@@ -2267,11 +2267,86 @@ body, input, button, select, textarea {
 .triage-avatar, .social-avatar-wrapper {
   cursor: pointer;
 }
-.triage-avatar:focus-visible, .social-avatar-wrapper:focus-visible {
-  outline: 2px solid var(--accent-cyan) !important;
-  outline-offset: 2px !important;
-  border-radius: 4px;
+/* ==========================================================================
+   MAILACCESS: EMAIL INTELLIGENCE & EXPOSURE STYLES
+   ========================================================================== */
+.mail-meter-card {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
+
+.mail-consensus-card {
+  background: rgba(0, 240, 255, 0.03) !important;
+  border: 1px solid rgba(0, 240, 255, 0.2) !important;
+  border-radius: 6px;
+}
+
+.mail-account-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.mail-account-card:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.04);
+}
+
+.mail-avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.mail-breach-card {
+  padding: 8px 12px;
+  background: rgba(244, 63, 94, 0.04);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.mail-breach-card:hover {
+  border-color: rgba(244, 63, 94, 0.5);
+  background: rgba(244, 63, 94, 0.08);
+}
+
+.mail-dept-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.mail-dept-row:hover {
+  background: rgba(0, 240, 255, 0.04);
+  border-color: rgba(0, 240, 255, 0.2);
+}
+
+.mail-pattern-card {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 0.72rem;
+}
+
 
 
 

@@ -23,6 +23,7 @@ import hashlib
 import re
 import datetime
 import unicodedata
+import mailaccess_engine
 
 # Enforce UTF-8 on Windows console
 if sys.platform == 'win32':
@@ -1423,6 +1424,10 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_get_bookmarks()
         elif path == '/api/data':
             self.handle_get_osint_data()
+        elif path == '/api/email/investigate':
+            self.handle_email_investigate(params)
+        elif path == '/api/email/harvest':
+            self.handle_email_harvest(params)
         elif path == '/api/manifest':
             self.handle_get_manifest()
         elif path == '/api/info':
@@ -1473,6 +1478,7 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
                 'Australian Corporate & ABN Registry Graph',
                 'OSINT Pivot Matrix',
                 'Visual Investigation Link Graph',
+                'MailAccess: Email Intelligence, Name Consensus & Exposure Engine',
                 'Session Snapshot & Encrypted Export'
             ],
             'status': 'online'
@@ -2459,6 +2465,22 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             'aggregated_keywords': sorted_keywords,
             'discovered_names': discovered_names
         })
+
+    def handle_email_investigate(self, params):
+        email = params.get('email', [''])[0].strip()
+        if not email:
+            self._json_response({'error': 'Missing required parameter: email', 'status': 'error'}, 400)
+            return
+        result = mailaccess_engine.investigate_email(email)
+        self._json_response(result)
+
+    def handle_email_harvest(self, params):
+        domain = params.get('domain', [''])[0].strip()
+        if not domain:
+            self._json_response({'error': 'Missing required parameter: domain', 'status': 'error'}, 400)
+            return
+        result = mailaccess_engine.harvest_domain_emails(domain)
+        self._json_response(result)
 
     def handle_es_open(self):
         try:

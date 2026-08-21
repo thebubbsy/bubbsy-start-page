@@ -122,6 +122,14 @@
           Recon
         </button>
 
+        <button class="btn-icon" id="btn-open-mail-access" title="MailAccess: Email Intelligence & Exposure Engine" aria-label="MailAccess: Email Intelligence & Exposure Engine" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Mail
+        </button>
+
         <button class="btn-icon" id="btn-open-corp" title="Australian Corporate & Beneficial Ownership Network" aria-label="Australian Corporate & Beneficial Ownership Network" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -235,6 +243,11 @@
       <div class="hud-item" onclick="document.getElementById('btn-open-pivot').click();">
         <kbd class="hud-key green">!pivot</kbd>
         <span class="hud-desc">Pivot</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-mail-access').click();">
+        <kbd class="hud-key cyan">!mail</kbd>
+        <span class="hud-desc">Mail</span>
       </div>
       <div class="hud-separator"></div>
       <div class="hud-item" onclick="document.getElementById('btn-open-graph').click();">
@@ -454,6 +467,142 @@
 
       <div class="radar-list-container" id="radar-items-list" style="max-height:400px;overflow-y:auto;">
         <div class="es-empty-state">Loading threat radar feed...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MAILACCESS: EMAIL INTELLIGENCE & EXPOSURE ENGINE MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-mail-access" role="dialog" aria-modal="true" aria-labelledby="modal-mail-access-title">
+    <div class="modal-content" style="max-width:960px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" id="modal-mail-access-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            MailAccess: Email Intelligence &amp; Exposure Engine
+          </h3>
+          <span class="brand-tag">KEYLESS / NAME CONSENSUS / DEFENDER'S BRIEF</span>
+        </div>
+        <button class="modal-close" id="btn-close-mail-access" aria-label="Close MailAccess dialog">&times;</button>
+      </div>
+
+      <!-- Mode Toggle: Email Investigator vs Domain Email Harvester -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:6px;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="cat-pill active" id="btn-mail-mode-investigate">📧 Target Email Investigator</button>
+          <button type="button" class="cat-pill" id="btn-mail-mode-harvest">🏢 Domain Email Harvester</button>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <span style="font-size:0.70rem;color:var(--text-muted);">Quick Sample:</span>
+          <button type="button" class="stat-chip mail-sample-chip" data-sample="torvalds@linux-foundation.org" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;">Linus Torvalds</button>
+          <button type="button" class="stat-chip mail-sample-chip" data-sample="anu.edu.au" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;">ANU.edu.au</button>
+        </div>
+      </div>
+
+      <!-- Search Input Section -->
+      <div class="form-group" style="margin-bottom:10px;">
+        <label class="form-label" id="mail-input-label">Target Email Address</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="mail-target-input" placeholder="e.g. target@company.com, user@proton.me, founder@domain.com.au" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-mail-search-exec" style="min-width:160px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span id="mail-search-btn-text">Investigate Email</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Container: Email Investigation Results -->
+      <div id="mail-investigation-container" style="display:none;flex-direction:column;gap:10px;max-height:480px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;">
+        <!-- Top HUD: Defender's Brief & Name Consensus Card -->
+        <div style="display:grid;grid-template-columns:220px 1fr;gap:10px;">
+          <!-- Exposure Meter Card -->
+          <div class="mail-meter-card" style="padding:12px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+            <span style="font-size:0.68rem;color:var(--text-muted);font-weight:700;letter-spacing:0.5px;">UNIFIED EXPOSURE SCORE</span>
+            <div id="mail-exposure-circle" style="font-size:2.2rem;font-weight:800;font-family:var(--font-mono);margin:4px 0;color:var(--accent-green);">0</div>
+            <span id="mail-threat-badge" class="brand-tag" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);">LOW EXPOSURE</span>
+          </div>
+
+          <!-- Name Consensus Card -->
+          <div class="mail-consensus-card" style="padding:12px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.68rem;color:var(--accent-cyan);font-weight:700;letter-spacing:0.5px;">👤 NAME CONSENSUS ENGINE:</span>
+              <span id="mail-consensus-band" class="brand-tag">UNKNOWN</span>
+            </div>
+            <div>
+              <div id="mail-consensus-name" style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">Unattributed Identity</div>
+              <div id="mail-consensus-rationale" style="font-size:0.72rem;color:var(--text-muted);margin-top:2px;">No verified signals found.</div>
+            </div>
+            <div id="mail-consensus-sources" style="display:flex;gap:4px;flex-wrap:wrap;"></div>
+          </div>
+        </div>
+
+        <!-- Defender's Brief Executive Summary -->
+        <div id="mail-defenders-brief-panel" style="padding:10px 12px;background:rgba(0,240,255,0.03);border:1px solid rgba(0,240,255,0.15);border-radius:6px;font-size:0.75rem;">
+          <strong style="color:var(--accent-cyan);display:block;margin-bottom:4px;">🛡️ DEFENDER'S BRIEF &amp; RISK FINDINGS:</strong>
+          <ul id="mail-findings-list" style="margin:0 0 6px 18px;padding:0;color:var(--text-secondary);display:flex;flex-direction:column;gap:3px;"></ul>
+          <strong style="color:var(--accent-amber);display:block;margin-bottom:4px;">⚡ RECOMMENDED COUNTERMEASURES:</strong>
+          <ul id="mail-actions-list" style="margin:0 0 0 18px;padding:0;color:var(--text-secondary);display:flex;flex-direction:column;gap:3px;"></ul>
+        </div>
+
+        <!-- Infrastructure & Mail Provider Row -->
+        <div id="mail-provider-panel" style="padding:8px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;flex-wrap:wrap;gap:8px;">
+          <div><span>Mail Infrastructure: </span><strong id="mail-provider-text" style="color:var(--accent-cyan);">--</strong></div>
+          <div id="mail-provider-tags" style="display:flex;gap:4px;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Verified Accounts Grid -->
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:var(--accent-cyan);letter-spacing:0.5px;display:block;margin-bottom:6px;">🔗 CORRELATED PLATFORMS &amp; ACCOUNTS:</span>
+          <div id="mail-accounts-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:8px;"></div>
+        </div>
+
+        <!-- Breach Exposure Timeline -->
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:#f43f5e;letter-spacing:0.5px;display:block;margin-bottom:6px;">⚠️ HISTORICAL BREACH EXPOSURE CORRELATION:</span>
+          <div id="mail-breaches-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+        </div>
+      </div>
+
+      <!-- Container: Domain Harvester Results -->
+      <div id="mail-harvest-container" style="display:none;flex-direction:column;gap:10px;max-height:480px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;">
+        <div id="mail-harvest-summary-bar" style="padding:8px 12px;background:rgba(0,240,255,0.04);border:1px solid rgba(0,240,255,0.18);border-radius:6px;font-size:0.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <div>Domain: <strong id="mail-harvest-domain-text" style="color:var(--accent-cyan);">--</strong></div>
+          <div>Discovered Mailboxes: <strong id="mail-harvest-count" style="color:var(--accent-green);">0</strong></div>
+          <div id="mail-harvest-infra-tag" class="brand-tag">--</div>
+        </div>
+
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:var(--accent-cyan);letter-spacing:0.5px;display:block;margin-bottom:6px;">🏢 DETECTED CORPORATE NAMING CONVENTIONS:</span>
+          <div id="mail-harvest-patterns-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+        </div>
+
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:var(--accent-green);letter-spacing:0.5px;display:block;margin-bottom:6px;">📬 DISCOVERED ORGANIZATIONAL MAILBOXES:</span>
+          <div id="mail-harvest-emails-list" style="display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="form-actions" style="justify-content:space-between;align-items:center;margin-top:8px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-mail-send-to-graph" style="border-color:var(--accent-purple);color:var(--accent-purple);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Send to Link Graph
+          </button>
+          <button type="button" class="btn-icon" id="btn-mail-pivot-social" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            Pivot to Social Recon 👤
+          </button>
+          <button type="button" class="btn-icon" id="btn-mail-export-dossier">
+            📋 Export Markdown Report
+          </button>
+        </div>
+        <button type="button" class="btn-icon" id="btn-mail-copy-json" style="font-size:0.70rem;">
+          Copy JSON
+        </button>
       </div>
     </div>
   </div>

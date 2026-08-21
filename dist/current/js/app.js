@@ -1239,6 +1239,14 @@
           elMainSearch.value = '';
           openThreatRadar();
           return;
+        } else if (bang === 'mail' || bang === 'email' || bang === 'mailaccess') {
+          elMainSearch.value = '';
+          openMailAccessModal(query, 'investigate');
+          return;
+        } else if (bang === 'harvest') {
+          elMainSearch.value = '';
+          openMailAccessModal(query, 'harvest');
+          return;
         }
 
         if (bangMap[bang] && bangMap[bang] !== activeSearchMode) {
@@ -1465,6 +1473,8 @@
       { bang: '!corp', name: 'ASIC / ABR Corporate Registers', icon: 'CORP', action: () => { closeModal(elModalPalette); openCorpRecon(); } },
       { bang: '!defang', name: 'Cyber Defang / Refang IOC Normalizer', icon: 'DEFANG', action: () => { closeModal(elModalPalette); openDefanger(); } },
       { bang: '!radar', name: 'Threat Radar & ACSC Essential 8', icon: 'RADAR', action: () => { closeModal(elModalPalette); openThreatRadar(); } },
+      { bang: '!mail', name: 'MailAccess: Email Intelligence & Name Consensus', icon: 'MAIL', action: () => { closeModal(elModalPalette); openMailAccessModal(); } },
+      { bang: '!harvest', name: 'Domain Corporate Email Harvester', icon: 'HARVEST', action: () => { closeModal(elModalPalette); openMailAccessModal('', 'harvest'); } },
       { bang: '!graph', name: 'Visual Investigation Link Graph', icon: 'GRAPH', action: () => { closeModal(elModalPalette); openInvestigationGraph(); } }
     ];
 
@@ -8341,6 +8351,504 @@
     await fetchThreatRadarFeed();
     renderRadarItems(elRadarSearchInput.value.trim());
   });
+
+  // =========================================================================
+  // MAILACCESS: EMAIL INTELLIGENCE & EXPOSURE CLIENT ENGINE
+  // =========================================================================
+  const elModalMailAccess = document.getElementById('modal-mail-access');
+  const elBtnCloseMailAccess = document.getElementById('btn-close-mail-access');
+  const elMailTargetInput = document.getElementById('mail-target-input');
+  const elBtnMailSearchExec = document.getElementById('btn-mail-search-exec');
+  const elBtnMailModeInvestigate = document.getElementById('btn-mail-mode-investigate');
+  const elBtnMailModeHarvest = document.getElementById('btn-mail-mode-harvest');
+  const elMailInvestigationContainer = document.getElementById('mail-investigation-container');
+  const elMailHarvestContainer = document.getElementById('mail-harvest-container');
+  const elMailInputLabel = document.getElementById('mail-input-label');
+  const elMailSearchBtnText = document.getElementById('mail-search-btn-text');
+
+  let currentMailMode = 'investigate'; // 'investigate' | 'harvest'
+  let latestMailInvestigation = null;
+  let latestMailHarvest = null;
+
+  function setMailAccessMode(mode) {
+    currentMailMode = mode;
+    if (mode === 'investigate') {
+      elBtnMailModeInvestigate?.classList.add('active');
+      elBtnMailModeHarvest?.classList.remove('active');
+      if (elMailInputLabel) elMailInputLabel.textContent = 'Target Email Address';
+      if (elMailTargetInput) elMailTargetInput.placeholder = 'e.g. target@company.com, user@proton.me, founder@domain.com.au';
+      if (elMailSearchBtnText) elMailSearchBtnText.textContent = 'Investigate Email';
+      if (latestMailInvestigation && elMailInvestigationContainer && elMailHarvestContainer) {
+        elMailInvestigationContainer.style.display = 'flex';
+        elMailHarvestContainer.style.display = 'none';
+      }
+    } else {
+      elBtnMailModeHarvest?.classList.add('active');
+      elBtnMailModeInvestigate?.classList.remove('active');
+      if (elMailInputLabel) elMailInputLabel.textContent = 'Target Domain / Organization';
+      if (elMailTargetInput) elMailTargetInput.placeholder = 'e.g. unsw.edu.au, telstra.com.au, atlassian.com, anu.edu.au';
+      if (elMailSearchBtnText) elMailSearchBtnText.textContent = 'Harvest Domain Emails';
+      if (latestMailHarvest && elMailHarvestContainer && elMailInvestigationContainer) {
+        elMailHarvestContainer.style.display = 'flex';
+        elMailInvestigationContainer.style.display = 'none';
+      }
+    }
+  }
+
+  function openMailAccessModal(initialQuery = '', mode = 'investigate') {
+    setMailAccessMode(mode);
+    if (elModalMailAccess) openModal(elModalMailAccess);
+    if (initialQuery && elMailTargetInput) {
+      elMailTargetInput.value = initialQuery.trim();
+      executeMailSearch();
+    } else if (elMailTargetInput) {
+      setTimeout(() => elMailTargetInput.focus(), 80);
+    }
+  }
+  window.openMailAccessModal = openMailAccessModal;
+
+  async function executeMailSearch() {
+    const rawVal = elMailTargetInput ? elMailTargetInput.value.trim() : '';
+    if (!rawVal) {
+      showToast('Please enter a target email or domain.');
+      return;
+    }
+
+    if (currentMailMode === 'investigate') {
+      await runEmailInvestigation(rawVal);
+    } else {
+      await runDomainHarvest(rawVal);
+    }
+  }
+
+  async function runEmailInvestigation(email) {
+    if (!elBtnMailSearchExec) return;
+    elBtnMailSearchExec.disabled = true;
+    elBtnMailSearchExec.innerHTML = `<span class="spin">⚡</span> Investigating...`;
+    showToast(`Investigating email: ${email}...`);
+
+    try {
+      const res = await fetch(`/api/email/investigate?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+
+      if (data.error || data.status === 'error') {
+        showToast(data.error || 'Failed to investigate email');
+        return;
+      }
+
+      latestMailInvestigation = data;
+      renderEmailInvestigationResults(data);
+    } catch (err) {
+      showToast('Error connecting to MailAccess engine.');
+      console.error(err);
+    } finally {
+      elBtnMailSearchExec.disabled = false;
+      elBtnMailSearchExec.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Investigate Email</span>
+      `;
+    }
+  }
+
+  function renderEmailInvestigationResults(data) {
+    if (!elMailInvestigationContainer || !elMailHarvestContainer) return;
+    elMailInvestigationContainer.style.display = 'flex';
+    elMailHarvestContainer.style.display = 'none';
+
+    // 1. Defender's Brief & Exposure Meter
+    const brief = data.defenders_brief || {};
+    const score = brief.exposure_score || 0;
+    const circle = document.getElementById('mail-exposure-circle');
+    if (circle) {
+      circle.textContent = score;
+      circle.style.color = brief.badge_color || '#10b981';
+    }
+
+    const threatBadge = document.getElementById('mail-threat-badge');
+    if (threatBadge) {
+      threatBadge.textContent = brief.threat_level || 'LOW EXPOSURE';
+      threatBadge.style.color = brief.badge_color || '#10b981';
+      threatBadge.style.borderColor = brief.badge_color || '#10b981';
+    }
+
+    // 2. Name Consensus
+    const nc = data.name_consensus || {};
+    const nameEl = document.getElementById('mail-consensus-name');
+    if (nameEl) nameEl.textContent = nc.consensus_name || 'Unattributed Identity';
+    
+    const bandBadge = document.getElementById('mail-consensus-band');
+    if (bandBadge) {
+      bandBadge.textContent = `${nc.confidence_band || 'UNKNOWN'} (${nc.confidence_score || 0}%)`;
+      if (nc.confidence_band === 'CONFIRMED') {
+        bandBadge.style.color = 'var(--accent-green)';
+        bandBadge.style.borderColor = 'var(--accent-green)';
+      } else if (nc.confidence_band === 'PROBABLE') {
+        bandBadge.style.color = 'var(--accent-cyan)';
+        bandBadge.style.borderColor = 'var(--accent-cyan)';
+      } else {
+        bandBadge.style.color = 'var(--accent-amber)';
+        bandBadge.style.borderColor = 'var(--accent-amber)';
+      }
+    }
+
+    const ratEl = document.getElementById('mail-consensus-rationale');
+    if (ratEl) ratEl.textContent = nc.rationale || 'No corroborated identity signals found.';
+    
+    const sourcesContainer = document.getElementById('mail-consensus-sources');
+    if (sourcesContainer) {
+      sourcesContainer.innerHTML = '';
+      (nc.sources || []).forEach(src => {
+        const chip = document.createElement('span');
+        chip.className = 'stat-chip';
+        chip.textContent = `✓ ${src}`;
+        sourcesContainer.appendChild(chip);
+      });
+    }
+
+    // 3. Defender's Brief Findings & Actions
+    const findingsList = document.getElementById('mail-findings-list');
+    if (findingsList) {
+      findingsList.innerHTML = '';
+      (brief.findings || []).forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f;
+        findingsList.appendChild(li);
+      });
+    }
+
+    const actionsList = document.getElementById('mail-actions-list');
+    if (actionsList) {
+      actionsList.innerHTML = '';
+      (brief.countermeasures || []).forEach(a => {
+        const li = document.createElement('li');
+        li.textContent = a;
+        actionsList.appendChild(li);
+      });
+    }
+
+    // 4. Infrastructure & Provider
+    const prov = data.provider || {};
+    const provText = document.getElementById('mail-provider-text');
+    if (provText) provText.textContent = prov.provider_name || 'Custom SMTP';
+    
+    const provTags = document.getElementById('mail-provider-tags');
+    if (provTags) {
+      provTags.innerHTML = '';
+      if (prov.is_m365_tenant) {
+        provTags.innerHTML += `<span class="brand-tag" style="color:#00a4ef;border-color:#00a4ef;">M365 ENTRA TENANT</span>`;
+      }
+      if (prov.is_google_workspace) {
+        provTags.innerHTML += `<span class="brand-tag" style="color:#34a853;border-color:#34a853;">GOOGLE WORKSPACE</span>`;
+      }
+      if (prov.is_australian_domain) {
+        provTags.innerHTML += `<span class="brand-tag" style="color:var(--accent-green);border-color:var(--accent-green);">[AUS] .AU DOMAIN</span>`;
+      }
+      if (prov.is_disposable) {
+        provTags.innerHTML += `<span class="brand-tag" style="color:#ef4444;border-color:#ef4444;">DISPOSABLE MAIL</span>`;
+      }
+    }
+
+    // 5. Correlated Accounts Grid
+    const accountsGrid = document.getElementById('mail-accounts-grid');
+    if (accountsGrid) {
+      accountsGrid.innerHTML = '';
+      const foundAccounts = (data.accounts || []).filter(a => a.found);
+      if (foundAccounts.length === 0) {
+        accountsGrid.innerHTML = `<div style="grid-column:1/-1;color:var(--text-muted);font-size:0.75rem;font-style:italic;">No active public developer/social accounts linked directly to this email hash.</div>`;
+      } else {
+        foundAccounts.forEach(acct => {
+          const card = document.createElement('div');
+          card.className = 'mail-account-card';
+          const avatar = acct.avatar_url ? `<img src="${escapeHtml(acct.avatar_url)}" class="mail-avatar-img" alt="${escapeHtml(acct.platform)}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'36\\' height=\\'36\\'><rect width=\\'36\\' height=\\'36\\' fill=\\'%23222\\'/></svg>'">` : `<div class="mail-avatar-img" style="display:flex;align-items:center;justify-content:center;font-weight:700;">${acct.platform[0]}</div>`;
+          card.innerHTML = `
+            ${avatar}
+            <div style="flex:1;overflow:hidden;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <strong style="font-size:0.80rem;color:var(--text-primary);">${escapeHtml(acct.display_name || acct.real_name || acct.platform)}</strong>
+                <span class="brand-tag" style="font-size:0.60rem;">${escapeHtml(acct.platform)}</span>
+              </div>
+              ${acct.bio ? `<div style="font-size:0.68rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;">${escapeHtml(acct.bio)}</div>` : ''}
+              <div style="margin-top:4px;display:flex;gap:4px;">
+                <a href="${escapeHtml(acct.profile_url)}" target="_blank" rel="noopener noreferrer" class="btn-icon" style="font-size:0.65rem;padding:1px 6px;text-decoration:none;">Open Profile ↗</a>
+                ${acct.pgp_fingerprint ? `<span class="stat-chip" style="font-size:0.62rem;color:var(--accent-purple);">PGP: ${acct.pgp_fingerprint.slice(-8)}</span>` : ''}
+              </div>
+            </div>
+          `;
+          accountsGrid.appendChild(card);
+        });
+      }
+    }
+
+    // 6. Breach Exposure
+    const breachesList = document.getElementById('mail-breaches-list');
+    if (breachesList) {
+      breachesList.innerHTML = '';
+      const breaches = data.breaches || [];
+      if (breaches.length === 0) {
+        breachesList.innerHTML = `<div style="color:var(--text-muted);font-size:0.75rem;font-style:italic;">No known historical breaches detected in active corpora.</div>`;
+      } else {
+        breaches.forEach(b => {
+          const card = document.createElement('div');
+          card.className = 'mail-breach-card';
+          card.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+              <strong style="color:#ffffff;font-size:0.82rem;">${escapeHtml(b.title)}</strong>
+              <span class="stat-chip" style="color:var(--accent-amber);">${escapeHtml(b.breach_date)}</span>
+            </div>
+            <p style="margin:0 0 4px 0;color:var(--text-muted);font-size:0.70rem;">${escapeHtml(b.description || '')}</p>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+              ${(b.data_classes || []).map(dc => `<span class="stat-chip" style="font-size:0.62rem;color:${dc.includes('Password')||dc.includes('Hash') ? '#ef4444' : 'var(--accent-cyan)'};">${escapeHtml(dc)}</span>`).join('')}
+            </div>
+          `;
+          breachesList.appendChild(card);
+        });
+      }
+    }
+  }
+
+  async function runDomainHarvest(domain) {
+    if (!elBtnMailSearchExec) return;
+    elBtnMailSearchExec.disabled = true;
+    elBtnMailSearchExec.innerHTML = `<span class="spin">⚡</span> Harvesting...`;
+    showToast(`Harvesting domain emails: ${domain}...`);
+
+    try {
+      const res = await fetch(`/api/email/harvest?domain=${encodeURIComponent(domain)}`);
+      const data = await res.json();
+
+      if (data.error || data.status === 'error') {
+        showToast(data.error || 'Failed to harvest domain');
+        return;
+      }
+
+      latestMailHarvest = data;
+      renderDomainHarvestResults(data);
+    } catch (err) {
+      showToast('Error connecting to MailAccess engine.');
+      console.error(err);
+    } finally {
+      elBtnMailSearchExec.disabled = false;
+      elBtnMailSearchExec.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Harvest Domain Emails</span>
+      `;
+    }
+  }
+
+  function renderDomainHarvestResults(data) {
+    if (!elMailHarvestContainer || !elMailInvestigationContainer) return;
+    elMailHarvestContainer.style.display = 'flex';
+    elMailInvestigationContainer.style.display = 'none';
+
+    const domText = document.getElementById('mail-harvest-domain-text');
+    if (domText) domText.textContent = data.domain || '--';
+    
+    const countText = document.getElementById('mail-harvest-count');
+    if (countText) countText.textContent = data.total_discovered || 0;
+    
+    const infraTag = document.getElementById('mail-harvest-infra-tag');
+    if (infraTag) infraTag.textContent = data.provider?.provider_name || 'Standard MX';
+
+    // Corporate Naming Patterns
+    const patternsGrid = document.getElementById('mail-harvest-patterns-grid');
+    if (patternsGrid) {
+      patternsGrid.innerHTML = '';
+      (data.naming_conventions || []).forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'mail-pattern-card';
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--accent-cyan);font-family:var(--font-mono);">${escapeHtml(p.pattern)}</strong>
+            <span style="color:var(--text-muted);font-size:0.65rem;">${escapeHtml(p.usage)}</span>
+          </div>
+          <div style="color:var(--text-secondary);font-size:0.68rem;margin-top:2px;">Example: <code>${escapeHtml(p.example)}</code></div>
+        `;
+        patternsGrid.appendChild(card);
+      });
+    }
+
+    // Discovered Emails List
+    const emailsList = document.getElementById('mail-harvest-emails-list');
+    if (emailsList) {
+      emailsList.innerHTML = '';
+      (data.discovered_emails || []).forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'mail-dept-row';
+        row.innerHTML = `
+          <div>
+            <strong style="color:var(--text-primary);margin-right:6px;">${escapeHtml(item.email)}</strong>
+            <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);">${escapeHtml(item.department)}</span>
+          </div>
+          <div style="display:flex;gap:4px;">
+            <button type="button" class="btn-icon" style="padding:1px 6px;font-size:0.65rem;" onclick="copyToClipboard('${escapeHtml(item.email)}', 'Copied ${escapeHtml(item.email)}')">Copy</button>
+            <button type="button" class="btn-icon" style="padding:1px 6px;font-size:0.65rem;border-color:var(--accent-cyan);color:var(--accent-cyan);" onclick="openMailAccessModal('${escapeHtml(item.email)}', 'investigate')">Investigate</button>
+          </div>
+        `;
+        emailsList.appendChild(row);
+      });
+    }
+  }
+
+  // Action: Send to Link Graph
+  function sendMailAccessToGraph() {
+    if (currentMailMode === 'investigate' && latestMailInvestigation) {
+      const data = latestMailInvestigation;
+      const email = data.email;
+      const name = data.name_consensus?.consensus_name || 'Person';
+      
+      const emailNodeId = window.addNodeToGraph(`Email: ${email}`, 'email');
+      const personNodeId = window.addNodeToGraph(`Identity: ${name}`, 'person');
+      window.addEdgeToGraph(personNodeId, emailNodeId, 'OWNER_OF');
+
+      if (data.domain) {
+        const domainNodeId = window.addNodeToGraph(`Domain: ${data.domain}`, 'domain');
+        window.addEdgeToGraph(emailNodeId, domainNodeId, 'HOSTED_ON');
+      }
+
+      (data.accounts || []).filter(a => a.found).forEach(acct => {
+        const acctNodeId = window.addNodeToGraph(`${acct.platform}: ${acct.display_name || acct.platform}`, 'social');
+        window.addEdgeToGraph(personNodeId, acctNodeId, 'AUTHENTICATED_PROFILE');
+      });
+
+      (data.breaches || []).forEach(b => {
+        const breachNodeId = window.addNodeToGraph(`Breach: ${b.title}`, 'cve');
+        window.addEdgeToGraph(emailNodeId, breachNodeId, 'EXPOSED_IN');
+      });
+
+      closeModal(elModalMailAccess);
+      openInvestigationGraph();
+      showToast('Synthesized MailAccess dossier into Visual Link Graph!');
+    } else if (currentMailMode === 'harvest' && latestMailHarvest) {
+      const data = latestMailHarvest;
+      const domainNodeId = window.addNodeToGraph(`Domain: ${data.domain}`, 'domain');
+      
+      (data.discovered_emails || []).slice(0, 8).forEach(item => {
+        const emailNodeId = window.addNodeToGraph(`Mailbox: ${item.email}`, 'email');
+        window.addEdgeToGraph(domainNodeId, emailNodeId, 'ORGANIZATIONAL_INBOX');
+      });
+
+      closeModal(elModalMailAccess);
+      openInvestigationGraph();
+      showToast('Synthesized Domain Harvest into Visual Link Graph!');
+    } else {
+      showToast('Run an investigation first to send data to graph.');
+    }
+  }
+
+  // Action: Pivot to Social Recon
+  function pivotMailToSocialRecon() {
+    if (latestMailInvestigation) {
+      const name = latestMailInvestigation.name_consensus?.consensus_name || latestMailInvestigation.local_part;
+      closeModal(elModalMailAccess);
+      openSocialRecon(name);
+      showToast(`Pivoting to Social Recon: ${name}`);
+    } else {
+      closeModal(elModalMailAccess);
+      openSocialRecon();
+    }
+  }
+
+  // Action: Export Markdown Dossier
+  function exportMailMarkdownDossier() {
+    if (currentMailMode === 'investigate' && latestMailInvestigation) {
+      const d = latestMailInvestigation;
+      const brief = d.defenders_brief || {};
+      const nc = d.name_consensus || {};
+
+      let md = `# MAILACCESS FORENSIC DOSSIER: ${d.email}\n\n`;
+      md += `**Generated:** ${new Date().toUTCString()} | **Bubbsy OSINT Hub v2.18.0**\n\n`;
+      md += `## 🛡️ Defender's Brief\n`;
+      md += `- **Unified Exposure Score:** ${brief.exposure_score}/100 (${brief.threat_level})\n`;
+      md += `- **Mail Infrastructure:** ${d.provider?.provider_name || 'Standard SMTP'}\n`;
+      md += `- **Microsoft 365 Tenant:** ${d.provider?.is_m365_tenant ? 'YES (Detected)' : 'NO'}\n`;
+      md += `- **Australian Domain:** ${d.provider?.is_australian_domain ? 'YES (.AU)' : 'NO'}\n\n`;
+
+      md += `### Executive Risk Findings:\n`;
+      (brief.findings || []).forEach(f => { md += `- ${f}\n`; });
+
+      md += `\n### Recommended Countermeasures:\n`;
+      (brief.countermeasures || []).forEach(c => { md += `- [ ] ${c}\n`; });
+
+      md += `\n## 👤 Name Consensus Engine\n`;
+      md += `- **Candidate Real Name:** ${nc.consensus_name || 'Unattributed'}\n`;
+      md += `- **Confidence Level:** ${nc.confidence_band} (${nc.confidence_score}%)\n`;
+      md += `- **Corroborating Sources:** ${(nc.sources || []).join(', ') || 'None'}\n`;
+      md += `- **Consensus Rationale:** ${nc.rationale}\n\n`;
+
+      md += `## 🔗 Correlated Public Accounts\n`;
+      const foundAccts = (d.accounts || []).filter(a => a.found);
+      if (foundAccts.length === 0) {
+        md += `*No public accounts directly correlated.*\n`;
+      } else {
+        foundAccts.forEach(a => {
+          md += `- **${a.platform}:** [${a.display_name || a.platform}](${a.profile_url}) ${a.location ? `(Location: ${a.location})` : ''}\n`;
+        });
+      }
+
+      md += `\n## ⚠️ Historical Breach Exposures\n`;
+      (d.breaches || []).forEach(b => {
+        md += `- **${b.title}** (${b.breach_date}): Compromised data: ${(b.data_classes || []).join(', ')}\n`;
+      });
+
+      copyToClipboard(md, 'Copied MailAccess Markdown Dossier to clipboard!');
+    } else if (currentMailMode === 'harvest' && latestMailHarvest) {
+      const h = latestMailHarvest;
+      let md = `# DOMAIN EMAIL HARVEST REPORT: ${h.domain}\n\n`;
+      md += `**Total Discovered Mailboxes:** ${h.total_discovered}\n\n`;
+      md += `### Detected Naming Conventions:\n`;
+      (h.naming_conventions || []).forEach(p => {
+        md += `- \`${p.pattern}\` (Example: ${p.example}) - ${p.usage}\n`;
+      });
+      md += `\n### Discovered Mailboxes:\n`;
+      (h.discovered_emails || []).forEach(e => {
+        md += `- **${e.email}** (${e.department})\n`;
+      });
+      copyToClipboard(md, 'Copied Domain Harvest Report to clipboard!');
+    } else {
+      showToast('Run an investigation or harvest first to export.');
+    }
+  }
+
+  // Action: Copy JSON
+  function copyMailJson() {
+    const data = currentMailMode === 'investigate' ? latestMailInvestigation : latestMailHarvest;
+    if (data) {
+      copyToClipboard(JSON.stringify(data, null, 2), 'Copied raw JSON to clipboard!');
+    } else {
+      showToast('No active data to copy.');
+    }
+  }
+
+  // Bind MailAccess Event Listeners
+  document.getElementById('btn-open-mail-access')?.addEventListener('click', () => openMailAccessModal());
+  elBtnCloseMailAccess?.addEventListener('click', () => closeModal(elModalMailAccess));
+  elBtnMailModeInvestigate?.addEventListener('click', () => setMailAccessMode('investigate'));
+  elBtnMailModeHarvest?.addEventListener('click', () => setMailAccessMode('harvest'));
+  elBtnMailSearchExec?.addEventListener('click', executeMailSearch);
+  elMailTargetInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      executeMailSearch();
+    }
+  });
+
+  document.querySelectorAll('.mail-sample-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const sample = chip.getAttribute('data-sample');
+      if (sample.includes('@')) {
+        setMailAccessMode('investigate');
+      } else {
+        setMailAccessMode('harvest');
+      }
+      if (elMailTargetInput) elMailTargetInput.value = sample;
+      executeMailSearch();
+    });
+  });
+
+  document.getElementById('btn-mail-send-to-graph')?.addEventListener('click', sendMailAccessToGraph);
+  document.getElementById('btn-mail-pivot-social')?.addEventListener('click', pivotMailToSocialRecon);
+  document.getElementById('btn-mail-export-dossier')?.addEventListener('click', exportMailMarkdownDossier);
+  document.getElementById('btn-mail-copy-json')?.addEventListener('click', copyMailJson);
 
   function extractDomain(url) {
     try {
