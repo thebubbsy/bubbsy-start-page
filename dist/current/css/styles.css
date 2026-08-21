@@ -2347,6 +2347,121 @@ body, input, button, select, textarea {
   font-size: 0.72rem;
 }
 
+/* ==========================================================================
+   DOMAIN DROP SNIPER & EXPIRY COUNTDOWN STYLES
+   ========================================================================== */
+.sniper-countdown-banner {
+  background: radial-gradient(circle at top left, rgba(0, 240, 255, 0.08), rgba(0, 0, 0, 0.6)) !important;
+  border: 1px solid rgba(0, 240, 255, 0.25) !important;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.04);
+}
+
+.sniper-digital-clock {
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.sniper-lifecycle-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.sniper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  text-align: center;
+}
+
+.sniper-step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.sniper-step-label {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.sniper-step-connector {
+  height: 2px;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: -16px;
+}
+
+.sniper-step.active .sniper-step-dot {
+  background: var(--accent-cyan);
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 10px var(--accent-cyan);
+  transform: scale(1.15);
+}
+
+.sniper-step.active .sniper-step-label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sniper-step.completed .sniper-step-dot {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.sniper-provider-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  gap: 8px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.sniper-provider-card:hover {
+  border-color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.sniper-archive-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  gap: 4px;
+}
+
+.sniper-archive-card:hover {
+  border-color: var(--accent-purple);
+  background: rgba(192, 132, 252, 0.04);
+}
+
+
 
 
 

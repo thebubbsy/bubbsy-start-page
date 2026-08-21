@@ -1247,6 +1247,10 @@
           elMainSearch.value = '';
           openMailAccessModal(query, 'harvest');
           return;
+        } else if (bang === 'drop' || bang === 'sniper' || bang === 'expiry' || bang === 'catch') {
+          elMainSearch.value = '';
+          openDomainSniperModal(query);
+          return;
         }
 
         if (bangMap[bang] && bangMap[bang] !== activeSearchMode) {
@@ -1475,6 +1479,7 @@
       { bang: '!radar', name: 'Threat Radar & ACSC Essential 8', icon: 'RADAR', action: () => { closeModal(elModalPalette); openThreatRadar(); } },
       { bang: '!mail', name: 'MailAccess: Email Intelligence & Name Consensus', icon: 'MAIL', action: () => { closeModal(elModalPalette); openMailAccessModal(); } },
       { bang: '!harvest', name: 'Domain Corporate Email Harvester', icon: 'HARVEST', action: () => { closeModal(elModalPalette); openMailAccessModal('', 'harvest'); } },
+      { bang: '!drop', name: 'Domain Drop Sniper & Expiry Countdown Radar', icon: 'DROP', action: () => { closeModal(elModalPalette); openDomainSniperModal(); } },
       { bang: '!graph', name: 'Visual Investigation Link Graph', icon: 'GRAPH', action: () => { closeModal(elModalPalette); openInvestigationGraph(); } }
     ];
 
@@ -8849,6 +8854,399 @@
   document.getElementById('btn-mail-pivot-social')?.addEventListener('click', pivotMailToSocialRecon);
   document.getElementById('btn-mail-export-dossier')?.addEventListener('click', exportMailMarkdownDossier);
   document.getElementById('btn-mail-copy-json')?.addEventListener('click', copyMailJson);
+
+  // =========================================================================
+  // DOMAIN DROP SNIPER & EXPIRY COUNTDOWN CLIENT ENGINE
+  // =========================================================================
+  const elModalDomainSniper = document.getElementById('modal-domain-sniper');
+  const elBtnCloseDomainSniper = document.getElementById('btn-close-domain-sniper');
+  const elDomainSniperInput = document.getElementById('domain-sniper-input');
+  const elBtnDomainSniperSearch = document.getElementById('btn-domain-sniper-search');
+  const elDomainSniperResults = document.getElementById('domain-sniper-results');
+  const elDomainSniperWatchlist = document.getElementById('domain-sniper-watchlist-container');
+  const elBtnSniperLoadTrending = document.getElementById('btn-sniper-load-trending');
+
+  let latestDomainSniperData = null;
+  let sniperCountdownTimerInterval = null;
+  let targetDropTimestampMs = null;
+
+  function openDomainSniperModal(initialDomain = '') {
+    if (elModalDomainSniper) openModal(elModalDomainSniper);
+    if (initialDomain && elDomainSniperInput) {
+      elDomainSniperInput.value = initialDomain.trim();
+      executeDomainSniperSearch();
+    } else if (elDomainSniperInput) {
+      setTimeout(() => elDomainSniperInput.focus(), 80);
+    }
+  }
+  window.openDomainSniperModal = openDomainSniperModal;
+
+  async function executeDomainSniperSearch() {
+    const rawVal = elDomainSniperInput ? elDomainSniperInput.value.trim() : '';
+    if (!rawVal) {
+      showToast('Please enter a target domain name.');
+      return;
+    }
+    await runDomainDropInspection(rawVal);
+  }
+
+  async function runDomainDropInspection(domain) {
+    if (!elBtnDomainSniperSearch) return;
+    elBtnDomainSniperSearch.disabled = true;
+    elBtnDomainSniperSearch.innerHTML = `<span class="spin">⚡</span> Resolving Expiry...`;
+    showToast(`Calculating drop & lifecycle for: ${domain}...`);
+
+    try {
+      const res = await fetch(`/api/domain/expiry?domain=${encodeURIComponent(domain)}`);
+      const data = await res.json();
+
+      if (data.error || data.status === 'error') {
+        showToast(data.error || 'Failed to inspect domain lifecycle');
+        return;
+      }
+
+      latestDomainSniperData = data;
+      renderDomainSniperResults(data);
+    } catch (err) {
+      showToast('Error connecting to Domain Drop Radar engine.');
+      console.error(err);
+    } finally {
+      elBtnDomainSniperSearch.disabled = false;
+      elBtnDomainSniperSearch.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Track &amp; Calculate Drop</span>
+      `;
+    }
+  }
+
+  function renderDomainSniperResults(data) {
+    if (!elDomainSniperResults) return;
+    elDomainSniperResults.style.display = 'flex';
+    if (elDomainSniperWatchlist) elDomainSniperWatchlist.style.display = 'none';
+
+    // 1. Top Banner
+    const targetEl = document.getElementById('sniper-target-domain');
+    if (targetEl) targetEl.textContent = data.domain || '--';
+
+    const stageBadge = document.getElementById('sniper-stage-badge');
+    const lifecycle = data.lifecycle || {};
+    if (stageBadge) {
+      stageBadge.textContent = lifecycle.stage_label || 'ACTIVE';
+      stageBadge.style.color = lifecycle.stage_color || '#10b981';
+      stageBadge.style.borderColor = lifecycle.stage_color || '#10b981';
+    }
+
+    const auBadge = document.getElementById('sniper-au-badge');
+    if (auBadge) {
+      auBadge.style.display = data.is_australian ? 'inline-block' : 'none';
+    }
+
+    const descEl = document.getElementById('sniper-status-desc');
+    if (descEl) descEl.textContent = lifecycle.status_description || '';
+
+    const dropTimeText = document.getElementById('sniper-drop-time-text');
+    if (dropTimeText) {
+      dropTimeText.textContent = data.is_australian 
+        ? `Drop Target: ${lifecycle.drop_timestamp_aest || '--'}`
+        : `Drop Target: ${lifecycle.drop_timestamp_utc ? new Date(lifecycle.drop_timestamp_utc).toUTCString() : '--'}`;
+    }
+
+    // 2. Start Live Dynamic Countdown Clock
+    if (sniperCountdownTimerInterval) clearInterval(sniperCountdownTimerInterval);
+    if (lifecycle.drop_timestamp_utc) {
+      targetDropTimestampMs = new Date(lifecycle.drop_timestamp_utc).getTime();
+      updateSniperCountdownClock();
+      sniperCountdownTimerInterval = setInterval(updateSniperCountdownClock, 1000);
+    }
+
+    // 3. Update Lifecycle Progress Stepper (0 to 4)
+    const stageIdx = lifecycle.stage_index ?? 0;
+    document.querySelectorAll('.sniper-step').forEach(stepEl => {
+      const idx = parseInt(stepEl.getAttribute('data-step'), 10);
+      stepEl.classList.remove('active', 'completed');
+      if (idx === stageIdx) {
+        stepEl.classList.add('active');
+        const dot = stepEl.querySelector('.sniper-step-dot');
+        if (dot) {
+          dot.style.background = lifecycle.stage_color || 'var(--accent-cyan)';
+          dot.style.boxShadow = `0 0 10px ${lifecycle.stage_color || 'var(--accent-cyan)'}`;
+        }
+      } else if (idx < stageIdx) {
+        stepEl.classList.add('completed');
+      }
+    });
+
+    // 4. Technical Timeline & Meta
+    const metaExp = document.getElementById('sniper-meta-expiry');
+    if (metaExp) metaExp.textContent = data.expiration_date ? new Date(data.expiration_date).toUTCString() : '--';
+
+    const metaCreated = document.getElementById('sniper-meta-created');
+    if (metaCreated) metaCreated.textContent = data.creation_date ? new Date(data.creation_date).toUTCString() : '--';
+
+    const metaUpdated = document.getElementById('sniper-meta-updated');
+    if (metaUpdated) metaUpdated.textContent = data.updated_date ? new Date(data.updated_date).toUTCString() : '--';
+
+    const metaReg = document.getElementById('sniper-meta-registrar');
+    if (metaReg) metaReg.textContent = data.registrar || 'Authoritative Registrar';
+
+    // Status Chips
+    const statusContainer = document.getElementById('sniper-status-chips');
+    if (statusContainer) {
+      statusContainer.innerHTML = '';
+      (data.status_codes || []).forEach(sc => {
+        const chip = document.createElement('span');
+        chip.className = 'stat-chip';
+        chip.style.fontSize = '0.62rem';
+        chip.textContent = sc;
+        statusContainer.appendChild(chip);
+      });
+      if (!data.status_codes || data.status_codes.length === 0) {
+        statusContainer.innerHTML = `<span style="color:var(--text-muted);font-style:italic;">Standard OK / Active</span>`;
+      }
+    }
+
+    // Nameservers
+    const nsContainer = document.getElementById('sniper-ns-chips');
+    if (nsContainer) {
+      nsContainer.innerHTML = '';
+      (data.nameservers || []).forEach(ns => {
+        const chip = document.createElement('span');
+        chip.className = 'stat-chip';
+        chip.style.fontSize = '0.62rem';
+        chip.textContent = ns;
+        nsContainer.appendChild(chip);
+      });
+    }
+
+    // 5. Backorder & Drop-Catch Launchpad Providers
+    const provGrid = document.getElementById('sniper-providers-grid');
+    if (provGrid) {
+      provGrid.innerHTML = '';
+      const providers = data.dispatch?.primary_providers || [];
+      providers.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'sniper-provider-card';
+        card.innerHTML = `
+          <div>
+            <strong style="color:var(--text-primary);font-size:0.80rem;display:block;">${escapeHtml(p.name)}</strong>
+            <span style="color:var(--accent-green);font-size:0.65rem;display:block;">${escapeHtml(p.type)}</span>
+            <span style="color:var(--text-muted);font-size:0.65rem;display:block;margin-top:2px;">${escapeHtml(p.desc)}</span>
+          </div>
+          <a href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer" class="btn-icon" style="border-color:var(--accent-green);color:var(--accent-green);padding:3px 10px;font-size:0.68rem;text-decoration:none;white-space:nowrap;">
+            Launch Backorder ↗
+          </a>
+        `;
+        provGrid.appendChild(card);
+      });
+    }
+
+    // 6. Archive & Valuation Pivots
+    const archiveGrid = document.getElementById('sniper-archive-grid');
+    if (archiveGrid) {
+      archiveGrid.innerHTML = '';
+      const pivots = data.dispatch?.archive_intel || [];
+      pivots.forEach(pv => {
+        const card = document.createElement('div');
+        card.className = 'sniper-archive-card';
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--text-primary);font-size:0.75rem;">${escapeHtml(pv.name)}</strong>
+            <span class="stat-chip" style="font-size:0.58rem;color:var(--accent-purple);">${escapeHtml(pv.category)}</span>
+          </div>
+          <span style="color:var(--text-muted);font-size:0.65rem;">${escapeHtml(pv.desc)}</span>
+          <a href="${escapeHtml(pv.url)}" target="_blank" rel="noopener noreferrer" class="btn-icon" style="font-size:0.65rem;padding:2px 6px;text-decoration:none;margin-top:4px;text-align:center;">
+            Inspect Archive ↗
+          </a>
+        `;
+        archiveGrid.appendChild(card);
+      });
+    }
+  }
+
+  function updateSniperCountdownClock() {
+    const clockEl = document.getElementById('sniper-countdown-digits');
+    if (!clockEl || !targetDropTimestampMs) return;
+
+    const now = Date.now();
+    let diffSecs = Math.floor((targetDropTimestampMs - now) / 1000);
+
+    if (diffSecs <= 0) {
+      clockEl.textContent = "00d 00h 00m 00s (DROPPED / LIVE)";
+      clockEl.style.color = "var(--accent-cyan)";
+      return;
+    }
+
+    const days = Math.floor(diffSecs / 86400);
+    diffSecs %= 86400;
+    const hours = Math.floor(diffSecs / 3600);
+    diffSecs %= 3600;
+    const mins = Math.floor(diffSecs / 60);
+    const secs = diffSecs % 60;
+
+    const pad = (n) => String(n).padStart(2, '0');
+    clockEl.textContent = `${pad(days)}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
+    
+    if (days === 0 && hours < 24) {
+      clockEl.style.color = "#ef4444"; // Urgent dropping red
+    } else if (days < 5) {
+      clockEl.style.color = "var(--accent-amber)";
+    } else {
+      clockEl.style.color = "var(--accent-cyan)";
+    }
+  }
+
+  async function loadTrendingDropWatchlist() {
+    if (!elDomainSniperWatchlist) return;
+    if (elDomainSniperWatchlist.style.display === 'flex') {
+      elDomainSniperWatchlist.style.display = 'none';
+      return;
+    }
+
+    showToast('Loading trending dropping domains watchlist...');
+    try {
+      const res = await fetch('/api/domain/drops/trending');
+      const data = await res.json();
+
+      const auList = document.getElementById('sniper-au-watchlist');
+      if (auList) {
+        auList.innerHTML = '';
+        (data.australian_drops || []).forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'mail-dept-row';
+          row.innerHTML = `
+            <div>
+              <strong style="color:var(--text-primary);margin-right:6px;">${escapeHtml(item.domain)}</strong>
+              <span class="stat-chip" style="font-size:0.60rem;color:var(--accent-green);">${escapeHtml(item.status)}</span>
+            </div>
+            <button type="button" class="btn-icon" style="padding:1px 6px;font-size:0.65rem;border-color:var(--accent-cyan);color:var(--accent-cyan);" onclick="openDomainSniperModal('${escapeHtml(item.domain)}')">Track Drop</button>
+          `;
+          auList.appendChild(row);
+        });
+      }
+
+      const globalList = document.getElementById('sniper-global-watchlist');
+      if (globalList) {
+        globalList.innerHTML = '';
+        (data.global_drops || []).forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'mail-dept-row';
+          row.innerHTML = `
+            <div>
+              <strong style="color:var(--text-primary);margin-right:6px;">${escapeHtml(item.domain)}</strong>
+              <span class="stat-chip" style="font-size:0.60rem;color:var(--accent-cyan);">${escapeHtml(item.status)}</span>
+            </div>
+            <button type="button" class="btn-icon" style="padding:1px 6px;font-size:0.65rem;border-color:var(--accent-cyan);color:var(--accent-cyan);" onclick="openDomainSniperModal('${escapeHtml(item.domain)}')">Track Drop</button>
+          `;
+          globalList.appendChild(row);
+        });
+      }
+
+      elDomainSniperWatchlist.style.display = 'flex';
+      if (elDomainSniperResults) elDomainSniperResults.style.display = 'none';
+    } catch (e) {
+      showToast('Failed to load drop watchlist');
+    }
+  }
+
+  // Action: Send Domain to Link Graph
+  function sendDomainSniperToGraph() {
+    if (!latestDomainSniperData) {
+      showToast('Track a domain first to send to graph.');
+      return;
+    }
+
+    const d = latestDomainSniperData;
+    const domainNodeId = window.addNodeToGraph(`Domain: ${d.domain}`, 'domain');
+    const lifecycleNodeId = window.addNodeToGraph(`Lifecycle: ${d.lifecycle?.stage_label || 'Status'}`, 'cve');
+    window.addEdgeToGraph(domainNodeId, lifecycleNodeId, 'LIFECYCLE_STAGE');
+
+    if (d.registrar) {
+      const regNodeId = window.addNodeToGraph(`Registrar: ${d.registrar}`, 'org');
+      window.addEdgeToGraph(domainNodeId, regNodeId, 'SPONSORED_BY');
+    }
+
+    (d.nameservers || []).forEach(ns => {
+      const nsNodeId = window.addNodeToGraph(`NS: ${ns}`, 'ip');
+      window.addEdgeToGraph(domainNodeId, nsNodeId, 'HOSTED_ON_NS');
+    });
+
+    closeModal(elModalDomainSniper);
+    openInvestigationGraph();
+    showToast(`Synthesized ${d.domain} drop telemetry into Visual Link Graph!`);
+  }
+
+  // Action: Export Markdown Drop Brief
+  function exportDomainSniperMarkdown() {
+    if (!latestDomainSniperData) {
+      showToast('Track a domain first to export.');
+      return;
+    }
+
+    const d = latestDomainSniperData;
+    const lc = d.lifecycle || {};
+
+    let md = `# DOMAIN DROP SNIPER DOSSIER: ${d.domain}\n\n`;
+    md += `**Generated:** ${new Date().toUTCString()} | **Bubbsy OSINT Hub v2.18.0**\n\n`;
+    md += `## 🎯 Drop Target Telemetry\n`;
+    md += `- **Target Domain:** \`${d.domain}\`\n`;
+    md += `- **Lifecycle Status:** **${lc.stage_label}** (${lc.stage_code})\n`;
+    md += `- **Estimated Drop Window (UTC):** ${lc.drop_timestamp_utc ? new Date(lc.drop_timestamp_utc).toUTCString() : '--'}\n`;
+    if (d.is_australian) {
+      md += `- **auDA 1:00 PM AEST Drop Schedule:** ${lc.drop_timestamp_aest || '--'}\n`;
+    }
+    md += `- **Countdown at Export:** \`${lc.countdown_formatted}\`\n`;
+    md += `- **Registrar of Record:** ${d.registrar || 'Unknown'}\n`;
+    md += `- **Creation Date:** ${d.creation_date || '--'}\n`;
+    md += `- **Official Expiration Date:** ${d.expiration_date || '--'}\n\n`;
+
+    md += `## 🚀 Direct Drop-Catch & Backorder Providers\n`;
+    (d.dispatch?.primary_providers || []).forEach(p => {
+      md += `- **[${p.name}](${p.url}):** ${p.desc} (${p.type})\n`;
+    });
+
+    md += `\n## 📚 Historical Archive & Lineage Pivots\n`;
+    (d.dispatch?.archive_intel || []).forEach(pv => {
+      md += `- **[${pv.name}](${pv.url}):** ${pv.desc}\n`;
+    });
+
+    copyToClipboard(md, `Copied Drop Sniper Dossier for ${d.domain} to clipboard!`);
+  }
+
+  // Action: Copy JSON
+  function copyDomainSniperJson() {
+    if (latestDomainSniperData) {
+      copyToClipboard(JSON.stringify(latestDomainSniperData, null, 2), 'Copied Domain Drop JSON to clipboard!');
+    } else {
+      showToast('No active domain data to copy.');
+    }
+  }
+
+  // Bind Event Listeners
+  document.getElementById('btn-open-domain-sniper')?.addEventListener('click', () => openDomainSniperModal());
+  elBtnCloseDomainSniper?.addEventListener('click', () => {
+    if (sniperCountdownTimerInterval) clearInterval(sniperCountdownTimerInterval);
+    closeModal(elModalDomainSniper);
+  });
+  elBtnDomainSniperSearch?.addEventListener('click', executeDomainSniperSearch);
+  elDomainSniperInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      executeDomainSniperSearch();
+    }
+  });
+
+  document.querySelectorAll('.domain-sniper-preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dom = btn.getAttribute('data-domain');
+      if (elDomainSniperInput) elDomainSniperInput.value = dom;
+      executeDomainSniperSearch();
+    });
+  });
+
+  elBtnSniperLoadTrending?.addEventListener('click', loadTrendingDropWatchlist);
+  document.getElementById('btn-sniper-send-to-graph')?.addEventListener('click', sendDomainSniperToGraph);
+  document.getElementById('btn-sniper-export-dossier')?.addEventListener('click', exportDomainSniperMarkdown);
+  document.getElementById('btn-sniper-copy-json')?.addEventListener('click', copyDomainSniperJson);
 
   function extractDomain(url) {
     try {

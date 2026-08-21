@@ -24,6 +24,7 @@ import re
 import datetime
 import unicodedata
 import mailaccess_engine
+import domain_drop_engine
 
 # Enforce UTF-8 on Windows console
 if sys.platform == 'win32':
@@ -1428,6 +1429,10 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_email_investigate(params)
         elif path == '/api/email/harvest':
             self.handle_email_harvest(params)
+        elif path == '/api/domain/expiry':
+            self.handle_domain_expiry(params)
+        elif path == '/api/domain/drops/trending':
+            self.handle_domain_drops_trending()
         elif path == '/api/manifest':
             self.handle_get_manifest()
         elif path == '/api/info':
@@ -1479,6 +1484,7 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
                 'OSINT Pivot Matrix',
                 'Visual Investigation Link Graph',
                 'MailAccess: Email Intelligence, Name Consensus & Exposure Engine',
+                'Domain Drop Sniper & Expiry Countdown Radar',
                 'Session Snapshot & Encrypted Export'
             ],
             'status': 'online'
@@ -2480,6 +2486,18 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self._json_response({'error': 'Missing required parameter: domain', 'status': 'error'}, 400)
             return
         result = mailaccess_engine.harvest_domain_emails(domain)
+        self._json_response(result)
+
+    def handle_domain_expiry(self, params):
+        domain = params.get('domain', [''])[0].strip()
+        if not domain:
+            self._json_response({'error': 'Missing required parameter: domain', 'status': 'error'}, 400)
+            return
+        result = domain_drop_engine.inspect_domain_expiry(domain)
+        self._json_response(result)
+
+    def handle_domain_drops_trending(self):
+        result = domain_drop_engine.get_trending_dropping_watchlist()
         self._json_response(result)
 
     def handle_es_open(self):

@@ -16,14 +16,6 @@ import time
 import server
 import mailaccess_engine
 
-@pytest.fixture(scope="module")
-def live_server():
-    """Spawns live threading server on localhost port 7777."""
-    t = threading.Thread(target=server.run_server, daemon=True)
-    t.start()
-    time.sleep(0.5)
-    yield "http://127.0.0.1:7777"
-
 # =========================================================================
 # 1. NAME CONSENSUS ENGINE TESTS
 # =========================================================================

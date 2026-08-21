@@ -130,6 +130,17 @@
           Mail
         </button>
 
+        <button class="btn-icon" id="btn-open-domain-sniper" title="Domain Drop Sniper & Expiry Countdown Radar" aria-label="Domain Drop Sniper & Expiry Countdown Radar" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="22" y1="12" x2="18" y2="12"></line>
+            <line x1="6" y1="12" x2="2" y2="12"></line>
+            <line x1="12" y1="6" x2="12" y2="2"></line>
+            <line x1="12" y1="22" x2="12" y2="18"></line>
+          </svg>
+          Drops
+        </button>
+
         <button class="btn-icon" id="btn-open-corp" title="Australian Corporate & Beneficial Ownership Network" aria-label="Australian Corporate & Beneficial Ownership Network" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -248,6 +259,11 @@
       <div class="hud-item" onclick="document.getElementById('btn-open-mail-access').click();">
         <kbd class="hud-key cyan">!mail</kbd>
         <span class="hud-desc">Mail</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-domain-sniper').click();">
+        <kbd class="hud-key cyan">!drop</kbd>
+        <span class="hud-desc">Drops</span>
       </div>
       <div class="hud-separator"></div>
       <div class="hud-item" onclick="document.getElementById('btn-open-graph').click();">
@@ -601,6 +617,168 @@
           </button>
         </div>
         <button type="button" class="btn-icon" id="btn-mail-copy-json" style="font-size:0.70rem;">
+          Copy JSON
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DOMAIN DROP SNIPER & EXPIRY COUNTDOWN RADAR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-domain-sniper" role="dialog" aria-modal="true" aria-labelledby="modal-domain-sniper-title">
+    <div class="modal-content" style="max-width:960px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" id="modal-domain-sniper-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="22" y1="12" x2="18" y2="12"></line>
+              <line x1="6" y1="12" x2="2" y2="12"></line>
+              <line x1="12" y1="6" x2="12" y2="2"></line>
+              <line x1="12" y1="22" x2="12" y2="18"></line>
+            </svg>
+            Domain Drop Sniper &amp; Expiry Countdown Radar
+          </h3>
+          <span class="brand-tag">AUDA 1PM AEST / VERISIGN DROP STREAM</span>
+        </div>
+        <button class="modal-close" id="btn-close-domain-sniper" aria-label="Close Domain Drop Sniper dialog">&times;</button>
+      </div>
+
+      <!-- Quick Preset & Trending Dropping Domains Bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:6px;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <span style="font-size:0.70rem;color:var(--text-muted);">Watchlist / Test Presets:</span>
+          <button type="button" class="stat-chip domain-sniper-preset" data-domain="cloudsec.com.au" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;color:var(--accent-green);">cloudsec.com.au [AU]</button>
+          <button type="button" class="stat-chip domain-sniper-preset" data-domain="quantumcompute.io" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;color:var(--accent-cyan);">quantumcompute.io</button>
+          <button type="button" class="stat-chip domain-sniper-preset" data-domain="google.com" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;">google.com</button>
+          <button type="button" class="stat-chip domain-sniper-preset" data-domain="expired-demo.com" style="cursor:pointer;padding:1px 6px;font-size:0.65rem;color:#f43f5e;">expired-demo.com</button>
+        </div>
+        <button type="button" class="btn-icon" id="btn-sniper-load-trending" style="padding:1px 8px;font-size:0.68rem;border-color:var(--accent-amber);color:var(--accent-amber);">
+          🔥 Trending Drop Watchlist
+        </button>
+      </div>
+
+      <!-- Target Domain Search Input -->
+      <div class="form-group" style="margin-bottom:10px;">
+        <label class="form-label">Target Domain for Expiry Tracking &amp; Drop Catching</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="domain-sniper-input" placeholder="e.g. targetdomain.com.au, startup.io, premiumbrand.com" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-domain-sniper-search" style="min-width:170px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>Track &amp; Calculate Drop</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Results Container -->
+      <div id="domain-sniper-results" style="display:none;flex-direction:column;gap:10px;max-height:480px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;">
+        <!-- Top Banner: Countdown Clock & Lifecycle Gauge -->
+        <div class="sniper-countdown-banner" style="padding:14px;background:rgba(0,0,0,0.45);border:1px solid rgba(0,240,255,0.25);border-radius:6px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <strong id="sniper-target-domain" style="font-size:1.25rem;color:#ffffff;font-family:var(--font-mono);">--</strong>
+              <span id="sniper-stage-badge" class="brand-tag">--</span>
+              <span id="sniper-au-badge" class="brand-tag" style="display:none;color:var(--accent-green);border-color:var(--accent-green);">[AUS] auDA CYCLE</span>
+            </div>
+            <div id="sniper-status-desc" style="font-size:0.75rem;color:var(--text-secondary);max-width:520px;">--</div>
+          </div>
+
+          <div style="text-align:right;">
+            <span style="font-size:0.68rem;color:var(--text-muted);font-weight:700;letter-spacing:0.5px;display:block;">ESTIMATED DROP COUNTDOWN:</span>
+            <div id="sniper-countdown-digits" class="sniper-digital-clock" style="font-size:1.8rem;font-weight:800;font-family:var(--font-mono);color:var(--accent-cyan);margin:2px 0;">--d --h --m --s</div>
+            <span id="sniper-drop-time-text" style="font-size:0.70rem;color:var(--accent-amber);font-family:var(--font-mono);">Drop Target: --</span>
+          </div>
+        </div>
+
+        <!-- 5-Stage Lifecycle Visualizer Stepper -->
+        <div style="padding:10px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px;">
+          <span style="font-size:0.68rem;font-weight:700;color:var(--accent-cyan);letter-spacing:0.5px;display:block;margin-bottom:8px;">DOMAIN LIFECYCLE PROGRESSION:</span>
+          <div class="sniper-lifecycle-stepper" id="sniper-lifecycle-stepper">
+            <div class="sniper-step" data-step="0">
+              <div class="sniper-step-dot">1</div>
+              <div class="sniper-step-label">Active Reg</div>
+            </div>
+            <div class="sniper-step-connector"></div>
+            <div class="sniper-step" data-step="1">
+              <div class="sniper-step-dot">2</div>
+              <div class="sniper-step-label">Grace Period</div>
+            </div>
+            <div class="sniper-step-connector"></div>
+            <div class="sniper-step" data-step="2">
+              <div class="sniper-step-dot">3</div>
+              <div class="sniper-step-label">Redemption (RGP)</div>
+            </div>
+            <div class="sniper-step-connector"></div>
+            <div class="sniper-step" data-step="3">
+              <div class="sniper-step-dot">4</div>
+              <div class="sniper-step-label">Pending Delete</div>
+            </div>
+            <div class="sniper-step-connector"></div>
+            <div class="sniper-step" data-step="4">
+              <div class="sniper-step-dot">5</div>
+              <div class="sniper-step-label">DROP / CATCH</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical WHOIS / RDAP Telemetry Grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="padding:10px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:6px;font-size:0.75rem;display:flex;flex-direction:column;gap:5px;">
+            <span style="font-size:0.68rem;font-weight:700;color:var(--accent-cyan);">REGISTRATION TIMELINE</span>
+            <div><span>Expiration Date: </span><strong id="sniper-meta-expiry" style="color:#ffffff;font-family:var(--font-mono);">--</strong></div>
+            <div><span>Creation Date: </span><span id="sniper-meta-created" style="color:var(--text-muted);font-family:var(--font-mono);">--</span></div>
+            <div><span>Last Updated: </span><span id="sniper-meta-updated" style="color:var(--text-muted);font-family:var(--font-mono);">--</span></div>
+            <div><span>Registrar of Record: </span><strong id="sniper-meta-registrar" style="color:var(--accent-green);">--</strong></div>
+          </div>
+
+          <div style="padding:10px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:6px;font-size:0.75rem;display:flex;flex-direction:column;gap:5px;">
+            <span style="font-size:0.68rem;font-weight:700;color:var(--accent-cyan);">REGISTRY STATUS &amp; NAMESERVERS</span>
+            <div><span>Registry Status Codes: </span><div id="sniper-status-chips" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:2px;"></div></div>
+            <div><span>Nameservers: </span><div id="sniper-ns-chips" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:2px;font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);"></div></div>
+          </div>
+        </div>
+
+        <!-- 1-Click Backorder & Drop-Catch Launchpad -->
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:var(--accent-green);letter-spacing:0.5px;display:block;margin-bottom:6px;">🎯 DIRECT BACKORDER &amp; DROP-CATCH LAUNCHPAD:</span>
+          <div id="sniper-providers-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:8px;"></div>
+        </div>
+
+        <!-- Historical Archive & SEO Valuation Pivots -->
+        <div>
+          <span style="font-size:0.70rem;font-weight:700;color:var(--accent-purple);letter-spacing:0.5px;display:block;margin-bottom:6px;">📚 HISTORICAL RECON &amp; VALUATION PIVOTS:</span>
+          <div id="sniper-archive-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));gap:8px;"></div>
+        </div>
+      </div>
+
+      <!-- Trending Watchlist Drawer (Collapsible) -->
+      <div id="domain-sniper-watchlist-container" style="display:none;flex-direction:column;gap:8px;max-height:450px;overflow-y:auto;">
+        <span style="font-size:0.72rem;font-weight:700;color:var(--accent-amber);letter-spacing:0.5px;">🔥 HIGH-VALUE DROPPING DOMAINS MONITOR:</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div>
+            <span style="font-size:0.68rem;color:var(--accent-green);font-weight:700;display:block;margin-bottom:4px;">🇦🇺 Australian (.au) Dropping List:</span>
+            <div id="sniper-au-watchlist" style="display:flex;flex-direction:column;gap:4px;"></div>
+          </div>
+          <div>
+            <span style="font-size:0.68rem;color:var(--accent-cyan);font-weight:700;display:block;margin-bottom:4px;">🌐 Global (.com / .io / .ai) Dropping List:</span>
+            <div id="sniper-global-watchlist" style="display:flex;flex-direction:column;gap:4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="form-actions" style="justify-content:space-between;align-items:center;margin-top:8px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-sniper-send-to-graph" style="border-color:var(--accent-purple);color:var(--accent-purple);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Send Domain to Link Graph
+          </button>
+          <button type="button" class="btn-icon" id="btn-sniper-export-dossier">
+            📋 Export Markdown Drop Brief
+          </button>
+        </div>
+        <button type="button" class="btn-icon" id="btn-sniper-copy-json" style="font-size:0.70rem;">
           Copy JSON
         </button>
       </div>
