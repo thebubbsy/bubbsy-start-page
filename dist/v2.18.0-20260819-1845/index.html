@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubbsy Start Page | OSINT Command Hub & Everything</title>
+  <meta name="description" content="Local OSINT & AI command dashboard with Voidtools Everything search, Australian intelligence, and investigation graph">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2.5'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="theme-default">
+
+  <!-- Tactical Top Bar & HUD Header -->
+  <header class="top-nav">
+    <div class="nav-container">
+      
+      <!-- Brand & Mission Badge -->
+      <div class="brand-section">
+        <div class="logo-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <h1 class="brand-title">
+          BUBBSY <span class="brand-sub">START PAGE</span>
+          <span class="brand-tag">OSINT COMMAND</span>
+        </h1>
+      </div>
+
+      <!-- Live Telemetry & Status Badges -->
+      <div class="nav-stats">
+        <div class="stat-chip" id="chip-tools-count">
+          <span class="stat-label">TOOLS:</span>
+          <span class="stat-value" id="stats-total-tools">1,699</span>
+        </div>
+        <div class="stat-chip" id="chip-categories-count">
+          <span class="stat-label">MODULES:</span>
+          <span class="stat-value" id="stats-total-categories">89</span>
+        </div>
+        <div class="stat-chip" id="es-status-indicator" title="Voidtools Everything IPC / HTTP Bridge Status">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="stat-label">ES:</span>
+          <span class="stat-value" id="es-status-text">DETECTING...</span>
+        </div>
+        <div class="stat-chip" id="chip-threat-radar" title="Live Threat Intel / CISA KEV Stream">
+          <span class="status-dot online" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></span>
+          <span class="stat-label">RADAR:</span>
+          <span class="stat-value" style="color:var(--accent-cyan);">ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="btn-palette" title="Command Palette (Ctrl+K)">
+          <kbd style="font-size:0.68rem;background:rgba(255,255,255,0.1);padding:1px 4px;border-radius:3px;">Ctrl+K</kbd>
+        </button>
+
+        <button class="btn-icon btn-es-toggle" id="btn-toggle-es" title="Toggle Voidtools Everything Search Panel">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          Everything
+        </button>
+
+        <button class="btn-icon" id="btn-open-pivot" title="OSINT Pivot Matrix (Shodan, Censys, VT, AbuseIPDB, ABN)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+          Pivot
+        </button>
+
+        <button class="btn-icon" id="btn-open-radar" title="Threat Intel & CVE Live Radar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+            <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"></path>
+          </svg>
+          Radar
+        </button>
+
+        <button class="btn-icon" id="btn-open-graph" title="Visual Investigation Link Graph">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          Graph
+        </button>
+
+        <button class="btn-icon" id="btn-open-export" title="Incident Session & Markdown Export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Export
+        </button>
+
+        <button class="btn-icon" id="btn-custom-bookmark" title="Add Custom Bookmark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          +Item
+        </button>
+
+        <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="btn-settings" title="Settings & Everything Auth">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Live World Clock Ticker Bar -->
+  <div class="world-clock-bar">
+    <div class="clock-grid" id="world-clocks-container">
+      <!-- Generated Dynamically -->
+    </div>
+  </div>
+
+  <!-- Sleek Minimalistic Keyboard Shortcuts HUD Bar -->
+  <div class="shortcuts-hud-bar">
+    <div class="shortcuts-hud-container">
+      <span class="hud-label">⚡ HOTKEYS</span>
+      <div class="hud-item" onclick="document.getElementById('main-search').focus();">
+        <kbd class="hud-key">/</kbd>
+        <span class="hud-desc">Focus Search</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-palette').click();">
+        <kbd class="hud-key cyan">Ctrl+K</kbd>
+        <span class="hud-desc">Command Palette</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('main-search').value=''; document.getElementById('main-search').dispatchEvent(new Event('input'));">
+        <kbd class="hud-key">ESC</kbd>
+        <span class="hud-desc">Clear</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item">
+        <span class="hud-combo"><span class="hud-action">Hover</span> + <kbd class="hud-key">C</kbd></span>
+        <span class="hud-desc">Copy URL</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item">
+        <span class="hud-combo"><span class="hud-action">Hover</span> + <kbd class="hud-key">F</kbd></span>
+        <span class="hud-desc">Pin Favorite</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="const b=document.querySelector('[data-bang=\'!es \']'); if(b) b.click();">
+        <kbd class="hud-key cyan">!es</kbd>
+        <span class="hud-desc">Everything Files</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-pivot').click();">
+        <kbd class="hud-key green">!pivot</kbd>
+        <span class="hud-desc">OSINT Matrix</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-graph').click();">
+        <kbd class="hud-key purple">!graph</kbd>
+        <span class="hud-desc">Link Graph</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero / Omnisearch Command Center -->
+  <section class="hero-section">
+    <div class="search-container">
+      
+      <!-- Search Mode Tabs -->
+      <div class="search-tabs" id="search-mode-tabs">
+        <button class="search-tab active" data-mode="filter">🔍 Filter Bookmarks</button>
+        <button class="search-tab es-tab" data-mode="everything">⚡ Voidtools Everything (ES)</button>
+        <button class="search-tab" data-mode="chatgpt">ChatGPT</button>
+        <button class="search-tab" data-mode="claude">Claude</button>
+        <button class="search-tab" data-mode="perplexity">Perplexity</button>
+        <button class="search-tab" data-mode="deepseek">DeepSeek</button>
+        <button class="search-tab" data-mode="genspark">Genspark</button>
+        <button class="search-tab" data-mode="phind">Phind</button>
+        <button class="search-tab" data-mode="trove">Trove (NLA)</button>
+        <button class="search-tab" data-mode="abn">ABN Lookup</button>
+        <button class="search-tab" data-mode="google">Google Dorking</button>
+        <button class="search-tab" data-mode="duckduckgo">DuckDuckGo</button>
+        <button class="search-tab" data-mode="shodan">Shodan</button>
+        <button class="search-tab" data-mode="virustotal">VirusTotal</button>
+        <button class="search-tab" data-mode="github">GitHub</button>
+      </div>
+
+      <!-- Main Search Input Bar -->
+      <div class="search-input-wrapper">
+        <div class="search-engine-badge" id="current-engine-label">🔍 FILTER</div>
+        <input 
+          type="text" 
+          id="main-search" 
+          class="main-search-input" 
+          placeholder="Fuzzy search 1,699+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)"
+          autocomplete="off" 
+          spellcheck="false"
+        >
+        <div class="search-hints">
+          <span class="kbd-badge">/</span>
+          <span class="kbd-badge">ESC</span>
+        </div>
+        <button class="btn-search-exec" id="btn-search-exec">Search</button>
+      </div>
+
+    </div>
+
+    <!-- Bang Shortcuts Ribbon -->
+    <div class="bang-bar">
+      <span style="opacity:0.6;">Quick Bangs:</span>
+      <span class="bang-chip" data-bang="!es ">!es &lt;file&gt;</span>
+      <span class="bang-chip" data-bang="!abn ">!abn &lt;entity/acn&gt;</span>
+      <span class="bang-chip" data-bang="!trove ">!trove &lt;archive&gt;</span>
+      <span class="bang-chip" data-bang="!austlii ">!austlii &lt;case/law&gt;</span>
+      <span class="bang-chip" data-bang="!gpt ">!gpt &lt;prompt&gt;</span>
+      <span class="bang-chip" data-bang="!claude ">!claude &lt;prompt&gt;</span>
+      <span class="bang-chip" data-bang="!ppx ">!ppx &lt;question&gt;</span>
+      <span class="bang-chip" data-bang="!deepseek ">!deepseek &lt;query&gt;</span>
+      <span class="bang-chip" data-bang="!genspark ">!genspark &lt;topic&gt;</span>
+      <span class="bang-chip" data-bang="!shodan ">!shodan &lt;ip&gt;</span>
+      <span class="bang-chip" data-bang="!vt ">!vt &lt;hash&gt;</span>
+      <span class="bang-chip" data-bang="!dork site:gov.au filetype:pdf ">!dork &lt;query&gt;</span>
+      <span class="bang-chip" data-bang="!gh ">!gh &lt;code&gt;</span>
+    </div>
+  </section>
+
+  <!-- Voidtools Everything (ES) Live Search Dock / Drawer -->
+  <section class="es-panel" id="es-results-panel">
+    <div class="es-card">
+      <div class="es-header">
+        <div class="es-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>VOIDTOOLS EVERYTHING RESULTS</span>
+          <span id="es-results-counter" style="font-size:0.75rem;opacity:0.8;font-family:var(--font-mono);">(0 files)</span>
+        </div>
+
+        <div class="es-filter-chips">
+          <button class="es-filter-btn active" data-es-filter="all">All</button>
+          <button class="es-filter-btn" data-es-filter="docs">Docs (.pdf, .docx, .txt)</button>
+          <button class="es-filter-btn" data-es-filter="data">Data (.json, .csv, .py)</button>
+          <button class="es-filter-btn" data-es-filter="archives">Archives (.zip, .7z)</button>
+          <button class="es-filter-btn" data-es-filter="media">Media (.jpg, .mp4)</button>
+        </div>
+      </div>
+
+      <!-- Advanced Everything Search Syntax Quick Filters -->
+      <div class="es-syntax-bar" style="padding:4px 10px;background:rgba(0,0,0,0.3);display:flex;gap:6px;overflow-x:auto;font-size:0.68rem;font-family:var(--font-mono);border-bottom:1px solid rgba(255,255,255,0.05);">
+        <span style="color:var(--text-muted);">Quick Queries:</span>
+        <button class="es-syntax-pill" data-syntax="dm:today">📅 Modified Today</button>
+        <button class="es-syntax-pill" data-syntax="size:>100MB">💾 Size &gt; 100MB</button>
+        <button class="es-syntax-pill" data-syntax="ext:pcap;cap;pcapng">🦈 Packet Captures</button>
+        <button class="es-syntax-pill" data-syntax="ext:key;pem;kdbx;ovpn">🔑 Credentials / Keys</button>
+        <button class="es-syntax-pill" data-syntax="ext:log;json;csv;sqlite">📊 Investigation Logs</button>
+      </div>
+
+      <div class="es-results-container" id="es-results-list">
+        <div class="es-empty-state">
+          Type a query above to instantly search all local files via Voidtools Everything.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Quick Jump Navigation Ribbon -->
+  <nav class="category-ribbon" id="category-ribbon">
+    <button class="cat-pill active" data-filter-group="all">All (1,699)</button>
+    <button class="cat-pill" data-filter-group="aus_intel" style="border-color:var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">🇦🇺 Australian OSINT</button>
+    <button class="cat-pill" data-filter-group="ai_hub" style="border-color:var(--accent-green);color:var(--accent-green);font-weight:700;">AI & Neural Tools</button>
+    <button class="cat-pill" data-filter-group="cyber_intel">Threat Intel & Cyber</button>
+    <button class="cat-pill" data-filter-group="identity">Identity & People</button>
+    <button class="cat-pill" data-filter-group="social">Social Networks</button>
+    <button class="cat-pill" data-filter-group="search_domain">Search & DNS</button>
+    <button class="cat-pill" data-filter-group="geo_transport">Geo, Maps & Transport</button>
+    <button class="cat-pill" data-filter-group="records_legal">Public Records & Gov</button>
+    <button class="cat-pill" data-filter-group="tools_general">Productivity & Toolsets</button>
+    <button class="cat-pill" data-filter-group="favorites">⭐ My Pinned</button>
+  </nav>
+
+  <!-- Main 4-Column Dashboard Grid -->
+  <main class="dashboard-container">
+    <div class="columns-grid" id="dashboard-grid">
+      <!-- Injected via JavaScript from data/osint_data.json -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       1. GLOBAL COMMAND PALETTE (CTRL+K)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-palette">
+    <div class="palette-modal-content">
+      <div class="palette-search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="palette-input" 
+          placeholder="Type a tool name, file query, OSINT command, or Australian entity... (Arrow Keys to navigate, Enter to open)" 
+          autocomplete="off" 
+          spellcheck="false"
+        >
+        <kbd class="hud-key" style="font-size:0.65rem;">ESC</kbd>
+      </div>
+
+      <div class="palette-results-list" id="palette-results">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div class="palette-footer">
+        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select / Execute</span>
+        <span><kbd>ESC</kbd> Dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. OSINT PIVOT MATRIX MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-pivot">
+    <div class="modal-content" style="max-width:760px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+          <span>🎯 OSINT Pivot Matrix</span>
+          <span class="brand-tag" id="pivot-type-badge">ENTER TARGET</span>
+        </h3>
+        <button class="modal-close" id="btn-close-pivot">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Target Indicator / Entity (IP, Domain, Hash, Email, CVE, AU ABN)</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="pivot-input" placeholder="e.g. 1.1.1.1, example.com, 5e884898..., CVE-2025-21417, 33 000 000 000" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-pivot-all" style="white-space:nowrap;">⚡ Launch All</button>
+        </div>
+      </div>
+
+      <!-- Pivot Categories Grid -->
+      <div class="pivot-grid" id="pivot-matrix-actions">
+        <!-- Injected based on input type -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <button type="button" class="btn-icon" id="btn-pivot-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+          🕸️ Add Entity to Link Graph
+        </button>
+        <button type="button" class="btn-icon" id="btn-pivot-clear">Clear Input</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. THREAT INTEL & CVE LIVE RADAR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-radar">
+    <div class="modal-content" style="max-width:850px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title">📡 Threat Intel & CVE Live Radar</h3>
+          <span class="stat-chip" style="font-size:0.68rem;color:var(--accent-cyan);" id="radar-live-badge">FEED: CISA KEV</span>
+        </div>
+        <button class="modal-close" id="btn-close-radar">&times;</button>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities by keyword (e.g. Ivanti, Fortinet, Windows, Cisco, Palo Alto)...">
+        <button type="button" class="btn-icon" id="btn-refresh-radar" title="Refresh Live Stream">🔄 Refresh</button>
+      </div>
+
+      <div class="radar-list-container" id="radar-items-list" style="max-height:420px;overflow-y:auto;">
+        <div class="es-empty-state">Loading threat radar feed...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. VISUAL INVESTIGATION LINK GRAPH MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-graph">
+    <div class="modal-content graph-modal-container">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title">🕸️ Visual Investigation Link Graph</h3>
+          <span class="brand-tag">INTERACTIVE CANVAS</span>
+        </div>
+        <button class="modal-close" id="btn-close-graph">&times;</button>
+      </div>
+
+      <!-- Graph Toolbar -->
+      <div class="graph-toolbar">
+        <div class="graph-tool-group">
+          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:220px;">
+          <select class="form-control" id="graph-new-node-type" style="width:130px;">
+            <option value="ip">🌐 IP Address</option>
+            <option value="domain">🔗 Domain</option>
+            <option value="hash">🔒 Hash</option>
+            <option value="email">📧 Email</option>
+            <option value="person">👤 Person</option>
+            <option value="org">🏢 Organization</option>
+            <option value="cve">⚠️ CVE Exploit</option>
+            <option value="aus">🇦🇺 AU ABN/ACN</option>
+          </select>
+          <button type="button" class="btn-icon" id="btn-graph-add-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Node</button>
+        </div>
+
+        <div class="graph-tool-group">
+          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them">🔗 Connect Nodes</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download High-Res PNG Screenshot">📷 Export PNG</button>
+          <button type="button" class="btn-icon" id="btn-graph-clear" title="Clear Canvas">🗑️ Clear</button>
+        </div>
+      </div>
+
+      <!-- Graph Canvas Container -->
+      <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
+        <canvas id="investigation-canvas"></canvas>
+        <div class="graph-hints-overlay">
+          <span>Drag nodes to position • Double-click node to Pivot • Mouse wheel to Zoom • Drag canvas to Pan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. INCIDENT SESSION & MARKDOWN EXPORT MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-export">
+    <div class="modal-content" style="max-width:680px;">
+      <div class="modal-header">
+        <h3 class="modal-title">📦 Incident Session & Markdown Export</h3>
+        <button class="modal-close" id="btn-close-export">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Investigation / Incident Case Name</label>
+        <input type="text" class="form-control" id="export-case-name" value="Operation Bubbsy Incident Dossier" placeholder="Case title">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Analyst Notes & Findings</label>
+        <textarea class="form-control" id="export-case-notes" rows="4" placeholder="Enter investigation summary, findings, IOCs, and analyst notes..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;">
+        <label class="form-label">Export Actions</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <button type="button" class="btn-search-exec" id="btn-export-markdown-file">
+            📋 Export Markdown Dossier (.md)
+          </button>
+          <button type="button" class="btn-icon" id="btn-export-json-workspace" style="border-color:var(--accent-green);color:var(--accent-green);">
+            💾 Export JSON Workspace (.json)
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:12px;">
+        <label class="form-label">Import Workspace Snapshot</label>
+        <input type="file" id="import-workspace-file" accept=".json" style="display:none;">
+        <button type="button" class="btn-icon" onclick="document.getElementById('import-workspace-file').click();" style="width:100%;justify-content:center;">
+          📂 Load / Restore Workspace Snapshot File
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CUSTOM BOOKMARK MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-custom-bookmark">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Custom OSINT Tool / Link</h3>
+        <button class="modal-close" id="btn-close-bm">&times;</button>
+      </div>
+      <form id="form-custom-bookmark">
+        <div class="form-group">
+          <label class="form-label">Title / Tool Name</label>
+          <input type="text" class="form-control" id="bm-title" required placeholder="e.g. My Private Shodan Query" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target URL</label>
+          <input type="url" class="form-control" id="bm-url" required placeholder="https://..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (Optional)</label>
+          <input type="text" class="form-control" id="bm-desc" placeholder="Brief description of tool" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Widget Category</label>
+          <select class="form-control" id="bm-category">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-icon" id="btn-cancel-bm">Cancel</button>
+          <button type="submit" class="btn-search-exec">Save Bookmark</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SETTINGS MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Bubbsy Start Page Settings</h3>
+        <button class="modal-close" id="btn-close-settings">&times;</button>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Voidtools Everything HTTP Server Endpoint</label>
+        <input type="text" class="form-control" id="cfg-es-url" value="http://127.0.0.1:8080" placeholder="http://127.0.0.1:8080">
+        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">
+          Enable in Everything: <strong>Tools &rarr; Options &rarr; HTTP Server &rarr; Enable HTTP server (Port 8080)</strong>.
+        </p>
+      </div>
+
+      <div class="form-row-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="form-group">
+          <label class="form-label">HTTP Username (Optional)</label>
+          <input type="text" class="form-control" id="cfg-es-user" placeholder="Everything username" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">HTTP Password (Optional)</label>
+          <div style="position:relative;display:flex;align-items:center;">
+            <input type="password" class="form-control" id="cfg-es-pass" placeholder="Everything password" autocomplete="new-password" style="padding-right:32px;">
+            <button type="button" id="btn-toggle-pass-visibility" title="Show/Hide Password" style="position:absolute;right:6px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.85rem;">👁️</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <button type="button" class="btn-icon" id="btn-test-es-conn" style="border-color:var(--accent-green);color:var(--accent-green);">
+          ⚡ Test Everything Connection
+        </button>
+        <div id="es-test-status-msg" style="font-size:0.74rem;font-family:var(--font-mono);color:var(--text-muted);"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Default Search Engine</label>
+        <select class="form-control" id="cfg-default-engine">
+          <option value="filter">🔍 Filter Bookmarks (Default)</option>
+          <option value="everything">⚡ Voidtools Everything (ES)</option>
+          <option value="google">Google Dorking</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="shodan">Shodan</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <label class="form-label">Backup & Sync Data</label>
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-export-backup">Export JSON Backup</button>
+          <button type="button" class="btn-icon" id="btn-reset-default">Reset to Defaults</button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-search-exec" id="btn-save-settings">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts: bundled offline data first, then app controller -->
+  <script src="data/osint_data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

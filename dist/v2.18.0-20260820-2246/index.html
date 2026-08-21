@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubbsy Start Page | OSINT Command Hub & Everything</title>
+  <meta name="description" content="Bubbsy Start Page - Tactical OSINT & AI command dashboard with Voidtools Everything local bridge, Australian intelligence, and visual link graph.">
+  <meta property="og:title" content="Bubbsy Start Page | OSINT Command Hub & Everything">
+  <meta property="og:description" content="1,699+ OSINT tools, Australian databases, evergreen AI models, and real-time threat intelligence.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050912">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2.5'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    // Immediate early typography & high-contrast application
+    (function() {
+      try {
+        var theme = localStorage.getItem('bubbsy_theme') || 'default';
+        document.documentElement.setAttribute('data-theme', theme);
+        var raw = localStorage.getItem('bubbsy_typography');
+        if (raw) {
+          var cfg = JSON.parse(raw);
+          if (cfg.fontSizePercent) document.documentElement.style.setProperty('--font-scale', (cfg.fontSizePercent / 100).toString());
+          if (cfg.fontWeight) {
+            var w = parseInt(cfg.fontWeight, 10);
+            document.documentElement.style.setProperty('--font-weight-normal', w.toString());
+            document.documentElement.style.setProperty('--font-weight-bold', Math.min(900, w + 300).toString());
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="theme-default">
+
+  <!-- Tactical Top Bar & HUD Header -->
+  <header class="top-nav">
+    <div class="nav-container">
+      
+      <!-- Brand & Mission Badge -->
+      <div class="brand-section">
+        <div class="logo-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <h1 class="brand-title">
+          BUBBSY <span class="brand-sub">START PAGE</span>
+          <span class="brand-tag">OSINT COMMAND</span>
+        </h1>
+      </div>
+
+      <!-- Live Telemetry & Status Badges -->
+      <div class="nav-stats">
+        <div class="stat-chip" id="chip-tools-count">
+          <span class="stat-label">TOOLS:</span>
+          <span class="stat-value" id="stats-total-tools">1,699</span>
+        </div>
+        <div class="stat-chip" id="chip-categories-count">
+          <span class="stat-label">MODULES:</span>
+          <span class="stat-value" id="stats-total-categories">89</span>
+        </div>
+        <div class="stat-chip" id="es-status-indicator" title="Voidtools Everything IPC / HTTP Bridge Status">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="stat-label">ES:</span>
+          <span class="stat-value" id="es-status-text">DETECTING...</span>
+        </div>
+        <div class="stat-chip" id="chip-threat-radar" title="Live Threat Intel / CISA KEV Stream">
+          <span class="status-dot online" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></span>
+          <span class="stat-label">RADAR:</span>
+          <span class="stat-value" style="color:var(--accent-cyan);">ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="btn-tour" title="Interactive Tutorial / Feature Walkthrough" style="border-color:var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Tour
+        </button>
+
+        <button class="btn-icon" id="btn-palette" title="Command Palette (Ctrl+K)">
+          <kbd style="font-size:0.68rem;background:rgba(255,255,255,0.1);padding:1px 4px;border-radius:3px;">Ctrl+K</kbd>
+        </button>
+
+        <button class="btn-icon btn-es-toggle" id="btn-toggle-es" title="Toggle Voidtools Everything Search Panel">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          Everything
+        </button>
+
+        <button class="btn-icon" id="btn-open-pivot" title="OSINT Pivot Matrix (Shodan, Censys, VT, AbuseIPDB, ABN)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+          Pivot
+        </button>
+
+        <button class="btn-icon" id="btn-open-radar" title="Threat Intel & CVE Live Radar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+            <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"></path>
+          </svg>
+          Radar
+        </button>
+
+        <button class="btn-icon" id="btn-open-dorks" title="Threat Dork & Attack Surface Generator">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+          Dorks
+        </button>
+
+        <button class="btn-icon" id="btn-open-geo" title="Australian Cadastre & Coordinate Recon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Geo
+        </button>
+
+        <button class="btn-icon" id="btn-open-social-recon" title="Social Handle & Username Recon (Maigret / Sherlock Pivot)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Recon
+        </button>
+
+        <button class="btn-icon" id="btn-open-corp" title="Australian Corporate & Beneficial Ownership Network">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          Corp
+        </button>
+
+        <button class="btn-icon" id="btn-open-defang" title="Tactical Cyber Defang / Refang & IOC Normalizer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Defang
+        </button>
+
+        <button class="btn-icon" id="btn-open-graph" title="Visual Investigation Link Graph">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          Graph
+        </button>
+
+        <button class="btn-icon" id="btn-open-export" title="Incident Session & Markdown Export">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Export
+        </button>
+
+        <button class="btn-icon" id="btn-custom-bookmark" title="Add Custom Bookmark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add
+        </button>
+
+        <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+          </svg>
+        </button>
+
+        <button class="btn-icon" id="btn-open-typography" title="Typography, Font Size & High-Contrast Colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 7 4 4 20 4 20 7"></polyline>
+            <line x1="9" y1="20" x2="15" y2="20"></line>
+            <line x1="12" y1="4" x2="12" y2="20"></line>
+          </svg>
+          <span style="font-size:0.75rem;font-weight:700;">Aa</span>
+        </button>
+
+        <button class="btn-icon" id="btn-settings" title="Settings & Everything Auth">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Live World Clock Ticker Bar -->
+  <div class="world-clock-bar">
+    <div class="clock-grid" id="world-clocks-container">
+      <!-- Generated Dynamically -->
+    </div>
+  </div>
+
+  <!-- Sleek Minimalistic Keyboard Shortcuts HUD Bar -->
+  <div class="shortcuts-hud-bar">
+    <div class="shortcuts-hud-container">
+      <span class="hud-label">HOTKEYS</span>
+      <div class="hud-item" onclick="document.getElementById('main-search').focus();">
+        <kbd class="hud-key">/</kbd>
+        <span class="hud-desc">Focus Search</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-palette').click();">
+        <kbd class="hud-key cyan">Ctrl+K</kbd>
+        <span class="hud-desc">Palette</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('main-search').value=''; document.getElementById('main-search').dispatchEvent(new Event('input'));">
+        <kbd class="hud-key">ESC</kbd>
+        <span class="hud-desc">Clear</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item">
+        <span class="hud-combo"><span class="hud-action">Hover</span> + <kbd class="hud-key">C</kbd></span>
+        <span class="hud-desc">Copy URL</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item">
+        <span class="hud-combo"><span class="hud-action">Hover</span> + <kbd class="hud-key">F</kbd></span>
+        <span class="hud-desc">Pin Item</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="const b=document.querySelector('[data-bang=\'!es \']'); if(b) b.click();">
+        <kbd class="hud-key cyan">!es</kbd>
+        <span class="hud-desc">Files</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-pivot').click();">
+        <kbd class="hud-key green">!pivot</kbd>
+        <span class="hud-desc">Pivot</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="document.getElementById('btn-open-graph').click();">
+        <kbd class="hud-key purple">!graph</kbd>
+        <span class="hud-desc">Graph</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openShortcutsModal();">
+        <kbd class="hud-key cyan">?</kbd>
+        <span class="hud-desc">Cheatsheet</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero / Omnisearch Command Center -->
+  <section class="hero-section">
+    <div class="search-container">
+      
+      <!-- Search Mode Tabs -->
+      <div class="search-tabs" id="search-mode-tabs">
+        <button class="search-tab active" data-mode="filter">Filter Bookmarks</button>
+        <button class="search-tab es-tab" data-mode="everything">Voidtools Everything (ES)</button>
+        <button class="search-tab" data-mode="aistudio" style="border-color:var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">Google AI Studio</button>
+        <button class="search-tab" data-mode="chatgpt">ChatGPT</button>
+        <button class="search-tab" data-mode="claude">Claude</button>
+        <button class="search-tab" data-mode="perplexity">Perplexity</button>
+        <button class="search-tab" data-mode="deepseek">DeepSeek</button>
+        <button class="search-tab" data-mode="genspark">Genspark</button>
+        <button class="search-tab" data-mode="phind">Phind</button>
+        <button class="search-tab" data-mode="trove">Trove (NLA)</button>
+        <button class="search-tab" data-mode="abn">ABN Lookup</button>
+        <button class="search-tab" data-mode="google">Google Dorking</button>
+        <button class="search-tab" data-mode="duckduckgo">DuckDuckGo</button>
+        <button class="search-tab" data-mode="shodan">Shodan</button>
+        <button class="search-tab" data-mode="virustotal">VirusTotal</button>
+        <button class="search-tab" data-mode="github">GitHub</button>
+      </div>
+
+      <!-- Main Search Input Bar -->
+      <div class="search-input-wrapper">
+        <div class="search-engine-badge" id="current-engine-label">FILTER</div>
+        <input 
+          type="text" 
+          id="main-search" 
+          class="main-search-input" 
+          placeholder="Fuzzy search 1,699+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)"
+          autocomplete="off" 
+          spellcheck="false"
+        >
+        <span id="search-live-matches" class="stat-chip" style="display:none;font-size:0.65rem;color:var(--accent-cyan);border-color:var(--accent-cyan);margin-right:4px;">0 MATCHES</span>
+        <div class="search-hints">
+          <span class="kbd-badge">/</span>
+          <span class="kbd-badge">ESC</span>
+        </div>
+        <button class="btn-search-exec" id="btn-search-exec">Search</button>
+      </div>
+
+    </div>
+
+    <!-- Bang Shortcuts Ribbon -->
+    <div class="bang-bar">
+      <span style="opacity:0.6;">Quick Bangs:</span>
+      <span class="bang-chip" data-bang="!aistudio " style="color:var(--accent-cyan);border-color:var(--accent-cyan);">!aistudio (Google AI Studio)</span>
+      <span class="bang-chip" data-bang="!gemini ">!gemini (Gemini AI)</span>
+      <span class="bang-chip" data-bang="!es ">!es &lt;file&gt;</span>
+      <span class="bang-chip" data-bang="!abn ">!abn &lt;entity/acn&gt;</span>
+      <span class="bang-chip" data-bang="!trove ">!trove &lt;archive&gt;</span>
+      <span class="bang-chip" data-bang="!austlii ">!austlii &lt;case/law&gt;</span>
+      <span class="bang-chip" data-bang="!gpt ">!gpt &lt;prompt&gt;</span>
+      <span class="bang-chip" data-bang="!claude ">!claude &lt;prompt&gt;</span>
+      <span class="bang-chip" data-bang="!ppx ">!ppx &lt;question&gt;</span>
+      <span class="bang-chip" data-bang="!deepseek ">!deepseek &lt;query&gt;</span>
+      <span class="bang-chip" data-bang="!genspark ">!genspark &lt;topic&gt;</span>
+      <span class="bang-chip" data-bang="!shodan ">!shodan &lt;ip&gt;</span>
+      <span class="bang-chip" data-bang="!vt ">!vt &lt;hash&gt;</span>
+      <span class="bang-chip" data-bang="!dork site:gov.au filetype:pdf ">!dork &lt;query&gt;</span>
+      <span class="bang-chip" data-bang="!gh ">!gh &lt;code&gt;</span>
+    </div>
+  </section>
+
+  <!-- Voidtools Everything (ES) Live Search Dock / Drawer -->
+  <section class="es-panel" id="es-results-panel">
+    <div class="es-card">
+      <div class="es-header">
+        <div class="es-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>VOIDTOOLS EVERYTHING RESULTS</span>
+          <span id="es-results-counter" style="font-size:0.75rem;opacity:0.8;font-family:var(--font-mono);">(0 files)</span>
+        </div>
+
+        <div class="es-filter-chips">
+          <button class="es-filter-btn active" data-es-filter="all">All</button>
+          <button class="es-filter-btn" data-es-filter="docs">Docs (.pdf, .docx, .txt)</button>
+          <button class="es-filter-btn" data-es-filter="data">Data (.json, .csv, .py)</button>
+          <button class="es-filter-btn" data-es-filter="archives">Archives (.zip, .7z)</button>
+          <button class="es-filter-btn" data-es-filter="media">Media (.jpg, .mp4)</button>
+        </div>
+      </div>
+
+      <!-- Advanced Everything Search Syntax Quick Filters -->
+      <div class="es-syntax-bar" style="padding:4px 10px;background:rgba(0,0,0,0.3);display:flex;gap:6px;overflow-x:auto;font-size:0.68rem;font-family:var(--font-mono);border-bottom:1px solid rgba(255,255,255,0.05);">
+        <span style="color:var(--text-muted);">Quick Queries:</span>
+        <button class="es-syntax-pill" data-syntax="dm:today">Modified Today</button>
+        <button class="es-syntax-pill" data-syntax="size:>100MB">Size &gt; 100MB</button>
+        <button class="es-syntax-pill" data-syntax="ext:pcap;cap;pcapng">Packet Captures</button>
+        <button class="es-syntax-pill" data-syntax="ext:key;pem;kdbx;ovpn">Credentials / Keys</button>
+        <button class="es-syntax-pill" data-syntax="ext:log;json;csv;sqlite">Investigation Logs</button>
+      </div>
+
+      <div class="es-results-container" id="es-results-list">
+        <div class="es-empty-state">
+          Type a query above to instantly search all local files via Voidtools Everything.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Quick Jump Navigation Ribbon -->
+  <nav class="category-ribbon" id="category-ribbon">
+    <button class="cat-pill active" data-filter-group="all">All (1,699)</button>
+    <button class="cat-pill" data-filter-group="aus_intel" style="border-color:var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">[AUS] Australian OSINT</button>
+    <button class="cat-pill" data-filter-group="ai_hub" style="border-color:var(--accent-green);color:var(--accent-green);font-weight:700;">AI & Neural Tools</button>
+    <button class="cat-pill" data-filter-group="cyber_intel">Threat Intel & Cyber</button>
+    <button class="cat-pill" data-filter-group="identity">Identity & People</button>
+    <button class="cat-pill" data-filter-group="social">Social Networks</button>
+    <button class="cat-pill" data-filter-group="search_domain">Search & DNS</button>
+    <button class="cat-pill" data-filter-group="geo_transport">Geo, Maps & Transport</button>
+    <button class="cat-pill" data-filter-group="records_legal">Public Records & Gov</button>
+    <button class="cat-pill" data-filter-group="tools_general">Productivity & Toolsets</button>
+    <button class="cat-pill" data-filter-group="favorites">Pinned Tools</button>
+    <button class="btn-icon" id="btn-toggle-all-cards" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(255,255,255,0.15);" title="Collapse / Expand All Category Cards">Collapse All</button>
+  </nav>
+
+  <!-- Main 4-Column Dashboard Grid -->
+  <main class="dashboard-container">
+    <div class="columns-grid" id="dashboard-grid">
+      <!-- Injected via JavaScript from data/osint_data.json -->
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       1. GLOBAL COMMAND PALETTE (CTRL+K)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-palette">
+    <div class="palette-modal-content">
+      <div class="palette-search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="palette-input" 
+          placeholder="Type a tool name, file query, OSINT command, or Australian entity... (Arrow Keys to navigate, Enter to open)" 
+          autocomplete="off" 
+          spellcheck="false"
+        >
+        <kbd class="hud-key" style="font-size:0.65rem;">ESC</kbd>
+      </div>
+
+      <div class="palette-results-list" id="palette-results">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div class="palette-footer">
+        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select / Execute</span>
+        <span><kbd>ESC</kbd> Dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. OSINT PIVOT MATRIX MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-pivot">
+    <div class="modal-content" style="max-width:760px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <span>OSINT Pivot Matrix</span>
+          <span class="brand-tag" id="pivot-type-badge">ENTER TARGET</span>
+        </h3>
+        <button class="modal-close" id="btn-close-pivot">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Target Indicator / Entity (IP, Domain, Hash, Email, CVE, AU ABN)</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="pivot-input" placeholder="e.g. 1.1.1.1, example.com, 5e884898..., CVE-2025-21417, 33 000 000 000" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-pivot-all" style="white-space:nowrap;">Launch All</button>
+        </div>
+      </div>
+
+      <!-- Pivot Categories Grid -->
+      <div class="pivot-grid" id="pivot-matrix-actions">
+        <!-- Injected based on input type -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-pivot-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Add Entity to Link Graph
+          </button>
+          <button type="button" class="btn-icon" id="btn-pivot-copy-urls">
+            Copy All URLs
+          </button>
+        </div>
+        <button type="button" class="btn-icon" id="btn-pivot-clear">Clear Input</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3. THREAT INTEL & CVE LIVE RADAR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-radar">
+    <div class="modal-content" style="max-width:850px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path><path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"></path></svg>
+            Threat Intel & CVE Live Radar
+          </h3>
+          <span class="stat-chip" style="font-size:0.68rem;color:var(--accent-cyan);" id="radar-live-badge">FEED: CISA KEV</span>
+        </div>
+        <button class="modal-close" id="btn-close-radar">&times;</button>
+      </div>
+
+      <div class="search-tabs" style="margin-bottom:10px;justify-content:flex-start;">
+        <button class="search-tab active" id="tab-radar-cisa" data-radar-feed="cisa">CISA KEV (Global Exploited)</button>
+        <button class="search-tab" id="tab-radar-acsc" data-radar-feed="acsc" style="color:var(--accent-cyan);">[AUS] ASD / ACSC Advisories & Essential 8</button>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities & advisories by keyword (e.g. Ivanti, Fortinet, ASD, Essential 8)...">
+        <button type="button" class="btn-icon" id="btn-radar-copy-table" title="Copy Filtered Advisories as Markdown Table">
+          Copy Table
+        </button>
+        <button type="button" class="btn-icon" id="btn-refresh-radar" title="Refresh Live Stream">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          Refresh
+        </button>
+      </div>
+
+      <div class="radar-filter-bar" style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;">
+        <button class="cat-pill active radar-pill-filter" data-radar-filter="all">All Latest (2026)</button>
+        <button class="cat-pill radar-pill-filter" data-radar-filter="latest2026" style="border-color:var(--accent-green);color:var(--accent-green);font-weight:700;">⚡ 2026 Zero-Days</button>
+        <button class="cat-pill radar-pill-filter" data-radar-filter="ransomware">Ransomware Exploited</button>
+        <button class="cat-pill radar-pill-filter" data-radar-filter="essential8">Essential 8</button>
+        <button class="cat-pill radar-pill-filter" data-radar-filter="critical">Critical / High</button>
+      </div>
+
+      <div class="radar-list-container" id="radar-items-list" style="max-height:400px;overflow-y:auto;">
+        <div class="es-empty-state">Loading threat radar feed...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SOCIAL HANDLE & USERNAME RECON ENGINE MODAL (SHERLOCK / MAIGRET)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-social-recon">
+    <div class="modal-content" style="max-width:960px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Social Handle &amp; Username Recon Engine
+          </h3>
+          <span class="brand-tag">35 PLATFORMS / MULTI-PIVOT TRIAGE</span>
+        </div>
+        <button class="modal-close" id="btn-close-social-recon">&times;</button>
+      </div>
+
+      <div class="form-group" style="margin-bottom:8px;">
+        <label class="form-label">Target Name / Username / Handle</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="social-recon-input" placeholder="e.g. torvalds, bubbsy_sec, john_doe_au, Tony Stark" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-social-recon-search" style="min-width:160px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Start Disambiguation
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode Toggle & Stepper Ribbon Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:6px;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="cat-pill active" id="btn-view-mode-triage">Guided Triage (Top 5 / Platform)</button>
+          <button type="button" class="cat-pill" id="btn-view-mode-grid">All Profiles Grid</button>
+        </div>
+        <div id="social-triage-stepper-text" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--accent-cyan);">
+          PLATFORM 1 OF 35
+        </div>
+      </div>
+
+      <!-- 35-Platform Stepper Tab Ribbon -->
+      <div class="triage-stepper-ribbon-wrapper" id="triage-stepper-wrapper" style="margin-bottom:8px;">
+        <div class="triage-stepper-ribbon" id="triage-stepper-ribbon">
+          <!-- Dynamically populated with 35 platform tabs -->
+        </div>
+      </div>
+
+      <!-- Real-Time Harvested Intelligence Pool HUD -->
+      <div id="social-harvest-pool-bar" style="padding:8px 12px;background:rgba(0,240,255,0.04);border:1px solid rgba(0,240,255,0.18);border-radius:6px;margin-bottom:10px;font-size:0.72rem;display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+            <span style="font-weight:700;color:var(--accent-cyan);font-family:var(--font-mono);letter-spacing:0.5px;">🎯 HARVESTED INTELLIGENCE POOL:</span>
+            <span id="harvest-pool-count" style="color:var(--text-muted);font-family:var(--font-mono);">0 Confirmed Matches</span>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="btn-icon" id="btn-add-harvest-pivot" style="padding:2px 8px;font-size:0.66rem;border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Pivot</button>
+            <button type="button" class="btn-icon" id="btn-copy-harvested-intel" style="padding:2px 8px;font-size:0.66rem;">📋 Copy Intel</button>
+            <button type="button" class="btn-icon" id="btn-clear-harvested-intel" style="padding:2px 8px;font-size:0.66rem;border-color:#f43f5e;color:#f43f5e;">🗑️ Reset Context</button>
+          </div>
+        </div>
+
+        <!-- Inline Add Pivot Input Form (collapsible) -->
+        <div id="harvest-add-pivot-form" style="display:none;padding:6px 8px;background:rgba(0,0,0,0.3);border:1px dashed rgba(0,240,255,0.3);border-radius:4px;gap:6px;align-items:center;flex-wrap:wrap;">
+          <select id="harvest-pivot-type" class="form-control" style="width:115px;font-size:0.68rem;padding:2px 4px;">
+            <option value="name">👤 Real Name</option>
+            <option value="location">📍 Location</option>
+            <option value="org">🏢 Org / Company</option>
+            <option value="handle">🔗 Handle / Alias</option>
+            <option value="email">📧 Email</option>
+          </select>
+          <input type="text" id="harvest-pivot-value" class="form-control" placeholder="Enter pivot value (e.g. Linus Torvalds, Portland OR)..." style="flex:1;font-size:0.68rem;padding:2px 6px;" autocomplete="off" />
+          <button type="button" class="btn-icon" id="btn-submit-harvest-pivot" style="padding:2px 8px;font-size:0.66rem;border-color:var(--accent-green);color:var(--accent-green);">Add</button>
+          <button type="button" class="btn-icon" id="btn-cancel-harvest-pivot" style="padding:2px 6px;font-size:0.66rem;">Cancel</button>
+        </div>
+
+        <!-- Accumulating Badge Chips Container -->
+        <div id="harvest-pool-chips" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:22px;">
+          <div id="harvest-pool-names" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <div id="harvest-pool-locations" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <div id="harvest-pool-orgs" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <div id="harvest-pool-handles" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <div id="harvest-pool-proofs" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <div id="harvest-pool-emails" style="display:none;gap:4px;align-items:center;flex-wrap:wrap;"></div>
+          <span id="harvest-pool-empty-hint" style="color:var(--text-muted);font-style:italic;font-size:0.68rem;">Mark candidate profiles with YES to harvest identity attributes</span>
+        </div>
+      </div>
+
+      <!-- GUIDED PLATFORM TRIAGE CONTAINER -->
+      <div id="social-triage-view">
+        <div class="social-triage-card-header" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:6px 6px 0 0;padding:8px 12px;gap:8px;flex-wrap:wrap;">
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span id="triage-platform-name" style="font-size:0.88rem;font-weight:700;color:#ffffff;">GitHub</span>
+              <span id="triage-platform-category-badge" class="brand-tag">DEV</span>
+            </div>
+            <div id="triage-query-context" style="font-size:0.68rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:2px;">Searching with harvested metadata: "torvalds"</div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button type="button" class="btn-icon" id="btn-triage-prev" style="padding:2px 8px;font-size:0.70rem;">◀ Prev Platform</button>
+            <button type="button" class="btn-icon" id="btn-triage-next" style="padding:2px 8px;font-size:0.70rem;border-color:var(--accent-cyan);color:var(--accent-cyan);">Next Platform ▶</button>
+          </div>
+        </div>
+
+        <div id="social-triage-candidates-list" style="max-height:400px;overflow-y:auto;overscroll-behavior:contain;border:1px solid rgba(255,255,255,0.08);border-top:none;border-radius:0 0 6px 6px;padding:8px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;gap:8px;">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- ALL PROFILES GRID VIEW (HIDDEN IN TRIAGE MODE) -->
+      <div id="social-grid-view" style="display:none;">
+        <div class="social-status-hud" id="social-status-hud" style="display:none;">
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+            <span>VERIFIED FOUND: <strong id="social-hud-found" style="color:var(--accent-green);">0</strong></span>
+            <span>SCANNED: <strong id="social-hud-total" style="color:var(--accent-cyan);">0</strong></span>
+            <span>CONFIRMED: <strong id="social-hud-confirmed" style="color:var(--accent-green);">0</strong></span>
+          </div>
+          <div id="social-hud-names" style="color:var(--accent-amber);font-weight:600;"></div>
+        </div>
+
+        <div class="social-keywords-cloud" id="social-keywords-container" style="display:none;">
+          <span style="font-size:0.68rem;font-weight:700;color:var(--accent-cyan);margin-right:4px;">TOPIC &amp; BIO KEYWORDS:</span>
+          <div id="social-keywords-chips" style="display:flex;flex-wrap:wrap;gap:4px;"></div>
+        </div>
+
+        <div class="social-filter-bar" style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;" id="social-category-filter-group">
+            <button class="cat-pill active social-pill-filter" data-social-filter="all">All Platforms (35)</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="verified" style="border-color:var(--accent-green);color:var(--accent-green);">Verified Found</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="social">Mainstream Social</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="messaging">Messaging &amp; Community</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="creator">Video &amp; Creator</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="dev">Developer &amp; Pro</button>
+            <button class="cat-pill social-pill-filter" data-social-filter="aus">[AUS] Australian Networks</button>
+          </div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;" id="social-decision-filter-group">
+            <button class="cat-pill active social-decision-pill" data-decision-filter="all" style="font-size:0.64rem;padding:2px 6px;">All</button>
+            <button class="cat-pill social-decision-pill" data-decision-filter="yes" style="font-size:0.64rem;padding:2px 6px;color:var(--accent-green);">✓ Confirmed</button>
+            <button class="cat-pill social-decision-pill" data-decision-filter="unsure" style="font-size:0.64rem;padding:2px 6px;color:var(--accent-amber);">? Unsure</button>
+            <button class="cat-pill social-decision-pill" data-decision-filter="no" style="font-size:0.64rem;padding:2px 6px;color:#f43f5e;">✕ Rejected</button>
+          </div>
+        </div>
+
+        <div class="social-profile-grid" id="social-recon-results"></div>
+      </div>
+
+      <!-- Footer Action & OSINT Tooling Ribbons -->
+      <div class="form-actions" style="justify-content:space-between;align-items:center;margin-top:12px;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-social-consolidate-person" style="border-color:var(--accent-green);color:var(--accent-green);">
+            📋 Export Persona Dossier
+          </button>
+          <button type="button" class="btn-icon" id="btn-social-download-dossier" style="border-color:var(--accent-green);color:var(--accent-green);" title="Download Forensic Dossier as .md">
+            ⬇ .md
+          </button>
+          <button type="button" class="btn-icon" id="btn-social-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            🌐 Send Persona to Link Graph
+          </button>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-open-crypto-drawer" style="border-color:#ec4899;color:#ec4899;" title="View Cryptographic Proofs &amp; PGP Fingerprint">
+            🔑 Proofs
+          </button>
+          <button type="button" class="btn-icon" id="btn-open-email-drawer" style="border-color:#a855f7;color:#a855f7;" title="View Candidate Email Permutations &amp; Corporate Registries">
+            📧 Emails &amp; ABN
+          </button>
+          <button type="button" class="btn-icon" id="btn-open-chrono-drawer" style="border-color:#f59e0b;color:#f59e0b;" title="View Activity &amp; Timezone Chronolocation">
+            ⏱️ Timezone
+          </button>
+          <button type="button" class="btn-icon" id="btn-social-launch-all" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            Launch Confirmed (Tabs)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3C. AVATAR INSPECTION & REVERSE IMAGE SEARCH MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-avatar-compare">
+    <div class="modal-content" style="max-width:760px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+            Avatar Inspector &amp; Reverse Image Search Pivots
+          </h3>
+          <span class="brand-tag">VISUAL OSINT</span>
+        </div>
+        <button class="modal-close" id="btn-close-avatar-compare">&times;</button>
+      </div>
+
+      <!-- Placeholder advisory banner -->
+      <div id="avatar-placeholder-banner" class="alert-banner" style="display:none;margin-bottom:12px;padding:8px 12px;background:rgba(245,158,11,0.12);border:1px solid var(--accent-amber);border-radius:4px;color:var(--accent-amber);font-size:0.72rem;align-items:center;gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span><strong>Advisory:</strong> Placeholder / Identicon detected. Reverse image search works best with authentic user photos.</span>
+      </div>
+
+      <div class="avatar-compare-body" style="display:grid;grid-template-columns:220px 1fr;gap:16px;margin-bottom:16px;">
+        <!-- Left: Candidate Avatar Zoom & Meta -->
+        <div class="avatar-zoom-container" style="display:flex;flex-direction:column;align-items:center;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:12px;">
+          <div class="avatar-zoom-frame" style="width:190px;height:190px;border-radius:8px;overflow:hidden;border:1px solid var(--accent-cyan);display:flex;align-items:center;justify-content:center;background:#050811;margin-bottom:10px;">
+            <img id="avatar-zoom-img" src="" alt="Candidate Avatar" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div id="avatar-zoom-info" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);text-align:center;line-height:1.4;">
+            <div id="avatar-zoom-dimensions" style="color:var(--accent-cyan);font-weight:700;">Loading dimensions...</div>
+            <div id="avatar-zoom-platform" style="color:#ffffff;">Platform: -</div>
+            <div id="avatar-zoom-handle">@target</div>
+          </div>
+        </div>
+
+        <!-- Right: Confirmed Avatars Comparison Strip -->
+        <div class="avatar-comparison-pane" style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:0.75rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;justify-content:space-between;">
+            <span>CROSS-PLATFORM COMPARISON (CONFIRMED ACCOUNTS)</span>
+            <span id="avatar-compare-count" class="brand-tag">0 Confirmed</span>
+          </div>
+          <div id="avatar-compare-strip" style="min-height:100px;max-height:180px;overflow-y:auto;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:8px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;">
+            <!-- Rendered via JS: comparison thumbnails -->
+          </div>
+          <div style="font-size:0.70rem;color:var(--text-muted);font-style:italic;">
+            Visual correlation: Compare facial symmetry, illustration styles, background colors, and avatar formats across platforms.
+          </div>
+        </div>
+      </div>
+
+      <!-- 1-Click Reverse Image Search Buttons -->
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--accent-cyan);margin-bottom:8px;letter-spacing:0.5px;">
+          1-CLICK REVERSE IMAGE SEARCH PIVOTS
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;">
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-google-lens" style="border-color:#4285f4;color:#4285f4;padding:6px 8px;font-size:0.70rem;">
+            🌐 Google Lens ↗
+          </button>
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-yandex" style="border-color:#ff4b00;color:#ff4b00;padding:6px 8px;font-size:0.70rem;">
+            🇷🇺 Yandex Visual ↗
+          </button>
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-tineye" style="border-color:#00e5ff;color:#00e5ff;padding:6px 8px;font-size:0.70rem;">
+            🔎 TinEye Search ↗
+          </button>
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-pimeyes" style="border-color:#a855f7;color:#a855f7;padding:6px 8px;font-size:0.70rem;">
+            👤 PimEyes Bio ↗
+          </button>
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-bing" style="border-color:#008080;color:#00d4d4;padding:6px 8px;font-size:0.70rem;">
+            🔍 Bing Visual ↗
+          </button>
+          <button type="button" class="btn-icon rev-search-btn" id="btn-rev-google-images" style="border-color:#34a853;color:#34a853;padding:6px 8px;font-size:0.70rem;">
+            📷 Name Search ↗
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3D. CRYPTOGRAPHIC PROOFS & KEYBASE DRAWER MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-crypto-drawer">
+    <div class="modal-content" style="max-width:740px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Cryptographic Identity &amp; Verified Proof Matrix
+          </h3>
+          <span class="brand-tag">PGP / KEYBASE</span>
+        </div>
+        <button class="modal-close" id="btn-close-crypto-drawer">&times;</button>
+      </div>
+
+      <div id="crypto-drawer-content" style="display:flex;flex-direction:column;gap:12px;padding:4px 0;">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3E. EMAIL PERMUTATION MATRIX & CORPORATE PIVOTS MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-email-matrix">
+    <div class="modal-content" style="max-width:760px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Candidate Email Permutations &amp; Corporate Matrix
+          </h3>
+          <span class="brand-tag">COMBINATORIAL OSINT</span>
+        </div>
+        <button class="modal-close" id="btn-close-email-matrix">&times;</button>
+      </div>
+
+      <div id="email-matrix-content" style="display:flex;flex-direction:column;gap:12px;padding:4px 0;">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       3F. ACTIVITY CHRONOLOCATION & TIMEZONE ESTIMATOR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-chrono-drawer">
+    <div class="modal-content" style="max-width:760px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Activity Chronolocation &amp; Timezone Analysis
+          </h3>
+          <span class="brand-tag">TEMPORAL OSINT</span>
+        </div>
+        <button class="modal-close" id="btn-close-chrono-drawer">&times;</button>
+      </div>
+
+      <div id="chrono-drawer-content" style="display:flex;flex-direction:column;gap:12px;padding:4px 0;">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. VISUAL INVESTIGATION LINK GRAPH MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-graph">
+    <div class="modal-content graph-modal-container">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Visual Investigation Link Graph
+          </h3>
+          <span class="brand-tag">INTERACTIVE CANVAS</span>
+        </div>
+        <button class="modal-close" id="btn-close-graph">&times;</button>
+      </div>
+
+      <!-- Graph Toolbar -->
+      <div class="graph-toolbar">
+        <div class="graph-tool-group">
+          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:220px;">
+          <select class="form-control" id="graph-new-node-type" style="width:130px;">
+            <option value="ip">IP Address</option>
+            <option value="domain">Domain</option>
+            <option value="hash">Hash</option>
+            <option value="email">Email</option>
+            <option value="person">Person</option>
+            <option value="org">Organization</option>
+            <option value="cve">CVE Exploit</option>
+            <option value="aus">[AUS] ABN/ACN</option>
+          </select>
+          <button type="button" class="btn-icon" id="btn-graph-add-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Node</button>
+        </div>
+
+        <div class="graph-tool-group">
+          <input type="text" class="form-control" id="graph-search-node" placeholder="Find Node..." style="width:110px;font-size:0.72rem;">
+          <button type="button" class="btn-icon" id="btn-graph-auto-layout" title="Auto-Organize Node Positions">Auto Layout</button>
+          <button type="button" class="btn-icon" id="btn-graph-template" title="Load Australian Investigation Case Template">AU Case Template</button>
+          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them">Connect Nodes</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download High-Res PNG Screenshot">Export PNG</button>
+          <button type="button" class="btn-icon" id="btn-graph-clear" title="Clear Canvas">Clear</button>
+        </div>
+      </div>
+
+      <!-- Selected Node Active Inspector Bar -->
+      <div id="graph-node-inspector" style="display:none;padding:6px 12px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.25);border-radius:4px;margin-bottom:8px;align-items:center;justify-content:space-between;gap:10px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;">
+          <span style="color:var(--text-muted);">SELECTED:</span>
+          <strong id="inspector-node-label" style="color:var(--accent-cyan);">--</strong>
+          <span class="stat-chip" id="inspector-node-type" style="font-size:0.65rem;">IP</span>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn-icon" id="btn-inspector-pivot" style="padding:1px 8px;font-size:0.68rem;color:var(--accent-cyan);border-color:var(--accent-cyan);">Pivot Matrix</button>
+          <button type="button" class="btn-icon" id="btn-inspector-delete" style="padding:1px 8px;font-size:0.68rem;color:#f43f5e;border-color:#f43f5e;">Delete Node</button>
+          <button type="button" class="btn-icon" id="btn-inspector-close" style="padding:1px 6px;font-size:0.68rem;">✕</button>
+        </div>
+      </div>
+
+      <!-- Graph Canvas Container -->
+      <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
+        <canvas id="investigation-canvas"></canvas>
+        <div class="graph-hints-overlay">
+          <span>Click node to inspect/select • Drag to position • Double-click to Pivot • Del to remove • Mouse wheel to Zoom</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. INCIDENT SESSION & MARKDOWN EXPORT MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-export">
+    <div class="modal-content" style="max-width:680px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Incident Session & Markdown Export
+          </h3>
+          <span class="brand-tag">DOSSIER GENERATOR</span>
+        </div>
+        <button class="modal-close" id="btn-close-export">&times;</button>
+      </div>
+
+      <div id="export-stats-bar" style="display:flex;gap:8px;margin-bottom:12px;">
+        <span class="stat-chip" id="stat-graph-count" style="font-size:0.68rem;color:var(--accent-cyan);">GRAPH ENTITIES: 0</span>
+        <span class="stat-chip" id="stat-fav-count" style="font-size:0.68rem;color:var(--accent-amber);">PINNED TOOLS: 0</span>
+        <span class="stat-chip" id="stat-cve-count" style="font-size:0.68rem;color:var(--accent-green);">RADAR ADVISORIES: 0</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Investigation / Incident Case Name</label>
+        <input type="text" class="form-control" id="export-case-name" value="Operation Bubbsy Incident Dossier" placeholder="Case title">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Analyst Notes & Findings</label>
+        <textarea class="form-control" id="export-case-notes" rows="4" placeholder="Enter investigation summary, findings, IOCs, and analyst notes..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.08);padding-top:14px;">
+        <label class="form-label">Export Actions</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;">
+          <button type="button" class="btn-search-exec" id="btn-export-markdown-file" style="font-size:0.75rem;">
+            Download (.md)
+          </button>
+          <button type="button" class="btn-icon" id="btn-export-copy-md" style="font-size:0.75rem;border-color:var(--accent-cyan);color:var(--accent-cyan);justify-content:center;">
+            Copy Markdown
+          </button>
+          <button type="button" class="btn-icon" id="btn-export-html-dossier" style="font-size:0.75rem;border-color:var(--accent-purple);color:var(--accent-purple);justify-content:center;">
+            HTML Report
+          </button>
+          <button type="button" class="btn-icon" id="btn-export-json-workspace" style="font-size:0.75rem;border-color:var(--accent-green);color:var(--accent-green);justify-content:center;">
+            JSON Backup
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:12px;">
+        <label class="form-label">Import Workspace Snapshot</label>
+        <input type="file" id="import-workspace-file" accept=".json" style="display:none;">
+        <button type="button" class="btn-icon" onclick="document.getElementById('import-workspace-file').click();" style="width:100%;justify-content:center;">
+          Load / Restore Workspace Snapshot File
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       THREAT DORK & ATTACK SURFACE GENERATOR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-dorks">
+    <div class="modal-content" style="max-width:820px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            Threat Dork & Attack Surface Generator
+          </h3>
+          <span class="brand-tag">GOOGLE / SHODAN / GITHUB</span>
+        </div>
+        <button class="modal-close" id="btn-close-dorks">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Target Domain / Keyword (Optional - leaves dorks universal if empty)</label>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="dork-target-input" placeholder="e.g. gov.au, unsw.edu.au, telstra.com.au, target.com" autocomplete="off">
+          <button type="button" class="btn-icon" id="btn-clear-dork-target">Clear</button>
+        </div>
+      </div>
+
+      <div class="dork-preset-bar" style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+        <span style="font-size:0.7rem;color:var(--text-muted);">AU Presets:</span>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="gov.au">gov.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="edu.au">edu.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="com.au">com.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="org.au">org.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="vic.gov.au">vic.gov.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="nsw.gov.au">nsw.gov.au</button>
+        <button type="button" class="cat-pill dork-preset-pill" data-target="qld.gov.au">qld.gov.au</button>
+      </div>
+
+      <div class="dork-filter-bar" style="display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;">
+        <span style="font-size:0.7rem;color:var(--text-muted);">Filter:</span>
+        <button type="button" class="cat-pill active dork-cat-filter" data-dork-cat="all">All Dorks</button>
+        <button type="button" class="cat-pill dork-cat-filter" data-dork-cat="files">Files & Configs</button>
+        <button type="button" class="cat-pill dork-cat-filter" data-dork-cat="admin">Portals & Admin</button>
+        <button type="button" class="cat-pill dork-cat-filter" data-dork-cat="logs">Logs & Traces</button>
+        <button type="button" class="cat-pill dork-cat-filter" data-dork-cat="cloud">Cloud & S3</button>
+      </div>
+
+      <div class="pivot-grid" id="dork-presets-container" style="max-height:420px;overflow-y:auto;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-dork-copy-playbook" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            Copy Dork Playbook (Markdown)
+          </button>
+          <button type="button" class="btn-icon" id="btn-dork-copy-raw-urls" style="border-color:var(--accent-green);color:var(--accent-green);">
+            Copy Raw URLs
+          </button>
+          <button type="button" class="btn-icon" id="btn-dork-add-to-graph">
+            Add Target to Graph
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       AUSTRALIAN CADASTRE & GEO-COORDINATE RECON MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-geo">
+    <div class="modal-content" style="max-width:780px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Australian Cadastre & Geo-Coordinate Recon
+          </h3>
+          <span class="brand-tag">SIX MAPS / VICPLAN / QLD GLOBE / SENTINEL</span>
+        </div>
+        <button class="modal-close" id="btn-close-geo">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Enter Latitude, Longitude or Address</label>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <input type="text" class="form-control" id="geo-coord-input" placeholder="-33.8688, 151.2093 (Sydney) or -37.8136, 144.9631 (Melbourne)" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-geo-parse">Resolve</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;" id="geo-city-chips">
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-33.8688, 151.2093" style="cursor:pointer;">Sydney</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-37.8136, 144.9631" style="cursor:pointer;">Melbourne</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-27.4698, 153.0251" style="cursor:pointer;">Brisbane</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-31.9505, 115.8605" style="cursor:pointer;">Perth</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-34.9285, 138.6007" style="cursor:pointer;">Adelaide</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-35.2809, 149.1300" style="cursor:pointer;">Canberra</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-12.4634, 130.8456" style="cursor:pointer;">Darwin</button>
+          <button type="button" class="stat-chip geo-city-btn" data-coords="-42.8821, 147.3272" style="cursor:pointer;">Hobart</button>
+        </div>
+      </div>
+
+      <div id="geo-resolved-telemetry" style="display:none;padding:6px 12px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.25);border-radius:4px;margin-bottom:12px;align-items:center;justify-content:space-between;gap:10px;font-size:0.78rem;">
+        <div>
+          <span style="color:var(--text-muted);">RESOLVED: </span>
+          <strong id="geo-telemetry-text" style="color:var(--accent-cyan);">--</strong>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-geo-copy-coords" style="padding:1px 8px;font-size:0.68rem;">Copy Decimal</button>
+          <button type="button" class="btn-icon" id="btn-geo-copy-dms" style="padding:1px 8px;font-size:0.68rem;">Copy DMS</button>
+          <button type="button" class="btn-icon" id="btn-geo-copy-geohash" style="padding:1px 8px;font-size:0.68rem;">Copy Geohash</button>
+          <button type="button" class="btn-icon" id="btn-geo-copy-mgrs" style="padding:1px 8px;font-size:0.68rem;border-color:var(--accent-green);color:var(--accent-green);">Copy CAD String</button>
+          <button type="button" class="btn-icon" id="btn-geo-copy-maps-url" style="padding:1px 8px;font-size:0.68rem;border-color:var(--accent-cyan);color:var(--accent-cyan);">Copy Maps URL</button>
+          <button type="button" class="btn-icon" id="btn-geo-open-earth" style="padding:1px 8px;font-size:0.68rem;color:var(--accent-cyan);border-color:var(--accent-cyan);">Google Earth 3D</button>
+        </div>
+      </div>
+
+      <div id="geo-solar-telemetry" style="display:none;padding:6px 12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.25);border-radius:4px;margin-bottom:12px;align-items:center;justify-content:space-between;gap:10px;font-size:0.75rem;font-family:var(--font-mono);">
+        <div>
+          <span style="color:var(--text-muted);">SOLAR AZIMUTH & SHADOW: </span>
+          <strong id="geo-solar-text" style="color:var(--accent-amber);">--</strong>
+        </div>
+        <button type="button" class="btn-icon" id="btn-geo-copy-solar" style="padding:1px 8px;font-size:0.68rem;border-color:var(--accent-amber);color:var(--accent-amber);">Copy Solar Intel</button>
+      </div>
+
+      <div class="pivot-grid" id="geo-map-actions">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <button type="button" class="btn-icon" id="btn-geo-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          Add Location to Link Graph
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       AUSTRALIAN CORPORATE & BENEFICIAL OWNERSHIP NETWORK MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-corp">
+    <div class="modal-content" style="max-width:840px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            Australian Corporate & Beneficial Ownership Network
+          </h3>
+          <span class="brand-tag">ASIC / ABR / AUSTENDER / AFSA</span>
+        </div>
+        <button class="modal-close" id="btn-close-corp">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <label class="form-label" style="margin-bottom:0;">Enter Australian Entity Name, ABN (11 digits), or ACN (9 digits)</label>
+          <span id="corp-validation-badge" class="stat-chip" style="display:none;font-size:0.65rem;">VALIDATING</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <input type="text" class="form-control" id="corp-input" placeholder="e.g. Atlassian, Telstra, 33 004 044 937, 004 044 937" autocomplete="off">
+          <button type="button" class="btn-search-exec" id="btn-corp-search">Resolve Registers</button>
+        </div>
+      </div>
+
+      <div class="pivot-grid" id="corp-results-grid" style="max-height:420px;overflow-y:auto;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-corp-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            Add Node to Graph
+          </button>
+          <button type="button" class="btn-icon" id="btn-corp-copy-abn" style="display:none;border-color:var(--accent-amber);color:var(--accent-amber);">
+            Copy Formatted ABN/ACN
+          </button>
+        </div>
+        <button type="button" class="btn-icon" id="btn-corp-launch-all" style="border-color:var(--accent-green);color:var(--accent-green);">
+          Launch All Registries
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TACTICAL CYBER DEFANG / REFANG & IOC NORMALIZER MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-defang">
+    <div class="modal-content" style="max-width:860px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Tactical Cyber Defang / Refang & IOC Normalizer
+          </h3>
+          <span class="brand-tag">IOC EXTRACT / DEFANG / REFANG</span>
+        </div>
+        <button class="modal-close" id="btn-close-defang">&times;</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Raw Incident / Advisory Text (Paste messy logs or reports)</label>
+          <textarea class="form-control" id="defang-raw-input" rows="8" placeholder="Paste unformatted report, raw logs, or IOC lists here... e.g. https://evil.com/payload.exe, 192.168.1.1, user@phish.org"></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Normalized / Processed Output</label>
+          <textarea class="form-control" id="defang-output" rows="8" placeholder="Processed output will appear here..." readonly></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <button type="button" class="btn-search-exec" id="btn-do-defang">Defang (Safe)</button>
+        <button type="button" class="btn-icon" id="btn-do-refang">Refang (Live)</button>
+        <button type="button" class="btn-icon" id="btn-do-extract-iocs" style="border-color:var(--accent-green);color:var(--accent-green);">Extract Structured IOCs</button>
+        <button type="button" class="btn-icon" id="btn-defang-copy-plain">Copy Plain List</button>
+        <button type="button" class="btn-icon" id="btn-defang-copy-splunk" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Splunk Query</button>
+        <button type="button" class="btn-icon" id="btn-defang-clear">Clear</button>
+      </div>
+
+      <div class="defang-filter-bar" id="defang-filter-bar" style="display:none;gap:6px;margin-bottom:10px;">
+        <button class="cat-pill active defang-pill-filter" data-defang-filter="all">All IOCs</button>
+        <button class="cat-pill defang-pill-filter" data-defang-filter="ip">IPs Only</button>
+        <button class="cat-pill defang-pill-filter" data-defang-filter="domain">Domains Only</button>
+        <button class="cat-pill defang-pill-filter" data-defang-filter="hash">Hashes Only</button>
+        <button class="cat-pill defang-pill-filter" data-defang-filter="email">Emails Only</button>
+      </div>
+
+      <div id="defang-ioc-summary" style="font-size:0.75rem;font-family:var(--font-mono);color:var(--text-muted);display:none;padding:8px 12px;background:rgba(0,0,0,0.3);border-radius:4px;border:1px solid rgba(255,255,255,0.06);margin-bottom:12px;">
+        <!-- Injected dynamically with extracted IOC stats -->
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <button type="button" class="btn-icon" id="btn-defang-add-to-graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          Send Extracted IOCs to Link Graph
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CUSTOM BOOKMARK MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-custom-bookmark">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Custom OSINT Tool / Link</h3>
+        <button class="modal-close" id="btn-close-bm">&times;</button>
+      </div>
+      <form id="form-custom-bookmark">
+        <div class="form-group">
+          <label class="form-label">Title / Tool Name</label>
+          <input type="text" class="form-control" id="bm-title" required placeholder="e.g. My Private Shodan Query" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target URL</label>
+          <input type="url" class="form-control" id="bm-url" required placeholder="https://..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (Optional)</label>
+          <input type="text" class="form-control" id="bm-desc" placeholder="Brief description of tool" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Widget Category</label>
+          <select class="form-control" id="bm-category">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.75rem;color:var(--accent-cyan);cursor:pointer;">
+            <input type="checkbox" id="bm-is-aus" style="cursor:pointer;">
+            <span>[AUS] Australian Tool / Equivalent (Pin at top)</span>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-icon" id="btn-cancel-bm">Cancel</button>
+          <button type="submit" class="btn-search-exec">Save Bookmark</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       TYPOGRAPHY, FONT SIZE, THICKNESS & HIGH-CONTRAST READABILITY SUITE
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-typography">
+    <div class="modal-content" style="max-width:740px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            Typography & Visual Readability Suite
+          </h3>
+          <span class="brand-tag">LEGIBILITY & CONTRAST</span>
+        </div>
+        <button class="modal-close" id="btn-close-typography">&times;</button>
+      </div>
+
+      <!-- Live Preview Card -->
+      <div class="typo-section" style="background:rgba(0,0,0,0.4);border-color:var(--accent-cyan);">
+        <div class="typo-section-title">
+          <span>LIVE TYPOGRAPHY PREVIEW</span>
+          <span class="hud-label" id="preview-preset-badge">HIGH CONTRAST</span>
+        </div>
+        <div class="typo-preview-card" id="typo-live-preview">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:1.05rem;font-weight:var(--font-weight-bold, 700);color:var(--text-primary);">
+              Investigative Intelligence Target: @bubbsy_sec
+            </span>
+            <span class="brand-tag" style="color:var(--accent-cyan);">[ACTIVE OSINT HUD]</span>
+          </div>
+          <p style="font-size:0.86rem;color:var(--text-secondary);line-height:1.45;margin-top:2px;">
+            This live preview demonstrates your chosen font size, weight thickness, and text color contrast across descriptions, toolcards, and investigative matrices.
+          </p>
+          <div style="display:flex;gap:12px;font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:4px;">
+            <span>📍 Sydney, Australia (AEST / UTC+10)</span>
+            <span>•</span>
+            <span>⚡ 1,699 Tools Indexed</span>
+            <span>•</span>
+            <span style="color:var(--accent-green);">● ASD Essential 8 Verified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. Font Size Scaling -->
+      <div class="typo-section">
+        <div class="typo-section-title">
+          <span>1. FONT SIZE SCALING</span>
+          <span id="lbl-font-size-val" class="typo-val-badge">100%</span>
+        </div>
+        <div class="typo-slider-container">
+          <span style="font-size:0.70rem;color:var(--text-muted);font-family:var(--font-mono);">80%</span>
+          <input type="range" class="typo-slider" id="slider-font-size" min="80" max="150" value="100" step="5">
+          <span style="font-size:0.70rem;color:var(--text-muted);font-family:var(--font-mono);">150%</span>
+        </div>
+        <div class="typo-presets-grid">
+          <button type="button" class="typo-preset-pill" data-size="85">Compact (85%)</button>
+          <button type="button" class="typo-preset-pill active" data-size="100">Standard (100%)</button>
+          <button type="button" class="typo-preset-pill" data-size="115">Comfortable (115%)</button>
+          <button type="button" class="typo-preset-pill" data-size="130">Large / OSINT Reader (130%)</button>
+          <button type="button" class="typo-preset-pill" data-size="145">Ultra Large (145%)</button>
+        </div>
+      </div>
+
+      <!-- 2. Font Thickness / Weight -->
+      <div class="typo-section">
+        <div class="typo-section-title">
+          <span>2. FONT THICKNESS & WEIGHT</span>
+          <span id="lbl-font-weight-val" class="typo-val-badge">Regular 400</span>
+        </div>
+        <div class="typo-presets-grid">
+          <button type="button" class="typo-preset-pill typo-weight-pill" data-weight="300">Light (300)</button>
+          <button type="button" class="typo-preset-pill typo-weight-pill active" data-weight="400">Regular (400)</button>
+          <button type="button" class="typo-preset-pill typo-weight-pill" data-weight="500">Medium (500)</button>
+          <button type="button" class="typo-preset-pill typo-weight-pill" data-weight="600">Semi-Bold (600)</button>
+          <button type="button" class="typo-preset-pill typo-weight-pill" data-weight="700">Bold / Max Legible (700)</button>
+          <button type="button" class="typo-preset-pill typo-weight-pill" data-weight="800">Heavy (800)</button>
+        </div>
+      </div>
+
+      <!-- 3. High-Contrast Text Color Palette -->
+      <div class="typo-section">
+        <div class="typo-section-title">
+          <span>3. HIGH-CONTRAST TEXT COLOR PALETTES (FIXES MUDDY GREY)</span>
+        </div>
+        <div class="typo-palette-grid">
+          <div class="typo-palette-card active" data-palette="crisp-silver">
+            <div class="typo-palette-header">
+              <span style="color:#ffffff;">⚪ Crisp Silver / White</span>
+            </div>
+            <div style="font-size:0.65rem;color:#cbd5e1;">Max Contrast Silver-White</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#ffffff;" title="Primary Text: Pure White"></div>
+              <div class="typo-swatch" style="background:#cbd5e1;" title="Secondary Text: Light Silver"></div>
+              <div class="typo-swatch" style="background:#94a3b8;" title="Muted Text: Slate"></div>
+            </div>
+          </div>
+
+          <div class="typo-palette-card" data-palette="cyber-amber">
+            <div class="typo-palette-header">
+              <span style="color:#fef08a;">🟡 Cyber Amber</span>
+            </div>
+            <div style="font-size:0.65rem;color:#fde047;">High Legibility Gold</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#fef08a;"></div>
+              <div class="typo-swatch" style="background:#fde047;"></div>
+              <div class="typo-swatch" style="background:#ca8a04;"></div>
+            </div>
+          </div>
+
+          <div class="typo-palette-card" data-palette="matrix-emerald">
+            <div class="typo-palette-header">
+              <span style="color:#bbf7d0;">🟢 Matrix Emerald</span>
+            </div>
+            <div style="font-size:0.65rem;color:#86efac;">Phosphor Green Glow</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#bbf7d0;"></div>
+              <div class="typo-swatch" style="background:#86efac;"></div>
+              <div class="typo-swatch" style="background:#22c55e;"></div>
+            </div>
+          </div>
+
+          <div class="typo-palette-card" data-palette="ice-cyan">
+            <div class="typo-palette-header">
+              <span style="color:#e0f2fe;">🔵 Ice Cyber Cyan</span>
+            </div>
+            <div style="font-size:0.65rem;color:#7dd3fc;">Tactical HUD Cyan</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#e0f2fe;"></div>
+              <div class="typo-swatch" style="background:#7dd3fc;"></div>
+              <div class="typo-swatch" style="background:#38bdf8;"></div>
+            </div>
+          </div>
+
+          <div class="typo-palette-card" data-palette="warm-paper">
+            <div class="typo-palette-header">
+              <span style="color:#fef9c3;">📄 Solarized Cream</span>
+            </div>
+            <div style="font-size:0.65rem;color:#fde68a;">Soft Paper Reading</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#fef9c3;"></div>
+              <div class="typo-swatch" style="background:#fde68a;"></div>
+              <div class="typo-swatch" style="background:#d97706;"></div>
+            </div>
+          </div>
+
+          <div class="typo-palette-card" data-palette="synthwave">
+            <div class="typo-palette-header">
+              <span style="color:#f5d0fe;">🟣 Synthwave Pink</span>
+            </div>
+            <div style="font-size:0.65rem;color:#e879f9;">Lavender Glow</div>
+            <div class="typo-swatches-row">
+              <div class="typo-swatch" style="background:#f5d0fe;"></div>
+              <div class="typo-swatch" style="background:#e879f9;"></div>
+              <div class="typo-swatch" style="background:#c084fc;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Color Inputs -->
+        <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;">
+          <span style="font-size:0.68rem;color:var(--text-muted);font-family:var(--font-mono);">Custom Color Precision Pickers:</span>
+          <div class="typo-custom-picker-row">
+            <div class="typo-color-input-wrapper">
+              <input type="color" class="typo-color-input" id="cfg-color-primary" value="#ffffff">
+              <label for="cfg-color-primary" style="font-size:0.68rem;color:var(--text-secondary);cursor:pointer;">Primary Text</label>
+            </div>
+            <div class="typo-color-input-wrapper">
+              <input type="color" class="typo-color-input" id="cfg-color-secondary" value="#cbd5e1">
+              <label for="cfg-color-secondary" style="font-size:0.68rem;color:var(--text-secondary);cursor:pointer;">Secondary Text</label>
+            </div>
+            <div class="typo-color-input-wrapper">
+              <input type="color" class="typo-color-input" id="cfg-color-muted" value="#94a3b8">
+              <label for="cfg-color-muted" style="font-size:0.68rem;color:var(--text-secondary);cursor:pointer;">Muted Meta</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Font Family -->
+      <div class="typo-section">
+        <div class="typo-section-title">
+          <span>4. TYPOGRAPHY FONT STACK</span>
+        </div>
+        <div class="typo-presets-grid">
+          <button type="button" class="typo-preset-pill typo-font-pill active" data-font="jetbrains">JetBrains Mono & Inter</button>
+          <button type="button" class="typo-preset-pill typo-font-pill" data-font="atkinson">Atkinson Hyperlegible (Braille Institute)</button>
+          <button type="button" class="typo-preset-pill typo-font-pill" data-font="fira">Fira Code & System UI</button>
+          <button type="button" class="typo-preset-pill typo-font-pill" data-font="cascadia">Cascadia Code & Segoe UI</button>
+          <button type="button" class="typo-preset-pill typo-font-pill" data-font="consolas">Consolas & Roboto</button>
+        </div>
+      </div>
+
+      <div class="form-actions" style="justify-content:space-between;align-items:center;">
+        <button type="button" class="btn-icon" id="btn-reset-typography">Reset to Default Typography</button>
+        <button type="button" class="btn-search-exec" id="btn-save-typography" style="min-width:140px;">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SETTINGS MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Bubbsy Start Page Settings</h3>
+        <button class="modal-close" id="btn-close-settings">&times;</button>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Voidtools Everything HTTP Server Endpoint</label>
+        <input type="text" class="form-control" id="cfg-es-url" value="http://127.0.0.1:8080" placeholder="http://127.0.0.1:8080">
+        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">
+          Enable in Everything: <strong>Tools &rarr; Options &rarr; HTTP Server &rarr; Enable HTTP server (Port 8080)</strong>.
+        </p>
+      </div>
+
+      <div class="form-row-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="form-group">
+          <label class="form-label">HTTP Username (Optional)</label>
+          <input type="text" class="form-control" id="cfg-es-user" placeholder="Everything username" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label class="form-label">HTTP Password (Optional)</label>
+          <div style="position:relative;display:flex;align-items:center;">
+            <input type="password" class="form-control" id="cfg-es-pass" placeholder="Everything password" autocomplete="new-password" style="padding-right:32px;">
+            <button type="button" id="btn-toggle-pass-visibility" title="Show/Hide Password" style="position:absolute;right:6px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.85rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <button type="button" class="btn-icon" id="btn-test-es-conn" style="border-color:var(--accent-green);color:var(--accent-green);">
+          Test Everything Connection
+        </button>
+        <div id="es-test-status-msg" style="font-size:0.74rem;font-family:var(--font-mono);color:var(--text-muted);"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Default Search Engine</label>
+        <select class="form-control" id="cfg-default-engine">
+          <option value="filter">Filter Bookmarks (Default)</option>
+          <option value="everything">Voidtools Everything (ES)</option>
+          <option value="google">Google Dorking</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="shodan">Shodan</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Typography, Font Size & High-Contrast Colors</span>
+          <button type="button" class="btn-icon" id="btn-open-typography-from-settings" style="font-size:0.70rem;padding:2px 8px;border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            Open Typography Suite (Aa)
+          </button>
+        </label>
+        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">
+          Scale font size (80%–150%), adjust font thickness/weight (300–800), and choose high-contrast text color palettes to eliminate low-contrast grey text.
+        </p>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <label class="form-label">System Health & Diagnostics</label>
+        <div id="settings-diagnostics-box" style="padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:4px;font-family:var(--font-mono);font-size:0.72rem;display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;justify-content:space-between;"><span>Backend Engine:</span> <strong id="diag-backend-status" style="color:var(--accent-green);">ONLINE (Port 7777)</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>Indexed OSINT Catalog:</span> <strong style="color:var(--accent-cyan);">1,699 Verified Tools</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>LocalStorage Footprint:</span> <strong id="diag-storage-usage" style="color:var(--text-primary);">-- KB</strong></div>
+          <div style="display:flex;justify-content:space-between;"><span>Security Benchmark:</span> <strong style="color:var(--accent-green);">ASD Essential 8 ML3</strong></div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <label class="form-label">Backup & Data Catalog</label>
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-export-backup">Export JSON Backup</button>
+          <button type="button" class="btn-icon" id="btn-export-csv-catalog" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Export 1,699 Tools (CSV)</button>
+          <button type="button" class="btn-icon" id="btn-reset-default">Reset Defaults</button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-search-exec" id="btn-save-settings">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FIRST-TIME ONBOARDING TOUR MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-tour">
+    <div class="modal-content tour-modal-content">
+      <div class="modal-header" style="border:none;padding-bottom:0;">
+        <span class="hud-label">MISSION BRIEFING</span>
+        <button class="modal-close" id="btn-skip-tour" title="Skip Tour">&times;</button>
+      </div>
+
+      <div class="tour-body" id="tour-slide-container">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="tour-footer">
+        <div class="tour-indicators" id="tour-dots">
+          <span class="tour-dot active"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="btn-icon" id="btn-tour-prev" style="display:none;">&larr; Back</button>
+          <button type="button" class="btn-search-exec" id="btn-tour-next">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       KEYBOARD SHORTCUTS CHEAT SHEET MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-shortcuts">
+    <div class="modal-content" style="max-width:680px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="6" y1="8" x2="6" y2="8"></line><line x1="10" y1="8" x2="10" y2="8"></line><line x1="14" y1="8" x2="14" y2="8"></line><line x1="18" y1="8" x2="18" y2="8"></line><line x1="6" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="18" y2="12"></line><line x1="8" y1="16" x2="16" y2="16"></line></svg>
+            Keyboard Shortcuts & Bang Matrix
+          </h3>
+          <span class="brand-tag">CHEATSHEET</span>
+        </div>
+        <button class="modal-close" id="btn-close-shortcuts">&times;</button>
+      </div>
+      <div class="form-group" style="margin-bottom:10px;">
+        <input type="text" class="form-control" id="shortcuts-filter-input" placeholder="Filter hotkeys and bangs (e.g. !abn, Hover, Ctrl, ES)..." style="font-size:0.75rem;" autocomplete="off">
+      </div>
+
+      <div id="shortcuts-grid-container" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.78rem;">
+        <div class="pivot-category-card shortcut-category">
+          <div class="pivot-card-header">Global Navigation</div>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:4px 0;">
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">/</kbd> <span>Focus Omnisearch</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Ctrl + K</kbd> <span>Command Palette</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">?</kbd> <span>Shortcuts Cheatsheet</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">[ / ]</kbd> <span>Cycle Active Modal Tabs</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">↓ / ↑</kbd> <span>Traverse Tools & Files</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Enter</kbd> <span>Launch Active Selection</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">ESC</kbd> <span>Clear / Close Modals</span></div>
+          </div>
+        </div>
+
+        <div class="pivot-category-card shortcut-category">
+          <div class="pivot-card-header">Zero-Click & Mouse Ergonomics</div>
+          <div style="display:flex;flex-direction:column;gap:6px;padding:4px 0;">
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Hover + C</kbd> <span>Copy Tool URL</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Right Click</kbd> <span>Instant Fast URL Copy</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Hover + F / P</kbd> <span>Pin / Unpin Bookmark</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Tab</kbd> <span>Autocomplete Bang</span></div>
+          </div>
+        </div>
+
+        <div class="pivot-category-card shortcut-category" style="grid-column:1/-1;">
+          <div class="pivot-card-header">Social Recon Triage &amp; Disambiguation Hotkeys</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px 0;font-size:0.75rem;">
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">1 / Y</kbd> <span>Mark Top Candidate as YES (Match)</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">2 / U</kbd> <span>Mark Candidate as UNSURE (?)</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">3 / N</kbd> <span>Mark Candidate as NO (Reject)</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">[ / ←</kbd> <span>Navigate to Previous Platform</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">] / →</kbd> <span>Navigate to Next Platform</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">G</kbd> <span>Toggle Guided Triage / All Profiles Grid</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">Space / Z</kbd> <span>Inspect Avatar &amp; Reverse Search Pivots</span></div>
+            <div class="shortcut-row" style="display:flex;justify-content:space-between;align-items:center;"><kbd class="hud-key">R</kbd> <span>Reset Harvested Context Pool</span></div>
+          </div>
+        </div>
+
+        <div class="pivot-category-card shortcut-category" style="grid-column:1/-1;">
+          <div class="pivot-card-header">Investigation Bang Operators (Click to Activate)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px 0;font-family:var(--font-mono);font-size:0.72rem;">
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!es" style="color:var(--accent-cyan);cursor:pointer;">!es &lt;query&gt;</strong> Voidtools Local Search</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!abn" style="color:var(--accent-cyan);cursor:pointer;">!abn &lt;query&gt;</strong> ABR / ABN Lookup</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!corp" style="color:var(--accent-cyan);cursor:pointer;">!corp &lt;query&gt;</strong> Corporate Ownership</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!defang" style="color:var(--accent-cyan);cursor:pointer;">!defang &lt;text&gt;</strong> Cyber Defang / IOCs</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!user" style="color:var(--accent-cyan);cursor:pointer;">!user &lt;handle&gt;</strong> Social Recon</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!radar" style="color:var(--accent-cyan);cursor:pointer;">!radar</strong> Threat Intel & CVEs</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!dorks" style="color:var(--accent-cyan);cursor:pointer;">!dorks &lt;target&gt;</strong> Attack Surface Dorks</div>
+            <div class="shortcut-row"><strong class="bang-cheatsheet-item" data-bang="!geo" style="color:var(--accent-cyan);cursor:pointer;">!geo &lt;lat,lng&gt;</strong> Australian Cadastre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tactical HUD Footer -->
+  <footer class="hud-footer" style="padding:14px 24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-muted);margin-top:40px;background:rgba(0,0,0,0.3);">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-weight:700;letter-spacing:1px;color:var(--text-primary);">BUBBSY COMMAND HUB</span>
+      <span class="stat-chip" style="font-size:0.62rem;">v2.18.0</span>
+      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);">1,699 OSINT TOOLS</span>
+      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-green);">ASD ESSENTIAL 8</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button type="button" class="btn-icon" onclick="startOnboardingTour();" style="padding:2px 8px;font-size:0.68rem;">Mission Briefing</button>
+      <button type="button" class="btn-icon" onclick="openShortcutsModal();" style="padding:2px 8px;font-size:0.68rem;">Shortcuts (?)</button>
+      <button type="button" class="btn-icon" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="padding:2px 8px;font-size:0.68rem;">↑ Top</button>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts: bundled offline data first, then app controller -->
+  <script src="data/osint_data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: bubbsy-start-page
+    runtime: python
+    buildCommand: ""
+    startCommand: python server.py

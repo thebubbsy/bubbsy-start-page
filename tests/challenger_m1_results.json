@@ -1,0 +1,407 @@
+{
+  "test_run_time": "2026-08-21T03:57:48Z",
+  "summary": {
+    "verdict": "REQUEST_CHANGES",
+    "concurrency_pass_rate": 100.0,
+    "cache_overall_speedup": "384.5x",
+    "platforms_tested_count": 12,
+    "burst_pass_rate": 98.0,
+    "fuzz_tests_pass_rate": "12/12"
+  },
+  "sections": {
+    "concurrency_stress": {
+      "num_threads": 50,
+      "total_requests": 100,
+      "total_time_s": 8.84,
+      "rps": 11.3,
+      "status_codes": {
+        "200": 100
+      },
+      "pass_rate_pct": 100.0,
+      "latency_ms": {
+        "min": 1.8,
+        "avg": 1571.5,
+        "p50": 755.9,
+        "p95": 6510.2,
+        "max": 8395.5
+      },
+      "errors": []
+    },
+    "ttl_cache_benchmark": {
+      "cache_metrics": [
+        {
+          "platform": "github",
+          "query": "torvalds",
+          "cold_latency_ms": 360.89,
+          "warm_latency_ms": 1.66,
+          "speedup_ratio": 216.9,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "bluesky",
+          "query": "jay.bsky.team",
+          "cold_latency_ms": 417.65,
+          "warm_latency_ms": 2.59,
+          "speedup_ratio": 161.4,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "keybase",
+          "query": "max",
+          "cold_latency_ms": 2180.3,
+          "warm_latency_ms": 2.48,
+          "speedup_ratio": 878.7,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "reddit",
+          "query": "spez",
+          "cold_latency_ms": 2589.66,
+          "warm_latency_ms": 1.7,
+          "speedup_ratio": 1521.9,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "gitlab",
+          "query": "ayufan",
+          "cold_latency_ms": 330.39,
+          "warm_latency_ms": 1.23,
+          "speedup_ratio": 269.2,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "devto",
+          "query": "ben",
+          "cold_latency_ms": 458.2,
+          "warm_latency_ms": 1.45,
+          "speedup_ratio": 316.7,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "dockerhub",
+          "query": "library",
+          "cold_latency_ms": 586.57,
+          "warm_latency_ms": 2.01,
+          "speedup_ratio": 291.4,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "whirlpool",
+          "query": "mod",
+          "cold_latency_ms": 1.71,
+          "warm_latency_ms": 1.53,
+          "speedup_ratio": 1.1,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "ocau",
+          "query": "admin",
+          "cold_latency_ms": 2.22,
+          "warm_latency_ms": 1.56,
+          "speedup_ratio": 1.4,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        },
+        {
+          "platform": "ozbargain",
+          "query": "scott",
+          "cold_latency_ms": 1.98,
+          "warm_latency_ms": 1.81,
+          "speedup_ratio": 1.1,
+          "cold_cached_flag": false,
+          "warm_cached_flag": true,
+          "data_integrity_identical": true
+        }
+      ],
+      "avg_cold_ms": 692.96,
+      "avg_warm_ms": 1.8,
+      "overall_speedup_multiplier": 384.5,
+      "ttl_expiration_pass": true,
+      "capacity_eviction_pass": true,
+      "concurrent_hammer_pass": true
+    },
+    "multi_platform_coverage": {
+      "platforms": {
+        "github": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 361.3,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://avatars.githubusercontent.com/u/1024025?v=4",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "bluesky": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 445.4,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:puowhte77r5j73kezbfucldw/bafkreiadm7gyooz3cyvrkta6nk5ysmen2ozme6sssnn63fd7k4j5d3mgyq",
+          "sample_handle": "linustorvalds.bsky.social",
+          "sample_display_name": "Linus"
+        },
+        "keybase": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 866.9,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://keybase.io/torvalds/picture",
+          "sample_handle": "torvalds",
+          "sample_display_name": "torvalds"
+        },
+        "reddit": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 2617.6,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://unavatar.io/reddit/torvalds",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "gitlab": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 314.9,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://secure.gravatar.com/avatar/b87e699d767594b8ac0cbf7f4d4e591a588ce38497fbeb3db7f99aa2cc65d08d?s=80&d=identicon",
+          "sample_handle": "LinusTorvalds",
+          "sample_display_name": "GitLab User"
+        },
+        "devto": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 996.7,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://ui-avatars.com/api/?name=Linus%20Torvalds&background=0a0a0a&color=fff",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "dockerhub": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 336.1,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://ui-avatars.com/api/?name=torvalds&background=0db7ed&color=fff",
+          "sample_handle": "torvalds",
+          "sample_display_name": "torvalds"
+        },
+        "whirlpool": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 3.1,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://ui-avatars.com/api/?name=Linus%20Torvalds&background=1070e0&color=fff",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "ocau": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 3.1,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://ui-avatars.com/api/?name=Linus%20Torvalds&background=f59e0b&color=000",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "ozbargain": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 3.5,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://ui-avatars.com/api/?name=Linus%20Torvalds&background=10b981&color=fff",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "gravatar": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 6300.7,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://www.gravatar.com/avatar/93481a42fd7006230c60e726b06d7b16?s=400&d=identicon",
+          "sample_handle": "torvalds",
+          "sample_display_name": "Linus Torvalds"
+        },
+        "all": {
+          "status_code": 200,
+          "candidate_count": 5,
+          "total_reported": 5,
+          "latency_ms": 2591.4,
+          "mandatory_fields_valid": true,
+          "reverse_image_valid": true,
+          "email_permutations_valid": true,
+          "avatar_valid": true,
+          "passed": true,
+          "sample_avatar": "https://avatars.githubusercontent.com/u/1024025?v=4",
+          "sample_handle": "torvalds",
+          "sample_display_name": "torvalds"
+        }
+      },
+      "all_platforms_passed": true
+    },
+    "burst_load_stress": {
+      "burst_count": 200,
+      "total_time_s": 3.64,
+      "rps": 55.0,
+      "status_counts": {
+        "200": 196,
+        "0": 4
+      },
+      "pass_rate_pct": 98.0,
+      "latency_ms": {
+        "min": 13.7,
+        "p50": 527.0,
+        "p95": 2343.3,
+        "max": 2555.2
+      }
+    },
+    "adversarial_fuzzing": {
+      "test_cases": [
+        {
+          "name": "Empty Query & Names",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 1.7
+        },
+        {
+          "name": "Special Characters in Query",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 116.3
+        },
+        {
+          "name": "Unicode & Emojis",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 47.0
+        },
+        {
+          "name": "SQL Injection String",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 127.9
+        },
+        {
+          "name": "XSS Script Payload",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 134.1
+        },
+        {
+          "name": "Negative Limit (limit=-10 -> clamped to 1)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 97.9
+        },
+        {
+          "name": "Zero Limit (limit=0 -> clamped to 1)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 2.0
+        },
+        {
+          "name": "Excessive Limit (limit=9999 -> clamped to 10)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 157.7
+        },
+        {
+          "name": "Non-Integer Limit (limit=abc -> fallback to 5)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 180.7
+        },
+        {
+          "name": "Unknown Platform (platform=matrix_cyber)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 22.4
+        },
+        {
+          "name": "Ultra Long String (2000 chars)",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 158.9
+        },
+        {
+          "name": "Cross-Pivot Enriched Query Forwarding",
+          "status_code": 200,
+          "passed": true,
+          "latency_ms": 9.2
+        }
+      ],
+      "all_passed": true
+    }
+  }
+}

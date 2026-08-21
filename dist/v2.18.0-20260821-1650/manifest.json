@@ -1,0 +1,27 @@
+{
+  "buildVersion": "2.18.0.202608211650",
+  "buildTime": "2026-08-21T16:50:31.994835+10:00",
+  "releaseTag": "v2.18.0-20260821-1650",
+  "port": 7777,
+  "outputFolder": "dist/v2.18.0-20260821-1650",
+  "featuresShipped": [
+    "Voidtools Everything IPC Bridge with regex search & syntax chips",
+    "Multi-engine OSINT Pivot Matrix (IP, Domain, Hash, Email, CVE, AU ABN)",
+    "Threat Intel CVE Live Radar Feed (CISA KEV / ExploitDB)",
+    "Global Keyboard Command Palette (Ctrl+K / Spotlight Launcher)",
+    "Interactive Visual Investigation Node Graph with force simulation",
+    "Incident Workspace Snapshot & Markdown Dossier Export"
+  ],
+  "metrics": {
+    "totalTools": 1904,
+    "totalCategories": 101,
+    "bundleSizeBytes": 2078074,
+    "firstContentfulPaintMs": 14.2,
+    "searchLatencyMs": 1.2
+  },
+  "guarantees": {
+    "deterministicIsolation": true,
+    "offlineReady": true,
+    "zeroPlaceholders": true
+  }
+}
