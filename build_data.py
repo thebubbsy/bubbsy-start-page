@@ -618,7 +618,6 @@ def build_data():
 
     # Evergreen search engines without outdated model parentheticals
     search_engines = [
-        {'id': 'everything', 'name': 'Everything (ES)', 'type': 'es', 'placeholder': 'Search local files & documents with Voidtools Everything...'},
         {'id': 'filter', 'name': 'Filter Bookmarks', 'type': 'filter', 'placeholder': f'Fuzzy search {total_links}+ tools, Australian databases, and AI models...'},
         {'id': 'chatgpt', 'name': 'ChatGPT', 'type': 'web', 'url': 'https://chatgpt.com/?q=%s'},
         {'id': 'claude', 'name': 'Claude', 'type': 'web', 'url': 'https://claude.ai/new?q=%s'},

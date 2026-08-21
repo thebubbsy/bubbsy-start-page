@@ -59,12 +59,6 @@ window.BUBBSY_DATA = {
   ],
   "search_engines": [
     {
-      "id": "everything",
-      "name": "Everything (ES)",
-      "type": "es",
-      "placeholder": "Search local files & documents with Voidtools Everything..."
-    },
-    {
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",

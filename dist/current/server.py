@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Bubbsy Start Page - Local Server & OSINT Command Engine
-Provides local HTTP hosting, Voidtools Everything (ES) search proxying with Basic Auth,
+Provides local HTTP hosting, Visual Identity Disambiguation & Social Recon (35 Platforms),
 Threat Intel Radar streaming (CISA KEV / ExploitDB / ACSC), OS file execution,
 and folder-isolated release serving.
 """
@@ -28,7 +28,7 @@ import unicodedata
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-PORT = 7777
+PORT = int(os.environ.get('PORT', 7777))
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 DIST_DIR = os.path.join(ROOT_DIR, 'dist')
@@ -1486,7 +1486,7 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             'port': PORT,
             'outputFolder': 'dist/v2.18.0-20260819-1900',
             'featuresShipped': [
-                'Voidtools Everything IPC Bridge with regex & advanced size/date search',
+                'Visual Identity Disambiguation & Social Recon Engine (35 Platforms)',
                 'Multi-engine OSINT Pivot Matrix (IP, Domain, Hash, Email, CVE, AU ABN)',
                 'Threat Intel CVE Live Radar Feed (CISA KEV / GitHub Security Advisories)',
                 'Global Keyboard Command Palette (Ctrl+K / Spotlight Launcher)',

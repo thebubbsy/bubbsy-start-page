@@ -84,7 +84,7 @@ pause
         "port": 7777,
         "outputFolder": f"dist/{RELEASE_NAME}",
         "featuresShipped": [
-            "Voidtools Everything IPC Bridge with regex search & syntax chips",
+            "Visual Identity Disambiguation & Social Recon Engine (35 Platforms)",
             "Multi-engine OSINT Pivot Matrix (IP, Domain, Hash, Email, CVE, AU ABN)",
             "Threat Intel CVE Live Radar Feed (CISA KEV / ExploitDB)",
             "Global Keyboard Command Palette (Ctrl+K / Spotlight Launcher)",
