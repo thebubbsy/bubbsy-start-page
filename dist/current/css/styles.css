@@ -246,6 +246,7 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .btn-icon {
@@ -261,6 +262,12 @@ body {
   gap: 4px;
   transition: all 0.2s ease;
   font-family: var(--font-sans);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-icon *, button * {
+  pointer-events: none;
 }
 
 .btn-icon:hover {
@@ -895,14 +902,14 @@ mark.search-match {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 20px;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
 .modal-overlay.active {
-  display: flex;
+  display: flex !important;
 }
 
 .modal-content {
@@ -917,7 +924,7 @@ mark.search-match {
   overscroll-behavior: contain;
   padding: 16px;
   position: relative;
-  z-index: 1001;
+  z-index: 10000;
 }
 
 .modal-header {

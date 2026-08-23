@@ -322,7 +322,7 @@
 
     if (btnOpen) btnOpen.addEventListener('click', openTypographyModal);
     if (btnOpenFromSettings) btnOpenFromSettings.addEventListener('click', () => {
-      closeSettings();
+      closeModal(document.getElementById('modal-settings'));
       openTypographyModal();
     });
     if (btnClose) btnClose.addEventListener('click', closeTypographyModal);
@@ -794,6 +794,27 @@
     document.querySelectorAll('.modal-overlay.active').forEach(modal => closeModal(modal));
   }
 
+  function openSettingsModal() {
+    const cfgEngine = document.getElementById('cfg-default-engine');
+    if (cfgEngine) cfgEngine.value = settings.defaultEngine || 'filter';
+
+    let totalBytes = 0;
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key)) {
+        totalBytes += (localStorage[key].length + key.length) * 2;
+      }
+    }
+    const kb = (totalBytes / 1024).toFixed(1);
+    const elStorage = document.getElementById('diag-storage-usage');
+    if (elStorage) elStorage.textContent = `${kb} KB / 5,120 KB`;
+
+    openModal(document.getElementById('modal-settings'));
+  }
+
+  function closeSettingsModal() {
+    closeModal(document.getElementById('modal-settings'));
+  }
+
   // --- EVENT LISTENERS ---
   function setupEventListeners() {
     let searchKeyboardNavIdx = -1;
@@ -931,57 +952,108 @@
       });
     });
 
-    document.getElementById('btn-palette').addEventListener('click', openCommandPalette);
-    document.getElementById('btn-open-pivot').addEventListener('click', () => openPivotMatrix());
-    document.getElementById('btn-open-radar').addEventListener('click', openThreatRadar);
-    document.getElementById('btn-open-graph').addEventListener('click', openInvestigationGraph);
-    document.getElementById('btn-open-export').addEventListener('click', openSessionExport);
-    document.getElementById('btn-theme-picker').addEventListener('click', cycleTheme);
-
-    document.getElementById('btn-custom-bookmark').addEventListener('click', () => {
+    // All Primary Top Header Action Buttons
+    document.getElementById('btn-tour')?.addEventListener('click', startOnboardingTour);
+    document.getElementById('btn-palette')?.addEventListener('click', openCommandPalette);
+    document.getElementById('btn-open-pivot')?.addEventListener('click', () => openPivotMatrix());
+    document.getElementById('btn-open-radar')?.addEventListener('click', openThreatRadar);
+    document.getElementById('btn-open-dorks')?.addEventListener('click', openDorkGenerator);
+    document.getElementById('btn-open-geo')?.addEventListener('click', openGeoRecon);
+    document.getElementById('btn-open-social-recon')?.addEventListener('click', () => openSocialRecon());
+    document.getElementById('btn-open-mail-access')?.addEventListener('click', () => openMailAccessModal());
+    document.getElementById('btn-open-domain-sniper')?.addEventListener('click', () => openDomainSniperModal());
+    document.getElementById('btn-open-corp')?.addEventListener('click', openCorpRecon);
+    document.getElementById('btn-open-defang')?.addEventListener('click', openDefanger);
+    document.getElementById('btn-open-graph')?.addEventListener('click', openInvestigationGraph);
+    document.getElementById('btn-open-export')?.addEventListener('click', openSessionExport);
+    document.getElementById('btn-custom-bookmark')?.addEventListener('click', () => {
       openModal(document.getElementById('modal-custom-bookmark'));
     });
-    document.getElementById('btn-close-bm').addEventListener('click', () => {
+    document.getElementById('btn-theme-picker')?.addEventListener('click', cycleTheme);
+    document.getElementById('btn-open-typography')?.addEventListener('click', openTypographyModal);
+    document.getElementById('btn-settings')?.addEventListener('click', openSettingsModal);
+
+    document.getElementById('btn-close-bm')?.addEventListener('click', () => {
       closeModal(document.getElementById('modal-custom-bookmark'));
     });
-    document.getElementById('btn-cancel-bm').addEventListener('click', () => {
+    document.getElementById('btn-cancel-bm')?.addEventListener('click', () => {
       closeModal(document.getElementById('modal-custom-bookmark'));
     });
+    document.getElementById('form-custom-bookmark')?.addEventListener('submit', handleAddCustomBookmark);
 
-    document.getElementById('form-custom-bookmark').addEventListener('submit', handleAddCustomBookmark);
-
-    document.getElementById('btn-settings').addEventListener('click', () => {
-      document.getElementById('cfg-default-engine').value = settings.defaultEngine || 'filter';
-
-      let totalBytes = 0;
-      for (let key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
-          totalBytes += (localStorage[key].length + key.length) * 2;
-        }
-      }
-      const kb = (totalBytes / 1024).toFixed(1);
-      const elStorage = document.getElementById('diag-storage-usage');
-      if (elStorage) elStorage.textContent = `${kb} KB / 5,120 KB`;
-
-      openModal(document.getElementById('modal-settings'));
-    });
-
-    document.getElementById('btn-close-settings').addEventListener('click', () => {
-      closeModal(document.getElementById('modal-settings'));
-    });
-
-    document.getElementById('btn-save-settings').addEventListener('click', () => {
+    document.getElementById('btn-close-settings')?.addEventListener('click', closeSettingsModal);
+    document.getElementById('btn-save-settings')?.addEventListener('click', () => {
       settings.defaultEngine = document.getElementById('cfg-default-engine').value;
       localStorage.setItem('bubbsy_settings', JSON.stringify(settings));
-      closeModal(document.getElementById('modal-settings'));
+      closeSettingsModal();
       showToast('Settings saved successfully!');
     });
 
-    document.getElementById('btn-export-backup').addEventListener('click', exportBackupJson);
-    document.getElementById('btn-reset-default').addEventListener('click', () => {
+    document.getElementById('btn-export-backup')?.addEventListener('click', exportBackupJson);
+    document.getElementById('btn-reset-default')?.addEventListener('click', () => {
       if (confirm('Reset all bookmarks and settings to factory defaults?')) {
         localStorage.clear();
         location.reload();
+      }
+    });
+
+    // Bulletproof Global Navigation Click Delegator
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button, [data-modal-target], .hud-item');
+      if (!btn) return;
+      const id = btn.id;
+
+      if (id === 'btn-tour') {
+        e.preventDefault();
+        startOnboardingTour();
+      } else if (id === 'btn-palette') {
+        e.preventDefault();
+        openCommandPalette();
+      } else if (id === 'btn-open-pivot') {
+        e.preventDefault();
+        openPivotMatrix();
+      } else if (id === 'btn-open-radar') {
+        e.preventDefault();
+        openThreatRadar();
+      } else if (id === 'btn-open-dorks') {
+        e.preventDefault();
+        openDorkGenerator();
+      } else if (id === 'btn-open-geo') {
+        e.preventDefault();
+        openGeoRecon();
+      } else if (id === 'btn-open-social-recon') {
+        e.preventDefault();
+        openSocialRecon();
+      } else if (id === 'btn-open-mail-access') {
+        e.preventDefault();
+        openMailAccessModal();
+      } else if (id === 'btn-open-domain-sniper') {
+        e.preventDefault();
+        openDomainSniperModal();
+      } else if (id === 'btn-open-corp') {
+        e.preventDefault();
+        openCorpRecon();
+      } else if (id === 'btn-open-defang') {
+        e.preventDefault();
+        openDefanger();
+      } else if (id === 'btn-open-graph') {
+        e.preventDefault();
+        openInvestigationGraph();
+      } else if (id === 'btn-open-export') {
+        e.preventDefault();
+        openSessionExport();
+      } else if (id === 'btn-custom-bookmark') {
+        e.preventDefault();
+        openModal(document.getElementById('modal-custom-bookmark'));
+      } else if (id === 'btn-theme-picker') {
+        e.preventDefault();
+        cycleTheme();
+      } else if (id === 'btn-open-typography') {
+        e.preventDefault();
+        openTypographyModal();
+      } else if (id === 'btn-settings') {
+        e.preventDefault();
+        openSettingsModal();
       }
     });
 
@@ -8282,19 +8354,24 @@
   ];
 
   function startOnboardingTour() {
+    const modalTour = document.getElementById('modal-tour');
+    if (!modalTour) return;
     currentTourSlide = 0;
-    openModal(elModalTour);
+    openModal(modalTour);
     renderTourSlide();
   }
 
   function renderTourSlide() {
     const s = tourSlides[currentTourSlide];
+    if (!s) return;
+    const slideContainer = document.getElementById('tour-slide-container');
+    if (!slideContainer) return;
     const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '1,904';
     const totalWidgets = (appData && appData.total_widgets) ? appData.total_widgets : 101;
     const renderedDesc = s.desc
       .split('__TOTAL_LINKS__').join(totalLinks)
       .split('__TOTAL_WIDGETS__').join(String(totalWidgets));
-    elTourSlideContainer.innerHTML = `
+    slideContainer.innerHTML = `
       <div class="tour-slide active">
         <div class="tour-icon-box">${s.icon}</div>
         <div class="tour-slide-title">${s.title}</div>
@@ -8303,22 +8380,28 @@
       </div>
     `;
 
-    const dots = elTourDots.querySelectorAll('.tour-dot');
-    dots.forEach((d, idx) => {
-      d.classList.toggle('active', idx === currentTourSlide);
-    });
+    const dotsContainer = document.getElementById('tour-dots');
+    if (dotsContainer) {
+      const dots = dotsContainer.querySelectorAll('.tour-dot');
+      dots.forEach((d, idx) => {
+        d.classList.toggle('active', idx === currentTourSlide);
+      });
+    }
 
-    elBtnTourPrev.style.display = currentTourSlide > 0 ? '' : 'none';
-    elBtnTourNext.textContent = currentTourSlide === tourSlides.length - 1 ? 'Get Started' : 'Next →';
+    const prevBtn = document.getElementById('btn-tour-prev');
+    const nextBtn = document.getElementById('btn-tour-next');
+    if (prevBtn) prevBtn.style.display = currentTourSlide > 0 ? '' : 'none';
+    if (nextBtn) nextBtn.textContent = currentTourSlide === tourSlides.length - 1 ? 'Get Started' : 'Next →';
   }
 
   function finishOnboardingTour() {
-    closeModal(elModalTour);
+    const modalTour = document.getElementById('modal-tour');
+    if (modalTour) closeModal(modalTour);
     localStorage.setItem('bubbsy_tour_seen', 'true');
     showToast('Welcome to Bubbsy Start Page! Press / or Ctrl+K to search.');
   }
 
-  elBtnTourNext.addEventListener('click', () => {
+  document.getElementById('btn-tour-next')?.addEventListener('click', () => {
     if (currentTourSlide < tourSlides.length - 1) {
       currentTourSlide++;
       renderTourSlide();
@@ -8327,14 +8410,14 @@
     }
   });
 
-  elBtnTourPrev.addEventListener('click', () => {
+  document.getElementById('btn-tour-prev')?.addEventListener('click', () => {
     if (currentTourSlide > 0) {
       currentTourSlide--;
       renderTourSlide();
     }
   });
 
-  elBtnSkipTour.addEventListener('click', finishOnboardingTour);
+  document.getElementById('btn-skip-tour')?.addEventListener('click', finishOnboardingTour);
   document.getElementById('btn-tour')?.addEventListener('click', startOnboardingTour);
 
   window.startOnboardingTour = startOnboardingTour;
@@ -8349,12 +8432,12 @@
     }
   };
 
-  document.getElementById('palette-input').addEventListener('input', (e) => renderPaletteResults(e.target.value));
-  document.getElementById('radar-search-input').addEventListener('input', (e) => renderRadarItems(e.target.value));
-  document.getElementById('btn-refresh-radar').addEventListener('click', async () => {
+  document.getElementById('palette-input')?.addEventListener('input', (e) => renderPaletteResults(e.target.value));
+  document.getElementById('radar-search-input')?.addEventListener('input', (e) => renderRadarItems(e.target.value));
+  document.getElementById('btn-refresh-radar')?.addEventListener('click', async () => {
     showToast('Refreshing threat radar feed...');
     await fetchThreatRadarFeed();
-    renderRadarItems(elRadarSearchInput.value.trim());
+    renderRadarItems(elRadarSearchInput ? elRadarSearchInput.value.trim() : '');
   });
 
   // =========================================================================
@@ -9270,6 +9353,29 @@
   function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
+
+  // Global Window Exports for inline onclicks & devtools
+  window.startOnboardingTour = startOnboardingTour;
+  window.openCommandPalette = openCommandPalette;
+  window.openPivotMatrix = openPivotMatrix;
+  window.openThreatRadar = openThreatRadar;
+  window.openDorkGenerator = openDorkGenerator;
+  window.openGeoRecon = openGeoRecon;
+  window.openSocialRecon = openSocialRecon;
+  window.openSocialReconModal = openSocialRecon;
+  window.openMailAccessModal = openMailAccessModal;
+  window.openDomainSniperModal = openDomainSniperModal;
+  window.openCorpRecon = openCorpRecon;
+  window.openDefanger = openDefanger;
+  window.openInvestigationGraph = openInvestigationGraph;
+  window.openSessionExport = openSessionExport;
+  window.openTypographyModal = openTypographyModal;
+  window.openSettingsModal = openSettingsModal;
+  window.closeSettingsModal = closeSettingsModal;
+  window.openShortcutsModal = openShortcutsModal;
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.cycleTheme = cycleTheme;
 
   // Self Boot
   if (document.readyState === 'loading') {
