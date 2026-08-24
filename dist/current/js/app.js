@@ -8310,46 +8310,317 @@
   let currentTourSlide = 0;
   const tourSlides = [
     {
+      id: 'overview',
+      category: 'TACTICAL OSINT COMMAND HUB',
+      pillLabel: '1. Overview',
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
-      title: 'Mission Briefing: Bubbsy Command Hub',
-      desc: 'Welcome to your tactical OSINT & intelligence start page. Loaded with <strong>__TOTAL_LINKS__+ verified tools</strong> across <strong>__TOTAL_WIDGETS__ modules</strong>, Australian corporate & legal registries, Google AI Studio, and sub-millisecond search.',
-      box: 'Australian-First Hierarchy • Live Threat Radar • Clean AI Hub'
+      title: 'Mission Briefing: Bubbsy Command Architecture',
+      desc: 'Bubbsy is an elite forensic OSINT & tactical intelligence platform. Equipped with <strong>__TOTAL_LINKS__+ verified tools</strong> organized across <strong>__TOTAL_WIDGETS__ categories</strong>, Australian-first corporate & legal networks, real-time threat feeds, and sub-millisecond offline execution.',
+      capabilities: [
+        { title: '🇦🇺 Australian-First Intelligence', detail: 'Integrated ABN/ACN corporate registers, ASIC records, NSW Six Maps, VicPlan, and auDA drop schedules.' },
+        { title: '⚡ Sub-Millisecond Omnisearch', detail: 'Zero-latency fuzzy filtering with 35+ direct bang routing shortcuts and keyboard result traversal.' },
+        { title: '🔒 Private & Self-Contained', detail: 'Zero external tracker telemetry, ASD Essential 8 ML3 privacy posture, completely offline capable.' }
+      ],
+      highlightSelector: '.brand-hud',
+      tryLive: {
+        title: 'Tactical Catalog Overview',
+        hint: 'Reset all active filters and browse all 1,904 verified intelligence modules',
+        btnText: '⚡ Browse Full Catalog',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          filterByCategory('all');
+          document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
+          showToast('Browsing full verified catalog (1,904 tools)');
+        }
+      },
+      shortcuts: ['/ : Focus Search', 'Ctrl+K : Spotlight', '? : Cheatsheet', 'Aa : Typography']
     },
     {
-      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>',
-      title: 'Category Ribbon & Australian-First Modules',
-      desc: 'Jump straight to a topic with the ribbon below the search bar. The <strong>[AUS] Australian OSINT</strong> pill groups all government, emergency, news, telco, corporate and defence tools — and the <strong>Interactive Visual Toolkit</strong> pill is packed with spectacular interactive visual tools (Earth Timelapse, Windy, Radio Garden and more).',
-      box: 'Click a pill to filter • [AUS] is Australian-first • Interactive Visual Toolkit is the visual showcase'
-    },
-    {
+      id: 'omnisearch',
+      category: 'OMNI-SEARCH & BANG OPERATOR MATRIX',
+      pillLabel: '2. Omnisearch',
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-      title: 'Omnisearch & Quick Bang Operators',
-      desc: 'Press <kbd class="hud-key">/</kbd> anywhere to focus the search bar. Use bang shortcuts to instantly route queries to specific intelligence providers:',
-      box: '!aistudio &lt;prompt&gt; • !abn &lt;entity&gt; • !trove &lt;archive&gt; • !gpt &lt;prompt&gt; • !shodan &lt;ip&gt;'
+      title: 'Omnisearch, 35+ Bangs & Instant Routing',
+      desc: 'Press <kbd class="hud-key">/</kbd> anywhere to focus Omnisearch. Type keywords to instantly filter local tools, or prepend a <strong>Bang operator</strong> (<kbd class="hud-key">!</kbd>) to dispatch external queries or launch specialized intelligence engines directly.',
+      capabilities: [
+        { title: '🎯 35+ Intelligence Bangs', detail: '!abn, !shodan, !trove, !mail, !drop, !radar, !user, !geo, !corp, !defang, !graph, !cve, !virustotal.' },
+        { title: '⌨️ Zero-Lag Keyboard Navigation', detail: 'Arrow keys (↑ / ↓) traverse visible results, Tab autocompletes matching bang chips, Enter launches tool.' },
+        { title: '🖱️ Zero-Click Hover Hotkeys', detail: 'Hover over any tool and press C to copy URL or F to toggle pin favorites.' }
+      ],
+      highlightSelector: '#main-search',
+      tryLive: {
+        title: 'Omnisearch Live Demonstration',
+        hint: 'Pre-fills Omnisearch with !abn to query Australian Business Register records',
+        btnText: '⚡ Try Bang Search (!abn)',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          elMainSearch.value = '!abn Australian ';
+          elMainSearch.focus();
+          handleSearchInput(elMainSearch.value);
+          showToast('Activated !abn bang search in Omnisearch');
+        }
+      },
+      shortcuts: ['/ : Focus Search', 'Tab : Complete Bang', 'Hover + C : Copy URL', 'Hover + F : Favorite']
     },
     {
-      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
-      title: 'Zero-Click Hover Hotkeys',
-      desc: 'Keep your workspace clean without button clutter. Simply hover your mouse cursor over any tool:',
-      box: 'Hover + C &rarr; Copy URL to Clipboard • Hover + F &rarr; Pin to Pinned Tools'
-    },
-    {
-      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="6" y1="8" x2="6.01" y2="8"></line><line x1="10" y1="8" x2="10.01" y2="8"></line><line x1="14" y1="8" x2="14.01" y2="8"></line><line x1="18" y1="8" x2="18.01" y2="8"></line></svg>',
-      title: 'Global Command Palette (Ctrl+K)',
-      desc: 'Press <kbd class="hud-key cyan">Ctrl+K</kbd> (or <kbd>Cmd+K</kbd>) anywhere to open the Spotlight launcher. Fuzzy search across all tools, HUD commands, and 35 social networks in milliseconds.',
-      box: 'Arrow Keys ↑ ↓ to navigate • Enter to Launch • ESC to Dismiss'
-    },
-    {
+      id: 'threat_radar',
+      category: 'LIVE THREAT INTEL & CVE RADAR',
+      pillLabel: '3. Threat Radar',
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>',
-      title: 'Clue Whiteboard & Threat Pivoting',
-      desc: 'Enter any IP, Domain, Hash, CVE, or ABN into the <strong>Pivot Matrix</strong> for instant multi-engine lookups. Connect clues together on the <strong>Link Graph</strong> and export incident dossiers to Markdown.',
-      box: 'Multi-Engine Pivots • Interactive Node Canvas • 1-Click Markdown Export'
+      title: 'Threat Intel CVE Live Radar & ACSC Feed',
+      desc: 'Track active in-the-wild zero-days and vulnerabilities in real time. Aggregates the <strong>CISA Known Exploited Vulnerabilities (KEV)</strong> catalog and <strong>ASD / ACSC Cyber Threat Advisory</strong> feeds with 1-click investigation pivots.',
+      capabilities: [
+        { title: '📡 Real-Time Live Feed', detail: 'Background caching and manual refresh of active CVE exploits, affected vendors, and CVSS scores.' },
+        { title: '📋 1-Click Forensic Export', detail: 'Copy single CVE advisories or export the entire threat briefing as a formatted Markdown report table.' },
+        { title: '🌐 Send Threat to Graph', detail: 'Instantly generate CVE and vendor nodes inside the Visual Investigation Link Graph.' }
+      ],
+      highlightSelector: '#btn-open-radar',
+      tryLive: {
+        title: 'Threat Radar Engine',
+        hint: 'Launch the live vulnerability feed and filter for active zero-days',
+        btnText: '📡 Open Live Threat Radar',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openThreatRadar();
+        }
+      },
+      shortcuts: ['!radar : Omnisearch Bang', 'Ctrl+K &rarr; Threat Radar', '1-Click Markdown Export']
     },
     {
-      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
-      title: 'Public Web & Desktop Ready',
-      desc: 'Bubbsy is 100% self-contained and ready for public web hosting (GitHub Pages / Vercel / Netlify) and local desktop operations.',
-      box: 'Production Ready • 100% Offline Capable • Zero External Dependencies'
+      id: 'mail_access',
+      category: 'KEYLESS EMAIL OSINT & RECON',
+      pillLabel: '4. MailAccess',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+      title: 'MailAccess: Email Intelligence & Consensus',
+      desc: 'Inspired by KatrielMoses/MailAccess, this keyless intelligence engine uncovers identity, exposure risk, and corporate infrastructure behind any email or domain.',
+      capabilities: [
+        { title: '👤 4-Tier Name Consensus', detail: 'Mathematical identity resolution across CONFIRMED, PROBABLE, POSSIBLE, and UNKNOWN certainty tiers.' },
+        { title: '🛡️ Defender\'s Exposure Score', detail: '0–100 threat rating identifying exposure vectors, credential stuffing risks, and dark web footprint.' },
+        { title: '🏢 Corporate Email Harvester', detail: 'Generates standard email permutations (first.last, f.last, handle) and matches MX records (M365, Google, Proton).' }
+      ],
+      highlightSelector: '#btn-open-mail-access',
+      tryLive: {
+        title: 'MailAccess Investigation Sandbox',
+        hint: 'Investigates corporate domain and extracts identity & mail infrastructure',
+        btnText: '📬 Launch MailAccess Demo',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openMailAccessModal();
+          const targetInput = document.getElementById('mail-target-input');
+          if (targetInput) {
+            targetInput.value = 'security@canva.com';
+            executeMailAccessSearch();
+          }
+        }
+      },
+      shortcuts: ['!mail <address> : Direct Search', '!harvest <domain> : Harvester Mode', '1-Click Graph Pivot']
+    },
+    {
+      id: 'domain_sniper',
+      category: 'DOMAIN DROP SNIPER & EXPIRY RADAR',
+      pillLabel: '5. Domain Drops',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>',
+      title: 'Domain Drop Sniper & Backorder Launchpad',
+      desc: 'Intercept expiring high-value domains before competitors. Features authoritative ICANN RDAP inspection, live countdown timer HUD, and multi-registrar backorder dispatch.',
+      capabilities: [
+        { title: '⏱️ 5-Stage Lifecycle Engine', detail: 'Tracks Active &rarr; Auto-Renew Grace &rarr; Redemption Period &rarr; Pending Delete &rarr; Dropped Available.' },
+        { title: '🇦🇺 auDA 1:00 PM AEST Drops', detail: 'Exact drop scheduling for .au domains with automated Australian timezone conversion.' },
+        { title: '🚀 Multi-Provider Backorder', detail: '1-click dispatch to DropCatch, SnapNames, NameJet, Drop.com.au, and Netfleet.' }
+      ],
+      highlightSelector: '#btn-open-domain-sniper',
+      tryLive: {
+        title: 'Domain Drop Sniper Demonstration',
+        hint: 'Calculates expiry lifecycle and drop countdown for cloudsec.com.au',
+        btnText: '🎯 Launch Domain Sniper',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openDomainSniperModal();
+          const domInput = document.getElementById('domain-sniper-input');
+          if (domInput) {
+            domInput.value = 'cloudsec.com.au';
+            executeDomainSniperCalculation();
+          }
+        }
+      },
+      shortcuts: ['!drop <domain> : Expiry Check', '!sniper : Watchlist Mode', 'Live Digital Countdown HUD']
+    },
+    {
+      id: 'social_recon',
+      category: 'IDENTITY DISAMBIGUATION & SOCIAL RECON',
+      pillLabel: '6. Social Recon',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
+      title: 'Visual Identity Disambiguation & Avatar Scraper',
+      desc: 'Unmask personas across 35+ social networks with concurrent avatar harvesting, 3-way triage gates, side-by-side avatar comparison, and reverse image pivots.',
+      capabilities: [
+        { title: '🖼️ Avatar Lightbox & Reverse Pivots', detail: '1-click visual search on Google Lens, Yandex, TinEye, and PimEyes directly from harvested profile pictures.' },
+        { title: '⚖️ 3-Way Triage (YES/UNSURE/NO)', detail: 'Auto-forwards discovered real names, locations, and organizations into subsequent queries.' },
+        { title: '🔑 PGP Proofs & Chronolocation', detail: 'Extracts Keybase cryptographic fingerprints and computes target active UTC timezones from activity timestamps.' }
+      ],
+      highlightSelector: '#btn-open-social-recon',
+      tryLive: {
+        title: 'Social Reconnaissance Engine',
+        hint: 'Harvests avatars and profiles for torvalds across GitHub, Bluesky, Keybase, and Reddit',
+        btnText: '👤 Launch Social Recon',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openSocialRecon('torvalds');
+        }
+      },
+      shortcuts: ['!user <handle> : Omnisearch', 'YES/UNSURE/NO : Triage Gates', 'Markdown Persona Dossier']
+    },
+    {
+      id: 'cadastre_geo',
+      category: 'AUSTRALIAN CADASTRE & GEO RECON',
+      pillLabel: '7. Cadastre Geo',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+      title: 'Australian Cadastre & Coordinate Recon',
+      desc: 'Precision geospatial intelligence with Australian-first coordinate transformation and state land administration pivots.',
+      capabilities: [
+        { title: '🗺️ Coordinate Conversions', detail: 'Instant parsing and bi-directional conversion between Decimal Degrees, DMS, Geohash, MGRS/UTM, and GDA2020 datum.' },
+        { title: '🏛️ State Land Administration', detail: '1-click pivots to NSW Six Maps, VicPlan, QLD Globe, WA Landgate, SA Location, ACTmapi, and NT Atlas.' },
+        { title: '☀️ Sun & Ephemeris Geometry', detail: 'Computes solar azimuth, elevation angles, and shadow length estimations for imagery chronolocation.' }
+      ],
+      highlightSelector: '#btn-open-geo',
+      tryLive: {
+        title: 'Australian Cadastre Sandbox',
+        hint: 'Resolves Sydney Opera House coordinates (-33.8568, 151.2153) and opens cadastre pivots',
+        btnText: '📍 Launch Cadastre Recon',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openGeoRecon();
+          const geoInput = document.getElementById('geo-coord-input');
+          if (geoInput) {
+            geoInput.value = '-33.8568, 151.2153';
+            handleGeoParse(geoInput.value);
+          }
+        }
+      },
+      shortcuts: ['!geo <coords> : Cadastre Parse', 'GDA2020 / MGA94 Converter', '1-Click Six Maps / VicPlan']
+    },
+    {
+      id: 'corp_recon',
+      category: 'CORPORATE OSINT & ABR / ASIC NETWORK',
+      pillLabel: '8. Corporate ABN',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>',
+      title: 'Australian Corporate & ASIC / ABR Network',
+      desc: 'Investigate Australian corporations, trusts, business names, and beneficial ownership structures with direct registry pivots.',
+      capabilities: [
+        { title: '🏢 ABN & ACN Verification', detail: 'Look up GST registration status, deductible gift recipient status, and entity type on the Australian Business Register.' },
+        { title: '📑 ASIC & Insolvency Records', detail: 'Direct pivots to the ASIC Corporate Registers, Published Banned & Disqualified Persons, and Insolvency Notices.' },
+        { title: '📊 Corporate Link Synthesis', detail: 'Map parent companies, subsidiaries, and corporate directors directly onto the Investigation Link Graph.' }
+      ],
+      highlightSelector: '#btn-open-corp',
+      tryLive: {
+        title: 'Corporate Registry Network',
+        hint: 'Opens corporate OSINT workbench with ABN lookup and company structure tools',
+        btnText: '🏢 Open Corporate Recon',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openCorpRecon();
+        }
+      },
+      shortcuts: ['!abn <entity> : Direct Search', '!corp : Corporate Recon Modal', 'ASIC & ABR Pivots']
+    },
+    {
+      id: 'threat_dorks',
+      category: 'ATTACK SURFACE & THREAT DORK ENGINE',
+      pillLabel: '9. Threat Dorks',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8M12 8v8"></path></svg>',
+      title: 'Threat Dork & Attack Surface Generator',
+      desc: 'Generate advanced Google, GitHub, and Shodan search dorks to pinpoint exposed assets, credentials, and open administrative interfaces.',
+      capabilities: [
+        { title: '☁️ Cloud Storage Leakage', detail: 'Uncovers public AWS S3 buckets, Azure Blobs, Google Cloud Storage, and exposed Docker registries.' },
+        { title: '🔑 Credential & Config Dorks', detail: 'Finds leaked .env files, .git repositories, SSH private keys, API secrets, and Swagger UI documents.' },
+        { title: '👁️ IoT & Interface Discovery', detail: 'Detects exposed IP cameras, Elasticsearch clusters, Grafana dashboards, and phpMyAdmin panels.' }
+      ],
+      highlightSelector: '#btn-open-dorks',
+      tryLive: {
+        title: 'Threat Dork Generator',
+        hint: 'Opens the attack surface workbench for generating multi-engine search dorks',
+        btnText: '🔎 Open Dork Generator',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openDorkGenerator();
+        }
+      },
+      shortcuts: ['!dorks : Omnisearch Bang', 'Google & GitHub Dorks', 'Shodan IoT Recon']
+    },
+    {
+      id: 'cyber_defang',
+      category: 'IOC NORMALIZER & SEARCH BUILDER',
+      pillLabel: '10. Cyber Defang',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
+      title: 'Cyber Defang / Refang & IOC Normalizer',
+      desc: 'Safely handle malicious indicators of compromise (IOCs) and automatically generate enterprise SIEM search queries.',
+      capabilities: [
+        { title: '🛡️ Safe Defang / Refang', detail: 'Instantly converts http:// &rarr; hxxp:// and example.com &rarr; example[.]com to neutralize clickability.' },
+        { title: '🔍 Unstructured IOC Extractor', detail: 'Parses raw incident logs or emails and extracts all unique IPv4, IPv6, URLs, domains, and MD5/SHA256 hashes.' },
+        { title: '💻 SIEM Query Builder', detail: '1-click export to ready-to-run Splunk SPL, Microsoft Sentinel KQL, and Elasticsearch Lucene queries.' }
+      ],
+      highlightSelector: '#btn-open-defang',
+      tryLive: {
+        title: 'Cyber Defanger Sandbox',
+        hint: 'Loads sample malicious IOCs and generates neutralized forms & SIEM queries',
+        btnText: '🛡️ Open Cyber Defanger',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openDefanger();
+          const defangInput = document.getElementById('defang-input');
+          if (defangInput) {
+            defangInput.value = 'hxxp://c2-beacon[.]net/payload.bin\n198.51.100.42\ne80b5017098950fc58aad83c8c14978e';
+            handleDefangProcess();
+          }
+        }
+      },
+      shortcuts: ['!defang <ioc> : Direct Defang', 'Splunk / KQL Query Builder', 'Batch IOC Normalizer']
+    },
+    {
+      id: 'link_graph',
+      category: 'INVESTIGATION LINK GRAPH CANVAS',
+      pillLabel: '11. Link Graph',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>',
+      title: 'Visual Investigation Link Graph Canvas',
+      desc: 'Connect forensic clues together on an interactive, force-directed whiteboard canvas with real-time physics and node clustering.',
+      capabilities: [
+        { title: '🌐 Multi-Entity Nodes', detail: 'Support for IP, Domain, Hash, Person, Org, CVE, Email, and Location entity types with custom colors.' },
+        { title: '🔗 Directed Relationship Edges', detail: 'Annotate connections with semantic labels (RESOLVES_TO, COMMUNICATES_WITH, OWNS, EXPLOITS).' },
+        { title: '📸 High-Res PNG & Markdown Export', detail: 'Capture full canvas screenshots for incident tickets or export the adjacency matrix to Markdown.' }
+      ],
+      highlightSelector: '#btn-open-graph',
+      tryLive: {
+        title: 'Visual Link Graph Canvas',
+        hint: 'Opens interactive whiteboard with pre-loaded forensic threat cluster',
+        btnText: '🌐 Launch Visual Link Graph',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openInvestigationGraph();
+        }
+      },
+      shortcuts: ['!graph : Open Whiteboard', 'Drag & Drop Canvas', '1-Click PNG Snapshot']
+    },
+    {
+      id: 'export_palette',
+      category: 'EXPORT, COMMAND PALETTE & ACCESSIBILITY',
+      pillLabel: '12. Palette & Export',
+      icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="6" y1="8" x2="6.01" y2="8"></line><line x1="10" y1="8" x2="10.01" y2="8"></line><line x1="14" y1="8" x2="14.01" y2="8"></line><line x1="18" y1="8" x2="18.01" y2="8"></line></svg>',
+      title: 'Command Palette, Customizer & Forensic Export',
+      desc: 'Complete control over your investigation workspace with instant spotlight navigation, high-contrast typography, and snapshot archiving.',
+      capabilities: [
+        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching 1,904 tools, commands, and social networks in under 2ms.' },
+        { title: 'Aa High-Contrast Typography', detail: 'Adjust font scaling (80%–150%), font weight (300–800), and switch high-contrast readability palettes.' },
+        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and complete 1,904-tool CSV catalogs.' }
+      ],
+      highlightSelector: '#btn-palette',
+      tryLive: {
+        title: 'Spotlight Command Launcher',
+        hint: 'Press Ctrl+K or click below to launch the spotlight search bar',
+        btnText: '⚡ Open Command Palette',
+        action: () => {
+          closeModal(document.getElementById('modal-tour'));
+          openCommandPalette();
+        }
+      },
+      shortcuts: ['Ctrl+K : Spotlight Launcher', 'Aa : Typography Modal', 'Ctrl+S / !export : Snapshot Export']
     }
   ];
 
@@ -8365,36 +8636,137 @@
     const s = tourSlides[currentTourSlide];
     if (!s) return;
     const slideContainer = document.getElementById('tour-slide-container');
-    if (!slideContainer) return;
+    const stageNav = document.getElementById('tour-stage-nav-bar');
+    const stepBadge = document.getElementById('tour-step-badge');
+    const dotsContainer = document.getElementById('tour-dots');
+    const prevBtn = document.getElementById('btn-tour-prev');
+    const nextBtn = document.getElementById('btn-tour-next');
+    const tryLiveBtn = document.getElementById('btn-tour-try-live');
+
+    // Remove any existing spotlight pulse from header buttons
+    document.querySelectorAll('.tour-spotlight-pulse').forEach(el => el.classList.remove('tour-spotlight-pulse'));
+
+    // Apply spotlight pulse to current slide's target element
+    if (s.highlightSelector) {
+      const targetEl = document.querySelector(s.highlightSelector);
+      if (targetEl) {
+        targetEl.classList.add('tour-spotlight-pulse');
+      }
+    }
+
+    // Update Step Badge
+    const stepNumber = String(currentTourSlide + 1).padStart(2, '0');
+    const totalSteps = String(tourSlides.length).padStart(2, '0');
+    if (stepBadge) stepBadge.textContent = `STAGE ${stepNumber} / ${totalSteps}`;
+
+    // Render Stage Navigation Ribbon
+    if (stageNav) {
+      stageNav.innerHTML = tourSlides.map((slide, idx) => `
+        <button type="button" class="tour-nav-pill ${idx === currentTourSlide ? 'active' : ''}" data-stage-idx="${idx}">
+          ${slide.pillLabel}
+        </button>
+      `).join('');
+
+      stageNav.querySelectorAll('.tour-nav-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          currentTourSlide = parseInt(pill.getAttribute('data-stage-idx'), 10);
+          renderTourSlide();
+        });
+      });
+
+      // Scroll active pill into view if needed
+      const activePill = stageNav.querySelector('.tour-nav-pill.active');
+      if (activePill) activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    // Dynamic replacement of totals
     const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '1,904';
     const totalWidgets = (appData && appData.total_widgets) ? appData.total_widgets : 101;
     const renderedDesc = s.desc
       .split('__TOTAL_LINKS__').join(totalLinks)
       .split('__TOTAL_WIDGETS__').join(String(totalWidgets));
-    slideContainer.innerHTML = `
-      <div class="tour-slide active">
-        <div class="tour-icon-box">${s.icon}</div>
-        <div class="tour-slide-title">${s.title}</div>
-        <p class="tour-slide-desc">${renderedDesc}</p>
-        <div class="tour-slide-box">${s.box}</div>
-      </div>
-    `;
 
-    const dotsContainer = document.getElementById('tour-dots');
-    if (dotsContainer) {
-      const dots = dotsContainer.querySelectorAll('.tour-dot');
-      dots.forEach((d, idx) => {
-        d.classList.toggle('active', idx === currentTourSlide);
+    // Capabilities cards HTML
+    const capabilitiesHtml = (s.capabilities || []).map(c => `
+      <div class="tour-capability-card">
+        <div class="tour-capability-title">${escapeHtml(c.title)}</div>
+        <div class="tour-capability-detail">${c.detail}</div>
+      </div>
+    `).join('');
+
+    // Shortcuts chips HTML
+    const shortcutsHtml = (s.shortcuts || []).map(sc => `
+      <span class="hud-key" style="font-size:0.68rem;padding:2px 6px;">${escapeHtml(sc)}</span>
+    `).join('');
+
+    // Render Main Slide Body
+    if (slideContainer) {
+      slideContainer.innerHTML = `
+        <div class="tour-slide active">
+          <div class="tour-slide-header">
+            <div class="tour-icon-box">${s.icon}</div>
+            <div class="tour-slide-heading-block">
+              <div class="tour-slide-category">${escapeHtml(s.category)}</div>
+              <div class="tour-slide-title">${escapeHtml(s.title)}</div>
+            </div>
+          </div>
+
+          <p class="tour-slide-desc">${renderedDesc}</p>
+
+          <div class="tour-capabilities-grid">
+            ${capabilitiesHtml}
+          </div>
+
+          <div class="tour-live-try-card">
+            <div class="tour-live-try-info">
+              <div class="tour-live-try-title">${escapeHtml(s.tryLive.title)}</div>
+              <div class="tour-live-try-hint">${escapeHtml(s.tryLive.hint)}</div>
+            </div>
+            <button type="button" class="tour-btn-try-feature" id="btn-tour-slide-action">
+              ${escapeHtml(s.tryLive.btnText)}
+            </button>
+          </div>
+
+          <div class="tour-shortcuts-row">
+            <span style="font-weight:700;color:var(--text-secondary);">TACTICAL OPERATORS:</span>
+            <div class="tour-shortcuts-chips">${shortcutsHtml}</div>
+          </div>
+        </div>
+      `;
+
+      // Bind dynamic in-slide Try Live button
+      document.getElementById('btn-tour-slide-action')?.addEventListener('click', () => {
+        if (typeof s.tryLive?.action === 'function') {
+          s.tryLive.action();
+        }
       });
     }
 
-    const prevBtn = document.getElementById('btn-tour-prev');
-    const nextBtn = document.getElementById('btn-tour-next');
+    // Render Dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = tourSlides.map((_, idx) => `
+        <span class="tour-dot ${idx === currentTourSlide ? 'active' : ''}" data-stage-idx="${idx}"></span>
+      `).join('');
+
+      dotsContainer.querySelectorAll('.tour-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          currentTourSlide = parseInt(dot.getAttribute('data-stage-idx'), 10);
+          renderTourSlide();
+        });
+      });
+    }
+
+    // Update Buttons
     if (prevBtn) prevBtn.style.display = currentTourSlide > 0 ? '' : 'none';
-    if (nextBtn) nextBtn.textContent = currentTourSlide === tourSlides.length - 1 ? 'Get Started' : 'Next →';
+    if (nextBtn) nextBtn.textContent = currentTourSlide === tourSlides.length - 1 ? 'Finish Mission Briefing (Enter) ✔️' : 'Next Stage (N) →';
+    if (tryLiveBtn) {
+      tryLiveBtn.textContent = s.tryLive?.btnText || '🚀 Try Live (T)';
+    }
   }
 
   function finishOnboardingTour() {
+    // Remove any pulsing spotlight
+    document.querySelectorAll('.tour-spotlight-pulse').forEach(el => el.classList.remove('tour-spotlight-pulse'));
     const modalTour = document.getElementById('modal-tour');
     if (modalTour) closeModal(modalTour);
     localStorage.setItem('bubbsy_tour_seen', 'true');
@@ -8417,8 +8789,50 @@
     }
   });
 
+  document.getElementById('btn-tour-try-live')?.addEventListener('click', () => {
+    const s = tourSlides[currentTourSlide];
+    if (typeof s?.tryLive?.action === 'function') {
+      s.tryLive.action();
+    }
+  });
+
   document.getElementById('btn-skip-tour')?.addEventListener('click', finishOnboardingTour);
   document.getElementById('btn-tour')?.addEventListener('click', startOnboardingTour);
+
+  // Keyboard navigation for active tour
+  document.addEventListener('keydown', (e) => {
+    const modalTour = document.getElementById('modal-tour');
+    if (!modalTour || !modalTour.classList.contains('active')) return;
+
+    if (e.key === 'ArrowRight' || e.key === 'n' || e.key === 'N') {
+      e.preventDefault();
+      if (currentTourSlide < tourSlides.length - 1) {
+        currentTourSlide++;
+        renderTourSlide();
+      } else {
+        finishOnboardingTour();
+      }
+    } else if (e.key === 'ArrowLeft' || e.key === 'p' || e.key === 'P') {
+      e.preventDefault();
+      if (currentTourSlide > 0) {
+        currentTourSlide--;
+        renderTourSlide();
+      }
+    } else if (e.key === 't' || e.key === 'T' || e.key === 'l' || e.key === 'L') {
+      e.preventDefault();
+      const s = tourSlides[currentTourSlide];
+      if (typeof s?.tryLive?.action === 'function') {
+        s.tryLive.action();
+      }
+    } else if (e.key >= '1' && e.key <= '9') {
+      const idx = parseInt(e.key, 10) - 1;
+      if (idx < tourSlides.length) {
+        e.preventDefault();
+        currentTourSlide = idx;
+        renderTourSlide();
+      }
+    }
+  });
 
   window.startOnboardingTour = startOnboardingTour;
   window.openShortcutsModal = openShortcutsModal;

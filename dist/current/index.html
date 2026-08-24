@@ -1771,32 +1771,48 @@
   </div>
 
   <!-- =========================================================================
-       FIRST-TIME ONBOARDING TOUR MODAL
+       COMPREHENSIVE INTERACTIVE PLATFORM WALKTHROUGH & TOUR MODAL
        ========================================================================= -->
   <div class="modal-overlay" id="modal-tour" role="dialog" aria-modal="true" aria-labelledby="modal-tour-title">
-    <div class="modal-content tour-modal-content">
-      <div class="modal-header" style="border:none;padding-bottom:0;">
-        <span class="hud-label" id="modal-tour-title">MISSION BRIEFING</span>
-        <button class="modal-close" id="btn-skip-tour" title="Skip Tour" aria-label="Close Tour dialog">&times;</button>
+    <div class="modal-content tour-modal-content" style="max-width:840px;">
+      <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <h3 class="modal-title" id="modal-tour-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Interactive Tactical Tour &amp; Capability Briefing
+          </h3>
+          <span class="brand-tag" id="tour-step-badge" style="background:rgba(0,240,255,0.15);border:1px solid var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">STAGE 01 / 12</span>
+        </div>
+        <button class="modal-close" id="btn-skip-tour" title="Close Tour (Esc)" aria-label="Close Tour dialog">&times;</button>
       </div>
 
+      <!-- Quick Stage Jump Navigator Ribbon -->
+      <div class="tour-stage-nav-bar" id="tour-stage-nav-bar" role="tablist" aria-label="Tour Stages">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Main Dynamic Slide Container -->
       <div class="tour-body" id="tour-slide-container">
         <!-- Injected via JavaScript -->
       </div>
 
+      <!-- Action Controls Footer -->
       <div class="tour-footer">
-        <div class="tour-indicators" id="tour-dots">
-          <span class="tour-dot active"></span>
-          <span class="tour-dot"></span>
-          <span class="tour-dot"></span>
-          <span class="tour-dot"></span>
-          <span class="tour-dot"></span>
-          <span class="tour-dot"></span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="tour-indicators" id="tour-dots">
+            <!-- Dynamic Dots Injected via JavaScript -->
+          </div>
+          <span id="tour-keyboard-hint" style="font-size:0.68rem;color:var(--text-muted);font-family:var(--font-mono);">[← / → Navigate • T Try Live • Esc Exit]</span>
         </div>
 
-        <div style="display:flex;gap:8px;">
-          <button type="button" class="btn-icon" id="btn-tour-prev" style="display:none;">&larr; Back</button>
-          <button type="button" class="btn-search-exec" id="btn-tour-next">Next &rarr;</button>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-tour-prev" style="display:none;">&larr; Back (P)</button>
+          <button type="button" class="btn-icon" id="btn-tour-try-live" style="border-color:var(--accent-cyan);color:var(--accent-cyan);font-weight:700;">
+            🚀 Try Live (T)
+          </button>
+          <button type="button" class="btn-search-exec" id="btn-tour-next">Next Stage (N) &rarr;</button>
         </div>
       </div>
     </div>
