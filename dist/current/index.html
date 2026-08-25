@@ -321,6 +321,9 @@
         <button class="btn-search-exec" id="btn-search-exec">Search</button>
       </div>
 
+      <!-- Live Floating Bang Autocomplete Dropdown Menu -->
+      <div class="bang-autocomplete-dropdown" id="bang-autocomplete-dropdown" style="display:none;" role="listbox" aria-label="Bang Autocomplete Suggestions"></div>
+
     </div>
 
     <!-- Bang Shortcuts Ribbon -->
@@ -1742,6 +1745,16 @@
         </label>
         <p style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">
           Scale font size (80%–150%), adjust font thickness/weight (300–800), and choose high-contrast text color palettes to eliminate low-contrast grey text.
+        </p>
+      </div>
+
+      <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Cyber Audio &amp; Haptic Soundscape Feedback</span>
+          <input type="checkbox" id="cfg-sound-effects" checked style="accent-color:var(--accent-cyan);cursor:pointer;width:16px;height:16px;">
+        </label>
+        <p style="font-size:0.72rem;color:var(--text-muted);margin-top:3px;">
+          Synthesize subtle mechanical and cyber sound effects (Web Audio API) for button clicks, copy confirmations, and modal sweeps.
         </p>
       </div>
 

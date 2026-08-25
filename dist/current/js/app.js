@@ -28,8 +28,103 @@
   }));
 
   let settings = JSON.parse(localStorage.getItem('bubbsy_settings') || JSON.stringify({
-    defaultEngine: 'filter'
+    defaultEngine: 'filter',
+    soundEffects: true
   }));
+
+  // --- CYBER ACOUSTIC & HAPTIC SYNTHESIZER (WEB AUDIO API) ---
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playCyberAudio(type = 'click') {
+    if (settings.soundEffects === false) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(440, now + 0.04);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'bang') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.exponentialRampToValueAtTime(1040, now + 0.06);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      } else if (type === 'copy' || type === 'success') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.setValueAtTime(880, now + 0.04); // A5
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } else if (type === 'modal_open') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'modal_close') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(640, now);
+        osc.frequency.exponentialRampToValueAtTime(320, now + 0.06);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      }
+    } catch (e) {
+      // Audio fallback silent
+    }
+  }
+
+  const BANG_SUGGESTIONS = [
+    { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
+    { bang: '!trove', name: 'Trove Australia (NLA)', syntax: '!trove <archive>', desc: 'National Library historical archives & press' },
+    { bang: '!austlii', name: 'AusLII Legal Database', syntax: '!austlii <case/act>', desc: 'Commonwealth legislation & High Court rulings' },
+    { bang: '!mail', name: 'MailAccess Intelligence', syntax: '!mail <email>', desc: '4-tier name consensus & defender exposure scoring' },
+    { bang: '!harvest', name: 'Corporate Email Harvester', syntax: '!harvest <domain>', desc: 'Extract corporate emails & department prefixes' },
+    { bang: '!drop', name: 'Domain Drop Sniper', syntax: '!drop <domain>', desc: '5-stage lifecycle state machine & drop countdown' },
+    { bang: '!user', name: 'Social Recon Disambiguation', syntax: '!user <handle>', desc: 'Avatar harvesting & 3-way identity triage' },
+    { bang: '!radar', name: 'Live CVE Threat Radar', syntax: '!radar', desc: 'CISA KEV & ACSC threat advisory intelligence' },
+    { bang: '!geo', name: 'Cadastre & Geo Recon', syntax: '!geo <coords>', desc: 'GDA2020 coordinate converter & cadastre maps' },
+    { bang: '!corp', name: 'Corporate ABN & ASIC', syntax: '!corp <entity>', desc: 'Corporate ownership structures & ASIC lookups' },
+    { bang: '!defang', name: 'IOC Defang / Refang', syntax: '!defang <ioc>', desc: 'Safe defanging & SIEM query builder (Splunk/KQL)' },
+    { bang: '!dorks', name: 'Attack Surface Dorks', syntax: '!dorks <target>', desc: 'Cloud buckets, leaked credentials & panel dorks' },
+    { bang: '!graph', name: 'Visual Link Graph', syntax: '!graph', desc: 'Interactive node graph canvas with entity linking' },
+    { bang: '!shodan', name: 'Shodan Search', syntax: '!shodan <query>', desc: 'Internet connected devices & open port scanner' },
+    { bang: '!vt', name: 'VirusTotal Scanner', syntax: '!vt <hash/url>', desc: 'Malware hash, domain & threat intelligence' },
+    { bang: '!gh', name: 'GitHub Code Search', syntax: '!gh <code>', desc: 'Public repositories, commits & leaked secrets' },
+    { bang: '!gpt', name: 'ChatGPT Assistant', syntax: '!gpt <prompt>', desc: 'OpenAI ChatGPT direct query pivot' },
+    { bang: '!claude', name: 'Claude AI Assistant', syntax: '!claude <prompt>', desc: 'Anthropic Claude direct query pivot' },
+    { bang: '!aistudio', name: 'Google AI Studio', syntax: '!aistudio <prompt>', desc: 'Gemini Developer Studio prompt sandbox' },
+    { bang: '!ppx', name: 'Perplexity Neural', syntax: '!ppx <query>', desc: 'Perplexity citation-backed search engine' },
+    { bang: '!deepseek', name: 'DeepSeek R1', syntax: '!deepseek <query>', desc: 'DeepSeek reasoning & code intelligence' },
+    { bang: '!genspark', name: 'Genspark Agent', syntax: '!genspark <query>', desc: 'Autonomous AI research sparkpage synthesis' }
+  ];
 
   // --- DOM ELEMENTS ---
   const elDashboardGrid = document.getElementById('dashboard-grid');
@@ -37,6 +132,7 @@
   const elSearchTabs = document.getElementById('search-mode-tabs');
   const elEngineBadge = document.getElementById('current-engine-label');
   const elBtnSearchExec = document.getElementById('btn-search-exec');
+  const elBangDropdown = document.getElementById('bang-autocomplete-dropdown');
   const elWorldClocks = document.getElementById('world-clocks-container');
   const elCategoryRibbon = document.getElementById('category-ribbon');
   const elToastContainer = document.getElementById('toast-container');
@@ -418,6 +514,7 @@
 
   // --- TOAST NOTIFICATIONS ---
   function showToast(msg, type = 'info') {
+    playCyberAudio(type === 'error' ? 'click' : 'copy');
     const toast = document.createElement('div');
     toast.className = 'toast-notice';
     toast.innerHTML = `<span>${msg}</span>`;
@@ -762,6 +859,7 @@
 
   function openModal(modalEl) {
     if (!modalEl) return;
+    playCyberAudio('modal_open');
     previouslyFocusedElement = document.activeElement;
     modalEl.classList.add('active');
     // Set focus on first interactive element or close button
@@ -775,6 +873,7 @@
 
   function closeModal(modalEl) {
     if (!modalEl) return;
+    playCyberAudio('modal_close');
     modalEl.classList.remove('active');
     if (modalEl.id === 'modal-graph' || graphAnimationId) {
       if (graphAnimationId) {
@@ -797,6 +896,9 @@
   function openSettingsModal() {
     const cfgEngine = document.getElementById('cfg-default-engine');
     if (cfgEngine) cfgEngine.value = settings.defaultEngine || 'filter';
+
+    const cfgSound = document.getElementById('cfg-sound-effects');
+    if (cfgSound) cfgSound.checked = settings.soundEffects !== false;
 
     let totalBytes = 0;
     for (let key in localStorage) {
@@ -840,7 +942,47 @@
     elMainSearch.addEventListener('keydown', (e) => {
       const val = elMainSearch.value;
 
-      // Autocomplete Bang on Tab
+      // 1. Bang Autocomplete Dropdown Navigation
+      if (elBangDropdown && elBangDropdown.style.display !== 'none') {
+        const bangItems = Array.from(elBangDropdown.querySelectorAll('.bang-autocomplete-item'));
+        if (bangItems.length > 0) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedBangIndex = (selectedBangIndex + 1) % bangItems.length;
+            bangItems.forEach((bi, i) => bi.classList.toggle('selected', i === selectedBangIndex));
+            if (bangItems[selectedBangIndex]) {
+              bangItems[selectedBangIndex].scrollIntoView({ block: 'nearest' });
+            }
+            return;
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedBangIndex = (selectedBangIndex - 1 + bangItems.length) % bangItems.length;
+            bangItems.forEach((bi, i) => bi.classList.toggle('selected', i === selectedBangIndex));
+            if (bangItems[selectedBangIndex]) {
+              bangItems[selectedBangIndex].scrollIntoView({ block: 'nearest' });
+            }
+            return;
+          } else if (e.key === 'Tab' || (e.key === 'Enter' && selectedBangIndex >= 0)) {
+            e.preventDefault();
+            const targetItem = selectedBangIndex >= 0 ? bangItems[selectedBangIndex] : bangItems[0];
+            if (targetItem) {
+              playCyberAudio('bang');
+              const b = targetItem.getAttribute('data-bang');
+              elMainSearch.value = b;
+              elBangDropdown.style.display = 'none';
+              selectedBangIndex = -1;
+              handleSearchInput(elMainSearch.value);
+            }
+            return;
+          } else if (e.key === 'Escape') {
+            elBangDropdown.style.display = 'none';
+            selectedBangIndex = -1;
+            return;
+          }
+        }
+      }
+
+      // 2. Autocomplete Bang on Tab from bang-bar
       if (e.key === 'Tab' && val.startsWith('!')) {
         const activeChip = document.querySelector('.bang-chip.bang-active-match');
         if (activeChip) {
@@ -851,7 +993,7 @@
         }
       }
 
-      // Arrow navigation over visible filtered tools in dashboard
+      // 3. Arrow navigation over visible filtered tools in dashboard
       if (activeSearchMode === 'filter' && val.trim()) {
         const visibleLinks = Array.from(document.querySelectorAll('.link-item')).filter(li => li.style.display !== 'none');
         if (visibleLinks.length > 0) {
@@ -882,6 +1024,13 @@
       } else if (e.key === 'Escape') {
         clearKeyboardSearchSelection();
         clearSearch();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (elBangDropdown && !e.target.closest('.search-container')) {
+        elBangDropdown.style.display = 'none';
+        selectedBangIndex = -1;
       }
     });
 
@@ -984,6 +1133,8 @@
     document.getElementById('btn-close-settings')?.addEventListener('click', closeSettingsModal);
     document.getElementById('btn-save-settings')?.addEventListener('click', () => {
       settings.defaultEngine = document.getElementById('cfg-default-engine').value;
+      const soundCb = document.getElementById('cfg-sound-effects');
+      if (soundCb) settings.soundEffects = soundCb.checked;
       localStorage.setItem('bubbsy_settings', JSON.stringify(settings));
       closeSettingsModal();
       showToast('Settings saved successfully!');
@@ -1227,9 +1378,64 @@
     }
   }
 
+  let selectedBangIndex = -1;
+  function renderBangAutocompleteDropdown(val) {
+    if (!elBangDropdown) return;
+    if (!val || !val.startsWith('!')) {
+      elBangDropdown.style.display = 'none';
+      selectedBangIndex = -1;
+      return;
+    }
+
+    const typed = val.toLowerCase().trim();
+    const matches = BANG_SUGGESTIONS.filter(item => {
+      return item.bang.startsWith(typed) || typed.startsWith(item.bang);
+    });
+
+    if (matches.length === 0) {
+      elBangDropdown.style.display = 'none';
+      selectedBangIndex = -1;
+      return;
+    }
+
+    selectedBangIndex = -1;
+    elBangDropdown.innerHTML = '';
+    matches.slice(0, 8).forEach((item, idx) => {
+      const row = document.createElement('div');
+      row.className = 'bang-autocomplete-item';
+      row.setAttribute('data-bang', item.bang + ' ');
+      row.setAttribute('data-idx', idx);
+      row.innerHTML = `
+        <div class="bang-autocomplete-left">
+          <span class="bang-autocomplete-badge">${item.bang}</span>
+          <div style="display:flex;flex-direction:column;gap:1px;">
+            <span style="font-weight:600;color:var(--text-primary);font-size:0.75rem;">${item.name}</span>
+            <span class="bang-autocomplete-desc">${item.desc}</span>
+          </div>
+        </div>
+        <span class="bang-autocomplete-syntax">${item.syntax}</span>
+      `;
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playCyberAudio('bang');
+        elMainSearch.value = item.bang + ' ';
+        elBangDropdown.style.display = 'none';
+        selectedBangIndex = -1;
+        elMainSearch.focus();
+        handleSearchInput(elMainSearch.value);
+      });
+      elBangDropdown.appendChild(row);
+    });
+
+    elBangDropdown.style.display = 'flex';
+  }
+
   let searchDebounceTimer = null;
   function handleSearchInput(val) {
     clearTimeout(searchDebounceTimer);
+
+    // Update floating bang dropdown
+    renderBangAutocompleteDropdown(val);
 
     if (val.startsWith('!')) {
       const match = val.match(/^!([a-zA-Z0-9]+)\s*(.*)$/);
@@ -1280,47 +1486,58 @@
         // Check for direct modal launcher bangs
         if (bang === 'user' || bang === 'recon') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openSocialRecon(query);
           return;
         } else if (bang === 'corp' || bang === 'acn' || bang === 'abn') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openCorpRecon(query);
           return;
         } else if (bang === 'defang' || bang === 'refang' || bang === 'ioc') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openDefanger(query);
           return;
         } else if (bang === 'pivot') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openPivotMatrix(query);
           return;
         } else if (bang === 'dorks' || bang === 'dork') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           if (query) elDorkTargetInput.value = query;
           openDorkGenerator();
           return;
         } else if (bang === 'geo') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openGeoRecon(query);
           return;
         } else if (bang === 'graph') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openInvestigationGraph();
           return;
         } else if (bang === 'radar' || bang === 'acsc') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openThreatRadar();
           return;
         } else if (bang === 'mail' || bang === 'email' || bang === 'mailaccess') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openMailAccessModal(query, 'investigate');
           return;
         } else if (bang === 'harvest') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openMailAccessModal(query, 'harvest');
           return;
         } else if (bang === 'drop' || bang === 'sniper' || bang === 'expiry' || bang === 'catch') {
           elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
           openDomainSniperModal(query);
           return;
         }
@@ -1329,6 +1546,7 @@
           setSearchMode(bangMap[bang]);
           elMainSearch.value = query;
           val = query;
+          renderBangAutocompleteDropdown('');
         }
       }
     }
@@ -1393,6 +1611,7 @@
 
   function clearSearch() {
     elMainSearch.value = '';
+    renderBangAutocompleteDropdown('');
     filterDashboardBookmarks('');
     elMainSearch.blur();
   }
@@ -1401,8 +1620,10 @@
   function filterDashboardBookmarks(query) {
     const q = (query || '').toLowerCase().trim();
     const matchBadge = document.getElementById('search-live-matches');
+    const existingEmpty = elDashboardGrid ? elDashboardGrid.querySelector('.tactical-empty-state') : null;
 
     if (!q) {
+      if (existingEmpty) existingEmpty.remove();
       if (matchBadge) matchBadge.style.display = 'none';
       for (let i = 0; i < BOOKMARK_SEARCH_INDEX.length; i++) {
         const entry = BOOKMARK_SEARCH_INDEX[i];
@@ -1461,7 +1682,51 @@
     }
 
     if (matchCount === 0 && q) {
-      showToast(`No local tools matched "${query}". Try Web Search tab.`, 'info');
+      if (!existingEmpty && elDashboardGrid) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'tactical-empty-state';
+        emptyDiv.innerHTML = `
+          <div class="empty-radar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="12" x2="19" y2="5"></line>
+              <circle cx="12" cy="12" r="6" stroke-dasharray="2 2"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <div class="empty-title">NO LOCAL OSINT INTEL MATCHES FOR "${escapeHtml(q)}"</div>
+          <div class="empty-subtitle">
+            Target not found across 1,904 local tools. Pivot immediately into external reconnaissance engines or clear filter.
+          </div>
+          <div class="empty-actions-row">
+            <button type="button" class="btn-search-exec" id="btn-empty-google">🌐 Google Web Search</button>
+            <button type="button" class="btn-icon" id="btn-empty-shodan" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">🛡️ Shodan Recon</button>
+            <button type="button" class="btn-icon" id="btn-empty-abn" style="border-color:var(--accent-green);color:var(--accent-green);">🇦🇺 ABN Lookup</button>
+            <button type="button" class="btn-icon" id="btn-empty-dorks" style="border-color:var(--accent-amber);color:var(--accent-amber);">🔎 Attack Surface Dorks</button>
+            <button type="button" class="btn-icon" id="btn-empty-clear">↩ Clear Filter (Esc)</button>
+          </div>
+        `;
+        emptyDiv.querySelector('#btn-empty-google')?.addEventListener('click', () => {
+          window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank', 'noopener,noreferrer');
+        });
+        emptyDiv.querySelector('#btn-empty-shodan')?.addEventListener('click', () => {
+          window.open('https://www.shodan.io/search?query=' + encodeURIComponent(q), '_blank', 'noopener,noreferrer');
+        });
+        emptyDiv.querySelector('#btn-empty-abn')?.addEventListener('click', () => {
+          window.open('https://abr.business.gov.au/Search/ResultsActive?SearchText=' + encodeURIComponent(q), '_blank', 'noopener,noreferrer');
+        });
+        emptyDiv.querySelector('#btn-empty-dorks')?.addEventListener('click', () => {
+          openDorkGenerator(q);
+        });
+        emptyDiv.querySelector('#btn-empty-clear')?.addEventListener('click', () => {
+          clearSearch();
+        });
+        elDashboardGrid.appendChild(emptyDiv);
+      }
+    } else {
+      if (existingEmpty) {
+        existingEmpty.remove();
+      }
     }
   }
 
