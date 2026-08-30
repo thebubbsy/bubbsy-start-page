@@ -678,6 +678,7 @@
           titleLower,
           descLower,
           urlLower,
+          isAu: li.getAttribute('data-au') === '1',
           isPinned: () => li.classList.contains('is-pinned')
         });
       });
@@ -685,6 +686,7 @@
         card,
         cardTitle,
         cardGroup,
+        isAuModule: card.getAttribute('data-au-module') === '1',
         links
       });
     });
@@ -708,7 +710,7 @@
     });
 
     // Update counters
-    document.getElementById('stats-total-tools').textContent = appData.total_links || '1,904';
+    document.getElementById('stats-total-tools').textContent = appData.total_links || '2,061';
     document.getElementById('stats-total-categories').textContent = appData.total_widgets || '101';
     // Keep the hero placeholder in sync with the live dataset size
     const totalTools = (appData.total_links || 0).toLocaleString();
@@ -774,6 +776,10 @@
     card.setAttribute('data-widget-id', w.id);
     card.setAttribute('data-group', w.group || 'tools_general');
     card.setAttribute('data-title', (w.title || '').toLowerCase());
+    if (w.au_module || /^\[AUS\]/.test(w.title || '')) {
+      card.setAttribute('data-au-module', '1');
+      card.classList.add('au-module');
+    }
 
     const isCollapsed = localStorage.getItem(`widget_collapsed_${w.id}`) === 'true';
     if (isCollapsed) card.classList.add('collapsed');
@@ -809,6 +815,7 @@
       li.setAttribute('data-link-desc', (link.description || '').toLowerCase());
       li.setAttribute('data-link-url', (link.url || '').toLowerCase());
       li.setAttribute('data-link-id', link.id || '');
+      if (link.au) li.setAttribute('data-au', '1');
 
       const isPinned = userFavorites.some(f => f.url === link.url || (link.id && f.id === link.id));
       if (isPinned) li.classList.add('is-pinned');
@@ -827,6 +834,7 @@
           >
           <span class="link-fallback-icon" style="display:none;">${initial}</span>
           <span class="link-title">${escapeHtml(link.title)}</span>
+          ${link.au ? '<span class="link-au-flag" title="Australian source - prioritised">AU</span>' : ''}
           <span class="link-pin-indicator" style="${isPinned ? '' : 'display:none;'}">${STAR_SVG}</span>
         </a>
       `;
@@ -1361,7 +1369,7 @@
     if (mode === 'filter') {
       elEngineBadge.textContent = 'FILTER';
       elEngineBadge.style.color = 'var(--accent-cyan)';
-      const totalTools = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '1,904';
+      const totalTools = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
       elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     } else if (mode === 'aistudio') {
       elEngineBadge.textContent = 'AI: GOOGLE AI STUDIO';
@@ -1629,9 +1637,11 @@
         const entry = BOOKMARK_SEARCH_INDEX[i];
         entry.card.classList.remove('dimmed', 'highlight');
         entry.card.style.display = '';
+        entry.card.style.order = '';
         for (let j = 0; j < entry.links.length; j++) {
           const link = entry.links[j];
           link.li.style.display = '';
+          link.li.style.order = '';
           if (link.titleSpan) {
             link.titleSpan.textContent = link.rawTitle;
           }
@@ -1641,10 +1651,12 @@
     }
 
     let matchCount = 0;
+    let auMatchCount = 0;
 
     for (let i = 0; i < BOOKMARK_SEARCH_INDEX.length; i++) {
       const entry = BOOKMARK_SEARCH_INDEX[i];
       let cardHasMatch = false;
+      let cardHasAuMatch = false;
 
       for (let j = 0; j < entry.links.length; j++) {
         const link = entry.links[j];
@@ -1657,26 +1669,38 @@
           cardHasMatch = true;
           matchCount++;
           link.li.style.display = '';
+          // Australian sources always sort above the rest of the matches.
+          link.li.style.order = link.isAu ? '0' : '1';
+          if (link.isAu) {
+            cardHasAuMatch = true;
+            auMatchCount++;
+          }
           if (link.titleSpan) {
             link.titleSpan.innerHTML = highlightMatch(link.rawTitle, q);
           }
         } else {
           link.li.style.display = 'none';
+          link.li.style.order = '';
         }
       }
 
       if (cardHasMatch) {
         entry.card.style.display = '';
+        // [AUS] modules first, then modules holding an Australian hit, then the rest.
+        entry.card.style.order = entry.isAuModule ? '0' : (cardHasAuMatch ? '1' : '2');
         entry.card.classList.remove('dimmed', 'collapsed');
         entry.card.classList.add('highlight');
       } else {
         entry.card.style.display = 'none';
+        entry.card.style.order = '';
       }
     }
 
     if (matchBadge) {
       matchBadge.style.display = 'inline-flex';
-      matchBadge.textContent = `${matchCount} MATCH${matchCount === 1 ? '' : 'ES'}`;
+      matchBadge.textContent = auMatchCount > 0
+        ? `${matchCount} MATCH${matchCount === 1 ? '' : 'ES'} · ${auMatchCount} AU`
+        : `${matchCount} MATCH${matchCount === 1 ? '' : 'ES'}`;
       matchBadge.style.color = matchCount > 0 ? 'var(--accent-cyan)' : '#f43f5e';
       matchBadge.style.borderColor = matchCount > 0 ? 'var(--accent-cyan)' : '#f43f5e';
     }
@@ -1696,7 +1720,7 @@
           </div>
           <div class="empty-title">NO LOCAL OSINT INTEL MATCHES FOR "${escapeHtml(q)}"</div>
           <div class="empty-subtitle">
-            Target not found across 1,904 local tools. Pivot immediately into external reconnaissance engines or clear filter.
+            Target not found across 2,061 local tools. Pivot immediately into external reconnaissance engines or clear filter.
           </div>
           <div class="empty-actions-row">
             <button type="button" class="btn-search-exec" id="btn-empty-google">🌐 Google Web Search</button>
@@ -8589,13 +8613,13 @@
       highlightSelector: '.brand-hud',
       tryLive: {
         title: 'Tactical Catalog Overview',
-        hint: 'Reset all active filters and browse all 1,904 verified intelligence modules',
+        hint: 'Reset all active filters and browse all 2,061 verified intelligence modules',
         btnText: '⚡ Browse Full Catalog',
         action: () => {
           closeModal(document.getElementById('modal-tour'));
           filterByCategory('all');
           document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
-          showToast('Browsing full verified catalog (1,904 tools)');
+          showToast('Browsing full verified catalog (2,061 tools)');
         }
       },
       shortcuts: ['/ : Focus Search', 'Ctrl+K : Spotlight', '? : Cheatsheet', 'Aa : Typography']
@@ -8871,9 +8895,9 @@
       title: 'Command Palette, Customizer & Forensic Export',
       desc: 'Complete control over your investigation workspace with instant spotlight navigation, high-contrast typography, and snapshot archiving.',
       capabilities: [
-        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching 1,904 tools, commands, and social networks in under 2ms.' },
+        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching 2,061 tools, commands, and social networks in under 2ms.' },
         { title: 'Aa High-Contrast Typography', detail: 'Adjust font scaling (80%–150%), font weight (300–800), and switch high-contrast readability palettes.' },
-        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and complete 1,904-tool CSV catalogs.' }
+        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and complete 2,061-tool CSV catalogs.' }
       ],
       highlightSelector: '#btn-palette',
       tryLive: {
@@ -8945,7 +8969,7 @@
     }
 
     // Dynamic replacement of totals
-    const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '1,904';
+    const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
     const totalWidgets = (appData && appData.total_widgets) ? appData.total_widgets : 101;
     const renderedDesc = s.desc
       .split('__TOTAL_LINKS__').join(totalLinks)

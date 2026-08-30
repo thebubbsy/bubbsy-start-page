@@ -2,8 +2,9 @@ window.BUBBSY_DATA = {
   "title": "Bubbsy Start Page",
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
-  "total_widgets": 101,
-  "total_links": 1904,
+  "total_widgets": 113,
+  "total_links": 2061,
+  "au_link_total": 313,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -62,7 +63,7 @@ window.BUBBSY_DATA = {
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 1904+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2061+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -160,187 +161,6 @@ window.BUBBSY_DATA = {
       "index": 0,
       "widgets": [
         {
-          "id": 9001,
-          "title": "AI ASSISTANTS & CHAT",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "sparkles",
-          "color": "#10b981",
-          "links": [
-            {
-              "title": "ChatGPT",
-              "url": "https://chatgpt.com/",
-              "description": "Conversational AI and reasoning by OpenAI",
-              "domain": "chatgpt.com",
-              "favicon": "https://f.start.me/chatgpt.com"
-            },
-            {
-              "title": "Claude",
-              "url": "https://claude.ai/",
-              "description": "AI assistant for coding, research, and analysis by Anthropic",
-              "domain": "claude.ai",
-              "favicon": "https://f.start.me/claude.ai"
-            },
-            {
-              "title": "Google Gemini",
-              "url": "https://gemini.google.com/",
-              "description": "Multimodal context and search-grounded assistant by Google",
-              "domain": "google.com",
-              "favicon": "https://f.start.me/gemini.google.com"
-            },
-            {
-              "title": "DeepSeek Chat",
-              "url": "https://chat.deepseek.com/",
-              "description": "Open-weight reasoning and coding assistant",
-              "domain": "deepseek.com",
-              "favicon": "https://f.start.me/deepseek.com"
-            },
-            {
-              "title": "Perplexity",
-              "url": "https://www.perplexity.ai/",
-              "description": "Live web search and answer engine with sources",
-              "domain": "perplexity.ai",
-              "favicon": "https://f.start.me/perplexity.ai"
-            },
-            {
-              "title": "Mistral Le Chat",
-              "url": "https://chat.mistral.ai/",
-              "description": "Fast European AI assistant by Mistral AI",
-              "domain": "mistral.ai",
-              "favicon": "https://f.start.me/mistral.ai"
-            },
-            {
-              "title": "Groq",
-              "url": "https://groq.com/",
-              "description": "Ultra-fast LPU inference engine for open models",
-              "domain": "groq.com",
-              "favicon": "https://f.start.me/groq.com"
-            },
-            {
-              "title": "Microsoft Copilot",
-              "url": "https://copilot.microsoft.com/",
-              "description": "AI companion for search and productivity by Microsoft",
-              "domain": "microsoft.com",
-              "favicon": "https://f.start.me/copilot.microsoft.com"
-            },
-            {
-              "title": "Meta AI",
-              "url": "https://www.meta.ai/",
-              "description": "Open intelligence platform by Meta",
-              "domain": "meta.ai",
-              "favicon": "https://f.start.me/meta.ai"
-            },
-            {
-              "title": "Cohere Coral",
-              "url": "https://coral.cohere.com/",
-              "description": "Enterprise knowledge retrieval and agent platform",
-              "domain": "cohere.com",
-              "favicon": "https://f.start.me/cohere.com"
-            },
-            {
-              "title": "Poe",
-              "url": "https://poe.com/",
-              "description": "Multi-model hub to query and compare various bots",
-              "domain": "poe.com",
-              "favicon": "https://f.start.me/poe.com"
-            },
-            {
-              "title": "Pi",
-              "url": "https://pi.ai/",
-              "description": "Conversational dialogue and voice companion",
-              "domain": "pi.ai",
-              "favicon": "https://f.start.me/pi.ai"
-            }
-          ]
-        },
-        {
-          "id": 9004,
-          "title": "LOCAL AI & OPEN SOURCE",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "cpu",
-          "color": "#ec4899",
-          "links": [
-            {
-              "title": "Ollama",
-              "url": "https://ollama.com/",
-              "description": "Run open-weight models locally via CLI and API",
-              "domain": "ollama.com",
-              "favicon": "https://f.start.me/ollama.com"
-            },
-            {
-              "title": "Hugging Face",
-              "url": "https://huggingface.co/models",
-              "description": "Repository for open models, datasets, and Spaces",
-              "domain": "huggingface.co",
-              "favicon": "https://f.start.me/huggingface.co"
-            },
-            {
-              "title": "LM Studio",
-              "url": "https://lmstudio.ai/",
-              "description": "Run local LLMs with a desktop GUI",
-              "domain": "lmstudio.ai",
-              "favicon": "https://f.start.me/lmstudio.ai"
-            },
-            {
-              "title": "Jan",
-              "url": "https://jan.ai/",
-              "description": "Open-source local ChatGPT alternative that runs offline",
-              "domain": "jan.ai",
-              "favicon": "https://f.start.me/jan.ai"
-            },
-            {
-              "title": "OpenRouter",
-              "url": "https://openrouter.ai/",
-              "description": "Unified API router for hundreds of AI models",
-              "domain": "openrouter.ai",
-              "favicon": "https://f.start.me/openrouter.ai"
-            },
-            {
-              "title": "Chatbot Arena",
-              "url": "https://lmarena.ai/",
-              "description": "Community benchmark leaderboard for AI models",
-              "domain": "lmarena.ai",
-              "favicon": "https://f.start.me/lmarena.ai"
-            },
-            {
-              "title": "Together AI",
-              "url": "https://www.together.ai/",
-              "description": "Cloud inference platform for open-source models",
-              "domain": "together.ai",
-              "favicon": "https://f.start.me/together.ai"
-            },
-            {
-              "title": "Replicate",
-              "url": "https://replicate.com/",
-              "description": "Run open machine learning models in the cloud",
-              "domain": "replicate.com",
-              "favicon": "https://f.start.me/replicate.com"
-            },
-            {
-              "title": "LocalAI",
-              "url": "https://localai.io/",
-              "description": "Self-hosted OpenAI-compatible REST API",
-              "domain": "localai.io",
-              "favicon": "https://f.start.me/localai.io"
-            },
-            {
-              "title": "vLLM",
-              "url": "https://vllm.ai/",
-              "description": "High-throughput engine for serving LLMs",
-              "domain": "vllm.ai",
-              "favicon": "https://f.start.me/vllm.ai"
-            },
-            {
-              "title": "ComfyUI",
-              "url": "https://github.com/comfyanonymous/ComfyUI",
-              "description": "Modular node-based interface for image and video diffusion",
-              "domain": "github.com",
-              "favicon": "https://f.start.me/github.com"
-            }
-          ]
-        },
-        {
           "id": 9102,
           "title": "[AUS] GOVERNMENT, LEGISLATION & DATA",
           "type": "urllist",
@@ -353,58 +173,68 @@ window.BUBBSY_DATA = {
               "url": "https://www.legislation.gov.au/",
               "description": "Complete repository of Australian Commonwealth Acts, Regulations, and Gazettes",
               "domain": "legislation.gov.au",
-              "favicon": "https://f.start.me/legislation.gov.au"
+              "favicon": "https://f.start.me/legislation.gov.au",
+              "au": true
             },
             {
               "title": "data.gov.au (Australian Open Data)",
               "url": "https://data.gov.au/",
               "description": "Central portal for public datasets published by Australian government agencies",
               "domain": "data.gov.au",
-              "favicon": "https://f.start.me/data.gov.au"
+              "favicon": "https://f.start.me/data.gov.au",
+              "au": true
             },
             {
               "title": "Trove (National Library of Australia)",
               "url": "https://trove.nla.gov.au/",
               "description": "Digitized historic Australian newspapers (1803-present), gazettes, photos, and archives",
               "domain": "trove.nla.gov.au",
-              "favicon": "https://f.start.me/nla.gov.au"
+              "favicon": "https://f.start.me/nla.gov.au",
+              "au": true
             },
             {
               "title": "National Archives of Australia (RecordSearch)",
               "url": "https://recordsearch.naa.gov.au/",
               "description": "Search federal government files, immigration passenger lists, security dossiers, and defense records",
               "domain": "naa.gov.au",
-              "favicon": "https://f.start.me/naa.gov.au"
+              "favicon": "https://f.start.me/naa.gov.au",
+              "au": true
             },
             {
               "title": "AusTender (Government Procurement Contracts)",
               "url": "https://www.tenders.gov.au/",
               "description": "All Commonwealth procurement contracts, tender notices, and supplier expenditure",
               "domain": "tenders.gov.au",
-              "favicon": "https://f.start.me/tenders.gov.au"
+              "favicon": "https://f.start.me/tenders.gov.au",
+              "au": true
             },
             {
               "title": "Australian Parliament House (APH Directory)",
               "url": "https://www.aph.gov.au/Senators_and_Members",
               "description": "Directory of Senators, MPs, parliamentary declarations, and Hansard transcripts",
               "domain": "aph.gov.au",
-              "favicon": "https://f.start.me/aph.gov.au"
+              "favicon": "https://f.start.me/aph.gov.au",
+              "au": true
             },
             {
               "title": "Australian Bureau of Statistics (ABS Data)",
               "url": "https://www.abs.gov.au/",
               "description": "Census data, regional population profiles, economic indicators, and trade statistics",
               "domain": "abs.gov.au",
-              "favicon": "https://f.start.me/abs.gov.au"
+              "favicon": "https://f.start.me/abs.gov.au",
+              "au": true
             },
             {
               "title": "Transparency Portal (Australian Gov Reports)",
               "url": "https://www.transparency.gov.au/",
               "description": "Annual reports and performance data across Australian government bodies",
               "domain": "transparency.gov.au",
-              "favicon": "https://f.start.me/transparency.gov.au"
+              "favicon": "https://f.start.me/transparency.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 8,
+          "au_module": true
         },
         {
           "id": 9105,
@@ -419,51 +249,60 @@ window.BUBBSY_DATA = {
               "url": "https://check.aec.gov.au/",
               "description": "Verify voter enrolment status, electorate boundaries, and political donation disclosures",
               "domain": "aec.gov.au",
-              "favicon": "https://f.start.me/aec.gov.au"
-            },
-            {
-              "title": "Ryerson Index (Australian Death & Funeral Notices)",
-              "url": "https://www.ryersonindex.org/",
-              "description": "Database of 8.5M+ death and funeral notices indexed from Australian newspapers",
-              "domain": "ryersonindex.org",
-              "favicon": "https://f.start.me/ryersonindex.org"
+              "favicon": "https://f.start.me/aec.gov.au",
+              "au": true
             },
             {
               "title": "White Pages Australia",
               "url": "https://www.whitepages.com.au/",
               "description": "Australian residential phone numbers, addresses, and individual directory lookup",
               "domain": "whitepages.com.au",
-              "favicon": "https://f.start.me/whitepages.com.au"
+              "favicon": "https://f.start.me/whitepages.com.au",
+              "au": true
             },
             {
               "title": "Yellow Pages Australia",
               "url": "https://www.yellowpages.com.au/",
               "description": "Australian commercial telephone directory, business locations, and contacts",
               "domain": "yellowpages.com.au",
-              "favicon": "https://f.start.me/yellowpages.com.au"
+              "favicon": "https://f.start.me/yellowpages.com.au",
+              "au": true
             },
             {
               "title": "Findmypast Australia & New Zealand",
               "url": "https://www.findmypast.com.au/",
               "description": "Australian electoral rolls, census records, convict lists, and military service files",
               "domain": "findmypast.com.au",
-              "favicon": "https://f.start.me/findmypast.com.au"
+              "favicon": "https://f.start.me/findmypast.com.au",
+              "au": true
             },
             {
               "title": "Ancestry Australia Archives",
               "url": "https://www.ancestry.com.au/",
               "description": "Australian historical records, bdm indexes, passenger manifests, and directories",
               "domain": "ancestry.com.au",
-              "favicon": "https://f.start.me/ancestry.com.au"
+              "favicon": "https://f.start.me/ancestry.com.au",
+              "au": true
+            },
+            {
+              "title": "Ryerson Index (Australian Death & Funeral Notices)",
+              "url": "https://www.ryersonindex.org/",
+              "description": "Database of 8.5M+ death and funeral notices indexed from Australian newspapers",
+              "domain": "ryersonindex.org",
+              "favicon": "https://f.start.me/ryersonindex.org",
+              "au": false
             },
             {
               "title": "HeavenAddress Australia Memorials",
               "url": "https://www.heavenaddress.com/",
               "description": "Australian online cemetery memorials, obituaries, and tribute records",
               "domain": "heavenaddress.com",
-              "favicon": "https://f.start.me/heavenaddress.com"
+              "favicon": "https://f.start.me/heavenaddress.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 5,
+          "au_module": true
         },
         {
           "id": 9108,
@@ -478,93 +317,556 @@ window.BUBBSY_DATA = {
               "url": "https://www.my.gov.au/",
               "description": "Single sign-on portal for ATO, Medicare, Centrelink and more",
               "domain": "my.gov.au",
-              "favicon": "https://f.start.me/my.gov.au"
+              "favicon": "https://f.start.me/my.gov.au",
+              "au": true
             },
             {
               "title": "Services Australia",
               "url": "https://www.servicesaustralia.gov.au/",
               "description": "Centrelink, Medicare, Child Support and NDIS services",
               "domain": "servicesaustralia.gov.au",
-              "favicon": "https://f.start.me/servicesaustralia.gov.au"
+              "favicon": "https://f.start.me/servicesaustralia.gov.au",
+              "au": true
             },
             {
               "title": "Australian Taxation Office (ATO)",
               "url": "https://www.ato.gov.au/",
               "description": "Tax, ABN, superannuation, lodgment and payment obligations",
               "domain": "ato.gov.au",
-              "favicon": "https://f.start.me/ato.gov.au"
+              "favicon": "https://f.start.me/ato.gov.au",
+              "au": true
             },
             {
               "title": "Medicare (Services Australia)",
               "url": "https://www.servicesaustralia.gov.au/medicare",
               "description": "Medicare enrolment, claims, and health services",
               "domain": "servicesaustralia.gov.au",
-              "favicon": "https://f.start.me/servicesaustralia.gov.au"
+              "favicon": "https://f.start.me/servicesaustralia.gov.au",
+              "au": true
             },
             {
               "title": "Centrelink (Services Australia)",
               "url": "https://www.servicesaustralia.gov.au/centrelink",
               "description": "Payments, income support and concession services",
               "domain": "servicesaustralia.gov.au",
-              "favicon": "https://f.start.me/servicesaustralia.gov.au"
+              "favicon": "https://f.start.me/servicesaustralia.gov.au",
+              "au": true
             },
             {
               "title": "eSafety Commissioner",
               "url": "https://www.esafety.gov.au/",
               "description": "Australian online safety regulator, complaints and takedowns",
               "domain": "esafety.gov.au",
-              "favicon": "https://f.start.me/esafety.gov.au"
+              "favicon": "https://f.start.me/esafety.gov.au",
+              "au": true
             },
             {
               "title": "Fair Work Ombudsman",
               "url": "https://www.fairwork.gov.au/",
               "description": "Workplace rights, employer obligations and disputes",
               "domain": "fairwork.gov.au",
-              "favicon": "https://f.start.me/fairwork.gov.au"
+              "favicon": "https://f.start.me/fairwork.gov.au",
+              "au": true
             },
             {
               "title": "Moneysmart (ASIC)",
               "url": "https://moneysmart.gov.au/",
               "description": "ASIC financial literacy and guidance portal",
               "domain": "moneysmart.gov.au",
-              "favicon": "https://f.start.me/moneysmart.gov.au"
+              "favicon": "https://f.start.me/moneysmart.gov.au",
+              "au": true
             },
             {
               "title": "Service NSW",
               "url": "https://www.service.nsw.gov.au/",
               "description": "NSW government services portal: rego, licences, fines & records",
               "domain": "service.nsw.gov.au",
-              "favicon": "https://f.start.me/service.nsw.gov.au"
+              "favicon": "https://f.start.me/service.nsw.gov.au",
+              "au": true
             },
             {
               "title": "Service Victoria",
               "url": "https://www.service.vic.gov.au/",
               "description": "Victorian government services portal",
               "domain": "service.vic.gov.au",
-              "favicon": "https://f.start.me/service.vic.gov.au"
+              "favicon": "https://f.start.me/service.vic.gov.au",
+              "au": true
             },
             {
               "title": "Queensland Government",
               "url": "https://www.qld.gov.au/",
               "description": "Queensland government services and information",
               "domain": "qld.gov.au",
-              "favicon": "https://f.start.me/qld.gov.au"
+              "favicon": "https://f.start.me/qld.gov.au",
+              "au": true
             },
             {
               "title": "My Health Record",
               "url": "https://www.myhealthrecord.gov.au/",
               "description": "National online health records system",
               "domain": "myhealthrecord.gov.au",
-              "favicon": "https://f.start.me/myhealthrecord.gov.au"
+              "favicon": "https://f.start.me/myhealthrecord.gov.au",
+              "au": true
             },
             {
               "title": "NDIS (National Disability Insurance Scheme)",
               "url": "https://www.ndis.gov.au/",
               "description": "NDIS participant and provider information",
               "domain": "ndis.gov.au",
-              "favicon": "https://f.start.me/ndis.gov.au"
+              "favicon": "https://f.start.me/ndis.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9113,
+          "title": "[AUS] CYBER SECURITY, SCAMS & FRAUD",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "shield",
+          "color": "#f43f5e",
+          "links": [
+            {
+              "title": "ACSC / cyber.gov.au",
+              "url": "https://www.cyber.gov.au/",
+              "description": "Australian Signals Directorate cyber advisories, alerts, and hardening guidance",
+              "domain": "cyber.gov.au",
+              "favicon": "https://f.start.me/cyber.gov.au",
+              "au": true
+            },
+            {
+              "title": "ReportCyber (Cybercrime Reporting)",
+              "url": "https://www.cyber.gov.au/report-and-recover/report",
+              "description": "Official Australian portal to report cybercrime, fraud, and online incidents",
+              "domain": "cyber.gov.au",
+              "favicon": "https://f.start.me/cyber.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACSC Alerts & Advisories",
+              "url": "https://www.cyber.gov.au/about-us/view-all-content/alerts-and-advisories",
+              "description": "Current critical vulnerability and active exploitation alerts for Australia",
+              "domain": "cyber.gov.au",
+              "favicon": "https://f.start.me/cyber.gov.au",
+              "au": true
+            },
+            {
+              "title": "Scamwatch (ACCC)",
+              "url": "https://www.scamwatch.gov.au/",
+              "description": "Live Australian scam alerts, reported scam statistics, and phishing trends",
+              "domain": "scamwatch.gov.au",
+              "favicon": "https://f.start.me/scamwatch.gov.au",
+              "au": true
+            },
+            {
+              "title": "National Anti-Scam Centre",
+              "url": "https://www.nasc.gov.au/",
+              "description": "Cross-agency Australian scam disruption intelligence and reporting hub",
+              "domain": "nasc.gov.au",
+              "favicon": "https://f.start.me/nasc.gov.au",
+              "au": true
+            },
+            {
+              "title": "IDCARE (Identity Theft Support)",
+              "url": "https://www.idcare.org/",
+              "description": "National identity and cyber support service for Australia and New Zealand",
+              "domain": "idcare.org",
+              "favicon": "https://f.start.me/idcare.org",
+              "au": true
+            },
+            {
+              "title": "OAIC Notifiable Data Breaches",
+              "url": "https://www.oaic.gov.au/privacy/notifiable-data-breaches",
+              "description": "Statutory Australian data breach notifications and half-yearly breach reports",
+              "domain": "oaic.gov.au",
+              "favicon": "https://f.start.me/oaic.gov.au",
+              "au": true
+            },
+            {
+              "title": "eSafety Commissioner",
+              "url": "https://www.esafety.gov.au/",
+              "description": "Australian online harm reporting, image-based abuse and platform takedown requests",
+              "domain": "esafety.gov.au",
+              "favicon": "https://f.start.me/esafety.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACMA Enforcement & Registers",
+              "url": "https://www.acma.gov.au/",
+              "description": "Australian communications regulator: spam, telco, and broadcast enforcement actions",
+              "domain": "acma.gov.au",
+              "favicon": "https://f.start.me/acma.gov.au",
+              "au": true
+            },
+            {
+              "title": "AusCERT",
+              "url": "https://www.auscert.org.au/",
+              "description": "Australian computer emergency response team bulletins and member advisories",
+              "domain": "auscert.org.au",
+              "favicon": "https://f.start.me/auscert.org.au",
+              "au": true
+            },
+            {
+              "title": "AFP Cybercrime",
+              "url": "https://www.afp.gov.au/crimes/cybercrime",
+              "description": "Australian Federal Police cybercrime reporting, operations, and case releases",
+              "domain": "afp.gov.au",
+              "favicon": "https://f.start.me/afp.gov.au",
+              "au": true
+            },
+            {
+              "title": "ASD (Australian Signals Directorate)",
+              "url": "https://www.asd.gov.au/",
+              "description": "National threat landscape reporting and cyber security posture guidance",
+              "domain": "asd.gov.au",
+              "favicon": "https://f.start.me/asd.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACCC Enforcement Actions",
+              "url": "https://www.accc.gov.au/",
+              "description": "Australian competition regulator actions, recalls, and consumer enforcement records",
+              "domain": "accc.gov.au",
+              "favicon": "https://f.start.me/accc.gov.au",
+              "au": true
+            },
+            {
+              "title": "Have I Been Pwned",
+              "url": "https://haveibeenpwned.com/",
+              "description": "Check an email address or phone number against known global breach corpora",
+              "domain": "haveibeenpwned.com",
+              "favicon": "https://f.start.me/haveibeenpwned.com",
+              "au": false
+            }
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9117,
+          "title": "[AUS] JOBS, EDUCATION & SKILLS",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "graduation-cap",
+          "color": "#8b5cf6",
+          "links": [
+            {
+              "title": "SEEK",
+              "url": "https://www.seek.com.au/",
+              "description": "Largest Australian job board - employer footprints, salary bands, role history",
+              "domain": "seek.com.au",
+              "favicon": "https://f.start.me/seek.com.au",
+              "au": true
+            },
+            {
+              "title": "APSJobs (Australian Public Service)",
+              "url": "https://www.apsjobs.gov.au/",
+              "description": "Commonwealth government vacancies, agency structures, and classifications",
+              "domain": "apsjobs.gov.au",
+              "favicon": "https://f.start.me/apsjobs.gov.au",
+              "au": true
+            },
+            {
+              "title": "Workforce Australia",
+              "url": "https://www.workforceaustralia.gov.au/",
+              "description": "Federal employment services portal and national vacancy listings",
+              "domain": "workforceaustralia.gov.au",
+              "favicon": "https://f.start.me/workforceaustralia.gov.au",
+              "au": true
+            },
+            {
+              "title": "training.gov.au",
+              "url": "https://training.gov.au/",
+              "description": "National register of RTOs, accredited courses, and training package units",
+              "domain": "training.gov.au",
+              "favicon": "https://f.start.me/training.gov.au",
+              "au": true
+            },
+            {
+              "title": "USI Registry (Unique Student Identifier)",
+              "url": "https://www.usi.gov.au/",
+              "description": "Verify Australian VET transcripts and student identifiers",
+              "domain": "usi.gov.au",
+              "favicon": "https://f.start.me/usi.gov.au",
+              "au": true
+            },
+            {
+              "title": "TEQSA National Register",
+              "url": "https://www.teqsa.gov.au/students/national-register",
+              "description": "Registered Australian higher education providers and course accreditation",
+              "domain": "teqsa.gov.au",
+              "favicon": "https://f.start.me/teqsa.gov.au",
+              "au": true
+            },
+            {
+              "title": "My School (ACARA)",
+              "url": "https://www.myschool.edu.au/",
+              "description": "Profile, funding, NAPLAN and enrolment data for every Australian school",
+              "domain": "myschool.edu.au",
+              "favicon": "https://f.start.me/myschool.edu.au",
+              "au": true
+            },
+            {
+              "title": "ComparEd (QILT Graduate Outcomes)",
+              "url": "https://www.compared.edu.au/",
+              "description": "Australian graduate outcomes, employment rates and student experience data",
+              "domain": "compared.edu.au",
+              "favicon": "https://f.start.me/compared.edu.au",
+              "au": true
+            },
+            {
+              "title": "Jobs and Skills Australia",
+              "url": "https://www.jobsandskills.gov.au/",
+              "description": "Occupation profiles, labour market projections and skills shortage lists",
+              "domain": "jobsandskills.gov.au",
+              "favicon": "https://f.start.me/jobsandskills.gov.au",
+              "au": true
+            },
+            {
+              "title": "Universities Admissions Centre (UAC)",
+              "url": "https://www.uac.edu.au/",
+              "description": "NSW/ACT tertiary admissions, ATAR cutoffs and course offerings",
+              "domain": "uac.edu.au",
+              "favicon": "https://f.start.me/uac.edu.au",
+              "au": true
+            },
+            {
+              "title": "Australian Apprenticeships",
+              "url": "https://www.australianapprenticeships.gov.au/",
+              "description": "Apprenticeship pathways, incentives and registered support network",
+              "domain": "australianapprenticeships.gov.au",
+              "favicon": "https://f.start.me/australianapprenticeships.gov.au",
+              "au": true
+            },
+            {
+              "title": "Study Australia",
+              "url": "https://www.studyaustralia.gov.au/",
+              "description": "Official international student portal: providers, visas, and course search",
+              "domain": "studyaustralia.gov.au",
+              "favicon": "https://f.start.me/studyaustralia.gov.au",
+              "au": true
+            },
+            {
+              "title": "Jora Australia",
+              "url": "https://au.jora.com/",
+              "description": "Aggregated Australian job listings across employer sites and agencies",
+              "domain": "jora.com",
+              "favicon": "https://f.start.me/jora.com",
+              "au": false
+            }
+          ],
+          "au_count": 12,
+          "au_module": true
+        },
+        {
+          "id": 9001,
+          "title": "AI ASSISTANTS & CHAT",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "sparkles",
+          "color": "#10b981",
+          "links": [
+            {
+              "title": "ChatGPT",
+              "url": "https://chatgpt.com/",
+              "description": "Conversational AI and reasoning by OpenAI",
+              "domain": "chatgpt.com",
+              "favicon": "https://f.start.me/chatgpt.com",
+              "au": false
+            },
+            {
+              "title": "Claude",
+              "url": "https://claude.ai/",
+              "description": "AI assistant for coding, research, and analysis by Anthropic",
+              "domain": "claude.ai",
+              "favicon": "https://f.start.me/claude.ai",
+              "au": false
+            },
+            {
+              "title": "Google Gemini",
+              "url": "https://gemini.google.com/",
+              "description": "Multimodal context and search-grounded assistant by Google",
+              "domain": "google.com",
+              "favicon": "https://f.start.me/gemini.google.com",
+              "au": false
+            },
+            {
+              "title": "DeepSeek Chat",
+              "url": "https://chat.deepseek.com/",
+              "description": "Open-weight reasoning and coding assistant",
+              "domain": "deepseek.com",
+              "favicon": "https://f.start.me/deepseek.com",
+              "au": false
+            },
+            {
+              "title": "Perplexity",
+              "url": "https://www.perplexity.ai/",
+              "description": "Live web search and answer engine with sources",
+              "domain": "perplexity.ai",
+              "favicon": "https://f.start.me/perplexity.ai",
+              "au": false
+            },
+            {
+              "title": "Mistral Le Chat",
+              "url": "https://chat.mistral.ai/",
+              "description": "Fast European AI assistant by Mistral AI",
+              "domain": "mistral.ai",
+              "favicon": "https://f.start.me/mistral.ai",
+              "au": false
+            },
+            {
+              "title": "Groq",
+              "url": "https://groq.com/",
+              "description": "Ultra-fast LPU inference engine for open models",
+              "domain": "groq.com",
+              "favicon": "https://f.start.me/groq.com",
+              "au": false
+            },
+            {
+              "title": "Microsoft Copilot",
+              "url": "https://copilot.microsoft.com/",
+              "description": "AI companion for search and productivity by Microsoft",
+              "domain": "microsoft.com",
+              "favicon": "https://f.start.me/copilot.microsoft.com",
+              "au": false
+            },
+            {
+              "title": "Meta AI",
+              "url": "https://www.meta.ai/",
+              "description": "Open intelligence platform by Meta",
+              "domain": "meta.ai",
+              "favicon": "https://f.start.me/meta.ai",
+              "au": false
+            },
+            {
+              "title": "Cohere Coral",
+              "url": "https://coral.cohere.com/",
+              "description": "Enterprise knowledge retrieval and agent platform",
+              "domain": "cohere.com",
+              "favicon": "https://f.start.me/cohere.com",
+              "au": false
+            },
+            {
+              "title": "Poe",
+              "url": "https://poe.com/",
+              "description": "Multi-model hub to query and compare various bots",
+              "domain": "poe.com",
+              "favicon": "https://f.start.me/poe.com",
+              "au": false
+            },
+            {
+              "title": "Pi",
+              "url": "https://pi.ai/",
+              "description": "Conversational dialogue and voice companion",
+              "domain": "pi.ai",
+              "favicon": "https://f.start.me/pi.ai",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
+        },
+        {
+          "id": 9004,
+          "title": "LOCAL AI & OPEN SOURCE",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "cpu",
+          "color": "#ec4899",
+          "links": [
+            {
+              "title": "Ollama",
+              "url": "https://ollama.com/",
+              "description": "Run open-weight models locally via CLI and API",
+              "domain": "ollama.com",
+              "favicon": "https://f.start.me/ollama.com",
+              "au": false
+            },
+            {
+              "title": "Hugging Face",
+              "url": "https://huggingface.co/models",
+              "description": "Repository for open models, datasets, and Spaces",
+              "domain": "huggingface.co",
+              "favicon": "https://f.start.me/huggingface.co",
+              "au": false
+            },
+            {
+              "title": "LM Studio",
+              "url": "https://lmstudio.ai/",
+              "description": "Run local LLMs with a desktop GUI",
+              "domain": "lmstudio.ai",
+              "favicon": "https://f.start.me/lmstudio.ai",
+              "au": false
+            },
+            {
+              "title": "Jan",
+              "url": "https://jan.ai/",
+              "description": "Open-source local ChatGPT alternative that runs offline",
+              "domain": "jan.ai",
+              "favicon": "https://f.start.me/jan.ai",
+              "au": false
+            },
+            {
+              "title": "OpenRouter",
+              "url": "https://openrouter.ai/",
+              "description": "Unified API router for hundreds of AI models",
+              "domain": "openrouter.ai",
+              "favicon": "https://f.start.me/openrouter.ai",
+              "au": false
+            },
+            {
+              "title": "Chatbot Arena",
+              "url": "https://lmarena.ai/",
+              "description": "Community benchmark leaderboard for AI models",
+              "domain": "lmarena.ai",
+              "favicon": "https://f.start.me/lmarena.ai",
+              "au": false
+            },
+            {
+              "title": "Together AI",
+              "url": "https://www.together.ai/",
+              "description": "Cloud inference platform for open-source models",
+              "domain": "together.ai",
+              "favicon": "https://f.start.me/together.ai",
+              "au": false
+            },
+            {
+              "title": "Replicate",
+              "url": "https://replicate.com/",
+              "description": "Run open machine learning models in the cloud",
+              "domain": "replicate.com",
+              "favicon": "https://f.start.me/replicate.com",
+              "au": false
+            },
+            {
+              "title": "LocalAI",
+              "url": "https://localai.io/",
+              "description": "Self-hosted OpenAI-compatible REST API",
+              "domain": "localai.io",
+              "favicon": "https://f.start.me/localai.io",
+              "au": false
+            },
+            {
+              "title": "vLLM",
+              "url": "https://vllm.ai/",
+              "description": "High-throughput engine for serving LLMs",
+              "domain": "vllm.ai",
+              "favicon": "https://f.start.me/vllm.ai",
+              "au": false
+            },
+            {
+              "title": "ComfyUI",
+              "url": "https://github.com/comfyanonymous/ComfyUI",
+              "description": "Modular node-based interface for image and video diffusion",
+              "domain": "github.com",
+              "favicon": "https://f.start.me/github.com",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55783034,
@@ -576,13 +878,24 @@ window.BUBBSY_DATA = {
           "link_count": 21,
           "links": [
             {
+              "id": 40375377,
+              "title": "[AUS] Crazytel Australia (VOIP & SMS)",
+              "url": "https://crazytel.com.au/",
+              "description": "Low cost Australian DID numbers, burner SIP trunks, and SMS routing",
+              "domain": "crazytel.com.au",
+              "favicon": "https://f.start.me/crazytel.com.au",
+              "status": 200,
+              "au": true
+            },
+            {
               "id": 90537399,
               "title": "[AUS] Receive-SMS Australia (+61)",
               "url": "https://receive-sms.cc/Australia-Phone-Number/",
               "description": "Free disposable Australian +61 numbers for SMS verification",
               "domain": "receive-sms.cc",
               "favicon": "https://f.start.me/receive-sms.cc",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 9747417,
@@ -591,7 +904,8 @@ window.BUBBSY_DATA = {
               "description": "Temporary Australian phone numbers for instant OTP verification",
               "domain": "quackr.io",
               "favicon": "https://f.start.me/quackr.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27237260,
@@ -600,16 +914,8 @@ window.BUBBSY_DATA = {
               "description": "Free online disposable mobile numbers in Australia",
               "domain": "anonymsms.com",
               "favicon": "https://f.start.me/anonymsms.com",
-              "status": 200
-            },
-            {
-              "id": 40375377,
-              "title": "[AUS] Crazytel Australia (VOIP & SMS)",
-              "url": "https://crazytel.com.au/",
-              "description": "Low cost Australian DID numbers, burner SIP trunks, and SMS routing",
-              "domain": "crazytel.com.au",
-              "favicon": "https://f.start.me/crazytel.com.au",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50622966,
@@ -618,7 +924,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlinesim.net",
               "favicon": "https://f.start.me/onlinesim.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50622965,
@@ -627,7 +934,8 @@ window.BUBBSY_DATA = {
               "description": "Use a Temporary Phone Number To Protect Your Privacy",
               "domain": "donotpay.com",
               "favicon": "https://f.start.me/donotpay.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45243082,
@@ -636,7 +944,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 51561845,
@@ -645,7 +954,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3580291,
@@ -654,7 +964,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "10minutemail.com",
               "favicon": "https://f.start.me/10minutemail.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 26745557,
@@ -663,7 +974,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "anonaddy.com",
               "favicon": "https://f.start.me/anonaddy.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29920658,
@@ -672,7 +984,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "simplelogin.io",
               "favicon": "https://f.start.me/simplelogin.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5136527,
@@ -681,7 +994,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "maildrop.cc",
               "favicon": "https://f.start.me/maildrop.cc",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8889310,
@@ -690,7 +1004,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "globfone.com",
               "favicon": "https://f.start.me/globfone.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3822069,
@@ -699,7 +1014,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sendatext.co",
               "favicon": "https://f.start.me/sendatext.co",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 15905,
@@ -708,7 +1024,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "faxzero.com",
               "favicon": "https://f.start.me/faxzero.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28924692,
@@ -717,7 +1034,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hs3x.com",
               "favicon": "https://f.start.me/hs3x.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2511892,
@@ -726,7 +1044,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "freesmsverification.com",
               "favicon": "https://f.start.me/freesmsverification.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37007377,
@@ -735,7 +1054,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "smstome.com",
               "favicon": "https://f.start.me/smstome.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 21404667,
@@ -744,7 +1064,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "aws.amazon.com",
               "favicon": "https://f.start.me/aws.amazon.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1813862,
@@ -753,7 +1074,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.twilio.com",
               "favicon": "https://f.start.me/twilio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29096587,
@@ -762,9 +1084,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "threader.app",
               "favicon": "https://f.start.me/threader.app",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 9202,
@@ -779,128 +1104,148 @@ window.BUBBSY_DATA = {
               "url": "https://quake.360.net/quake/#/index",
               "description": "Cyberspace surveying and mapping system by 360",
               "domain": "quake.360.net",
-              "favicon": "https://f.start.me/quake.360.net"
+              "favicon": "https://f.start.me/quake.360.net",
+              "au": false
             },
             {
               "title": "Hunter (Internet Asset Search)",
               "url": "https://hunter.how/",
               "description": "Internet search engine for security researchers",
               "domain": "hunter.how",
-              "favicon": "https://f.start.me/hunter.how"
+              "favicon": "https://f.start.me/hunter.how",
+              "au": false
             },
             {
               "title": "ODIN",
               "url": "https://getodin.com/",
               "description": "One of the most powerful search engines for scanned internet assets",
               "domain": "getodin.com",
-              "favicon": "https://f.start.me/getodin.com"
+              "favicon": "https://f.start.me/getodin.com",
+              "au": false
             },
             {
               "title": "Modat Magnify",
               "url": "https://magnify.modat.io/",
               "description": "The largest internet device DNA dataset available",
               "domain": "magnify.modat.io",
-              "favicon": "https://f.start.me/magnify.modat.io"
+              "favicon": "https://f.start.me/magnify.modat.io",
+              "au": false
             },
             {
               "title": "Natlas",
               "url": "https://natlas.io/",
               "description": "Scaling network scanning search engine",
               "domain": "natlas.io",
-              "favicon": "https://f.start.me/natlas.io"
+              "favicon": "https://f.start.me/natlas.io",
+              "au": false
             },
             {
               "title": "BinaryEdge",
               "url": "https://www.binaryedge.io/",
               "description": "Continuous internet-wide scanning data and attack surface",
               "domain": "binaryedge.io",
-              "favicon": "https://f.start.me/binaryedge.io"
+              "favicon": "https://f.start.me/binaryedge.io",
+              "au": false
             },
             {
               "title": "FullHunt",
               "url": "https://fullhunt.io/",
               "description": "Attack surface database of the entire internet",
               "domain": "fullhunt.io",
-              "favicon": "https://f.start.me/fullhunt.io"
+              "favicon": "https://f.start.me/fullhunt.io",
+              "au": false
             },
             {
               "title": "RedHunt Labs",
               "url": "https://redhuntlabs.com/",
               "description": "Discover and monitor your external attack surface, continuously",
               "domain": "redhuntlabs.com",
-              "favicon": "https://f.start.me/redhuntlabs.com"
+              "favicon": "https://f.start.me/redhuntlabs.com",
+              "au": false
             },
             {
               "title": "NetworksDB",
               "url": "https://networksdb.io/",
               "description": "Public IPv4/IPv6 networks and domains owned by organizations",
               "domain": "networksdb.io",
-              "favicon": "https://f.start.me/networksdb.io"
+              "favicon": "https://f.start.me/networksdb.io",
+              "au": false
             },
             {
               "title": "ASNlookup",
               "url": "https://asnlookup.com/",
               "description": "Lookup ASN, organization, CIDR and registered IP addresses",
               "domain": "asnlookup.com",
-              "favicon": "https://f.start.me/asnlookup.com"
+              "favicon": "https://f.start.me/asnlookup.com",
+              "au": false
             },
             {
               "title": "BGPview",
               "url": "https://bgpview.io/",
               "description": "Investigate IP addresses, ASNs, IXPs, BGP and prefixes",
               "domain": "bgpview.io",
-              "favicon": "https://f.start.me/bgpview.io"
+              "favicon": "https://f.start.me/bgpview.io",
+              "au": false
             },
             {
               "title": "bgp.tools",
               "url": "https://bgp.tools/",
               "description": "Browse the internet routing ecosystem",
               "domain": "bgp.tools",
-              "favicon": "https://f.start.me/bgp.tools"
+              "favicon": "https://f.start.me/bgp.tools",
+              "au": false
             },
             {
               "title": "Cloudflare Radar",
               "url": "https://radar.cloudflare.com/",
               "description": "Global internet traffic, attack and technology trends",
               "domain": "radar.cloudflare.com",
-              "favicon": "https://f.start.me/radar.cloudflare.com"
+              "favicon": "https://f.start.me/radar.cloudflare.com",
+              "au": false
             },
             {
               "title": "Hurricane Electric BGP Toolkit",
               "url": "https://bgp.he.net/",
               "description": "Free ASN, IP and prefix BGP lookups",
               "domain": "bgp.he.net",
-              "favicon": "https://f.start.me/bgp.he.net"
+              "favicon": "https://f.start.me/bgp.he.net",
+              "au": false
             },
             {
               "title": "IPinfo",
               "url": "https://ipinfo.io/",
               "description": "The trusted source for IP address data and geolocation",
               "domain": "ipinfo.io",
-              "favicon": "https://f.start.me/ipinfo.io"
+              "favicon": "https://f.start.me/ipinfo.io",
+              "au": false
             },
             {
               "title": "HackMyIP",
               "url": "https://hackmyip.com/",
               "description": "Free privacy toolkit: IP, DNS, leak tests and more",
               "domain": "hackmyip.com",
-              "favicon": "https://f.start.me/hackmyip.com"
+              "favicon": "https://f.start.me/hackmyip.com",
+              "au": false
             },
             {
               "title": "Awseye",
               "url": "https://awseye.com/",
               "description": "OSINT and recon on publicly accessible AWS data",
               "domain": "awseye.com",
-              "favicon": "https://f.start.me/awseye.com"
+              "favicon": "https://f.start.me/awseye.com",
+              "au": false
             },
             {
               "title": "S4E",
               "url": "https://app.s4e.io/",
               "description": "Continuous threat exposure management scans of digital assets",
               "domain": "app.s4e.io",
-              "favicon": "https://f.start.me/app.s4e.io"
+              "favicon": "https://f.start.me/app.s4e.io",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55783241,
@@ -912,22 +1257,24 @@ window.BUBBSY_DATA = {
           "link_count": 36,
           "links": [
             {
-              "id": 11979013,
-              "title": "[AUS] Fake Address Generator Australia",
-              "url": "https://www.fakeaddressgenerator.com/World/Australia_address_generator",
-              "description": "Generate Australian addresses, suburbs, postcodes, and phone numbers",
-              "domain": "www.fakeaddressgenerator.com",
-              "favicon": "https://f.start.me/www.fakeaddressgenerator.com",
-              "status": 200
-            },
-            {
               "id": 19323824,
               "title": "[AUS] Australia Post Postcode & Address Finder",
               "url": "https://auspost.com.au/postcode",
               "description": "Official Australia Post suburb, postcode, and delivery address validator",
               "domain": "auspost.com.au",
               "favicon": "https://f.start.me/auspost.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 11979013,
+              "title": "[AUS] Fake Address Generator Australia",
+              "url": "https://www.fakeaddressgenerator.com/World/Australia_address_generator",
+              "description": "Generate Australian addresses, suburbs, postcodes, and phone numbers",
+              "domain": "www.fakeaddressgenerator.com",
+              "favicon": "https://f.start.me/www.fakeaddressgenerator.com",
+              "status": 200,
+              "au": false
             },
             {
               "id": 16921406,
@@ -936,7 +1283,8 @@ window.BUBBSY_DATA = {
               "description": "Generate synthetic Australian identities, TFN formats, and credentials",
               "domain": "fakedetail.com",
               "favicon": "https://f.start.me/fakedetail.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43696820,
@@ -945,7 +1293,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.lastpass.com",
               "favicon": "https://f.start.me/lastpass.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2473096,
@@ -954,7 +1303,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24710746,
@@ -963,7 +1313,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thisresumedoesnotexist.com",
               "favicon": "https://f.start.me/thisresumedoesnotexist.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6231244,
@@ -972,7 +1323,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.behindthename.com",
               "favicon": "https://f.start.me/behindthename.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522086,
@@ -981,7 +1333,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wpimeigenerator.github.io",
               "favicon": "https://f.start.me/wpimeigenerator.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5147054,
@@ -990,7 +1343,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dyrk.org",
               "favicon": "https://f.start.me/dyrk.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21144947,
@@ -999,7 +1353,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.elfqrin.com",
               "favicon": "https://f.start.me/elfqrin.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522103,
@@ -1008,7 +1363,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mmarvick.github.io",
               "favicon": "https://f.start.me/mmarvick.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44504988,
@@ -1017,7 +1373,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27567683,
@@ -1026,7 +1383,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thisrentaldoesnotexist.com",
               "favicon": "https://f.start.me/thisrentaldoesnotexist.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22942135,
@@ -1035,7 +1393,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thispersondoesnotexist.com",
               "favicon": "https://f.start.me/thispersondoesnotexist.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44505719,
@@ -1044,7 +1403,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19483308,
@@ -1053,7 +1413,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19483332,
@@ -1062,7 +1423,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.allredtech.com",
               "favicon": "https://f.start.me/allredtech.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25061183,
@@ -1071,7 +1433,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19483312,
@@ -1080,7 +1443,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19483329,
@@ -1089,7 +1453,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33231624,
@@ -1098,7 +1463,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16999548,
@@ -1107,7 +1473,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fakenamegenerator.com",
               "favicon": "https://f.start.me/fakenamegenerator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522093,
@@ -1116,7 +1483,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "georgybu.github.io",
               "favicon": "https://f.start.me/georgybu.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522102,
@@ -1125,7 +1493,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "richardkundl.github.io",
               "favicon": "https://f.start.me/richardkundl.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30948838,
@@ -1134,7 +1503,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "zelark.github.io",
               "favicon": "https://f.start.me/zelark.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33353300,
@@ -1143,7 +1513,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "chris927.github.io",
               "favicon": "https://f.start.me/chris927.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26310808,
@@ -1152,7 +1523,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012483,
@@ -1161,7 +1533,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26530602,
@@ -1170,7 +1543,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.dating-profile-generator.org.uk",
               "favicon": "https://f.start.me/dating-profile-generator.org.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20834087,
@@ -1179,7 +1553,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.elfqrin.com",
               "favicon": "https://f.start.me/elfqrin.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44504989,
@@ -1188,7 +1563,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44505000,
@@ -1197,7 +1573,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44505711,
@@ -1206,7 +1583,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 44505713,
@@ -1215,7 +1593,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fakeinfo.net",
               "favicon": "https://f.start.me/fakeinfo.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44505706,
@@ -1224,7 +1603,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vinaysomawat.github.io",
               "favicon": "https://f.start.me/vinaysomawat.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38974080,
@@ -1233,9 +1613,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fauxid.com",
               "favicon": "https://f.start.me/fauxid.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 61880020,
@@ -1253,7 +1636,8 @@ window.BUBBSY_DATA = {
               "description": "Disposable Secure Browser or Desktop",
               "domain": "kasmweb.com",
               "favicon": "https://f.start.me/kasmweb.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12913185,
@@ -1262,7 +1646,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bluestacks.com",
               "favicon": "https://f.start.me/bluestacks.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2987399,
@@ -1271,7 +1656,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.genymotion.com",
               "favicon": "https://f.start.me/genymotion.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23848328,
@@ -1280,7 +1666,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.primeos.in",
               "favicon": "https://f.start.me/primeos.in",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6292624,
@@ -1289,7 +1676,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bignox.com",
               "favicon": "https://f.start.me/bignox.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20538695,
@@ -1298,7 +1686,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.memuplay.com",
               "favicon": "https://f.start.me/memuplay.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29840546,
@@ -1307,9 +1696,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ldplayer.net",
               "favicon": "https://f.start.me/ldplayer.net",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55787793,
@@ -1327,7 +1719,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dfir.blog",
               "favicon": "https://f.start.me/dfir.blog",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 432760,
@@ -1336,7 +1729,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wolframalpha.com",
               "favicon": "https://f.start.me/wolframalpha.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5400118,
@@ -1345,7 +1739,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cryptpad.fr",
               "favicon": "https://f.start.me/cryptpad.fr",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36407788,
@@ -1354,7 +1749,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recontool.org",
               "favicon": "https://f.start.me/recontool.org",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 13490227,
@@ -1363,7 +1759,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "app.mindmup.com",
               "favicon": "https://f.start.me/app.mindmup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760256,
@@ -1372,7 +1769,8 @@ window.BUBBSY_DATA = {
               "description": "Discover the tracking dots on a scanned document. Upload an image (600 dpi) of your print out. Dottspotter will try to detect the yellow dot code (MIC). See below for details. Results will be shown on this page.",
               "domain": "www.forensicdots.de",
               "favicon": "https://f.start.me/forensicdots.de",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013744,
@@ -1381,7 +1779,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "defuse.ca",
               "favicon": "https://f.start.me/defuse.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14317090,
@@ -1390,7 +1789,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "privatebin.net",
               "favicon": "https://f.start.me/privatebin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19606112,
@@ -1399,7 +1799,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bin.disroot.org",
               "favicon": "https://f.start.me/bin.disroot.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013791,
@@ -1408,7 +1809,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "framadrop.org",
               "favicon": "https://f.start.me/framadrop.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4046942,
@@ -1417,7 +1819,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pad.riseup.net",
               "favicon": "https://f.start.me/pad.riseup.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1735137,
@@ -1426,7 +1829,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ethercalc.net",
               "favicon": "https://f.start.me/ethercalc.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22273000,
@@ -1435,7 +1839,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "proofreadbot.com",
               "favicon": "https://f.start.me/proofreadbot.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4823217,
@@ -1444,7 +1849,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "write.as",
               "favicon": "https://f.start.me/write.as",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19275567,
@@ -1453,7 +1859,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "crypt.ee",
               "favicon": "https://f.start.me/crypt.ee",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31501254,
@@ -1462,7 +1869,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dudle.inf.tu-dresden.de",
               "favicon": "https://f.start.me/dudle.inf.tu-dresden.de",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14196203,
@@ -1471,7 +1879,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.airborn.io",
               "favicon": "https://f.start.me/airborn.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522094,
@@ -1480,7 +1889,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "skyzh.github.io",
               "favicon": "https://f.start.me/skyzh.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2072112,
@@ -1489,7 +1899,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.tor2web.org",
               "favicon": "https://f.start.me/tor2web.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2128827,
@@ -1498,7 +1909,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "archive.is",
               "favicon": "https://f.start.me/archive.is",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 3723854,
@@ -1507,7 +1919,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "web.archive.org",
               "favicon": "https://f.start.me/web.archive.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608799,
@@ -1516,7 +1929,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 426461,
@@ -1525,7 +1939,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cachedpages.com",
               "favicon": "https://f.start.me/cachedpages.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20439850,
@@ -1534,7 +1949,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cachedview.com",
               "favicon": "https://f.start.me/cachedview.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2615688,
@@ -1543,7 +1959,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "oldweb.today",
               "favicon": "https://f.start.me/oldweb.today",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36344093,
@@ -1552,7 +1969,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "unpaywall.org",
               "favicon": "https://f.start.me/unpaywall.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10939745,
@@ -1561,7 +1979,8 @@ window.BUBBSY_DATA = {
               "description": "DeepL trains artificial intelligence to understand and translate texts.",
               "domain": "www.deepl.com",
               "favicon": "https://f.start.me/deepl.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521826,
@@ -1570,7 +1989,8 @@ window.BUBBSY_DATA = {
               "description": "Online & Offline CSV File Viewer & Editor",
               "domain": "projectcsv.github.io",
               "favicon": "https://f.start.me/projectcsv.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521855,
@@ -1579,7 +1999,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "codepen.io",
               "favicon": "https://f.start.me/codepen.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 5985288,
@@ -1588,7 +2009,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "microsoft.github.io",
               "favicon": "https://f.start.me/microsoft.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34794867,
@@ -1597,7 +2019,8 @@ window.BUBBSY_DATA = {
               "description": "Simplify documentation and avoid heavy tools. Open source Visio Alternative. Commonly used for explaining your code! Mermaid is a simple markdown-like script language for generating charts from tex...",
               "domain": "mermaid-js.github.io",
               "favicon": "https://f.start.me/mermaid-js.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522081,
@@ -1606,7 +2029,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "markdown-editor.github.io",
               "favicon": "https://f.start.me/markdown-editor.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37076178,
@@ -1615,7 +2039,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mycompiler.io",
               "favicon": "https://f.start.me/mycompiler.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32874460,
@@ -1624,7 +2049,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inloop.github.io",
               "favicon": "https://f.start.me/inloop.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39237446,
@@ -1633,7 +2059,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41761470,
@@ -1642,7 +2069,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wetranscriber.com",
               "favicon": "https://f.start.me/wetranscriber.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 15203434,
@@ -1651,7 +2079,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tophonetics.com",
               "favicon": "https://f.start.me/tophonetics.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4776,
@@ -1660,7 +2089,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "translate.google.com",
               "favicon": "https://f.start.me/translate.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42163944,
@@ -1669,7 +2099,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "translate.mix.pink",
               "favicon": "https://f.start.me/translate.mix.pink",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 1727075,
@@ -1678,7 +2109,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "translate.yandex.com",
               "favicon": "https://f.start.me/translate.yandex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2448521,
@@ -1687,7 +2119,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bing.com",
               "favicon": "https://f.start.me/bing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30689765,
@@ -1696,7 +2129,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.reverso.net",
               "favicon": "https://f.start.me/reverso.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38094628,
@@ -1705,7 +2139,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.translatedict.com",
               "favicon": "https://f.start.me/translatedict.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10943238,
@@ -1714,7 +2149,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.naturalreaders.com",
               "favicon": "https://f.start.me/naturalreaders.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10421316,
@@ -1723,7 +2159,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ttsreader.com",
               "favicon": "https://f.start.me/ttsreader.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3609827,
@@ -1732,7 +2169,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlinesequencer.net",
               "favicon": "https://f.start.me/onlinesequencer.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 17492333,
@@ -1741,7 +2179,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fetchrss.com",
               "favicon": "https://f.start.me/fetchrss.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33550957,
@@ -1750,7 +2189,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sci-hub.st",
               "favicon": "https://f.start.me/sci-hub.st",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37117891,
@@ -1759,7 +2199,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "libgen.fun",
               "favicon": "https://f.start.me/libgen.fun",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24505147,
@@ -1768,7 +2209,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "z-lib.org",
               "favicon": "https://f.start.me/z-lib.org",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 10047660,
@@ -1777,7 +2219,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pdfdrive.com",
               "favicon": "https://f.start.me/pdfdrive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4011490,
@@ -1786,7 +2229,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "arxiv.org",
               "favicon": "https://f.start.me/arxiv.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12066614,
@@ -1795,7 +2239,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.biorxiv.org",
               "favicon": "https://f.start.me/biorxiv.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 835859,
@@ -1804,7 +2249,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gutenberg.org",
               "favicon": "https://f.start.me/gutenberg.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35250389,
@@ -1813,7 +2259,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "trantor.is",
               "favicon": "https://f.start.me/trantor.is",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 42596696,
@@ -1822,7 +2269,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowlibraries.github.io",
               "favicon": "https://f.start.me/shadowlibraries.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12679701,
@@ -1831,9 +2279,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "editor.typely.com",
               "favicon": "https://f.start.me/editor.typely.com",
-              "status": 460
+              "status": 460,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 60575144,
@@ -1851,7 +2302,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mega.io",
               "favicon": "https://f.start.me/mega.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 737708,
@@ -1860,7 +2312,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "transfer.sh",
               "favicon": "https://f.start.me/transfer.sh",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 46608807,
@@ -1869,7 +2322,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "send.actionsack.com",
               "favicon": "https://f.start.me/send.actionsack.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 50623048,
@@ -1878,7 +2332,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "keep.sh",
               "favicon": "https://f.start.me/keep.sh",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 37013748,
@@ -1887,7 +2342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "disroot.org",
               "favicon": "https://f.start.me/disroot.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26138930,
@@ -1896,9 +2352,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blackhole.run",
               "favicon": "https://f.start.me/blackhole.run",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55826422,
@@ -1916,7 +2375,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gchq.github.io",
               "favicon": "https://f.start.me/gchq.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19124374,
@@ -1925,7 +2385,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042691,
@@ -1934,7 +2395,8 @@ window.BUBBSY_DATA = {
               "description": "Frack is my attempt at creating an end-to-end solution to store, manage and query your breach data. The tool has got a very basic workflow making it easy to use.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521864,
@@ -1943,7 +2405,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013420,
@@ -1952,7 +2415,8 @@ window.BUBBSY_DATA = {
               "description": "theHarvester is a very simple, yet effective tool designed to be used in the early\nstages of a penetration test. Use it for open source intelligence gathering and helping\nto determine a company's external threat landscape on the internet",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13919235,
@@ -1961,7 +2425,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "emn178.github.io",
               "favicon": "https://f.start.me/emn178.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20961744,
@@ -1970,7 +2435,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dreampuf.github.io",
               "favicon": "https://f.start.me/dreampuf.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 666189,
@@ -1979,7 +2445,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "codepen.io",
               "favicon": "https://f.start.me/codepen.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 7852263,
@@ -1988,7 +2455,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.rempe.us",
               "favicon": "https://f.start.me/rempe.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18690880,
@@ -1997,7 +2465,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "checkphish.ai",
               "favicon": "https://f.start.me/checkphish.ai",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 10643178,
@@ -2006,7 +2475,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "defuse.ca",
               "favicon": "https://f.start.me/defuse.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5977139,
@@ -2015,7 +2485,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "defuse.ca",
               "favicon": "https://f.start.me/defuse.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7886564,
@@ -2024,7 +2495,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "defuse.ca",
               "favicon": "https://f.start.me/defuse.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11303353,
@@ -2033,7 +2505,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "defuse.ca",
               "favicon": "https://f.start.me/defuse.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10057641,
@@ -2042,7 +2515,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "meyerweb.com",
               "favicon": "https://f.start.me/meyerweb.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20848874,
@@ -2051,7 +2525,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlinedisassembler.com",
               "favicon": "https://f.start.me/onlinedisassembler.com",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 37075500,
@@ -2060,7 +2535,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "disasm.pro",
               "favicon": "https://f.start.me/disasm.pro",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37075507,
@@ -2069,7 +2545,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fotor.com",
               "favicon": "https://f.start.me/fotor.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27893732,
@@ -2078,7 +2555,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.decompiler.com",
               "favicon": "https://f.start.me/decompiler.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29930967,
@@ -2087,7 +2565,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "colab.research.google.com",
               "favicon": "https://f.start.me/colab.research.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6572779,
@@ -2096,7 +2575,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "godbolt.org",
               "favicon": "https://f.start.me/godbolt.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36327066,
@@ -2105,7 +2585,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlinehtmleditor.dev",
               "favicon": "https://f.start.me/onlinehtmleditor.dev",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37075511,
@@ -2114,7 +2595,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "colorpicker.me",
               "favicon": "https://f.start.me/colorpicker.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31723302,
@@ -2123,7 +2605,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "text2image.com",
               "favicon": "https://f.start.me/text2image.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37076227,
@@ -2132,7 +2615,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dbis-uibk.github.io",
               "favicon": "https://f.start.me/dbis-uibk.github.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37076229,
@@ -2141,7 +2625,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "raj457036.github.io",
               "favicon": "https://f.start.me/raj457036.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37076232,
@@ -2150,7 +2635,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "canihavesomecoffee.github.io",
               "favicon": "https://f.start.me/canihavesomecoffee.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39695755,
@@ -2159,7 +2645,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tools.digitalmethods.net",
               "favicon": "https://f.start.me/tools.digitalmethods.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24336240,
@@ -2168,7 +2655,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stylesuxx.github.io",
               "favicon": "https://f.start.me/stylesuxx.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15879781,
@@ -2177,7 +2665,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nutbread.github.io",
               "favicon": "https://f.start.me/nutbread.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521841,
@@ -2186,7 +2675,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "neverducky.github.io",
               "favicon": "https://f.start.me/neverducky.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522035,
@@ -2195,7 +2685,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vega.github.io",
               "favicon": "https://f.start.me/vega.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522097,
@@ -2204,7 +2695,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "duncanford.github.io",
               "favicon": "https://f.start.me/duncanford.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6455596,
@@ -2213,7 +2705,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "canarytokens.org",
               "favicon": "https://f.start.me/canarytokens.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6583363,
@@ -2222,7 +2715,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "explainshell.com",
               "favicon": "https://f.start.me/explainshell.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 13730204,
@@ -2231,7 +2725,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "colab.research.google.com",
               "favicon": "https://f.start.me/colab.research.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608801,
@@ -2240,9 +2735,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59768015,
@@ -2260,7 +2758,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "crackstation.net",
               "favicon": "https://f.start.me/crackstation.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784171,
@@ -2269,7 +2768,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hashmob.net",
               "favicon": "https://f.start.me/hashmob.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33003869,
@@ -2278,7 +2778,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hashes.com",
               "favicon": "https://f.start.me/hashes.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7826600,
@@ -2287,7 +2788,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.onlinehashcrack.com",
               "favicon": "https://f.start.me/onlinehashcrack.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24065011,
@@ -2296,7 +2798,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "md5decrypt.net",
               "favicon": "https://f.start.me/md5decrypt.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8865818,
@@ -2305,7 +2808,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "md5.gromweb.com",
               "favicon": "https://f.start.me/md5.gromweb.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3280327,
@@ -2314,7 +2818,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "md5hashing.net",
               "favicon": "https://f.start.me/md5hashing.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 15628656,
@@ -2323,9 +2828,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hashes.org",
               "favicon": "https://f.start.me/hashes.org",
-              "status": null
+              "status": null,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55827103,
@@ -2343,7 +2851,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "media-downloader.net",
               "favicon": "https://f.start.me/media-downloader.net",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 18420261,
@@ -2352,7 +2861,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dschep.github.io",
               "favicon": "https://f.start.me/dschep.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21964063,
@@ -2361,7 +2871,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "exportcomments.com",
               "favicon": "https://f.start.me/exportcomments.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33971403,
@@ -2370,7 +2881,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "extract.pics",
               "favicon": "https://f.start.me/extract.pics",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30758398,
@@ -2379,7 +2891,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "loader.to",
               "favicon": "https://f.start.me/loader.to",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29421550,
@@ -2388,7 +2901,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.commentexporter.com",
               "favicon": "https://f.start.me/commentexporter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18291859,
@@ -2397,7 +2911,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sites.google.com",
               "favicon": "https://f.start.me/sites.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41688822,
@@ -2406,7 +2921,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowcrypt.net",
               "favicon": "https://f.start.me/shadowcrypt.net",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 15266850,
@@ -2415,9 +2931,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hackertarget.com",
               "favicon": "https://f.start.me/hackertarget.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786005,
@@ -2435,7 +2954,8 @@ window.BUBBSY_DATA = {
               "description": "Australian Privacy Principles (APPs), surveillance law, and data access rights",
               "domain": "www.oaic.gov.au",
               "favicon": "https://f.start.me/www.oaic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 69990277,
@@ -2444,7 +2964,8 @@ window.BUBBSY_DATA = {
               "description": "Australian digital rights, mandatory data retention opposition, and surveillance analysis",
               "domain": "www.efa.org.au",
               "favicon": "https://f.start.me/www.efa.org.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 46148624,
@@ -2453,7 +2974,8 @@ window.BUBBSY_DATA = {
               "description": "Australia national identity and cyber support service for credential compromise",
               "domain": "www.idcare.org",
               "favicon": "https://f.start.me/www.idcare.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40770158,
@@ -2462,7 +2984,8 @@ window.BUBBSY_DATA = {
               "description": "This is the third step of a three-step process to request, freeze, and remove your personal information from within data broker and credit reporting services.",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43003370,
@@ -2471,7 +2994,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "privacyguides.org",
               "favicon": "https://f.start.me/privacyguides.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25536,
@@ -2480,7 +3004,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ssd.eff.org",
               "favicon": "https://f.start.me/ssd.eff.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042730,
@@ -2489,7 +3014,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gofoss.net",
               "favicon": "https://f.start.me/gofoss.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36559098,
@@ -2498,7 +3024,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "securityplanner.consumerreports.org",
               "favicon": "https://f.start.me/securityplanner.consumerreports.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7270046,
@@ -2507,7 +3034,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "securityinabox.org",
               "favicon": "https://f.start.me/securityinabox.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46728712,
@@ -2516,7 +3044,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2229541,
@@ -2525,7 +3054,8 @@ window.BUBBSY_DATA = {
               "description": "Opt out of global data surveillance programs like PRISM, XKeyscore and Tempora. Help make mass surveillance of entire populations uneconomical! We all have a right to privacy, which you can exercis...",
               "domain": "prism-break.org",
               "favicon": "https://f.start.me/prism-break.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041653,
@@ -2534,7 +3064,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "secfirst.org",
               "favicon": "https://f.start.me/secfirst.org",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 38235238,
@@ -2543,7 +3074,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "matweb.info",
               "favicon": "https://f.start.me/matweb.info",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013876,
@@ -2552,7 +3084,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "metacleaner.com",
               "favicon": "https://f.start.me/metacleaner.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33257910,
@@ -2561,7 +3094,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "everestpipkin.github.io",
               "favicon": "https://f.start.me/everestpipkin.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 186791,
@@ -2570,7 +3104,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.verexif.com",
               "favicon": "https://f.start.me/verexif.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040568,
@@ -2579,7 +3114,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bitcoinprivacy.guide",
               "favicon": "https://f.start.me/bitcoinprivacy.guide",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 342570,
@@ -2588,7 +3124,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "localbitcoins.com",
               "favicon": "https://f.start.me/localbitcoins.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17677254,
@@ -2597,7 +3134,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "localmonero.co",
               "favicon": "https://f.start.me/localmonero.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11241345,
@@ -2606,7 +3144,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bitonic.nl",
               "favicon": "https://f.start.me/bitonic.nl",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2320376,
@@ -2615,7 +3154,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "paxful.com",
               "favicon": "https://f.start.me/paxful.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 27302539,
@@ -2624,7 +3164,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mynoise.net",
               "favicon": "https://f.start.me/mynoise.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23819157,
@@ -2633,7 +3174,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.stutterbox.co.uk",
               "favicon": "https://f.start.me/stutterbox.co.uk",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 38889653,
@@ -2642,7 +3184,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stegonline.georgeom.net",
               "favicon": "https://f.start.me/stegonline.georgeom.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40222705,
@@ -2651,9 +3194,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "anonymousplanet.org",
               "favicon": "https://f.start.me/anonymousplanet.org",
-              "status": 404
+              "status": 404,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 55787923,
@@ -2671,7 +3217,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "signal.org",
               "favicon": "https://f.start.me/signal.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34874553,
@@ -2680,7 +3227,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "element.io",
               "favicon": "https://f.start.me/element.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4011510,
@@ -2689,7 +3237,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "briarproject.org",
               "favicon": "https://f.start.me/briarproject.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24168276,
@@ -2698,7 +3247,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "jami.net",
               "favicon": "https://f.start.me/jami.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2361149,
@@ -2707,7 +3257,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "meet.jit.si",
               "favicon": "https://f.start.me/meet.jit.si",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2370568,
@@ -2716,7 +3267,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rocket.chat",
               "favicon": "https://f.start.me/rocket.chat",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6011269,
@@ -2725,7 +3277,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wire.com",
               "favicon": "https://f.start.me/wire.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 47176828,
@@ -2734,7 +3287,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nekogram.app",
               "favicon": "https://f.start.me/nekogram.app",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11251419,
@@ -2743,7 +3297,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.telegram.org",
               "favicon": "https://f.start.me/telegram.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42649084,
@@ -2752,7 +3307,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "talk.brave.com",
               "favicon": "https://f.start.me/talk.brave.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24100519,
@@ -2761,7 +3317,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.torproject.org",
               "favicon": "https://f.start.me/torproject.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3417815,
@@ -2770,7 +3327,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "brave.com",
               "favicon": "https://f.start.me/brave.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24047494,
@@ -2779,7 +3337,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.psiphon.ca",
               "favicon": "https://f.start.me/psiphon.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8094649,
@@ -2788,7 +3347,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "protonvpn.com",
               "favicon": "https://f.start.me/protonvpn.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2253409,
@@ -2797,7 +3357,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hide.me",
               "favicon": "https://f.start.me/hide.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42649073,
@@ -2806,7 +3367,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "adguard-vpn.com",
               "favicon": "https://f.start.me/adguard-vpn.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6395842,
@@ -2815,7 +3377,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "geti2p.net",
               "favicon": "https://f.start.me/geti2p.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43017759,
@@ -2824,7 +3387,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "privacyguides.org",
               "favicon": "https://f.start.me/privacyguides.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43017760,
@@ -2833,7 +3397,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "privacyguides.org",
               "favicon": "https://f.start.me/privacyguides.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30533470,
@@ -2842,9 +3407,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "getsession.org",
               "favicon": "https://f.start.me/getsession.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55784905,
@@ -2862,7 +3430,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ohshint.gitbook.io",
               "favicon": "https://f.start.me/ohshint.gitbook.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34682372,
@@ -2871,7 +3440,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42696227,
@@ -2880,7 +3450,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35617122,
@@ -2889,7 +3460,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29271162,
@@ -2898,7 +3470,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20345316,
@@ -2907,7 +3480,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19573532,
@@ -2916,7 +3490,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18078498,
@@ -2925,7 +3500,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35650825,
@@ -2934,7 +3510,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14958805,
@@ -2943,7 +3520,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "medium.com",
               "favicon": "https://f.start.me/medium.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 29175193,
@@ -2952,7 +3530,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37330931,
@@ -2961,7 +3540,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33517059,
@@ -2970,7 +3550,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.technisette.com",
               "favicon": "https://f.start.me/technisette.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 13913136,
@@ -2979,7 +3560,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osintframework.com",
               "favicon": "https://f.start.me/osintframework.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5135470,
@@ -2988,7 +3570,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31996106,
@@ -2997,7 +3580,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "medium.com",
               "favicon": "https://f.start.me/medium.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 33254868,
@@ -3006,7 +3590,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "docs.google.com",
               "favicon": "https://f.start.me/docs.google.com",
-              "status": 410
+              "status": 410,
+              "au": false
             },
             {
               "id": 17041455,
@@ -3015,7 +3600,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osinttechniques.com",
               "favicon": "https://f.start.me/osinttechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26636008,
@@ -3024,7 +3610,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35231719,
@@ -3033,7 +3620,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thedarksource.com",
               "favicon": "https://f.start.me/thedarksource.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34606697,
@@ -3042,7 +3630,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sector035.nl",
               "favicon": "https://f.start.me/sector035.nl",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19908382,
@@ -3051,7 +3640,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.team",
               "favicon": "https://f.start.me/osint.team",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 35469044,
@@ -3060,7 +3650,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34985646,
@@ -3069,7 +3660,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040036,
@@ -3078,7 +3670,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 449876,
@@ -3087,7 +3680,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bitcoin.org",
               "favicon": "https://f.start.me/bitcoin.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24823913,
@@ -3096,7 +3690,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osintcurio.us",
               "favicon": "https://f.start.me/osintcurio.us",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37554533,
@@ -3105,7 +3700,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "webintmaster.com",
               "favicon": "https://f.start.me/webintmaster.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41983224,
@@ -3114,7 +3710,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dfirdiva.com",
               "favicon": "https://f.start.me/dfirdiva.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16539810,
@@ -3123,7 +3720,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "booleanstrings.com",
               "favicon": "https://f.start.me/booleanstrings.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28895699,
@@ -3132,7 +3730,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osintme.com",
               "favicon": "https://f.start.me/osintme.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17180258,
@@ -3141,7 +3740,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "jakecreps.com",
               "favicon": "https://f.start.me/jakecreps.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37067704,
@@ -3150,7 +3750,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.reknowledge.tech",
               "favicon": "https://f.start.me/reknowledge.tech",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36362916,
@@ -3159,7 +3760,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "docs.google.com",
               "favicon": "https://f.start.me/spreadsheets.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41263729,
@@ -3168,7 +3770,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cipher387.github.io",
               "favicon": "https://f.start.me/cipher387.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29062417,
@@ -3177,7 +3780,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "awesomeopensource.com",
               "favicon": "https://f.start.me/awesomeopensource.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41673304,
@@ -3186,7 +3790,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osintme.com",
               "favicon": "https://f.start.me/osintme.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42158628,
@@ -3195,7 +3800,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "freetraining.dfirdiva.com",
               "favicon": "https://f.start.me/freetraining.dfirdiva.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 31220608,
@@ -3204,7 +3810,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38381719,
@@ -3213,7 +3820,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 15163614,
@@ -3222,7 +3830,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osinttechniques.com",
               "favicon": "https://f.start.me/osinttechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41726008,
@@ -3231,7 +3840,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blog.parakomanai.lt",
               "favicon": "https://f.start.me/blog.parakomanai.lt",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 34758422,
@@ -3240,7 +3850,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "docs.google.com",
               "favicon": "https://f.start.me/spreadsheets.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41761291,
@@ -3249,7 +3860,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.emsisoft.com",
               "favicon": "https://f.start.me/emsisoft.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25957843,
@@ -3258,7 +3870,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitter.com",
               "favicon": "https://f.start.me/twitter.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 15257196,
@@ -3267,7 +3880,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitter.com",
               "favicon": "https://f.start.me/twitter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5869069,
@@ -3276,7 +3890,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "awesomelists.top",
               "favicon": "https://f.start.me/awesomelists.top",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37745033,
@@ -3285,7 +3900,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.motakasoft.com",
               "favicon": "https://f.start.me/github.motakasoft.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29840547,
@@ -3294,7 +3910,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41417502,
@@ -3303,7 +3920,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "metaosint.github.io",
               "favicon": "https://f.start.me/metaosint.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27020236,
@@ -3312,7 +3930,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24325704,
@@ -3321,7 +3940,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42951494,
@@ -3330,7 +3950,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "outline.com",
               "favicon": "https://f.start.me/outline.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43040916,
@@ -3339,9 +3960,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nubela.co",
               "favicon": "https://f.start.me/nubela.co",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55787871,
@@ -3359,7 +3983,8 @@ window.BUBBSY_DATA = {
               "description": "Official Australian national weather service, Doppler rain radars, and satellite imagery",
               "domain": "www.bom.gov.au",
               "favicon": "https://f.start.me/www.bom.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 42697797,
@@ -3368,7 +3993,8 @@ window.BUBBSY_DATA = {
               "description": "High-resolution Australian radar, lightning tracker, and synoptic charts",
               "domain": "www.weatherzone.com.au",
               "favicon": "https://f.start.me/www.weatherzone.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 36456031,
@@ -3377,7 +4003,8 @@ window.BUBBSY_DATA = {
               "description": "Hyper-local Australian wind, tide, swell, UV, and rainfall reports",
               "domain": "www.willyweather.com.au",
               "favicon": "https://f.start.me/www.willyweather.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 54963586,
@@ -3386,7 +4013,8 @@ window.BUBBSY_DATA = {
               "description": "Australian coastal waters forecasts, gale warnings, and sea surface temperatures",
               "domain": "www.bom.gov.au",
               "favicon": "https://f.start.me/www.bom.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 11984423,
@@ -3395,7 +4023,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "openweathermap.org",
               "favicon": "https://f.start.me/openweathermap.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10855641,
@@ -3404,7 +4033,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wunderground.com",
               "favicon": "https://f.start.me/wunderground.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12913567,
@@ -3413,7 +4043,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.timeanddate.com",
               "favicon": "https://f.start.me/timeanddate.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 10893288,
@@ -3422,9 +4053,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.accuweather.com",
               "favicon": "https://f.start.me/accuweather.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 4,
+          "au_module": false
         },
         {
           "id": 55826339,
@@ -3442,7 +4076,8 @@ window.BUBBSY_DATA = {
               "description": "Official Australian signals directorate threat advisories, alerts, and incident reporting",
               "domain": "www.cyber.gov.au",
               "favicon": "https://f.start.me/www.cyber.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 98667170,
@@ -3451,7 +4086,8 @@ window.BUBBSY_DATA = {
               "description": "Australian Computer Emergency Response Team security alerts and vulnerability notices",
               "domain": "auscert.org.au",
               "favicon": "https://f.start.me/auscert.org.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 92416923,
@@ -3460,7 +4096,8 @@ window.BUBBSY_DATA = {
               "description": "Reports and statistics on mandatory privacy data breaches in Australia",
               "domain": "www.oaic.gov.au",
               "favicon": "https://f.start.me/www.oaic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 51438829,
@@ -3469,7 +4106,8 @@ window.BUBBSY_DATA = {
               "description": "Gold Coast based global data breach indexing service created by Troy Hunt",
               "domain": "haveibeenpwned.com",
               "favicon": "https://f.start.me/haveibeenpwned.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6796809,
@@ -3478,7 +4116,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "threatbutt.com",
               "favicon": "https://f.start.me/threatbutt.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 2372363,
@@ -3487,7 +4126,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cybermap.kaspersky.com",
               "favicon": "https://f.start.me/cybermap.kaspersky.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3400129,
@@ -3496,7 +4136,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.checkpoint.com",
               "favicon": "https://f.start.me/checkpoint.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16981127,
@@ -3505,7 +4146,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.digitalattackmap.com",
               "favicon": "https://f.start.me/digitalattackmap.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2112277,
@@ -3514,7 +4156,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fireeye.com",
               "favicon": "https://f.start.me/fireeye.com",
-              "status": 530
+              "status": 530,
+              "au": false
             },
             {
               "id": 11155445,
@@ -3523,7 +4166,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "threatmap.bitdefender.com",
               "favicon": "https://f.start.me/threatmap.bitdefender.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15291330,
@@ -3532,7 +4176,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pulsedive.com",
               "favicon": "https://f.start.me/pulsedive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8185944,
@@ -3541,7 +4186,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "talosintelligence.com",
               "favicon": "https://f.start.me/talosintelligence.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6796804,
@@ -3550,7 +4196,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "threatmap.fortiguard.com",
               "favicon": "https://f.start.me/threatmap.fortiguard.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2049255,
@@ -3559,7 +4206,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fortiguard.com",
               "favicon": "https://f.start.me/fortiguard.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 5057208,
@@ -3568,7 +4216,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.threatminer.org",
               "favicon": "https://f.start.me/threatminer.org",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 3350999,
@@ -3577,7 +4226,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cymon.io",
               "favicon": "https://f.start.me/cymon.io",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 34833153,
@@ -3586,7 +4236,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3261238,
@@ -3595,7 +4246,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.akamai.com",
               "favicon": "https://f.start.me/akamai.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 7115103,
@@ -3604,7 +4256,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "map.lookingglasscyber.com",
               "favicon": "https://f.start.me/map.lookingglasscyber.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 31605152,
@@ -3613,7 +4266,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "horizon.netscout.com",
               "favicon": "https://f.start.me/horizon.netscout.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16538978,
@@ -3622,9 +4276,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 55784964,
@@ -3642,7 +4299,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cryptome.wikileaks.org",
               "favicon": "https://f.start.me/cryptome.wikileaks.org",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 30858767,
@@ -3651,9 +4309,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nextstrain.org",
               "favicon": "https://f.start.me/nextstrain.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55785164,
@@ -3671,7 +4332,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dashboard.clearbit.com",
               "favicon": "https://f.start.me/dashboard.clearbit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19714947,
@@ -3680,7 +4342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dashboard.fullcontact.com",
               "favicon": "https://f.start.me/dashboard.fullcontact.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 3748375,
@@ -3689,9 +4352,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "aeroleads.com",
               "favicon": "https://f.start.me/aeroleads.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55785330,
@@ -3709,7 +4375,8 @@ window.BUBBSY_DATA = {
               "description": "Official .au domain registrar status and registrant policy verification",
               "domain": "www.auda.org.au",
               "favicon": "https://f.start.me/www.auda.org.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 63268167,
@@ -3718,7 +4385,8 @@ window.BUBBSY_DATA = {
               "description": "Australian BGP routing, ping, and traceroute diagnostic endpoint",
               "domain": "looking-glass.aussiebroadband.com.au",
               "favicon": "https://f.start.me/looking-glass.aussiebroadband.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 16512383,
@@ -3727,7 +4395,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.skypeipresolver.net",
               "favicon": "https://f.start.me/skypeipresolver.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013638,
@@ -3736,7 +4405,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "playstationresolver.xyz",
               "favicon": "https://f.start.me/playstationresolver.xyz",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37009864,
@@ -3745,7 +4415,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.skypeipresolver.net",
               "favicon": "https://f.start.me/skypeipresolver.net",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37013924,
@@ -3754,7 +4425,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowcrypt.net",
               "favicon": "https://f.start.me/shadowcrypt.net",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 37015325,
@@ -3763,7 +4435,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.leaked.site",
               "favicon": "https://f.start.me/leaked.site",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37649293,
@@ -3772,9 +4445,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "xboxresolver.com",
               "favicon": "https://f.start.me/xboxresolver.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 55788245,
@@ -3786,22 +4462,24 @@ window.BUBBSY_DATA = {
           "link_count": 12,
           "links": [
             {
-              "id": 41430907,
-              "title": "[AUS] Similarweb Australia Rankings",
-              "url": "https://www.similarweb.com/top-websites/australia/",
-              "description": "Top visited web domains and traffic analytics across Australia",
-              "domain": "www.similarweb.com",
-              "favicon": "https://f.start.me/www.similarweb.com",
-              "status": 200
-            },
-            {
               "id": 30967466,
               "title": "[AUS] ABS Australian Industry Statistics",
               "url": "https://www.abs.gov.au/statistics/industry",
               "description": "Statistical market share and digital economy metrics for Australia",
               "domain": "www.abs.gov.au",
               "favicon": "https://f.start.me/www.abs.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 41430907,
+              "title": "[AUS] Similarweb Australia Rankings",
+              "url": "https://www.similarweb.com/top-websites/australia/",
+              "description": "Top visited web domains and traffic analytics across Australia",
+              "domain": "www.similarweb.com",
+              "favicon": "https://f.start.me/www.similarweb.com",
+              "status": 200,
+              "au": false
             },
             {
               "id": 40961890,
@@ -3810,7 +4488,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1764397,
@@ -3819,7 +4498,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.hashatit.com",
               "favicon": "https://f.start.me/hashatit.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 17838838,
@@ -3828,7 +4508,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.social-searcher.com",
               "favicon": "https://f.start.me/social-searcher.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 35988957,
@@ -3837,7 +4518,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.social-searcher.com",
               "favicon": "https://f.start.me/social-searcher.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16989636,
@@ -3846,7 +4528,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mentionmapp.com",
               "favicon": "https://f.start.me/mentionmapp.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27960581,
@@ -3855,7 +4538,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ads.google.com",
               "favicon": "https://f.start.me/ads.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2627345,
@@ -3864,7 +4548,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.semrush.com",
               "favicon": "https://f.start.me/semrush.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44604265,
@@ -3873,7 +4558,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osome.iu.edu",
               "favicon": "https://f.start.me/osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44604267,
@@ -3882,7 +4568,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osome.iu.edu",
               "favicon": "https://f.start.me/osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42470242,
@@ -3891,95 +4578,126 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osome.iu.edu",
               "favicon": "https://f.start.me/osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
+        },
+        {
+          "id": 9301,
+          "title": "GLOBAL CORPORATE REGISTRIES & OWNERSHIP",
+          "type": "urllist",
+          "group": "records_legal",
+          "icon": "building",
+          "color": "#0ea5e9",
+          "links": [
+            {
+              "title": "OpenCorporates",
+              "url": "https://opencorporates.com/",
+              "description": "Largest open database of companies and directors across 140+ jurisdictions",
+              "domain": "opencorporates.com",
+              "favicon": "https://f.start.me/opencorporates.com",
+              "au": false
+            },
+            {
+              "title": "OCCRP Aleph",
+              "url": "https://aleph.occrp.org/",
+              "description": "Investigative archive of leaks, registries, sanctions and court records",
+              "domain": "occrp.org",
+              "favicon": "https://f.start.me/occrp.org",
+              "au": false
+            },
+            {
+              "title": "ICIJ Offshore Leaks Database",
+              "url": "https://offshoreleaks.icij.org/",
+              "description": "Panama, Paradise and Pandora Papers entities, officers and addresses",
+              "domain": "icij.org",
+              "favicon": "https://f.start.me/icij.org",
+              "au": false
+            },
+            {
+              "title": "OpenSanctions",
+              "url": "https://www.opensanctions.org/",
+              "description": "Consolidated global sanctions, PEP and watchlist entity search",
+              "domain": "opensanctions.org",
+              "favicon": "https://f.start.me/opensanctions.org",
+              "au": false
+            },
+            {
+              "title": "GLEIF LEI Search",
+              "url": "https://search.gleif.org/",
+              "description": "Legal Entity Identifiers and corporate parent/child ownership chains",
+              "domain": "gleif.org",
+              "favicon": "https://f.start.me/gleif.org",
+              "au": false
+            },
+            {
+              "title": "Open Ownership Register",
+              "url": "https://www.openownership.org/",
+              "description": "Beneficial ownership disclosures linked across jurisdictions",
+              "domain": "openownership.org",
+              "favicon": "https://f.start.me/openownership.org",
+              "au": false
+            },
+            {
+              "title": "UK Companies House",
+              "url": "https://find-and-update.company-information.service.gov.uk/",
+              "description": "Free UK company filings, officers, charges and accounts",
+              "domain": "service.gov.uk",
+              "favicon": "https://f.start.me/service.gov.uk",
+              "au": false
+            },
+            {
+              "title": "SEC EDGAR Full-Text Search",
+              "url": "https://efts.sec.gov/LATEST/search-index?q=",
+              "description": "Full-text search across all US securities filings and exhibits",
+              "domain": "sec.gov",
+              "favicon": "https://f.start.me/sec.gov",
+              "au": false
+            },
+            {
+              "title": "NZ Companies Office",
+              "url": "https://companies-register.companiesoffice.govt.nz/",
+              "description": "New Zealand company, director and shareholder register",
+              "domain": "companiesoffice.govt.nz",
+              "favicon": "https://f.start.me/companiesoffice.govt.nz",
+              "au": false
+            },
+            {
+              "title": "LittleSis",
+              "url": "https://littlesis.org/",
+              "description": "Mapped relationships between powerful people, companies and boards",
+              "domain": "littlesis.org",
+              "favicon": "https://f.start.me/littlesis.org",
+              "au": false
+            },
+            {
+              "title": "EU Business Registers (e-Justice)",
+              "url": "https://e-justice.europa.eu/489/EN/business_registers__search_for_a_company_in_the_eu",
+              "description": "Gateway to official company registers across EU member states",
+              "domain": "europa.eu",
+              "favicon": "https://f.start.me/europa.eu",
+              "au": false
+            },
+            {
+              "title": "North Data",
+              "url": "https://www.northdata.com/",
+              "description": "European company financials, networks and publication history",
+              "domain": "northdata.com",
+              "favicon": "https://f.start.me/northdata.com",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
         }
       ]
     },
     {
       "index": 1,
       "widgets": [
-        {
-          "id": 9002,
-          "title": "AI SEARCH & RESEARCH",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "search",
-          "color": "#06b6d4",
-          "links": [
-            {
-              "title": "Genspark",
-              "url": "https://www.genspark.ai/",
-              "description": "Autonomous multi-agent research search engine",
-              "domain": "genspark.ai",
-              "favicon": "https://f.start.me/genspark.ai"
-            },
-            {
-              "title": "Exa",
-              "url": "https://exa.ai/",
-              "description": "Embedding-based neural search designed for AI agents",
-              "domain": "exa.ai",
-              "favicon": "https://f.start.me/exa.ai"
-            },
-            {
-              "title": "Tavily",
-              "url": "https://tavily.com/",
-              "description": "Search API built for LLM research agents",
-              "domain": "tavily.com",
-              "favicon": "https://f.start.me/tavily.com"
-            },
-            {
-              "title": "Firecrawl",
-              "url": "https://www.firecrawl.dev/",
-              "description": "Turn websites into clean markdown for AI workflows",
-              "domain": "firecrawl.dev",
-              "favicon": "https://f.start.me/firecrawl.dev"
-            },
-            {
-              "title": "Consensus",
-              "url": "https://consensus.app/",
-              "description": "AI search across scientific papers and peer-reviewed studies",
-              "domain": "consensus.app",
-              "favicon": "https://f.start.me/consensus.app"
-            },
-            {
-              "title": "Elicit",
-              "url": "https://elicit.com/",
-              "description": "Automated research assistant for academic literature",
-              "domain": "elicit.com",
-              "favicon": "https://f.start.me/elicit.com"
-            },
-            {
-              "title": "Phind",
-              "url": "https://www.phind.com/",
-              "description": "Technical search engine optimized for developers",
-              "domain": "phind.com",
-              "favicon": "https://f.start.me/phind.com"
-            },
-            {
-              "title": "Scite",
-              "url": "https://scite.ai/",
-              "description": "Smart citation analysis for research claims",
-              "domain": "scite.ai",
-              "favicon": "https://f.start.me/scite.ai"
-            },
-            {
-              "title": "Semantic Scholar",
-              "url": "https://www.semanticscholar.org/",
-              "description": "AI-backed scholarly literature search",
-              "domain": "semanticscholar.org",
-              "favicon": "https://f.start.me/semanticscholar.org"
-            },
-            {
-              "title": "Kagi",
-              "url": "https://kagi.com/",
-              "description": "Fast, ad-free search with integrated summarizer",
-              "domain": "kagi.com",
-              "favicon": "https://f.start.me/kagi.com"
-            }
-          ]
-        },
         {
           "id": 9103,
           "title": "[AUS] POLICE, COURTS & LAW ENFORCEMENT",
@@ -3993,72 +4711,84 @@ window.BUBBSY_DATA = {
               "url": "https://www.afp.gov.au/",
               "description": "National policing, wanted persons, cybercrime alerts, and federal investigations",
               "domain": "afp.gov.au",
-              "favicon": "https://f.start.me/afp.gov.au"
+              "favicon": "https://f.start.me/afp.gov.au",
+              "au": true
             },
             {
               "title": "AusLII (Australasian Legal Information Institute)",
               "url": "https://www.austlii.edu.au/",
               "description": "High Court, Federal Court, Supreme Court judgments and legislation database",
               "domain": "austlii.edu.au",
-              "favicon": "https://f.start.me/austlii.edu.au"
+              "favicon": "https://f.start.me/austlii.edu.au",
+              "au": true
             },
             {
               "title": "Crime Stoppers Australia",
               "url": "https://crimestoppers.com.au/",
               "description": "National unsolved crime appeals, fugitive lists, and anonymous reporting",
               "domain": "crimestoppers.com.au",
-              "favicon": "https://f.start.me/crimestoppers.com.au"
+              "favicon": "https://f.start.me/crimestoppers.com.au",
+              "au": true
             },
             {
               "title": "National Missing Persons Coordination Centre",
               "url": "https://www.missingpersons.gov.au/",
               "description": "Australian official missing persons register and unsolved profiles",
               "domain": "missingpersons.gov.au",
-              "favicon": "https://f.start.me/missingpersons.gov.au"
+              "favicon": "https://f.start.me/missingpersons.gov.au",
+              "au": true
             },
             {
               "title": "NSW Police Force Wanted & News",
               "url": "https://www.police.nsw.gov.au/",
               "description": "NSW Police media releases, wanted persons, and incident reports",
               "domain": "police.nsw.gov.au",
-              "favicon": "https://f.start.me/police.nsw.gov.au"
+              "favicon": "https://f.start.me/police.nsw.gov.au",
+              "au": true
             },
             {
               "title": "Victoria Police News & Wanted",
               "url": "https://www.police.vic.gov.au/",
               "description": "VicPol incident reports, crime appeals, and public notices",
               "domain": "police.vic.gov.au",
-              "favicon": "https://f.start.me/police.vic.gov.au"
+              "favicon": "https://f.start.me/police.vic.gov.au",
+              "au": true
             },
             {
               "title": "Queensland Police Service (QPS News)",
               "url": "https://mypolice.qld.gov.au/",
               "description": "Queensland Police news, stolen vehicle alerts, and public appeals",
               "domain": "police.qld.gov.au",
-              "favicon": "https://f.start.me/police.qld.gov.au"
+              "favicon": "https://f.start.me/police.qld.gov.au",
+              "au": true
             },
             {
               "title": "Western Australia Police Force",
               "url": "https://www.police.wa.gov.au/",
               "description": "WA Police crime alerts, wanted persons, and court listings",
               "domain": "police.wa.gov.au",
-              "favicon": "https://f.start.me/police.wa.gov.au"
+              "favicon": "https://f.start.me/police.wa.gov.au",
+              "au": true
             },
             {
               "title": "ACIC (Criminal Intelligence Commission)",
               "url": "https://www.acic.gov.au/",
               "description": "Australia national criminal intelligence agency and illicit market reports",
               "domain": "acic.gov.au",
-              "favicon": "https://f.start.me/acic.gov.au"
+              "favicon": "https://f.start.me/acic.gov.au",
+              "au": true
             },
             {
               "title": "NSW Caselaw Judgments",
               "url": "https://www.caselaw.nsw.gov.au/",
               "description": "Judgments and decisions from NSW Courts, Tribunals, and Coroner Court",
               "domain": "caselaw.nsw.gov.au",
-              "favicon": "https://f.start.me/caselaw.nsw.gov.au"
+              "favicon": "https://f.start.me/caselaw.nsw.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 10,
+          "au_module": true
         },
         {
           "id": 9107,
@@ -4073,100 +4803,440 @@ window.BUBBSY_DATA = {
               "url": "https://www.news.com.au/",
               "description": "Australia's most-read commercial news site: national, world, sport & entertainment",
               "domain": "news.com.au",
-              "favicon": "https://f.start.me/news.com.au"
+              "favicon": "https://f.start.me/news.com.au",
+              "au": true
             },
             {
               "title": "9News",
               "url": "https://www.9news.com.au/",
               "description": "Nine Network live news, investigations and breaking stories",
               "domain": "9news.com.au",
-              "favicon": "https://f.start.me/9news.com.au"
+              "favicon": "https://f.start.me/9news.com.au",
+              "au": true
             },
             {
               "title": "7NEWS Australia",
               "url": "https://7news.com.au/",
               "description": "Seven Network national news and current affairs",
               "domain": "7news.com.au",
-              "favicon": "https://f.start.me/7news.com.au"
+              "favicon": "https://f.start.me/7news.com.au",
+              "au": true
             },
             {
               "title": "The Age",
               "url": "https://www.theage.com.au/",
               "description": "Melbourne & Victorian daily newspaper published by Nine",
               "domain": "theage.com.au",
-              "favicon": "https://f.start.me/theage.com.au"
+              "favicon": "https://f.start.me/theage.com.au",
+              "au": true
             },
             {
               "title": "Sydney Morning Herald",
               "url": "https://www.smh.com.au/",
               "description": "Sydney & NSW daily newspaper published by Nine",
               "domain": "smh.com.au",
-              "favicon": "https://f.start.me/smh.com.au"
+              "favicon": "https://f.start.me/smh.com.au",
+              "au": true
             },
             {
               "title": "The Australian",
               "url": "https://www.theaustralian.com.au/",
               "description": "National broadsheet published by News Corp Australia",
               "domain": "theaustralian.com.au",
-              "favicon": "https://f.start.me/theaustralian.com.au"
+              "favicon": "https://f.start.me/theaustralian.com.au",
+              "au": true
             },
             {
               "title": "Crikey",
               "url": "https://www.crikey.com.au/",
               "description": "Independent Australian political and media commentary",
               "domain": "crikey.com.au",
-              "favicon": "https://f.start.me/crikey.com.au"
-            },
-            {
-              "title": "The Conversation (AU)",
-              "url": "https://theconversation.com/au",
-              "description": "Academic expert analysis on Australian issues",
-              "domain": "theconversation.com",
-              "favicon": "https://f.start.me/theconversation.com"
+              "favicon": "https://f.start.me/crikey.com.au",
+              "au": true
             },
             {
               "title": "ABC iview",
               "url": "https://iview.abc.net.au/",
               "description": "ABC catch-up TV streaming, live channels, news and documentaries",
               "domain": "iview.abc.net.au",
-              "favicon": "https://f.start.me/abc.net.au"
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
             },
             {
               "title": "SBS On Demand",
               "url": "https://www.sbs.com.au/ondemand",
               "description": "Free multicultural and international streaming by SBS",
               "domain": "sbs.com.au",
-              "favicon": "https://f.start.me/sbs.com.au"
+              "favicon": "https://f.start.me/sbs.com.au",
+              "au": true
             },
             {
               "title": "10 Play",
               "url": "https://10play.com.au/",
               "description": "Network 10 catch-up streaming and live TV",
               "domain": "10play.com.au",
-              "favicon": "https://f.start.me/10play.com.au"
+              "favicon": "https://f.start.me/10play.com.au",
+              "au": true
             },
             {
               "title": "NITV (National Indigenous Television)",
               "url": "https://www.sbs.com.au/nitv",
               "description": "First Nations news, documentaries and programs",
               "domain": "sbs.com.au",
-              "favicon": "https://f.start.me/sbs.com.au"
+              "favicon": "https://f.start.me/sbs.com.au",
+              "au": true
             },
             {
               "title": "Media Watch (ABC)",
               "url": "https://www.abc.net.au/mediawatch",
               "description": "ABC's weekly media accountability and criticism program",
               "domain": "abc.net.au",
-              "favicon": "https://f.start.me/abc.net.au"
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
             },
             {
               "title": "ACMA (Media & Communications Regulator)",
               "url": "https://www.acma.gov.au/",
               "description": "Australian media, broadcasting, telecom and spectrum regulator",
               "domain": "acma.gov.au",
-              "favicon": "https://f.start.me/acma.gov.au"
+              "favicon": "https://f.start.me/acma.gov.au",
+              "au": true
+            },
+            {
+              "title": "The Conversation (AU)",
+              "url": "https://theconversation.com/au",
+              "description": "Academic expert analysis on Australian issues",
+              "domain": "theconversation.com",
+              "favicon": "https://f.start.me/theconversation.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9114,
+          "title": "[AUS] PROFESSIONAL, HEALTH & LICENCE REGISTERS",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "badge-check",
+          "color": "#10b981",
+          "links": [
+            {
+              "title": "AHPRA Register of Practitioners",
+              "url": "https://www.ahpra.gov.au/registration/registers-of-practitioners.aspx",
+              "description": "Verify Australian doctors, nurses, psychologists, dentists and conditions on registration",
+              "domain": "ahpra.gov.au",
+              "favicon": "https://f.start.me/ahpra.gov.au",
+              "au": true
+            },
+            {
+              "title": "ASIC Financial Advisers Register",
+              "url": "https://moneysmart.gov.au/financial-advice/financial-advisers-register",
+              "description": "Licensed Australian financial advisers, employment history, and bans",
+              "domain": "moneysmart.gov.au",
+              "favicon": "https://f.start.me/moneysmart.gov.au",
+              "au": true
+            },
+            {
+              "title": "ASIC Banned & Disqualified Register",
+              "url": "https://asic.gov.au/online-services/search-asic-s-registers/banned-and-disqualified/",
+              "description": "Australians banned from managing corporations or providing financial services",
+              "domain": "asic.gov.au",
+              "favicon": "https://f.start.me/asic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Tax Practitioners Board Public Register",
+              "url": "https://www.tpb.gov.au/public-register",
+              "description": "Registered Australian tax agents, BAS agents, sanctions and terminations",
+              "domain": "tpb.gov.au",
+              "favicon": "https://f.start.me/tpb.gov.au",
+              "au": true
+            },
+            {
+              "title": "NDIS Registered Provider Finder",
+              "url": "https://www.ndis.gov.au/participants/working-providers/find-registered-provider",
+              "description": "Search registered NDIS providers, registration groups, and service areas",
+              "domain": "ndis.gov.au",
+              "favicon": "https://f.start.me/ndis.gov.au",
+              "au": true
+            },
+            {
+              "title": "NSW Fair Trading Public Register",
+              "url": "https://www.onegov.nsw.gov.au/publicregister/",
+              "description": "NSW trade licences, builders, electricians, motor dealers and disciplinary action",
+              "domain": "onegov.nsw.gov.au",
+              "favicon": "https://f.start.me/onegov.nsw.gov.au",
+              "au": true
+            },
+            {
+              "title": "QBCC Licence Search (QLD)",
+              "url": "https://www.qbcc.qld.gov.au/online-services/licence-search",
+              "description": "Queensland building and construction licensees, defect history, and directions",
+              "domain": "qbcc.qld.gov.au",
+              "favicon": "https://f.start.me/qbcc.qld.gov.au",
+              "au": true
+            },
+            {
+              "title": "VBA Practitioner Search (VIC)",
+              "url": "https://www.vba.vic.gov.au/tools/practitioner-search",
+              "description": "Victorian registered builders, plumbers, and disciplinary records",
+              "domain": "vba.vic.gov.au",
+              "favicon": "https://f.start.me/vba.vic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Law Society of NSW - Find a Lawyer",
+              "url": "https://www.lawsociety.com.au/for-the-public/find-a-lawyer",
+              "description": "Practising NSW solicitors, firms, and practising certificate status",
+              "domain": "lawsociety.com.au",
+              "favicon": "https://f.start.me/lawsociety.com.au",
+              "au": true
+            },
+            {
+              "title": "Victorian Legal Services Board Register",
+              "url": "https://lsbc.vic.gov.au/lawyer-search",
+              "description": "Victorian lawyer register, conditions, and disciplinary history",
+              "domain": "lsbc.vic.gov.au",
+              "favicon": "https://f.start.me/lsbc.vic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Fair Work Ombudsman",
+              "url": "https://www.fairwork.gov.au/",
+              "description": "Australian workplace enforcement outcomes, court penalties, and awards",
+              "domain": "fairwork.gov.au",
+              "favicon": "https://f.start.me/fairwork.gov.au",
+              "au": true
+            },
+            {
+              "title": "Safe Work Australia",
+              "url": "https://www.safeworkaustralia.gov.au/",
+              "description": "National WHS statistics, prosecutions, and incident notification data",
+              "domain": "safeworkaustralia.gov.au",
+              "favicon": "https://f.start.me/safeworkaustralia.gov.au",
+              "au": true
+            },
+            {
+              "title": "Australian Immunisation Register",
+              "url": "https://www.servicesaustralia.gov.au/australian-immunisation-register",
+              "description": "Individual immunisation history statements via Medicare and myGov",
+              "domain": "servicesaustralia.gov.au",
+              "favicon": "https://f.start.me/servicesaustralia.gov.au",
+              "au": true
+            }
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9118,
+          "title": "[AUS] AVIATION, RAIL & VESSEL TRACKING",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "plane",
+          "color": "#38bdf8",
+          "links": [
+            {
+              "title": "CASA Australian Aircraft Register",
+              "url": "https://www.casa.gov.au/search-centre/aircraft-register",
+              "description": "Look up VH- registered aircraft, owners, operators and airworthiness",
+              "domain": "casa.gov.au",
+              "favicon": "https://f.start.me/casa.gov.au",
+              "au": true
+            },
+            {
+              "title": "Airservices Australia",
+              "url": "https://www.airservicesaustralia.com/",
+              "description": "Australian airspace, NOTAMs, aeronautical charts and noise complaint data",
+              "domain": "airservicesaustralia.com",
+              "favicon": "https://f.start.me/airservicesaustralia.com",
+              "au": true
+            },
+            {
+              "title": "ATSB Transport Investigations",
+              "url": "https://www.atsb.gov.au/",
+              "description": "Australian aviation, rail and marine accident investigation reports",
+              "domain": "atsb.gov.au",
+              "favicon": "https://f.start.me/atsb.gov.au",
+              "au": true
+            },
+            {
+              "title": "AMSA (Maritime Safety Authority)",
+              "url": "https://www.amsa.gov.au/",
+              "description": "Australian vessel registration, incident reporting and search & rescue",
+              "domain": "amsa.gov.au",
+              "favicon": "https://f.start.me/amsa.gov.au",
+              "au": true
+            },
+            {
+              "title": "AMSA Port State Control Detentions",
+              "url": "https://www.amsa.gov.au/vessels-operators/port-state-control",
+              "description": "Port state control inspections and detained vessels in Australian ports",
+              "domain": "amsa.gov.au",
+              "favicon": "https://f.start.me/amsa.gov.au",
+              "au": true
+            },
+            {
+              "title": "AMSA Vessel Registration",
+              "url": "https://www.amsa.gov.au/vessels-operators/vessel-registration",
+              "description": "Domestic commercial vessel identifiers and certificate lookups",
+              "domain": "amsa.gov.au",
+              "favicon": "https://f.start.me/amsa.gov.au",
+              "au": true
+            },
+            {
+              "title": "ARTC Rail Network",
+              "url": "https://www.artc.com.au/",
+              "description": "Australian Rail Track Corporation network maps, closures and train paths",
+              "domain": "artc.com.au",
+              "favicon": "https://f.start.me/artc.com.au",
+              "au": true
+            },
+            {
+              "title": "BITRE Transport Statistics",
+              "url": "https://www.bitre.gov.au/statistics",
+              "description": "Australian aviation route volumes, freight, road and rail statistics",
+              "domain": "bitre.gov.au",
+              "favicon": "https://f.start.me/bitre.gov.au",
+              "au": true
+            },
+            {
+              "title": "Flightradar24",
+              "url": "https://www.flightradar24.com/",
+              "description": "Live global ADS-B flight tracking with playback and aircraft history",
+              "domain": "flightradar24.com",
+              "favicon": "https://f.start.me/flightradar24.com",
+              "au": false
+            },
+            {
+              "title": "ADS-B Exchange",
+              "url": "https://globe.adsbexchange.com/",
+              "description": "Unfiltered ADS-B feed including military and blocked aircraft",
+              "domain": "adsbexchange.com",
+              "favicon": "https://f.start.me/adsbexchange.com",
+              "au": false
+            },
+            {
+              "title": "OpenSky Network",
+              "url": "https://opensky-network.org/",
+              "description": "Research-grade historical ADS-B data and REST API for flight analysis",
+              "domain": "opensky-network.org",
+              "favicon": "https://f.start.me/opensky-network.org",
+              "au": false
+            },
+            {
+              "title": "MarineTraffic",
+              "url": "https://www.marinetraffic.com/",
+              "description": "Global AIS vessel tracking, port calls, and ship particulars",
+              "domain": "marinetraffic.com",
+              "favicon": "https://f.start.me/marinetraffic.com",
+              "au": false
+            },
+            {
+              "title": "VesselFinder",
+              "url": "https://www.vesselfinder.com/",
+              "description": "Live AIS positions, vessel photos and voyage history",
+              "domain": "vesselfinder.com",
+              "favicon": "https://f.start.me/vesselfinder.com",
+              "au": false
+            }
+          ],
+          "au_count": 8,
+          "au_module": true
+        },
+        {
+          "id": 9002,
+          "title": "AI SEARCH & RESEARCH",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "search",
+          "color": "#06b6d4",
+          "links": [
+            {
+              "title": "Genspark",
+              "url": "https://www.genspark.ai/",
+              "description": "Autonomous multi-agent research search engine",
+              "domain": "genspark.ai",
+              "favicon": "https://f.start.me/genspark.ai",
+              "au": false
+            },
+            {
+              "title": "Exa",
+              "url": "https://exa.ai/",
+              "description": "Embedding-based neural search designed for AI agents",
+              "domain": "exa.ai",
+              "favicon": "https://f.start.me/exa.ai",
+              "au": false
+            },
+            {
+              "title": "Tavily",
+              "url": "https://tavily.com/",
+              "description": "Search API built for LLM research agents",
+              "domain": "tavily.com",
+              "favicon": "https://f.start.me/tavily.com",
+              "au": false
+            },
+            {
+              "title": "Firecrawl",
+              "url": "https://www.firecrawl.dev/",
+              "description": "Turn websites into clean markdown for AI workflows",
+              "domain": "firecrawl.dev",
+              "favicon": "https://f.start.me/firecrawl.dev",
+              "au": false
+            },
+            {
+              "title": "Consensus",
+              "url": "https://consensus.app/",
+              "description": "AI search across scientific papers and peer-reviewed studies",
+              "domain": "consensus.app",
+              "favicon": "https://f.start.me/consensus.app",
+              "au": false
+            },
+            {
+              "title": "Elicit",
+              "url": "https://elicit.com/",
+              "description": "Automated research assistant for academic literature",
+              "domain": "elicit.com",
+              "favicon": "https://f.start.me/elicit.com",
+              "au": false
+            },
+            {
+              "title": "Phind",
+              "url": "https://www.phind.com/",
+              "description": "Technical search engine optimized for developers",
+              "domain": "phind.com",
+              "favicon": "https://f.start.me/phind.com",
+              "au": false
+            },
+            {
+              "title": "Scite",
+              "url": "https://scite.ai/",
+              "description": "Smart citation analysis for research claims",
+              "domain": "scite.ai",
+              "favicon": "https://f.start.me/scite.ai",
+              "au": false
+            },
+            {
+              "title": "Semantic Scholar",
+              "url": "https://www.semanticscholar.org/",
+              "description": "AI-backed scholarly literature search",
+              "domain": "semanticscholar.org",
+              "favicon": "https://f.start.me/semanticscholar.org",
+              "au": false
+            },
+            {
+              "title": "Kagi",
+              "url": "https://kagi.com/",
+              "description": "Fast, ad-free search with integrated summarizer",
+              "domain": "kagi.com",
+              "favicon": "https://f.start.me/kagi.com",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 9201,
@@ -4181,114 +5251,132 @@ window.BUBBSY_DATA = {
               "url": "https://earthengine.google.com/timelapse/",
               "description": "Watch 40 years of Earth change from space in interactive 3D",
               "domain": "earthengine.google.com",
-              "favicon": "https://f.start.me/earthengine.google.com"
+              "favicon": "https://f.start.me/earthengine.google.com",
+              "au": false
             },
             {
               "title": "Windy.com",
               "url": "https://www.windy.com/",
               "description": "Global animated weather, wind, waves and air quality maps",
               "domain": "windy.com",
-              "favicon": "https://f.start.me/windy.com"
+              "favicon": "https://f.start.me/windy.com",
+              "au": false
             },
             {
               "title": "Ventusky",
               "url": "https://www.ventusky.com/",
               "description": "Live animated global weather visualization",
               "domain": "ventusky.com",
-              "favicon": "https://f.start.me/ventusky.com"
+              "favicon": "https://f.start.me/ventusky.com",
+              "au": false
             },
             {
               "title": "Earth Nullschool",
               "url": "https://earth.nullschool.net/",
               "description": "Real-time global wind, ocean and pollution currents",
               "domain": "earth.nullschool.net",
-              "favicon": "https://f.start.me/earth.nullschool.net"
+              "favicon": "https://f.start.me/earth.nullschool.net",
+              "au": false
             },
             {
               "title": "Zoom Earth",
               "url": "https://zoom.earth/",
               "description": "Live satellite and radar imagery updated every 10 minutes",
               "domain": "zoom.earth",
-              "favicon": "https://f.start.me/zoom.earth"
+              "favicon": "https://f.start.me/zoom.earth",
+              "au": false
             },
             {
               "title": "NASA Worldview",
               "url": "https://worldview.earthdata.nasa.gov/",
               "description": "NASA satellite imagery explorer with 800+ layers",
               "domain": "worldview.earthdata.nasa.gov",
-              "favicon": "https://f.start.me/worldview.earthdata.nasa.gov"
+              "favicon": "https://f.start.me/worldview.earthdata.nasa.gov",
+              "au": false
             },
             {
               "title": "Google Arts & Culture",
               "url": "https://artsandculture.google.com/",
               "description": "Zoom into 4K museum artworks and historical artifacts",
               "domain": "artsandculture.google.com",
-              "favicon": "https://f.start.me/artsandculture.google.com"
+              "favicon": "https://f.start.me/artsandculture.google.com",
+              "au": false
             },
             {
               "title": "Radio Garden",
               "url": "https://radio.garden/",
               "description": "Spin the globe and listen to live radio from anywhere",
               "domain": "radio.garden",
-              "favicon": "https://f.start.me/radio.garden"
+              "favicon": "https://f.start.me/radio.garden",
+              "au": false
             },
             {
               "title": "Old Maps Online",
               "url": "https://www.oldmapsonline.org/",
               "description": "Search millions of historical maps by location and era",
               "domain": "oldmapsonline.org",
-              "favicon": "https://f.start.me/oldmapsonline.org"
+              "favicon": "https://f.start.me/oldmapsonline.org",
+              "au": false
             },
             {
               "title": "SunCalc",
               "url": "https://www.suncalc.org/",
               "description": "Sun position, shadow and golden hour calculator for any location",
               "domain": "suncalc.org",
-              "favicon": "https://f.start.me/suncalc.org"
+              "favicon": "https://f.start.me/suncalc.org",
+              "au": false
             },
             {
               "title": "Shadowmap",
               "url": "https://shadowmap.org/",
               "description": "3D sunlight and shadow simulation for any city",
               "domain": "shadowmap.org",
-              "favicon": "https://f.start.me/shadowmap.org"
+              "favicon": "https://f.start.me/shadowmap.org",
+              "au": false
             },
             {
               "title": "Light Pollution Map",
               "url": "https://www.lightpollutionmap.info/",
               "description": "Dark sky and light pollution visualization",
               "domain": "lightpollutionmap.info",
-              "favicon": "https://f.start.me/lightpollutionmap.info"
+              "favicon": "https://f.start.me/lightpollutionmap.info",
+              "au": false
             },
             {
               "title": "Stellarium Web",
               "url": "https://stellarium-web.org/",
               "description": "Free browser planetarium \u2014 explore the night sky",
               "domain": "stellarium-web.org",
-              "favicon": "https://f.start.me/stellarium-web.org"
+              "favicon": "https://f.start.me/stellarium-web.org",
+              "au": false
             },
             {
               "title": "GDELT Project",
               "url": "https://www.gdeltproject.org/",
               "description": "Global news event database \u2014 hundreds of millions of events",
               "domain": "gdeltproject.org",
-              "favicon": "https://f.start.me/gdeltproject.org"
+              "favicon": "https://f.start.me/gdeltproject.org",
+              "au": false
             },
             {
               "title": "Kepler.gl",
               "url": "https://kepler.gl/demo",
               "description": "Massive geospatial datasets visualized in your browser",
               "domain": "kepler.gl",
-              "favicon": "https://f.start.me/kepler.gl"
+              "favicon": "https://f.start.me/kepler.gl",
+              "au": false
             },
             {
               "title": "Google Mars",
               "url": "https://www.google.com/mars/",
               "description": "Interactive 3D map of the red planet",
               "domain": "google.com",
-              "favicon": "https://f.start.me/google.com"
+              "favicon": "https://f.start.me/google.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59477502,
@@ -4306,7 +5394,8 @@ window.BUBBSY_DATA = {
               "description": "Google search localized to Australian servers and regional index",
               "domain": "www.google.com.au",
               "favicon": "https://f.start.me/www.google.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 86292445,
@@ -4315,7 +5404,8 @@ window.BUBBSY_DATA = {
               "description": "Unified discovery across Australian newspapers, archives, books, and gazettes",
               "domain": "trove.nla.gov.au",
               "favicon": "https://f.start.me/trove.nla.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 49357992,
@@ -4324,7 +5414,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30710926,
@@ -4333,7 +5424,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "synapsint.com",
               "favicon": "https://f.start.me/synapsint.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 14787106,
@@ -4342,7 +5434,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "infotracer.com",
               "favicon": "https://f.start.me/infotracer.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18129341,
@@ -4351,7 +5444,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "metadefender.opswat.com",
               "favicon": "https://f.start.me/metadefender.opswat.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2157397,
@@ -4360,7 +5454,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "usersearch.org",
               "favicon": "https://f.start.me/usersearch.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18464006,
@@ -4369,7 +5464,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.spytox.com",
               "favicon": "https://f.start.me/spytox.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 42550705,
@@ -4378,7 +5474,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "effectgroup.io",
               "favicon": "https://f.start.me/effectgroup.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22515036,
@@ -4387,7 +5484,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18861045,
@@ -4396,7 +5494,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15054894,
@@ -4405,7 +5504,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45763940,
@@ -4414,7 +5514,8 @@ window.BUBBSY_DATA = {
               "description": "Repository for the LinkScope Client software",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29936420,
@@ -4423,7 +5524,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.io-archive.org",
               "favicon": "https://f.start.me/io-archive.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042664,
@@ -4432,9 +5534,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.criminalip.io",
               "favicon": "https://f.start.me/criminalip.io",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 9203,
@@ -4449,156 +5554,180 @@ window.BUBBSY_DATA = {
               "url": "https://nvd.nist.gov/vuln/search",
               "description": "US National Vulnerability Database",
               "domain": "nvd.nist.gov",
-              "favicon": "https://f.start.me/nvd.nist.gov"
+              "favicon": "https://f.start.me/nvd.nist.gov",
+              "au": false
             },
             {
               "title": "MITRE CVE",
               "url": "https://cve.mitre.org/cve/search_cve_list.html",
               "description": "Catalog of publicly disclosed cybersecurity vulnerabilities",
               "domain": "cve.mitre.org",
-              "favicon": "https://f.start.me/cve.mitre.org"
+              "favicon": "https://f.start.me/cve.mitre.org",
+              "au": false
             },
             {
               "title": "osv.dev",
               "url": "https://osv.dev/list",
               "description": "Open source vulnerability database by Google",
               "domain": "osv.dev",
-              "favicon": "https://f.start.me/osv.dev"
+              "favicon": "https://f.start.me/osv.dev",
+              "au": false
             },
             {
               "title": "Vulners",
               "url": "https://vulners.com/",
               "description": "Your search engine for security intelligence",
               "domain": "vulners.com",
-              "favicon": "https://f.start.me/vulners.com"
+              "favicon": "https://f.start.me/vulners.com",
+              "au": false
             },
             {
               "title": "VulDB",
               "url": "https://vuldb.com/",
               "description": "One of the largest vulnerability databases",
               "domain": "vuldb.com",
-              "favicon": "https://f.start.me/vuldb.com"
+              "favicon": "https://f.start.me/vuldb.com",
+              "au": false
             },
             {
               "title": "CVE Details",
               "url": "https://www.cvedetails.com/",
               "description": "The ultimate security vulnerability datasource",
               "domain": "cvedetails.com",
-              "favicon": "https://f.start.me/cvedetails.com"
+              "favicon": "https://f.start.me/cvedetails.com",
+              "au": false
             },
             {
               "title": "OpenCVE",
               "url": "https://www.opencve.io/cve",
               "description": "Easiest way to track CVE updates and get alerted",
               "domain": "opencve.io",
-              "favicon": "https://f.start.me/opencve.io"
+              "favicon": "https://f.start.me/opencve.io",
+              "au": false
             },
             {
               "title": "cvefeed.io",
               "url": "https://cvefeed.io/",
               "description": "Up-to-date feed of the latest CVEs and advisories",
               "domain": "cvefeed.io",
-              "favicon": "https://f.start.me/cvefeed.io"
+              "favicon": "https://f.start.me/cvefeed.io",
+              "au": false
             },
             {
               "title": "InTheWild",
               "url": "https://inthewild.io/feed",
               "description": "Free open source feed of exploited vulnerabilities",
               "domain": "inthewild.io",
-              "favicon": "https://f.start.me/inthewild.io"
+              "favicon": "https://f.start.me/inthewild.io",
+              "au": false
             },
             {
               "title": "Exploit-DB",
               "url": "https://www.exploit-db.com/",
               "description": "Exploit database and proof-of-concept code",
               "domain": "exploit-db.com",
-              "favicon": "https://f.start.me/exploit-db.com"
+              "favicon": "https://f.start.me/exploit-db.com",
+              "au": false
             },
             {
               "title": "Packet Storm",
               "url": "https://packetstormsecurity.com/",
               "description": "Exploits, advisories, tools and whitepapers",
               "domain": "packetstormsecurity.com",
-              "favicon": "https://f.start.me/packetstormsecurity.com"
+              "favicon": "https://f.start.me/packetstormsecurity.com",
+              "au": false
             },
             {
               "title": "GTFOBins",
               "url": "https://gtfobins.github.io/",
               "description": "Unix binaries for privilege escalation and security bypasses",
               "domain": "gtfobins.github.io",
-              "favicon": "https://f.start.me/gtfobins.github.io"
+              "favicon": "https://f.start.me/gtfobins.github.io",
+              "au": false
             },
             {
               "title": "LOLBAS",
               "url": "https://lolbas-project.github.io/",
               "description": "Living Off The Land Windows binaries and scripts",
               "domain": "lolbas-project.github.io",
-              "favicon": "https://f.start.me/lolbas-project.github.io"
+              "favicon": "https://f.start.me/lolbas-project.github.io",
+              "au": false
             },
             {
               "title": "Payloads All The Things",
               "url": "https://swisskyrepo.github.io/PayloadsAllTheThings/",
               "description": "Payloads and bypasses for web application security",
               "domain": "swisskyrepo.github.io",
-              "favicon": "https://f.start.me/swisskyrepo.github.io"
+              "favicon": "https://f.start.me/swisskyrepo.github.io",
+              "au": false
             },
             {
               "title": "RevShells",
               "url": "https://www.revshells.com/",
               "description": "Online reverse shell generator with encoding options",
               "domain": "revshells.com",
-              "favicon": "https://f.start.me/revshells.com"
+              "favicon": "https://f.start.me/revshells.com",
+              "au": false
             },
             {
               "title": "HackerOne Hacktivity",
               "url": "https://hackerone.com/hacktivity",
               "description": "See the latest hacker activity on HackerOne",
               "domain": "hackerone.com",
-              "favicon": "https://f.start.me/hackerone.com"
+              "favicon": "https://f.start.me/hackerone.com",
+              "au": false
             },
             {
               "title": "Bugcrowd Crowdstream",
               "url": "https://bugcrowd.com/crowdstream",
               "description": "Accepted and disclosed submissions on Bugcrowd programs",
               "domain": "bugcrowd.com",
-              "favicon": "https://f.start.me/bugcrowd.com"
+              "favicon": "https://f.start.me/bugcrowd.com",
+              "au": false
             },
             {
               "title": "GTFOArgs",
               "url": "https://gtfoargs.github.io/",
               "description": "Unix binaries that can be manipulated for argument injection",
               "domain": "gtfoargs.github.io",
-              "favicon": "https://f.start.me/gtfoargs.github.io"
+              "favicon": "https://f.start.me/gtfoargs.github.io",
+              "au": false
             },
             {
               "title": "LOLDrivers",
               "url": "https://www.loldrivers.io/",
               "description": "Known malicious and vulnerable Windows drivers",
               "domain": "loldrivers.io",
-              "favicon": "https://f.start.me/loldrivers.io"
+              "favicon": "https://f.start.me/loldrivers.io",
+              "au": false
             },
             {
               "title": "shell-storm Shellcodes",
               "url": "https://shell-storm.org/shellcode/index.html",
               "description": "Shellcode database for study cases",
               "domain": "shell-storm.org",
-              "favicon": "https://f.start.me/shell-storm.org"
+              "favicon": "https://f.start.me/shell-storm.org",
+              "au": false
             },
             {
               "title": "Zero Day Initiative",
               "url": "https://www.zerodayinitiative.com/advisories/published/",
               "description": "Publicly disclosed vulnerabilities discovered by ZDI researchers",
               "domain": "zerodayinitiative.com",
-              "favicon": "https://f.start.me/zerodayinitiative.com"
+              "favicon": "https://f.start.me/zerodayinitiative.com",
+              "au": false
             },
             {
               "title": "WADComs",
               "url": "https://wadcoms.github.io/",
               "description": "Offensive security commands for Windows/AD environments",
               "domain": "wadcoms.github.io",
-              "favicon": "https://f.start.me/wadcoms.github.io"
+              "favicon": "https://f.start.me/wadcoms.github.io",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786001,
@@ -4616,16 +5745,8 @@ window.BUBBSY_DATA = {
               "description": "Australia premier residential phone numbers, names, and address directory",
               "domain": "www.whitepages.com.au",
               "favicon": "https://f.start.me/www.whitepages.com.au",
-              "status": 200
-            },
-            {
-              "id": 57413335,
-              "title": "[AUS] Ryerson Index (Australian Death Notices)",
-              "url": "https://www.ryersonindex.org/",
-              "description": "8.5M+ indexed notices from Australian newspapers for people tracing",
-              "domain": "www.ryersonindex.org",
-              "favicon": "https://f.start.me/www.ryersonindex.org",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 51468585,
@@ -4634,7 +5755,18 @@ window.BUBBSY_DATA = {
               "description": "Verify if an Australian resident is registered on the electoral roll",
               "domain": "check.aec.gov.au",
               "favicon": "https://f.start.me/check.aec.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 57413335,
+              "title": "[AUS] Ryerson Index (Australian Death Notices)",
+              "url": "https://www.ryersonindex.org/",
+              "description": "8.5M+ indexed notices from Australian newspapers for people tracing",
+              "domain": "www.ryersonindex.org",
+              "favicon": "https://f.start.me/www.ryersonindex.org",
+              "status": 200,
+              "au": false
             },
             {
               "id": 34052665,
@@ -4643,7 +5775,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian names and caller IDs linked to +61 mobile and landline numbers",
               "domain": "www.truecaller.com",
               "favicon": "https://f.start.me/www.truecaller.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33830862,
@@ -4652,7 +5785,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.idcrawl.com",
               "favicon": "https://f.start.me/idcrawl.com",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 27455781,
@@ -4661,7 +5795,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "webmii.com",
               "favicon": "https://f.start.me/webmii.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30069141,
@@ -4670,7 +5805,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7038474,
@@ -4679,7 +5815,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.truepeoplesearch.com",
               "favicon": "https://f.start.me/truepeoplesearch.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 13899882,
@@ -4688,7 +5825,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.peoplefinder.com",
               "favicon": "https://f.start.me/peoplefinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30360526,
@@ -4697,7 +5835,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fastpeoplesearch.com",
               "favicon": "https://f.start.me/fastpeoplesearch.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 14997216,
@@ -4706,7 +5845,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yandex.ru",
               "favicon": "https://f.start.me/yandex.ru",
-              "status": 410
+              "status": 410,
+              "au": false
             },
             {
               "id": 9882941,
@@ -4715,7 +5855,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.familytreenow.com",
               "favicon": "https://f.start.me/familytreenow.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 11008874,
@@ -4724,7 +5865,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "itools.com",
               "favicon": "https://f.start.me/itools.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36029327,
@@ -4733,7 +5875,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732277,
@@ -4742,7 +5885,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17727994,
@@ -4751,7 +5895,8 @@ window.BUBBSY_DATA = {
               "description": "Search for People, Businesses & Places in the UK",
               "domain": "www.192.com",
               "favicon": "https://f.start.me/192.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 16920227,
@@ -4760,7 +5905,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.infobel.com",
               "favicon": "https://f.start.me/infobel.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 26798157,
@@ -4769,7 +5915,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12320143,
@@ -4778,7 +5925,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.peekyou.com",
               "favicon": "https://f.start.me/peekyou.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 12154952,
@@ -4787,7 +5935,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.whitepages.com",
               "favicon": "https://f.start.me/whitepages.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26034670,
@@ -4796,7 +5945,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.canada411.ca",
               "favicon": "https://f.start.me/canada411.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6218501,
@@ -4805,7 +5955,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "411.com",
               "favicon": "https://f.start.me/411.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4590602,
@@ -4814,7 +5965,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.truthfinder.com",
               "favicon": "https://f.start.me/truthfinder.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 19557881,
@@ -4823,7 +5975,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zabasearch.com",
               "favicon": "https://f.start.me/zabasearch.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 3791812,
@@ -4832,7 +5985,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thatsthem.com",
               "favicon": "https://f.start.me/thatsthem.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3548425,
@@ -4841,7 +5995,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "radaris.com",
               "favicon": "https://f.start.me/radaris.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 68386,
@@ -4850,7 +6005,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.yasni.com",
               "favicon": "https://f.start.me/yasni.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 26300411,
@@ -4859,7 +6015,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gofindwho.com",
               "favicon": "https://f.start.me/gofindwho.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 28614464,
@@ -4868,7 +6025,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "xlek.com",
               "favicon": "https://f.start.me/xlek.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 30360537,
@@ -4877,7 +6035,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ufind.name",
               "favicon": "https://f.start.me/ufind.name",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 91003031,
@@ -4886,7 +6045,8 @@ window.BUBBSY_DATA = {
               "description": "The #1 source for identity and trust",
               "domain": "pipl.com",
               "favicon": "https://f.start.me/pipl.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003032,
@@ -4895,7 +6055,8 @@ window.BUBBSY_DATA = {
               "description": "Easy, affordable access to public record information",
               "domain": "beenverified.com",
               "favicon": "https://f.start.me/beenverified.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003034,
@@ -4904,9 +6065,12 @@ window.BUBBSY_DATA = {
               "description": "Social White Pages - search for people's profiles on social sites",
               "domain": "snitch.name",
               "favicon": "https://f.start.me/snitch.name",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 55783176,
@@ -4924,7 +6088,8 @@ window.BUBBSY_DATA = {
               "description": "Search profiles and history on Australia largest tech and lifestyle community",
               "domain": "forums.whirlpool.net.au",
               "favicon": "https://f.start.me/forums.whirlpool.net.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 2000824,
@@ -4933,7 +6098,8 @@ window.BUBBSY_DATA = {
               "description": "Search usernames and activity on Australia leading consumer forum",
               "domain": "www.ozbargain.com.au",
               "favicon": "https://f.start.me/www.ozbargain.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 66710825,
@@ -4942,7 +6108,8 @@ window.BUBBSY_DATA = {
               "description": "Search sellers, listings, and user identifiers across Australia",
               "domain": "www.gumtree.com.au",
               "favicon": "https://f.start.me/www.gumtree.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 31287551,
@@ -4951,7 +6118,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whatsmyname.app",
               "favicon": "https://f.start.me/whatsmyname.app",
-              "status": 464
+              "status": 464,
+              "au": false
             },
             {
               "id": 36810502,
@@ -4960,7 +6128,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "analyzeid.com",
               "favicon": "https://f.start.me/analyzeid.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42438536,
@@ -4969,7 +6138,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.idcrawl.com",
               "favicon": "https://f.start.me/idcrawl.com",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 29622927,
@@ -4978,7 +6148,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608787,
@@ -4987,7 +6158,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24705163,
@@ -4996,7 +6168,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34743113,
@@ -5005,7 +6178,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608795,
@@ -5014,7 +6188,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42575482,
@@ -5023,7 +6198,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12219894,
@@ -5032,7 +6208,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "knowem.com",
               "favicon": "https://f.start.me/knowem.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 18927298,
@@ -5041,7 +6218,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "checkusernames.com",
               "favicon": "https://f.start.me/checkusernames.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 26582607,
@@ -5050,7 +6228,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "checkuser.org",
               "favicon": "https://f.start.me/checkuser.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1983226,
@@ -5059,7 +6238,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "namechk.com",
               "favicon": "https://f.start.me/namechk.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 33852670,
@@ -5068,7 +6248,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "com.lullar.com",
               "favicon": "https://f.start.me/com.lullar.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24262125,
@@ -5077,7 +6258,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searchpof.com",
               "favicon": "https://f.start.me/searchpof.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37228758,
@@ -5086,7 +6268,8 @@ window.BUBBSY_DATA = {
               "description": "In order to use these tools, please enter the username into the relevant box below, excluding any prefixed @ or # symbols.\n\nN.B. any results for usernames are an approximation, as such, any negative results, especially in the case of searches relating to messaging apps (Kik, Snapchat, Whatsapp, etc), does not necessarily mean the username is not in use.",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27959146,
@@ -5095,7 +6278,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36538888,
@@ -5104,7 +6288,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042683,
@@ -5113,9 +6298,12 @@ window.BUBBSY_DATA = {
               "description": "Quidam allows you to retrieve information thanks to the forgotten password function of some sites.",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 55786875,
@@ -5133,7 +6321,8 @@ window.BUBBSY_DATA = {
               "description": "Inspect mail exchange records and SPF/DKIM for Australian .au domains",
               "domain": "mxtoolbox.com",
               "favicon": "https://f.start.me/mxtoolbox.com",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 31611372,
@@ -5142,7 +6331,8 @@ window.BUBBSY_DATA = {
               "description": "Query major Australian ISP email gateways (bigpond, optusnet, tpg, iinet)",
               "domain": "mxtoolbox.com",
               "favicon": "https://f.start.me/mxtoolbox.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50224959,
@@ -5151,7 +6341,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "identificator.space",
               "favicon": "https://f.start.me/identificator.space",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37663683,
@@ -5160,7 +6351,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "epieos.com",
               "favicon": "https://f.start.me/epieos.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 26045717,
@@ -5169,7 +6361,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013697,
@@ -5178,7 +6371,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42571697,
@@ -5187,7 +6381,8 @@ window.BUBBSY_DATA = {
               "description": "Infoga - Email OSINT. Contribute to m4ll0k/Infoga development by creating an account on GitHub.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 26687354,
@@ -5196,7 +6391,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15388922,
@@ -5205,7 +6401,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "trumail.io",
               "favicon": "https://f.start.me/trumail.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4676412,
@@ -5214,7 +6411,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hunter.io",
               "favicon": "https://f.start.me/hunter.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11741966,
@@ -5223,7 +6421,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "verify-email.org",
               "favicon": "https://f.start.me/verify-email.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38372784,
@@ -5232,7 +6431,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 11815549,
@@ -5241,7 +6441,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "centralops.net",
               "favicon": "https://f.start.me/centralops.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5578599,
@@ -5250,7 +6451,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.email-format.com",
               "favicon": "https://f.start.me/email-format.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5509557,
@@ -5259,7 +6461,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mxtoolbox.com",
               "favicon": "https://f.start.me/mxtoolbox.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29050005,
@@ -5268,7 +6471,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10026938,
@@ -5277,7 +6481,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "proofy.io",
               "favicon": "https://f.start.me/proofy.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 869706,
@@ -5286,7 +6491,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "metricsparrow.com",
               "favicon": "https://f.start.me/metricsparrow.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33264232,
@@ -5295,7 +6501,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "phonebook.cz",
               "favicon": "https://f.start.me/phonebook.cz",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26338448,
@@ -5304,7 +6511,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.hotsheet.com",
               "favicon": "https://f.start.me/hotsheet.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24881448,
@@ -5313,7 +6521,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "emailrep.io",
               "favicon": "https://f.start.me/emailrep.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38372744,
@@ -5322,7 +6531,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37013705,
@@ -5331,7 +6541,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013422,
@@ -5340,7 +6551,8 @@ window.BUBBSY_DATA = {
               "description": "Email OSINT and password breach hunting. Use h8mail to find passwords through different breach and reconnaissance services, or the infamous Breached Compilation torrent",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25606974,
@@ -5349,7 +6561,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26105266,
@@ -5358,7 +6571,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4356544,
@@ -5367,7 +6581,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "anymailfinder.com",
               "favicon": "https://f.start.me/anymailfinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37356057,
@@ -5376,7 +6591,8 @@ window.BUBBSY_DATA = {
               "description": "ProtOSINT is a Python script that helps you investigate ProtonMail accounts and ProtonVPN IP addresses.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003021,
@@ -5385,7 +6601,8 @@ window.BUBBSY_DATA = {
               "description": "Find professional email addresses in seconds",
               "domain": "hunter.io",
               "favicon": "https://f.start.me/hunter.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003022,
@@ -5394,7 +6611,8 @@ window.BUBBSY_DATA = {
               "description": "Your first-degree connection to any professional's email",
               "domain": "rocketreach.co",
               "favicon": "https://f.start.me/rocketreach.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003024,
@@ -5403,7 +6621,8 @@ window.BUBBSY_DATA = {
               "description": "Find anyone's email address",
               "domain": "voilanorbert.com",
               "favicon": "https://f.start.me/voilanorbert.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003025,
@@ -5412,9 +6631,12 @@ window.BUBBSY_DATA = {
               "description": "430M+ indexed emails with search filters and deliverability checks",
               "domain": "tomba.io",
               "favicon": "https://f.start.me/tomba.io",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 55785661,
@@ -5426,22 +6648,14 @@ window.BUBBSY_DATA = {
           "link_count": 31,
           "links": [
             {
-              "id": 32124478,
-              "title": "[AUS] Reverse Australia (Phone Lookup)",
-              "url": "https://www.reverseaustralia.com/",
-              "description": "Australia leading reverse phone directory with caller feedback and addresses",
-              "domain": "www.reverseaustralia.com",
-              "favicon": "https://f.start.me/www.reverseaustralia.com",
-              "status": 200
-            },
-            {
               "id": 38219910,
               "title": "[AUS] ACMA Numbering Register Lookup",
               "url": "https://www.thenumberingsystem.com.au/",
               "description": "Find which Australian carrier (Telstra, Optus, TPG) was allocated any phone prefix",
               "domain": "www.thenumberingsystem.com.au",
               "favicon": "https://f.start.me/www.thenumberingsystem.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 916311,
@@ -5450,7 +6664,8 @@ window.BUBBSY_DATA = {
               "description": "Australian telecommunications consumer register and marketing compliance rules",
               "domain": "www.donotcall.gov.au",
               "favicon": "https://f.start.me/www.donotcall.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 14877999,
@@ -5459,7 +6674,18 @@ window.BUBBSY_DATA = {
               "description": "Lookup commercial Australian phone numbers, direct lines, and departments",
               "domain": "www.yellowpages.com.au",
               "favicon": "https://f.start.me/www.yellowpages.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 32124478,
+              "title": "[AUS] Reverse Australia (Phone Lookup)",
+              "url": "https://www.reverseaustralia.com/",
+              "description": "Australia leading reverse phone directory with caller feedback and addresses",
+              "domain": "www.reverseaustralia.com",
+              "favicon": "https://f.start.me/www.reverseaustralia.com",
+              "status": 200,
+              "au": false
             },
             {
               "id": 49359112,
@@ -5468,7 +6694,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36959821,
@@ -5477,7 +6704,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "demo.phoneinfoga.crvx.fr",
               "favicon": "https://f.start.me/demo.phoneinfoga.crvx.fr",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 43040905,
@@ -5486,7 +6714,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.idcrawl.com",
               "favicon": "https://f.start.me/idcrawl.com",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 41983620,
@@ -5495,7 +6724,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21673946,
@@ -5504,7 +6734,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34363532,
@@ -5513,7 +6744,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46588824,
@@ -5522,7 +6754,8 @@ window.BUBBSY_DATA = {
               "description": "Collector is a tool OSINT (open source intelligence) and information gathering.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36029321,
@@ -5531,7 +6764,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4287813,
@@ -5540,7 +6774,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nuwber.com",
               "favicon": "https://f.start.me/nuwber.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 4275067,
@@ -5549,7 +6784,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.whocalledme.com",
               "favicon": "https://f.start.me/whocalledme.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27959133,
@@ -5558,7 +6794,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11236107,
@@ -5567,7 +6804,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "validnumber.com",
               "favicon": "https://f.start.me/validnumber.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7494906,
@@ -5576,7 +6814,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zlookup.com",
               "favicon": "https://f.start.me/zlookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23517000,
@@ -5585,7 +6824,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.reversephonecheck.com",
               "favicon": "https://f.start.me/reversephonecheck.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 1978616,
@@ -5594,7 +6834,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.truecaller.com",
               "favicon": "https://f.start.me/truecaller.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41688824,
@@ -5603,7 +6844,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowcrypt.net",
               "favicon": "https://f.start.me/shadowcrypt.net",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 2459101,
@@ -5612,7 +6854,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sync.me",
               "favicon": "https://f.start.me/sync.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23823520,
@@ -5621,7 +6864,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opencellid.org",
               "favicon": "https://f.start.me/opencellid.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20179619,
@@ -5630,7 +6874,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cell2gps.com",
               "favicon": "https://f.start.me/cell2gps.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 23537281,
@@ -5639,7 +6884,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cellidfinder.com",
               "favicon": "https://f.start.me/cellidfinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22866224,
@@ -5648,7 +6894,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.phonescoop.com",
               "favicon": "https://f.start.me/phonescoop.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12170559,
@@ -5657,7 +6904,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gsmarena.com",
               "favicon": "https://f.start.me/gsmarena.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5454052,
@@ -5666,7 +6914,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fcc.io",
               "favicon": "https://f.start.me/fcc.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23492096,
@@ -5675,7 +6924,8 @@ window.BUBBSY_DATA = {
               "description": "white pages, free people search, phone\r\ndirectory number, historical phone book, historical white\r\npages, old white pages, \r\n1994,1995,1996,1997,1998,2001,2002,2003,2007,2008,background \r\nsearch, c...",
               "domain": "www.oldphonebook.com",
               "favicon": "https://f.start.me/oldphonebook.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2482670,
@@ -5684,7 +6934,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.carrierlookup.com",
               "favicon": "https://f.start.me/carrierlookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23823975,
@@ -5693,7 +6944,8 @@ window.BUBBSY_DATA = {
               "description": "Spy Dialer is the totally 100% seriously free reverse phone lookup used by millions of people. NO membership required! Have a missed call? Need to know whose number is it? Search now by phone numbe...",
               "domain": "spydialer.com",
               "favicon": "https://f.start.me/spydialer.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34492412,
@@ -5702,7 +6954,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.martinvigo.com",
               "favicon": "https://f.start.me/martinvigo.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003041,
@@ -5711,7 +6964,8 @@ window.BUBBSY_DATA = {
               "description": "Free reverse phone lookup",
               "domain": "numlookup.com",
               "favicon": "https://f.start.me/numlookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003042,
@@ -5720,7 +6974,8 @@ window.BUBBSY_DATA = {
               "description": "Enter a phone number and return the carrier name",
               "domain": "freecarrierlookup.com",
               "favicon": "https://f.start.me/freecarrierlookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003043,
@@ -5729,7 +6984,8 @@ window.BUBBSY_DATA = {
               "description": "Cell phone, landline or fake number check",
               "domain": "phonevalidator.com",
               "favicon": "https://f.start.me/phonevalidator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003044,
@@ -5738,9 +6994,12 @@ window.BUBBSY_DATA = {
               "description": "Who is calling? International reverse phone search",
               "domain": "tellows.com",
               "favicon": "https://f.start.me/tellows.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 55783512,
@@ -5758,7 +7017,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 47758207,
@@ -5767,7 +7027,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.huntintel.io",
               "favicon": "https://f.start.me/huntintel.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50597345,
@@ -5776,7 +7037,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27592038,
@@ -5785,7 +7047,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.social-searcher.com",
               "favicon": "https://f.start.me/social-searcher.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15421715,
@@ -5794,7 +7057,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whopostedwhat.com",
               "favicon": "https://f.start.me/whopostedwhat.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37731575,
@@ -5803,7 +7067,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32545738,
@@ -5812,7 +7077,8 @@ window.BUBBSY_DATA = {
               "description": "Skype Search Engine",
               "domain": "www.skypli.com",
               "favicon": "https://f.start.me/skypli.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36788792,
@@ -5821,7 +7087,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28924686,
@@ -5830,7 +7097,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "kribrum.io",
               "favicon": "https://f.start.me/kribrum.io",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 20476722,
@@ -5839,7 +7107,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "graphtreon.com",
               "favicon": "https://f.start.me/graphtreon.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 20114985,
@@ -5848,7 +7117,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.socialsearchengine.org",
               "favicon": "https://f.start.me/socialsearchengine.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30835496,
@@ -5857,7 +7127,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29752434,
@@ -5866,7 +7137,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21669668,
@@ -5875,7 +7147,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36032126,
@@ -5884,9 +7157,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55788096,
@@ -5904,7 +7180,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37731570,
@@ -5913,7 +7190,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201261,
@@ -5922,7 +7200,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40597789,
@@ -5931,7 +7210,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "4wbwa6vcpvcr3vvf4qkhppgy56urmjcj2vagu2iqgp3z656xcmfdbiqd.onion.pet",
               "favicon": "https://f.start.me/4wbwa6vcpvcr3vvf4qkhppgy56urmjcj2vagu2iqgp3z656xcmfdbiqd.onion.pet",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 44759876,
@@ -5940,7 +7220,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sowsearch.info",
               "favicon": "https://f.start.me/sowsearch.info",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30188755,
@@ -5949,7 +7230,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.social-searcher.com",
               "favicon": "https://f.start.me/social-searcher.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37076206,
@@ -5958,7 +7240,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fbdown.github.io",
               "favicon": "https://f.start.me/fbdown.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24948639,
@@ -5967,7 +7250,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17803816,
@@ -5976,7 +7260,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "commentpicker.com",
               "favicon": "https://f.start.me/commentpicker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26499464,
@@ -5985,7 +7270,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osintcombine.com",
               "favicon": "https://f.start.me/osintcombine.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 36762948,
@@ -5994,7 +7280,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42571716,
@@ -6003,7 +7290,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29659441,
@@ -6012,7 +7300,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29659439,
@@ -6021,7 +7310,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19166557,
@@ -6030,7 +7320,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.facebook.com",
               "favicon": "https://f.start.me/facebook.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 40018492,
@@ -6039,9 +7330,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "haveibeenzucked.com",
               "favicon": "https://f.start.me/haveibeenzucked.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786740,
@@ -6059,7 +7353,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50597854,
@@ -6068,7 +7363,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nitter.hu",
               "favicon": "https://f.start.me/nitter.hu",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 49480497,
@@ -6077,7 +7373,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nitter.it",
               "favicon": "https://f.start.me/nitter.it",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 45964808,
@@ -6086,7 +7383,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "birdhunt.co",
               "favicon": "https://f.start.me/birdhunt.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608814,
@@ -6095,7 +7393,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "xnaas.github.io",
               "favicon": "https://f.start.me/xnaas.github.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 23651165,
@@ -6104,7 +7403,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37731572,
@@ -6113,7 +7413,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201135,
@@ -6122,7 +7423,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201305,
@@ -6131,7 +7433,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201245,
@@ -6140,7 +7443,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 403326,
@@ -6149,7 +7453,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitter.com",
               "favicon": "https://f.start.me/twitter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41675765,
@@ -6158,7 +7463,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitter.com",
               "favicon": "https://f.start.me/twitter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10855591,
@@ -6167,7 +7473,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tweetbeaver.com",
               "favicon": "https://f.start.me/tweetbeaver.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 30447623,
@@ -6176,7 +7483,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38601525,
@@ -6185,7 +7493,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28122404,
@@ -6194,7 +7503,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tweettioc.com",
               "favicon": "https://f.start.me/tweettioc.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 2007715,
@@ -6203,7 +7513,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "followerwonk.com",
               "favicon": "https://f.start.me/followerwonk.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17044272,
@@ -6212,7 +7523,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onemilliontweetmap.com",
               "favicon": "https://f.start.me/onemilliontweetmap.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2084515,
@@ -6221,7 +7533,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.tweetbinder.com",
               "favicon": "https://f.start.me/tweetbinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30835463,
@@ -6230,7 +7543,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30835459,
@@ -6239,7 +7553,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14229371,
@@ -6248,7 +7563,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "threadreaderapp.com",
               "favicon": "https://f.start.me/threadreaderapp.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37008889,
@@ -6257,7 +7573,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pushshift.io",
               "favicon": "https://f.start.me/pushshift.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 30447566,
@@ -6266,7 +7583,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searchfortweets1.com",
               "favicon": "https://f.start.me/searchfortweets1.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 42931114,
@@ -6275,7 +7593,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "getdewey.co",
               "favicon": "https://f.start.me/getdewey.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4515141,
@@ -6284,7 +7603,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "geosocialfootprint.com",
               "favicon": "https://f.start.me/geosocialfootprint.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26950632,
@@ -6293,7 +7613,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.omnisci.com",
               "favicon": "https://f.start.me/omnisci.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3168787,
@@ -6302,7 +7623,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "doesfollow.com",
               "favicon": "https://f.start.me/doesfollow.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 868903,
@@ -6311,7 +7633,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sleepingtime.org",
               "favicon": "https://f.start.me/sleepingtime.org",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 2861854,
@@ -6320,7 +7643,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "foller.me",
               "favicon": "https://f.start.me/foller.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 9849707,
@@ -6329,7 +7653,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tweettopicexplorer.neoformix.com",
               "favicon": "https://f.start.me/tweettopicexplorer.neoformix.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32823859,
@@ -6338,7 +7663,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "app.truthnest.com",
               "favicon": "https://f.start.me/app.truthnest.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25292830,
@@ -6347,7 +7673,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "getdaytrends.com",
               "favicon": "https://f.start.me/getdaytrends.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5644869,
@@ -6356,7 +7683,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.trendsmap.com",
               "favicon": "https://f.start.me/trendsmap.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3811314,
@@ -6365,7 +7693,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "socialbearing.com",
               "favicon": "https://f.start.me/socialbearing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 403329,
@@ -6374,7 +7703,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twiangulate.com",
               "favicon": "https://f.start.me/twiangulate.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 844251,
@@ -6383,7 +7713,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ctrlq.org",
               "favicon": "https://f.start.me/ctrlq.org",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 26459814,
@@ -6392,7 +7723,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twittertrails.com",
               "favicon": "https://f.start.me/twittertrails.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30929294,
@@ -6401,7 +7733,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.vicinitas.io",
               "favicon": "https://f.start.me/vicinitas.io",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 50597123,
@@ -6410,9 +7743,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "airtable.com",
               "favicon": "https://f.start.me/airtable.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55788542,
@@ -6430,7 +7766,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "docs.invidious.io",
               "favicon": "https://f.start.me/docs.invidious.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040090,
@@ -6439,7 +7776,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44455201,
@@ -6448,7 +7786,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39643322,
@@ -6457,7 +7796,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ytdl.actionsack.com",
               "favicon": "https://f.start.me/ytdl.actionsack.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 22817386,
@@ -6466,7 +7806,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mattw.io",
               "favicon": "https://f.start.me/mattw.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40917433,
@@ -6475,7 +7816,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mattw.io",
               "favicon": "https://f.start.me/mattw.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34863793,
@@ -6484,7 +7826,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hadzy.com",
               "favicon": "https://f.start.me/hadzy.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 27158644,
@@ -6493,7 +7836,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "commentpicker.com",
               "favicon": "https://f.start.me/commentpicker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8815377,
@@ -6502,7 +7846,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "citizenevidence.amnestyusa.org",
               "favicon": "https://f.start.me/citizenevidence.amnestyusa.org",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 2931056,
@@ -6511,7 +7856,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "youtube.github.io",
               "favicon": "https://f.start.me/youtube.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521875,
@@ -6520,7 +7866,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "asif633.github.io",
               "favicon": "https://f.start.me/asif633.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040087,
@@ -6529,7 +7876,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3157739,
@@ -6538,7 +7886,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yout.com",
               "favicon": "https://f.start.me/yout.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26787944,
@@ -6547,7 +7896,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ytcomment.kmcat.uk",
               "favicon": "https://f.start.me/ytcomment.kmcat.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30835591,
@@ -6556,7 +7906,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28104005,
@@ -6565,7 +7916,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "unlistedvideos.com",
               "favicon": "https://f.start.me/unlistedvideos.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 24258087,
@@ -6574,9 +7926,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "youtubecommentsdownloader.com",
               "favicon": "https://f.start.me/youtubecommentsdownloader.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786630,
@@ -6594,7 +7949,8 @@ window.BUBBSY_DATA = {
               "description": "Australia primary national discussion community and breaking news",
               "domain": "www.reddit.com",
               "favicon": "https://f.start.me/www.reddit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21618816,
@@ -6603,7 +7959,8 @@ window.BUBBSY_DATA = {
               "description": "Australian economic trends, property discussion, and financial intelligence",
               "domain": "www.reddit.com",
               "favicon": "https://f.start.me/www.reddit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 88726981,
@@ -6612,7 +7969,8 @@ window.BUBBSY_DATA = {
               "description": "Discussions on Australian federal and state law, police, and legal disputes",
               "domain": "www.reddit.com",
               "favicon": "https://f.start.me/www.reddit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37318011,
@@ -6621,7 +7979,8 @@ window.BUBBSY_DATA = {
               "description": "Reddit privacy frontend",
               "domain": "teddit.net",
               "favicon": "https://f.start.me/teddit.net",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 48163836,
@@ -6630,7 +7989,8 @@ window.BUBBSY_DATA = {
               "description": "Search reddit using the pushshift.io API. For more advanced searches you can directly query the API fairly easily.",
               "domain": "camas.unddit.com",
               "favicon": "https://f.start.me/camas.unddit.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 735265,
@@ -6639,7 +7999,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "karmadecay.com",
               "favicon": "https://f.start.me/karmadecay.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37013417,
@@ -6648,7 +8009,8 @@ window.BUBBSY_DATA = {
               "description": "A command line program to easily download reddit users' post histories.",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43220709,
@@ -6657,7 +8019,8 @@ window.BUBBSY_DATA = {
               "description": "Social media statistics for Reddit - popular communities, trending topics, and more",
               "domain": "www.socialgrep.com",
               "favicon": "https://f.start.me/socialgrep.com",
-              "status": 523
+              "status": 523,
+              "au": false
             },
             {
               "id": 48073644,
@@ -6666,7 +8029,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redditsearchtool.com",
               "favicon": "https://f.start.me/redditsearchtool.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48175582,
@@ -6675,7 +8039,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bmai.dev",
               "favicon": "https://f.start.me/bmai.dev",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48332150,
@@ -6684,7 +8049,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ihsoyct.github.io",
               "favicon": "https://f.start.me/ihsoyct.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48332163,
@@ -6693,7 +8059,8 @@ window.BUBBSY_DATA = {
               "description": "Pushshift Frontend",
               "domain": "adhesivecheese.github.io",
               "favicon": "https://f.start.me/adhesivecheese.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042720,
@@ -6702,7 +8069,8 @@ window.BUBBSY_DATA = {
               "description": "USE: https://nydolls.org/author/REDDITOR",
               "domain": "nydolls.org",
               "favicon": "https://f.start.me/nydolls.org",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 38564478,
@@ -6711,7 +8079,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.reveddit.com",
               "favicon": "https://f.start.me/reveddit.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37076199,
@@ -6720,7 +8089,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redditdownloader.github.io",
               "favicon": "https://f.start.me/redditdownloader.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23301515,
@@ -6729,7 +8099,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.redective.com",
               "favicon": "https://f.start.me/redective.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 45763636,
@@ -6738,7 +8109,8 @@ window.BUBBSY_DATA = {
               "description": "A Python module to extract personality insights, sentiment & keywords from reddit accounts",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45763650,
@@ -6747,7 +8119,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "uncensor.cc",
               "favicon": "https://f.start.me/uncensor.cc",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 36798889,
@@ -6756,7 +8129,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15147331,
@@ -6765,7 +8139,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33534746,
@@ -6774,7 +8149,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "reddit-user-analyser.netlify.app",
               "favicon": "https://f.start.me/reddit-user-analyser.netlify.app",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18882156,
@@ -6783,7 +8159,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.redditsearch.io",
               "favicon": "https://f.start.me/redditsearch.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32713645,
@@ -6792,7 +8169,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17485006,
@@ -6801,7 +8179,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pholder.com",
               "favicon": "https://f.start.me/pholder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26160156,
@@ -6810,7 +8189,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redditmetis.com",
               "favicon": "https://f.start.me/redditmetis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34736915,
@@ -6819,7 +8199,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.redditcommentsearch.com",
               "favicon": "https://f.start.me/redditcommentsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27921000,
@@ -6828,7 +8209,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.redditinvestigator.com",
               "favicon": "https://f.start.me/redditinvestigator.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 29793874,
@@ -6837,7 +8219,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pushshift.io",
               "favicon": "https://f.start.me/pushshift.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25463469,
@@ -6846,7 +8229,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041872,
@@ -6855,7 +8239,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searcheddit.com",
               "favicon": "https://f.start.me/searcheddit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21930271,
@@ -6864,7 +8249,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "removeddit.com",
               "favicon": "https://f.start.me/removeddit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45993392,
@@ -6873,7 +8259,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "deaditarchive.netlify.app",
               "favicon": "https://f.start.me/deaditarchive.netlify.app",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40434782,
@@ -6882,7 +8269,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "anvaka.github.io",
               "favicon": "https://f.start.me/anvaka.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43632129,
@@ -6891,7 +8279,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yasiv.com",
               "favicon": "https://f.start.me/yasiv.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17466153,
@@ -6900,7 +8289,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.resavr.com",
               "favicon": "https://f.start.me/resavr.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 47519731,
@@ -6909,7 +8299,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redditle.com",
               "favicon": "https://f.start.me/redditle.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38009317,
@@ -6918,9 +8309,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "libredd.it",
               "favicon": "https://f.start.me/libredd.it",
-              "status": 1099
+              "status": 1099,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59478606,
@@ -6938,7 +8332,8 @@ window.BUBBSY_DATA = {
               "description": "Easily use Google to search profiles on LinkedIn",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18071754,
@@ -6947,7 +8342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.lisearcher.com",
               "favicon": "https://f.start.me/lisearcher.com",
-              "status": 526
+              "status": 526,
+              "au": false
             },
             {
               "id": 33871870,
@@ -6956,7 +8352,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "linkedprospect.com",
               "favicon": "https://f.start.me/linkedprospect.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37731567,
@@ -6965,7 +8362,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48364187,
@@ -6974,7 +8372,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43674387,
@@ -6983,7 +8382,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "buildorgchart.herokuapp.com",
               "favicon": "https://f.start.me/buildorgchart.herokuapp.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 42554668,
@@ -6992,7 +8392,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nubela.co",
               "favicon": "https://f.start.me/nubela.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48042681,
@@ -7001,7 +8402,8 @@ window.BUBBSY_DATA = {
               "description": "Allows you to retrieve information on linkedin profiles, companies on linkedin and search on linkedin companies/persons",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30712788,
@@ -7010,9 +8412,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.support",
               "favicon": "https://f.start.me/osint.support",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58807771,
@@ -7030,7 +8435,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35977832,
@@ -7039,7 +8445,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3547846,
@@ -7048,7 +8455,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.social-searcher.com",
               "favicon": "https://f.start.me/social-searcher.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521973,
@@ -7057,9 +8465,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58902254,
@@ -7077,7 +8488,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discordhub.com",
               "favicon": "https://f.start.me/discordhub.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4714416,
@@ -7086,7 +8498,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discord.me",
               "favicon": "https://f.start.me/discord.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41675353,
@@ -7095,7 +8508,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discordzoom.com",
               "favicon": "https://f.start.me/discordzoom.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13785238,
@@ -7104,7 +8518,8 @@ window.BUBBSY_DATA = {
               "description": "Discord History Tracker lets you save chat history in your servers, groups, and private conversations, and view it offline.",
               "domain": "dht.chylex.com",
               "favicon": "https://f.start.me/dht.chylex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41457406,
@@ -7113,7 +8528,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14860022,
@@ -7122,7 +8538,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discordservers.com",
               "favicon": "https://f.start.me/discordservers.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16178196,
@@ -7131,7 +8548,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "disboard.org",
               "favicon": "https://f.start.me/disboard.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 25057636,
@@ -7140,7 +8558,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.discordportal.com",
               "favicon": "https://f.start.me/discordportal.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33583876,
@@ -7149,7 +8568,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discord.id",
               "favicon": "https://f.start.me/discord.id",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25057638,
@@ -7158,7 +8578,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discord.center",
               "favicon": "https://f.start.me/discord.center",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41675351,
@@ -7167,7 +8588,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discordbotlist.com",
               "favicon": "https://f.start.me/discordbotlist.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29634010,
@@ -7176,7 +8598,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "top.gg",
               "favicon": "https://f.start.me/top.gg",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41419530,
@@ -7185,9 +8608,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discord.bots.gg",
               "favicon": "https://f.start.me/discord.bots.gg",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 61879979,
@@ -7205,7 +8631,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitchtracker.com",
               "favicon": "https://f.start.me/twitchtracker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708011,
@@ -7214,7 +8641,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitch.fckdmca.com",
               "favicon": "https://f.start.me/twitch.fckdmca.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 46708013,
@@ -7223,7 +8651,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sizeof.cat",
               "favicon": "https://f.start.me/sizeof.cat",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 30868446,
@@ -7232,7 +8661,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sullygnome.com",
               "favicon": "https://f.start.me/sullygnome.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 46708016,
@@ -7241,7 +8671,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searchstream.live",
               "favicon": "https://f.start.me/searchstream.live",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22538944,
@@ -7250,7 +8681,8 @@ window.BUBBSY_DATA = {
               "description": "View the follower list of any Twitch channel",
               "domain": "twitch-tools.rootonline.de",
               "favicon": "https://f.start.me/twitch-tools.rootonline.de",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708017,
@@ -7259,7 +8691,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cactus.tools",
               "favicon": "https://f.start.me/cactus.tools",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708019,
@@ -7268,7 +8701,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cactus.tools",
               "favicon": "https://f.start.me/cactus.tools",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708023,
@@ -7277,7 +8711,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cactus.tools",
               "favicon": "https://f.start.me/cactus.tools",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708024,
@@ -7286,7 +8721,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cactus.tools",
               "favicon": "https://f.start.me/cactus.tools",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30868451,
@@ -7295,7 +8731,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitchstats.net",
               "favicon": "https://f.start.me/twitchstats.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 23210082,
@@ -7304,7 +8741,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.twitchmetrics.net",
               "favicon": "https://f.start.me/twitchmetrics.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708030,
@@ -7313,9 +8751,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitchusernames.com",
               "favicon": "https://f.start.me/twitchusernames.com",
-              "status": 408
+              "status": 408,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58902170,
@@ -7333,7 +8774,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bibliogram.art",
               "favicon": "https://f.start.me/bibliogram.art",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46608917,
@@ -7342,7 +8784,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bib.actionsack.com",
               "favicon": "https://f.start.me/bib.actionsack.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 46111260,
@@ -7351,7 +8794,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "instahunt.co",
               "favicon": "https://f.start.me/instahunt.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24243059,
@@ -7360,7 +8804,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30206202,
@@ -7369,7 +8814,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gramho.com",
               "favicon": "https://f.start.me/gramho.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 35664476,
@@ -7378,7 +8824,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "codeofaninja.com",
               "favicon": "https://f.start.me/codeofaninja.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 24234237,
@@ -7387,7 +8834,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "commentpicker.com",
               "favicon": "https://f.start.me/commentpicker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24192011,
@@ -7396,7 +8844,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.searchmy.bio",
               "favicon": "https://f.start.me/searchmy.bio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18197500,
@@ -7405,7 +8854,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "statflux.com",
               "favicon": "https://f.start.me/statflux.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37029097,
@@ -7414,7 +8864,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gramsize.com",
               "favicon": "https://f.start.me/gramsize.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 48042675,
@@ -7423,7 +8874,8 @@ window.BUBBSY_DATA = {
               "description": "It is a tool written to retrieve private information such as Phone Number, Mail Address, ID on Instagram accounts via API.",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013424,
@@ -7432,7 +8884,8 @@ window.BUBBSY_DATA = {
               "description": "InstaLooter is a program that can download any picture or video associated from an Instagram profile, without any API access",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013685,
@@ -7441,7 +8894,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34364264,
@@ -7450,7 +8904,8 @@ window.BUBBSY_DATA = {
               "description": "internet monitoring osint telegram bot for windows",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36414373,
@@ -7459,7 +8914,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32949168,
@@ -7468,7 +8924,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33678911,
@@ -7477,7 +8934,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45114184,
@@ -7486,7 +8944,8 @@ window.BUBBSY_DATA = {
               "description": "Simple OSINT script to find Instagram profiles by name and e-mail/phone",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37500236,
@@ -7495,9 +8954,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55805173,
@@ -7515,7 +8977,8 @@ window.BUBBSY_DATA = {
               "description": "Telegram Search Engine",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26321589,
@@ -7524,7 +8987,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26943354,
@@ -7533,7 +8997,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tgstat.com",
               "favicon": "https://f.start.me/tgstat.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24874861,
@@ -7542,7 +9007,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "lyzem.com",
               "favicon": "https://f.start.me/lyzem.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24874858,
@@ -7551,7 +9017,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.buzz.im",
               "favicon": "https://f.start.me/search.buzz.im",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37013865,
@@ -7560,7 +9027,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "socialfinder.app",
               "favicon": "https://f.start.me/socialfinder.app",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 10742124,
@@ -7569,7 +9037,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tlgrm.eu",
               "favicon": "https://f.start.me/tlgrm.eu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36641727,
@@ -7578,7 +9047,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "readergram.com",
               "favicon": "https://f.start.me/readergram.com",
-              "status": 500
+              "status": 500,
+              "au": false
             },
             {
               "id": 37029156,
@@ -7587,7 +9057,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.telegramgroup1.com",
               "favicon": "https://f.start.me/telegramgroup1.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 33812477,
@@ -7596,7 +9067,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "xtea.io",
               "favicon": "https://f.start.me/xtea.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21439986,
@@ -7605,7 +9077,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.telegram-group.com",
               "favicon": "https://f.start.me/telegram-group.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34231324,
@@ -7614,7 +9087,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "telegramdb.org",
               "favicon": "https://f.start.me/telegramdb.org",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 28190471,
@@ -7623,7 +9097,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "t.me",
               "favicon": "https://f.start.me/t.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36652679,
@@ -7632,7 +9107,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "clickbee.me",
               "favicon": "https://f.start.me/clickbee.me",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 45763668,
@@ -7641,7 +9117,8 @@ window.BUBBSY_DATA = {
               "description": "The third-party Telegram android app",
               "domain": "f-droid.org",
               "favicon": "https://f.start.me/f-droid.org",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 41726163,
@@ -7650,9 +9127,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58911916,
@@ -7670,7 +9150,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ghostcodes.com",
               "favicon": "https://f.start.me/ghostcodes.com",
-              "status": 503
+              "status": 503,
+              "au": false
             },
             {
               "id": 15128407,
@@ -7679,7 +9160,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "map.snapchat.com",
               "favicon": "https://f.start.me/map.snapchat.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35937349,
@@ -7688,7 +9170,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "snapdex.com",
               "favicon": "https://f.start.me/snapdex.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 44286290,
@@ -7697,7 +9180,8 @@ window.BUBBSY_DATA = {
               "description": "SnapScraper is an open source intelligence tool which enables users to download media uploaded to Snapchat\u2019s Snap Map using a set of latitude and longitiude co-ordinates.",
               "domain": "rhematt.github.io",
               "favicon": "https://f.start.me/rhematt.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44286293,
@@ -7706,7 +9190,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22353887,
@@ -7715,7 +9200,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sovip.io",
               "favicon": "https://f.start.me/sovip.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48612539,
@@ -7724,9 +9210,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "feelinsonice.appspot.com",
               "favicon": "https://f.start.me/feelinsonice.appspot.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 62831643,
@@ -7744,7 +9233,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.noc.social",
               "favicon": "https://f.start.me/search.noc.social",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772414,
@@ -7753,9 +9243,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59772184,
@@ -7773,7 +9266,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30718601,
@@ -7782,7 +9276,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vidnice.com",
               "favicon": "https://f.start.me/vidnice.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 41631832,
@@ -7791,7 +9286,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tiktokd.com",
               "favicon": "https://f.start.me/tiktokd.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 48305914,
@@ -7800,9 +9296,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58911926,
@@ -7820,7 +9319,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "steamcommunity.com",
               "favicon": "https://f.start.me/steamcommunity.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040115,
@@ -7829,7 +9329,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "steamidfinder.com",
               "favicon": "https://f.start.me/steamidfinder.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 1877294,
@@ -7838,9 +9339,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "steamdb.info",
               "favicon": "https://f.start.me/steamdb.info",
-              "status": 1099
+              "status": 1099,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58911951,
@@ -7858,7 +9362,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "clubhousedb.com",
               "favicon": "https://f.start.me/clubhousedb.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39587361,
@@ -7867,7 +9372,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "roomsofclubhouse.com",
               "favicon": "https://f.start.me/roomsofclubhouse.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39744580,
@@ -7876,9 +9382,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "clubsearch.io",
               "favicon": "https://f.start.me/clubsearch.io",
-              "status": 460
+              "status": 460,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58911958,
@@ -7896,7 +9405,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlysearch.co",
               "favicon": "https://f.start.me/onlysearch.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41530564,
@@ -7905,7 +9415,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onlyfinder.com",
               "favicon": "https://f.start.me/onlyfinder.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 41530559,
@@ -7914,7 +9425,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hubite.com",
               "favicon": "https://f.start.me/hubite.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 45771143,
@@ -7923,7 +9435,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fansmetrics.com",
               "favicon": "https://f.start.me/fansmetrics.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 45993334,
@@ -7932,7 +9445,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "findr.fans",
               "favicon": "https://f.start.me/findr.fans",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46765542,
@@ -7941,9 +9455,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "similarfans.com",
               "favicon": "https://f.start.me/similarfans.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 60575062,
@@ -7961,7 +9478,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "botsentinel.com",
               "favicon": "https://f.start.me/botsentinel.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 35758487,
@@ -7970,7 +9488,8 @@ window.BUBBSY_DATA = {
               "description": "Botometer\u00ae (formerly BotOrNot) checks the activity of\n        Twitter accounts and gives them a score based on how likely they are to\n        be bots. Higher scores are more bot-like. Brought to yo...",
               "domain": "botometer.osome.iu.edu",
               "favicon": "https://f.start.me/botometer.osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43313138,
@@ -7979,7 +9498,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.followeraudit.com",
               "favicon": "https://f.start.me/followeraudit.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44454675,
@@ -7988,7 +9508,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "circleboom.com",
               "favicon": "https://f.start.me/circleboom.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40732540,
@@ -7997,9 +9518,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osome.iu.edu",
               "favicon": "https://f.start.me/osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59723209,
@@ -8017,7 +9541,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18860744,
@@ -8026,7 +9551,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201181,
@@ -8035,7 +9561,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38015038,
@@ -8044,9 +9571,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55805696,
@@ -8064,7 +9594,8 @@ window.BUBBSY_DATA = {
               "description": "Australian national broadcaster live news, investigations, and four corners reports",
               "domain": "www.abc.net.au",
               "favicon": "https://f.start.me/www.abc.net.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 99275571,
@@ -8073,7 +9604,8 @@ window.BUBBSY_DATA = {
               "description": "Special Broadcasting Service Australian and multicultural news portal",
               "domain": "www.sbs.com.au",
               "favicon": "https://f.start.me/www.sbs.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 48461431,
@@ -8082,7 +9614,8 @@ window.BUBBSY_DATA = {
               "description": "Australia premier business, corporate governance, and markets intelligence",
               "domain": "www.afr.com",
               "favicon": "https://f.start.me/www.afr.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 60122658,
@@ -8091,7 +9624,8 @@ window.BUBBSY_DATA = {
               "description": "Independent investigative journalism and political analysis in Australia",
               "domain": "www.theguardian.com",
               "favicon": "https://f.start.me/www.theguardian.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772608,
@@ -8100,7 +9634,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201196,
@@ -8109,7 +9644,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3526,
@@ -8118,7 +9654,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "news.google.com",
               "favicon": "https://f.start.me/news.google.com",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 37041742,
@@ -8127,7 +9664,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "upstract.com",
               "favicon": "https://f.start.me/upstract.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 438041,
@@ -8136,7 +9674,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "newslookup.com",
               "favicon": "https://f.start.me/newslookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33248240,
@@ -8145,7 +9684,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "correctsearch.com",
               "favicon": "https://f.start.me/correctsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27799327,
@@ -8154,7 +9694,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "informationisbeautiful.net",
               "favicon": "https://f.start.me/informationisbeautiful.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15198236,
@@ -8163,7 +9704,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "goodgopher.com",
               "favicon": "https://f.start.me/goodgopher.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25401804,
@@ -8172,7 +9714,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.newsnow.co.uk",
               "favicon": "https://f.start.me/newsnow.co.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41726313,
@@ -8181,7 +9724,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wintria.com",
               "favicon": "https://f.start.me/wintria.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37041153,
@@ -8190,7 +9734,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mereku.com",
               "favicon": "https://f.start.me/mereku.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2562220,
@@ -8199,7 +9744,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.newspapers.com",
               "favicon": "https://f.start.me/newspapers.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42101139,
@@ -8208,7 +9754,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gastearsivi.com",
               "favicon": "https://f.start.me/gastearsivi.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 5281213,
@@ -8217,7 +9764,8 @@ window.BUBBSY_DATA = {
               "description": "Google Alerts alternative. The best and free alerts service with Twitter results",
               "domain": "www.talkwalker.com",
               "favicon": "https://f.start.me/talkwalker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 560191,
@@ -8226,7 +9774,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17118159,
@@ -8235,7 +9784,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "paperball.news",
               "favicon": "https://f.start.me/paperball.news",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 37448305,
@@ -8244,7 +9794,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hoaxy.osome.iu.edu",
               "favicon": "https://f.start.me/hoaxy.osome.iu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41773409,
@@ -8253,7 +9804,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.snopes.com",
               "favicon": "https://f.start.me/snopes.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5512201,
@@ -8262,7 +9814,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "reviewmeta.com",
               "favicon": "https://f.start.me/reviewmeta.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 34637587,
@@ -8271,7 +9824,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datajournalism.com",
               "favicon": "https://f.start.me/datajournalism.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2751225,
@@ -8280,7 +9834,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.truthorfiction.com",
               "favicon": "https://f.start.me/truthorfiction.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34245978,
@@ -8289,7 +9844,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.factcheck.org",
               "favicon": "https://f.start.me/factcheck.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 8577781,
@@ -8298,109 +9854,126 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "reporterslab.org",
               "favicon": "https://f.start.me/reporterslab.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
+        },
+        {
+          "id": 9302,
+          "title": "ARCHIVES, VERIFICATION & FACT-CHECK",
+          "type": "urllist",
+          "group": "tools_general",
+          "icon": "archive",
+          "color": "#a855f7",
+          "links": [
+            {
+              "title": "RMIT ABC Fact Check",
+              "url": "https://www.abc.net.au/news/factcheck/",
+              "description": "Australian political and public claim verification by RMIT and the ABC",
+              "domain": "abc.net.au",
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
+            },
+            {
+              "title": "AAP FactCheck",
+              "url": "https://www.aap.com.au/factcheck/",
+              "description": "Australian Associated Press verification of viral local claims",
+              "domain": "aap.com.au",
+              "favicon": "https://f.start.me/aap.com.au",
+              "au": true
+            },
+            {
+              "title": "Wayback Machine",
+              "url": "https://web.archive.org/",
+              "description": "Historic snapshots of web pages, including deleted or altered content",
+              "domain": "archive.org",
+              "favicon": "https://f.start.me/archive.org",
+              "au": false
+            },
+            {
+              "title": "archive.today",
+              "url": "https://archive.ph/",
+              "description": "On-demand page freezing that captures JavaScript-heavy and paywalled pages",
+              "domain": "archive.ph",
+              "favicon": "https://f.start.me/archive.ph",
+              "au": false
+            },
+            {
+              "title": "Time Travel (Memento)",
+              "url": "http://timetravel.mementoweb.org/",
+              "description": "Query many web archives at once for a URL at a given date",
+              "domain": "mementoweb.org",
+              "favicon": "https://f.start.me/mementoweb.org",
+              "au": false
+            },
+            {
+              "title": "CachedView",
+              "url": "https://cachedview.nl/",
+              "description": "Fast lookup across Google, Wayback and other cache sources",
+              "domain": "cachedview.nl",
+              "favicon": "https://f.start.me/cachedview.nl",
+              "au": false
+            },
+            {
+              "title": "Bellingcat Online Investigation Toolkit",
+              "url": "https://bellingcat.gitbook.io/toolkit",
+              "description": "Curated open-source investigation tool directory maintained by Bellingcat",
+              "domain": "gitbook.io",
+              "favicon": "https://f.start.me/gitbook.io",
+              "au": false
+            },
+            {
+              "title": "InVID / WeVerify Plugin",
+              "url": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/",
+              "description": "Video keyframe extraction, reverse search and metadata verification",
+              "domain": "invid-project.eu",
+              "favicon": "https://f.start.me/invid-project.eu",
+              "au": false
+            },
+            {
+              "title": "Forensically",
+              "url": "https://29a.ch/photo-forensics/",
+              "description": "Error level analysis, clone detection and noise inspection for images",
+              "domain": "29a.ch",
+              "favicon": "https://f.start.me/29a.ch",
+              "au": false
+            },
+            {
+              "title": "FotoForensics",
+              "url": "https://fotoforensics.com/",
+              "description": "ELA and metadata forensics for detecting manipulated photographs",
+              "domain": "fotoforensics.com",
+              "favicon": "https://f.start.me/fotoforensics.com",
+              "au": false
+            },
+            {
+              "title": "Google Fact Check Explorer",
+              "url": "https://toolbox.google.com/factcheck/explorer",
+              "description": "Search published fact checks from accredited global organisations",
+              "domain": "google.com",
+              "favicon": "https://f.start.me/google.com",
+              "au": false
+            },
+            {
+              "title": "WikiBlame",
+              "url": "https://wikipedia.ramselehof.de/wikiblame.php",
+              "description": "Find which Wikipedia revision introduced or removed specific text",
+              "domain": "ramselehof.de",
+              "favicon": "https://f.start.me/ramselehof.de",
+              "au": false
+            }
+          ],
+          "au_count": 2,
+          "au_module": false
         }
       ]
     },
     {
       "index": 2,
       "widgets": [
-        {
-          "id": 9003,
-          "title": "AI CODE & AGENTS",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "code",
-          "color": "#8b5cf6",
-          "links": [
-            {
-              "title": "Cursor",
-              "url": "https://www.cursor.com/",
-              "description": "AI code editor with codebase indexing and Composer",
-              "domain": "cursor.com",
-              "favicon": "https://f.start.me/cursor.com"
-            },
-            {
-              "title": "v0",
-              "url": "https://v0.dev/",
-              "description": "Generative UI system producing React and Tailwind code",
-              "domain": "v0.dev",
-              "favicon": "https://f.start.me/v0.dev"
-            },
-            {
-              "title": "Bolt.new",
-              "url": "https://bolt.new/",
-              "description": "In-browser AI fullstack development sandbox",
-              "domain": "bolt.new",
-              "favicon": "https://f.start.me/bolt.new"
-            },
-            {
-              "title": "Claude Code",
-              "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
-              "description": "Agentic terminal tool for autonomous coding",
-              "domain": "anthropic.com",
-              "favicon": "https://f.start.me/anthropic.com"
-            },
-            {
-              "title": "Lovable",
-              "url": "https://lovable.dev/",
-              "description": "Fullstack app builder from natural language prompts",
-              "domain": "lovable.dev",
-              "favicon": "https://f.start.me/lovable.dev"
-            },
-            {
-              "title": "Windsurf",
-              "url": "https://codeium.com/windsurf",
-              "description": "Agentic coding environment by Codeium",
-              "domain": "codeium.com",
-              "favicon": "https://f.start.me/codeium.com"
-            },
-            {
-              "title": "OpenMemory",
-              "url": "https://github.com/CaviraOSS/OpenMemory",
-              "description": "Self-hosted long-term memory layer for AI agents",
-              "domain": "github.com",
-              "favicon": "https://f.start.me/github.com"
-            },
-            {
-              "title": "context-mode",
-              "url": "https://github.com/mksglu/context-mode",
-              "description": "Model Context Protocol virtualization tooling",
-              "domain": "github.com",
-              "favicon": "https://f.start.me/github.com"
-            },
-            {
-              "title": "Dify",
-              "url": "https://dify.ai/",
-              "description": "Open-source platform for building LLM applications and RAG",
-              "domain": "dify.ai",
-              "favicon": "https://f.start.me/dify.ai"
-            },
-            {
-              "title": "LangSmith",
-              "url": "https://smith.langchain.com/",
-              "description": "Observability and evaluation platform for AI agents",
-              "domain": "langchain.com",
-              "favicon": "https://f.start.me/langchain.com"
-            },
-            {
-              "title": "Flowise",
-              "url": "https://flowiseai.com/",
-              "description": "Drag-and-drop builder for custom LLM workflows",
-              "domain": "flowiseai.com",
-              "favicon": "https://f.start.me/flowiseai.com"
-            },
-            {
-              "title": "CrewAI",
-              "url": "https://www.crewai.com/",
-              "description": "Framework for orchestrating multi-agent workflows",
-              "domain": "crewai.com",
-              "favicon": "https://f.start.me/crewai.com"
-            }
-          ]
-        },
         {
           "id": 9106,
           "title": "[AUS] TRANSPORT, VEHICLE REGO & MARITIME",
@@ -8414,44 +9987,52 @@ window.BUBBSY_DATA = {
               "url": "https://www.ppsr.gov.au/",
               "description": "Search vehicle VIN/chassis numbers in Australia for financial security interests and written-off status",
               "domain": "ppsr.gov.au",
-              "favicon": "https://f.start.me/ppsr.gov.au"
+              "favicon": "https://f.start.me/ppsr.gov.au",
+              "au": true
             },
             {
               "title": "Service NSW Vehicle Registration Check",
               "url": "https://www.service.nsw.gov.au/transaction/check-a-vehicle-registration",
               "description": "Free NSW license plate rego status, CTP insurer, and expiry lookup",
               "domain": "service.nsw.gov.au",
-              "favicon": "https://f.start.me/nsw.gov.au"
+              "favicon": "https://f.start.me/nsw.gov.au",
+              "au": true
             },
             {
               "title": "VicRoads Registration Check",
               "url": "https://www.vicroads.vic.gov.au/registration/buy-sell-or-transfer-a-vehicle/check-vehicle-registration/vehicle-registration-enquiry",
               "description": "Free Victorian vehicle registration and VIN verification tool",
               "domain": "vicroads.vic.gov.au",
-              "favicon": "https://f.start.me/vic.gov.au"
+              "favicon": "https://f.start.me/vic.gov.au",
+              "au": true
             },
             {
               "title": "QLD Transport Vehicle Registration Check",
               "url": "https://www.service.transport.qld.gov.au/checkrego/application/VehicleSearch.xhtml",
               "description": "Check Queensland registration status by plate or VIN",
               "domain": "service.transport.qld.gov.au",
-              "favicon": "https://f.start.me/qld.gov.au"
+              "favicon": "https://f.start.me/qld.gov.au",
+              "au": true
             },
             {
               "title": "CASA (Civil Aviation Safety Authority Register)",
               "url": "https://www.casa.gov.au/aircraft/register-aircraft/civil-aircraft-register",
               "description": "Search all registered VH- Australian aircraft, owners, and operators",
               "domain": "casa.gov.au",
-              "favicon": "https://f.start.me/casa.gov.au"
+              "favicon": "https://f.start.me/casa.gov.au",
+              "au": true
             },
             {
               "title": "AMSA (Australian Maritime Safety Authority)",
               "url": "https://www.amsa.gov.au/vessels-operators/ship-registration/australian-register-ships",
               "description": "Australian General Shipping Register, commercial vessels, and maritime safety notices",
               "domain": "amsa.gov.au",
-              "favicon": "https://f.start.me/amsa.gov.au"
+              "favicon": "https://f.start.me/amsa.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 6,
+          "au_module": true
         },
         {
           "id": 9110,
@@ -8466,93 +10047,108 @@ window.BUBBSY_DATA = {
               "url": "http://www.bom.gov.au/climate/data/",
               "description": "Historical Australian weather observations and climate records",
               "domain": "bom.gov.au",
-              "favicon": "https://f.start.me/bom.gov.au"
+              "favicon": "https://f.start.me/bom.gov.au",
+              "au": true
             },
             {
               "title": "BOM Weather Radar Network",
               "url": "http://www.bom.gov.au/australia/radar/",
               "description": "National live rainfall and wind radar loops",
               "domain": "bom.gov.au",
-              "favicon": "https://f.start.me/bom.gov.au"
+              "favicon": "https://f.start.me/bom.gov.au",
+              "au": true
             },
             {
               "title": "BOM Severe Weather Warnings",
               "url": "http://www.bom.gov.au/australia/warnings/",
               "description": "Current cyclone, flood, fire weather and severe storm warnings",
               "domain": "bom.gov.au",
-              "favicon": "https://f.start.me/bom.gov.au"
+              "favicon": "https://f.start.me/bom.gov.au",
+              "au": true
             },
             {
               "title": "Fire Danger Ratings (AFAC)",
               "url": "https://www.afac.com.au/",
               "description": "Australian Fire Authorities Council \u2014 national fire danger ratings",
               "domain": "afac.com.au",
-              "favicon": "https://f.start.me/afac.com.au"
+              "favicon": "https://f.start.me/afac.com.au",
+              "au": true
             },
             {
               "title": "NSW RFS Fires Near Me",
               "url": "https://www.rfs.nsw.gov.au/fire-information/fires-near-me",
               "description": "Live NSW bushfire incidents and planned burns",
               "domain": "rfs.nsw.gov.au",
-              "favicon": "https://f.start.me/rfs.nsw.gov.au"
+              "favicon": "https://f.start.me/rfs.nsw.gov.au",
+              "au": true
             },
             {
               "title": "VicEmergency",
               "url": "https://www.emergency.vic.gov.au/",
               "description": "Victorian fire, flood, storm and incident warnings",
               "domain": "emergency.vic.gov.au",
-              "favicon": "https://f.start.me/emergency.vic.gov.au"
+              "favicon": "https://f.start.me/emergency.vic.gov.au",
+              "au": true
             },
             {
               "title": "Queensland Fire & Emergency Services",
               "url": "https://www.qfes.qld.gov.au/",
               "description": "QLD bushfire, incident and hazard alerts",
               "domain": "qfes.qld.gov.au",
-              "favicon": "https://f.start.me/qfes.qld.gov.au"
+              "favicon": "https://f.start.me/qfes.qld.gov.au",
+              "au": true
             },
             {
               "title": "Emergency WA (DFES)",
               "url": "https://www.emergency.wa.gov.au/",
               "description": "Western Australian incident alerts and warnings",
               "domain": "emergency.wa.gov.au",
-              "favicon": "https://f.start.me/emergency.wa.gov.au"
+              "favicon": "https://f.start.me/emergency.wa.gov.au",
+              "au": true
             },
             {
               "title": "SA Country Fire Service",
               "url": "https://www.cfs.sa.gov.au/",
               "description": "South Australian CFS incident warnings",
               "domain": "cfs.sa.gov.au",
-              "favicon": "https://f.start.me/cfs.sa.gov.au"
+              "favicon": "https://f.start.me/cfs.sa.gov.au",
+              "au": true
             },
             {
               "title": "TAS ALERT",
               "url": "https://alert.tas.gov.au/",
               "description": "Tasmanian emergency warnings and alerts",
               "domain": "alert.tas.gov.au",
-              "favicon": "https://f.start.me/alert.tas.gov.au"
+              "favicon": "https://f.start.me/alert.tas.gov.au",
+              "au": true
             },
             {
               "title": "ACT ESA",
               "url": "https://esa.act.gov.au/",
               "description": "ACT Emergency Services Agency warnings and incidents",
               "domain": "esa.act.gov.au",
-              "favicon": "https://f.start.me/esa.act.gov.au"
+              "favicon": "https://f.start.me/esa.act.gov.au",
+              "au": true
             },
             {
               "title": "Emergency Alert (National)",
               "url": "https://www.emergencyalert.gov.au/",
               "description": "National telephone-based emergency warning system",
               "domain": "emergencyalert.gov.au",
-              "favicon": "https://f.start.me/emergencyalert.gov.au"
+              "favicon": "https://f.start.me/emergencyalert.gov.au",
+              "au": true
             },
             {
               "title": "ABC Emergency",
               "url": "https://www.abc.net.au/news/emergency",
               "description": "ABC emergency broadcast coverage and alert aggregator",
               "domain": "abc.net.au",
-              "favicon": "https://f.start.me/abc.net.au"
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 13,
+          "au_module": true
         },
         {
           "id": 9111,
@@ -8567,65 +10163,76 @@ window.BUBBSY_DATA = {
               "url": "https://www.defence.gov.au/",
               "description": "Australian Defence Force structure, projects and capability",
               "domain": "defence.gov.au",
-              "favicon": "https://f.start.me/defence.gov.au"
+              "favicon": "https://f.start.me/defence.gov.au",
+              "au": true
             },
             {
               "title": "Australian Signals Directorate (ASD)",
               "url": "https://www.asd.gov.au/",
               "description": "Signals intelligence and offensive/defensive cyber agency",
               "domain": "asd.gov.au",
-              "favicon": "https://f.start.me/asd.gov.au"
+              "favicon": "https://f.start.me/asd.gov.au",
+              "au": true
             },
             {
               "title": "ASIO",
               "url": "https://www.asio.gov.au/",
               "description": "Australian Security Intelligence Organisation public statements",
               "domain": "asio.gov.au",
-              "favicon": "https://f.start.me/asio.gov.au"
+              "favicon": "https://f.start.me/asio.gov.au",
+              "au": true
             },
             {
               "title": "Australian Border Force",
               "url": "https://www.abf.gov.au/",
               "description": "Border control, customs and visa enforcement",
               "domain": "abf.gov.au",
-              "favicon": "https://f.start.me/abf.gov.au"
+              "favicon": "https://f.start.me/abf.gov.au",
+              "au": true
             },
             {
               "title": "Department of Home Affairs",
               "url": "https://www.homeaffairs.gov.au/",
               "description": "Immigration, visas, citizenship and national security policy",
               "domain": "homeaffairs.gov.au",
-              "favicon": "https://f.start.me/homeaffairs.gov.au"
+              "favicon": "https://f.start.me/homeaffairs.gov.au",
+              "au": true
             },
             {
               "title": "AUSTRAC",
               "url": "https://www.austrac.gov.au/",
               "description": "Financial intelligence and AML/CTF regulator",
               "domain": "austrac.gov.au",
-              "favicon": "https://f.start.me/austrac.gov.au"
+              "favicon": "https://f.start.me/austrac.gov.au",
+              "au": true
             },
             {
               "title": "DFAT Smartraveller",
               "url": "https://www.smartraveller.gov.au/",
               "description": "Official travel advisories and consular assistance",
               "domain": "smartraveller.gov.au",
-              "favicon": "https://f.start.me/smartraveller.gov.au"
+              "favicon": "https://f.start.me/smartraveller.gov.au",
+              "au": true
             },
             {
               "title": "National Emergency Management Agency (NEMA)",
               "url": "https://nema.gov.au/",
               "description": "National disaster and emergency coordination",
               "domain": "nema.gov.au",
-              "favicon": "https://f.start.me/nema.gov.au"
+              "favicon": "https://f.start.me/nema.gov.au",
+              "au": true
             },
             {
               "title": "Office of National Intelligence (ONI)",
               "url": "https://www.oni.gov.au/",
               "description": "Coordination and assessment across Australia intelligence community",
               "domain": "oni.gov.au",
-              "favicon": "https://f.start.me/oni.gov.au"
+              "favicon": "https://f.start.me/oni.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 9,
+          "au_module": true
         },
         {
           "id": 9112,
@@ -8636,90 +10243,468 @@ window.BUBBSY_DATA = {
           "color": "#8b5cf6",
           "links": [
             {
-              "title": "NRL",
-              "url": "https://www.nrl.com/",
-              "description": "National Rugby League: teams, draws and results",
-              "domain": "nrl.com",
-              "favicon": "https://f.start.me/nrl.com"
-            },
-            {
               "title": "AFL",
               "url": "https://www.afl.com.au/",
               "description": "Australian Football League: teams, fixtures and ladders",
               "domain": "afl.com.au",
-              "favicon": "https://f.start.me/afl.com.au"
+              "favicon": "https://f.start.me/afl.com.au",
+              "au": true
             },
             {
               "title": "Cricket Australia",
               "url": "https://www.cricket.com.au/",
               "description": "Australian cricket teams, series and scores",
               "domain": "cricket.com.au",
-              "favicon": "https://f.start.me/cricket.com.au"
+              "favicon": "https://f.start.me/cricket.com.au",
+              "au": true
             },
             {
               "title": "Tennis Australia",
               "url": "https://www.tennis.com.au/",
               "description": "Australian tennis, rankings and tournament draws",
               "domain": "tennis.com.au",
-              "favicon": "https://f.start.me/tennis.com.au"
+              "favicon": "https://f.start.me/tennis.com.au",
+              "au": true
             },
             {
               "title": "triple j",
               "url": "https://www.abc.net.au/triplej",
               "description": "ABC youth radio, Unearthed and the Hottest 100",
               "domain": "abc.net.au",
-              "favicon": "https://f.start.me/abc.net.au"
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
             },
             {
               "title": "ABC Listen",
               "url": "https://www.abc.net.au/listen",
               "description": "ABC radio and podcast streaming",
               "domain": "abc.net.au",
-              "favicon": "https://f.start.me/abc.net.au"
+              "favicon": "https://f.start.me/abc.net.au",
+              "au": true
             },
             {
               "title": "Beachsafe (Surf Life Saving)",
               "url": "https://beachsafe.org.au/",
               "description": "Live Australian beach conditions and patrol status",
               "domain": "beachsafe.org.au",
-              "favicon": "https://f.start.me/beachsafe.org.au"
+              "favicon": "https://f.start.me/beachsafe.org.au",
+              "au": true
             },
             {
               "title": "National Gallery of Australia",
               "url": "https://nga.gov.au/",
               "description": "National art collection and exhibitions",
               "domain": "nga.gov.au",
-              "favicon": "https://f.start.me/nga.gov.au"
+              "favicon": "https://f.start.me/nga.gov.au",
+              "au": true
             },
             {
               "title": "ACMI",
               "url": "https://www.acmi.net.au/",
               "description": "Australian Centre for the Moving Image",
               "domain": "acmi.net.au",
-              "favicon": "https://f.start.me/acmi.net.au"
+              "favicon": "https://f.start.me/acmi.net.au",
+              "au": true
             },
             {
               "title": "Australian War Memorial",
               "url": "https://www.awm.gov.au/",
               "description": "National military history museum and memorial records",
               "domain": "awm.gov.au",
-              "favicon": "https://f.start.me/awm.gov.au"
+              "favicon": "https://f.start.me/awm.gov.au",
+              "au": true
             },
             {
               "title": "National Museum of Australia",
               "url": "https://www.nma.gov.au/",
               "description": "Australian social history and collections",
               "domain": "nma.gov.au",
-              "favicon": "https://f.start.me/nma.gov.au"
+              "favicon": "https://f.start.me/nma.gov.au",
+              "au": true
             },
             {
               "title": "australia.gov.au",
               "url": "https://www.australia.gov.au/",
               "description": "Official Australian government entry portal",
               "domain": "australia.gov.au",
-              "favicon": "https://f.start.me/australia.gov.au"
+              "favicon": "https://f.start.me/australia.gov.au",
+              "au": true
+            },
+            {
+              "title": "NRL",
+              "url": "https://www.nrl.com/",
+              "description": "National Rugby League: teams, draws and results",
+              "domain": "nrl.com",
+              "favicon": "https://f.start.me/nrl.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 11,
+          "au_module": true
+        },
+        {
+          "id": 9115,
+          "title": "[AUS] MAPS, GEOSPATIAL & ENVIRONMENT",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "map",
+          "color": "#06b6d4",
+          "links": [
+            {
+              "title": "Digital Atlas of Australia",
+              "url": "https://digital.atlas.gov.au/",
+              "description": "National authoritative geospatial layers: boundaries, demography, infrastructure",
+              "domain": "digital.atlas.gov.au",
+              "favicon": "https://f.start.me/digital.atlas.gov.au",
+              "au": true
+            },
+            {
+              "title": "NationalMap",
+              "url": "https://nationalmap.gov.au/",
+              "description": "Federal open spatial data viewer with satellite, cadastre and thematic overlays",
+              "domain": "nationalmap.gov.au",
+              "favicon": "https://f.start.me/nationalmap.gov.au",
+              "au": true
+            },
+            {
+              "title": "Geoscience Australia",
+              "url": "https://www.ga.gov.au/",
+              "description": "Topography, geology, earthquakes, bathymetry and national elevation datasets",
+              "domain": "ga.gov.au",
+              "favicon": "https://f.start.me/ga.gov.au",
+              "au": true
+            },
+            {
+              "title": "SIX Maps (NSW)",
+              "url": "https://maps.six.nsw.gov.au/",
+              "description": "NSW cadastral parcels, lot/DP, imagery timeline, and property boundaries",
+              "domain": "six.nsw.gov.au",
+              "favicon": "https://f.start.me/six.nsw.gov.au",
+              "au": true
+            },
+            {
+              "title": "MapshareVic (VIC)",
+              "url": "https://mapshare.vic.gov.au/",
+              "description": "Victorian cadastre, planning overlays, aerial imagery, and public land data",
+              "domain": "mapshare.vic.gov.au",
+              "favicon": "https://f.start.me/mapshare.vic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Queensland Globe",
+              "url": "https://qldglobe.information.qld.gov.au/",
+              "description": "Queensland property, tenure, imagery, mining and environmental layers",
+              "domain": "information.qld.gov.au",
+              "favicon": "https://f.start.me/information.qld.gov.au",
+              "au": true
+            },
+            {
+              "title": "Landgate Map Viewer (WA)",
+              "url": "https://maps.landgate.wa.gov.au/",
+              "description": "Western Australian land titles, cadastre and aerial imagery viewer",
+              "domain": "landgate.wa.gov.au",
+              "favicon": "https://f.start.me/landgate.wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "LocationSA Map Viewer (SA)",
+              "url": "https://location.sa.gov.au/viewer/",
+              "description": "South Australian cadastre, addressing, imagery and administrative boundaries",
+              "domain": "location.sa.gov.au",
+              "favicon": "https://f.start.me/location.sa.gov.au",
+              "au": true
+            },
+            {
+              "title": "ELVIS Elevation & Depth",
+              "url": "https://elevation.fsdf.org.au/",
+              "description": "Download Australian LiDAR, DEM and bathymetry tiles for terrain analysis",
+              "domain": "elevation.fsdf.org.au",
+              "favicon": "https://f.start.me/elevation.fsdf.org.au",
+              "au": true
+            },
+            {
+              "title": "Atlas of Living Australia",
+              "url": "https://www.ala.org.au/",
+              "description": "Georeferenced Australian species occurrence records and survey datasets",
+              "domain": "ala.org.au",
+              "favicon": "https://f.start.me/ala.org.au",
+              "au": true
+            },
+            {
+              "title": "BOM Water Information",
+              "url": "http://www.bom.gov.au/water/",
+              "description": "Australian river gauges, storage levels, groundwater and water accounts",
+              "domain": "bom.gov.au",
+              "favicon": "https://f.start.me/bom.gov.au",
+              "au": true
+            },
+            {
+              "title": "National Pollutant Inventory",
+              "url": "https://www.dcceew.gov.au/environment/protection/npi",
+              "description": "Facility-level Australian emissions and pollutant transfer reporting",
+              "domain": "dcceew.gov.au",
+              "favicon": "https://f.start.me/dcceew.gov.au",
+              "au": true
+            },
+            {
+              "title": "NSW Air Quality Monitoring",
+              "url": "https://www.airquality.nsw.gov.au/",
+              "description": "Live NSW air quality station readings, smoke and hazard reduction data",
+              "domain": "airquality.nsw.gov.au",
+              "favicon": "https://f.start.me/airquality.nsw.gov.au",
+              "au": true
+            },
+            {
+              "title": "Sentinel Hub EO Browser",
+              "url": "https://apps.sentinel-hub.com/eo-browser/",
+              "description": "Free multispectral satellite imagery browser with historical comparison",
+              "domain": "sentinel-hub.com",
+              "favicon": "https://f.start.me/sentinel-hub.com",
+              "au": false
+            },
+            {
+              "title": "NASA FIRMS Fire Map",
+              "url": "https://firms.modaps.eosdis.nasa.gov/map/",
+              "description": "Near real-time global and Australian active fire and thermal anomaly detections",
+              "domain": "nasa.gov",
+              "favicon": "https://f.start.me/nasa.gov",
+              "au": false
+            }
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9119,
+          "title": "[AUS] MARKETPLACES, FORUMS & COMMUNITY",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "shopping-bag",
+          "color": "#ec4899",
+          "links": [
+            {
+              "title": "Gumtree Australia",
+              "url": "https://www.gumtree.com.au/",
+              "description": "Australian classifieds - seller profiles, listing history and location pivots",
+              "domain": "gumtree.com.au",
+              "favicon": "https://f.start.me/gumtree.com.au",
+              "au": true
+            },
+            {
+              "title": "OzBargain",
+              "url": "https://www.ozbargain.com.au/",
+              "description": "Australian deals community with long-lived, searchable user post history",
+              "domain": "ozbargain.com.au",
+              "favicon": "https://f.start.me/ozbargain.com.au",
+              "au": true
+            },
+            {
+              "title": "Whirlpool Forums",
+              "url": "https://forums.whirlpool.net.au/",
+              "description": "Australian broadband and tech forum - deep archives of user activity",
+              "domain": "whirlpool.net.au",
+              "favicon": "https://f.start.me/whirlpool.net.au",
+              "au": true
+            },
+            {
+              "title": "Overclockers Australia",
+              "url": "https://forums.overclockers.com.au/",
+              "description": "Long-running Australian tech community with public member profiles",
+              "domain": "overclockers.com.au",
+              "favicon": "https://f.start.me/overclockers.com.au",
+              "au": true
+            },
+            {
+              "title": "Carsales",
+              "url": "https://www.carsales.com.au/",
+              "description": "Australian vehicle listings, dealer footprints and price history",
+              "domain": "carsales.com.au",
+              "favicon": "https://f.start.me/carsales.com.au",
+              "au": true
+            },
+            {
+              "title": "Bikesales",
+              "url": "https://www.bikesales.com.au/",
+              "description": "Australian motorcycle marketplace and seller listings",
+              "domain": "bikesales.com.au",
+              "favicon": "https://f.start.me/bikesales.com.au",
+              "au": true
+            },
+            {
+              "title": "Boatsales",
+              "url": "https://www.boatsales.com.au/",
+              "description": "Australian boat and marine listings with vendor details",
+              "domain": "boatsales.com.au",
+              "favicon": "https://f.start.me/boatsales.com.au",
+              "au": true
+            },
+            {
+              "title": "Machines4u",
+              "url": "https://machines4u.com.au/",
+              "description": "Australian industrial, farm and construction machinery marketplace",
+              "domain": "machines4u.com.au",
+              "favicon": "https://f.start.me/machines4u.com.au",
+              "au": true
+            },
+            {
+              "title": "Pickles Auctions",
+              "url": "https://www.pickles.com.au/",
+              "description": "Australian salvage, fleet and government asset auction records",
+              "domain": "pickles.com.au",
+              "favicon": "https://f.start.me/pickles.com.au",
+              "au": true
+            },
+            {
+              "title": "eBay Australia",
+              "url": "https://www.ebay.com.au/",
+              "description": "Australian eBay storefronts, feedback history and seller locations",
+              "domain": "ebay.com.au",
+              "favicon": "https://f.start.me/ebay.com.au",
+              "au": true
+            },
+            {
+              "title": "Grays",
+              "url": "https://www.grays.com/",
+              "description": "Australian industrial and insolvency asset auctions",
+              "domain": "grays.com",
+              "favicon": "https://f.start.me/grays.com",
+              "au": true
+            },
+            {
+              "title": "Airtasker",
+              "url": "https://www.airtasker.com/",
+              "description": "Australian gig marketplace - worker profiles, reviews and locations",
+              "domain": "airtasker.com",
+              "favicon": "https://f.start.me/airtasker.com",
+              "au": true
+            },
+            {
+              "title": "r/australia (Reddit)",
+              "url": "https://www.reddit.com/r/australia/",
+              "description": "Primary Australian subreddit for local events and community chatter",
+              "domain": "reddit.com",
+              "favicon": "https://f.start.me/reddit.com",
+              "au": false
+            },
+            {
+              "title": "Facebook Marketplace",
+              "url": "https://www.facebook.com/marketplace/",
+              "description": "Localised peer-to-peer listings tied to real identity profiles",
+              "domain": "facebook.com",
+              "favicon": "https://f.start.me/facebook.com",
+              "au": false
+            }
+          ],
+          "au_count": 12,
+          "au_module": true
+        },
+        {
+          "id": 9003,
+          "title": "AI CODE & AGENTS",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "code",
+          "color": "#8b5cf6",
+          "links": [
+            {
+              "title": "Cursor",
+              "url": "https://www.cursor.com/",
+              "description": "AI code editor with codebase indexing and Composer",
+              "domain": "cursor.com",
+              "favicon": "https://f.start.me/cursor.com",
+              "au": false
+            },
+            {
+              "title": "v0",
+              "url": "https://v0.dev/",
+              "description": "Generative UI system producing React and Tailwind code",
+              "domain": "v0.dev",
+              "favicon": "https://f.start.me/v0.dev",
+              "au": false
+            },
+            {
+              "title": "Bolt.new",
+              "url": "https://bolt.new/",
+              "description": "In-browser AI fullstack development sandbox",
+              "domain": "bolt.new",
+              "favicon": "https://f.start.me/bolt.new",
+              "au": false
+            },
+            {
+              "title": "Claude Code",
+              "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+              "description": "Agentic terminal tool for autonomous coding",
+              "domain": "anthropic.com",
+              "favicon": "https://f.start.me/anthropic.com",
+              "au": false
+            },
+            {
+              "title": "Lovable",
+              "url": "https://lovable.dev/",
+              "description": "Fullstack app builder from natural language prompts",
+              "domain": "lovable.dev",
+              "favicon": "https://f.start.me/lovable.dev",
+              "au": false
+            },
+            {
+              "title": "Windsurf",
+              "url": "https://codeium.com/windsurf",
+              "description": "Agentic coding environment by Codeium",
+              "domain": "codeium.com",
+              "favicon": "https://f.start.me/codeium.com",
+              "au": false
+            },
+            {
+              "title": "OpenMemory",
+              "url": "https://github.com/CaviraOSS/OpenMemory",
+              "description": "Self-hosted long-term memory layer for AI agents",
+              "domain": "github.com",
+              "favicon": "https://f.start.me/github.com",
+              "au": false
+            },
+            {
+              "title": "context-mode",
+              "url": "https://github.com/mksglu/context-mode",
+              "description": "Model Context Protocol virtualization tooling",
+              "domain": "github.com",
+              "favicon": "https://f.start.me/github.com",
+              "au": false
+            },
+            {
+              "title": "Dify",
+              "url": "https://dify.ai/",
+              "description": "Open-source platform for building LLM applications and RAG",
+              "domain": "dify.ai",
+              "favicon": "https://f.start.me/dify.ai",
+              "au": false
+            },
+            {
+              "title": "LangSmith",
+              "url": "https://smith.langchain.com/",
+              "description": "Observability and evaluation platform for AI agents",
+              "domain": "langchain.com",
+              "favicon": "https://f.start.me/langchain.com",
+              "au": false
+            },
+            {
+              "title": "Flowise",
+              "url": "https://flowiseai.com/",
+              "description": "Drag-and-drop builder for custom LLM workflows",
+              "domain": "flowiseai.com",
+              "favicon": "https://f.start.me/flowiseai.com",
+              "au": false
+            },
+            {
+              "title": "CrewAI",
+              "url": "https://www.crewai.com/",
+              "description": "Framework for orchestrating multi-agent workflows",
+              "domain": "crewai.com",
+              "favicon": "https://f.start.me/crewai.com",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55797903,
@@ -8737,7 +10722,8 @@ window.BUBBSY_DATA = {
               "description": "Google search prioritizing Australian regional results and local servers",
               "domain": "www.google.com.au",
               "favicon": "https://f.start.me/www.google.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 56448458,
@@ -8746,7 +10732,8 @@ window.BUBBSY_DATA = {
               "description": "National Library of Australia digitized historical press search",
               "domain": "trove.nla.gov.au",
               "favicon": "https://f.start.me/trove.nla.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 32830814,
@@ -8755,7 +10742,8 @@ window.BUBBSY_DATA = {
               "description": "Search all Australian high, federal, and state courts and statutory rules",
               "domain": "www.austlii.edu.au",
               "favicon": "https://f.start.me/www.austlii.edu.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 49358972,
@@ -8764,7 +10752,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inteltechniques.com",
               "favicon": "https://f.start.me/inteltechniques.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 759140,
@@ -8773,7 +10762,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28458337,
@@ -8782,7 +10772,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searx.info",
               "favicon": "https://f.start.me/searx.info",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28549145,
@@ -8791,7 +10782,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bing.com",
               "favicon": "https://f.start.me/bing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3292520,
@@ -8800,7 +10792,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yandex.com",
               "favicon": "https://f.start.me/yandex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37029212,
@@ -8809,7 +10802,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "metager3.de",
               "favicon": "https://f.start.me/metager3.de",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 573,
@@ -8818,7 +10812,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "duckduckgo.com",
               "favicon": "https://f.start.me/duckduckgo.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32948013,
@@ -8827,7 +10822,8 @@ window.BUBBSY_DATA = {
               "description": "Search Engines in all countries in the world",
               "domain": "www.searchenginesindex.com",
               "favicon": "https://f.start.me/searchenginesindex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37878846,
@@ -8836,7 +10832,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.carrot2.org",
               "favicon": "https://f.start.me/search.carrot2.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 118877,
@@ -8845,7 +10842,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.qwant.com",
               "favicon": "https://f.start.me/qwant.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5492,
@@ -8854,7 +10852,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "startpage.com",
               "favicon": "https://f.start.me/startpage.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201196,
@@ -8863,7 +10862,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2935149,
@@ -8872,7 +10872,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "swisscows.com",
               "favicon": "https://f.start.me/swisscows.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 9230744,
@@ -8881,7 +10882,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.crossref.org",
               "favicon": "https://f.start.me/search.crossref.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41051440,
@@ -8890,7 +10892,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.brave.com",
               "favicon": "https://f.start.me/search.brave.com",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 524144,
@@ -8899,7 +10902,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mojeek.com",
               "favicon": "https://f.start.me/mojeek.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28553883,
@@ -8908,7 +10912,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.yahoo.com",
               "favicon": "https://f.start.me/search.yahoo.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1042338,
@@ -8917,7 +10922,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.baidu.com",
               "favicon": "https://f.start.me/baidu.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 473590,
@@ -8926,7 +10932,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ecosia.org",
               "favicon": "https://f.start.me/ecosia.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 2472370,
@@ -8935,7 +10942,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.dogpile.com",
               "favicon": "https://f.start.me/dogpile.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11813613,
@@ -8944,7 +10952,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.metacrawler.com",
               "favicon": "https://f.start.me/metacrawler.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 459685,
@@ -8953,7 +10962,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fnd.io",
               "favicon": "https://f.start.me/fnd.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15889446,
@@ -8962,7 +10972,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.search.ask.com",
               "favicon": "https://f.start.me/search.ask.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 36853576,
@@ -8971,7 +10982,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "zorexeye.com",
               "favicon": "https://f.start.me/zorexeye.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37040984,
@@ -8980,7 +10992,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yassen.com",
               "favicon": "https://f.start.me/yassen.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41673917,
@@ -8989,7 +11002,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.flippity.com",
               "favicon": "https://f.start.me/flippity.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 28619458,
@@ -8998,7 +11012,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "keys.openpgp.org",
               "favicon": "https://f.start.me/keys.openpgp.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2012712,
@@ -9007,7 +11022,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pgp.mit.edu",
               "favicon": "https://f.start.me/pgp.mit.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040990,
@@ -9016,7 +11032,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ipse.io",
               "favicon": "https://f.start.me/ipse.io",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 31162222,
@@ -9025,7 +11042,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ipfs-search.com",
               "favicon": "https://f.start.me/ipfs-search.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041722,
@@ -9034,7 +11052,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "debate.cards",
               "favicon": "https://f.start.me/debate.cards",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 37041724,
@@ -9043,7 +11062,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "argumentsearch.com",
               "favicon": "https://f.start.me/argumentsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33820316,
@@ -9052,7 +11072,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.meganzsearch.com",
               "favicon": "https://f.start.me/meganzsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040992,
@@ -9061,7 +11082,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "engine.presearch.org",
               "favicon": "https://f.start.me/engine.presearch.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 31162236,
@@ -9070,7 +11092,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blockscan.com",
               "favicon": "https://f.start.me/blockscan.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041607,
@@ -9079,7 +11102,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "publc.com",
               "favicon": "https://f.start.me/publc.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041622,
@@ -9088,7 +11112,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gopit.com",
               "favicon": "https://f.start.me/gopit.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 19722,
@@ -9097,7 +11122,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.doc-txt.com",
               "favicon": "https://f.start.me/doc-txt.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18617586,
@@ -9106,7 +11132,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cachedviews.com",
               "favicon": "https://f.start.me/cachedviews.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36180733,
@@ -9115,7 +11142,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "maclookup.app",
               "favicon": "https://f.start.me/maclookup.app",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19242812,
@@ -9124,7 +11152,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sploitus.com",
               "favicon": "https://f.start.me/sploitus.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18381281,
@@ -9133,7 +11162,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vulmon.com",
               "favicon": "https://f.start.me/vulmon.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4627261,
@@ -9142,7 +11172,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.rapid7.com",
               "favicon": "https://f.start.me/rapid7.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41686035,
@@ -9151,7 +11182,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recon222tttn4ob7ujdhbn3s4gjre7netvzybuvbq2bcqwltkiqinhad.onion.pet",
               "favicon": "https://f.start.me/recon222tttn4ob7ujdhbn3s4gjre7netvzybuvbq2bcqwltkiqinhad.onion.pet",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 40596541,
@@ -9160,7 +11192,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35294718,
@@ -9169,7 +11202,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11240504,
@@ -9178,7 +11212,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "boardreader.com",
               "favicon": "https://f.start.me/boardreader.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35344407,
@@ -9187,7 +11222,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "libgen.rs",
               "favicon": "https://f.start.me/libgen.rs",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 41599918,
@@ -9196,7 +11232,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stacksear.ch",
               "favicon": "https://f.start.me/stacksear.ch",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12226194,
@@ -9205,7 +11242,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.searchtempest.com",
               "favicon": "https://f.start.me/searchtempest.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19513381,
@@ -9214,7 +11252,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "2lingual.com",
               "favicon": "https://f.start.me/2lingual.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40905201,
@@ -9223,7 +11262,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "seqe.me",
               "favicon": "https://f.start.me/seqe.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13052849,
@@ -9232,7 +11272,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "milled.com",
               "favicon": "https://f.start.me/milled.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 5820336,
@@ -9241,7 +11282,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "btdig.com",
               "favicon": "https://f.start.me/btdig.com",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 29062417,
@@ -9250,7 +11292,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "awesomeopensource.com",
               "favicon": "https://f.start.me/awesomeopensource.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 1876346,
@@ -9259,7 +11302,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "monstercrawler.com",
               "favicon": "https://f.start.me/monstercrawler.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41725390,
@@ -9268,7 +11312,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "arabo.com",
               "favicon": "https://f.start.me/arabo.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 999253,
@@ -9277,7 +11322,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "scholar.google.com",
               "favicon": "https://f.start.me/scholar.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 338146,
@@ -9286,7 +11332,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "millionshort.com",
               "favicon": "https://f.start.me/millionshort.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 40583942,
@@ -9295,7 +11342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bevigil.com",
               "favicon": "https://f.start.me/bevigil.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2598851,
@@ -9304,7 +11352,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "en.search.wordpress.com",
               "favicon": "https://f.start.me/en.search.wordpress.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41726418,
@@ -9313,7 +11362,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "octosearch.dootech.com",
               "favicon": "https://f.start.me/octosearch.dootech.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2441498,
@@ -9322,7 +11372,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searchcraigslist.org",
               "favicon": "https://f.start.me/searchcraigslist.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18105757,
@@ -9331,7 +11382,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "buckets.grayhatwarfare.com",
               "favicon": "https://f.start.me/buckets.grayhatwarfare.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38430093,
@@ -9340,7 +11392,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 39533388,
@@ -9349,7 +11402,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shorteners.grayhatwarfare.com",
               "favicon": "https://f.start.me/shorteners.grayhatwarfare.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041112,
@@ -9358,7 +11412,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mywoodle.com",
               "favicon": "https://f.start.me/mywoodle.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41919503,
@@ -9367,7 +11422,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "searchatlas.org",
               "favicon": "https://f.start.me/searchatlas.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 26030455,
@@ -9376,7 +11432,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45763928,
@@ -9385,7 +11442,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "binparcel.com",
               "favicon": "https://f.start.me/binparcel.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 91001001,
@@ -9394,7 +11452,8 @@ window.BUBBSY_DATA = {
               "description": "Petabyte-scale open web crawl index for custom searching and analysis",
               "domain": "commoncrawl.org",
               "favicon": "https://f.start.me/commoncrawl.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91001002,
@@ -9403,7 +11462,8 @@ window.BUBBSY_DATA = {
               "description": "Search engine for the small, independent and non-commercial web",
               "domain": "marginalia.nu",
               "favicon": "https://f.start.me/marginalia.nu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91001003,
@@ -9412,7 +11472,8 @@ window.BUBBSY_DATA = {
               "description": "Search millions of public research datasets across the web",
               "domain": "datasetsearch.research.google.com",
               "favicon": "https://f.start.me/datasetsearch.research.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91001004,
@@ -9421,7 +11482,8 @@ window.BUBBSY_DATA = {
               "description": "Search the classic, hand-crafted web \u2014 pages modern engines forget",
               "domain": "wiby.me",
               "favicon": "https://f.start.me/wiby.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91001005,
@@ -9430,7 +11492,8 @@ window.BUBBSY_DATA = {
               "description": "Full-text search across millions of archived books, texts and web pages",
               "domain": "archive.org",
               "favicon": "https://f.start.me/archive.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003001,
@@ -9439,7 +11502,8 @@ window.BUBBSY_DATA = {
               "description": "Independent general web search engine",
               "domain": "yep.com",
               "favicon": "https://f.start.me/yep.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003002,
@@ -9448,7 +11512,8 @@ window.BUBBSY_DATA = {
               "description": "Open-source search engine for the independent web",
               "domain": "stract.com",
               "favicon": "https://f.start.me/stract.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003003,
@@ -9457,7 +11522,8 @@ window.BUBBSY_DATA = {
               "description": "Uncensored private web search",
               "domain": "gibiru.com",
               "favicon": "https://f.start.me/gibiru.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003004,
@@ -9466,9 +11532,12 @@ window.BUBBSY_DATA = {
               "description": "Public meta-search instance aggregating 70+ engines",
               "domain": "searx.be",
               "favicon": "https://f.start.me/searx.be",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 9204,
@@ -9483,107 +11552,124 @@ window.BUBBSY_DATA = {
               "url": "https://www.dehashed.com/",
               "description": "Free deep-web scans and protection against credential leaks",
               "domain": "dehashed.com",
-              "favicon": "https://f.start.me/dehashed.com"
+              "favicon": "https://f.start.me/dehashed.com",
+              "au": false
             },
             {
               "title": "LeakCheck",
               "url": "https://leakcheck.io/",
               "description": "Make sure your credentials have not been compromised",
               "domain": "leakcheck.io",
-              "favicon": "https://f.start.me/leakcheck.io"
+              "favicon": "https://f.start.me/leakcheck.io",
+              "au": false
             },
             {
               "title": "Snusbase",
               "url": "https://snusbase.com/",
               "description": "Stay on top of the latest database breaches",
               "domain": "snusbase.com",
-              "favicon": "https://f.start.me/snusbase.com"
+              "favicon": "https://f.start.me/snusbase.com",
+              "au": false
             },
             {
               "title": "WeLeakInfo",
               "url": "https://weleakinfo.io/",
               "description": "View breached and leaked databases",
               "domain": "weleakinfo.io",
-              "favicon": "https://f.start.me/weleakinfo.io"
+              "favicon": "https://f.start.me/weleakinfo.io",
+              "au": false
             },
             {
               "title": "Leak-Lookup",
               "url": "https://leak-lookup.com/",
               "description": "Search across thousands of data breaches",
               "domain": "leak-lookup.com",
-              "favicon": "https://f.start.me/leak-lookup.com"
+              "favicon": "https://f.start.me/leak-lookup.com",
+              "au": false
             },
             {
               "title": "CrackStation",
               "url": "https://crackstation.net/",
               "description": "Massive pre-computed lookup tables to crack password hashes",
               "domain": "crackstation.net",
-              "favicon": "https://f.start.me/crackstation.net"
+              "favicon": "https://f.start.me/crackstation.net",
+              "au": false
             },
             {
               "title": "HashKiller",
               "url": "https://hashkiller.io/listmanager",
               "description": "Pre-cracked hashes, easily searchable",
               "domain": "hashkiller.io",
-              "favicon": "https://f.start.me/hashkiller.io"
+              "favicon": "https://f.start.me/hashkiller.io",
+              "au": false
             },
             {
               "title": "ntlm.pw",
               "url": "https://ntlm.pw/",
               "description": "NTLM hash lookup with 8B+ entries",
               "domain": "ntlm.pw",
-              "favicon": "https://f.start.me/ntlm.pw"
+              "favicon": "https://f.start.me/ntlm.pw",
+              "au": false
             },
             {
               "title": "HaveIBeenSold",
               "url": "https://haveibeensold.app/",
               "description": "Find out if your email has been sold to third parties",
               "domain": "haveibeensold.app",
-              "favicon": "https://f.start.me/haveibeensold.app"
+              "favicon": "https://f.start.me/haveibeensold.app",
+              "au": false
             },
             {
               "title": "WhiteIntel",
               "url": "https://whiteintel.io/",
               "description": "Check if a company or its customers were hit by infostealer malware",
               "domain": "whiteintel.io",
-              "favicon": "https://f.start.me/whiteintel.io"
+              "favicon": "https://f.start.me/whiteintel.io",
+              "au": false
             },
             {
               "title": "Hudson Rock",
               "url": "https://www.hudsonrock.com/threat-intelligence-cybercrime-tools",
               "description": "Free cybercrime intelligence on compromised credentials",
               "domain": "hudsonrock.com",
-              "favicon": "https://f.start.me/hudsonrock.com"
+              "favicon": "https://f.start.me/hudsonrock.com",
+              "au": false
             },
             {
               "title": "InfoStealers.info",
               "url": "https://infostealers.info/",
               "description": "Instant insights from infostealer data",
               "domain": "infostealers.info",
-              "favicon": "https://f.start.me/infostealers.info"
+              "favicon": "https://f.start.me/infostealers.info",
+              "au": false
             },
             {
               "title": "LeakRadar",
               "url": "https://leakradar.io/",
               "description": "Check email credentials against infostealer logs",
               "domain": "leakradar.io",
-              "favicon": "https://f.start.me/leakradar.io"
+              "favicon": "https://f.start.me/leakradar.io",
+              "au": false
             },
             {
               "title": "Distributed Denial of Secrets",
               "url": "https://ddosecrets.com/",
               "description": "Non-profit archive publishing and preserving leaks",
               "domain": "ddosecrets.com",
-              "favicon": "https://f.start.me/ddosecrets.com"
+              "favicon": "https://f.start.me/ddosecrets.com",
+              "au": false
             },
             {
               "title": "Cryptome",
               "url": "https://cryptome.org/",
               "description": "Documents for publication prohibited by governments worldwide",
               "domain": "cryptome.org",
-              "favicon": "https://f.start.me/cryptome.org"
+              "favicon": "https://f.start.me/cryptome.org",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 60638815,
@@ -9601,7 +11687,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37731526,
@@ -9610,7 +11697,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772537,
@@ -9619,7 +11707,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40961865,
@@ -9628,7 +11717,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34913092,
@@ -9637,7 +11727,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201240,
@@ -9646,7 +11737,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772540,
@@ -9655,7 +11747,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201200,
@@ -9664,7 +11757,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15350541,
@@ -9673,7 +11767,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201250,
@@ -9682,7 +11777,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201172,
@@ -9691,7 +11787,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16995365,
@@ -9700,7 +11797,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201249,
@@ -9709,7 +11807,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201191,
@@ -9718,7 +11817,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16614935,
@@ -9727,7 +11827,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30082775,
@@ -9736,7 +11837,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772425,
@@ -9745,7 +11847,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 49110102,
@@ -9754,7 +11857,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 49110099,
@@ -9763,9 +11867,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786230,
@@ -9783,7 +11890,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "facecheck.id",
               "favicon": "https://f.start.me/facecheck.id",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 557944,
@@ -9792,7 +11900,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "images.google.com",
               "favicon": "https://f.start.me/images.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6097604,
@@ -9801,7 +11910,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yandex.com",
               "favicon": "https://f.start.me/yandex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2277805,
@@ -9810,7 +11920,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bing.com",
               "favicon": "https://f.start.me/bing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26043429,
@@ -9819,7 +11930,8 @@ window.BUBBSY_DATA = {
               "description": "Search the web using an image instead of text. Reverse image search engine. Search by image: Take a picture or upload one to find similar images and products. Identify landmarks, animals, even cele...",
               "domain": "www.bing.com",
               "favicon": "https://f.start.me/bing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732286,
@@ -9828,7 +11940,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11417376,
@@ -9837,7 +11950,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "viliusle.github.io",
               "favicon": "https://f.start.me/viliusle.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15266393,
@@ -9846,7 +11960,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pimeyes.com",
               "favicon": "https://f.start.me/pimeyes.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 775460,
@@ -9855,7 +11970,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tineye.com",
               "favicon": "https://f.start.me/tineye.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 24234452,
@@ -9864,7 +11980,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "findclone.ru",
               "favicon": "https://f.start.me/findclone.ru",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30736220,
@@ -9873,7 +11990,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32142454,
@@ -9882,7 +12000,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "infringement.report",
               "favicon": "https://f.start.me/infringement.report",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38718977,
@@ -9891,7 +12010,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "same.energy",
               "favicon": "https://f.start.me/same.energy",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6414606,
@@ -9900,7 +12020,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "image.baidu.com",
               "favicon": "https://f.start.me/image.baidu.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 28795374,
@@ -9909,7 +12030,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.peteyvid.com",
               "favicon": "https://f.start.me/peteyvid.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 12976,
@@ -9918,7 +12040,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "musgle.com",
               "favicon": "https://f.start.me/musgle.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4875053,
@@ -9927,7 +12050,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "images.search.yahoo.com",
               "favicon": "https://f.start.me/images.search.yahoo.com",
-              "status": 500
+              "status": 500,
+              "au": false
             },
             {
               "id": 15201258,
@@ -9936,7 +12060,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13097828,
@@ -9945,7 +12070,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.midomi.com",
               "favicon": "https://f.start.me/midomi.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34369854,
@@ -9954,7 +12080,8 @@ window.BUBBSY_DATA = {
               "description": "The MyHeritage Photo Enhancer uses deep learning technology to enhance photos by upscaling (increasing the resolution) the faces that appear in them. This produces exceptional results for historica...",
               "domain": "www.myheritage.com",
               "favicon": "https://f.start.me/myheritage.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12436684,
@@ -9963,7 +12090,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "letsenhance.io",
               "favicon": "https://f.start.me/letsenhance.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522019,
@@ -9972,7 +12100,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "svg-edit.github.io",
               "favicon": "https://f.start.me/svg-edit.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2805616,
@@ -9981,7 +12110,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pixsy.com",
               "favicon": "https://f.start.me/pixsy.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7794007,
@@ -9990,7 +12120,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fotoforensics.com",
               "favicon": "https://f.start.me/fotoforensics.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7432096,
@@ -9999,7 +12130,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.listennotes.com",
               "favicon": "https://f.start.me/listennotes.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 2177700,
@@ -10008,7 +12140,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.imageidentify.com",
               "favicon": "https://f.start.me/imageidentify.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2886173,
@@ -10017,7 +12150,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "exifdata.com",
               "favicon": "https://f.start.me/exifdata.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37720506,
@@ -10026,7 +12160,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "jimpl.com",
               "favicon": "https://f.start.me/jimpl.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15263052,
@@ -10035,7 +12170,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "podsearch.com",
               "favicon": "https://f.start.me/podsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18764649,
@@ -10044,7 +12180,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.picsearch.com",
               "favicon": "https://f.start.me/picsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29795351,
@@ -10053,7 +12190,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "photoscissors.com",
               "favicon": "https://f.start.me/photoscissors.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39492585,
@@ -10062,7 +12200,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "museo.app",
               "favicon": "https://f.start.me/museo.app",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040066,
@@ -10071,7 +12210,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.diffchecker.com",
               "favicon": "https://f.start.me/diffchecker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3564430,
@@ -10080,7 +12220,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "29a.ch",
               "favicon": "https://f.start.me/29a.ch",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28382451,
@@ -10089,7 +12230,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pictriev.com",
               "favicon": "https://f.start.me/pictriev.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 631405,
@@ -10098,7 +12240,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.facesaerch.com",
               "favicon": "https://f.start.me/facesaerch.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 656893,
@@ -10107,7 +12250,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.myfonts.com",
               "favicon": "https://f.start.me/myfonts.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21931599,
@@ -10116,7 +12260,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pic.sogou.com",
               "favicon": "https://f.start.me/pic.sogou.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 23930245,
@@ -10125,7 +12270,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pixabay.com",
               "favicon": "https://f.start.me/pixabay.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37041869,
@@ -10134,7 +12280,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tidder.xyz",
               "favicon": "https://f.start.me/tidder.xyz",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45867876,
@@ -10143,9 +12290,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hue.tools",
               "favicon": "https://f.start.me/hue.tools",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59546132,
@@ -10163,7 +12313,8 @@ window.BUBBSY_DATA = {
               "description": "Search any Australian vehicle VIN for security interests, written-off status, and theft",
               "domain": "www.ppsr.gov.au",
               "favicon": "https://f.start.me/www.ppsr.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 88161569,
@@ -10172,7 +12323,8 @@ window.BUBBSY_DATA = {
               "description": "Free NSW license plate rego status, CTP insurer, and expiry date lookup",
               "domain": "www.service.nsw.gov.au",
               "favicon": "https://f.start.me/www.service.nsw.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 42942529,
@@ -10181,7 +12333,8 @@ window.BUBBSY_DATA = {
               "description": "Free Victorian vehicle registration and VIN verification tool",
               "domain": "www.vicroads.vic.gov.au",
               "favicon": "https://f.start.me/www.vicroads.vic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 20362884,
@@ -10190,7 +12343,8 @@ window.BUBBSY_DATA = {
               "description": "Queensland vehicle registration and plate verification",
               "domain": "www.service.transport.qld.gov.au",
               "favicon": "https://f.start.me/www.service.transport.qld.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 80835681,
@@ -10199,7 +12353,8 @@ window.BUBBSY_DATA = {
               "description": "Free unified license plate checker covering NSW, VIC, QLD, WA, SA, TAS, ACT, NT",
               "domain": "www.regocheck.com.au",
               "favicon": "https://f.start.me/www.regocheck.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 64894330,
@@ -10208,7 +12363,8 @@ window.BUBBSY_DATA = {
               "description": "Lookup Australian vehicle models, badge trims, factory options, and price histories",
               "domain": "www.redbook.com.au",
               "favicon": "https://f.start.me/www.redbook.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 39134348,
@@ -10217,7 +12373,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "platerecognizer.com",
               "favicon": "https://f.start.me/platerecognizer.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 59330,
@@ -10226,7 +12383,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.worldlicenseplates.com",
               "favicon": "https://f.start.me/worldlicenseplates.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3236742,
@@ -10235,7 +12393,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.vindecoderz.com",
               "favicon": "https://f.start.me/vindecoderz.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 23660540,
@@ -10244,7 +12403,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "poctra.com",
               "favicon": "https://f.start.me/poctra.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 18365147,
@@ -10253,7 +12413,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.faxvin.com",
               "favicon": "https://f.start.me/faxvin.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14463836,
@@ -10262,7 +12423,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.autocheck.com",
               "favicon": "https://f.start.me/autocheck.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36657375,
@@ -10271,7 +12433,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "thatsthem.com",
               "favicon": "https://f.start.me/thatsthem.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 23014513,
@@ -10280,7 +12443,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nicb.org",
               "favicon": "https://f.start.me/nicb.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 42682483,
@@ -10289,7 +12453,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.autogespot.us",
               "favicon": "https://f.start.me/autogespot.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19217601,
@@ -10298,7 +12463,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nomerogram.ru",
               "favicon": "https://f.start.me/nomerogram.ru",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 38889864,
@@ -10307,7 +12473,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osintcurio.us",
               "favicon": "https://f.start.me/osintcurio.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45871776,
@@ -10316,7 +12483,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 34484202,
@@ -10325,7 +12493,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "carnet.ai",
               "favicon": "https://f.start.me/carnet.ai",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44404342,
@@ -10334,7 +12503,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "carmodel.toolpie.com",
               "favicon": "https://f.start.me/carmodel.toolpie.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32340461,
@@ -10343,7 +12513,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20635048,
@@ -10352,7 +12523,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vincheck.info",
               "favicon": "https://f.start.me/vincheck.info",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48612511,
@@ -10361,7 +12533,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vindecoder.pl",
               "favicon": "https://f.start.me/vindecoder.pl",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15583254,
@@ -10370,7 +12543,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.autodna.com",
               "favicon": "https://f.start.me/autodna.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22227621,
@@ -10379,7 +12553,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.vindecoder.net",
               "favicon": "https://f.start.me/vindecoder.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48612509,
@@ -10388,7 +12563,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "orto.website",
               "favicon": "https://f.start.me/orto.website",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21404570,
@@ -10397,7 +12573,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.europlates.eu",
               "favicon": "https://f.start.me/europlates.eu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39791971,
@@ -10406,7 +12583,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.howsmydrivingny.nyc",
               "favicon": "https://f.start.me/howsmydrivingny.nyc",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39391928,
@@ -10415,7 +12593,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.skoda-storyboard.com",
               "favicon": "https://f.start.me/skoda-storyboard.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22442705,
@@ -10424,7 +12603,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "driving-tests.org",
               "favicon": "https://f.start.me/driving-tests.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29680014,
@@ -10433,7 +12613,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.vehiclehistory.com",
               "favicon": "https://f.start.me/vehiclehistory.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 39322470,
@@ -10442,7 +12623,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.partialnumberplate.co.uk",
               "favicon": "https://f.start.me/partialnumberplate.co.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44791259,
@@ -10451,7 +12633,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.searchquarry.com",
               "favicon": "https://f.start.me/searchquarry.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31702189,
@@ -10460,7 +12643,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vehicleenquiry.service.gov.uk",
               "favicon": "https://f.start.me/vehicleenquiry.service.gov.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41342864,
@@ -10469,7 +12653,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.checkcardetails.co.uk",
               "favicon": "https://f.start.me/checkcardetails.co.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26627328,
@@ -10478,7 +12663,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "findbyplate.com",
               "favicon": "https://f.start.me/findbyplate.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 91003062,
@@ -10487,7 +12673,8 @@ window.BUBBSY_DATA = {
               "description": "VIN check: vehicle history, price, damages and title records",
               "domain": "epicvin.com",
               "favicon": "https://f.start.me/epicvin.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003063,
@@ -10496,9 +12683,12 @@ window.BUBBSY_DATA = {
               "description": "Largest internet project dedicated to vehicle registration plates",
               "domain": "platesmania.com",
               "favicon": "https://f.start.me/platesmania.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 6,
+          "au_module": false
         },
         {
           "id": 58911981,
@@ -10516,7 +12706,8 @@ window.BUBBSY_DATA = {
               "description": "Search all VH- registered Australian aircraft, airframe details, and registered owners",
               "domain": "www.casa.gov.au",
               "favicon": "https://f.start.me/www.casa.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 50498764,
@@ -10525,7 +12716,8 @@ window.BUBBSY_DATA = {
               "description": "Live tracking and noise monitoring of flights across major Australian airports",
               "domain": "www.airservicesaustralia.com",
               "favicon": "https://f.start.me/www.airservicesaustralia.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 73875599,
@@ -10534,7 +12726,8 @@ window.BUBBSY_DATA = {
               "description": "Real-time flight tracking across Australian FIR airspace and airports",
               "domain": "www.flightaware.com",
               "favicon": "https://f.start.me/www.flightaware.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42544319,
@@ -10543,7 +12736,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.flightairmap.com",
               "favicon": "https://f.start.me/flightairmap.com",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 35344261,
@@ -10552,7 +12746,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "globe.adsbexchange.com",
               "favicon": "https://f.start.me/globe.adsbexchange.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41521684,
@@ -10561,7 +12756,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "icarus.flights",
               "favicon": "https://f.start.me/icarus.flights",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 998627,
@@ -10570,7 +12766,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "flightaware.com",
               "favicon": "https://f.start.me/flightaware.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2715845,
@@ -10579,7 +12776,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.flightradar24.com",
               "favicon": "https://f.start.me/flightradar24.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 6910890,
@@ -10588,7 +12786,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.liveatc.net",
               "favicon": "https://f.start.me/liveatc.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 6393259,
@@ -10597,7 +12796,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.planespotters.net",
               "favicon": "https://f.start.me/planespotters.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 3305538,
@@ -10606,7 +12806,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.skyscanner.com",
               "favicon": "https://f.start.me/skyscanner.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31835183,
@@ -10615,7 +12816,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.radarbox.com",
               "favicon": "https://f.start.me/radarbox.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631160,
@@ -10624,9 +12826,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 59546260,
@@ -10644,16 +12849,8 @@ window.BUBBSY_DATA = {
               "description": "Official Australian maritime shipping register, commercial vessel owners, and tonnage",
               "domain": "www.amsa.gov.au",
               "favicon": "https://f.start.me/www.amsa.gov.au",
-              "status": 200
-            },
-            {
-              "id": 40308670,
-              "title": "[AUS] MarineTraffic Australia AIS Tracking",
-              "url": "https://www.marinetraffic.com/en/ais/home/centerx/145.0/centery/-30.0/zoom/4",
-              "description": "Live satellite and coastal AIS tracking for ships in Australian waters and ports",
-              "domain": "www.marinetraffic.com",
-              "favicon": "https://f.start.me/www.marinetraffic.com",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 4783996,
@@ -10662,7 +12859,18 @@ window.BUBBSY_DATA = {
               "description": "Daily arrivals and departures for Sydney Harbour, Port Botany, and Port Kembla",
               "domain": "www.portauthoritynsw.com.au",
               "favicon": "https://f.start.me/www.portauthoritynsw.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 40308670,
+              "title": "[AUS] MarineTraffic Australia AIS Tracking",
+              "url": "https://www.marinetraffic.com/en/ais/home/centerx/145.0/centery/-30.0/zoom/4",
+              "description": "Live satellite and coastal AIS tracking for ships in Australian waters and ports",
+              "domain": "www.marinetraffic.com",
+              "favicon": "https://f.start.me/www.marinetraffic.com",
+              "status": 200,
+              "au": false
             },
             {
               "id": 663116,
@@ -10671,7 +12879,8 @@ window.BUBBSY_DATA = {
               "description": "MarineTraffic Live Ships Map. Discover information and vessel positions for vessels around the world. Search the MarineTraffic ships database of more than 550000 active and decommissioned vessels. ...",
               "domain": "www.marinetraffic.com",
               "favicon": "https://f.start.me/marinetraffic.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 2062262,
@@ -10680,7 +12889,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.vesselfinder.com",
               "favicon": "https://f.start.me/vesselfinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42544319,
@@ -10689,7 +12899,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.flightairmap.com",
               "favicon": "https://f.start.me/flightairmap.com",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 37475948,
@@ -10698,7 +12909,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wondersmithrae.medium.com",
               "favicon": "https://f.start.me/wondersmithrae.medium.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 43211556,
@@ -10707,7 +12919,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shipais.uk",
               "favicon": "https://f.start.me/shipais.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6952885,
@@ -10716,7 +12929,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fleetmon.com",
               "favicon": "https://f.start.me/fleetmon.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 39729381,
@@ -10725,7 +12939,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.shipfinder.com",
               "favicon": "https://f.start.me/shipfinder.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38635097,
@@ -10734,7 +12949,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ais.boatnerd.com",
               "favicon": "https://f.start.me/ais.boatnerd.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14353951,
@@ -10743,7 +12959,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.livecruiseshiptracker.com",
               "favicon": "https://f.start.me/livecruiseshiptracker.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22614413,
@@ -10752,7 +12969,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.shippingexplorer.net",
               "favicon": "https://f.start.me/shippingexplorer.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40879916,
@@ -10761,7 +12979,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.marinevesseltraffic.com",
               "favicon": "https://f.start.me/marinevesseltraffic.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 40418994,
@@ -10770,7 +12989,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "map.nbr.org",
               "favicon": "https://f.start.me/map.nbr.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38256047,
@@ -10779,7 +12999,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "theshippingdatabase.com",
               "favicon": "https://f.start.me/theshippingdatabase.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38899484,
@@ -10788,7 +13009,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.crewlist.org.uk",
               "favicon": "https://f.start.me/crewlist.org.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19560474,
@@ -10797,7 +13019,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.icc-ccs.org",
               "favicon": "https://f.start.me/icc-ccs.org",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 28925084,
@@ -10806,7 +13029,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.marinevesseltraffic.com",
               "favicon": "https://f.start.me/marinevesseltraffic.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 1913073,
@@ -10815,7 +13039,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "container-tracking.org",
               "favicon": "https://f.start.me/container-tracking.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17702847,
@@ -10824,7 +13049,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.track-trace.com",
               "favicon": "https://f.start.me/track-trace.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30762368,
@@ -10833,9 +13059,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.maersk.com",
               "favicon": "https://f.start.me/maersk.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 62510177,
@@ -10853,7 +13082,8 @@ window.BUBBSY_DATA = {
               "description": "Find public PDF documents, disclosures, and reports hosted on .gov.au domains",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/www.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33782132,
@@ -10862,7 +13092,8 @@ window.BUBBSY_DATA = {
               "description": "Discover unindexed FOI releases from Australian federal and state agencies",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/www.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39112993,
@@ -10871,7 +13102,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian university research repositories and data files",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/www.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46220583,
@@ -10880,7 +13112,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dorksearch.com",
               "favicon": "https://f.start.me/dorksearch.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37015337,
@@ -10889,7 +13122,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21253406,
@@ -10898,7 +13132,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.exploit-db.com",
               "favicon": "https://f.start.me/exploit-db.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013420,
@@ -10907,7 +13142,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20476506,
@@ -10916,7 +13152,8 @@ window.BUBBSY_DATA = {
               "description": "metagoofil searches Google for specific types of files being publicly hosted on a web site and optionally downloads them to your local box.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41417019,
@@ -10925,7 +13162,8 @@ window.BUBBSY_DATA = {
               "description": "A Python tool to automate some dorking stuff to find information disclosures.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30262630,
@@ -10934,7 +13172,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17755712,
@@ -10943,9 +13182,12 @@ window.BUBBSY_DATA = {
               "description": "automates Google searching for potentially vulnerable web pages and applications on the Internet.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58923807,
@@ -10963,7 +13205,8 @@ window.BUBBSY_DATA = {
               "description": "10,000+ open public datasets across Australian Commonwealth and State bodies",
               "domain": "data.gov.au",
               "favicon": "https://f.start.me/data.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 9281210,
@@ -10972,7 +13215,8 @@ window.BUBBSY_DATA = {
               "description": "Declassified Australian intelligence, defense, and passenger archives",
               "domain": "www.naa.gov.au",
               "favicon": "https://f.start.me/www.naa.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 12897748,
@@ -10981,7 +13225,8 @@ window.BUBBSY_DATA = {
               "description": "Social, political, and demographic open datasets hosted at ANU",
               "domain": "ada.edu.au",
               "favicon": "https://f.start.me/ada.edu.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 45903059,
@@ -10990,7 +13235,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cartographia.github.io",
               "favicon": "https://f.start.me/cartographia.github.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 14865303,
@@ -10999,7 +13245,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "odfinder.github.io",
               "favicon": "https://f.start.me/odfinder.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34913136,
@@ -11008,7 +13255,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24221100,
@@ -11017,7 +13265,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opendirsearch.abifog.com",
               "favicon": "https://f.start.me/opendirsearch.abifog.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 891736,
@@ -11026,7 +13275,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "archive-it.org",
               "favicon": "https://f.start.me/archive-it.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35567073,
@@ -11035,7 +13285,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "odcrawler.xyz",
               "favicon": "https://f.start.me/odcrawler.xyz",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15201179,
@@ -11044,7 +13295,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732282,
@@ -11053,7 +13305,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35865754,
@@ -11062,7 +13315,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36798867,
@@ -11071,7 +13325,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732288,
@@ -11080,7 +13335,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40596562,
@@ -11089,7 +13345,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37076582,
@@ -11098,7 +13355,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fonetask.com",
               "favicon": "https://f.start.me/fonetask.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27993013,
@@ -11107,7 +13365,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32311883,
@@ -11116,7 +13375,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pdfsearch.io",
               "favicon": "https://f.start.me/pdfsearch.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14777359,
@@ -11125,7 +13385,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15920475,
@@ -11134,7 +13395,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "drivesearch.kwebpia.net",
               "favicon": "https://f.start.me/drivesearch.kwebpia.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7186035,
@@ -11143,7 +13405,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "filepursuit.com",
               "favicon": "https://f.start.me/filepursuit.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 33820192,
@@ -11152,7 +13415,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.filechef.com",
               "favicon": "https://f.start.me/filechef.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30266303,
@@ -11161,7 +13425,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "eyeofjustice.com",
               "favicon": "https://f.start.me/eyeofjustice.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 22538846,
@@ -11170,7 +13435,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mmnt.net",
               "favicon": "https://f.start.me/mmnt.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29496067,
@@ -11179,7 +13445,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "lendx.org",
               "favicon": "https://f.start.me/lendx.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28825254,
@@ -11188,9 +13455,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ewasion.github.io",
               "favicon": "https://f.start.me/ewasion.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 60575286,
@@ -11208,7 +13478,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ohshint.gitbook.io",
               "favicon": "https://f.start.me/ohshint.gitbook.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29892709,
@@ -11217,7 +13488,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datasetsearch.research.google.com",
               "favicon": "https://f.start.me/datasetsearch.research.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41743147,
@@ -11226,7 +13498,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.kaggle.com",
               "favicon": "https://f.start.me/kaggle.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041717,
@@ -11235,7 +13508,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "databasd.com",
               "favicon": "https://f.start.me/databasd.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 750312,
@@ -11244,7 +13518,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.data.gov",
               "favicon": "https://f.start.me/data.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4814775,
@@ -11253,7 +13528,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "data.world",
               "favicon": "https://f.start.me/data.world",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14736389,
@@ -11262,7 +13538,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cloud.google.com",
               "favicon": "https://f.start.me/cloud.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040954,
@@ -11271,7 +13548,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ariadne2.isti.cnr.it",
               "favicon": "https://f.start.me/ariadne2.isti.cnr.it",
-              "status": 500
+              "status": 500,
+              "au": false
             },
             {
               "id": 35563133,
@@ -11280,7 +13558,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.datasciencecentral.com",
               "favicon": "https://f.start.me/datasciencecentral.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30755339,
@@ -11289,7 +13568,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.datasetlist.com",
               "favicon": "https://f.start.me/datasetlist.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20824949,
@@ -11298,7 +13578,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datahub.io",
               "favicon": "https://f.start.me/datahub.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 18356351,
@@ -11307,7 +13588,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opendata.socrata.com",
               "favicon": "https://f.start.me/opendata.socrata.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42682529,
@@ -11316,7 +13598,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opensanctions.org",
               "favicon": "https://f.start.me/opensanctions.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41743136,
@@ -11325,9 +13608,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fivethirtyeight.com",
               "favicon": "https://f.start.me/fivethirtyeight.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55784976,
@@ -11345,7 +13631,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772604,
@@ -11354,7 +13641,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36798881,
@@ -11363,7 +13651,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2900999,
@@ -11372,7 +13661,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "publicwww.com",
               "favicon": "https://f.start.me/publicwww.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22610519,
@@ -11381,7 +13671,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "recruitin.net",
               "favicon": "https://f.start.me/recruitin.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30659279,
@@ -11390,7 +13681,8 @@ window.BUBBSY_DATA = {
               "description": "Search across a half million git repos",
               "domain": "grep.app",
               "favicon": "https://f.start.me/grep.app",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 17065149,
@@ -11399,7 +13691,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nerdydata.com",
               "favicon": "https://f.start.me/nerdydata.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15480946,
@@ -11408,7 +13701,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "psbdmp.ws",
               "favicon": "https://f.start.me/psbdmp.ws",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3424655,
@@ -11417,7 +13711,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012579,
@@ -11426,7 +13721,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bitbucket.org",
               "favicon": "https://f.start.me/bitbucket.org",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 27502974,
@@ -11435,7 +13731,8 @@ window.BUBBSY_DATA = {
               "description": "We help secure forward-thinking development, operations, and security teams by finding secrets across their code before it leads to a security breach.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39381943,
@@ -11444,7 +13741,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041160,
@@ -11453,7 +13751,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "webfinery.com",
               "favicon": "https://f.start.me/webfinery.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040899,
@@ -11462,7 +13761,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redhuntlabs.com",
               "favicon": "https://f.start.me/redhuntlabs.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 515512,
@@ -11471,7 +13771,8 @@ window.BUBBSY_DATA = {
               "description": "Search 75 billion lines of code from 40 million projects",
               "domain": "searchcode.com",
               "favicon": "https://f.start.me/searchcode.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29033718,
@@ -11480,7 +13781,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "about.sourcegraph.com",
               "favicon": "https://f.start.me/about.sourcegraph.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26591765,
@@ -11489,7 +13791,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "awesomeopensource.com",
               "favicon": "https://f.start.me/awesomeopensource.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 36673181,
@@ -11498,7 +13801,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "awesome-indexed.mathew-davies.co.uk",
               "favicon": "https://f.start.me/awesome-indexed.mathew-davies.co.uk",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 42571817,
@@ -11507,7 +13811,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dev.awesomelists.top",
               "favicon": "https://f.start.me/dev.awesomelists.top",
-              "status": 521
+              "status": 521,
+              "au": false
             },
             {
               "id": 20006333,
@@ -11516,7 +13821,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37471285,
@@ -11525,7 +13831,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003013,
@@ -11534,7 +13841,8 @@ window.BUBBSY_DATA = {
               "description": "Search code examples from over 1 million projects",
               "domain": "hotexamples.com",
               "favicon": "https://f.start.me/hotexamples.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003014,
@@ -11543,7 +13851,8 @@ window.BUBBSY_DATA = {
               "description": "Open source package dependency, version and security data by Google",
               "domain": "deps.dev",
               "favicon": "https://f.start.me/deps.dev",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003015,
@@ -11552,9 +13861,12 @@ window.BUBBSY_DATA = {
               "description": "Open API service for package, version and dependency metadata",
               "domain": "ecosyste.ms",
               "favicon": "https://f.start.me/ecosyste.ms",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 60610244,
@@ -11572,7 +13884,8 @@ window.BUBBSY_DATA = {
               "description": "Official registrar and registrant entity lookup for .com.au, .net.au, and .au domains",
               "domain": "www.auda.org.au",
               "favicon": "https://f.start.me/www.auda.org.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 10954489,
@@ -11581,7 +13894,8 @@ window.BUBBSY_DATA = {
               "description": "Regional Internet Registry for Australia - lookup IP blocks, ASNs, and network owners",
               "domain": "wq.apnic.net",
               "favicon": "https://f.start.me/wq.apnic.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44454753,
@@ -11590,7 +13904,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whoismind.com",
               "favicon": "https://f.start.me/whoismind.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25296104,
@@ -11599,7 +13914,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "webwhois.verisign.com",
               "favicon": "https://f.start.me/webwhois.verisign.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1879938,
@@ -11608,7 +13924,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "who.is",
               "favicon": "https://f.start.me/who.is",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16756555,
@@ -11617,7 +13934,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.whoxy.com",
               "favicon": "https://f.start.me/whoxy.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38372772,
@@ -11626,9 +13944,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 55785469,
@@ -11646,7 +13967,8 @@ window.BUBBSY_DATA = {
               "description": "Lookup Australian domain registrant ABN/ACN and authorized contact details",
               "domain": "www.auda.org.au",
               "favicon": "https://f.start.me/www.auda.org.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 14803091,
@@ -11655,7 +13977,8 @@ window.BUBBSY_DATA = {
               "description": "IP address allocations and Autonomous System Numbers for Australian ISPs",
               "domain": "wq.apnic.net",
               "favicon": "https://f.start.me/wq.apnic.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 47492670,
@@ -11664,7 +13987,8 @@ window.BUBBSY_DATA = {
               "description": "Telstra national backbone routing and BGP path analysis",
               "domain": "telstra.net",
               "favicon": "https://f.start.me/telstra.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 12961661,
@@ -11673,7 +13997,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "domainbigdata.com",
               "favicon": "https://f.start.me/domainbigdata.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 45763943,
@@ -11682,7 +14007,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.domaincodex.com",
               "favicon": "https://f.start.me/domaincodex.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 15305471,
@@ -11691,7 +14017,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dnslytics.com",
               "favicon": "https://f.start.me/dnslytics.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16114001,
@@ -11700,7 +14027,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "securitytrails.com",
               "favicon": "https://f.start.me/securitytrails.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 10770221,
@@ -11709,7 +14037,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shodan.io",
               "favicon": "https://f.start.me/shodan.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 46173749,
@@ -11718,7 +14047,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "internetdb.shodan.io",
               "favicon": "https://f.start.me/internetdb.shodan.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41688978,
@@ -11727,7 +14057,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.greynoise.io",
               "favicon": "https://f.start.me/greynoise.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14201858,
@@ -11736,7 +14067,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fofa.so",
               "favicon": "https://f.start.me/fofa.so",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3179180,
@@ -11745,7 +14077,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zoomeye.org",
               "favicon": "https://f.start.me/zoomeye.org",
-              "status": 521
+              "status": 521,
+              "au": false
             },
             {
               "id": 28195495,
@@ -11754,7 +14087,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "censys.io",
               "favicon": "https://f.start.me/censys.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 18089704,
@@ -11763,7 +14097,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "viewdns.info",
               "favicon": "https://f.start.me/viewdns.info",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 19539511,
@@ -11772,7 +14107,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "census2012.sourceforge.net",
               "favicon": "https://f.start.me/census2012.sourceforge.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18638745,
@@ -11781,7 +14117,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.onyphe.io",
               "favicon": "https://f.start.me/onyphe.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2233696,
@@ -11790,7 +14127,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ipleak.net",
               "favicon": "https://f.start.me/ipleak.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29140738,
@@ -11799,7 +14137,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "censys.io",
               "favicon": "https://f.start.me/censys.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 27048089,
@@ -11808,7 +14147,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "censys.io",
               "favicon": "https://f.start.me/censys.io",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 676505,
@@ -11817,7 +14157,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.robtex.com",
               "favicon": "https://f.start.me/robtex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013764,
@@ -11826,7 +14167,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35344300,
@@ -11835,7 +14177,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wappalyzer.com",
               "favicon": "https://f.start.me/wappalyzer.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013434,
@@ -11844,7 +14187,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41288905,
@@ -11853,7 +14197,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 389853,
@@ -11862,7 +14207,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "builtwith.com",
               "favicon": "https://f.start.me/builtwith.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41688833,
@@ -11871,7 +14217,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41688828,
@@ -11880,7 +14227,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowcrypt.net",
               "favicon": "https://f.start.me/shadowcrypt.net",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 3812284,
@@ -11889,7 +14237,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "centralops.net",
               "favicon": "https://f.start.me/centralops.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15628517,
@@ -11898,7 +14247,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "transparencyreport.google.com",
               "favicon": "https://f.start.me/transparencyreport.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38372739,
@@ -11907,7 +14257,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 12319293,
@@ -11916,7 +14267,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "crt.sh",
               "favicon": "https://f.start.me/crt.sh",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 34660317,
@@ -11925,7 +14277,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "leakix.net",
               "favicon": "https://f.start.me/leakix.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24154635,
@@ -11934,7 +14287,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "domainwat.ch",
               "favicon": "https://f.start.me/domainwat.ch",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7538715,
@@ -11943,7 +14297,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "urlscan.io",
               "favicon": "https://f.start.me/urlscan.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2473143,
@@ -11952,7 +14307,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dnsdumpster.com",
               "favicon": "https://f.start.me/dnsdumpster.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 2700920,
@@ -11961,7 +14317,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.similarweb.com",
               "favicon": "https://f.start.me/similarweb.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11483898,
@@ -11970,7 +14327,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.alexa.com",
               "favicon": "https://f.start.me/alexa.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35294724,
@@ -11979,7 +14337,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "one-plus.github.io",
               "favicon": "https://f.start.me/one-plus.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28937997,
@@ -11988,7 +14347,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nerd.cesnet.cz",
               "favicon": "https://f.start.me/nerd.cesnet.cz",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38372792,
@@ -11997,7 +14357,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41688882,
@@ -12006,7 +14367,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41688888,
@@ -12015,7 +14377,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38372724,
@@ -12024,7 +14387,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38372717,
@@ -12033,7 +14397,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38372734,
@@ -12042,7 +14407,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38430119,
@@ -12051,7 +14417,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 38372756,
@@ -12060,7 +14427,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41688900,
@@ -12069,7 +14437,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41688913,
@@ -12078,7 +14447,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "osint.sh",
               "favicon": "https://f.start.me/osint.sh",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 6558439,
@@ -12087,7 +14457,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.iana.org",
               "favicon": "https://f.start.me/iana.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20441036,
@@ -12096,7 +14467,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "punkspider.org",
               "favicon": "https://f.start.me/punkspider.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35232163,
@@ -12105,7 +14477,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26681258,
@@ -12114,7 +14487,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "spyse.com",
               "favicon": "https://f.start.me/spyse.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 42851611,
@@ -12123,9 +14497,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "netlas.io",
               "favicon": "https://f.start.me/netlas.io",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 58969036,
@@ -12143,7 +14520,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "malpedia.caad.fkie.fraunhofer.de",
               "favicon": "https://f.start.me/malpedia.caad.fkie.fraunhofer.de",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15382838,
@@ -12152,7 +14530,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "app.any.run",
               "favicon": "https://f.start.me/app.any.run",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28980016,
@@ -12161,7 +14540,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "hybrid-analysis.com",
               "favicon": "https://f.start.me/hybrid-analysis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25354910,
@@ -12170,7 +14550,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.virustotal.com",
               "favicon": "https://f.start.me/virustotal.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25959123,
@@ -12179,7 +14560,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "maltiverse.com",
               "favicon": "https://f.start.me/maltiverse.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 25011505,
@@ -12188,7 +14570,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5526168,
@@ -12197,7 +14580,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "otx.alienvault.com",
               "favicon": "https://f.start.me/otx.alienvault.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2477300,
@@ -12206,7 +14590,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "virusscan.jotti.org",
               "favicon": "https://f.start.me/virusscan.jotti.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41773389,
@@ -12215,7 +14600,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cloud.iobit.com",
               "favicon": "https://f.start.me/cloud.iobit.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 3025271,
@@ -12224,7 +14610,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 35792775,
@@ -12233,7 +14620,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vx-underground.org",
               "favicon": "https://f.start.me/vx-underground.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41722423,
@@ -12242,7 +14630,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vx-underground.org",
               "favicon": "https://f.start.me/vx-underground.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 16538978,
@@ -12251,7 +14640,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46727548,
@@ -12260,7 +14650,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32158846,
@@ -12269,9 +14660,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786270,
@@ -12289,7 +14683,8 @@ window.BUBBSY_DATA = {
               "description": "Search all licensed wireless, cellular, and IoT transmitter sites in Australia",
               "domain": "web.acma.gov.au",
               "favicon": "https://f.start.me/web.acma.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 56714220,
@@ -12298,7 +14693,8 @@ window.BUBBSY_DATA = {
               "description": "Search indexed IoT hardware, webcams, SCADA, and servers located in Australia",
               "domain": "www.shodan.io",
               "favicon": "https://f.start.me/www.shodan.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41772626,
@@ -12307,7 +14703,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 961769,
@@ -12316,7 +14713,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.insecam.org",
               "favicon": "https://f.start.me/insecam.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15305968,
@@ -12325,7 +14723,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.camhacker.com",
               "favicon": "https://f.start.me/camhacker.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 5502490,
@@ -12334,7 +14733,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.earthcam.com",
               "favicon": "https://f.start.me/earthcam.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29117241,
@@ -12343,7 +14743,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "airportwebcams.net",
               "favicon": "https://f.start.me/airportwebcams.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6161374,
@@ -12352,7 +14753,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.the-webcam-network.com",
               "favicon": "https://f.start.me/the-webcam-network.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18361707,
@@ -12361,7 +14763,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cleancss.com",
               "favicon": "https://f.start.me/cleancss.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1918495,
@@ -12370,7 +14773,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gobefore.me",
               "favicon": "https://f.start.me/gobefore.me",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 37041735,
@@ -12379,7 +14783,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.webcamsabroad.com",
               "favicon": "https://f.start.me/webcamsabroad.com",
-              "status": 503
+              "status": 503,
+              "au": false
             },
             {
               "id": 15920917,
@@ -12388,7 +14793,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.whatsupcams.com",
               "favicon": "https://f.start.me/whatsupcams.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32308068,
@@ -12397,7 +14803,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "city-webcams.com",
               "favicon": "https://f.start.me/city-webcams.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18014616,
@@ -12406,7 +14813,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.thingful.net",
               "favicon": "https://f.start.me/thingful.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041877,
@@ -12415,7 +14823,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "liveworldwebcam.net",
               "favicon": "https://f.start.me/liveworldwebcam.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36704395,
@@ -12424,7 +14833,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.iplivecams.com",
               "favicon": "https://f.start.me/iplivecams.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13232966,
@@ -12433,7 +14843,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.webcamtaxi.com",
               "favicon": "https://f.start.me/webcamtaxi.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 4348571,
@@ -12442,7 +14853,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "explorecams.com",
               "favicon": "https://f.start.me/explorecams.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41992238,
@@ -12451,7 +14863,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c4-cams.qwazwsx.xyz",
               "favicon": "https://f.start.me/c4-cams.qwazwsx.xyz",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 20345584,
@@ -12460,7 +14873,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nestcamdirectory.com",
               "favicon": "https://f.start.me/nestcamdirectory.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 977791,
@@ -12469,7 +14883,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.opentopia.com",
               "favicon": "https://f.start.me/opentopia.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15243195,
@@ -12478,7 +14893,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "worldcam.eu",
               "favicon": "https://f.start.me/worldcam.eu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43637004,
@@ -12487,7 +14903,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "goakamai.org",
               "favicon": "https://f.start.me/goakamai.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3768862,
@@ -12496,7 +14913,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www2.honolulu.gov",
               "favicon": "https://f.start.me/www2.honolulu.gov",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 43638156,
@@ -12505,7 +14923,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43657054,
@@ -12514,7 +14933,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43637700,
@@ -12523,7 +14943,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43637387,
@@ -12532,7 +14953,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43638008,
@@ -12541,7 +14963,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31461460,
@@ -12550,7 +14973,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sunders.uber.space",
               "favicon": "https://f.start.me/sunders.uber.space",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46456238,
@@ -12559,7 +14983,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nagix.github.io",
               "favicon": "https://f.start.me/nagix.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 839141,
@@ -12568,9 +14993,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fisgonia.com",
               "favicon": "https://f.start.me/fisgonia.com",
-              "status": null
+              "status": null,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 62510540,
@@ -12588,7 +15016,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "511on.ca",
               "favicon": "https://f.start.me/511on.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631125,
@@ -12597,7 +15026,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gtaupdate.com",
               "favicon": "https://f.start.me/gtaupdate.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41822031,
@@ -12606,7 +15036,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.torontohydro.com",
               "favicon": "https://f.start.me/torontohydro.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42166491,
@@ -12615,7 +15046,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.toronto.ca",
               "favicon": "https://f.start.me/toronto.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631107,
@@ -12624,9 +15056,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.tpscalls.live",
               "favicon": "https://f.start.me/tpscalls.live",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58807394,
@@ -12644,7 +15079,8 @@ window.BUBBSY_DATA = {
               "description": "Official database of all radio frequencies, tower coordinates, and license holders in AU",
               "domain": "web.acma.gov.au",
               "favicon": "https://f.start.me/web.acma.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 85737544,
@@ -12653,7 +15089,8 @@ window.BUBBSY_DATA = {
               "description": "Police, emergency services, aviation, and marine radio scanner frequencies for AU",
               "domain": "www.radioreference.com",
               "favicon": "https://f.start.me/www.radioreference.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 51657557,
@@ -12662,7 +15099,8 @@ window.BUBBSY_DATA = {
               "description": "Terrestrial radio, AM/FM, and digital television transmission towers in Australia",
               "domain": "www.baxtel.com",
               "favicon": "https://f.start.me/www.baxtel.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5143942,
@@ -12671,7 +15109,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.broadcastify.com",
               "favicon": "https://f.start.me/broadcastify.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41769026,
@@ -12680,7 +15119,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.broadcastify.com",
               "favicon": "https://f.start.me/broadcastify.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41189596,
@@ -12689,7 +15129,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "instabridge.com",
               "favicon": "https://f.start.me/instabridge.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 788971,
@@ -12698,7 +15139,8 @@ window.BUBBSY_DATA = {
               "description": "Scanner Frequencies and Radio Frequency Reference Database",
               "domain": "www.radioreference.com",
               "favicon": "https://f.start.me/radioreference.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41769021,
@@ -12707,7 +15149,8 @@ window.BUBBSY_DATA = {
               "description": "This a website transcribing scanner feeds to text in real-time, in response to recent events",
               "domain": "feeds.talonvoice.com",
               "favicon": "https://f.start.me/feeds.talonvoice.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41768444,
@@ -12716,7 +15159,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sonix.ai",
               "favicon": "https://f.start.me/sonix.ai",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40068884,
@@ -12725,7 +15169,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "scanmap.mobi",
               "favicon": "https://f.start.me/scanmap.mobi",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1698027,
@@ -12734,7 +15179,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wigle.net",
               "favicon": "https://f.start.me/wigle.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4349955,
@@ -12743,7 +15189,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.qrz.com",
               "favicon": "https://f.start.me/qrz.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11784850,
@@ -12752,7 +15199,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "radio-locator.com",
               "favicon": "https://f.start.me/radio-locator.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41547268,
@@ -12761,7 +15209,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "location.services.mozilla.com",
               "favicon": "https://f.start.me/location.services.mozilla.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37015320,
@@ -12770,7 +15219,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "database.radioid.net",
               "favicon": "https://f.start.me/database.radioid.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041861,
@@ -12779,7 +15229,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dxmaps.com",
               "favicon": "https://f.start.me/dxmaps.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041863,
@@ -12788,7 +15239,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rfsearch.com",
               "favicon": "https://f.start.me/rfsearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32527475,
@@ -12797,7 +15249,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "radiocells.org",
               "favicon": "https://f.start.me/radiocells.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41770628,
@@ -12806,7 +15259,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "twitter.com",
               "favicon": "https://f.start.me/twitter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5562449,
@@ -12815,7 +15269,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wifispc.com",
               "favicon": "https://f.start.me/wifispc.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30789567,
@@ -12824,9 +15279,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.wiman.me",
               "favicon": "https://f.start.me/wiman.me",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 55788066,
@@ -12844,7 +15302,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian residential, commercial property histories, floorplans, and sales",
               "domain": "www.realestate.com.au",
               "favicon": "https://f.start.me/www.realestate.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 99854924,
@@ -12853,7 +15312,8 @@ window.BUBBSY_DATA = {
               "description": "Property price estimates, sold histories, zoning, and auction results in Australia",
               "domain": "www.domain.com.au",
               "favicon": "https://f.start.me/www.domain.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 95131764,
@@ -12862,7 +15322,8 @@ window.BUBBSY_DATA = {
               "description": "CoreLogic Australian property sales history, estimated value, and title data",
               "domain": "www.propertyvalue.com.au",
               "favicon": "https://f.start.me/www.propertyvalue.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 13896502,
@@ -12871,7 +15332,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.primelocation.com",
               "favicon": "https://f.start.me/primelocation.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 2671189,
@@ -12880,7 +15342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.realtor.com",
               "favicon": "https://f.start.me/realtor.com",
-              "status": 429
+              "status": 429,
+              "au": false
             },
             {
               "id": 10405848,
@@ -12889,7 +15352,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.emporis.com",
               "favicon": "https://f.start.me/emporis.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3043598,
@@ -12898,7 +15362,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rehold.com",
               "favicon": "https://f.start.me/rehold.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 6014570,
@@ -12907,7 +15372,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zillow.com",
               "favicon": "https://f.start.me/zillow.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34285505,
@@ -12916,7 +15382,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zillow.com",
               "favicon": "https://f.start.me/zillow.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 11289760,
@@ -12925,7 +15392,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.zoopla.co.uk",
               "favicon": "https://f.start.me/zoopla.co.uk",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 8816452,
@@ -12934,7 +15402,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "homemetry.com",
               "favicon": "https://f.start.me/homemetry.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 29318280,
@@ -12943,7 +15412,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.remax.ca",
               "favicon": "https://f.start.me/remax.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784307,
@@ -12952,168 +15422,126 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
+        },
+        {
+          "id": 9303,
+          "title": "SATELLITE, SPACE & EARTH OBSERVATION",
+          "type": "urllist",
+          "group": "geo_transport",
+          "icon": "satellite",
+          "color": "#22d3ee",
+          "links": [
+            {
+              "title": "Geoscience Australia Sentinel Hotspots",
+              "url": "https://hotspots.dea.ga.gov.au/",
+              "description": "Australian near real-time bushfire hotspot detections from satellite",
+              "domain": "ga.gov.au",
+              "favicon": "https://f.start.me/ga.gov.au",
+              "au": true
+            },
+            {
+              "title": "Himawari Satellite Loops (BOM)",
+              "url": "http://www.bom.gov.au/australia/satellite/",
+              "description": "Australian Bureau of Meteorology Himawari satellite imagery loops",
+              "domain": "bom.gov.au",
+              "favicon": "https://f.start.me/bom.gov.au",
+              "au": true
+            },
+            {
+              "title": "Copernicus Browser",
+              "url": "https://browser.dataspace.copernicus.eu/",
+              "description": "Free Sentinel-1/2/3 imagery with band maths and time comparison",
+              "domain": "copernicus.eu",
+              "favicon": "https://f.start.me/copernicus.eu",
+              "au": false
+            },
+            {
+              "title": "NASA Worldview",
+              "url": "https://worldview.earthdata.nasa.gov/",
+              "description": "Daily global satellite imagery layers including fires, smoke and aerosols",
+              "domain": "nasa.gov",
+              "favicon": "https://f.start.me/nasa.gov",
+              "au": false
+            },
+            {
+              "title": "USGS EarthExplorer",
+              "url": "https://earthexplorer.usgs.gov/",
+              "description": "Landsat, aerial and declassified satellite imagery archive back to the 1940s",
+              "domain": "usgs.gov",
+              "favicon": "https://f.start.me/usgs.gov",
+              "au": false
+            },
+            {
+              "title": "Planet Explorer",
+              "url": "https://www.planet.com/explorer/",
+              "description": "High-cadence commercial imagery basemaps with monthly mosaics",
+              "domain": "planet.com",
+              "favicon": "https://f.start.me/planet.com",
+              "au": false
+            },
+            {
+              "title": "Zoom Earth",
+              "url": "https://zoom.earth/",
+              "description": "Live weather satellite loops, cyclone tracking and wildfire overlays",
+              "domain": "zoom.earth",
+              "favicon": "https://f.start.me/zoom.earth",
+              "au": false
+            },
+            {
+              "title": "Sentinel Playground",
+              "url": "https://apps.sentinel-hub.com/sentinel-playground/",
+              "description": "Quick multispectral index visualisation (NDVI, moisture, urban)",
+              "domain": "sentinel-hub.com",
+              "favicon": "https://f.start.me/sentinel-hub.com",
+              "au": false
+            },
+            {
+              "title": "N2YO Satellite Tracking",
+              "url": "https://www.n2yo.com/",
+              "description": "Live orbital positions, passes and TLE data for tracked satellites",
+              "domain": "n2yo.com",
+              "favicon": "https://f.start.me/n2yo.com",
+              "au": false
+            },
+            {
+              "title": "Heavens-Above",
+              "url": "https://heavens-above.com/",
+              "description": "Satellite pass predictions and sky charts for any observer location",
+              "domain": "heavens-above.com",
+              "favicon": "https://f.start.me/heavens-above.com",
+              "au": false
+            },
+            {
+              "title": "CelesTrak",
+              "url": "https://celestrak.org/",
+              "description": "Authoritative TLE catalogues, conjunction data and orbital element sets",
+              "domain": "celestrak.org",
+              "favicon": "https://f.start.me/celestrak.org",
+              "au": false
+            },
+            {
+              "title": "Space-Track.org",
+              "url": "https://www.space-track.org/",
+              "description": "Official US space catalogue with historical orbital element access",
+              "domain": "space-track.org",
+              "favicon": "https://f.start.me/space-track.org",
+              "au": false
+            }
+          ],
+          "au_count": 2,
+          "au_module": false
         }
       ]
     },
     {
       "index": 3,
       "widgets": [
-        {
-          "id": 9005,
-          "title": "AI IMAGE & VIDEO",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "image",
-          "color": "#f59e0b",
-          "links": [
-            {
-              "title": "Midjourney",
-              "url": "https://www.midjourney.com/",
-              "description": "Photorealistic image synthesis platform",
-              "domain": "midjourney.com",
-              "favicon": "https://f.start.me/midjourney.com"
-            },
-            {
-              "title": "FLUX (Black Forest Labs)",
-              "url": "https://blackforestlabs.ai/",
-              "description": "Text-to-image models and generation",
-              "domain": "blackforestlabs.ai",
-              "favicon": "https://f.start.me/blackforestlabs.ai"
-            },
-            {
-              "title": "Recraft",
-              "url": "https://www.recraft.ai/",
-              "description": "Design tool generating vector SVG and 3D graphics",
-              "domain": "recraft.ai",
-              "favicon": "https://f.start.me/recraft.ai"
-            },
-            {
-              "title": "Bing Image Creator",
-              "url": "https://www.bing.com/images/create",
-              "description": "Free web image generation",
-              "domain": "bing.com",
-              "favicon": "https://f.start.me/bing.com"
-            },
-            {
-              "title": "Runway",
-              "url": "https://runwayml.com/",
-              "description": "Generative video tools and motion synthesis",
-              "domain": "runwayml.com",
-              "favicon": "https://f.start.me/runwayml.com"
-            },
-            {
-              "title": "Luma Dream Machine",
-              "url": "https://lumalabs.ai/dream-machine",
-              "description": "Realistic video generation from text and imagery",
-              "domain": "lumalabs.ai",
-              "favicon": "https://f.start.me/lumalabs.ai"
-            },
-            {
-              "title": "Kling AI",
-              "url": "https://klingai.com/",
-              "description": "AI video generator with cinematic motion",
-              "domain": "klingai.com",
-              "favicon": "https://f.start.me/klingai.com"
-            },
-            {
-              "title": "Pika",
-              "url": "https://pika.art/",
-              "description": "Generative video and animation platform",
-              "domain": "pika.art",
-              "favicon": "https://f.start.me/pika.art"
-            },
-            {
-              "title": "CutItOut",
-              "url": "https://cut-it-out.vercel.app/",
-              "description": "Fast AI background remover tool",
-              "domain": "vercel.app",
-              "favicon": "https://f.start.me/cut-it-out.vercel.app"
-            },
-            {
-              "title": "Magnific",
-              "url": "https://magnific.ai/",
-              "description": "High-resolution image upscaling and detail enhancer",
-              "domain": "magnific.ai",
-              "favicon": "https://f.start.me/magnific.ai"
-            },
-            {
-              "title": "Krea",
-              "url": "https://www.krea.ai/",
-              "description": "Real-time drawing canvas and visual enhancer",
-              "domain": "krea.ai",
-              "favicon": "https://f.start.me/krea.ai"
-            },
-            {
-              "title": "Ideogram",
-              "url": "https://ideogram.ai/",
-              "description": "Image generator with typography and text rendering",
-              "domain": "ideogram.ai",
-              "favicon": "https://f.start.me/ideogram.ai"
-            }
-          ]
-        },
-        {
-          "id": 9006,
-          "title": "AI VOICE & AUDIO",
-          "type": "urllist",
-          "group": "ai_hub",
-          "icon": "mic",
-          "color": "#3b82f6",
-          "links": [
-            {
-              "title": "ElevenLabs",
-              "url": "https://elevenlabs.io/",
-              "description": "Natural voice generation and speech synthesis",
-              "domain": "elevenlabs.io",
-              "favicon": "https://f.start.me/elevenlabs.io"
-            },
-            {
-              "title": "Suno",
-              "url": "https://suno.com/",
-              "description": "Generate songs and audio from text prompts",
-              "domain": "suno.com",
-              "favicon": "https://f.start.me/suno.com"
-            },
-            {
-              "title": "Udio",
-              "url": "https://www.udio.com/",
-              "description": "Music synthesis and composition engine",
-              "domain": "udio.com",
-              "favicon": "https://f.start.me/udio.com"
-            },
-            {
-              "title": "OpenAI Whisper",
-              "url": "https://github.com/openai/whisper",
-              "description": "Open-source speech recognition and transcription",
-              "domain": "github.com",
-              "favicon": "https://f.start.me/github.com"
-            },
-            {
-              "title": "HeyGen",
-              "url": "https://www.heygen.com/",
-              "description": "AI video avatar and lip-sync platform",
-              "domain": "heygen.com",
-              "favicon": "https://f.start.me/heygen.com"
-            },
-            {
-              "title": "Play.ht",
-              "url": "https://play.ht/",
-              "description": "Realistic voice cloning and audio generation",
-              "domain": "play.ht",
-              "favicon": "https://f.start.me/play.ht"
-            },
-            {
-              "title": "Meshy",
-              "url": "https://www.meshy.ai/",
-              "description": "Text and image to 3D mesh model generator",
-              "domain": "meshy.ai",
-              "favicon": "https://f.start.me/meshy.ai"
-            }
-          ]
-        },
         {
           "id": 9101,
           "title": "[AUS] CORPORATIONS, ABN & ASIC",
@@ -13127,58 +15555,68 @@ window.BUBBSY_DATA = {
               "url": "https://abr.business.gov.au/",
               "description": "Search Australian Business Numbers, GST status, business names, and trading entities",
               "domain": "business.gov.au",
-              "favicon": "https://f.start.me/business.gov.au"
+              "favicon": "https://f.start.me/business.gov.au",
+              "au": true
             },
             {
               "title": "ASIC Connect (Company & Business Register)",
               "url": "https://connectonline.asic.gov.au/",
               "description": "Search Australian company directors, registered office, ACN, and document filings",
               "domain": "asic.gov.au",
-              "favicon": "https://f.start.me/asic.gov.au"
+              "favicon": "https://f.start.me/asic.gov.au",
+              "au": true
             },
             {
               "title": "AFSA Bankruptcy Register (NPII)",
               "url": "https://www.afsa.gov.au/",
               "description": "National Personal Insolvency Index - check bankruptcy and insolvency records in Australia",
               "domain": "afsa.gov.au",
-              "favicon": "https://f.start.me/afsa.gov.au"
+              "favicon": "https://f.start.me/afsa.gov.au",
+              "au": true
             },
             {
               "title": "ASX Company Announcements & Filings",
               "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements",
               "description": "Live disclosures, financial reports, and executive holdings for Australian listed companies",
               "domain": "asx.com.au",
-              "favicon": "https://f.start.me/asx.com.au"
+              "favicon": "https://f.start.me/asx.com.au",
+              "au": true
             },
             {
               "title": "IP Australia (Trade Marks Search - ATMOSS)",
               "url": "https://search.ipaustralia.gov.au/trademarks/search/quick",
               "description": "Search registered Australian trade marks, patent holders, and commercial IP owners",
               "domain": "ipaustralia.gov.au",
-              "favicon": "https://f.start.me/ipaustralia.gov.au"
+              "favicon": "https://f.start.me/ipaustralia.gov.au",
+              "au": true
             },
             {
               "title": "ACNC (Australian Charities Register)",
               "url": "https://www.acnc.gov.au/charity/charities",
               "description": "Search registered charities, board members, financial reports, and non-profits",
               "domain": "acnc.gov.au",
-              "favicon": "https://f.start.me/acnc.gov.au"
+              "favicon": "https://f.start.me/acnc.gov.au",
+              "au": true
             },
             {
               "title": "CreditorWatch Commercial Credit Reports",
               "url": "https://creditorwatch.com.au/",
               "description": "Credit history, court judgments, and cross-directorship alerts for Australian businesses",
               "domain": "creditorwatch.com.au",
-              "favicon": "https://f.start.me/creditorwatch.com.au"
+              "favicon": "https://f.start.me/creditorwatch.com.au",
+              "au": true
             },
             {
               "title": "Dun & Bradstreet Australia / Illion",
               "url": "https://www.illion.com.au/",
               "description": "Australian commercial credit intelligence and company directory",
               "domain": "illion.com.au",
-              "favicon": "https://f.start.me/illion.com.au"
+              "favicon": "https://f.start.me/illion.com.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 8,
+          "au_module": true
         },
         {
           "id": 9104,
@@ -13193,58 +15631,68 @@ window.BUBBSY_DATA = {
               "url": "https://www.realestate.com.au/",
               "description": "Search Australian residential, commercial property histories, floorplans, and sales",
               "domain": "realestate.com.au",
-              "favicon": "https://f.start.me/realestate.com.au"
+              "favicon": "https://f.start.me/realestate.com.au",
+              "au": true
             },
             {
               "title": "Domain.com.au Property Records",
               "url": "https://www.domain.com.au/",
               "description": "Property price estimates, sold histories, zoning, and auction results in Australia",
               "domain": "domain.com.au",
-              "favicon": "https://f.start.me/domain.com.au"
+              "favicon": "https://f.start.me/domain.com.au",
+              "au": true
             },
             {
               "title": "NSW SIX Maps (Spatial Information Exchange)",
               "url": "https://maps.six.nsw.gov.au/",
               "description": "NSW high-res cadastral mapping, property lot/DP boundaries, and historical aerial photos",
               "domain": "six.nsw.gov.au",
-              "favicon": "https://f.start.me/nsw.gov.au"
+              "favicon": "https://f.start.me/nsw.gov.au",
+              "au": true
             },
             {
               "title": "VicPlan (Victoria Planning & Land Zones)",
               "url": "https://mapshare.vic.gov.au/vicplan/",
               "description": "Victorian property boundaries, planning zones, overlays, and council permits",
               "domain": "mapshare.vic.gov.au",
-              "favicon": "https://f.start.me/vic.gov.au"
+              "favicon": "https://f.start.me/vic.gov.au",
+              "au": true
             },
             {
               "title": "Queensland Globe (Cadastre & Imagery)",
               "url": "https://qldglobe.information.qld.gov.au/",
               "description": "Interactive satellite imagery, land parcel boundaries, topography, and property data for QLD",
               "domain": "information.qld.gov.au",
-              "favicon": "https://f.start.me/qld.gov.au"
+              "favicon": "https://f.start.me/qld.gov.au",
+              "au": true
             },
             {
               "title": "Geoscience Australia NationalMap",
               "url": "https://nationalmap.gov.au/",
               "description": "National Australian geospatial data, infrastructure, satellite imagery, and environmental layers",
               "domain": "nationalmap.gov.au",
-              "favicon": "https://f.start.me/nationalmap.gov.au"
+              "favicon": "https://f.start.me/nationalmap.gov.au",
+              "au": true
             },
             {
               "title": "Landgate WA Map Viewer",
               "url": "https://www.landgate.wa.gov.au/",
               "description": "Western Australia property certificates, titles, surveys, and spatial data",
               "domain": "landgate.wa.gov.au",
-              "favicon": "https://f.start.me/landgate.wa.gov.au"
+              "favicon": "https://f.start.me/landgate.wa.gov.au",
+              "au": true
             },
             {
               "title": "LocationSA Map Viewer",
               "url": "https://location.sa.gov.au/viewer/",
               "description": "South Australian spatial data, land titles, and infrastructure map viewer",
               "domain": "location.sa.gov.au",
-              "favicon": "https://f.start.me/sa.gov.au"
+              "favicon": "https://f.start.me/sa.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 8,
+          "au_module": true
         },
         {
           "id": 9109,
@@ -13259,65 +15707,484 @@ window.BUBBSY_DATA = {
               "url": "https://auspost.com.au/",
               "description": "Postal services, PO boxes, postcodes and address redirection",
               "domain": "auspost.com.au",
-              "favicon": "https://f.start.me/auspost.com.au"
+              "favicon": "https://f.start.me/auspost.com.au",
+              "au": true
             },
             {
               "title": "Australia Post Track & Trace",
               "url": "https://auspost.com.au/mypost/track",
               "description": "Track Australian domestic and international parcels",
               "domain": "auspost.com.au",
-              "favicon": "https://f.start.me/auspost.com.au"
+              "favicon": "https://f.start.me/auspost.com.au",
+              "au": true
             },
             {
               "title": "G-NAF Geocoded Address Data",
               "url": "https://data.gov.au/dataset/geocoded-national-address-file-g-naf",
               "description": "National geocoded address file (G-NAF) for address verification and geocoding",
               "domain": "data.gov.au",
-              "favicon": "https://f.start.me/data.gov.au"
+              "favicon": "https://f.start.me/data.gov.au",
+              "au": true
             },
             {
               "title": "NBN Co Address Lookup",
               "url": "https://www.nbnco.com.au/",
               "description": "National Broadband Network rollout, address and technology lookup",
               "domain": "nbnco.com.au",
-              "favicon": "https://f.start.me/nbnco.com.au"
+              "favicon": "https://f.start.me/nbnco.com.au",
+              "au": true
             },
             {
               "title": "Telstra",
               "url": "https://www.telstra.com.au/",
               "description": "Telstra services, plans and phone number support",
               "domain": "telstra.com.au",
-              "favicon": "https://f.start.me/telstra.com.au"
+              "favicon": "https://f.start.me/telstra.com.au",
+              "au": true
             },
             {
               "title": "Optus",
               "url": "https://www.optus.com.au/",
               "description": "Optus mobile, broadband and business services",
               "domain": "optus.com.au",
-              "favicon": "https://f.start.me/optus.com.au"
+              "favicon": "https://f.start.me/optus.com.au",
+              "au": true
             },
             {
               "title": "Vodafone Australia",
               "url": "https://www.vodafone.com.au/",
               "description": "Vodafone mobile plans and coverage",
               "domain": "vodafone.com.au",
-              "favicon": "https://f.start.me/vodafone.com.au"
+              "favicon": "https://f.start.me/vodafone.com.au",
+              "au": true
             },
             {
               "title": "Geoscape Australia (Address Data)",
               "url": "https://geoscape.com.au/",
               "description": "G-NAF geocoded address data and cadastral products for Australia",
               "domain": "geoscape.com.au",
-              "favicon": "https://f.start.me/geoscape.com.au"
+              "favicon": "https://f.start.me/geoscape.com.au",
+              "au": true
             },
             {
               "title": "ACMA Telecommunications",
               "url": "https://www.acma.gov.au/industry/spectrum/radiocomms-licences/radiocomms-licence-numbers",
               "description": "ACMA radiocommunications licence and spectrum information",
               "domain": "acma.gov.au",
-              "favicon": "https://f.start.me/acma.gov.au"
+              "favicon": "https://f.start.me/acma.gov.au",
+              "au": true
             }
-          ]
+          ],
+          "au_count": 9,
+          "au_module": true
+        },
+        {
+          "id": 9116,
+          "title": "[AUS] BANKING, TAX, FINANCE & CONSUMER",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "banknote",
+          "color": "#f59e0b",
+          "links": [
+            {
+              "title": "Reserve Bank of Australia",
+              "url": "https://www.rba.gov.au/",
+              "description": "Australian cash rate decisions, statistical tables, and payments system data",
+              "domain": "rba.gov.au",
+              "favicon": "https://f.start.me/rba.gov.au",
+              "au": true
+            },
+            {
+              "title": "APRA Register of Institutions",
+              "url": "https://www.apra.gov.au/register-of-authorised-deposit-taking-institutions",
+              "description": "Authorised Australian banks, credit unions, insurers, and superannuation funds",
+              "domain": "apra.gov.au",
+              "favicon": "https://f.start.me/apra.gov.au",
+              "au": true
+            },
+            {
+              "title": "AUSTRAC",
+              "url": "https://www.austrac.gov.au/",
+              "description": "Australian AML/CTF regulator: reporting entities, enforcement, typology reports",
+              "domain": "austrac.gov.au",
+              "favicon": "https://f.start.me/austrac.gov.au",
+              "au": true
+            },
+            {
+              "title": "Australian Taxation Office",
+              "url": "https://www.ato.gov.au/",
+              "description": "ABN/GST status, corporate tax transparency reports, and lost super search",
+              "domain": "ato.gov.au",
+              "favicon": "https://f.start.me/ato.gov.au",
+              "au": true
+            },
+            {
+              "title": "MoneySmart Investor Alert List",
+              "url": "https://moneysmart.gov.au/investment-warnings/investor-alert-list",
+              "description": "ASIC list of unlicensed entities and suspected investment scam operators",
+              "domain": "moneysmart.gov.au",
+              "favicon": "https://f.start.me/moneysmart.gov.au",
+              "au": true
+            },
+            {
+              "title": "BSB Number Lookup (AusPayNet)",
+              "url": "https://bsb.auspaynet.com.au/",
+              "description": "Resolve an Australian BSB to its issuing bank, branch and location",
+              "domain": "auspaynet.com.au",
+              "favicon": "https://f.start.me/auspaynet.com.au",
+              "au": true
+            },
+            {
+              "title": "AFCA (Financial Complaints Authority)",
+              "url": "https://www.afca.org.au/",
+              "description": "Australian financial firm complaint determinations and published decisions",
+              "domain": "afca.org.au",
+              "favicon": "https://f.start.me/afca.org.au",
+              "au": true
+            },
+            {
+              "title": "ASIC Registers Portal",
+              "url": "https://asic.gov.au/online-services/search-asic-s-registers/",
+              "description": "Central entry point to all ASIC company, licence, and enforcement registers",
+              "domain": "asic.gov.au",
+              "favicon": "https://f.start.me/asic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Australian Treasury",
+              "url": "https://treasury.gov.au/",
+              "description": "Budget papers, consultation submissions, and economic policy documents",
+              "domain": "treasury.gov.au",
+              "favicon": "https://f.start.me/treasury.gov.au",
+              "au": true
+            },
+            {
+              "title": "Product Safety Australia Recalls",
+              "url": "https://www.productsafety.gov.au/recalls",
+              "description": "Official Australian product recall notices and supplier contact details",
+              "domain": "productsafety.gov.au",
+              "favicon": "https://f.start.me/productsafety.gov.au",
+              "au": true
+            },
+            {
+              "title": "CHOICE",
+              "url": "https://www.choice.com.au/",
+              "description": "Independent Australian consumer testing, recalls, and company investigations",
+              "domain": "choice.com.au",
+              "favicon": "https://f.start.me/choice.com.au",
+              "au": true
+            },
+            {
+              "title": "ProductReview.com.au",
+              "url": "https://www.productreview.com.au/",
+              "description": "Australian consumer reviews of businesses, tradies, insurers and retailers",
+              "domain": "productreview.com.au",
+              "favicon": "https://f.start.me/productreview.com.au",
+              "au": true
+            },
+            {
+              "title": "ACNC Charity Financial Reports",
+              "url": "https://www.acnc.gov.au/charity/charities",
+              "description": "Annual information statements and financials for Australian charities",
+              "domain": "acnc.gov.au",
+              "favicon": "https://f.start.me/acnc.gov.au",
+              "au": true
+            }
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9120,
+          "title": "[AUS] ENERGY, UTILITIES & INFRASTRUCTURE",
+          "type": "urllist",
+          "group": "aus_intel",
+          "icon": "zap",
+          "color": "#eab308",
+          "links": [
+            {
+              "title": "AEMO (Energy Market Operator)",
+              "url": "https://aemo.com.au/",
+              "description": "Live Australian NEM demand, generation, price and gas market data",
+              "domain": "aemo.com.au",
+              "favicon": "https://f.start.me/aemo.com.au",
+              "au": true
+            },
+            {
+              "title": "OpenNEM",
+              "url": "https://opennem.org.au/",
+              "description": "Open dashboard of Australian electricity generation by fuel and region",
+              "domain": "opennem.org.au",
+              "favicon": "https://f.start.me/opennem.org.au",
+              "au": true
+            },
+            {
+              "title": "Energy Made Easy (AER)",
+              "url": "https://www.energymadeeasy.gov.au/",
+              "description": "Official Australian retail energy plan and price comparison register",
+              "domain": "energymadeeasy.gov.au",
+              "favicon": "https://f.start.me/energymadeeasy.gov.au",
+              "au": true
+            },
+            {
+              "title": "Australian Energy Regulator",
+              "url": "https://www.aer.gov.au/",
+              "description": "Network determinations, retailer compliance and enforcement actions",
+              "domain": "aer.gov.au",
+              "favicon": "https://f.start.me/aer.gov.au",
+              "au": true
+            },
+            {
+              "title": "nbn Address Check",
+              "url": "https://www.nbnco.com.au/connect-home-or-business/check-your-address",
+              "description": "Confirm nbn technology type, rollout status and service class at an address",
+              "domain": "nbnco.com.au",
+              "favicon": "https://f.start.me/nbnco.com.au",
+              "au": true
+            },
+            {
+              "title": "National Broadband Map",
+              "url": "https://www.infrastructure.gov.au/media-technology-communications/internet/national-broadband-map",
+              "description": "Broadband availability, technology and speeds across Australian regions",
+              "domain": "infrastructure.gov.au",
+              "favicon": "https://f.start.me/infrastructure.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACMA Register of Radiocommunications Licences",
+              "url": "https://web.acma.gov.au/rrl/register_search.main_page",
+              "description": "Search Australian spectrum licences, callsigns, licensees and transmitters",
+              "domain": "acma.gov.au",
+              "favicon": "https://f.start.me/acma.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACMA Transmitter Site Lookup",
+              "url": "https://web.acma.gov.au/rrl/site_search.site_lookup",
+              "description": "Geolocate Australian radio transmitter sites and licensed equipment",
+              "domain": "acma.gov.au",
+              "favicon": "https://f.start.me/acma.gov.au",
+              "au": true
+            },
+            {
+              "title": "Before You Dig Australia",
+              "url": "https://www.byda.com.au/",
+              "description": "National buried utility and asset plan enquiry service",
+              "domain": "byda.com.au",
+              "favicon": "https://f.start.me/byda.com.au",
+              "au": true
+            },
+            {
+              "title": "Ausgrid Outages (NSW)",
+              "url": "https://www.ausgrid.com.au/outages",
+              "description": "Live NSW electricity outage map, causes and restoration estimates",
+              "domain": "ausgrid.com.au",
+              "favicon": "https://f.start.me/ausgrid.com.au",
+              "au": true
+            },
+            {
+              "title": "Energex Outage Finder (QLD)",
+              "url": "https://www.energex.com.au/outages/outage-finder",
+              "description": "Queensland power outage map with suburb-level incident detail",
+              "domain": "energex.com.au",
+              "favicon": "https://f.start.me/energex.com.au",
+              "au": true
+            },
+            {
+              "title": "WaterNSW",
+              "url": "https://www.waternsw.com.au/",
+              "description": "NSW dam levels, river flows, water licences and allocation data",
+              "domain": "waternsw.com.au",
+              "favicon": "https://f.start.me/waternsw.com.au",
+              "au": true
+            },
+            {
+              "title": "Infrastructure Australia",
+              "url": "https://www.infrastructureaustralia.gov.au/",
+              "description": "National infrastructure priority list, audits and project pipeline",
+              "domain": "infrastructureaustralia.gov.au",
+              "favicon": "https://f.start.me/infrastructureaustralia.gov.au",
+              "au": true
+            }
+          ],
+          "au_count": 13,
+          "au_module": true
+        },
+        {
+          "id": 9005,
+          "title": "AI IMAGE & VIDEO",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "image",
+          "color": "#f59e0b",
+          "links": [
+            {
+              "title": "Midjourney",
+              "url": "https://www.midjourney.com/",
+              "description": "Photorealistic image synthesis platform",
+              "domain": "midjourney.com",
+              "favicon": "https://f.start.me/midjourney.com",
+              "au": false
+            },
+            {
+              "title": "FLUX (Black Forest Labs)",
+              "url": "https://blackforestlabs.ai/",
+              "description": "Text-to-image models and generation",
+              "domain": "blackforestlabs.ai",
+              "favicon": "https://f.start.me/blackforestlabs.ai",
+              "au": false
+            },
+            {
+              "title": "Recraft",
+              "url": "https://www.recraft.ai/",
+              "description": "Design tool generating vector SVG and 3D graphics",
+              "domain": "recraft.ai",
+              "favicon": "https://f.start.me/recraft.ai",
+              "au": false
+            },
+            {
+              "title": "Bing Image Creator",
+              "url": "https://www.bing.com/images/create",
+              "description": "Free web image generation",
+              "domain": "bing.com",
+              "favicon": "https://f.start.me/bing.com",
+              "au": false
+            },
+            {
+              "title": "Runway",
+              "url": "https://runwayml.com/",
+              "description": "Generative video tools and motion synthesis",
+              "domain": "runwayml.com",
+              "favicon": "https://f.start.me/runwayml.com",
+              "au": false
+            },
+            {
+              "title": "Luma Dream Machine",
+              "url": "https://lumalabs.ai/dream-machine",
+              "description": "Realistic video generation from text and imagery",
+              "domain": "lumalabs.ai",
+              "favicon": "https://f.start.me/lumalabs.ai",
+              "au": false
+            },
+            {
+              "title": "Kling AI",
+              "url": "https://klingai.com/",
+              "description": "AI video generator with cinematic motion",
+              "domain": "klingai.com",
+              "favicon": "https://f.start.me/klingai.com",
+              "au": false
+            },
+            {
+              "title": "Pika",
+              "url": "https://pika.art/",
+              "description": "Generative video and animation platform",
+              "domain": "pika.art",
+              "favicon": "https://f.start.me/pika.art",
+              "au": false
+            },
+            {
+              "title": "CutItOut",
+              "url": "https://cut-it-out.vercel.app/",
+              "description": "Fast AI background remover tool",
+              "domain": "vercel.app",
+              "favicon": "https://f.start.me/cut-it-out.vercel.app",
+              "au": false
+            },
+            {
+              "title": "Magnific",
+              "url": "https://magnific.ai/",
+              "description": "High-resolution image upscaling and detail enhancer",
+              "domain": "magnific.ai",
+              "favicon": "https://f.start.me/magnific.ai",
+              "au": false
+            },
+            {
+              "title": "Krea",
+              "url": "https://www.krea.ai/",
+              "description": "Real-time drawing canvas and visual enhancer",
+              "domain": "krea.ai",
+              "favicon": "https://f.start.me/krea.ai",
+              "au": false
+            },
+            {
+              "title": "Ideogram",
+              "url": "https://ideogram.ai/",
+              "description": "Image generator with typography and text rendering",
+              "domain": "ideogram.ai",
+              "favicon": "https://f.start.me/ideogram.ai",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
+        },
+        {
+          "id": 9006,
+          "title": "AI VOICE & AUDIO",
+          "type": "urllist",
+          "group": "ai_hub",
+          "icon": "mic",
+          "color": "#3b82f6",
+          "links": [
+            {
+              "title": "ElevenLabs",
+              "url": "https://elevenlabs.io/",
+              "description": "Natural voice generation and speech synthesis",
+              "domain": "elevenlabs.io",
+              "favicon": "https://f.start.me/elevenlabs.io",
+              "au": false
+            },
+            {
+              "title": "Suno",
+              "url": "https://suno.com/",
+              "description": "Generate songs and audio from text prompts",
+              "domain": "suno.com",
+              "favicon": "https://f.start.me/suno.com",
+              "au": false
+            },
+            {
+              "title": "Udio",
+              "url": "https://www.udio.com/",
+              "description": "Music synthesis and composition engine",
+              "domain": "udio.com",
+              "favicon": "https://f.start.me/udio.com",
+              "au": false
+            },
+            {
+              "title": "OpenAI Whisper",
+              "url": "https://github.com/openai/whisper",
+              "description": "Open-source speech recognition and transcription",
+              "domain": "github.com",
+              "favicon": "https://f.start.me/github.com",
+              "au": false
+            },
+            {
+              "title": "HeyGen",
+              "url": "https://www.heygen.com/",
+              "description": "AI video avatar and lip-sync platform",
+              "domain": "heygen.com",
+              "favicon": "https://f.start.me/heygen.com",
+              "au": false
+            },
+            {
+              "title": "Play.ht",
+              "url": "https://play.ht/",
+              "description": "Realistic voice cloning and audio generation",
+              "domain": "play.ht",
+              "favicon": "https://f.start.me/play.ht",
+              "au": false
+            },
+            {
+              "title": "Meshy",
+              "url": "https://www.meshy.ai/",
+              "description": "Text and image to 3D mesh model generator",
+              "domain": "meshy.ai",
+              "favicon": "https://f.start.me/meshy.ai",
+              "au": false
+            }
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55789019,
@@ -13335,7 +16202,8 @@ window.BUBBSY_DATA = {
               "description": "NSW high-res cadastral mapping, property lot/DP boundaries, and historical aerials",
               "domain": "maps.six.nsw.gov.au",
               "favicon": "https://f.start.me/maps.six.nsw.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 85757329,
@@ -13344,7 +16212,8 @@ window.BUBBSY_DATA = {
               "description": "Victorian property boundaries, planning zones, overlays, and council permits",
               "domain": "mapshare.vic.gov.au",
               "favicon": "https://f.start.me/mapshare.vic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 54166291,
@@ -13353,7 +16222,8 @@ window.BUBBSY_DATA = {
               "description": "Interactive satellite imagery, land parcel boundaries, and property data for QLD",
               "domain": "qldglobe.information.qld.gov.au",
               "favicon": "https://f.start.me/qldglobe.information.qld.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 28194710,
@@ -13362,7 +16232,8 @@ window.BUBBSY_DATA = {
               "description": "National Australian geospatial data, infrastructure, satellite imagery, and topography",
               "domain": "nationalmap.gov.au",
               "favicon": "https://f.start.me/nationalmap.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 89780550,
@@ -13371,7 +16242,8 @@ window.BUBBSY_DATA = {
               "description": "ACT cadastral maps, zoning, land titles, and public infrastructure",
               "domain": "www.actmapi.act.gov.au",
               "favicon": "https://f.start.me/www.actmapi.act.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 21475,
@@ -13380,7 +16252,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1899337,
@@ -13389,7 +16262,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bing.com",
               "favicon": "https://f.start.me/bing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4200317,
@@ -13398,7 +16272,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "yandex.com",
               "favicon": "https://f.start.me/yandex.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37618629,
@@ -13407,7 +16282,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.udeuschle.de",
               "favicon": "https://f.start.me/udeuschle.de",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15134731,
@@ -13416,7 +16292,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mapillary.com",
               "favicon": "https://f.start.me/mapillary.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36641325,
@@ -13425,7 +16302,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.geonarra.com",
               "favicon": "https://f.start.me/geonarra.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 38791154,
@@ -13434,7 +16312,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.waze.com",
               "favicon": "https://f.start.me/waze.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13526231,
@@ -13443,7 +16322,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "map.baidu.com",
               "favicon": "https://f.start.me/map.baidu.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 10790651,
@@ -13452,7 +16332,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discover.digitalglobe.com",
               "favicon": "https://f.start.me/discover.digitalglobe.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 2134758,
@@ -13461,7 +16342,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mapquest.com",
               "favicon": "https://f.start.me/mapquest.com",
-              "status": 202
+              "status": 202,
+              "au": false
             },
             {
               "id": 2069085,
@@ -13470,7 +16352,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.openstreetmap.org",
               "favicon": "https://f.start.me/openstreetmap.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30715179,
@@ -13479,7 +16362,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "maps.descarteslabs.com",
               "favicon": "https://f.start.me/maps.descarteslabs.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 37015360,
@@ -13488,7 +16372,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42571792,
@@ -13497,7 +16382,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "livingatlas.arcgis.com",
               "favicon": "https://f.start.me/livingatlas.arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27443460,
@@ -13506,7 +16392,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "firms.modaps.eosdis.nasa.gov",
               "favicon": "https://f.start.me/firms.modaps.eosdis.nasa.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30966489,
@@ -13515,7 +16402,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "coronavirus.jhu.edu",
               "favicon": "https://f.start.me/coronavirus.jhu.edu",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 6823629,
@@ -13524,7 +16412,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "liveuamap.com",
               "favicon": "https://f.start.me/liveuamap.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 20159994,
@@ -13533,7 +16422,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "satellites.pro",
               "favicon": "https://f.start.me/satellites.pro",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37015365,
@@ -13542,7 +16432,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "umap.openstreetmap.fr",
               "favicon": "https://f.start.me/umap.openstreetmap.fr",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32737,
@@ -13551,7 +16442,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wikimapia.org",
               "favicon": "https://f.start.me/wikimapia.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6861259,
@@ -13560,7 +16452,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "syria.liveuamap.com",
               "favicon": "https://f.start.me/syria.liveuamap.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 31472882,
@@ -13569,7 +16462,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "radio.garden",
               "favicon": "https://f.start.me/radio.garden",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41992251,
@@ -13578,7 +16472,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.windy.com",
               "favicon": "https://f.start.me/windy.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522010,
@@ -13587,7 +16482,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "gpx.studio",
               "favicon": "https://f.start.me/gpx.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26791007,
@@ -13596,7 +16492,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.oalley.net",
               "favicon": "https://f.start.me/oalley.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41725982,
@@ -13605,7 +16502,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "jsfiddle.net",
               "favicon": "https://f.start.me/jsfiddle.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 42101150,
@@ -13614,7 +16512,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "kartaview.org",
               "favicon": "https://f.start.me/kartaview.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31137821,
@@ -13623,7 +16522,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631133,
@@ -13632,7 +16532,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43657001,
@@ -13641,7 +16542,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631137,
@@ -13650,7 +16552,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631102,
@@ -13659,7 +16562,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631104,
@@ -13668,7 +16572,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7993822,
@@ -13677,7 +16582,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "inciweb.nwcg.gov",
               "favicon": "https://f.start.me/inciweb.nwcg.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43637968,
@@ -13686,7 +16592,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "earth.nullschool.net",
               "favicon": "https://f.start.me/earth.nullschool.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46175810,
@@ -13695,7 +16602,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43637714,
@@ -13704,7 +16612,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46175795,
@@ -13713,7 +16622,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.google.com",
               "favicon": "https://f.start.me/google.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 46708091,
@@ -13722,7 +16632,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.live-action-map.com",
               "favicon": "https://f.start.me/live-action-map.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46189029,
@@ -13731,7 +16642,8 @@ window.BUBBSY_DATA = {
               "description": "A curated list of maps of Ukraine, ukrainian mappers and tools that they use or develop for creating and publish maps.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 46708094,
@@ -13740,7 +16652,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "dopomoha.pl",
               "favicon": "https://f.start.me/dopomoha.pl",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46439142,
@@ -13749,7 +16662,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nagix.github.io",
               "favicon": "https://f.start.me/nagix.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46708099,
@@ -13758,7 +16672,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ruarq.github.io",
               "favicon": "https://f.start.me/ruarq.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14211806,
@@ -13767,7 +16682,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "traintimes.org.uk",
               "favicon": "https://f.start.me/traintimes.org.uk",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 46708435,
@@ -13776,7 +16692,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "livecorona.co.kr",
               "favicon": "https://f.start.me/livecorona.co.kr",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 31174619,
@@ -13785,7 +16702,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.tfljamcams.net",
               "favicon": "https://f.start.me/tfljamcams.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 47037453,
@@ -13794,9 +16712,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cesium.com",
               "favicon": "https://f.start.me/cesium.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 5,
+          "au_module": false
         },
         {
           "id": 9205,
@@ -13811,121 +16732,140 @@ window.BUBBSY_DATA = {
               "url": "https://rapiddns.io/",
               "description": "Query subdomains or sites of a same IP easily",
               "domain": "rapiddns.io",
-              "favicon": "https://f.start.me/rapiddns.io"
+              "favicon": "https://f.start.me/rapiddns.io",
+              "au": false
             },
             {
               "title": "Farsight DNSDB",
               "url": "https://www.farsightsecurity.com/",
               "description": "Passive DNS historical database",
               "domain": "farsightsecurity.com",
-              "favicon": "https://f.start.me/farsightsecurity.com"
+              "favicon": "https://f.start.me/farsightsecurity.com",
+              "au": false
             },
             {
               "title": "Chaos (ProjectDiscovery)",
               "url": "https://chaos.projectdiscovery.io/#/",
               "description": "Enhance research and analyse changes around DNS",
               "domain": "chaos.projectdiscovery.io",
-              "favicon": "https://f.start.me/chaos.projectdiscovery.io"
+              "favicon": "https://f.start.me/chaos.projectdiscovery.io",
+              "au": false
             },
             {
               "title": "DNSViz",
               "url": "https://dnsviz.net/",
               "description": "Visualize the status of a DNS zone",
               "domain": "dnsviz.net",
-              "favicon": "https://f.start.me/dnsviz.net"
+              "favicon": "https://f.start.me/dnsviz.net",
+              "au": false
             },
             {
               "title": "Validin",
               "url": "https://app.validin.com/",
               "description": "Massive DNS record collection with free history search",
               "domain": "app.validin.com",
-              "favicon": "https://f.start.me/app.validin.com"
+              "favicon": "https://f.start.me/app.validin.com",
+              "au": false
             },
             {
               "title": "AskDNS",
               "url": "https://askdns.com/",
               "description": "Lookup connected domain names and IP addresses",
               "domain": "askdns.com",
-              "favicon": "https://f.start.me/askdns.com"
+              "favicon": "https://f.start.me/askdns.com",
+              "au": false
             },
             {
               "title": "DNSTwister",
               "url": "https://dnstwister.report/",
               "description": "Anti-phishing domain name search and DNS monitoring",
               "domain": "dnstwister.report",
-              "favicon": "https://f.start.me/dnstwister.report"
+              "favicon": "https://f.start.me/dnstwister.report",
+              "au": false
             },
             {
               "title": "NSLookup.io",
               "url": "https://www.nslookup.io/",
               "description": "Find all DNS records for a domain name",
               "domain": "nslookup.io",
-              "favicon": "https://f.start.me/nslookup.io"
+              "favicon": "https://f.start.me/nslookup.io",
+              "au": false
             },
             {
               "title": "DNSMap",
               "url": "https://dnsmap.io/",
               "description": "Worldwide DNS propagation checker",
               "domain": "dnsmap.io",
-              "favicon": "https://f.start.me/dnsmap.io"
+              "favicon": "https://f.start.me/dnsmap.io",
+              "au": false
             },
             {
               "title": "dnslookup.pro",
               "url": "https://dnslookup.pro/",
               "description": "Advanced DNS record analysis and troubleshooting",
               "domain": "dnslookup.pro",
-              "favicon": "https://f.start.me/dnslookup.pro"
+              "favicon": "https://f.start.me/dnslookup.pro",
+              "au": false
             },
             {
               "title": "dnsaudit.io",
               "url": "https://dnsaudit.io/",
               "description": "Find DNS misconfigurations, risks and security gaps",
               "domain": "dnsaudit.io",
-              "favicon": "https://f.start.me/dnsaudit.io"
+              "favicon": "https://f.start.me/dnsaudit.io",
+              "au": false
             },
             {
               "title": "CertSpotter",
               "url": "https://sslmate.com/certspotter/",
               "description": "Monitor domains for expiring, unauthorized and invalid certs",
               "domain": "sslmate.com",
-              "favicon": "https://f.start.me/sslmate.com"
+              "favicon": "https://f.start.me/sslmate.com",
+              "au": false
             },
             {
               "title": "ciphersuite.info",
               "url": "https://ciphersuite.info/",
               "description": "TLS ciphersuite search by IANA, OpenSSL or GnuTLS name",
               "domain": "ciphersuite.info",
-              "favicon": "https://f.start.me/ciphersuite.info"
+              "favicon": "https://f.start.me/ciphersuite.info",
+              "au": false
             },
             {
               "title": "certs.io",
               "url": "https://certs.io/",
               "description": "Search TLS certificates across the internet",
               "domain": "certs.io",
-              "favicon": "https://f.start.me/certs.io"
+              "favicon": "https://f.start.me/certs.io",
+              "au": false
             },
             {
               "title": "tls.bufferover.run",
               "url": "https://tls.bufferover.run/",
               "description": "Quickly find certificates in IPv4 space",
               "domain": "tls.bufferover.run",
-              "favicon": "https://f.start.me/tls.bufferover.run"
+              "favicon": "https://f.start.me/tls.bufferover.run",
+              "au": false
             },
             {
               "title": "ZETAlytics",
               "url": "https://zetalytics.com/",
               "description": "Unrivalled global network visibility in searchable datasets",
               "domain": "zetalytics.com",
-              "favicon": "https://f.start.me/zetalytics.com"
+              "favicon": "https://f.start.me/zetalytics.com",
+              "au": false
             },
             {
               "title": "FacebookCT",
               "url": "https://developers.facebook.com/tools/ct/search/",
               "description": "Facebook certificate transparency search for a domain",
               "domain": "developers.facebook.com",
-              "favicon": "https://f.start.me/developers.facebook.com"
+              "favicon": "https://f.start.me/developers.facebook.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 9206,
@@ -13940,170 +16880,196 @@ window.BUBBSY_DATA = {
               "url": "https://attack.mitre.org/",
               "description": "Knowledge base of adversary tactics and techniques",
               "domain": "attack.mitre.org",
-              "favicon": "https://f.start.me/attack.mitre.org"
+              "favicon": "https://f.start.me/attack.mitre.org",
+              "au": false
             },
             {
               "title": "MalwareBazaar (abuse.ch)",
               "url": "https://bazaar.abuse.ch/browse/",
               "description": "Malware sample database by abuse.ch",
               "domain": "bazaar.abuse.ch",
-              "favicon": "https://f.start.me/bazaar.abuse.ch"
+              "favicon": "https://f.start.me/bazaar.abuse.ch",
+              "au": false
             },
             {
               "title": "ThreatFox (abuse.ch)",
               "url": "https://threatfox.abuse.ch/browse/",
               "description": "Indicator of Compromise (IOC) database",
               "domain": "threatfox.abuse.ch",
-              "favicon": "https://f.start.me/threatfox.abuse.ch"
+              "favicon": "https://f.start.me/threatfox.abuse.ch",
+              "au": false
             },
             {
               "title": "URLhaus (abuse.ch)",
               "url": "https://urlhaus.abuse.ch/browse/",
               "description": "Malicious URL database",
               "domain": "urlhaus.abuse.ch",
-              "favicon": "https://f.start.me/urlhaus.abuse.ch"
+              "favicon": "https://f.start.me/urlhaus.abuse.ch",
+              "au": false
             },
             {
               "title": "FeodoTracker (abuse.ch)",
               "url": "https://feodotracker.abuse.ch/browse/",
               "description": "Botnet Command&Control server list",
               "domain": "feodotracker.abuse.ch",
-              "favicon": "https://f.start.me/feodotracker.abuse.ch"
+              "favicon": "https://f.start.me/feodotracker.abuse.ch",
+              "au": false
             },
             {
               "title": "SSLBL (abuse.ch)",
               "url": "https://sslbl.abuse.ch/ssl-certificates/",
               "description": "All malicious SSL certificates",
               "domain": "sslbl.abuse.ch",
-              "favicon": "https://f.start.me/sslbl.abuse.ch"
+              "favicon": "https://f.start.me/sslbl.abuse.ch",
+              "au": false
             },
             {
               "title": "YARAify (abuse.ch)",
               "url": "https://yaraify.abuse.ch/",
               "description": "Scan files against a large repository of YARA rules",
               "domain": "yaraify.abuse.ch",
-              "favicon": "https://f.start.me/yaraify.abuse.ch"
+              "favicon": "https://f.start.me/yaraify.abuse.ch",
+              "au": false
             },
             {
               "title": "AnyRun",
               "url": "https://app.any.run/submissions",
               "description": "Browse thousands of malware sandbox submissions",
               "domain": "app.any.run",
-              "favicon": "https://f.start.me/app.any.run"
+              "favicon": "https://f.start.me/app.any.run",
+              "au": false
             },
             {
               "title": "Hybrid Analysis",
               "url": "https://www.hybrid-analysis.com/",
               "description": "Free malware analysis service for the community",
               "domain": "hybrid-analysis.com",
-              "favicon": "https://f.start.me/hybrid-analysis.com"
+              "favicon": "https://f.start.me/hybrid-analysis.com",
+              "au": false
             },
             {
               "title": "Joe Sandbox",
               "url": "https://www.joesandbox.com/",
               "description": "Threat hunting and deep malware analysis engine",
               "domain": "joesandbox.com",
-              "favicon": "https://f.start.me/joesandbox.com"
+              "favicon": "https://f.start.me/joesandbox.com",
+              "au": false
             },
             {
               "title": "tria.ge",
               "url": "https://tria.ge/s",
               "description": "Fully automated high-volume malware sandboxing",
               "domain": "tria.ge",
-              "favicon": "https://f.start.me/tria.ge"
+              "favicon": "https://f.start.me/tria.ge",
+              "au": false
             },
             {
               "title": "VirusShare",
               "url": "https://virusshare.com/",
               "description": "Repository of 48M+ malware samples",
               "domain": "virusshare.com",
-              "favicon": "https://f.start.me/virusshare.com"
+              "favicon": "https://f.start.me/virusshare.com",
+              "au": false
             },
             {
               "title": "MalShare",
               "url": "https://malshare.com/",
               "description": "Community driven public malware repository",
               "domain": "malshare.com",
-              "favicon": "https://f.start.me/malshare.com"
+              "favicon": "https://f.start.me/malshare.com",
+              "au": false
             },
             {
               "title": "PhishTank",
               "url": "https://phishtank.org/",
               "description": "Collaborative clearinghouse for phishing URLs",
               "domain": "phishtank.org",
-              "favicon": "https://f.start.me/phishtank.org"
+              "favicon": "https://f.start.me/phishtank.org",
+              "au": false
             },
             {
               "title": "OpenPhish",
               "url": "https://openphish.com/",
               "description": "Actionable intelligence on active phishing threats",
               "domain": "openphish.com",
-              "favicon": "https://f.start.me/openphish.com"
+              "favicon": "https://f.start.me/openphish.com",
+              "au": false
             },
             {
               "title": "urlquery",
               "url": "https://urlquery.net/",
               "description": "Service for detecting and analyzing web-based malware",
               "domain": "urlquery.net",
-              "favicon": "https://f.start.me/urlquery.net"
+              "favicon": "https://f.start.me/urlquery.net",
+              "au": false
             },
             {
               "title": "Sucuri SiteCheck",
               "url": "https://sitecheck.sucuri.net/",
               "description": "Check websites for malware and blacklisting status",
               "domain": "sitecheck.sucuri.net",
-              "favicon": "https://f.start.me/sitecheck.sucuri.net"
+              "favicon": "https://f.start.me/sitecheck.sucuri.net",
+              "au": false
             },
             {
               "title": "AbuseIPDB",
               "url": "https://www.abuseipdb.com/",
               "description": "Check the report history of any IP address",
               "domain": "abuseipdb.com",
-              "favicon": "https://f.start.me/abuseipdb.com"
+              "favicon": "https://f.start.me/abuseipdb.com",
+              "au": false
             },
             {
               "title": "Spamhaus",
               "url": "https://spamhaus.com/",
               "description": "Protect and investigate using IP and domain reputation data",
               "domain": "spamhaus.com",
-              "favicon": "https://f.start.me/spamhaus.com"
+              "favicon": "https://f.start.me/spamhaus.com",
+              "au": false
             },
             {
               "title": "IBM X-Force Exchange",
               "url": "https://exchange.xforce.ibmcloud.com/",
               "description": "Threat intelligence sharing and research platform",
               "domain": "exchange.xforce.ibmcloud.com",
-              "favicon": "https://f.start.me/exchange.xforce.ibmcloud.com"
+              "favicon": "https://f.start.me/exchange.xforce.ibmcloud.com",
+              "au": false
             },
             {
               "title": "InQuest Labs",
               "url": "https://labs.inquest.net/",
               "description": "Threat intel and forensic signature research",
               "domain": "labs.inquest.net",
-              "favicon": "https://f.start.me/labs.inquest.net"
+              "favicon": "https://f.start.me/labs.inquest.net",
+              "au": false
             },
             {
               "title": "Zone-H Archive",
               "url": "https://www.zone-h.org/archive/",
               "description": "Archive collecting records of defaced websites",
               "domain": "zone-h.org",
-              "favicon": "https://f.start.me/zone-h.org"
+              "favicon": "https://f.start.me/zone-h.org",
+              "au": false
             },
             {
               "title": "ransomlook.io",
               "url": "https://www.ransomlook.io/",
               "description": "Open-source real-time ransomware intelligence",
               "domain": "ransomlook.io",
-              "favicon": "https://f.start.me/ransomlook.io"
+              "favicon": "https://f.start.me/ransomlook.io",
+              "au": false
             },
             {
               "title": "Kaspersky OpenTIP",
               "url": "https://opentip.kaspersky.com/requests",
               "description": "Scan files, domains, IP addresses and URLs for threats",
               "domain": "opentip.kaspersky.com",
-              "favicon": "https://f.start.me/opentip.kaspersky.com"
+              "favicon": "https://f.start.me/opentip.kaspersky.com",
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 58923839,
@@ -14121,7 +17087,8 @@ window.BUBBSY_DATA = {
               "description": "Australian geological maps, seismic data, satellite Earth observation, and elevation",
               "domain": "www.ga.gov.au",
               "favicon": "https://f.start.me/www.ga.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 74962168,
@@ -14130,7 +17097,8 @@ window.BUBBSY_DATA = {
               "description": "Frequently updated sub-5cm aerial photogrammetry for Australian urban centers",
               "domain": "www.nearmap.com",
               "favicon": "https://f.start.me/www.nearmap.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17981720,
@@ -14139,7 +17107,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "start.me",
               "favicon": "https://f.start.me/start.me",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19516389,
@@ -14148,7 +17117,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.geonames.org",
               "favicon": "https://f.start.me/geonames.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29713120,
@@ -14157,7 +17127,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.geoseer.net",
               "favicon": "https://f.start.me/geoseer.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20005163,
@@ -14166,7 +17137,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41708647,
@@ -14175,7 +17147,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shadowcrypt.net",
               "favicon": "https://f.start.me/shadowcrypt.net",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 20392021,
@@ -14184,7 +17157,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "developers.google.com",
               "favicon": "https://f.start.me/developers.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4080624,
@@ -14193,7 +17167,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.geoplatform.gov",
               "favicon": "https://f.start.me/geoplatform.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41708684,
@@ -14202,7 +17177,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.inspire-geoportal.eu",
               "favicon": "https://f.start.me/inspire-geoportal.eu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41708695,
@@ -14211,7 +17187,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "data.apps.fao.org",
               "favicon": "https://f.start.me/data.apps.fao.org",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 41708697,
@@ -14220,7 +17197,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datacore-gn.unepgrid.ch",
               "favicon": "https://f.start.me/datacore-gn.unepgrid.ch",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 41708699,
@@ -14229,7 +17207,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "data.isric.org",
               "favicon": "https://f.start.me/data.isric.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3604257,
@@ -14238,7 +17217,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.geocreepy.com",
               "favicon": "https://f.start.me/geocreepy.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 35766005,
@@ -14247,7 +17227,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "acleddata.com",
               "favicon": "https://f.start.me/acleddata.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43629770,
@@ -14256,7 +17237,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "apps.esri.ca",
               "favicon": "https://f.start.me/apps.esri.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43631131,
@@ -14265,7 +17247,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.arcgis.com",
               "favicon": "https://f.start.me/arcgis.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46173761,
@@ -14274,7 +17257,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rapidapi.com",
               "favicon": "https://f.start.me/rapidapi.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 46174030,
@@ -14283,7 +17267,8 @@ window.BUBBSY_DATA = {
               "description": "A bunch of geospatial intelligence workflows implemented using Python.",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 50597373,
@@ -14292,9 +17277,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 61880046,
@@ -14312,7 +17300,8 @@ window.BUBBSY_DATA = {
               "description": "List of regulated and registered cryptocurrency exchanges operating in Australia",
               "domain": "www.austrac.gov.au",
               "favicon": "https://f.start.me/www.austrac.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 33155026,
@@ -14321,7 +17310,8 @@ window.BUBBSY_DATA = {
               "description": "Australian domestic cryptocurrency trading volumes and AUD order books",
               "domain": "www.coinspot.com.au",
               "favicon": "https://f.start.me/www.coinspot.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 20247342,
@@ -14330,7 +17320,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cryptocurrencyalerting.com",
               "favicon": "https://f.start.me/cryptocurrencyalerting.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34809733,
@@ -14339,7 +17330,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blockchair.com",
               "favicon": "https://f.start.me/blockchair.com",
-              "status": 401
+              "status": 401,
+              "au": false
             },
             {
               "id": 4232712,
@@ -14348,7 +17340,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "etherscan.io",
               "favicon": "https://f.start.me/etherscan.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42379984,
@@ -14357,7 +17350,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "flowscan.org",
               "favicon": "https://f.start.me/flowscan.org",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 37732276,
@@ -14366,7 +17360,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18351251,
@@ -14375,7 +17370,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.blockchain.com",
               "favicon": "https://f.start.me/blockchain.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 4287311,
@@ -14384,7 +17380,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "live.blockcypher.com",
               "favicon": "https://f.start.me/live.blockcypher.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 17207253,
@@ -14393,7 +17390,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "addresschecker.eu",
               "favicon": "https://f.start.me/addresschecker.eu",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 13401210,
@@ -14402,7 +17400,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "coinwink.com",
               "favicon": "https://f.start.me/coinwink.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27912385,
@@ -14411,7 +17410,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 27957648,
@@ -14420,7 +17420,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003051,
@@ -14429,7 +17430,8 @@ window.BUBBSY_DATA = {
               "description": "Report and search malicious crypto activity",
               "domain": "chainabuse.com",
               "favicon": "https://f.start.me/chainabuse.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91003052,
@@ -14438,9 +17440,12 @@ window.BUBBSY_DATA = {
               "description": "Multi-blockchain explorer, analytics and web services",
               "domain": "blockchair.com",
               "favicon": "https://f.start.me/blockchair.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 55783596,
@@ -14458,7 +17463,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "darktracer.io",
               "favicon": "https://f.start.me/darktracer.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45763511,
@@ -14467,7 +17473,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ransomwatch.telemetry.ltd",
               "favicon": "https://f.start.me/ransomwatch.telemetry.ltd",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 46708066,
@@ -14476,7 +17483,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sizeof.cat",
               "favicon": "https://f.start.me/sizeof.cat",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3461641,
@@ -14485,7 +17493,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ahmia.fi",
               "favicon": "https://f.start.me/ahmia.fi",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 47167319,
@@ -14494,7 +17503,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "onionengine.com",
               "favicon": "https://f.start.me/onionengine.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41983660,
@@ -14503,7 +17513,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29934475,
@@ -14512,7 +17523,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tor2web.onionsearchengine.com",
               "favicon": "https://f.start.me/tor2web.onionsearchengine.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41675575,
@@ -14521,7 +17533,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ransomwr3tsydeii4q43vazm7wofla5ujdajquitomtd47cxjtfgwyyd.onion.pet",
               "favicon": "https://f.start.me/ransomwr3tsydeii4q43vazm7wofla5ujdajquitomtd47cxjtfgwyyd.onion.pet",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 20247159,
@@ -14530,7 +17543,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blockpath.com",
               "favicon": "https://f.start.me/blockpath.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 9768825,
@@ -14539,7 +17553,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "link-base.org",
               "favicon": "https://f.start.me/link-base.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 42158660,
@@ -14548,7 +17563,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "darknetlive.com",
               "favicon": "https://f.start.me/darknetlive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37067689,
@@ -14557,7 +17573,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "darknetlive.com",
               "favicon": "https://f.start.me/darknetlive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37067690,
@@ -14566,7 +17583,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "darknetlive.com",
               "favicon": "https://f.start.me/darknetlive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42450914,
@@ -14575,7 +17593,8 @@ window.BUBBSY_DATA = {
               "description": "Accurately fast search engine",
               "domain": "iwr4usy33opfclmbyemzbmnwwnmmqpqltezpac7fyqqkdv3mabtm6kqd.onion.pet",
               "favicon": "https://f.start.me/iwr4usy33opfclmbyemzbmnwwnmmqpqltezpac7fyqqkdv3mabtm6kqd.onion.pet",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 36047128,
@@ -14584,9 +17603,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "learnmeabitcoin.com",
               "favicon": "https://f.start.me/learnmeabitcoin.com",
-              "status": 403
+              "status": 403,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55783556,
@@ -14604,7 +17626,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "breachdirectory.org",
               "favicon": "https://f.start.me/breachdirectory.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 393640,
@@ -14613,7 +17636,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "haveibeenpwned.com",
               "favicon": "https://f.start.me/haveibeenpwned.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41686002,
@@ -14622,7 +17646,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "xjypo5vzgmo7jca6b322dnqbsdnp3amd24ybx26x5nxbusccjkm4pwid.onion.pet",
               "favicon": "https://f.start.me/xjypo5vzgmo7jca6b322dnqbsdnp3amd24ybx26x5nxbusccjkm4pwid.onion.pet",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 38711121,
@@ -14631,7 +17656,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cybernews.com",
               "favicon": "https://f.start.me/cybernews.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 19988055,
@@ -14640,7 +17666,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "intelx.io",
               "favicon": "https://f.start.me/intelx.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41090073,
@@ -14649,7 +17676,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ddosecrets.com",
               "favicon": "https://f.start.me/ddosecrets.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 38399795,
@@ -14658,7 +17686,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "scylla.so",
               "favicon": "https://f.start.me/scylla.so",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 30833417,
@@ -14667,7 +17696,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "leakedpassword.com",
               "favicon": "https://f.start.me/leakedpassword.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18545955,
@@ -14676,7 +17706,8 @@ window.BUBBSY_DATA = {
               "description": "Have you been compromised? DeHashed provides free deep-web scans and protection against credential leaks. A modern personal asset search engine created for security analysts, journalists, security ...",
               "domain": "dehashed.com",
               "favicon": "https://f.start.me/dehashed.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37010109,
@@ -14685,7 +17716,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.snusbase.com",
               "favicon": "https://f.start.me/snusbase.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36699843,
@@ -14694,7 +17726,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.leaked.site",
               "favicon": "https://f.start.me/leaked.site",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2696660,
@@ -14703,7 +17736,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ashley.cynic.al",
               "favicon": "https://f.start.me/ashley.cynic.al",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 30144007,
@@ -14712,7 +17746,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "checkashleymadison.com",
               "favicon": "https://f.start.me/checkashleymadison.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 41547218,
@@ -14721,7 +17756,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wikileaks.org",
               "favicon": "https://f.start.me/wikileaks.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 52071515,
@@ -14730,7 +17766,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "qoob.keybase.pub",
               "favicon": "https://f.start.me/qoob.keybase.pub",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 41385477,
@@ -14739,9 +17776,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "haveibeenzuckered.com",
               "favicon": "https://f.start.me/haveibeenzuckered.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 55786333,
@@ -14759,7 +17799,8 @@ window.BUBBSY_DATA = {
               "description": "Verify voter enrolment status, electorate boundaries, and political donation disclosures",
               "domain": "check.aec.gov.au",
               "favicon": "https://f.start.me/check.aec.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 3740366,
@@ -14768,7 +17809,8 @@ window.BUBBSY_DATA = {
               "description": "Search declared political donations, party funding, and campaign expenditure in Australia",
               "domain": "transparency.aec.gov.au",
               "favicon": "https://f.start.me/transparency.aec.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 50408037,
@@ -14777,7 +17819,8 @@ window.BUBBSY_DATA = {
               "description": "NSW state election candidate disclosures, third-party campaigners, and registered voters",
               "domain": "elections.nsw.gov.au",
               "favicon": "https://f.start.me/elections.nsw.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 41992307,
@@ -14786,7 +17829,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "booleanstrings.com",
               "favicon": "https://f.start.me/booleanstrings.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 96374,
@@ -14795,7 +17839,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.soundpolitics.com",
               "favicon": "https://f.start.me/soundpolitics.com",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37011761,
@@ -14804,7 +17849,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "arkvoters.com",
               "favicon": "https://f.start.me/arkvoters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011762,
@@ -14813,7 +17859,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "coloradovoters.info",
               "favicon": "https://f.start.me/coloradovoters.info",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 12801805,
@@ -14822,7 +17869,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "delawarevoters.info",
               "favicon": "https://f.start.me/delawarevoters.info",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 6486689,
@@ -14831,7 +17879,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "flvoters.com",
               "favicon": "https://f.start.me/flvoters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522254,
@@ -14840,7 +17889,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "georgia-voters.com",
               "favicon": "https://f.start.me/georgia-voters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011763,
@@ -14849,7 +17899,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "connvoters.com",
               "favicon": "https://f.start.me/connvoters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011766,
@@ -14858,7 +17909,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "michiganvoters.info",
               "favicon": "https://f.start.me/michiganvoters.info",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011768,
@@ -14867,7 +17919,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ohiovoters.us",
               "favicon": "https://f.start.me/ohiovoters.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 14403740,
@@ -14876,7 +17929,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "oklavoters.com",
               "favicon": "https://f.start.me/oklavoters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011769,
@@ -14885,7 +17939,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rivoters.com",
               "favicon": "https://f.start.me/rivoters.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41522252,
@@ -14894,7 +17949,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wiscvoters.com",
               "favicon": "https://f.start.me/wiscvoters.com",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 42479488,
@@ -14903,7 +17959,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "utvoters.com",
               "favicon": "https://f.start.me/utvoters.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44504985,
@@ -14912,7 +17969,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "oklahomadata.com",
               "favicon": "https://f.start.me/oklahomadata.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012455,
@@ -14921,7 +17979,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012451,
@@ -14930,9 +17989,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 55785109,
@@ -14950,7 +18012,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "discordleaks.unicornriot.ninja",
               "favicon": "https://f.start.me/discordleaks.unicornriot.ninja",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 45759152,
@@ -14959,7 +18022,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.ddosecrets.com",
               "favicon": "https://f.start.me/search.ddosecrets.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 40087882,
@@ -14968,7 +18032,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "parler.adatascienti.st",
               "favicon": "https://f.start.me/parler.adatascienti.st",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 38200901,
@@ -14977,7 +18042,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 32393068,
@@ -14986,7 +18052,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whispers.ddosecrets.com",
               "favicon": "https://f.start.me/whispers.ddosecrets.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 14221608,
@@ -14995,7 +18062,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "4chansearch.org",
               "favicon": "https://f.start.me/4chansearch.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 7384231,
@@ -15004,7 +18072,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "archived.moe",
               "favicon": "https://f.start.me/archived.moe",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 23266579,
@@ -15013,7 +18082,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "qresear.ch",
               "favicon": "https://f.start.me/qresear.ch",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 26647006,
@@ -15022,7 +18092,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.splcenter.org",
               "favicon": "https://f.start.me/splcenter.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19562123,
@@ -15031,7 +18102,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.splcenter.org",
               "favicon": "https://f.start.me/splcenter.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013846,
@@ -15040,7 +18112,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nsatt.org",
               "favicon": "https://f.start.me/nsatt.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37029032,
@@ -15049,7 +18122,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.no-fly-list.com",
               "favicon": "https://f.start.me/no-fly-list.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3130977,
@@ -15058,7 +18132,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "smapp.rand.org",
               "favicon": "https://f.start.me/smapp.rand.org",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 30438969,
@@ -15067,7 +18142,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.start.umd.edu",
               "favicon": "https://f.start.me/start.umd.edu",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 3644299,
@@ -15076,7 +18152,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sanctionssearch.ofac.treas.gov",
               "favicon": "https://f.start.me/sanctionssearch.ofac.treas.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 36414083,
@@ -15085,7 +18162,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.thetrumparchive.com",
               "favicon": "https://f.start.me/thetrumparchive.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732551,
@@ -15094,7 +18172,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19731826,
@@ -15103,7 +18182,8 @@ window.BUBBSY_DATA = {
               "description": "Database of Russian Aggression",
               "domain": "informnapalm.org",
               "favicon": "https://f.start.me/informnapalm.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41760455,
@@ -15112,7 +18192,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pypi.org",
               "favicon": "https://f.start.me/pypi.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41715876,
@@ -15121,7 +18202,8 @@ window.BUBBSY_DATA = {
               "description": "GETTR API client library written in Python",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732295,
@@ -15130,7 +18212,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732547,
@@ -15139,7 +18222,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37732548,
@@ -15148,7 +18232,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 29098905,
@@ -15157,9 +18242,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ironmarch.exposed",
               "favicon": "https://f.start.me/ironmarch.exposed",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 60670533,
@@ -15177,7 +18265,8 @@ window.BUBBSY_DATA = {
               "description": "Australian stock quotes, executive filings, market disclosures, and financial reports",
               "domain": "www.asx.com.au",
               "favicon": "https://f.start.me/www.asx.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 72342212,
@@ -15186,7 +18275,8 @@ window.BUBBSY_DATA = {
               "description": "Australian monetary policy, exchange rates, banking aggregates, and inflation data",
               "domain": "www.rba.gov.au",
               "favicon": "https://f.start.me/www.rba.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 92942180,
@@ -15195,7 +18285,8 @@ window.BUBBSY_DATA = {
               "description": "Australian Prudential Regulation Authority list of authorized banks, ADIs, and insurers",
               "domain": "www.apra.gov.au",
               "favicon": "https://f.start.me/www.apra.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 44604251,
@@ -15204,7 +18295,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "greylisttrace.com",
               "favicon": "https://f.start.me/greylisttrace.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44604246,
@@ -15213,7 +18305,8 @@ window.BUBBSY_DATA = {
               "description": "An environment of open source services used for market analysis",
               "domain": "github.com",
               "favicon": "https://f.start.me/github.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41026209,
@@ -15222,7 +18315,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "tradint.io",
               "favicon": "https://f.start.me/tradint.io",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 44604254,
@@ -15231,7 +18325,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.covianalytics.com",
               "favicon": "https://f.start.me/covianalytics.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42596248,
@@ -15240,7 +18335,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ppp.adatascienti.st",
               "favicon": "https://f.start.me/ppp.adatascienti.st",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 41692674,
@@ -15249,7 +18345,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ppp.directory",
               "favicon": "https://f.start.me/ppp.directory",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45856287,
@@ -15258,7 +18355,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.m-x.ca",
               "favicon": "https://f.start.me/m-x.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18347807,
@@ -15267,7 +18365,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.tsx.com",
               "favicon": "https://f.start.me/tsx.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39174565,
@@ -15276,9 +18375,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sedar.com",
               "favicon": "https://f.start.me/sedar.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 55788231,
@@ -15296,7 +18398,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian Business Numbers, GST status, business names, and trading entities",
               "domain": "abr.business.gov.au",
               "favicon": "https://f.start.me/abr.business.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 5170028,
@@ -15305,7 +18408,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian company directors, registered office, ACN, and document filings",
               "domain": "connectonline.asic.gov.au",
               "favicon": "https://f.start.me/connectonline.asic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 27666412,
@@ -15314,7 +18418,8 @@ window.BUBBSY_DATA = {
               "description": "National Personal Insolvency Index - check bankruptcy and insolvency records in Australia",
               "domain": "www.afsa.gov.au",
               "favicon": "https://f.start.me/www.afsa.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 51269403,
@@ -15323,7 +18428,8 @@ window.BUBBSY_DATA = {
               "description": "Search registered Australian trade marks, patent holders, and commercial IP owners",
               "domain": "search.ipaustralia.gov.au",
               "favicon": "https://f.start.me/search.ipaustralia.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 7488360,
@@ -15332,7 +18438,8 @@ window.BUBBSY_DATA = {
               "description": "Search registered charities, board members, financial reports, and non-profits",
               "domain": "www.acnc.gov.au",
               "favicon": "https://f.start.me/www.acnc.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 37732278,
@@ -15341,7 +18448,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cse.google.com",
               "favicon": "https://f.start.me/cse.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41726416,
@@ -15350,7 +18458,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whaleslide.com",
               "favicon": "https://f.start.me/whaleslide.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 23446102,
@@ -15359,7 +18468,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "allpeople.com",
               "favicon": "https://f.start.me/allpeople.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 3336839,
@@ -15368,7 +18478,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.corporationwiki.com",
               "favicon": "https://f.start.me/corporationwiki.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37030659,
@@ -15377,7 +18488,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "public.flourish.studio",
               "favicon": "https://f.start.me/public.flourish.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760647,
@@ -15386,7 +18498,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0eib122.caspio.com",
               "favicon": "https://f.start.me/c0eib122.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 885797,
@@ -15395,7 +18508,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gov.uk",
               "favicon": "https://f.start.me/gov.uk",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24804372,
@@ -15404,7 +18518,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.brownbook.net",
               "favicon": "https://f.start.me/brownbook.net",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 18929333,
@@ -15413,7 +18528,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.list-org.com",
               "favicon": "https://f.start.me/list-org.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 885819,
@@ -15422,7 +18538,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opencorporates.com",
               "favicon": "https://f.start.me/opencorporates.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 3320637,
@@ -15431,7 +18548,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "offshoreleaks.icij.org",
               "favicon": "https://f.start.me/offshoreleaks.icij.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 17318440,
@@ -15440,7 +18558,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "comptroller.texas.gov",
               "favicon": "https://f.start.me/comptroller.texas.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37040058,
@@ -15449,7 +18568,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.aware-online.com",
               "favicon": "https://f.start.me/aware-online.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041095,
@@ -15458,7 +18578,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.xrefer.com",
               "favicon": "https://f.start.me/xrefer.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041188,
@@ -15467,7 +18588,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ttabcenter.com",
               "favicon": "https://f.start.me/ttabcenter.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 13607846,
@@ -15476,7 +18598,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.firstround.com",
               "favicon": "https://f.start.me/search.firstround.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041627,
@@ -15485,7 +18608,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "findingstartups.com",
               "favicon": "https://f.start.me/findingstartups.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 20554018,
@@ -15494,7 +18618,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "startuptracker.io",
               "favicon": "https://f.start.me/startuptracker.io",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37041865,
@@ -15503,7 +18628,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "shopsearchengine.com",
               "favicon": "https://f.start.me/shopsearchengine.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37648631,
@@ -15512,7 +18638,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "covidbailouttracker.com",
               "favicon": "https://f.start.me/covidbailouttracker.com",
-              "status": 408
+              "status": 408,
+              "au": false
             },
             {
               "id": 37009899,
@@ -15521,7 +18648,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41784330,
@@ -15530,7 +18658,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784223,
@@ -15539,7 +18668,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784302,
@@ -15548,7 +18678,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784320,
@@ -15557,7 +18688,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760380,
@@ -15566,7 +18698,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0eru285.caspio.com",
               "favicon": "https://f.start.me/c0eru285.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760448,
@@ -15575,7 +18708,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "vikingrifleseries.caspio.com",
               "favicon": "https://f.start.me/vikingrifleseries.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 91002001,
@@ -15584,7 +18718,8 @@ window.BUBBSY_DATA = {
               "description": "Visualize interlocking corporate board directorates across major companies",
               "domain": "theyrule.net",
               "favicon": "https://f.start.me/theyrule.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 91002002,
@@ -15593,9 +18728,12 @@ window.BUBBSY_DATA = {
               "description": "Company funding, founders, leadership and market intelligence",
               "domain": "crunchbase.com",
               "favicon": "https://f.start.me/crunchbase.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 5,
+          "au_module": false
         },
         {
           "id": 55785899,
@@ -15613,7 +18751,8 @@ window.BUBBSY_DATA = {
               "description": "National policing, wanted persons, cybercrime alerts, and federal investigations",
               "domain": "www.afp.gov.au",
               "favicon": "https://f.start.me/www.afp.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 18803637,
@@ -15622,7 +18761,8 @@ window.BUBBSY_DATA = {
               "description": "National unsolved crime appeals, fugitive lists, and anonymous reporting",
               "domain": "crimestoppers.com.au",
               "favicon": "https://f.start.me/crimestoppers.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 68035134,
@@ -15631,7 +18771,8 @@ window.BUBBSY_DATA = {
               "description": "Australia national criminal intelligence agency and illicit market reports",
               "domain": "www.acic.gov.au",
               "favicon": "https://f.start.me/www.acic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 56821969,
@@ -15640,7 +18781,8 @@ window.BUBBSY_DATA = {
               "description": "NSW Police media releases, wanted persons, and incident reports",
               "domain": "www.police.nsw.gov.au",
               "favicon": "https://f.start.me/www.police.nsw.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 67248636,
@@ -15649,7 +18791,8 @@ window.BUBBSY_DATA = {
               "description": "VicPol incident reports, crime appeals, and public notices",
               "domain": "www.police.vic.gov.au",
               "favicon": "https://f.start.me/www.police.vic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 63251572,
@@ -15658,7 +18801,8 @@ window.BUBBSY_DATA = {
               "description": "Queensland Police news, stolen vehicle alerts, and public appeals",
               "domain": "mypolice.qld.gov.au",
               "favicon": "https://f.start.me/mypolice.qld.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 92198193,
@@ -15667,7 +18811,8 @@ window.BUBBSY_DATA = {
               "description": "WA Police crime alerts, wanted persons, and court listings",
               "domain": "www.police.wa.gov.au",
               "favicon": "https://f.start.me/www.police.wa.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 37009878,
@@ -15676,7 +18821,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "openoversight.com",
               "favicon": "https://f.start.me/openoversight.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013669,
@@ -15685,7 +18831,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "extras.mercurynews.com",
               "favicon": "https://f.start.me/extras.mercurynews.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760278,
@@ -15694,7 +18841,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37649390,
@@ -15703,7 +18851,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nyclu.shinyapps.io",
               "favicon": "https://f.start.me/nyclu.shinyapps.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 39359021,
@@ -15712,7 +18861,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nypdonline.org",
               "favicon": "https://f.start.me/nypdonline.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37649310,
@@ -15721,7 +18871,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "public.flourish.studio",
               "favicon": "https://f.start.me/public.flourish.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37030549,
@@ -15730,7 +18881,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37439550,
@@ -15739,7 +18891,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "complaints.cuapb.org",
               "favicon": "https://f.start.me/complaints.cuapb.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37648496,
@@ -15748,7 +18901,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "apps.bostonglobe.com",
               "favicon": "https://f.start.me/apps.bostonglobe.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013675,
@@ -15757,7 +18911,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0acu882.caspio.com",
               "favicon": "https://f.start.me/c0acu882.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760327,
@@ -15766,7 +18921,8 @@ window.BUBBSY_DATA = {
               "description": "How to use CopWatch SF Cops are listed below alphabetically by last name. You can filter or group officers in different ways. Click on the magnifying glass to search by cop name, date of incident, \u2026",
               "domain": "airtable.com",
               "favicon": "https://f.start.me/airtable.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784317,
@@ -15775,7 +18931,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34270433,
@@ -15784,7 +18941,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "atlasofsurveillance.org",
               "favicon": "https://f.start.me/atlasofsurveillance.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41522411,
@@ -15793,7 +18951,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760337,
@@ -15802,7 +18961,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.oregon.gov",
               "favicon": "https://f.start.me/oregon.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784354,
@@ -15811,7 +18971,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34221578,
@@ -15820,7 +18981,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "blueleaks.io",
               "favicon": "https://f.start.me/blueleaks.io",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 37030677,
@@ -15829,7 +18991,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.plainviewproject.org",
               "favicon": "https://f.start.me/plainviewproject.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37008973,
@@ -15838,7 +19001,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ice.wikileaks.org",
               "favicon": "https://f.start.me/ice.wikileaks.org",
-              "status": 502
+              "status": 502,
+              "au": false
             },
             {
               "id": 23335955,
@@ -15847,7 +19011,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "policecrime.bgsu.edu",
               "favicon": "https://f.start.me/policecrime.bgsu.edu",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37009942,
@@ -15856,7 +19021,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.capstat.nyc",
               "favicon": "https://f.start.me/capstat.nyc",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 24994072,
@@ -15865,7 +19031,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "beta.cpdp.co",
               "favicon": "https://f.start.me/beta.cpdp.co",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37009929,
@@ -15874,7 +19041,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "fatalencounters.org",
               "favicon": "https://f.start.me/fatalencounters.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37009896,
@@ -15883,7 +19051,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37010957,
@@ -15892,7 +19061,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opendatapolicing.com",
               "favicon": "https://f.start.me/opendatapolicing.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011218,
@@ -15901,7 +19071,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "redshiftzero.github.io",
               "favicon": "https://f.start.me/redshiftzero.github.io",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 6316821,
@@ -15910,7 +19081,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mappingpoliceviolence.org",
               "favicon": "https://f.start.me/mappingpoliceviolence.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 41547246,
@@ -15919,7 +19091,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 33392832,
@@ -15928,7 +19101,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "docs.google.com",
               "favicon": "https://f.start.me/spreadsheets.google.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013672,
@@ -15937,7 +19111,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.rcfp.org",
               "favicon": "https://f.start.me/rcfp.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013721,
@@ -15946,7 +19121,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.policebrutalitydatabase.org",
               "favicon": "https://f.start.me/policebrutalitydatabase.org",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 37030632,
@@ -15955,7 +19131,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.chicagocopa.org",
               "favicon": "https://f.start.me/chicagocopa.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37010654,
@@ -15964,7 +19141,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "coplookup.com",
               "favicon": "https://f.start.me/coplookup.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37648494,
@@ -15973,7 +19151,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.projectcomport.org",
               "favicon": "https://f.start.me/projectcomport.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760291,
@@ -15982,7 +19161,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41544173,
@@ -15991,7 +19171,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.thetrace.org",
               "favicon": "https://f.start.me/projects.thetrace.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 16105616,
@@ -16000,7 +19181,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "theintercept.com",
               "favicon": "https://f.start.me/theintercept.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760265,
@@ -16009,7 +19191,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "public.flourish.studio",
               "favicon": "https://f.start.me/public.flourish.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760267,
@@ -16018,7 +19201,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "public.flourish.studio",
               "favicon": "https://f.start.me/public.flourish.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760270,
@@ -16027,7 +19211,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "public.flourish.studio",
               "favicon": "https://f.start.me/public.flourish.studio",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760396,
@@ -16036,7 +19221,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c2ffn114.caspio.com",
               "favicon": "https://f.start.me/c2ffn114.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 49110092,
@@ -16045,7 +19231,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "airtable.com",
               "favicon": "https://f.start.me/airtable.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 47032586,
@@ -16054,9 +19241,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "post.coag.gov",
               "favicon": "https://f.start.me/post.coag.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 7,
+          "au_module": false
         },
         {
           "id": 63107465,
@@ -16074,7 +19264,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.policemisconductdatabase.ca",
               "favicon": "https://f.start.me/policemisconductdatabase.ca",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 41760572,
@@ -16083,7 +19274,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0cqk108.caspio.com",
               "favicon": "https://f.start.me/c0cqk108.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760574,
@@ -16092,7 +19284,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0cqk108.caspio.com",
               "favicon": "https://f.start.me/c0cqk108.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784364,
@@ -16101,9 +19294,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
         },
         {
           "id": 59788239,
@@ -16121,7 +19317,8 @@ window.BUBBSY_DATA = {
               "description": "National anonymous crime reporting, rewards, and intelligence submission portal",
               "domain": "crimestoppers.com.au",
               "favicon": "https://f.start.me/crimestoppers.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 73393329,
@@ -16130,7 +19327,8 @@ window.BUBBSY_DATA = {
               "description": "Transcripts and filings for High Court appeals, witness evidence, and legal argument",
               "domain": "www.hcourt.gov.au",
               "favicon": "https://f.start.me/www.hcourt.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 35744087,
@@ -16139,7 +19337,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "whosarat.com",
               "favicon": "https://f.start.me/whosarat.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43040980,
@@ -16148,7 +19347,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "web.archive.org",
               "favicon": "https://f.start.me/web.archive.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 43040935,
@@ -16157,9 +19357,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "goldensnitches.com",
               "favicon": "https://f.start.me/goldensnitches.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 2,
+          "au_module": false
         },
         {
           "id": 59645362,
@@ -16177,7 +19380,8 @@ window.BUBBSY_DATA = {
               "description": "Australian national inter-jurisdictional register of reportable sex offenders",
               "domain": "www.acic.gov.au",
               "favicon": "https://f.start.me/www.acic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 52114609,
@@ -16186,7 +19390,8 @@ window.BUBBSY_DATA = {
               "description": "NSW Police child protection registry enforcement and compliance notices",
               "domain": "www.police.nsw.gov.au",
               "favicon": "https://f.start.me/www.police.nsw.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 96208953,
@@ -16195,7 +19400,8 @@ window.BUBBSY_DATA = {
               "description": "National research on sexual violence, offender recidivism, and justice data in AU",
               "domain": "www.aic.gov.au",
               "favicon": "https://f.start.me/www.aic.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 42682530,
@@ -16204,7 +19410,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.osintme.com",
               "favicon": "https://f.start.me/osintme.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 4606547,
@@ -16213,7 +19420,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.nsopw.gov",
               "favicon": "https://f.start.me/nsopw.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 22518678,
@@ -16222,7 +19430,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.fbi.gov",
               "favicon": "https://f.start.me/fbi.gov",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 42844031,
@@ -16231,7 +19440,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sexoffender.go.kr",
               "favicon": "https://f.start.me/sexoffender.go.kr",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42844034,
@@ -16240,7 +19450,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gov.mb.ca",
               "favicon": "https://f.start.me/gov.mb.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42844037,
@@ -16249,7 +19460,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stoppedophiles.ca",
               "favicon": "https://f.start.me/stoppedophiles.ca",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 42844039,
@@ -16258,7 +19470,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ibbclaims.co.uk",
               "favicon": "https://f.start.me/ibbclaims.co.uk",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 19487790,
@@ -16267,7 +19480,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.familywatchdog.us",
               "favicon": "https://f.start.me/familywatchdog.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42844042,
@@ -16276,7 +19490,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "nsod.naptip.gov.ng",
               "favicon": "https://f.start.me/nsod.naptip.gov.ng",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 14211785,
@@ -16285,7 +19500,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rps.ms.gov.pl",
               "favicon": "https://f.start.me/rps.ms.gov.pl",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42844046,
@@ -16294,9 +19510,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.offenders.mv",
               "favicon": "https://f.start.me/offenders.mv",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 3,
+          "au_module": false
         },
         {
           "id": 59645405,
@@ -16314,7 +19533,8 @@ window.BUBBSY_DATA = {
               "description": "Search Australian residential landlines, family names, and verified street addresses",
               "domain": "www.whitepages.com.au",
               "favicon": "https://f.start.me/www.whitepages.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 57413335,
@@ -16323,7 +19543,8 @@ window.BUBBSY_DATA = {
               "description": "8.5M+ indexed notices from Australian newspapers for locating past residents",
               "domain": "www.ryersonindex.org",
               "favicon": "https://f.start.me/www.ryersonindex.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37729789,
@@ -16332,7 +19553,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.michiganresidentdatabase.com",
               "favicon": "https://f.start.me/michiganresidentdatabase.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37041774,
@@ -16341,7 +19563,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ohioresidentdatabase.com",
               "favicon": "https://f.start.me/ohioresidentdatabase.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 18534093,
@@ -16350,7 +19573,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.floridaresidentsdirectory.com",
               "favicon": "https://f.start.me/floridaresidentsdirectory.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37730041,
@@ -16359,7 +19583,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "northcarolinaresidentdatabase.com",
               "favicon": "https://f.start.me/northcarolinaresidentdatabase.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 33473140,
@@ -16368,9 +19593,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "apps.hcr.ny.gov",
               "favicon": "https://f.start.me/apps.hcr.ny.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 1,
+          "au_module": false
         },
         {
           "id": 55786502,
@@ -16388,7 +19616,8 @@ window.BUBBSY_DATA = {
               "description": "Search federal government files, immigration passenger lists, security dossiers, and defense records",
               "domain": "recordsearch.naa.gov.au",
               "favicon": "https://f.start.me/recordsearch.naa.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 86292445,
@@ -16397,7 +19626,8 @@ window.BUBBSY_DATA = {
               "description": "Digitized historic Australian newspapers (1803-present), gazettes, photos, and archives",
               "domain": "trove.nla.gov.au",
               "favicon": "https://f.start.me/trove.nla.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 32830814,
@@ -16406,16 +19636,8 @@ window.BUBBSY_DATA = {
               "description": "High Court, Federal Court, Supreme Court judgments and legislation database",
               "domain": "www.austlii.edu.au",
               "favicon": "https://f.start.me/www.austlii.edu.au",
-              "status": 200
-            },
-            {
-              "id": 57413335,
-              "title": "[AUS] Ryerson Index (Death & Funeral Notices)",
-              "url": "https://www.ryersonindex.org/",
-              "description": "8.5M+ indexed notices from Australian newspapers for people tracing",
-              "domain": "www.ryersonindex.org",
-              "favicon": "https://f.start.me/www.ryersonindex.org",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 5481432,
@@ -16424,7 +19646,8 @@ window.BUBBSY_DATA = {
               "description": "Australia residential phone numbers, addresses, and contacts",
               "domain": "www.whitepages.com.au",
               "favicon": "https://f.start.me/www.whitepages.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 37021162,
@@ -16433,7 +19656,18 @@ window.BUBBSY_DATA = {
               "description": "Australian electoral rolls, census records, convict lists, and military service files",
               "domain": "www.findmypast.com.au",
               "favicon": "https://f.start.me/www.findmypast.com.au",
-              "status": 200
+              "status": 200,
+              "au": true
+            },
+            {
+              "id": 57413335,
+              "title": "[AUS] Ryerson Index (Death & Funeral Notices)",
+              "url": "https://www.ryersonindex.org/",
+              "description": "8.5M+ indexed notices from Australian newspapers for people tracing",
+              "domain": "www.ryersonindex.org",
+              "favicon": "https://f.start.me/www.ryersonindex.org",
+              "status": 200,
+              "au": false
             },
             {
               "id": 34819907,
@@ -16442,7 +19676,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.judyrecords.com",
               "favicon": "https://f.start.me/judyrecords.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5034508,
@@ -16451,7 +19686,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.courtlistener.com",
               "favicon": "https://f.start.me/courtlistener.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 34219980,
@@ -16460,7 +19696,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "pacer.uscourts.gov",
               "favicon": "https://f.start.me/pacer.uscourts.gov",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041110,
@@ -16469,7 +19706,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "parallelsearch.casetext.com",
               "favicon": "https://f.start.me/parallelsearch.casetext.com",
-              "status": 410
+              "status": 410,
+              "au": false
             },
             {
               "id": 561554,
@@ -16478,7 +19716,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.canlii.org",
               "favicon": "https://f.start.me/canlii.org",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 41983595,
@@ -16487,7 +19726,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.scc-csc.ca",
               "favicon": "https://f.start.me/scc-csc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41773508,
@@ -16496,7 +19736,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "mdocweb.state.mi.us",
               "favicon": "https://f.start.me/mdocweb.state.mi.us",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012462,
@@ -16505,7 +19746,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41545952,
@@ -16514,7 +19756,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "publicrecords.searchsystems.net",
               "favicon": "https://f.start.me/publicrecords.searchsystems.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784219,
@@ -16523,7 +19766,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37607177,
@@ -16532,7 +19776,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40939964,
@@ -16541,7 +19786,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sortedbybirthdate.com",
               "favicon": "https://f.start.me/sortedbybirthdate.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 3866353,
@@ -16550,7 +19796,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "njparcels.com",
               "favicon": "https://f.start.me/njparcels.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37011773,
@@ -16559,7 +19806,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "ssdmf.info",
               "favicon": "https://f.start.me/ssdmf.info",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 24630659,
@@ -16568,7 +19816,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "sortedbyname.com",
               "favicon": "https://f.start.me/sortedbyname.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 42479484,
@@ -16577,7 +19826,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cemetery.directory",
               "favicon": "https://f.start.me/cemetery.directory",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 37012486,
@@ -16586,7 +19836,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012492,
@@ -16595,7 +19846,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37012504,
@@ -16604,7 +19856,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 15743876,
@@ -16613,7 +19866,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.boatinfoworld.com",
               "favicon": "https://f.start.me/boatinfoworld.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37649353,
@@ -16622,7 +19876,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.mlive.com",
               "favicon": "https://f.start.me/mlive.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 37013715,
@@ -16631,7 +19886,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "stevemorse.org",
               "favicon": "https://f.start.me/stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37013717,
@@ -16640,7 +19896,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "bklyn-genealogy-info.stevemorse.org",
               "favicon": "https://f.start.me/bklyn-genealogy-info.stevemorse.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784311,
@@ -16649,7 +19906,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 19327526,
@@ -16658,7 +19916,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "newenglandfacts.com",
               "favicon": "https://f.start.me/newenglandfacts.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 41773572,
@@ -16667,7 +19926,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "michigan.staterecords.org",
               "favicon": "https://f.start.me/michigan.staterecords.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41544183,
@@ -16676,7 +19936,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cancelthesefunerals.com",
               "favicon": "https://f.start.me/cancelthesefunerals.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760295,
@@ -16685,7 +19946,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784342,
@@ -16694,7 +19956,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784273,
@@ -16703,7 +19966,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760413,
@@ -16712,7 +19976,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b4.caspio.com",
               "favicon": "https://f.start.me/b4.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784239,
@@ -16721,7 +19986,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760546,
@@ -16730,7 +19996,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c3cqk813.caspio.com",
               "favicon": "https://f.start.me/c3cqk813.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760650,
@@ -16739,7 +20006,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0eru132.caspio.com",
               "favicon": "https://f.start.me/c0eru132.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760654,
@@ -16748,7 +20016,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0dcb948.caspio.com",
               "favicon": "https://f.start.me/c0dcb948.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760657,
@@ -16757,7 +20026,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0gaf106.caspio.com",
               "favicon": "https://f.start.me/c0gaf106.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760659,
@@ -16766,7 +20036,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0abe732.caspio.com",
               "favicon": "https://f.start.me/c0abe732.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760665,
@@ -16775,7 +20046,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0esh132.caspio.com",
               "favicon": "https://f.start.me/c0esh132.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760708,
@@ -16784,7 +20056,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0acy802.caspio.com",
               "favicon": "https://f.start.me/c0acy802.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41784368,
@@ -16793,7 +20066,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784372,
@@ -16802,7 +20076,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18109426,
@@ -16811,7 +20086,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.smallarmssurvey.org",
               "favicon": "https://f.start.me/smallarmssurvey.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 28860092,
@@ -16820,7 +20096,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.e-yearbook.com",
               "favicon": "https://f.start.me/e-yearbook.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44153972,
@@ -16829,7 +20106,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ancestry.com",
               "favicon": "https://f.start.me/ancestry.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 48612481,
@@ -16838,9 +20116,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.myheritage.com",
               "favicon": "https://f.start.me/myheritage.com",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 5,
+          "au_module": false
         },
         {
           "id": 55784980,
@@ -16858,7 +20139,8 @@ window.BUBBSY_DATA = {
               "description": "Complete repository of Australian Commonwealth Acts, Regulations, and Gazettes",
               "domain": "www.legislation.gov.au",
               "favicon": "https://f.start.me/www.legislation.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 59313258,
@@ -16867,7 +20149,8 @@ window.BUBBSY_DATA = {
               "description": "Central portal for public datasets published by Australian government agencies",
               "domain": "data.gov.au",
               "favicon": "https://f.start.me/data.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 92114616,
@@ -16876,7 +20159,8 @@ window.BUBBSY_DATA = {
               "description": "All Commonwealth procurement contracts, tender notices, and supplier expenditure",
               "domain": "www.tenders.gov.au",
               "favicon": "https://f.start.me/www.tenders.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 53719289,
@@ -16885,7 +20169,8 @@ window.BUBBSY_DATA = {
               "description": "Directory of Senators, MPs, parliamentary declarations, and Hansard transcripts",
               "domain": "www.aph.gov.au",
               "favicon": "https://f.start.me/www.aph.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 68011557,
@@ -16894,7 +20179,8 @@ window.BUBBSY_DATA = {
               "description": "Census data, regional population profiles, economic indicators, and trade statistics",
               "domain": "www.abs.gov.au",
               "favicon": "https://f.start.me/www.abs.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 15447103,
@@ -16903,7 +20189,8 @@ window.BUBBSY_DATA = {
               "description": "Annual reports and performance data across Australian government bodies",
               "domain": "www.transparency.gov.au",
               "favicon": "https://f.start.me/www.transparency.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 3448359,
@@ -16912,7 +20199,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "data.occrp.org",
               "favicon": "https://f.start.me/data.occrp.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41913086,
@@ -16921,7 +20209,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "cdn.occrp.org",
               "favicon": "https://f.start.me/cdn.occrp.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44550238,
@@ -16930,7 +20219,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "datawrapper.dwcdn.net",
               "favicon": "https://f.start.me/datawrapper.dwcdn.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 997417,
@@ -16939,7 +20229,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.muckrock.com",
               "favicon": "https://f.start.me/muckrock.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 37030322,
@@ -16948,7 +20239,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "govsalaries.com",
               "favicon": "https://f.start.me/govsalaries.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 30109102,
@@ -16957,7 +20249,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "openpayrolls.com",
               "favicon": "https://f.start.me/openpayrolls.com",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 37030574,
@@ -16966,7 +20259,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.seethroughny.net",
               "favicon": "https://f.start.me/seethroughny.net",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37041726,
@@ -16975,7 +20269,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.scotussearch.com",
               "favicon": "https://f.start.me/scotussearch.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 2571534,
@@ -16984,7 +20279,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37009899,
@@ -16993,7 +20289,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 32731565,
@@ -17002,7 +20299,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "projects.propublica.org",
               "favicon": "https://f.start.me/projects.propublica.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37010058,
@@ -17011,7 +20309,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wikileaks.org",
               "favicon": "https://f.start.me/wikileaks.org",
-              "status": 500
+              "status": 500,
+              "au": false
             },
             {
               "id": 37010072,
@@ -17020,7 +20319,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wikileaks.org",
               "favicon": "https://f.start.me/wikileaks.org",
-              "status": 500
+              "status": 500,
+              "au": false
             },
             {
               "id": 37010090,
@@ -17029,7 +20329,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "search.wikileaks.org",
               "favicon": "https://f.start.me/search.wikileaks.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37010098,
@@ -17038,7 +20339,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "wikileaks.org",
               "favicon": "https://f.start.me/wikileaks.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 5136613,
@@ -17047,7 +20349,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "littlesis.org",
               "favicon": "https://f.start.me/littlesis.org",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44550263,
@@ -17056,7 +20359,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ect130.caspio.com",
               "favicon": "https://f.start.me/c0ect130.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784290,
@@ -17065,7 +20369,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760627,
@@ -17074,7 +20379,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ctb111.caspio.com",
               "favicon": "https://f.start.me/c0ctb111.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760549,
@@ -17083,7 +20389,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0bkr141.caspio.com",
               "favicon": "https://f.start.me/c0bkr141.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760494,
@@ -17092,7 +20399,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ebl104.caspio.com",
               "favicon": "https://f.start.me/c0ebl104.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760541,
@@ -17101,7 +20409,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b3.caspio.com",
               "favicon": "https://f.start.me/b3.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760420,
@@ -17110,7 +20419,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ctb134.caspio.com",
               "favicon": "https://f.start.me/c0ctb134.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760466,
@@ -17119,7 +20429,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0eib112.caspio.com",
               "favicon": "https://f.start.me/c0eib112.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760510,
@@ -17128,7 +20439,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ect130.caspio.com",
               "favicon": "https://f.start.me/c0ect130.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760639,
@@ -17137,7 +20449,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0ect130.caspio.com",
               "favicon": "https://f.start.me/c0ect130.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760671,
@@ -17146,7 +20459,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760355,
@@ -17155,7 +20469,8 @@ window.BUBBSY_DATA = {
               "description": "The State Personnel Salary database lists all state government employees and their salary, department and position. It does not include Public School, General Assembly, University System or UNC Hospitals employees. The salary reflects the current base pay only and does not include supplemental wages (bonus, overtime, longevity, etc.).",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760364,
@@ -17164,7 +20479,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0eib112.caspio.com",
               "favicon": "https://f.start.me/c0eib112.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784259,
@@ -17173,7 +20489,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 20477369,
@@ -17182,7 +20499,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784267,
@@ -17191,7 +20509,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760405,
@@ -17200,7 +20519,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760689,
@@ -17209,7 +20529,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760559,
@@ -17218,7 +20539,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784275,
@@ -17227,7 +20549,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784279,
@@ -17236,7 +20559,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784254,
@@ -17245,7 +20569,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784327,
@@ -17254,7 +20579,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760453,
@@ -17263,7 +20589,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0acz339.caspio.com",
               "favicon": "https://f.start.me/c0acz339.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760391,
@@ -17272,7 +20599,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c2abn462.caspio.com",
               "favicon": "https://f.start.me/c2abn462.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760513,
@@ -17281,7 +20609,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c7ect427.caspio.com",
               "favicon": "https://f.start.me/c7ect427.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760532,
@@ -17290,7 +20619,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0dzk127.caspio.com",
               "favicon": "https://f.start.me/c0dzk127.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 41760564,
@@ -17299,7 +20629,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c3dug085.caspio.com",
               "favicon": "https://f.start.me/c3dug085.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41760666,
@@ -17308,7 +20639,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0acw966.caspio.com",
               "favicon": "https://f.start.me/c0acw966.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784347,
@@ -17317,7 +20649,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41784381,
@@ -17326,7 +20659,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "b2.caspio.com",
               "favicon": "https://f.start.me/b2.caspio.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44550268,
@@ -17335,9 +20669,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "c0acu481.caspio.com",
               "favicon": "https://f.start.me/c0acu481.caspio.com",
-              "status": null
+              "status": null,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 6,
+          "au_module": false
         },
         {
           "id": 61879293,
@@ -17355,7 +20692,8 @@ window.BUBBSY_DATA = {
               "description": "Complete repository of Australian Commonwealth Acts, Regulations, and Gazettes",
               "domain": "www.legislation.gov.au",
               "favicon": "https://f.start.me/www.legislation.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 59313258,
@@ -17364,7 +20702,8 @@ window.BUBBSY_DATA = {
               "description": "Central portal for public datasets published by Australian government agencies",
               "domain": "data.gov.au",
               "favicon": "https://f.start.me/data.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 92114616,
@@ -17373,7 +20712,8 @@ window.BUBBSY_DATA = {
               "description": "All Commonwealth procurement contracts, tender notices, and supplier expenditure",
               "domain": "www.tenders.gov.au",
               "favicon": "https://f.start.me/www.tenders.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 53719289,
@@ -17382,7 +20722,8 @@ window.BUBBSY_DATA = {
               "description": "Directory of Senators, MPs, parliamentary declarations, and Hansard transcripts",
               "domain": "www.aph.gov.au",
               "favicon": "https://f.start.me/www.aph.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 68011557,
@@ -17391,7 +20732,8 @@ window.BUBBSY_DATA = {
               "description": "Census data, regional population profiles, economic indicators, and trade statistics",
               "domain": "www.abs.gov.au",
               "favicon": "https://f.start.me/www.abs.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 15447103,
@@ -17400,7 +20742,8 @@ window.BUBBSY_DATA = {
               "description": "Annual reports and performance data across Australian government bodies",
               "domain": "www.transparency.gov.au",
               "favicon": "https://f.start.me/www.transparency.gov.au",
-              "status": 200
+              "status": 200,
+              "au": true
             },
             {
               "id": 45856268,
@@ -17409,7 +20752,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "lobbycanada.gc.ca",
               "favicon": "https://f.start.me/lobbycanada.gc.ca",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 45856267,
@@ -17418,7 +20762,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www150.statcan.gc.ca",
               "favicon": "https://f.start.me/www150.statcan.gc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45855693,
@@ -17427,7 +20772,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gazette.gc.ca",
               "favicon": "https://f.start.me/gazette.gc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42700214,
@@ -17436,7 +20782,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "open.canada.ca",
               "favicon": "https://f.start.me/open.canada.ca",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 40030204,
@@ -17445,7 +20792,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "strategis.ic.gc.ca",
               "favicon": "https://f.start.me/strategis.ic.gc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38622863,
@@ -17454,7 +20802,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cihi.ca",
               "favicon": "https://f.start.me/cihi.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45870258,
@@ -17463,7 +20812,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.association-assq.qc.ca",
               "favicon": "https://f.start.me/association-assq.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 1896616,
@@ -17472,7 +20822,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "citoyens.soquij.qc.ca",
               "favicon": "https://f.start.me/citoyens.soquij.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40960695,
@@ -17481,7 +20832,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "opendata.durham.ca",
               "favicon": "https://f.start.me/opendata.durham.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37008703,
@@ -17490,7 +20842,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.oct.ca",
               "favicon": "https://f.start.me/oct.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38597856,
@@ -17499,7 +20852,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.infogo.gov.on.ca",
               "favicon": "https://f.start.me/infogo.gov.on.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 40683719,
@@ -17508,7 +20862,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "novascotia.ca",
               "favicon": "https://f.start.me/novascotia.ca",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 45870242,
@@ -17517,7 +20872,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www2.gov.bc.ca",
               "favicon": "https://f.start.me/www2.gov.bc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45870245,
@@ -17526,7 +20882,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www2.gov.bc.ca",
               "favicon": "https://f.start.me/www2.gov.bc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42262991,
@@ -17535,7 +20892,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cpsbc.ca",
               "favicon": "https://f.start.me/cpsbc.ca",
-              "status": 404
+              "status": 404,
+              "au": false
             },
             {
               "id": 38597829,
@@ -17544,7 +20902,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.alberta.ca",
               "favicon": "https://f.start.me/alberta.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45856271,
@@ -17553,7 +20912,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ic.gc.ca",
               "favicon": "https://f.start.me/ic.gc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39171796,
@@ -17562,7 +20922,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.donneesquebec.ca",
               "favicon": "https://f.start.me/donneesquebec.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 21230277,
@@ -17571,7 +20932,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.bac-lac.gc.ca",
               "favicon": "https://f.start.me/bac-lac.gc.ca",
-              "status": null
+              "status": null,
+              "au": false
             },
             {
               "id": 45870139,
@@ -17580,7 +20942,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.archives.mcgill.ca",
               "favicon": "https://f.start.me/archives.mcgill.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45870207,
@@ -17589,7 +20952,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "media.utoronto.ca",
               "favicon": "https://f.start.me/media.utoronto.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45870210,
@@ -17598,7 +20962,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "resources.library.ubc.ca",
               "favicon": "https://f.start.me/resources.library.ubc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 44245162,
@@ -17607,9 +20972,12 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "justice.gov.bc.ca",
               "favicon": "https://f.start.me/justice.gov.bc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 6,
+          "au_module": false
         },
         {
           "id": 61879306,
@@ -17627,7 +20995,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "rjsc.novascotia.ca",
               "favicon": "https://f.start.me/rjsc.novascotia.ca",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 1852080,
@@ -17636,7 +21005,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.ic.gc.ca",
               "favicon": "https://f.start.me/ic.gc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45855460,
@@ -17645,7 +21015,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "federalcorporation.ca",
               "favicon": "https://f.start.me/federalcorporation.ca",
-              "status": 503
+              "status": 503,
+              "au": false
             },
             {
               "id": 37697940,
@@ -17654,7 +21025,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pxw2.snb.ca",
               "favicon": "https://f.start.me/pxw2.snb.ca",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 24649390,
@@ -17663,7 +21035,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "beta.canadasbusinessregistries.ca",
               "favicon": "https://f.start.me/beta.canadasbusinessregistries.ca",
-              "status": 460
+              "status": 460,
+              "au": false
             },
             {
               "id": 38597823,
@@ -17672,7 +21045,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "albertacorporations.com",
               "favicon": "https://f.start.me/albertacorporations.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 19377409,
@@ -17681,7 +21055,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.leolist.cc",
               "favicon": "https://f.start.me/leolist.cc",
-              "status": 1099
+              "status": 1099,
+              "au": false
             },
             {
               "id": 45855520,
@@ -17690,7 +21065,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "misc.thestar.com",
               "favicon": "https://f.start.me/misc.thestar.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 42512040,
@@ -17699,7 +21075,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.n49.com",
               "favicon": "https://f.start.me/n49.com",
-              "status": 403
+              "status": 403,
+              "au": false
             },
             {
               "id": 39310402,
@@ -17708,7 +21085,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.gov.mb.ca",
               "favicon": "https://f.start.me/gov.mb.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 18316264,
@@ -17717,7 +21095,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sedar.com",
               "favicon": "https://f.start.me/sedar.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 39716967,
@@ -17726,7 +21105,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "occ.ca",
               "favicon": "https://f.start.me/occ.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45855441,
@@ -17735,7 +21115,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pes.rbq.gouv.qc.ca",
               "favicon": "https://f.start.me/pes.rbq.gouv.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45855450,
@@ -17744,7 +21125,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pes.rbq.gouv.qc.ca",
               "favicon": "https://f.start.me/pes.rbq.gouv.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 45855443,
@@ -17753,7 +21135,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pes.rbq.gouv.qc.ca",
               "favicon": "https://f.start.me/pes.rbq.gouv.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38597868,
@@ -17762,7 +21145,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.pes.ctq.gouv.qc.ca",
               "favicon": "https://f.start.me/pes.ctq.gouv.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 38597866,
@@ -17771,7 +21155,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.racj.gouv.qc.ca",
               "favicon": "https://f.start.me/racj.gouv.qc.ca",
-              "status": 307
+              "status": 307,
+              "au": false
             },
             {
               "id": 38597860,
@@ -17780,7 +21165,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "numerique.banq.qc.ca",
               "favicon": "https://f.start.me/numerique.banq.qc.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 41629626,
@@ -17789,7 +21175,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.princeedwardisland.ca",
               "favicon": "https://f.start.me/princeedwardisland.ca",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 24290140,
@@ -17798,7 +21185,8 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.sedar.com",
               "favicon": "https://f.start.me/sedar.com",
-              "status": 200
+              "status": 200,
+              "au": false
             },
             {
               "id": 37580476,
@@ -17807,9 +21195,128 @@ window.BUBBSY_DATA = {
               "description": "",
               "domain": "www.cdsbc.org",
               "favicon": "https://f.start.me/cdsbc.org",
-              "status": 408
+              "status": 408,
+              "au": false
             }
-          ]
+          ],
+          "au_count": 0,
+          "au_module": false
+        },
+        {
+          "id": 9304,
+          "title": "OPSEC, PRIVACY & SECURE COMMS",
+          "type": "urllist",
+          "group": "cyber_intel",
+          "icon": "lock",
+          "color": "#94a3b8",
+          "links": [
+            {
+              "title": "OAIC Privacy Rights (AU)",
+              "url": "https://www.oaic.gov.au/privacy/your-privacy-rights",
+              "description": "Australian Privacy Principles, access requests and complaint pathways",
+              "domain": "oaic.gov.au",
+              "favicon": "https://f.start.me/oaic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Privacy Guides",
+              "url": "https://www.privacyguides.org/",
+              "description": "Vetted privacy tool recommendations and threat-model driven guidance",
+              "domain": "privacyguides.org",
+              "favicon": "https://f.start.me/privacyguides.org",
+              "au": false
+            },
+            {
+              "title": "Tor Project",
+              "url": "https://www.torproject.org/",
+              "description": "Anonymity network, browser downloads and bridge configuration",
+              "domain": "torproject.org",
+              "favicon": "https://f.start.me/torproject.org",
+              "au": false
+            },
+            {
+              "title": "Tails OS",
+              "url": "https://tails.net/",
+              "description": "Amnesic live operating system routing all traffic through Tor",
+              "domain": "tails.net",
+              "favicon": "https://f.start.me/tails.net",
+              "au": false
+            },
+            {
+              "title": "Whonix",
+              "url": "https://www.whonix.org/",
+              "description": "Isolated VM architecture that prevents IP leaks during investigations",
+              "domain": "whonix.org",
+              "favicon": "https://f.start.me/whonix.org",
+              "au": false
+            },
+            {
+              "title": "Mullvad VPN",
+              "url": "https://mullvad.net/",
+              "description": "Account-number-only VPN with no email requirement and audited clients",
+              "domain": "mullvad.net",
+              "favicon": "https://f.start.me/mullvad.net",
+              "au": false
+            },
+            {
+              "title": "Proton Mail",
+              "url": "https://proton.me/mail",
+              "description": "End-to-end encrypted mail with anonymous signup options",
+              "domain": "proton.me",
+              "favicon": "https://f.start.me/proton.me",
+              "au": false
+            },
+            {
+              "title": "SimpleX Chat",
+              "url": "https://simplex.chat/",
+              "description": "Messenger with no persistent user identifiers or account handles",
+              "domain": "simplex.chat",
+              "favicon": "https://f.start.me/simplex.chat",
+              "au": false
+            },
+            {
+              "title": "Signal",
+              "url": "https://signal.org/",
+              "description": "End-to-end encrypted messaging and calls with sealed sender",
+              "domain": "signal.org",
+              "favicon": "https://f.start.me/signal.org",
+              "au": false
+            },
+            {
+              "title": "KeePassXC",
+              "url": "https://keepassxc.org/",
+              "description": "Offline, cross-platform password vault with no cloud dependency",
+              "domain": "keepassxc.org",
+              "favicon": "https://f.start.me/keepassxc.org",
+              "au": false
+            },
+            {
+              "title": "Cryptomator",
+              "url": "https://cryptomator.org/",
+              "description": "Client-side encryption for files stored in any cloud provider",
+              "domain": "cryptomator.org",
+              "favicon": "https://f.start.me/cryptomator.org",
+              "au": false
+            },
+            {
+              "title": "Exodus Privacy",
+              "url": "https://reports.exodus-privacy.eu.org/",
+              "description": "Analyse trackers and permissions embedded in Android applications",
+              "domain": "exodus-privacy.eu.org",
+              "favicon": "https://f.start.me/exodus-privacy.eu.org",
+              "au": false
+            },
+            {
+              "title": "Terms of Service; Didn't Read",
+              "url": "https://tosdr.org/",
+              "description": "Graded summaries of platform terms, data retention and rights",
+              "domain": "tosdr.org",
+              "favicon": "https://f.start.me/tosdr.org",
+              "au": false
+            }
+          ],
+          "au_count": 1,
+          "au_module": false
         }
       ]
     }
