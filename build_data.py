@@ -2,6 +2,13 @@ import json
 import os
 import re
 
+from modules_extra import (
+    AUS_EXTRA_WIDGETS,
+    GLOBAL_EXTRA_WIDGETS,
+    EXTRA_WIDGET_IDS,
+    apply_au_priority,
+)
+
 def clean_domain(url):
     if not url:
         return ""
@@ -29,6 +36,7 @@ def build_data():
     # (id-based so any additional [AUS]/visual widgets added by hand in osint_data.json survive rebuilds)
     REBUILT_WIDGET_IDS = {9001, 9002, 9003, 9004, 9005, 9006, 9101, 9102, 9103, 9104, 9105, 9106,
                           9107, 9108, 9109, 9110, 9111, 9112, 9201, 9202, 9203, 9204, 9205, 9206}
+    REBUILT_WIDGET_IDS |= EXTRA_WIDGET_IDS
     for col in columns:
         col['widgets'] = [w for w in col.get('widgets', []) if w.get('id') not in REBUILT_WIDGET_IDS]
 
@@ -612,6 +620,17 @@ def build_data():
     columns[3]['widgets'].insert(6, hacker_widgets[3]) # HACKER SEARCH: DNS, Certs & Infra
     columns[3]['widgets'].insert(7, hacker_widgets[4]) # HACKER SEARCH: Threat Intel & Malware
 
+    # Expanded [AUS] Australian modules and global fallback modules.
+    # Distributed round-robin so the four columns stay balanced in height.
+    for i, widget in enumerate(AUS_EXTRA_WIDGETS):
+        columns[i % len(columns)]['widgets'].append(widget)
+    for i, widget in enumerate(GLOBAL_EXTRA_WIDGETS):
+        columns[i % len(columns)]['widgets'].append(widget)
+
+    # Australian-first: tag AU links, float them to the top of every module,
+    # and float every [AUS] module to the top of its column.
+    au_link_total = apply_au_priority(columns)
+
     # Recalculate totals
     total_widgets = sum(len(col.get('widgets', [])) for col in columns)
     total_links = sum(sum(len(w.get('links', [])) for w in col.get('widgets', [])) for col in columns)
@@ -642,6 +661,7 @@ def build_data():
         'version': '2.5.0',
         'total_widgets': total_widgets,
         'total_links': total_links,
+        'au_link_total': au_link_total,
         'world_clocks': world_clocks,
         'rss_feeds': rss_feeds,
         'search_engines': search_engines,
@@ -659,6 +679,7 @@ def build_data():
     print(f"Successfully generated clean evergreen dataset:")
     print(f"Total Widgets: {total_widgets}")
     print(f"Total Links: {total_links}")
+    print(f"Australian-priority links: {au_link_total}")
 
 if __name__ == '__main__':
     build_data()

@@ -1,6 +1,6 @@
 # Bubbsy Start Page & Tactical OSINT Command Hub
 
-**Bubbsy Start Page** is a high-performance tactical start page and intelligence command center. It features **1,904+ curated OSINT links across 101 structured modules** — including 12 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
+**Bubbsy Start Page** is a high-performance tactical start page and intelligence command center. It features **2,061+ curated OSINT links across 113 structured modules** — including 20 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
 
 ---
 
@@ -11,9 +11,10 @@
    - Operates fully offline with zero external server requirements.
    - 250 bundled CVE & threat advisories cached locally.
 
-2. **1,904+ Curated OSINT Tools Across 101 Modules**:
-   - 101 structured modules across 4 balanced columns (Threat Intel, Geolocation, People & Email, Social Networks, Dorking, DNS/IP, Darknet, Public Records, Gov & Police, etc.).
-   - 12 dedicated **[AUS]** modules: Government & Data, Public Records, Police & Courts, Corporations/ABN/ASIC, Real Estate & Cadastre, Transport & Rego, News & Media, Gov Services & myGov, Telco/Postal/Address, Emergency & Weather, Defence & Security, Sport/Arts/Culture.
+2. **2,061+ Curated OSINT Tools Across 113 Modules**:
+   - 113 structured modules across 4 balanced columns (Threat Intel, Geolocation, People & Email, Social Networks, Dorking, DNS/IP, Darknet, Public Records, Gov & Police, etc.).
+   - 20 dedicated **[AUS]** modules: Government & Data, Public Records, Police & Courts, Corporations/ABN/ASIC, Real Estate & Cadastre, Transport & Rego, News & Media, Gov Services & myGov, Telco/Postal/Address, Emergency & Weather, Defence & Security, Sport/Arts/Culture, Cyber Security & Scams, Professional/Health & Licence Registers, Maps/Geospatial & Environment, Banking/Tax & Consumer, Jobs/Education & Skills, Aviation/Rail & Vessel Tracking, Marketplaces & Forums, Energy/Utilities & Infrastructure.
+   - **4 global depth modules**: Corporate Registries & Ownership (OpenCorporates, Aleph, ICIJ, OpenSanctions), Archives & Fact-Check, Satellite & Earth Observation, OPSEC & Secure Comms.
    - **5 Hacker Search Engine modules** (from `edoardottt/awesome-hacker-search-engines`): Servers & Attack Surface (Quake, ODIN, BinaryEdge, BGPview, Cloudflare Radar…), Vulnerabilities & Exploits (NVD, Vulners, VulDB, Exploit-DB, GTFOBins, LOLBAS…), Leaks/Credentials/Hashes (Dehashed, LeakCheck, CrackStation, ntlm.pw…), DNS/Certs/Infra (RapidDNS, DNSViz, Validin, CertSpotter…), Threat Intel & Malware (abuse.ch family, AnyRun, Hybrid Analysis, PhishTank, AbuseIPDB…).
    - **Interactive Visual Toolkit** module: Google Earth Timelapse, Windy, Ventusky, Radio Garden, SunCalc, Shadowmap, Stellarium, NASA Worldview, and more interactive visual tools.
    - Instant client-side fuzzy search with highlighted matches (`/` or `Ctrl+K`).
