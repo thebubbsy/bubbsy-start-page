@@ -102,6 +102,8 @@
   }
 
   const BANG_SUGGESTIONS = [
+    { bang: '!ai', name: 'Autonomous AI OSINT Copilot', syntax: '!ai <target/query>', desc: 'Gemini 3.8 / Multi-model prompt synthesizer & reasoning blueprints' },
+    { bang: '!copilot', name: 'AI OSINT Reasoning Studio', syntax: '!copilot <target>', desc: 'Multi-stage MITRE, persona & Essential 8 reasoning engine' },
     { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
     { bang: '!trove', name: 'Trove Australia (NLA)', syntax: '!trove <archive>', desc: 'National Library historical archives & press' },
     { bang: '!austlii', name: 'AusLII Legal Database', syntax: '!austlii <case/act>', desc: 'Commonwealth legislation & High Court rulings' },
@@ -184,6 +186,7 @@
     populateCategorySelect();
     setupEventListeners();
     setupTypographyEventListeners();
+    initUiMode();
     fetchThreatRadarFeed();
 
     // Set default search engine from settings
@@ -652,6 +655,92 @@
         if (timeSpan) timeSpan.textContent = now.toTimeString().split(' ')[0];
       }
     });
+  }
+
+  // --- BASIC / ADVANCED INTERFACE MODE ---
+  // Basic is the default for first-time visitors: brand, search and categories
+  // only. Advanced restores the full HUD (world clocks, hotkey bar, bang
+  // ribbon, every tool inline). No element is added or removed from the DOM,
+  // so every handler, hotkey and modal keeps working in both modes.
+  const UI_MODE_KEY = 'bubbsy_ui_mode';
+
+  function getUiMode() {
+    try {
+      return localStorage.getItem(UI_MODE_KEY) === 'advanced' ? 'advanced' : 'basic';
+    } catch (e) {
+      return 'basic';
+    }
+  }
+
+  function closeNavOverflow() {
+    const panel = document.getElementById('nav-overflow-panel');
+    const btn = document.getElementById('btn-nav-more');
+    if (panel) panel.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
+
+  function applyUiMode(mode, opts) {
+    const next = mode === 'advanced' ? 'advanced' : 'basic';
+    document.documentElement.setAttribute('data-ui-mode', next);
+    try { localStorage.setItem(UI_MODE_KEY, next); } catch (e) {}
+
+    document.querySelectorAll('.ui-mode-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-mode') === next);
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-mode') === next));
+    });
+
+    closeNavOverflow();
+
+    // A hidden engine tab must never stay selected, or the search bar would
+    // silently route queries through an engine the user can no longer see.
+    if (next === 'basic') {
+      const activeTab = document.querySelector('#search-mode-tabs .search-tab.active');
+      if (activeTab && activeTab.hasAttribute('data-adv')) {
+        const fallback = document.querySelector('#search-mode-tabs .search-tab[data-mode="filter"]');
+        if (fallback) fallback.click();
+      }
+    }
+
+    if (opts && opts.announce) {
+      showToast(next === 'advanced'
+        ? 'Advanced mode: full tactical HUD enabled'
+        : 'Basic mode: simplified start page');
+    }
+  }
+
+  function initUiMode() {
+    applyUiMode(getUiMode());
+
+    document.querySelectorAll('.ui-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyUiMode(btn.getAttribute('data-mode'), { announce: true });
+      });
+    });
+
+    const moreBtn = document.getElementById('btn-nav-more');
+    const panel = document.getElementById('nav-overflow-panel');
+    if (moreBtn && panel) {
+      // Derive the badge from the DOM so it cannot drift as tools are added.
+      const countBadge = moreBtn.querySelector('.nav-more-count');
+      if (countBadge) countBadge.textContent = String(panel.querySelectorAll('.btn-icon').length);
+
+      moreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const willOpen = !panel.classList.contains('open');
+        panel.classList.toggle('open', willOpen);
+        moreBtn.setAttribute('aria-expanded', String(willOpen));
+      });
+      // Any tool inside the panel closes it once used.
+      panel.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-icon')) closeNavOverflow();
+      });
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-more-wrap')) closeNavOverflow();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeNavOverflow();
+      });
+    }
   }
 
   // --- DASHBOARD RENDERING & IN-MEMORY SEARCH INDEX ---
@@ -1201,6 +1290,9 @@
       } else if (id === 'btn-open-export') {
         e.preventDefault();
         openSessionExport();
+      } else if (id === 'btn-open-ai-copilot') {
+        e.preventDefault();
+        openAiCopilotModal();
       } else if (id === 'btn-custom-bookmark') {
         e.preventDefault();
         openModal(document.getElementById('modal-custom-bookmark'));
@@ -1548,6 +1640,11 @@
           renderBangAutocompleteDropdown('');
           openDomainSniperModal(query);
           return;
+        } else if (bang === 'ai' || bang === 'copilot' || bang === 'reason' || bang === 'prompt') {
+          elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
+          openAiCopilotModal(query);
+          return;
         }
 
         if (bangMap[bang] && bangMap[bang] !== activeSearchMode) {
@@ -1806,6 +1903,7 @@
     const items = [];
 
     const actions = [
+      { id: 'act_ai_copilot', title: 'Autonomous AI OSINT Copilot & Structured Reasoner (Gemini 3.8 / Multi-Model)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
       { id: 'act_aistudio', title: 'Open Google AI Studio (Gemini 2.5 Pro / Flash Developer Workbench)', category: 'ACTIONS', icon: 'AI', action: () => window.open('https://aistudio.google.com/', '_blank') },
       { id: 'act_gemini', title: 'Open Google Gemini AI Assistant', category: 'ACTIONS', icon: 'GEMINI', action: () => window.open('https://gemini.google.com/', '_blank') },
       { id: 'act_social_recon', title: 'Social Handle & Username Recon Engine (Maigret / Sherlock)', category: 'ACTIONS', icon: 'RECON', action: () => openSocialRecon() },
@@ -1825,6 +1923,8 @@
     ];
 
     const bangShortcuts = [
+      { bang: '!ai', name: 'Autonomous AI OSINT Copilot & Reasoner', icon: 'AI', action: () => { closeModal(elModalPalette); openAiCopilotModal(); } },
+      { bang: '!copilot', name: 'AI OSINT Reasoning Studio', icon: 'AI', action: () => { closeModal(elModalPalette); openAiCopilotModal(); } },
       { bang: '!aistudio', name: 'Google AI Studio Developer Prompt Studio', icon: 'AI', action: () => { closeModal(elModalPalette); setSearchMode('aistudio'); elMainSearch.focus(); } },
       { bang: '!gemini', name: 'Google Gemini Multimodal Assistant', icon: 'GEMINI', action: () => { closeModal(elModalPalette); setSearchMode('aistudio'); elMainSearch.focus(); } },
       { bang: '!typo', name: 'Typography, Font Size & High-Contrast Colors', icon: 'TYPO', action: () => { closeModal(elModalPalette); openTypographyModal(); } },
@@ -5261,6 +5361,42 @@
     copyToClipboard(md, `Copied Markdown table with ${currentRenderedRadarItems.length} advisories!`);
   });
 
+  document.getElementById('btn-radar-ai-brief')?.addEventListener('click', () => {
+    if (!currentRenderedRadarItems.length) {
+      showToast('No active advisories to brief');
+      return;
+    }
+    const topItems = currentRenderedRadarItems.slice(0, 10);
+    const summary = topItems.map(i => `- [${i.id}] (${i.severity}) ${i.title} (Vendor: ${i.vendor || i.publisher || 'N/A'})`).join('\n');
+    closeModal(document.getElementById('modal-radar'));
+    openAiCopilotModal('Active Threat Radar Incident', 'ttp');
+    const ctxBox = document.getElementById('ai-copilot-context');
+    if (ctxBox) {
+      ctxBox.value = `ACTIVE RADAR ADVISORIES & KEV DETECTIONS:\n${summary}`;
+      document.getElementById('btn-ai-synthesize-prompt')?.click();
+    }
+  });
+
+  document.getElementById('btn-radar-send-to-graph')?.addEventListener('click', () => {
+    if (!currentRenderedRadarItems.length) {
+      showToast('No active advisories to send to graph');
+      return;
+    }
+    const topItems = currentRenderedRadarItems.slice(0, 6);
+    topItems.forEach(item => {
+      const cveId = addNodeToGraph(item.id, 'cve');
+      if (item.vendor || item.publisher) {
+        const vendorNodeId = addNodeToGraph(item.vendor || item.publisher, 'org');
+        if (cveId && vendorNodeId) {
+          addEdgeToGraph(vendorNodeId, cveId, 'affects_vendor');
+        }
+      }
+    });
+    showToast(`Added ${topItems.length} Threat Radar CVEs to Link Graph!`);
+    closeModal(document.getElementById('modal-radar'));
+    openInvestigationGraph();
+  });
+
   document.getElementById('tab-radar-cisa').addEventListener('click', async () => {
     document.getElementById('tab-radar-cisa').classList.add('active');
     document.getElementById('tab-radar-acsc').classList.remove('active');
@@ -7492,7 +7628,7 @@
       ctx.translate(graphOffset.x, graphOffset.y);
       ctx.scale(graphScale, graphScale);
 
-      // Draw Edges
+      // Draw Edges with Directed Direction & Labeled Badges
       edges.forEach(e => {
         const s = nodes.find(n => n.id === e.source);
         const t = nodes.find(n => n.id === e.target);
@@ -7500,16 +7636,37 @@
           ctx.beginPath();
           ctx.moveTo(s.x, s.y);
           ctx.lineTo(t.x, t.y);
-          ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+          ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
           ctx.lineWidth = 1.8;
           ctx.stroke();
 
+          // Arrowhead
+          const angle = Math.atan2(t.y - s.y, t.x - s.x);
+          const arrowDist = t.radius + 6;
+          const ax = t.x - Math.cos(angle) * arrowDist;
+          const ay = t.y - Math.sin(angle) * arrowDist;
+          ctx.beginPath();
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(ax - 10 * Math.cos(angle - Math.PI / 6), ay - 10 * Math.sin(angle - Math.PI / 6));
+          ctx.lineTo(ax - 10 * Math.cos(angle + Math.PI / 6), ay - 10 * Math.sin(angle + Math.PI / 6));
+          ctx.closePath();
+          ctx.fillStyle = 'rgba(0, 240, 255, 0.75)';
+          ctx.fill();
+
+          // Relationship Label Badge
           if (e.label) {
             const mx = (s.x + t.x) / 2;
             const my = (s.y + t.y) / 2;
-            ctx.fillStyle = '#a8b8cc';
-            ctx.font = '10px monospace';
-            ctx.fillText(e.label, mx, my - 4);
+            ctx.font = 'bold 9px monospace';
+            const tw = ctx.measureText(e.label).width;
+            ctx.fillStyle = 'rgba(5, 9, 18, 0.88)';
+            ctx.fillRect(mx - tw / 2 - 4, my - 7, tw + 8, 14);
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(mx - tw / 2 - 4, my - 7, tw + 8, 14);
+            ctx.fillStyle = '#67e8f9';
+            ctx.textAlign = 'center';
+            ctx.fillText(e.label, mx, my + 3);
           }
         }
       });
@@ -7568,6 +7725,51 @@
 
       ctx.restore();
 
+      // Render Mini-Map Canvas Overlay
+      const miniCanvas = document.getElementById('graph-minimap-canvas');
+      if (miniCanvas) {
+        const mctx = miniCanvas.getContext('2d');
+        mctx.clearRect(0, 0, miniCanvas.width, miniCanvas.height);
+
+        let minX = 0, maxX = elCanvas.width || 800, minY = 0, maxY = elCanvas.height || 600;
+        if (nodes.length > 0) {
+          nodes.forEach(n => {
+            if (n.x < minX) minX = n.x;
+            if (n.x > maxX) maxX = n.x;
+            if (n.y < minY) minY = n.y;
+            if (n.y > maxY) maxY = n.y;
+          });
+        }
+        const spanX = Math.max(600, maxX - minX + 160);
+        const spanY = Math.max(400, maxY - minY + 160);
+        const mScale = Math.min(miniCanvas.width / spanX, miniCanvas.height / spanY);
+
+        mctx.save();
+        mctx.translate((miniCanvas.width - spanX * mScale) / 2, (miniCanvas.height - spanY * mScale) / 2);
+
+        edges.forEach(e => {
+          const s = nodes.find(n => n.id === e.source);
+          const t = nodes.find(n => n.id === e.target);
+          if (s && t) {
+            mctx.beginPath();
+            mctx.moveTo((s.x - minX + 80) * mScale, (s.y - minY + 80) * mScale);
+            mctx.lineTo((t.x - minX + 80) * mScale, (t.y - minY + 80) * mScale);
+            mctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+            mctx.lineWidth = 1;
+            mctx.stroke();
+          }
+        });
+
+        nodes.forEach(n => {
+          mctx.beginPath();
+          mctx.arc((n.x - minX + 80) * mScale, (n.y - minY + 80) * mScale, Math.max(2, n.radius * mScale * 0.4), 0, Math.PI * 2);
+          mctx.fillStyle = n.color || '#00f0ff';
+          mctx.fill();
+        });
+
+        mctx.restore();
+      }
+
       if (totalKineticEnergy > 0.005 || draggedNode !== null || isPanningCanvas) {
         graphAnimationId = requestAnimationFrame(renderLoop);
       } else {
@@ -7583,6 +7785,7 @@
     social: { color: '#00f0ff', radius: 20, labelPrefix: '', icon: '🔗' },
     org:    { color: '#f59e0b', radius: 24, labelPrefix: 'Org', icon: '🏢' },
     geo:    { color: '#10b981', radius: 20, labelPrefix: 'Loc', icon: '📍' },
+    location: { color: '#10b981', radius: 20, labelPrefix: 'Loc', icon: '📍' },
     aus:    { color: '#10b981', radius: 22, labelPrefix: 'AUS', icon: '🇦🇺' },
     email:  { color: '#a855f7', radius: 18, labelPrefix: 'Email', icon: '✉️' },
     crypto: { color: '#ec4899', radius: 20, labelPrefix: 'PGP', icon: '🔑' },
@@ -7590,7 +7793,8 @@
     domain: { color: '#00ff9d', radius: 20, labelPrefix: 'Domain', icon: '🌐' },
     ip:     { color: '#00f0ff', radius: 22, labelPrefix: 'IP', icon: '💻' },
     hash:   { color: '#ec4899', radius: 20, labelPrefix: 'Hash', icon: '🔒' },
-    cve:    { color: '#f43f5e', radius: 22, labelPrefix: 'CVE', icon: '🛡️' }
+    cve:    { color: '#f43f5e', radius: 22, labelPrefix: 'CVE', icon: '🛡️' },
+    threat_actor: { color: '#ef4444', radius: 26, labelPrefix: 'Actor', icon: '☠️' }
   };
 
   window.addNodeToGraph = function(label, type = 'ip', customX = null, customY = null) {
@@ -7632,7 +7836,7 @@
     return newNode.id;
   };
 
-  window.addEdgeToGraph = function(sourceId, targetId, label = 'connected_to') {
+  window.addEdgeToGraph = function(sourceId, targetId, label = 'affiliated_with') {
     if (!sourceId || !targetId || sourceId === targetId) return;
     const edgeExists = investigationGraph.edges.some(
       e => (e.source === sourceId && e.target === targetId && e.label === label) ||
@@ -7647,6 +7851,66 @@
       }
     }
   };
+
+  function applyGraphLayout(layoutMode) {
+    const nodes = investigationGraph.nodes;
+    if (!nodes || nodes.length === 0) return;
+    const cx = (elCanvas && elCanvas.width > 0) ? elCanvas.width / 2 : 400;
+    const cy = (elCanvas && elCanvas.height > 0) ? elCanvas.height / 2 : 300;
+
+    if (layoutMode === 'radial') {
+      const radius = Math.min(cx, cy) * 0.55;
+      const step = (2 * Math.PI) / nodes.length;
+      nodes.forEach((n, i) => {
+        n.x = cx + radius * Math.cos(i * step);
+        n.y = cy + radius * Math.sin(i * step);
+        n.vx = 0; n.vy = 0;
+      });
+      showToast('Applied Radial Starburst Layout');
+    } else if (layoutMode === 'tree') {
+      const levels = {};
+      nodes.forEach((n, i) => {
+        const lvl = i % 4;
+        if (!levels[lvl]) levels[lvl] = [];
+        levels[lvl].push(n);
+      });
+      const levelKeys = Object.keys(levels);
+      levelKeys.forEach((lvl, lIdx) => {
+        const row = levels[lvl];
+        const yPos = 100 + lIdx * 120;
+        row.forEach((n, cIdx) => {
+          const spacing = (elCanvas.width || 800) / (row.length + 1);
+          n.x = spacing * (cIdx + 1);
+          n.y = yPos;
+          n.vx = 0; n.vy = 0;
+        });
+      });
+      showToast('Applied Hierarchical Tree Layout');
+    } else if (layoutMode === 'grid') {
+      const cols = Math.ceil(Math.sqrt(nodes.length));
+      const cellW = 160;
+      const cellH = 120;
+      const startX = cx - (cols * cellW) / 2 + cellW / 2;
+      const startY = cy - (Math.ceil(nodes.length / cols) * cellH) / 2 + cellH / 2;
+      nodes.forEach((n, i) => {
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+        n.x = startX + col * cellW;
+        n.y = startY + row * cellH;
+        n.vx = 0; n.vy = 0;
+      });
+      showToast('Applied Grid Cluster Layout');
+    } else {
+      // Force Physics
+      nodes.forEach(n => {
+        n.vx = (Math.random() - 0.5) * 6;
+        n.vy = (Math.random() - 0.5) * 6;
+      });
+      showToast('Applied Force-Directed Physics');
+    }
+
+    if (!graphAnimationId) startGraphSimulation();
+  }
 
   elCanvas.addEventListener('mousedown', (e) => {
     const rect = elCanvas.getBoundingClientRect();
@@ -7665,13 +7929,14 @@
           connectSourceNode = clicked;
           showToast(`Connecting: Select target node for ${clicked.label}`);
         } else if (connectSourceNode !== clicked) {
+          const selectedRel = document.getElementById('graph-edge-rel-type')?.value || 'affiliated_with';
           investigationGraph.edges.push({
             source: connectSourceNode.id,
             target: clicked.id,
-            label: 'connected_to'
+            label: selectedRel
           });
           localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-          showToast(`Connected ${connectSourceNode.label} -> ${clicked.label}`);
+          showToast(`Connected ${connectSourceNode.label} -[${selectedRel}]-> ${clicked.label}`);
           isGraphConnectMode = false;
           connectSourceNode = null;
         }
@@ -7736,27 +8001,14 @@
   document.getElementById('btn-inspector-delete').addEventListener('click', deleteSelectedNode);
   document.getElementById('btn-inspector-close').addEventListener('click', () => setSelectedNode(null));
 
-  // Graph Search & Auto Layout
+  // Graph Search & Layout Selector
   document.getElementById('graph-search-node')?.addEventListener('input', (e) => {
     graphNodeSearchQuery = e.target.value.toLowerCase().trim();
     if (!graphAnimationId) startGraphSimulation();
   });
 
-  document.getElementById('btn-graph-auto-layout')?.addEventListener('click', () => {
-    const nodes = investigationGraph.nodes;
-    if (!nodes.length) return;
-    const cx = elCanvas.width / 2;
-    const cy = elCanvas.height / 2;
-    const r = Math.min(cx, cy) * 0.55;
-    const step = (2 * Math.PI) / nodes.length;
-    nodes.forEach((n, idx) => {
-      n.x = cx + r * Math.cos(idx * step);
-      n.y = cy + r * Math.sin(idx * step);
-      n.vx = 0;
-      n.vy = 0;
-    });
-    showToast('Auto-arranged node layout');
-    if (!graphAnimationId) startGraphSimulation();
+  document.getElementById('graph-layout-mode')?.addEventListener('change', (e) => {
+    applyGraphLayout(e.target.value);
   });
 
   // Case Template Loader
@@ -7816,6 +8068,48 @@
     showToast('Exported graph screenshot as PNG');
   });
 
+  // JSON Export / Import for Link Graph
+  document.getElementById('btn-graph-export-json')?.addEventListener('click', () => {
+    const data = JSON.stringify(investigationGraph, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `bubbsy_investigation_graph_${Date.now()}.json`;
+    a.click();
+    showToast('Exported investigation graph JSON!');
+  });
+
+  document.getElementById('btn-graph-import-json')?.addEventListener('click', () => {
+    document.getElementById('graph-file-input')?.click();
+  });
+
+  document.getElementById('graph-file-input')?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const parsed = JSON.parse(evt.target.result);
+        if (parsed && Array.isArray(parsed.nodes)) {
+          investigationGraph = {
+            nodes: parsed.nodes || [],
+            edges: parsed.edges || []
+          };
+          localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
+          setSelectedNode(null);
+          showToast(`Imported graph with ${investigationGraph.nodes.length} nodes!`);
+          if (!graphAnimationId) startGraphSimulation();
+        } else {
+          showToast('Invalid investigation graph JSON schema');
+        }
+      } catch (err) {
+        showToast('Failed to parse graph JSON file');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
   // Global Delete hotkey when Graph modal is active
   window.addEventListener('keydown', (e) => {
     if (elModalGraph.classList.contains('active') && selectedGraphNode) {
@@ -7827,6 +8121,221 @@
         }
       }
     }
+  });
+
+  // =========================================================================
+  // 4B. AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / PRO)
+  // =========================================================================
+  const elModalAiCopilot = document.getElementById('modal-ai-copilot');
+  const elBtnCloseAiCopilot = document.getElementById('btn-close-ai-copilot');
+  const elAiCopilotTarget = document.getElementById('ai-copilot-target');
+  const elAiCopilotModel = document.getElementById('ai-copilot-model');
+  const elAiCopilotContext = document.getElementById('ai-copilot-context');
+  const elAiCopilotPromptPreview = document.getElementById('ai-copilot-prompt-preview');
+  const elBtnAiSynthesizePrompt = document.getElementById('btn-ai-synthesize-prompt');
+  const elBtnAiCopyPrompt = document.getElementById('btn-ai-copy-prompt');
+  const elBtnAiSendToGraph = document.getElementById('btn-ai-send-to-graph');
+  const elBtnAiLaunchStudio = document.getElementById('btn-ai-launch-studio');
+
+  let activeAiRecipe = 'ttp';
+  let activeAiFormat = 'forensic';
+
+  function openAiCopilotModal(initialTarget = '', initialRecipe = 'ttp') {
+    if (initialTarget && elAiCopilotTarget) {
+      elAiCopilotTarget.value = initialTarget;
+    }
+    if (initialRecipe) {
+      activeAiRecipe = initialRecipe;
+      document.querySelectorAll('.ai-recipe-pill').forEach(p => {
+        p.classList.toggle('active', p.getAttribute('data-recipe') === activeAiRecipe);
+      });
+    }
+    openModal(elModalAiCopilot);
+    generateAiCopilotPrompt();
+  }
+
+  function generateAiCopilotPrompt() {
+    const target = (elAiCopilotTarget?.value || '').trim() || '[TARGET_SUBJECT / ENTITY / CVE]';
+    const context = (elAiCopilotContext?.value || '').trim();
+    const model = elAiCopilotModel?.value || 'aistudio';
+
+    let recipeName = 'TTP Threat Attribution';
+    let systemRole = 'Lead Cyber Threat Intelligence (CTI) Principal Investigator & MITRE ATT&CK Framework Master';
+    let instructions = '';
+
+    if (activeAiRecipe === 'ttp') {
+      recipeName = 'MITRE ATT&CK & CTI Threat Actor Attribution';
+      systemRole = 'Principal Threat Intelligence Analyst and Adversary Emulation Expert';
+      instructions = `
+1. ATT&CK MAPPING: Deconstruct observed telemetry into Tactics, Techniques, and Procedures (TTPs).
+2. WEAPONIZATION & KEV: Cross-reference CISA KEV, Exploit Prediction Scoring System (EPSS), and CVSS 3.1 metrics.
+3. DIAMOND MODEL: Populate Adversary, Capability, Infrastructure, and Victimology vertices.
+4. ASD ESSENTIAL 8 DEFENSE: Recommend strict Maturity Level 3 mitigation controls.`;
+    } else if (activeAiRecipe === 'person') {
+      recipeName = 'Multi-Platform Digital Footprint & Persona Dossier';
+      systemRole = 'Senior Open Source Intelligence (OSINT) Officer & Identity Disambiguation Specialist';
+      instructions = `
+1. IDENTITY CORROBORATION: Corroborate disparate online handles, avatar similarities, and PGP fingerprints.
+2. CHRONOLOCATION: Analyze posting timestamps to infer active timezone (UTC offset) and working cadence.
+3. SOCIAL & REPO GRAPH: Identify primary code contributions, linked domain ownerships, and corporate affiliations.
+4. OPSEC EVALUATION: Detail operational security leakages, email permutations, and linked personas.`;
+    } else if (activeAiRecipe === 'corp') {
+      recipeName = 'Australian Corporate Lineage & Beneficial Ownership Network';
+      systemRole = 'Specialist Forensic Financial & Corporate Registry Analyst for Australia (ASIC / ABN / PPSR)';
+      instructions = `
+1. ABN / ACN LINEAGE: Parse 11-digit ABN / 9-digit ACN registers, GST status, and historical trading names.
+2. BENEFICIAL OWNERSHIP: Map parent holding entities, cross-directorships, and ultimate beneficial owners (UBOs).
+3. COMMONWEALTH PROCUREMENT: Check historical AusTender procurement contract awards.
+4. PPSR & INSOLVENCY: Highlight registered security interests, corporate restructuring, and AFSA records.`;
+    } else if (activeAiRecipe === 'essential8') {
+      recipeName = 'ASD Essential 8 Maturity Level 3 Compliance & Gap Audit';
+      systemRole = 'ASD Certified IRAP Assessor & Critical Infrastructure Security Act (SOCI) Architect';
+      instructions = `
+1. ESSENTIAL 8 PILLARS: Audit Application Control, Patch Applications, Configure Microsoft Office Macros, User Application Hardening, Restrict Administrative Privileges, Patch Operating Systems, Multi-factor Authentication, and Regular Backups.
+2. MATURITY LEVEL 3 GAP ANALYSIS: Identify non-conformances against strict ML3 controls.
+3. REMEDIATION PLAYBOOK: Provide actionable step-by-step engineering hardening guides.`;
+    } else if (activeAiRecipe === 'timeline') {
+      recipeName = 'Incident Chronolocation & DFIR Timeline Matrix';
+      systemRole = 'Digital Forensics & Incident Response (DFIR) Campaign Reconstruction Specialist';
+      instructions = `
+1. CHRONOLOGICAL RECONSTRUCTION: Order all events, logs, and artifacts in ISO 8601 UTC sequence.
+2. DWELL TIME & VELOCITY: Calculate time elapsed from initial access to detection and remediation.
+3. OPERATIONAL CADENCE: Pinpoint working hours, automated cron jobs vs hands-on-keyboard activity.`;
+    } else if (activeAiRecipe === 'geo') {
+      recipeName = 'Satellite Cadastre & Solar Ephemeris Chrono-Triangulation';
+      systemRole = 'Satellite Reconnaissance, Cadastral Geospatial & SunCalc Ephemeris Analyst';
+      instructions = `
+1. COORDINATES & GDA2020: Resolve Decimal, DMS, Geohash, and Australian GDA2020 / MGA94 coordinates.
+2. SOLAR AZIMUTH & SHADOWS: Calculate sun position, azimuth angle, and shadow ratios for the specified timestamp.
+3. CADASTRAL MAPPING: Reference NSW SIX Maps, VicPlan, QLD Globe, and Landgate cadastral lot boundaries.`;
+    }
+
+    let formatInstructions = 'Provide a Comprehensive Forensic Markdown Dossier with structured tables, severity badges, and actionable findings.';
+    if (activeAiFormat === 'mitre') {
+      formatInstructions = 'Format output as a structured MITRE ATT&CK Matrix Table with Tactic ID, Technique Name, Observed Evidence, and Detection Strategy.';
+    } else if (activeAiFormat === 'graph') {
+      formatInstructions = 'Provide a structured JSON node/edge payload conforming to Bubbsy Link Graph schema (nodes: [{id, label, type}], edges: [{source, target, label}]).';
+    } else if (activeAiFormat === 'brief') {
+      formatInstructions = 'Provide a high-impact Executive Intelligence Briefing (TL;DR, Threat Actor Hypothesis, Business Impact, and Immediate Containment Actions).';
+    }
+
+    let prompt = `System Prompt:
+You are an expert ${systemRole}. Conduct an in-depth, rigorous intelligence analysis adhering strictly to ASD Essential 8 and Australian CTI standards.
+
+Investigation Focus: ${recipeName}
+Target Subject / Entity: ${target}
+
+${context ? `Discovered Evidence & Raw Telemetry:\n\`\`\`\n${context}\n\`\`\`\n` : ''}
+Analysis Directives:
+${instructions}
+
+Output Requirement:
+${formatInstructions}
+`;
+
+    if (elAiCopilotPromptPreview) {
+      elAiCopilotPromptPreview.value = prompt;
+    }
+  }
+
+  function dispatchAiCopilotSession() {
+    const prompt = elAiCopilotPromptPreview?.value || '';
+    const model = elAiCopilotModel?.value || 'aistudio';
+    playCyberAudio('bang');
+
+    if (!prompt) {
+      showToast('Please synthesize a prompt first');
+      return;
+    }
+
+    copyToClipboard(prompt, 'Copied prompt to clipboard!');
+
+    if (model === 'aistudio') {
+      window.open(`https://aistudio.google.com/`, '_blank');
+    } else if (model === 'chatgpt') {
+      window.open(`https://chatgpt.com/?q=${encodeURIComponent(prompt)}`, '_blank');
+    } else if (model === 'claude') {
+      window.open(`https://claude.ai/new?q=${encodeURIComponent(prompt)}`, '_blank');
+    } else if (model === 'deepseek') {
+      window.open(`https://chat.deepseek.com/?q=${encodeURIComponent(prompt)}`, '_blank');
+    } else if (model === 'perplexity') {
+      window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank');
+    }
+  }
+
+  function sendAiDossierToLinkGraph() {
+    const target = (elAiCopilotTarget?.value || '').trim();
+    const context = (elAiCopilotContext?.value || '').trim();
+
+    if (!target && !context) {
+      showToast('Enter a target entity or paste context to extract to graph');
+      return;
+    }
+
+    const centralLabel = target || 'AI Investigation Focus';
+    let centralType = 'person';
+    if (activeAiRecipe === 'ttp') centralType = 'threat_actor';
+    else if (activeAiRecipe === 'corp') centralType = 'org';
+    else if (activeAiRecipe === 'geo') centralType = 'location';
+    else if (activeAiRecipe === 'essential8') centralType = 'org';
+
+    const rootId = addNodeToGraph(centralLabel, centralType);
+
+    // Extract IPs
+    const ipMatches = context.match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g) || [];
+    ipMatches.slice(0, 4).forEach(ip => {
+      const ipId = addNodeToGraph(ip, 'ip');
+      if (rootId && ipId) addEdgeToGraph(rootId, ipId, 'associated_ip');
+    });
+
+    // Extract Domains
+    const domMatches = context.match(/\b(?:[a-zA-Z0-9-]+\.)+(?:com|com\.au|org|org\.au|net|io|ai|gov\.au|edu\.au)\b/gi) || [];
+    domMatches.slice(0, 4).forEach(dom => {
+      const domId = addNodeToGraph(dom.toLowerCase(), 'domain');
+      if (rootId && domId) addEdgeToGraph(rootId, domId, 'associated_domain');
+    });
+
+    // Extract CVEs
+    const cveMatches = context.match(/\bCVE-\d{4}-\d{4,7}\b/gi) || [];
+    cveMatches.slice(0, 4).forEach(cve => {
+      const cveId = addNodeToGraph(cve.toUpperCase(), 'cve');
+      if (rootId && cveId) addEdgeToGraph(rootId, cveId, 'targets_vulnerability');
+    });
+
+    closeModal(elModalAiCopilot);
+    openInvestigationGraph();
+    showToast(`Synthesized AI entity '${centralLabel}' into Link Graph!`);
+  }
+
+  // Bind AI Copilot Event Listeners
+  elBtnCloseAiCopilot?.addEventListener('click', () => closeModal(elModalAiCopilot));
+  elBtnAiSynthesizePrompt?.addEventListener('click', generateAiCopilotPrompt);
+  elBtnAiCopyPrompt?.addEventListener('click', () => {
+    const prompt = elAiCopilotPromptPreview?.value || '';
+    if (prompt) copyToClipboard(prompt, 'Copied synthesized AI prompt to clipboard!');
+  });
+  elBtnAiLaunchStudio?.addEventListener('click', dispatchAiCopilotSession);
+  elBtnAiSendToGraph?.addEventListener('click', sendAiDossierToLinkGraph);
+  elAiCopilotTarget?.addEventListener('input', generateAiCopilotPrompt);
+  elAiCopilotModel?.addEventListener('change', generateAiCopilotPrompt);
+  elAiCopilotContext?.addEventListener('input', generateAiCopilotPrompt);
+
+  document.querySelectorAll('.ai-recipe-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ai-recipe-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeAiRecipe = btn.getAttribute('data-recipe');
+      generateAiCopilotPrompt();
+    });
+  });
+
+  document.querySelectorAll('.ai-format-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.ai-format-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeAiFormat = btn.getAttribute('data-format');
+      generateAiCopilotPrompt();
+    });
   });
 
   // =========================================================================
@@ -10072,6 +10581,7 @@
   window.openDefanger = openDefanger;
   window.openInvestigationGraph = openInvestigationGraph;
   window.openSessionExport = openSessionExport;
+  window.openAiCopilotModal = openAiCopilotModal;
   window.openTypographyModal = openTypographyModal;
   window.openSettingsModal = openSettingsModal;
   window.closeSettingsModal = closeSettingsModal;

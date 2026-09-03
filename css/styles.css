@@ -2836,3 +2836,214 @@ body, input, button, select, textarea {
 .widget-card.au-module .widget-title {
   color: #34d399;
 }
+
+/* ==========================================================================
+   BASIC / ADVANCED INTERFACE MODES
+   Basic strips the HUD down to brand + search + categories. Advanced restores
+   the full tactical chrome. Nothing is removed from the DOM in either mode.
+   ========================================================================== */
+
+/* Advanced-only chrome: world clocks, hotkey HUD, bang ribbon, extra chips
+   and the long tail of search-engine tabs. */
+html[data-ui-mode="basic"] [data-adv] {
+  display: none !important;
+}
+
+/* Basic-mode-only affordances (e.g. the overflow panel heading). */
+html:not([data-ui-mode="basic"]) [data-basic] {
+  display: none !important;
+}
+
+/* --- Mode switch ---------------------------------------------------------- */
+.ui-mode-switch {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ui-mode-btn {
+  padding: 3px 9px;
+  font-family: inherit;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+
+.ui-mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.ui-mode-btn.active {
+  color: #050912;
+  background: var(--accent-cyan);
+}
+
+.ui-mode-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 1px;
+}
+
+/* --- Overflow "More Tools" panel ------------------------------------------ */
+.nav-more-wrap {
+  position: relative;
+  display: contents;
+}
+
+/* Advanced: the panel dissolves and its buttons flow inline in the toolbar,
+   exactly as they did before modes existed. */
+.nav-overflow-panel {
+  display: contents;
+}
+
+#btn-nav-more {
+  display: none;
+}
+
+.nav-more-count {
+  margin-left: 4px;
+  padding: 0 4px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  border-radius: 8px;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.14);
+}
+
+/* Basic: the panel becomes a dropdown behind a single "More Tools" button. */
+html[data-ui-mode="basic"] .nav-more-wrap {
+  display: inline-block;
+}
+
+html[data-ui-mode="basic"] #btn-nav-more {
+  display: inline-flex;
+}
+
+html[data-ui-mode="basic"] .nav-overflow-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 300;
+  width: max-content;
+  max-width: min(420px, calc(100vw - 24px));
+  padding: 8px;
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
+  gap: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-card, #0b1220);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+html[data-ui-mode="basic"] .nav-overflow-panel.open {
+  display: grid;
+}
+
+html[data-ui-mode="basic"] .nav-overflow-panel .btn-icon {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.nav-overflow-heading {
+  grid-column: 1 / -1;
+  padding: 2px 4px 6px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2px;
+}
+
+/* Basic mode breathes a little more around the search bar, since the dense
+   ticker bars above it are gone. */
+html[data-ui-mode="basic"] .hero-section {
+  padding-top: 14px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 720px) {
+  html[data-ui-mode="basic"] .nav-overflow-panel {
+    grid-template-columns: repeat(2, minmax(96px, 1fr));
+  }
+}
+
+/* ==========================================================================
+   GEMINI 3.8 AI COPILOT & ADVANCED LINK GRAPH STYLES
+   ========================================================================== */
+.graph-minimap-container {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 160px;
+  height: 110px;
+  background: rgba(5, 9, 18, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 240, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+#graph-minimap-canvas {
+  width: 100%;
+  height: 92px;
+  display: block;
+}
+
+.graph-minimap-label {
+  font-size: 0.52rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 1px 0;
+  background: rgba(0, 240, 255, 0.08);
+  border-top: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.ai-recipe-pill, .ai-format-pill {
+  cursor: pointer;
+  padding: 3px 8px;
+  font-size: 0.70rem;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.ai-recipe-pill:hover, .ai-format-pill:hover {
+  border-color: #c084fc;
+  color: #ffffff;
+  background: rgba(192, 132, 252, 0.1);
+}
+
+.ai-recipe-pill.active, .ai-format-pill.active {
+  background: rgba(192, 132, 252, 0.22);
+  border-color: #c084fc;
+  color: #f5d0fe;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(192, 132, 252, 0.35);
+}

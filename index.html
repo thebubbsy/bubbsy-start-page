@@ -17,6 +17,10 @@
       try {
         var theme = localStorage.getItem('bubbsy_theme') || 'default';
         document.documentElement.setAttribute('data-theme', theme);
+        // Set the interface mode before first paint so the dense advanced HUD
+        // never flashes for basic-mode users. Basic is the default.
+        var uiMode = localStorage.getItem('bubbsy_ui_mode') === 'advanced' ? 'advanced' : 'basic';
+        document.documentElement.setAttribute('data-ui-mode', uiMode);
         var raw = localStorage.getItem('bubbsy_typography');
         if (raw) {
           var cfg = JSON.parse(raw);
@@ -56,11 +60,11 @@
           <span class="stat-label">TOOLS:</span>
           <span class="stat-value" id="stats-total-tools">2,061</span>
         </div>
-        <div class="stat-chip" id="chip-categories-count">
+        <div class="stat-chip" id="chip-categories-count" data-adv>
           <span class="stat-label">MODULES:</span>
           <span class="stat-value" id="stats-total-categories">101</span>
         </div>
-        <div class="stat-chip" id="chip-threat-radar" title="Live Threat Intel / CISA KEV Stream">
+        <div class="stat-chip" id="chip-threat-radar" data-adv title="Live Threat Intel / CISA KEV Stream">
           <span class="status-dot online" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></span>
           <span class="stat-label">RADAR:</span>
           <span class="stat-value" style="color:var(--accent-cyan);">ACTIVE 2026</span>
@@ -77,19 +81,9 @@
           </svg>
           Tour
         </button>
-
         <button class="btn-icon" id="btn-palette" title="Command Palette (Ctrl+K)" aria-label="Command Palette" aria-haspopup="dialog">
           <kbd style="font-size:0.68rem;background:rgba(255,255,255,0.1);padding:1px 4px;border-radius:3px;">Ctrl+K</kbd>
         </button>
-
-        <button class="btn-icon" id="btn-open-pivot" title="OSINT Pivot Matrix (Shodan, Censys, VT, AbuseIPDB, ABN)" aria-label="OSINT Pivot Matrix" aria-haspopup="dialog">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-          </svg>
-          Pivot
-        </button>
-
         <button class="btn-icon" id="btn-open-radar" title="Threat Intel & CVE Live Radar" aria-label="Threat Intel & CVE Live Radar" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
@@ -97,7 +91,25 @@
           </svg>
           Radar
         </button>
-
+        <div class="nav-more-wrap">
+          <button class="btn-icon" id="btn-nav-more" title="More investigation tools" aria-label="More investigation tools" aria-haspopup="true" aria-expanded="false" aria-controls="nav-overflow-panel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="5" cy="12" r="1.6"></circle>
+              <circle cx="12" cy="12" r="1.6"></circle>
+              <circle cx="19" cy="12" r="1.6"></circle>
+            </svg>
+            More Tools
+            <span class="nav-more-count">12</span>
+          </button>
+          <div class="nav-overflow-panel" id="nav-overflow-panel" role="menu" aria-label="Advanced investigation tools">
+            <div class="nav-overflow-heading" data-basic>Investigation Tools</div>
+        <button class="btn-icon" id="btn-open-pivot" title="OSINT Pivot Matrix (Shodan, Censys, VT, AbuseIPDB, ABN)" aria-label="OSINT Pivot Matrix" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+          Pivot
+        </button>
         <button class="btn-icon" id="btn-open-dorks" title="Threat Dork & Attack Surface Generator" aria-label="Threat Dork & Attack Surface Generator" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="4 17 10 11 4 5"></polyline>
@@ -105,7 +117,6 @@
           </svg>
           Dorks
         </button>
-
         <button class="btn-icon" id="btn-open-geo" title="Australian Cadastre & Coordinate Recon" aria-label="Australian Cadastre & Coordinate Recon" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -113,7 +124,6 @@
           </svg>
           Geo
         </button>
-
         <button class="btn-icon" id="btn-open-social-recon" title="Social Handle & Username Recon (Maigret / Sherlock Pivot)" aria-label="Social Handle & Username Recon" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -121,7 +131,6 @@
           </svg>
           Recon
         </button>
-
         <button class="btn-icon" id="btn-open-mail-access" title="MailAccess: Email Intelligence & Exposure Engine" aria-label="MailAccess: Email Intelligence & Exposure Engine" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -129,7 +138,6 @@
           </svg>
           Mail
         </button>
-
         <button class="btn-icon" id="btn-open-domain-sniper" title="Domain Drop Sniper & Expiry Countdown Radar" aria-label="Domain Drop Sniper & Expiry Countdown Radar" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
@@ -140,7 +148,6 @@
           </svg>
           Drops
         </button>
-
         <button class="btn-icon" id="btn-open-corp" title="Australian Corporate & Beneficial Ownership Network" aria-label="Australian Corporate & Beneficial Ownership Network" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -148,14 +155,12 @@
           </svg>
           Corp
         </button>
-
         <button class="btn-icon" id="btn-open-defang" title="Tactical Cyber Defang / Refang & IOC Normalizer" aria-label="Tactical Cyber Defang / Refang & IOC Normalizer" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>
           Defang
         </button>
-
         <button class="btn-icon" id="btn-open-graph" title="Visual Investigation Link Graph" aria-label="Visual Investigation Link Graph" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="18" cy="5" r="3"></circle>
@@ -166,7 +171,6 @@
           </svg>
           Graph
         </button>
-
         <button class="btn-icon" id="btn-open-export" title="Incident Session & Markdown Export" aria-label="Incident Session & Markdown Export" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -175,21 +179,19 @@
           </svg>
           Export
         </button>
-
-        <button class="btn-icon" id="btn-custom-bookmark" title="Add Custom Bookmark" aria-label="Add Custom Bookmark" aria-haspopup="dialog">
+        <button class="btn-icon" id="btn-open-ai-copilot" title="Autonomous AI OSINT Copilot & Multi-Model Reasoner (Gemini 3.8 / Pro)" aria-label="Autonomous AI OSINT Copilot & Multi-Model Reasoner" aria-haspopup="dialog" style="border-color:var(--accent-purple);color:#c084fc;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+            <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
           </svg>
-          Add
+          <span style="font-weight:700;">AI Copilot</span>
         </button>
-
         <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme" aria-label="Switch HUD Color Theme">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
           </svg>
+          <span data-basic>Theme</span>
         </button>
-
         <button class="btn-icon" id="btn-open-typography" title="Typography, Font Size & High-Contrast Colors" aria-label="Typography, Font Size & High-Contrast Colors" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="4 7 4 4 20 4 20 7"></polyline>
@@ -198,27 +200,40 @@
           </svg>
           <span style="font-size:0.75rem;font-weight:700;">Aa</span>
         </button>
+          </div>
+        </div>
 
+        <button class="btn-icon" id="btn-custom-bookmark" title="Add Custom Bookmark" aria-label="Add Custom Bookmark" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add
+        </button>
         <button class="btn-icon" id="btn-settings" title="Settings & Everything Auth" aria-label="Settings & Everything Auth" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
         </button>
+        <div class="ui-mode-switch" role="group" aria-label="Interface complexity">
+          <button type="button" class="ui-mode-btn" id="btn-mode-basic" data-mode="basic" title="Basic: a clean start page with search and categories">Basic</button>
+          <button type="button" class="ui-mode-btn" id="btn-mode-advanced" data-mode="advanced" title="Advanced: full tactical HUD with clocks, hotkeys and every tool inline">Advanced</button>
+        </div>
       </div>
 
     </div>
   </header>
 
   <!-- Live World Clock Ticker Bar -->
-  <div class="world-clock-bar">
+  <div class="world-clock-bar" data-adv>
     <div class="clock-grid" id="world-clocks-container">
       <!-- Generated Dynamically -->
     </div>
   </div>
 
   <!-- Sleek Minimalistic Keyboard Shortcuts HUD Bar -->
-  <div class="shortcuts-hud-bar">
+  <div class="shortcuts-hud-bar" data-adv>
     <div class="shortcuts-hud-container">
       <span class="hud-label">HOTKEYS</span>
       <div class="hud-item" onclick="document.getElementById('main-search').focus();">
@@ -271,6 +286,11 @@
         <span class="hud-desc">Graph</span>
       </div>
       <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openAiCopilotModal();">
+        <kbd class="hud-key purple">!ai</kbd>
+        <span class="hud-desc">Copilot</span>
+      </div>
+      <div class="hud-separator"></div>
       <div class="hud-item" onclick="openShortcutsModal();">
         <kbd class="hud-key cyan">?</kbd>
         <span class="hud-desc">Cheatsheet</span>
@@ -286,20 +306,20 @@
       <div class="search-tabs" id="search-mode-tabs">
         <button class="search-tab active" data-mode="filter">Filter Bookmarks</button>
         <button class="search-tab" data-mode="chatgpt">ChatGPT</button>
-        <button class="search-tab" data-mode="claude">Claude</button>
-        <button class="search-tab" data-mode="aistudio">Google AI Studio</button>
-        <button class="search-tab" data-mode="perplexity">Perplexity</button>
-        <button class="search-tab" data-mode="deepseek">DeepSeek</button>
-        <button class="search-tab" data-mode="genspark">Genspark</button>
-        <button class="search-tab" data-mode="phind">Phind</button>
+        <button class="search-tab" data-adv data-mode="claude">Claude</button>
+        <button class="search-tab" data-adv data-mode="aistudio">Google AI Studio</button>
+        <button class="search-tab" data-adv data-mode="perplexity">Perplexity</button>
+        <button class="search-tab" data-adv data-mode="deepseek">DeepSeek</button>
+        <button class="search-tab" data-adv data-mode="genspark">Genspark</button>
+        <button class="search-tab" data-adv data-mode="phind">Phind</button>
         <button class="search-tab" data-mode="trove">Trove (NLA)</button>
         <button class="search-tab" data-mode="abn">ABN Lookup</button>
-        <button class="search-tab" data-mode="austlii">AusLII Law</button>
+        <button class="search-tab" data-adv data-mode="austlii">AusLII Law</button>
         <button class="search-tab" data-mode="google">Google Dorking</button>
-        <button class="search-tab" data-mode="duckduckgo">DuckDuckGo</button>
-        <button class="search-tab" data-mode="shodan">Shodan</button>
-        <button class="search-tab" data-mode="virustotal">VirusTotal</button>
-        <button class="search-tab" data-mode="github">GitHub</button>
+        <button class="search-tab" data-adv data-mode="duckduckgo">DuckDuckGo</button>
+        <button class="search-tab" data-adv data-mode="shodan">Shodan</button>
+        <button class="search-tab" data-adv data-mode="virustotal">VirusTotal</button>
+        <button class="search-tab" data-adv data-mode="github">GitHub</button>
       </div>
 
       <!-- Main Search Input Bar -->
@@ -327,7 +347,7 @@
     </div>
 
     <!-- Bang Shortcuts Ribbon -->
-    <div class="bang-bar">
+    <div class="bang-bar" data-adv>
       <span style="opacity:0.6;">Quick Bangs:</span>
       <span class="bang-chip" data-bang="!abn ">!abn &lt;entity/acn&gt;</span>
       <span class="bang-chip" data-bang="!trove ">!trove &lt;archive&gt;</span>
@@ -465,8 +485,14 @@
         <button class="search-tab" id="tab-radar-acsc" data-radar-feed="acsc" style="color:var(--accent-cyan);">[AUS] ASD / ACSC Advisories & Essential 8</button>
       </div>
 
-      <div style="display:flex;gap:8px;margin-bottom:8px;">
-        <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities & advisories by keyword (e.g. Ivanti, Fortinet, ASD, Essential 8)...">
+      <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+        <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities & advisories by keyword (e.g. Ivanti, Fortinet, ASD, Essential 8)..." style="flex:1;min-width:200px;">
+        <button type="button" class="btn-icon" id="btn-radar-ai-brief" title="Generate AI Threat Intelligence Brief (Gemini 3.8 / Multi-Model)" style="border-color:var(--accent-purple);color:#c084fc;font-weight:700;">
+          🤖 AI Threat Brief
+        </button>
+        <button type="button" class="btn-icon" id="btn-radar-send-to-graph" title="Send Filtered CVEs to Link Graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+          🕸️ To Graph
+        </button>
         <button type="button" class="btn-icon" id="btn-radar-copy-table" title="Copy Filtered Advisories as Markdown Table">
           Copy Table
         </button>
@@ -1124,10 +1150,10 @@
       </div>
 
       <!-- Graph Toolbar -->
-      <div class="graph-toolbar">
+      <div class="graph-toolbar" style="flex-wrap:wrap;gap:6px;">
         <div class="graph-tool-group">
-          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:220px;">
-          <select class="form-control" id="graph-new-node-type" style="width:130px;">
+          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:200px;">
+          <select class="form-control" id="graph-new-node-type" style="width:120px;">
             <option value="ip">IP Address</option>
             <option value="domain">Domain</option>
             <option value="hash">Hash</option>
@@ -1136,15 +1162,33 @@
             <option value="org">Organization</option>
             <option value="cve">CVE Exploit</option>
             <option value="aus">[AUS] ABN/ACN</option>
+            <option value="threat_actor">Threat Actor</option>
+            <option value="location">Location / Geo</option>
           </select>
           <button type="button" class="btn-icon" id="btn-graph-add-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Node</button>
         </div>
 
         <div class="graph-tool-group">
-          <input type="text" class="form-control" id="graph-search-node" placeholder="Find Node..." style="width:110px;font-size:0.72rem;">
-          <button type="button" class="btn-icon" id="btn-graph-auto-layout" title="Auto-Organize Node Positions">Auto Layout</button>
-          <button type="button" class="btn-icon" id="btn-graph-template" title="Load Australian Investigation Case Template">AU Case Template</button>
-          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them">Connect Nodes</button>
+          <select class="form-control" id="graph-layout-mode" style="width:140px;font-size:0.72rem;color:var(--accent-cyan);border-color:rgba(0,240,255,0.3);">
+            <option value="force" selected>⚡ Force Physics</option>
+            <option value="radial">🌐 Radial Starburst</option>
+            <option value="tree">🌲 Hierarchical Tree</option>
+            <option value="grid">▦ Grid Cluster</option>
+          </select>
+          <select class="form-control" id="graph-edge-rel-type" style="width:130px;font-size:0.72rem;color:var(--accent-green);border-color:rgba(16,185,129,0.3);">
+            <option value="affiliated_with" selected>🔗 affiliated_with</option>
+            <option value="owns">🏢 owns</option>
+            <option value="controls">🎮 controls</option>
+            <option value="resolves_to">🌐 resolves_to</option>
+            <option value="targets">🎯 targets</option>
+            <option value="communicates_with">💬 communicates_with</option>
+            <option value="associated_ip">⚡ associated_ip</option>
+          </select>
+          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them with selected relationship">Connect Nodes</button>
+          <button type="button" class="btn-icon" id="btn-graph-template" title="Load Australian Investigation Case Template">AU Template</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-json" title="Export Investigation Graph as JSON">Export JSON</button>
+          <button type="button" class="btn-icon" id="btn-graph-import-json" title="Import Investigation Graph JSON">Import JSON</button>
+          <input type="file" id="graph-file-input" accept=".json" style="display:none;">
           <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download High-Res PNG Screenshot">Export PNG</button>
           <button type="button" class="btn-icon" id="btn-graph-clear" title="Clear Canvas">Clear</button>
         </div>
@@ -1167,8 +1211,12 @@
       <!-- Graph Canvas Container -->
       <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
         <canvas id="investigation-canvas"></canvas>
+        <div class="graph-minimap-container" id="graph-minimap-container">
+          <canvas id="graph-minimap-canvas" width="160" height="110"></canvas>
+          <div class="graph-minimap-label">RADAR MINI-MAP</div>
+        </div>
         <div class="graph-hints-overlay">
-          <span>Click node to inspect/select • Drag to position • Double-click to Pivot • Del to remove • Mouse wheel to Zoom</span>
+          <span>Click node to inspect • Drag to position • Double-click to Pivot • Del to remove • Scroll to Zoom • Drag canvas to Pan</span>
         </div>
       </div>
     </div>
@@ -1230,6 +1278,107 @@
         <button type="button" class="btn-icon" onclick="document.getElementById('import-workspace-file').click();" style="width:100%;justify-content:center;">
           Load / Restore Workspace Snapshot File
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / MULTI-MODEL)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-ai-copilot" role="dialog" aria-modal="true" aria-labelledby="modal-ai-copilot-title">
+    <div class="modal-content" style="max-width:920px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" id="modal-ai-copilot-title" style="display:flex;align-items:center;gap:8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+              <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
+            </svg>
+            Autonomous AI OSINT Copilot &amp; Multi-Model Reasoner
+          </h3>
+          <span class="brand-tag" style="background:rgba(192,132,252,0.15);border:1px solid #c084fc;color:#c084fc;font-weight:700;">GEMINI 3.8 / MULTI-MODEL REASONER</span>
+        </div>
+        <button class="modal-close" id="btn-close-ai-copilot" aria-label="Close AI OSINT Copilot dialog">&times;</button>
+      </div>
+
+      <!-- Strategy Blueprint Selector -->
+      <div class="form-group" style="margin-bottom:10px;">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Select Investigation Reasoning Blueprint</span>
+          <span style="font-size:0.68rem;color:var(--accent-cyan);font-family:var(--font-mono);">MULTI-STAGE PROMPT ARCHITECTURE</span>
+        </label>
+        <div class="ai-recipe-grid" id="ai-recipe-buttons" style="display:flex;flex-wrap:wrap;gap:6px;">
+          <button type="button" class="stat-chip ai-recipe-pill active" data-recipe="ttp">🛡️ TTP Threat Attribution</button>
+          <button type="button" class="stat-chip ai-recipe-pill" data-recipe="person">👤 Person Dossier &amp; Identity</button>
+          <button type="button" class="stat-chip ai-recipe-pill" data-recipe="corp">🏢 Australian Corporate &amp; ABN</button>
+          <button type="button" class="stat-chip ai-recipe-pill" data-recipe="essential8">🔒 ASD Essential 8 &amp; SOCI</button>
+          <button type="button" class="stat-chip ai-recipe-pill" data-recipe="timeline">⏳ Timeline &amp; Chronolocation</button>
+          <button type="button" class="stat-chip ai-recipe-pill" data-recipe="geo">🗺️ Geo &amp; Shadow Azimuth</button>
+        </div>
+      </div>
+
+      <!-- Target Parameters Grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label" id="lbl-ai-subject">Target Entity / Subject / Identifier</label>
+          <input type="text" class="form-control" id="ai-copilot-target" placeholder="e.g. CVE-2026-21858, @target_handle, cloudsec.com.au, ABN 51 824 753 556" autocomplete="off">
+        </div>
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Target Model / Reasoner</label>
+          <select class="form-control" id="ai-copilot-model">
+            <option value="aistudio" selected>Google AI Studio (Gemini 2.5 / 3.0 Pro)</option>
+            <option value="chatgpt">ChatGPT (o3-mini / GPT-4o)</option>
+            <option value="claude">Claude (3.7 Sonnet Thinking)</option>
+            <option value="deepseek">DeepSeek (R1 Reasoner)</option>
+            <option value="perplexity">Perplexity (Deep Research)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Discovered Raw Evidence & Fragment Notes -->
+      <div class="form-group" style="margin-bottom:10px;">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>Raw Evidence &amp; Discovered Intelligence Fragments</span>
+          <span style="font-size:0.68rem;color:var(--text-muted);">Paste logs, WHOIS, bio text, IOC lists, or meeting notes</span>
+        </label>
+        <textarea class="form-control" id="ai-copilot-context" rows="3" placeholder="e.g. IP 103.224.182.246 associated with AS13335, registrant email admin@cloudsec.com.au, PGP 4F2A 91BC..."></textarea>
+      </div>
+
+      <!-- Output Configuration Format -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:0.70rem;color:var(--text-muted);font-weight:600;">Output Format:</span>
+          <button type="button" class="stat-chip ai-format-pill active" data-format="forensic">Forensic Markdown Dossier</button>
+          <button type="button" class="stat-chip ai-format-pill" data-format="mitre">MITRE ATT&amp;CK Matrix</button>
+          <button type="button" class="stat-chip ai-format-pill" data-format="graph">Link Graph JSON Nodes</button>
+          <button type="button" class="stat-chip ai-format-pill" data-format="brief">Executive Brief</button>
+        </div>
+        <button type="button" class="btn-search-exec" id="btn-ai-synthesize-prompt" style="padding:3px 12px;font-size:0.75rem;">
+          ⚡ Synthesize Prompt
+        </button>
+      </div>
+
+      <!-- Live Synthesized Prompt Preview Box -->
+      <div class="form-group" style="margin-bottom:10px;">
+        <label class="form-label">Synthesized Tactical Intelligence Prompt</label>
+        <textarea class="form-control" id="ai-copilot-prompt-preview" rows="7" readonly style="font-family:var(--font-mono);font-size:0.74rem;background:rgba(0,0,0,0.4);border-color:rgba(192,132,252,0.3);color:#f5d0fe;line-height:1.45;"></textarea>
+      </div>
+
+      <!-- Action Dispatch Row -->
+      <div class="form-actions" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-icon" id="btn-ai-copy-prompt" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            📋 Copy Prompt
+          </button>
+          <button type="button" class="btn-icon" id="btn-ai-send-to-graph" style="border-color:var(--accent-purple);color:#c084fc;">
+            🕸️ Extract &amp; Send to Link Graph
+          </button>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <button type="button" class="btn-search-exec" id="btn-ai-launch-studio" style="background:linear-gradient(135deg, #a855f7, #6366f1);color:#ffffff;font-weight:700;">
+            🚀 1-Click Launch AI Session
+          </button>
+        </div>
       </div>
     </div>
   </div>

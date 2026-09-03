@@ -37,8 +37,13 @@ def test_header_modal_triggers_across_viewports(live_server, w, h, vp_name):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(viewport={'width': w, 'height': h})
-        # Mark tour as seen so it does not auto-popup and interfere during button clicks
-        context.add_init_script("localStorage.setItem('bubbsy_tour_seen', 'true');")
+        # Mark tour as seen so it does not auto-popup and interfere during button clicks.
+        # This suite exercises the full inline toolset, which is Advanced mode; the
+        # Basic-mode path to the same tools is covered in test_ui_modes_e2e.py.
+        context.add_init_script(
+            "localStorage.setItem('bubbsy_tour_seen', 'true');"
+            "localStorage.setItem('bubbsy_ui_mode', 'advanced');"
+        )
         page = context.new_page()
         page.goto(live_server)
         page.wait_for_load_state('networkidle')

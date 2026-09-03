@@ -27,13 +27,19 @@
    - Timezone/activity chronolocation and corporate email permutations.
    - 1-click persona synthesis into the Visual Investigation Link Graph.
 
-4. **Tactical OSINT HUD UI ("Pro Vibes")**:
+4. **Basic & Advanced Interface Modes**:
+   - **Basic** (default on first visit): brand bar, search, and category ribbon only — three rows before your links, not seven. Five everyday search engines (Filter, Google, ChatGPT, Trove, ABN) and five inline tools (Tour, Palette, Radar, Add, Settings).
+   - **More Tools** menu keeps the other 12 tools (Pivot, Dorks, Geo, Recon, Mail, Drops, Corp, Defang, Graph, Export, Theme, Typography) one click away — nothing is removed, just tucked away.
+   - **Advanced**: restores the full tactical HUD — world clock ticker, hotkey bar, bang ribbon, all 16 search engines, and every tool inline.
+   - Toggle lives in the header; your choice persists across sessions and is applied before first paint, so the dense HUD never flashes.
+
+5. **Tactical OSINT HUD UI ("Pro Vibes")**:
    - Sleek dark glassmorphism styling with glowing status badges.
    - Live World Clock bar tracking 11 global timezones (LA, Houston, NY, London, Berlin, Cairo, Tehran, Delhi, HK, Tokyo, Sydney).
    - Category jump ribbon for instant section navigation.
    - 4 Cyberpunk themes: Tactical Obsidian (Default), Cyber Amber, Matrix Emerald, Dracula Midnight.
 
-5. **Bang Shortcuts Support**:
+6. **Bang Shortcuts Support**:
    - `!shodan <ip>`: Search Shodan intelligence.
    - `!vt <hash>`: Query VirusTotal.
    - `!dork <query>`: Google Dorking search.
