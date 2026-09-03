@@ -122,7 +122,10 @@ class TestFrontendDOMStructureIntegrity(unittest.TestCase):
         self.assertIsNotNone(self.soup.find(id="graph-new-node-label"))
         self.assertIsNotNone(self.soup.find(id="graph-new-node-type"))
         self.assertIsNotNone(self.soup.find(id="btn-graph-add-node"))
-        self.assertIsNotNone(self.soup.find(id="btn-graph-auto-layout"))
+        # The single auto-layout button was replaced by a multi-mode layout
+        # selector (force / radial / tree / grid) alongside a navigator minimap.
+        self.assertIsNotNone(self.soup.find(id="graph-layout-mode"))
+        self.assertIsNotNone(self.soup.find(id="graph-minimap-canvas"))
 
 
 class TestTriageStateMachineSimulation(unittest.TestCase):
