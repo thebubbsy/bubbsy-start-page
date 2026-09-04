@@ -3,8 +3,8 @@ window.BUBBSY_DATA = {
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2061,
-  "au_link_total": 313,
+  "total_links": 2063,
+  "au_link_total": 315,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -63,7 +63,7 @@ window.BUBBSY_DATA = {
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2061+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2063+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -15689,9 +15689,25 @@ window.BUBBSY_DATA = {
               "domain": "location.sa.gov.au",
               "favicon": "https://f.start.me/sa.gov.au",
               "au": true
+            },
+            {
+              "title": "theLIST LISTmap (Tasmania)",
+              "url": "https://theLIST.tas.gov.au/",
+              "description": "Tasmanian land titles, cadastral parcels, planning zones, and property spatial data",
+              "domain": "thelist.tas.gov.au",
+              "favicon": "https://f.start.me/thelist.tas.gov.au",
+              "au": true
+            },
+            {
+              "title": "NR Maps (Northern Territory)",
+              "url": "https://nrmaps.nt.gov.au/nrmaps.html",
+              "description": "Northern Territory land parcels, tenure, pastoral leases, and natural resource map layers",
+              "domain": "nrmaps.nt.gov.au",
+              "favicon": "https://f.start.me/nrmaps.nt.gov.au",
+              "au": true
             }
           ],
-          "au_count": 8,
+          "au_count": 10,
           "au_module": true
         },
         {

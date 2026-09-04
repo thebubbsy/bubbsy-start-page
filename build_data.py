@@ -241,7 +241,9 @@ def build_data():
                 {'title': 'Queensland Globe (Cadastre & Imagery)', 'url': 'https://qldglobe.information.qld.gov.au/', 'description': 'Interactive satellite imagery, land parcel boundaries, topography, and property data for QLD', 'domain': 'information.qld.gov.au', 'favicon': 'https://f.start.me/qld.gov.au'},
                 {'title': 'Geoscience Australia NationalMap', 'url': 'https://nationalmap.gov.au/', 'description': 'National Australian geospatial data, infrastructure, satellite imagery, and environmental layers', 'domain': 'nationalmap.gov.au', 'favicon': 'https://f.start.me/nationalmap.gov.au'},
                 {'title': 'Landgate WA Map Viewer', 'url': 'https://www.landgate.wa.gov.au/', 'description': 'Western Australia property certificates, titles, surveys, and spatial data', 'domain': 'landgate.wa.gov.au', 'favicon': 'https://f.start.me/landgate.wa.gov.au'},
-                {'title': 'LocationSA Map Viewer', 'url': 'https://location.sa.gov.au/viewer/', 'description': 'South Australian spatial data, land titles, and infrastructure map viewer', 'domain': 'location.sa.gov.au', 'favicon': 'https://f.start.me/sa.gov.au'}
+                {'title': 'LocationSA Map Viewer', 'url': 'https://location.sa.gov.au/viewer/', 'description': 'South Australian spatial data, land titles, and infrastructure map viewer', 'domain': 'location.sa.gov.au', 'favicon': 'https://f.start.me/sa.gov.au'},
+                {'title': 'theLIST LISTmap (Tasmania)', 'url': 'https://theLIST.tas.gov.au/', 'description': 'Tasmanian land titles, cadastral parcels, planning zones, and property spatial data', 'domain': 'thelist.tas.gov.au', 'favicon': 'https://f.start.me/thelist.tas.gov.au'},
+                {'title': 'NR Maps (Northern Territory)', 'url': 'https://nrmaps.nt.gov.au/nrmaps.html', 'description': 'Northern Territory land parcels, tenure, pastoral leases, and natural resource map layers', 'domain': 'nrmaps.nt.gov.au', 'favicon': 'https://f.start.me/nrmaps.nt.gov.au'}
             ]
         },
         {
