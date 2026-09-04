@@ -576,6 +576,7 @@ body {
 
 .main-search-input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
@@ -709,20 +710,20 @@ body {
 
 .columns-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   align-items: start;
 }
 
 @media (max-width: 1440px) {
   .columns-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .columns-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -872,6 +873,7 @@ body {
   font-weight: 500;
   line-height: 1.15;
   transition: all 0.12s ease;
+  min-width: 0;
 }
 
 .link-anchor:hover {
@@ -921,6 +923,7 @@ body {
 
 .link-title {
   flex: 1;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
