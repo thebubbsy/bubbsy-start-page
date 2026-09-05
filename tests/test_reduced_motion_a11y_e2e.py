@@ -19,13 +19,24 @@ def _context(p, reduced_motion):
     return browser, page
 
 
+def _goto_and_wait_for_dashboard(page, live_server):
+    """Navigate and wait for the dashboard to actually render.
+
+    Deliberately avoids wait_for_load_state('networkidle'): the app polls
+    /api/radar/feed and keeps a 1s world-clock tick running, so the network
+    never truly goes idle. Waiting on a concrete rendered element is both
+    faster and more reliable.
+    """
+    page.goto(live_server)
+    page.wait_for_selector('.link-anchor', timeout=15000)
+
+
 def test_reduced_motion_collapses_css_transitions_and_scroll_behavior(live_server):
     """With the OS preference set, transitions/animations shrink to ~instant."""
     with sync_playwright() as p:
         browser, page = _context(p, 'reduce')
         try:
-            page.goto(live_server)
-            page.wait_for_load_state('networkidle')
+            _goto_and_wait_for_dashboard(page, live_server)
 
             html_scroll_behavior = page.evaluate(
                 "getComputedStyle(document.documentElement).scrollBehavior"
@@ -52,8 +63,7 @@ def test_no_motion_preference_keeps_original_transitions(live_server):
     with sync_playwright() as p:
         browser, page = _context(p, 'no-preference')
         try:
-            page.goto(live_server)
-            page.wait_for_load_state('networkidle')
+            _goto_and_wait_for_dashboard(page, live_server)
 
             html_scroll_behavior = page.evaluate(
                 "getComputedStyle(document.documentElement).scrollBehavior"
@@ -77,16 +87,14 @@ def test_motion_safe_behavior_helper_respects_the_media_query(live_server):
     with sync_playwright() as p:
         browser, page = _context(p, 'reduce')
         try:
-            page.goto(live_server)
-            page.wait_for_load_state('networkidle')
+            _goto_and_wait_for_dashboard(page, live_server)
             assert page.evaluate("window.motionSafeBehavior('smooth')") == 'auto'
         finally:
             browser.close()
 
         browser2, page2 = _context(p, 'no-preference')
         try:
-            page2.goto(live_server)
-            page2.wait_for_load_state('networkidle')
+            _goto_and_wait_for_dashboard(page2, live_server)
             assert page2.evaluate("window.motionSafeBehavior('smooth')") == 'smooth'
         finally:
             browser2.close()
