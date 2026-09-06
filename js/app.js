@@ -6,6 +6,14 @@
 (function () {
   'use strict';
 
+  // Honour the OS-level "reduce motion" preference for scrolls that request
+  // 'smooth' explicitly (CSS scroll-behavior alone can't override those).
+  function motionSafeBehavior(preferred) {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return reduced ? 'auto' : preferred;
+  }
+  window.motionSafeBehavior = motionSafeBehavior;
+
   // --- STATE ---
   let appData = window.BUBBSY_DATA || null;
   let activeSearchMode = 'filter'; // 'filter', 'everything', 'google', etc.
@@ -1026,7 +1034,7 @@
       clearKeyboardSearchSelection();
       if (visibleLinks[idx]) {
         visibleLinks[idx].classList.add('keyboard-selected');
-        visibleLinks[idx].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        visibleLinks[idx].scrollIntoView({ block: 'nearest', behavior: motionSafeBehavior('smooth') });
       }
     }
 
@@ -5684,7 +5692,7 @@
     // Auto-scroll active tab into view
     const activeTabEl = elRibbon.querySelector('.stepper-tab.active');
     if (activeTabEl) {
-      activeTabEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      activeTabEl.scrollIntoView({ behavior: motionSafeBehavior('smooth'), block: 'nearest', inline: 'center' });
     }
   }
 
@@ -9474,7 +9482,7 @@ ${formatInstructions}
 
       // Scroll active pill into view if needed
       const activePill = stageNav.querySelector('.tour-nav-pill.active');
-      if (activePill) activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      if (activePill) activePill.scrollIntoView({ behavior: motionSafeBehavior('smooth'), block: 'nearest', inline: 'center' });
     }
 
     // Dynamic replacement of totals
