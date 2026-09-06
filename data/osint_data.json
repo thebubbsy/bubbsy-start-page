@@ -3,8 +3,8 @@
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2063,
-  "au_link_total": 315,
+  "total_links": 2071,
+  "au_link_total": 323,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -63,7 +63,7 @@
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2063+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2071+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -253,6 +253,70 @@
               "au": true
             },
             {
+              "title": "NSW Registry of Births, Deaths & Marriages",
+              "url": "https://bdm.nsw.gov.au/",
+              "description": "Official NSW civil registry for birth, death, marriage and change of name certificates",
+              "domain": "bdm.nsw.gov.au",
+              "favicon": "https://f.start.me/bdm.nsw.gov.au",
+              "au": true
+            },
+            {
+              "title": "Victoria Births, Deaths & Marriages",
+              "url": "https://www.bdm.vic.gov.au/",
+              "description": "Official Victorian civil registry for birth, death, marriage and relationship records",
+              "domain": "bdm.vic.gov.au",
+              "favicon": "https://f.start.me/bdm.vic.gov.au",
+              "au": true
+            },
+            {
+              "title": "Queensland Births, Deaths & Marriages",
+              "url": "https://www.qld.gov.au/law/births-deaths-marriages-and-divorces",
+              "description": "Official Queensland civil registry for birth, death, marriage and divorce records",
+              "domain": "qld.gov.au",
+              "favicon": "https://f.start.me/qld.gov.au",
+              "au": true
+            },
+            {
+              "title": "WA Registry of Births, Deaths & Marriages",
+              "url": "https://www.wa.gov.au/organisation/department-of-justice/the-registry-of-births-deaths-and-marriages",
+              "description": "Official Western Australian civil registry for birth, death, marriage and name change records",
+              "domain": "wa.gov.au",
+              "favicon": "https://f.start.me/wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "SA Births, Deaths & Marriages (CBS)",
+              "url": "https://www.cbs.sa.gov.au/births,-deaths-and-marriages",
+              "description": "Official South Australian civil registry for birth, death, marriage and relationship records",
+              "domain": "cbs.sa.gov.au",
+              "favicon": "https://f.start.me/cbs.sa.gov.au",
+              "au": true
+            },
+            {
+              "title": "Tasmania Births, Deaths & Marriages",
+              "url": "https://www.justice.tas.gov.au/bdm/home",
+              "description": "Official Tasmanian civil registry for birth, death, marriage and change of name records",
+              "domain": "justice.tas.gov.au",
+              "favicon": "https://f.start.me/justice.tas.gov.au",
+              "au": true
+            },
+            {
+              "title": "NT Births, Deaths & Marriages",
+              "url": "https://nt.gov.au/law/bdm/search-births-deaths-and-marriages-records",
+              "description": "Official Northern Territory civil registry search and certificate application service",
+              "domain": "nt.gov.au",
+              "favicon": "https://f.start.me/nt.gov.au",
+              "au": true
+            },
+            {
+              "title": "ACT Births, Relationships & Deaths (Access Canberra)",
+              "url": "https://www.accesscanberra.act.gov.au/births-relationships-and-deaths",
+              "description": "Official ACT civil registry for birth, relationship and death records via Access Canberra",
+              "domain": "accesscanberra.act.gov.au",
+              "favicon": "https://f.start.me/accesscanberra.act.gov.au",
+              "au": true
+            },
+            {
               "title": "White Pages Australia",
               "url": "https://www.whitepages.com.au/",
               "description": "Australian residential phone numbers, addresses, and individual directory lookup",
@@ -301,7 +365,7 @@
               "au": false
             }
           ],
-          "au_count": 5,
+          "au_count": 13,
           "au_module": true
         },
         {

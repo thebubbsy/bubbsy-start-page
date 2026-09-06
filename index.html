@@ -2055,17 +2055,17 @@
   </div>
 
   <!-- Tactical HUD Footer -->
-  <footer class="hud-footer" style="padding:14px 24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-muted);margin-top:40px;background:rgba(0,0,0,0.3);">
-    <div style="display:flex;align-items:center;gap:10px;">
+  <footer class="hud-footer" style="padding:14px 24px;border-top:1px solid rgba(255,255,255,0.06);display:flex;flex-wrap:wrap;row-gap:10px;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--text-muted);margin-top:40px;background:rgba(0,0,0,0.3);">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
       <span style="font-weight:700;letter-spacing:1px;color:var(--text-primary);">BUBBSY COMMAND HUB</span>
       <span class="stat-chip" style="font-size:0.62rem;">v2.18.0</span>
       <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);">2,061 OSINT TOOLS</span>
       <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-green);">ASD ESSENTIAL 8</span>
     </div>
-    <div style="display:flex;gap:8px;align-items:center;">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
       <button type="button" class="btn-icon" onclick="startOnboardingTour();" style="padding:2px 8px;font-size:0.68rem;">Mission Briefing</button>
       <button type="button" class="btn-icon" onclick="openShortcutsModal();" style="padding:2px 8px;font-size:0.68rem;">Shortcuts (?)</button>
-      <button type="button" class="btn-icon" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="padding:2px 8px;font-size:0.68rem;">↑ Top</button>
+      <button type="button" class="btn-icon" onclick="window.scrollTo({top:0,behavior:motionSafeBehavior('smooth')});" style="padding:2px 8px;font-size:0.68rem;">↑ Top</button>
     </div>
   </footer>
 
