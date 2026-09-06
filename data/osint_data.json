@@ -3,8 +3,8 @@
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2071,
-  "au_link_total": 323,
+  "total_links": 2072,
+  "au_link_total": 324,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -63,7 +63,7 @@
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2071+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2072+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -10179,6 +10179,14 @@
               "au": true
             },
             {
+              "title": "Secure NT",
+              "url": "https://securent.nt.gov.au/",
+              "description": "Northern Territory bushfire, flood, cyclone and storm warnings from BOM, NTFRS and NTES",
+              "domain": "securent.nt.gov.au",
+              "favicon": "https://f.start.me/securent.nt.gov.au",
+              "au": true
+            },
+            {
               "title": "TAS ALERT",
               "url": "https://alert.tas.gov.au/",
               "description": "Tasmanian emergency warnings and alerts",
@@ -10211,7 +10219,7 @@
               "au": true
             }
           ],
-          "au_count": 13,
+          "au_count": 14,
           "au_module": true
         },
         {
