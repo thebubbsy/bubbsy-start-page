@@ -325,15 +325,16 @@
       <!-- Main Search Input Bar -->
       <div class="search-input-wrapper">
         <div class="search-engine-badge" id="current-engine-label">FILTER</div>
-        <input 
-          type="text" 
-          id="main-search" 
-          class="main-search-input" 
+        <input
+          type="text"
+          id="main-search"
+          class="main-search-input"
           placeholder="Fuzzy search 2,061+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)"
-          autocomplete="off" 
+          aria-label="Search or filter bookmarks"
+          autocomplete="off"
           spellcheck="false"
         >
-        <span id="search-live-matches" class="stat-chip" style="display:none;font-size:0.65rem;color:var(--accent-cyan);border-color:var(--accent-cyan);margin-right:4px;">0 MATCHES</span>
+        <span id="search-live-matches" class="stat-chip" role="status" aria-live="polite" aria-atomic="true" style="display:none;font-size:0.65rem;color:var(--accent-cyan);border-color:var(--accent-cyan);margin-right:4px;">0 MATCHES</span>
         <div class="search-hints">
           <span class="kbd-badge">/</span>
           <span class="kbd-badge">ESC</span>
