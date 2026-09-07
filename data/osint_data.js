@@ -10211,6 +10211,14 @@ window.BUBBSY_DATA = {
               "au": true
             },
             {
+              "title": "Secure NT",
+              "url": "https://securent.nt.gov.au/",
+              "description": "Northern Territory bushfire, flood, cyclone and storm warnings from BOM, NTFRS and NTES",
+              "domain": "securent.nt.gov.au",
+              "favicon": "https://f.start.me/securent.nt.gov.au",
+              "au": true
+            },
+            {
               "title": "TAS ALERT",
               "url": "https://alert.tas.gov.au/",
               "description": "Tasmanian emergency warnings and alerts",
@@ -10243,7 +10251,7 @@ window.BUBBSY_DATA = {
               "au": true
             }
           ],
-          "au_count": 13,
+          "au_count": 14,
           "au_module": true
         },
         {
