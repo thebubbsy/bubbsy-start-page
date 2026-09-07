@@ -1,0 +1,19 @@
+{
+  "$schema": "https://os.cloudflare.app/schemas/gadget-blueprint.v1.json",
+  "blueprintId": "blueprint.bubbsy.startpage",
+  "title": "Bubbsy Enterprise Dashboard & Start Page",
+  "description": "Customizable high-performance personal intranet dashboard, domain drops monitor, and category aggregator.",
+  "output": {
+    "id": "app",
+    "noun": "Dashboard",
+    "plural": "Dashboards",
+    "icon": "layoutGrid"
+  },
+  "bindings": {
+    "STORAGE": {
+      "type": "kv",
+      "description": "User bookmarks, category configs, and session preferences"
+    }
+  },
+  "version": "1.0.0"
+}
