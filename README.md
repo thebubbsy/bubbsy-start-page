@@ -74,3 +74,14 @@ Simply double-click `index.html`. The bundled dataset `data/osint_data.js` loads
 | `/` or `Ctrl + K` | Focus & select Omnisearch bar |
 | `Esc` | Clear search / close results dock |
 | `Enter` | Execute active search query |
+
+---
+
+## 🇦🇺 Author & Ecosystem
+
+Developed by **Matthew Bubb (OnYaChamp)** ([@thebubbsy](https://github.com/thebubbsy)).
+- Central Hub & Engineering Portfolio: [OnYaChamp.com](https://onyachamp.com)
+- OpenXML Flagship: [MarkSmith Compiler](https://onyachamp.com/marksmith.html)
+- Sovereign MDM: [LocalPilot Fleet](https://github.com/thebubbsy/LocalPilotFleet)
+
+
