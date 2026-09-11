@@ -5,4 +5,4 @@ pages_build_output_dir = "."
 [[d1_databases]]
 binding = "DB"
 database_name = "bubbsy_analytics"
-database_id = "bubbsy-analytics-d1"
+database_id = "36debf00-3376-45d9-9342-76dfbe6942d4"
