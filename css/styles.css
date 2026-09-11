@@ -2412,6 +2412,16 @@ mark.search-match {
   .avatar-compare-body {
     grid-template-columns: 1fr !important;
   }
+  .hud-footer {
+    flex-wrap: wrap;
+    justify-content: center !important;
+    gap: 10px;
+    text-align: center;
+  }
+  .hud-footer > div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* ==========================================================================
