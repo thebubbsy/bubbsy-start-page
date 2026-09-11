@@ -110,6 +110,7 @@
   }
 
   const BANG_SUGGESTIONS = [
+    { bang: '!admin', name: 'Admin Telemetry & D1 Analytics', syntax: '!admin', desc: 'Protected administrator user click telemetry (user:hacker)' },
     { bang: '!ai', name: 'Autonomous AI OSINT Copilot', syntax: '!ai <target/query>', desc: 'Gemini 3.8 / Multi-model prompt synthesizer & reasoning blueprints' },
     { bang: '!copilot', name: 'AI OSINT Reasoning Studio', syntax: '!copilot <target>', desc: 'Multi-stage MITRE, persona & Essential 8 reasoning engine' },
     { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
@@ -1301,6 +1302,9 @@
       } else if (id === 'btn-open-ai-copilot') {
         e.preventDefault();
         openAiCopilotModal();
+      } else if (id === 'btn-open-admin') {
+        e.preventDefault();
+        openAdminModal();
       } else if (id === 'btn-custom-bookmark') {
         e.preventDefault();
         openModal(document.getElementById('modal-custom-bookmark'));
@@ -1653,6 +1657,11 @@
           renderBangAutocompleteDropdown('');
           openAiCopilotModal(query);
           return;
+        } else if (bang === 'admin' || bang === 'telemetry' || bang === 'clicks') {
+          elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
+          openAdminModal();
+          return;
         }
 
         if (bangMap[bang] && bangMap[bang] !== activeSearchMode) {
@@ -1912,6 +1921,7 @@
 
     const actions = [
       { id: 'act_ai_copilot', title: 'Autonomous AI OSINT Copilot & Structured Reasoner (Gemini 3.8 / Multi-Model)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
+      { id: 'act_admin', title: 'Admin Click Telemetry & Cloudflare D1 Analytics (user / hacker)', category: 'ACTIONS', icon: 'ADMIN', action: () => { closeModal(elModalPalette); openAdminModal(); } },
       { id: 'act_aistudio', title: 'Open Google AI Studio (Gemini 2.5 Pro / Flash Developer Workbench)', category: 'ACTIONS', icon: 'AI', action: () => window.open('https://aistudio.google.com/', '_blank') },
       { id: 'act_gemini', title: 'Open Google Gemini AI Assistant', category: 'ACTIONS', icon: 'GEMINI', action: () => window.open('https://gemini.google.com/', '_blank') },
       { id: 'act_social_recon', title: 'Social Handle & Username Recon Engine (Maigret / Sherlock)', category: 'ACTIONS', icon: 'RECON', action: () => openSocialRecon() },
@@ -1931,6 +1941,7 @@
     ];
 
     const bangShortcuts = [
+      { bang: '!admin', name: 'Admin Telemetry & User Click Analytics', icon: 'ADMIN', action: () => { closeModal(elModalPalette); openAdminModal(); } },
       { bang: '!ai', name: 'Autonomous AI OSINT Copilot & Reasoner', icon: 'AI', action: () => { closeModal(elModalPalette); openAiCopilotModal(); } },
       { bang: '!copilot', name: 'AI OSINT Reasoning Studio', icon: 'AI', action: () => { closeModal(elModalPalette); openAiCopilotModal(); } },
       { bang: '!aistudio', name: 'Google AI Studio Developer Prompt Studio', icon: 'AI', action: () => { closeModal(elModalPalette); setSearchMode('aistudio'); elMainSearch.focus(); } },
@@ -8347,6 +8358,246 @@ ${formatInstructions}
   });
 
   // =========================================================================
+  // 4C. ADMIN ANALYTICS & CLOUDFLARE D1 TELEMETRY CONTROLLER (user / hacker)
+  // =========================================================================
+  const elModalAdmin = document.getElementById('modal-admin');
+  const elBtnCloseAdmin = document.getElementById('btn-close-admin');
+  const elAdminLoginView = document.getElementById('admin-login-view');
+  const elAdminDashboardView = document.getElementById('admin-dashboard-view');
+  const elAdminLoginForm = document.getElementById('admin-login-form');
+  const elAdminUsername = document.getElementById('admin-username');
+  const elAdminPassword = document.getElementById('admin-password');
+  const elAdminLoginError = document.getElementById('admin-login-error');
+  const elAdminClicksTbody = document.getElementById('admin-clicks-tbody');
+  const elAdminFilterInput = document.getElementById('admin-filter-input');
+  const elBtnAdminRefresh = document.getElementById('btn-admin-refresh');
+  const elBtnAdminExportCsv = document.getElementById('btn-admin-export-csv');
+  const elBtnAdminClearLogs = document.getElementById('btn-admin-clear-logs');
+  const elBtnAdminLogout = document.getElementById('btn-admin-logout');
+
+  let currentAdminTelemetryClicks = [];
+
+  function getAdminAuthHeader() {
+    return sessionStorage.getItem('bubbsy_admin_auth');
+  }
+
+  function openAdminModal() {
+    openModal(elModalAdmin);
+    const authHeader = getAdminAuthHeader();
+    if (authHeader) {
+      if (elAdminLoginView) elAdminLoginView.style.display = 'none';
+      if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
+      fetchAdminTelemetry();
+    } else {
+      if (elAdminLoginView) elAdminLoginView.style.display = 'block';
+      if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
+      if (elAdminLoginError) elAdminLoginError.style.display = 'none';
+      setTimeout(() => elAdminUsername?.focus(), 100);
+    }
+  }
+
+  async function handleAdminLogin() {
+    const user = (elAdminUsername?.value || '').trim();
+    const pass = (elAdminPassword?.value || '').trim();
+    if (!user || !pass) {
+      if (elAdminLoginError) {
+        elAdminLoginError.textContent = 'Please enter username and password';
+        elAdminLoginError.style.display = 'block';
+      }
+      return;
+    }
+
+    const authHeader = 'Basic ' + btoa(`${user}:${pass}`);
+    try {
+      const res = await fetch('/api/admin/analytics', {
+        headers: { 'Authorization': authHeader }
+      });
+      if (res.ok) {
+        sessionStorage.setItem('bubbsy_admin_auth', authHeader);
+        if (elAdminLoginError) elAdminLoginError.style.display = 'none';
+        if (elAdminLoginView) elAdminLoginView.style.display = 'none';
+        if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
+        showToast('Admin Authenticated (Cloudflare D1)');
+        const data = await res.json();
+        renderAdminTelemetry(data);
+      } else {
+        if (elAdminLoginError) {
+          elAdminLoginError.textContent = 'Invalid credentials. Access Denied.';
+          elAdminLoginError.style.display = 'block';
+        }
+        playCyberAudio('modal_close');
+      }
+    } catch (err) {
+      // Local/offline fallback verification for user / hacker
+      if (user === 'user' && pass === 'hacker') {
+        sessionStorage.setItem('bubbsy_admin_auth', authHeader);
+        if (elAdminLoginView) elAdminLoginView.style.display = 'none';
+        if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
+        showToast('Admin Authenticated (Local)');
+        fetchAdminTelemetry();
+      } else {
+        if (elAdminLoginError) {
+          elAdminLoginError.textContent = 'Authentication failed.';
+          elAdminLoginError.style.display = 'block';
+        }
+      }
+    }
+  }
+
+  async function fetchAdminTelemetry() {
+    const authHeader = getAdminAuthHeader();
+    if (!authHeader) return;
+
+    if (elAdminClicksTbody) {
+      elAdminClicksTbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--accent-cyan);">Querying D1 database telemetry...</td></tr>`;
+    }
+
+    try {
+      const res = await fetch('/api/admin/analytics', {
+        headers: { 'Authorization': authHeader }
+      });
+      if (res.status === 401) {
+        logoutAdmin();
+        return;
+      }
+      const data = await res.json();
+      renderAdminTelemetry(data);
+    } catch (err) {
+      if (elAdminClicksTbody) {
+        elAdminClicksTbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:24px;color:#ef4444;">Failed to load analytics: ${escapeHtml(err.message)}</td></tr>`;
+      }
+    }
+  }
+
+  function renderAdminTelemetry(data) {
+    const summary = data?.summary || {};
+    currentAdminTelemetryClicks = data?.clicks || [];
+
+    const totalEl = document.getElementById('admin-metric-total-clicks');
+    if (totalEl) totalEl.textContent = summary.total_clicks ?? currentAdminTelemetryClicks.length;
+
+    const sessEl = document.getElementById('admin-metric-sessions');
+    if (sessEl) sessEl.textContent = summary.unique_sessions ?? new Set(currentAdminTelemetryClicks.map(c => c.session_id)).size;
+
+    const topEl = document.getElementById('admin-metric-top-target');
+    if (topEl) {
+      const topTarget = summary.top_targets?.[0]?.target || currentAdminTelemetryClicks[0]?.element_text || '--';
+      topEl.textContent = topTarget;
+      topEl.title = topTarget;
+    }
+
+    renderAdminTableRows(currentAdminTelemetryClicks);
+  }
+
+  function renderAdminTableRows(clicks) {
+    if (!elAdminClicksTbody) return;
+    if (!clicks || clicks.length === 0) {
+      elAdminClicksTbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text-muted);">No click telemetry logged yet. Click any button or bookmark to record events!</td></tr>`;
+      return;
+    }
+
+    elAdminClicksTbody.innerHTML = clicks.map(c => {
+      const ts = c.timestamp ? new Date(c.timestamp).toLocaleString() : '--';
+      const sessShort = (c.session_id || 'anon').slice(0, 12);
+      const tagChip = `<span class="telemetry-tag-chip">&lt;${escapeHtml(c.element_tag || 'EL')}&gt;</span> ${c.element_id ? '#' + escapeHtml(c.element_id) : ''}`;
+      const textLabel = escapeHtml(c.element_text || '--');
+      const href = c.target_href ? `<a href="${escapeHtml(c.target_href)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${escapeHtml(c.target_href.slice(0, 45))}${c.target_href.length > 45 ? '...' : ''}</a>` : '--';
+      const geo = `<span class="stat-chip" style="font-size:0.62rem;">${escapeHtml(c.country || 'AU')}</span>`;
+
+      return `
+        <tr class="telemetry-row">
+          <td style="padding:6px 10px;font-family:var(--font-mono);font-size:0.70rem;color:var(--text-muted);white-space:nowrap;">${ts}</td>
+          <td style="padding:6px 10px;font-family:var(--font-mono);font-size:0.70rem;color:var(--text-secondary);">${sessShort}</td>
+          <td style="padding:6px 10px;">${tagChip}</td>
+          <td style="padding:6px 10px;font-weight:600;color:var(--text-primary);">${textLabel}</td>
+          <td style="padding:6px 10px;font-family:var(--font-mono);font-size:0.70rem;">${href}</td>
+          <td style="padding:6px 10px;">${geo}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function filterAdminTelemetry() {
+    const q = (elAdminFilterInput?.value || '').toLowerCase().trim();
+    if (!q) {
+      renderAdminTableRows(currentAdminTelemetryClicks);
+      return;
+    }
+    const filtered = currentAdminTelemetryClicks.filter(c => {
+      return (c.element_text || '').toLowerCase().includes(q) ||
+             (c.element_id || '').toLowerCase().includes(q) ||
+             (c.element_tag || '').toLowerCase().includes(q) ||
+             (c.target_href || '').toLowerCase().includes(q) ||
+             (c.session_id || '').toLowerCase().includes(q);
+    });
+    renderAdminTableRows(filtered);
+  }
+
+  function exportAdminCsv() {
+    if (!currentAdminTelemetryClicks.length) {
+      showToast('No click telemetry to export');
+      return;
+    }
+    const headers = ['id', 'timestamp', 'session_id', 'element_tag', 'element_id', 'element_text', 'target_href', 'page_path', 'ip', 'country'];
+    const csvRows = [headers.join(',')];
+    currentAdminTelemetryClicks.forEach(c => {
+      const row = headers.map(h => {
+        let v = (c[h] !== undefined && c[h] !== null) ? String(c[h]) : '';
+        v = v.replace(/"/g, '""');
+        return `"${v}"`;
+      });
+      csvRows.push(row.join(','));
+    });
+
+    const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `bubbsy_clicks_telemetry_${Date.now()}.csv`;
+    a.click();
+    showToast('Exported click telemetry CSV!');
+  }
+
+  async function clearAdminLogs() {
+    const authHeader = getAdminAuthHeader();
+    if (!authHeader) return;
+    if (!confirm('Are you sure you want to clear all D1 click telemetry logs?')) return;
+
+    try {
+      const res = await fetch('/api/admin/clear', {
+        method: 'POST',
+        headers: { 'Authorization': authHeader }
+      });
+      if (res.ok) {
+        showToast('Telemetry logs purged from D1');
+        fetchAdminTelemetry();
+      } else {
+        showToast('Failed to clear logs');
+      }
+    } catch (e) {
+      showToast('Failed to clear logs');
+    }
+  }
+
+  function logoutAdmin() {
+    sessionStorage.removeItem('bubbsy_admin_auth');
+    if (elAdminLoginView) elAdminLoginView.style.display = 'block';
+    if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
+    if (elAdminUsername) elAdminUsername.value = 'user';
+    if (elAdminPassword) elAdminPassword.value = 'hacker';
+    showToast('Logged out of Admin');
+  }
+
+  // Bind Admin Event Listeners
+  elBtnCloseAdmin?.addEventListener('click', () => closeModal(elModalAdmin));
+  document.getElementById('btn-admin-login-submit')?.addEventListener('click', handleAdminLogin);
+  elAdminLoginForm?.addEventListener('submit', (e) => { e.preventDefault(); handleAdminLogin(); });
+  elBtnAdminRefresh?.addEventListener('click', fetchAdminTelemetry);
+  elBtnAdminExportCsv?.addEventListener('click', exportAdminCsv);
+  elBtnAdminClearLogs?.addEventListener('click', clearAdminLogs);
+  elBtnAdminLogout?.addEventListener('click', logoutAdmin);
+  elAdminFilterInput?.addEventListener('input', filterAdminTelemetry);
+
+  // =========================================================================
   // 5. INCIDENT SESSION & MARKDOWN EXPORT
   // =========================================================================
   function openSessionExport() {
@@ -10590,6 +10841,7 @@ ${formatInstructions}
   window.openInvestigationGraph = openInvestigationGraph;
   window.openSessionExport = openSessionExport;
   window.openAiCopilotModal = openAiCopilotModal;
+  window.openAdminModal = openAdminModal;
   window.openTypographyModal = openTypographyModal;
   window.openSettingsModal = openSettingsModal;
   window.closeSettingsModal = closeSettingsModal;

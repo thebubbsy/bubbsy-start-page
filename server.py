@@ -35,8 +35,38 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 DIST_DIR = os.path.join(ROOT_DIR, 'dist')
 BOOKMARKS_FILE = os.path.join(DATA_DIR, 'user_bookmarks.json')
-OSINT_DATA_FILE = os.path.join(DATA_DIR, 'osint_data.json')
+import sqlite3
 RADAR_CACHE_FILE = os.path.join(DATA_DIR, 'radar_cache.json')
+ANALYTICS_DB_FILE = os.path.join(ROOT_DIR, 'bubbsy_analytics.db')
+
+def init_analytics_db():
+    try:
+        conn = sqlite3.connect(ANALYTICS_DB_FILE)
+        cur = conn.cursor()
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS clicks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id TEXT NOT NULL,
+                element_tag TEXT,
+                element_id TEXT,
+                element_classes TEXT,
+                element_text TEXT,
+                target_href TEXT,
+                page_path TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                ip TEXT,
+                country TEXT,
+                user_agent TEXT
+            )
+        ''')
+        cur.execute('CREATE INDEX IF NOT EXISTS idx_clicks_timestamp ON clicks(timestamp DESC)')
+        cur.execute('CREATE INDEX IF NOT EXISTS idx_clicks_session ON clicks(session_id)')
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"[Analytics DB Init Warning] {e}")
+
+init_analytics_db()
 
 # Path to es.exe if available
 ES_CLI_PATH = shutil.which('es.exe') or shutil.which('es')
@@ -1437,6 +1467,8 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_get_manifest()
         elif path == '/api/info':
             self.handle_info()
+        elif path == '/api/admin/analytics':
+            self.handle_admin_analytics(params)
         else:
             # Fall back to serving static files
             super().do_GET()
@@ -1449,6 +1481,10 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_es_open()
         elif path == '/api/bookmarks':
             self.handle_save_bookmarks()
+        elif path == '/api/track':
+            self.handle_track_click()
+        elif path == '/api/admin/clear':
+            self.handle_admin_clear()
         else:
             self.send_error(404, "Endpoint not found")
 
@@ -1469,6 +1505,124 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             encoded = base64.b64encode(auth_str.encode('utf-8')).decode('ascii')
             return f"Basic {encoded}"
         return None
+
+    def _verify_admin_auth(self):
+        auth_header = self.headers.get('Authorization', '')
+        if auth_header.startswith('Basic '):
+            try:
+                decoded = base64.b64decode(auth_header[6:]).decode('utf-8')
+                parts = decoded.split(':', 1)
+                if len(parts) == 2 and parts[0] == 'user' and parts[1] == 'hacker':
+                    return True
+            except Exception:
+                pass
+        return False
+
+    def handle_track_click(self):
+        content_length = int(self.headers.get('Content-Length', 0))
+        post_data = self.rfile.read(content_length)
+        try:
+            payload = json.loads(post_data.decode('utf-8'))
+        except Exception:
+            self._json_response({'error': 'Invalid JSON'}, status=400)
+            return
+
+        session_id = payload.get('session_id', 'anon')
+        element_tag = payload.get('element_tag', '')
+        element_id = payload.get('element_id', '')
+        element_classes = payload.get('element_classes', '')
+        element_text = payload.get('element_text', '')[:200]
+        target_href = payload.get('target_href', '')
+        page_path = payload.get('page_path', '/')
+        ts = payload.get('timestamp') or datetime.datetime.now(datetime.timezone.utc).isoformat()
+        ip = self.client_address[0] if self.client_address else '127.0.0.1'
+        country = 'AU'
+        ua = (self.headers.get('User-Agent', '') or '')[:250]
+
+        try:
+            conn = sqlite3.connect(ANALYTICS_DB_FILE)
+            cur = conn.cursor()
+            cur.execute('''
+                INSERT INTO clicks (session_id, element_tag, element_id, element_classes, element_text, target_href, page_path, timestamp, ip, country, user_agent)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (session_id, element_tag, element_id, element_classes, element_text, target_href, page_path, ts, ip, country, ua))
+            conn.commit()
+            conn.close()
+            self._json_response({'success': True, 'timestamp': ts})
+        except Exception as e:
+            self._json_response({'error': str(e)}, status=500)
+
+    def handle_admin_analytics(self, params):
+        if not self._verify_admin_auth():
+            u = params.get('u', [''])[0]
+            p = params.get('p', [''])[0]
+            if not (u == 'user' and p == 'hacker'):
+                self.send_response(401)
+                self.send_header('WWW-Authenticate', 'Basic realm="Bubbsy Admin Area"')
+                self.send_header('Content-Type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': 'Unauthorized'}).encode('utf-8'))
+                return
+
+        try:
+            conn = sqlite3.connect(ANALYTICS_DB_FILE)
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+
+            cur.execute("SELECT COUNT(*) as count FROM clicks")
+            row = cur.fetchone()
+            total_clicks = row['count'] if row else 0
+
+            cur.execute("SELECT COUNT(DISTINCT session_id) as count FROM clicks")
+            row = cur.fetchone()
+            unique_sessions = row['count'] if row else 0
+
+            cur.execute('''
+                SELECT 
+                    COALESCE(NULLIF(target_href, ''), element_text, element_id) as target,
+                    COUNT(*) as count
+                FROM clicks
+                WHERE target IS NOT NULL AND target != ''
+                GROUP BY target
+                ORDER BY count DESC
+                LIMIT 6
+            ''')
+            top_targets = [dict(r) for r in cur.fetchall()]
+
+            cur.execute('''
+                SELECT id, session_id, element_tag, element_id, element_classes, element_text, target_href, page_path, timestamp, ip, country, user_agent
+                FROM clicks
+                ORDER BY id DESC
+                LIMIT 250
+            ''')
+            clicks = [dict(r) for r in cur.fetchall()]
+            conn.close()
+
+            self._json_response({
+                'authorized': True,
+                'summary': {
+                    'total_clicks': total_clicks,
+                    'unique_sessions': unique_sessions,
+                    'top_targets': top_targets
+                },
+                'clicks': clicks
+            })
+        except Exception as e:
+            self._json_response({'error': str(e)}, status=500)
+
+    def handle_admin_clear(self):
+        if not self._verify_admin_auth():
+            self._json_response({'error': 'Unauthorized'}, status=401)
+            return
+        try:
+            conn = sqlite3.connect(ANALYTICS_DB_FILE)
+            cur = conn.cursor()
+            cur.execute("DELETE FROM clicks")
+            conn.commit()
+            conn.close()
+            self._json_response({'success': True, 'message': 'Analytics cleared'})
+        except Exception as e:
+            self._json_response({'error': str(e)}, status=500)
 
     def handle_info(self):
         self._json_response({

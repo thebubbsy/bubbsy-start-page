@@ -186,6 +186,13 @@
           </svg>
           <span style="font-weight:700;">AI Copilot</span>
         </button>
+        <button class="btn-icon" id="btn-open-admin" title="Admin Analytics & Click Telemetry (Cloudflare D1)" aria-label="Admin Analytics & Click Telemetry" aria-haspopup="dialog" style="border-color:var(--accent-amber);color:var(--accent-amber);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span style="font-weight:700;">Admin</span>
+        </button>
         <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme" aria-label="Switch HUD Color Theme">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
@@ -289,6 +296,11 @@
       <div class="hud-item" onclick="openAiCopilotModal();">
         <kbd class="hud-key purple">!ai</kbd>
         <span class="hud-desc">Copilot</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openAdminModal();">
+        <kbd class="hud-key amber" style="border-color:var(--accent-amber);color:var(--accent-amber);">!admin</kbd>
+        <span class="hud-desc">Admin</span>
       </div>
       <div class="hud-separator"></div>
       <div class="hud-item" onclick="openShortcutsModal();">
@@ -1384,6 +1396,119 @@
   </div>
 
   <!-- =========================================================================
+       ADMIN ANALYTICS & CLICK TELEMETRY MODAL (CLOUDFLARE D1)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-admin" role="dialog" aria-modal="true" aria-labelledby="modal-admin-title">
+    <div class="modal-content" style="max-width:980px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" id="modal-admin-title" style="display:flex;align-items:center;gap:8px;color:var(--accent-amber);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Admin Telemetry &amp; User Click Analytics
+          </h3>
+          <span class="brand-tag" style="border-color:rgba(245,158,11,0.4);color:var(--accent-amber);">CLOUDFLARE D1</span>
+        </div>
+        <button class="modal-close" id="btn-close-admin" aria-label="Close Admin dialog">&times;</button>
+      </div>
+
+      <!-- State 1: Login Gate View -->
+      <div id="admin-login-view" style="padding:24px 12px;text-align:center;">
+        <div style="max-width:360px;margin:0 auto;background:rgba(5,9,18,0.7);padding:24px;border-radius:12px;border:1px solid rgba(245,158,11,0.3);box-shadow:0 12px 30px rgba(0,0,0,0.5);">
+          <div style="font-size:2rem;margin-bottom:8px;">🔐</div>
+          <h4 style="margin:0 0 6px 0;color:var(--text-primary);">Restricted Admin Access</h4>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;">Enter administrative credentials to inspect live user click logs and D1 database analytics.</p>
+          
+          <form id="admin-login-form" onsubmit="return false;">
+            <div class="form-group" style="text-align:left;margin-bottom:12px;">
+              <label class="form-label" for="admin-username" style="font-size:0.72rem;">Username</label>
+              <input type="text" class="form-control" id="admin-username" placeholder="Username" autocomplete="username" value="user" style="font-family:var(--font-mono);font-size:0.82rem;">
+            </div>
+            <div class="form-group" style="text-align:left;margin-bottom:16px;">
+              <label class="form-label" for="admin-password" style="font-size:0.72rem;">Password</label>
+              <input type="password" class="form-control" id="admin-password" placeholder="Password" autocomplete="current-password" value="hacker" style="font-family:var(--font-mono);font-size:0.82rem;">
+            </div>
+            <div id="admin-login-error" style="display:none;color:#ef4444;font-size:0.75rem;margin-bottom:12px;font-weight:600;">Invalid username or password</div>
+            <button type="submit" class="btn-search-exec" id="btn-admin-login-submit" style="width:100%;padding:8px;background:var(--accent-amber);color:#050912;font-weight:700;">
+              Authenticate to Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- State 2: Authenticated Analytics Dashboard View -->
+      <div id="admin-dashboard-view" style="display:none;">
+        <!-- Top Metric Cards -->
+        <div class="admin-metrics-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;margin-bottom:16px;">
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(0,240,255,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Total Clicks</div>
+            <div id="admin-metric-total-clicks" style="font-size:1.6rem;font-weight:800;color:var(--accent-cyan);font-family:var(--font-mono);">0</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Unique Sessions</div>
+            <div id="admin-metric-sessions" style="font-size:1.6rem;font-weight:800;color:var(--accent-green);font-family:var(--font-mono);">0</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Top Click Target</div>
+            <div id="admin-metric-top-target" style="font-size:0.88rem;font-weight:700;color:var(--accent-amber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="--">--</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(192,132,252,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">D1 Database Status</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
+              <span class="online-dot" style="background:var(--accent-green);"></span>
+              <span style="font-size:0.85rem;font-weight:700;color:#c084fc;">Active &amp; Logging</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Control Bar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;padding:8px 12px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
+          <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:240px;">
+            <input type="text" class="form-control" id="admin-filter-input" placeholder="Search clicks by text, tag, ID, or session..." style="font-size:0.75rem;padding:4px 10px;">
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="btn-icon" id="btn-admin-refresh" style="font-size:0.72rem;padding:3px 8px;border-color:var(--accent-cyan);color:var(--accent-cyan);">
+              🔄 Refresh
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-export-csv" style="font-size:0.72rem;padding:3px 8px;border-color:var(--accent-green);color:var(--accent-green);">
+              📥 Export CSV
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-clear-logs" style="font-size:0.72rem;padding:3px 8px;border-color:rgba(239,68,68,0.5);color:#ef4444;">
+              🗑️ Clear Logs
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-logout" style="font-size:0.72rem;padding:3px 8px;">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Telemetry Table -->
+        <div style="max-height:420px;overflow-y:auto;border:1px solid rgba(255,255,255,0.08);border-radius:6px;background:rgba(5,9,18,0.5);">
+          <table style="width:100%;border-collapse:collapse;font-size:0.75rem;text-align:left;">
+            <thead>
+              <tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;z-index:2;backdrop-filter:blur(8px);">
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:130px;">Time</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:110px;">Session ID</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:90px;">Tag / ID</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;">Clicked Label / Action</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;">Target Link / Destination</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:80px;">Geo / IP</th>
+              </tr>
+            </thead>
+            <tbody id="admin-clicks-tbody">
+              <tr>
+                <td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted);">Loading telemetry from Cloudflare D1...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
        THREAT DORK & ATTACK SURFACE GENERATOR MODAL
        ========================================================================= -->
   <div class="modal-overlay" id="modal-dorks" role="dialog" aria-modal="true" aria-labelledby="modal-dorks-title">
@@ -2072,9 +2197,10 @@
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
-  <!-- Scripts: bundled offline data first, then app controller -->
+  <!-- Scripts: bundled offline data first, telemetry tracker, then app controller -->
   <script src="data/osint_data.js"></script>
   <script src="data/radar_cache.js"></script>
+  <script src="js/tracker.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
