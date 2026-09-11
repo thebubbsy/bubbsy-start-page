@@ -3,8 +3,8 @@
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2075,
-  "au_link_total": 327,
+  "total_links": 2078,
+  "au_link_total": 330,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -63,7 +63,7 @@
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2075+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2078+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -5083,6 +5083,22 @@
               "au": true
             },
             {
+              "title": "WA Online Licence Search (DEMIRS)",
+              "url": "https://ols.demirs.wa.gov.au/",
+              "description": "Western Australian builders, plumbers, electricians and other occupational licensees",
+              "domain": "demirs.wa.gov.au",
+              "favicon": "https://f.start.me/demirs.wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "NT Licensing Public Register",
+              "url": "https://licensingnt.nt.gov.au/PublicRegister/",
+              "description": "Northern Territory occupational licence holders, including expired-within-12-months status",
+              "domain": "licensingnt.nt.gov.au",
+              "favicon": "https://f.start.me/licensingnt.nt.gov.au",
+              "au": true
+            },
+            {
               "title": "Law Society of NSW - Find a Lawyer",
               "url": "https://www.lawsociety.com.au/for-the-public/find-a-lawyer",
               "description": "Practising NSW solicitors, firms, and practising certificate status",
@@ -5123,7 +5139,7 @@
               "au": true
             }
           ],
-          "au_count": 13,
+          "au_count": 15,
           "au_module": true
         },
         {
