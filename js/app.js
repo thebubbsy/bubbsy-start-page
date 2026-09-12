@@ -8974,54 +8974,79 @@ ${formatInstructions}
   }
 
   function geInitMap() {
-    if (geLeafletInitialized || !window.L) return;
+    if (geLeafletInitialized) {
+      if (geLeafletMap) {
+        setTimeout(() => geLeafletMap.invalidateSize(), 50);
+      }
+      return;
+    }
+
+    if (!window.L) {
+      // Dynamic fallback load if CDN script was deferred or blocked
+      if (!document.getElementById('ge-leaflet-script-fallback')) {
+        const script = document.createElement('script');
+        script.id = 'ge-leaflet-script-fallback';
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
+        script.onload = () => geInitMap();
+        document.head.appendChild(script);
+      } else {
+        setTimeout(geInitMap, 200);
+      }
+      return;
+    }
+
     const mapEl = document.getElementById('ge-leaflet-map');
     if (!mapEl || mapEl.offsetHeight === 0) {
-      // Retry once the panel is rendered
-      setTimeout(geInitMap, 300);
+      setTimeout(geInitMap, 150);
       return;
     }
     geLeafletInitialized = true;
 
-    geLeafletMap = L.map('ge-leaflet-map', {
-      center: [-28.0, 135.0],
-      zoom: 4,
-      zoomControl: true,
-      attributionControl: true,
-    });
+    try {
+      geLeafletMap = L.map('ge-leaflet-map', {
+        center: [-28.0, 135.0],
+        zoom: 4,
+        zoomControl: true,
+        attributionControl: true,
+      });
 
-    // OpenStreetMap tiles — free, no API key required
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(geLeafletMap);
-
-    // Add state capital markers
-    Object.entries(GE_AU_STATES).forEach(([abbr, state]) => {
-      const marker = L.circleMarker([state.lat, state.lng], {
-        radius: 7,
-        fillColor: '#00f0ff',
-        color: '#005566',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.8,
+      // OpenStreetMap tiles — free, no API key required
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(geLeafletMap);
 
-      marker.bindPopup(`
-        <div style="min-width:180px;font-family:monospace;font-size:12px;">
-          <strong style="color:#00f0ff;">${abbr} — ${state.name}</strong><br>
-          <hr style="border-color:rgba(0,240,255,0.2);margin:4px 0;">
-          <a href="${state.police}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🚔 Police Portal</a>
-          <a href="${state.courts}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">⚖️ Courts</a>
-          <a href="${state.abn}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🏢 ABN Search</a>
-          <a href="${state.bom}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🌦️ Weather (BoM)</a>
-          <a href="${state.news}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">📰 Local News</a>
-        </div>
-      `, { maxWidth: 240 });
-    });
+      // Add state capital markers
+      Object.entries(GE_AU_STATES).forEach(([abbr, state]) => {
+        const marker = L.circleMarker([state.lat, state.lng], {
+          radius: 7,
+          fillColor: '#00f0ff',
+          color: '#005566',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.8,
+        }).addTo(geLeafletMap);
 
-    // Fit to AU bounds
-    geLeafletMap.fitBounds([[-44.0, 112.0], [-10.0, 154.0]]);
+        marker.bindPopup(`
+          <div style="min-width:180px;font-family:monospace;font-size:12px;">
+            <strong style="color:#00f0ff;">${abbr} — ${state.name}</strong><br>
+            <hr style="border-color:rgba(0,240,255,0.2);margin:4px 0;">
+            <a href="${state.police}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🚔 Police Portal</a>
+            <a href="${state.courts}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">⚖️ Courts</a>
+            <a href="${state.abn}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🏢 ABN Search</a>
+            <a href="${state.bom}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🌦️ Weather (BoM)</a>
+            <a href="${state.news}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">📰 Local News</a>
+          </div>
+        `, { maxWidth: 240 });
+      });
+
+      // Fit to AU bounds
+      geLeafletMap.fitBounds([[-44.0, 112.0], [-10.0, 154.0]]);
+      setTimeout(() => { if (geLeafletMap) geLeafletMap.invalidateSize(); }, 300);
+    } catch (e) {
+      console.error('[Gods Eye Map Error]', e);
+      geLeafletInitialized = false;
+    }
   }
 
   async function geFetchFeed(source) {
