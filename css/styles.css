@@ -3505,3 +3505,197 @@ html[data-ui-mode="basic"] .hero-section {
   .ge-body { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; }
   .ge-stats-row { grid-column: 1; grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Tactical Map Toolbar & Layer Controls */
+.ge-map-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.ge-map-btn {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.ge-map-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-primary);
+  background: rgba(0, 240, 255, 0.1);
+}
+
+.ge-map-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* Custom Tactical Leaflet Camera Markers */
+.ge-camera-marker-icon {
+  background: rgba(10, 15, 25, 0.9);
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: 50%;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.ge-camera-marker-icon:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.9);
+  background: #000;
+}
+
+/* Tactical Camera Stream Inspector Modal */
+.ge-camera-box {
+  background: rgba(8, 12, 20, 0.97);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.25), 0 10px 40px rgba(0,0,0,0.8);
+  width: 92%;
+  max-width: 580px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ge-camera-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(0, 240, 255, 0.06);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+.ge-camera-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.ge-camera-media-wrap {
+  position: relative;
+  background: #000;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+  overflow: hidden;
+}
+
+.ge-camera-media-wrap::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+.ge-camera-img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.ge-camera-overlay-info {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ge-cam-badge {
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: var(--accent-cyan);
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.08em;
+}
+
+.ge-camera-meta {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ge-cam-meta-row {
+  display: flex;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.ge-cam-label {
+  color: var(--text-muted);
+  width: 90px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+}
+
+.ge-cam-val {
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.ge-camera-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 240, 255, 0.03);
+  border-top: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.ge-camera-btn {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: var(--accent-cyan);
+  padding: 7px 10px;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: all 0.15s ease;
+  font-weight: 600;
+}
+
+.ge-camera-btn:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--accent-cyan);
+  color: #fff;
+}
+

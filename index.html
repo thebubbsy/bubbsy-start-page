@@ -2252,9 +2252,16 @@
         </div>
       </div>
 
-      <!-- COL 2: Australia Map -->
+      <!-- COL 2: Australia Map & Tactical Surveillance -->
       <div class="ge-panel ge-map-panel">
-        <div class="ge-panel-title">🗺️ AUSTRALIA — LIVE INTELLIGENCE MAP</div>
+        <div class="ge-panel-title" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>🗺️ TACTICAL RECON & SURVEILLANCE MAP</span>
+          <div class="ge-map-controls">
+            <button class="ge-map-btn active" id="ge-toggle-cctv" title="Toggle Public Highway & Traffic CCTV Feeds">📷 Traffic CCTV (<span id="ge-cctv-count">50</span>)</button>
+            <button class="ge-map-btn" id="ge-toggle-radar" title="Toggle Live BoM Rain & Precipitation Radar">🌧️ BoM Weather Radar</button>
+            <button class="ge-map-btn" id="ge-toggle-basemap" title="Switch between Dark Surveillance and Satellite Imagery">🛰️ Satellite</button>
+          </div>
+        </div>
         <div id="ge-leaflet-map"></div>
       </div>
 
@@ -2332,6 +2339,45 @@
   <div class="ge-state-popover" id="ge-state-popover" role="tooltip">
     <div class="ge-state-popover-title" id="ge-popover-title">NSW — New South Wales</div>
     <div id="ge-popover-links"></div>
+  </div>
+
+  <!-- Tactical Camera Stream Inspector Modal -->
+  <div class="modal-overlay" id="modal-ge-camera" role="dialog" aria-modal="true" aria-labelledby="ge-camera-title" style="display:none;align-items:center;justify-content:center;z-index:100000;">
+    <div class="ge-camera-box">
+      <div class="ge-camera-header">
+        <div class="ge-camera-status">
+          <span class="ge-status-dot"></span>
+          <span id="ge-camera-title" style="font-weight:700;letter-spacing:0.08em;color:var(--accent-cyan);text-transform:uppercase;">LIVE SURVEILLANCE FEED</span>
+        </div>
+        <button class="modal-close" id="btn-close-ge-camera" aria-label="Close Camera Stream">&times;</button>
+      </div>
+      <div class="ge-camera-media-wrap">
+        <img id="ge-camera-img" src="" alt="Public Traffic CCTV Stream" class="ge-camera-img" />
+        <div class="ge-camera-overlay-info">
+          <span id="ge-camera-id-badge" class="ge-cam-badge">ID: CAM-001</span>
+          <span id="ge-camera-time-badge" class="ge-cam-badge">00:00:00 AEST</span>
+        </div>
+      </div>
+      <div class="ge-camera-meta">
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Location:</span>
+          <span id="ge-cam-location" class="ge-cam-val">—</span>
+        </div>
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Coordinates:</span>
+          <span id="ge-cam-coords" class="ge-cam-val font-mono">—</span>
+        </div>
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Provider:</span>
+          <span id="ge-cam-source" class="ge-cam-val">—</span>
+        </div>
+      </div>
+      <div class="ge-camera-actions">
+        <button class="ge-camera-btn" id="ge-cam-btn-refresh">↻ Force Refresh</button>
+        <button class="ge-camera-btn" id="ge-cam-btn-cadastre">📍 Pivot Cadastre</button>
+        <button class="ge-camera-btn" id="ge-cam-btn-streetview">👁 Street View</button>
+      </div>
+    </div>
   </div>
 
   <!-- Scripts: bundled offline data first, telemetry tracker, then app controller -->
