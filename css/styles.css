@@ -3620,6 +3620,14 @@ html[data-ui-mode="basic"] .hero-section {
   display: block;
 }
 
+.ge-camera-iframe {
+  width: 100%;
+  height: 340px;
+  border: none;
+  background: #000;
+  display: block;
+}
+
 .ge-camera-overlay-info {
   position: absolute;
   top: 8px;
