@@ -38,6 +38,7 @@ BOOKMARKS_FILE = os.path.join(DATA_DIR, 'user_bookmarks.json')
 import sqlite3
 RADAR_CACHE_FILE = os.path.join(DATA_DIR, 'radar_cache.json')
 ANALYTICS_DB_FILE = os.path.join(ROOT_DIR, 'bubbsy_analytics.db')
+OSINT_DATA_FILE = os.path.join(DATA_DIR, 'osint_data.json')
 
 def init_analytics_db():
     try:

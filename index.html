@@ -11,6 +11,9 @@
   <meta name="theme-color" content="#050912">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2.5'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon></svg>">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Leaflet.js — God's Eye AU Map (free/open-source, no API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GKQ0=" crossorigin=""></script>
   <script>
     // Immediate early typography & high-contrast application
     (function() {
@@ -193,6 +196,10 @@
           </svg>
           <span style="font-weight:700;">Admin</span>
         </button>
+        <button class="btn-icon" id="btn-open-gods-eye" title="God's Eye View — Australian OSINT Intelligence HUD" aria-label="God's Eye View Australian OSINT HUD" aria-haspopup="dialog" style="border-color:#10b981;color:#10b981;">
+          <span style="font-size:1rem;line-height:1;">👁</span>
+          <span style="font-weight:700;">Eye</span>
+        </button>
         <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme" aria-label="Switch HUD Color Theme">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
@@ -301,6 +308,11 @@
       <div class="hud-item" onclick="openAdminModal();">
         <kbd class="hud-key amber" style="border-color:var(--accent-amber);color:var(--accent-amber);">!admin</kbd>
         <span class="hud-desc">Admin</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openGodsEyeModal();">
+        <kbd class="hud-key green" style="border-color:#10b981;color:#10b981;">!eye</kbd>
+        <span class="hud-desc">God's Eye</span>
       </div>
       <div class="hud-separator"></div>
       <div class="hud-item" onclick="openShortcutsModal();">
@@ -2196,6 +2208,131 @@
 
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
+
+  <!-- ===== GOD'S EYE VIEW — Australian OSINT Palantir HUD ===== -->
+  <div class="modal-overlay" id="modal-gods-eye" role="dialog" aria-modal="true" aria-labelledby="ge-modal-title" style="display:none;padding:0;align-items:stretch;justify-content:stretch;">
+    <!-- GE Header -->
+    <div class="ge-header">
+      <div class="ge-title">
+        <span class="ge-eye-icon">👁</span>
+        <span id="ge-modal-title">GOD'S EYE VIEW — AUSTRALIA</span>
+      </div>
+      <div class="ge-status-bar">
+        <span class="ge-status-dot" id="ge-dot-feeds"></span>
+        <span id="ge-status-feeds">Feeds initialising…</span>
+        <span style="opacity:0.3;">│</span>
+        <span class="ge-status-dot amber"></span>
+        <span id="ge-status-time">——:——:—— AEST</span>
+        <span style="opacity:0.3;">│</span>
+        <span id="ge-feed-count" style="color:var(--accent-cyan);">0 items loaded</span>
+      </div>
+      <button class="modal-close" id="btn-close-gods-eye" aria-label="Close God's Eye View" style="margin-left:auto;">&times;</button>
+    </div>
+
+    <!-- GE Body: 3-col bento grid -->
+    <div class="ge-body">
+
+      <!-- COL 1: Live Intel Feeds -->
+      <div class="ge-panel" id="ge-feeds-panel">
+        <div class="ge-panel-title">
+          📡 LIVE INTEL FEEDS
+          <button class="ge-refresh-btn" id="ge-refresh-btn" title="Refresh all feeds">↻ Refresh</button>
+        </div>
+        <div class="ge-feed-tabs">
+          <button class="ge-feed-tab active" data-feed="acsc">ACSC</button>
+          <button class="ge-feed-tab" data-feed="afp">AFP</button>
+          <button class="ge-feed-tab" data-feed="asic">ASIC</button>
+          <button class="ge-feed-tab" data-feed="austlii">AusLII</button>
+          <button class="ge-feed-tab" data-feed="all">All</button>
+        </div>
+        <div class="ge-feeds-list" id="ge-feeds-list">
+          <div class="ge-feeds-loading">
+            <span class="ge-spinning">↻</span> Loading AU intel feeds…
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 2: Australia Map -->
+      <div class="ge-panel ge-map-panel">
+        <div class="ge-panel-title">🗺️ AUSTRALIA — LIVE INTELLIGENCE MAP</div>
+        <div id="ge-leaflet-map"></div>
+      </div>
+
+      <!-- COL 3: Entity Spotlight + Quick Pivot Rail -->
+      <div class="ge-panel ge-spotlight-panel">
+        <div class="ge-panel-title">🔍 ENTITY SPOTLIGHT</div>
+        <div class="ge-spotlight-input-row">
+          <input type="text" class="ge-spotlight-input" id="ge-spotlight-input" placeholder="Search ABN, name, domain, IP…" autocomplete="off">
+          <button class="ge-spotlight-btn" id="ge-spotlight-search">GO</button>
+        </div>
+
+        <!-- State Tiles inside spotlight panel -->
+        <div class="ge-panel-title" style="border-top:1px solid rgba(0,240,255,0.08);">🏛️ AU STATE INTEL TILES</div>
+        <div class="ge-state-tiles" id="ge-state-tiles">
+          <div class="ge-state-tile" data-state="NSW"><span class="ge-state-abbr">NSW</span><span class="ge-state-name">New South Wales</span></div>
+          <div class="ge-state-tile" data-state="VIC"><span class="ge-state-abbr">VIC</span><span class="ge-state-name">Victoria</span></div>
+          <div class="ge-state-tile" data-state="QLD"><span class="ge-state-abbr">QLD</span><span class="ge-state-name">Queensland</span></div>
+          <div class="ge-state-tile" data-state="WA"><span class="ge-state-abbr">WA</span><span class="ge-state-name">Western Australia</span></div>
+          <div class="ge-state-tile" data-state="SA"><span class="ge-state-abbr">SA</span><span class="ge-state-name">South Australia</span></div>
+          <div class="ge-state-tile" data-state="TAS"><span class="ge-state-abbr">TAS</span><span class="ge-state-name">Tasmania</span></div>
+          <div class="ge-state-tile" data-state="ACT"><span class="ge-state-abbr">ACT</span><span class="ge-state-name">Capital Territory</span></div>
+          <div class="ge-state-tile" data-state="NT"><span class="ge-state-abbr">NT</span><span class="ge-state-name">Northern Territory</span></div>
+        </div>
+
+        <!-- Quick Pivot Rail -->
+        <div class="ge-panel-title" style="border-top:1px solid rgba(0,240,255,0.08);">⚡ QUICK PIVOT</div>
+        <div class="ge-pivot-buttons">
+          <button class="ge-pivot-btn" id="ge-pivot-graph"><span class="ge-pivot-icon">🔗</span> Visual Link Graph</button>
+          <button class="ge-pivot-btn" id="ge-pivot-copilot"><span class="ge-pivot-icon">🤖</span> AI OSINT Copilot</button>
+          <button class="ge-pivot-btn" id="ge-pivot-radar"><span class="ge-pivot-icon">⚠️</span> Threat Radar (CVE)</button>
+          <button class="ge-pivot-btn" id="ge-pivot-corp"><span class="ge-pivot-icon">🏢</span> ABN / ASIC Lookup</button>
+          <button class="ge-pivot-btn" id="ge-pivot-austlii"><span class="ge-pivot-icon">⚖️</span> AusLII Legal Search</button>
+          <button class="ge-pivot-btn" id="ge-pivot-social"><span class="ge-pivot-icon">👤</span> Social Recon</button>
+        </div>
+      </div>
+
+      <!-- STAT COUNTER ROW (spans all 3 columns) -->
+      <div class="ge-stats-row" id="ge-stats-row">
+        <div class="ge-stat-card green">
+          <span class="ge-stat-icon">🏢</span>
+          <span class="ge-stat-value" id="ge-stat-abns">—</span>
+          <span class="ge-stat-label">Active ABNs (Est.)</span>
+        </div>
+        <div class="ge-stat-card amber">
+          <span class="ge-stat-icon">⚠️</span>
+          <span class="ge-stat-value" id="ge-stat-acsc">—</span>
+          <span class="ge-stat-label">ACSC Advisories</span>
+        </div>
+        <div class="ge-stat-card">
+          <span class="ge-stat-icon">⚖️</span>
+          <span class="ge-stat-value" id="ge-stat-austlii">—</span>
+          <span class="ge-stat-label">AusLII Judgments</span>
+        </div>
+        <div class="ge-stat-card red">
+          <span class="ge-stat-icon">🔒</span>
+          <span class="ge-stat-value" id="ge-stat-asic">—</span>
+          <span class="ge-stat-label">ASIC Actions</span>
+        </div>
+        <div class="ge-stat-card amber">
+          <span class="ge-stat-icon">📡</span>
+          <span class="ge-stat-value" id="ge-stat-feeds">—</span>
+          <span class="ge-stat-label">Live Feeds Active</span>
+        </div>
+        <div class="ge-stat-card green">
+          <span class="ge-stat-icon">🌐</span>
+          <span class="ge-stat-value" id="ge-stat-new-abns">—</span>
+          <span class="ge-stat-label">New ABNs Today</span>
+        </div>
+      </div>
+
+    </div><!-- /ge-body -->
+  </div><!-- /#modal-gods-eye -->
+
+  <!-- State Popover (singleton, positioned by JS) -->
+  <div class="ge-state-popover" id="ge-state-popover" role="tooltip">
+    <div class="ge-state-popover-title" id="ge-popover-title">NSW — New South Wales</div>
+    <div id="ge-popover-links"></div>
+  </div>
 
   <!-- Scripts: bundled offline data first, telemetry tracker, then app controller -->
   <script src="data/osint_data.js"></script>

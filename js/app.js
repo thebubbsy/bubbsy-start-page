@@ -111,6 +111,8 @@
 
   const BANG_SUGGESTIONS = [
     { bang: '!admin', name: 'Admin Telemetry & D1 Analytics', syntax: '!admin', desc: 'Protected administrator user click telemetry (user:hacker)' },
+    { bang: '!eye', name: "God's Eye View — AU OSINT HUD", syntax: '!eye', desc: "Australian Palantir-style live intel dashboard — ACSC, AFP, ASIC, AusLII, Leaflet map" },
+    { bang: '!godseyeview', name: "God's Eye View (alias)", syntax: '!godseyeview', desc: "Full-screen Australian OSINT intelligence surveillance HUD" },
     { bang: '!ai', name: 'Autonomous AI OSINT Copilot', syntax: '!ai <target/query>', desc: 'Gemini 3.8 / Multi-model prompt synthesizer & reasoning blueprints' },
     { bang: '!copilot', name: 'AI OSINT Reasoning Studio', syntax: '!copilot <target>', desc: 'Multi-stage MITRE, persona & Essential 8 reasoning engine' },
     { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
@@ -1305,6 +1307,9 @@
       } else if (id === 'btn-open-admin') {
         e.preventDefault();
         openAdminModal();
+      } else if (id === 'btn-open-gods-eye') {
+        e.preventDefault();
+        openGodsEyeModal();
       } else if (id === 'btn-custom-bookmark') {
         e.preventDefault();
         openModal(document.getElementById('modal-custom-bookmark'));
@@ -1662,6 +1667,11 @@
           renderBangAutocompleteDropdown('');
           openAdminModal();
           return;
+        } else if (bang === 'eye' || bang === 'godseyeview' || bang === 'godseye' || bang === 'palantir') {
+          elMainSearch.value = '';
+          renderBangAutocompleteDropdown('');
+          openGodsEyeModal();
+          return;
         }
 
         if (bangMap[bang] && bangMap[bang] !== activeSearchMode) {
@@ -1922,6 +1932,7 @@
     const actions = [
       { id: 'act_ai_copilot', title: 'Autonomous AI OSINT Copilot & Structured Reasoner (Gemini 3.8 / Multi-Model)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
       { id: 'act_admin', title: 'Admin Click Telemetry & Cloudflare D1 Analytics (user / hacker)', category: 'ACTIONS', icon: 'ADMIN', action: () => { closeModal(elModalPalette); openAdminModal(); } },
+      { id: 'act_gods_eye', title: "God's Eye View — Australian OSINT Palantir HUD (ACSC, AFP, ASIC, AusLII, AU Map)", category: 'ACTIONS', icon: 'EYE', action: () => { closeModal(elModalPalette); openGodsEyeModal(); } },
       { id: 'act_aistudio', title: 'Open Google AI Studio (Gemini 2.5 Pro / Flash Developer Workbench)', category: 'ACTIONS', icon: 'AI', action: () => window.open('https://aistudio.google.com/', '_blank') },
       { id: 'act_gemini', title: 'Open Google Gemini AI Assistant', category: 'ACTIONS', icon: 'GEMINI', action: () => window.open('https://gemini.google.com/', '_blank') },
       { id: 'act_social_recon', title: 'Social Handle & Username Recon Engine (Maigret / Sherlock)', category: 'ACTIONS', icon: 'RECON', action: () => openSocialRecon() },
@@ -8889,6 +8900,398 @@ ${formatInstructions}
   });
 
   // =========================================================================
+  // 4D. GOD'S EYE VIEW — Australian OSINT Palantir HUD
+  // =========================================================================
+
+  const GE_AU_STATES = {
+    NSW: { name: 'New South Wales', lat: -33.87, lng: 151.21, police: 'https://www.police.nsw.gov.au/', courts: 'https://www.localcourt.nsw.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=NSW', bom: 'https://www.bom.gov.au/nsw/', news: 'https://www.smh.com.au/', land: 'https://www.nswlrs.com.au/' },
+    VIC: { name: 'Victoria', lat: -37.81, lng: 144.96, police: 'https://www.police.vic.gov.au/', courts: 'https://www.magistratescourt.vic.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=VIC', bom: 'https://www.bom.gov.au/vic/', news: 'https://www.theage.com.au/', land: 'https://www.land.vic.gov.au/' },
+    QLD: { name: 'Queensland', lat: -27.47, lng: 153.02, police: 'https://www.police.qld.gov.au/', courts: 'https://www.courts.qld.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=QLD', bom: 'https://www.bom.gov.au/qld/', news: 'https://www.couriermail.com.au/', land: 'https://www.business.qld.gov.au/' },
+    WA:  { name: 'Western Australia', lat: -31.95, lng: 115.86, police: 'https://www.police.wa.gov.au/', courts: 'https://www.magistratescourt.wa.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=WA', bom: 'https://www.bom.gov.au/wa/', news: 'https://www.perthnow.com.au/', land: 'https://www.landgate.wa.gov.au/' },
+    SA:  { name: 'South Australia', lat: -34.93, lng: 138.60, police: 'https://www.police.sa.gov.au/', courts: 'https://www.courts.sa.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=SA', bom: 'https://www.bom.gov.au/sa/', news: 'https://www.adelaidenow.com.au/', land: 'https://www.sa.gov.au/' },
+    TAS: { name: 'Tasmania', lat: -42.88, lng: 147.32, police: 'https://www.police.tas.gov.au/', courts: 'https://www.magistratescourt.tas.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=TAS', bom: 'https://www.bom.gov.au/tas/', news: 'https://www.themercury.com.au/', land: 'https://www.thelist.tas.gov.au/' },
+    ACT: { name: 'Australian Capital Territory', lat: -35.28, lng: 149.13, police: 'https://www.police.act.gov.au/', courts: 'https://www.courts.act.gov.au/', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=ACT', bom: 'https://www.bom.gov.au/act/', news: 'https://www.canberratimes.com.au/', land: 'https://actmapi.act.gov.au/' },
+    NT:  { name: 'Northern Territory', lat: -12.46, lng: 130.84, police: 'https://pfes.nt.gov.au/police', courts: 'https://justice.nt.gov.au/courts', abn: 'https://abr.business.gov.au/Search/ResultsActive?SearchText=NT', bom: 'https://www.bom.gov.au/nt/', news: 'https://www.ntnews.com.au/', land: 'https://nt.gov.au/' },
+  };
+
+  const GE_FEED_SOURCES = ['acsc', 'afp', 'asic', 'austlii'];
+
+  let geLeafletMap = null;
+  let geLeafletInitialized = false;
+  let geFeedData = {}; // { acsc: [...items], afp: [...], asic: [...], austlii: [...] }
+  let geActiveFeedTab = 'acsc';
+  let geRefreshInterval = null;
+  let geClockInterval = null;
+  let geAllFeedItems = []; // flat list of all items for 'all' tab
+  let geFeedItemCount = 0;
+
+  function openGodsEyeModal() {
+    const el = document.getElementById('modal-gods-eye');
+    if (!el) return;
+    el.style.display = 'flex';
+    el.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+
+    // Focus trap
+    const closeBtn = document.getElementById('btn-close-gods-eye');
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 50);
+
+    geStartClock();
+    geInitMap();
+    geFetchAllFeeds();
+    geStartStatCounters();
+    geBindControls();
+
+    // Auto-refresh every 90s
+    if (geRefreshInterval) clearInterval(geRefreshInterval);
+    geRefreshInterval = setInterval(geFetchAllFeeds, 90000);
+  }
+
+  function closeGodsEyeModal() {
+    const el = document.getElementById('modal-gods-eye');
+    if (!el) return;
+    el.style.display = 'none';
+    el.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    if (geRefreshInterval) { clearInterval(geRefreshInterval); geRefreshInterval = null; }
+    if (geClockInterval) { clearInterval(geClockInterval); geClockInterval = null; }
+    geHideStatePopover();
+  }
+
+  function geStartClock() {
+    if (geClockInterval) clearInterval(geClockInterval);
+    function tick() {
+      const el = document.getElementById('ge-status-time');
+      if (!el) return;
+      const now = new Date();
+      const aest = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+      el.textContent = aest + ' AEST';
+    }
+    tick();
+    geClockInterval = setInterval(tick, 1000);
+  }
+
+  function geInitMap() {
+    if (geLeafletInitialized || !window.L) return;
+    const mapEl = document.getElementById('ge-leaflet-map');
+    if (!mapEl || mapEl.offsetHeight === 0) {
+      // Retry once the panel is rendered
+      setTimeout(geInitMap, 300);
+      return;
+    }
+    geLeafletInitialized = true;
+
+    geLeafletMap = L.map('ge-leaflet-map', {
+      center: [-28.0, 135.0],
+      zoom: 4,
+      zoomControl: true,
+      attributionControl: true,
+    });
+
+    // OpenStreetMap tiles — free, no API key required
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(geLeafletMap);
+
+    // Add state capital markers
+    Object.entries(GE_AU_STATES).forEach(([abbr, state]) => {
+      const marker = L.circleMarker([state.lat, state.lng], {
+        radius: 7,
+        fillColor: '#00f0ff',
+        color: '#005566',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8,
+      }).addTo(geLeafletMap);
+
+      marker.bindPopup(`
+        <div style="min-width:180px;font-family:monospace;font-size:12px;">
+          <strong style="color:#00f0ff;">${abbr} — ${state.name}</strong><br>
+          <hr style="border-color:rgba(0,240,255,0.2);margin:4px 0;">
+          <a href="${state.police}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🚔 Police Portal</a>
+          <a href="${state.courts}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">⚖️ Courts</a>
+          <a href="${state.abn}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🏢 ABN Search</a>
+          <a href="${state.bom}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">🌦️ Weather (BoM)</a>
+          <a href="${state.news}" target="_blank" rel="noopener" style="display:block;padding:2px 0;">📰 Local News</a>
+        </div>
+      `, { maxWidth: 240 });
+    });
+
+    // Fit to AU bounds
+    geLeafletMap.fitBounds([[-44.0, 112.0], [-10.0, 154.0]]);
+  }
+
+  async function geFetchFeed(source) {
+    try {
+      const resp = await fetch(`/api/gods-eye/feed?source=${source}`, { signal: AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+
+      if (source === 'abn' && data.stats) {
+        geUpdateAbnStats(data.stats);
+        return [];
+      }
+
+      return (data.items || []).map(item => ({ ...item, source }));
+    } catch (_) {
+      return [];
+    }
+  }
+
+  async function geFetchAllFeeds() {
+    const statusEl = document.getElementById('ge-status-feeds');
+    const dotEl = document.getElementById('ge-dot-feeds');
+    const refreshBtn = document.getElementById('ge-refresh-btn');
+
+    if (statusEl) statusEl.textContent = 'Refreshing feeds…';
+    if (dotEl) dotEl.className = 'ge-status-dot amber';
+    if (refreshBtn) refreshBtn.innerHTML = '<span class="ge-spinning">↻</span> Loading…';
+
+    // Fetch all feeds in parallel
+    const results = await Promise.all(GE_FEED_SOURCES.map(s => geFetchFeed(s)));
+
+    geAllFeedItems = [];
+    GE_FEED_SOURCES.forEach((src, i) => {
+      geFeedData[src] = results[i] || [];
+      geAllFeedItems.push(...(results[i] || []));
+    });
+
+    // Also fetch ABN stats
+    geFetchFeed('abn');
+
+    geFeedItemCount = geAllFeedItems.length;
+    const countEl = document.getElementById('ge-feed-count');
+    if (countEl) countEl.textContent = `${geFeedItemCount} items loaded`;
+
+    if (statusEl) statusEl.textContent = geFeedItemCount > 0 ? `${geFeedItemCount} AU intel items live` : 'Feeds active (fallback)';
+    if (dotEl) dotEl.className = 'ge-status-dot';
+    if (refreshBtn) refreshBtn.innerHTML = '↻ Refresh';
+
+    geRenderFeedList(geActiveFeedTab);
+    geUpdateFeedStats();
+  }
+
+  function geRenderFeedList(tab) {
+    const listEl = document.getElementById('ge-feeds-list');
+    if (!listEl) return;
+
+    const items = tab === 'all' ? geAllFeedItems : (geFeedData[tab] || []);
+
+    if (!items.length) {
+      listEl.innerHTML = '<div class="ge-feeds-loading">No items loaded yet. Click ↻ Refresh.</div>';
+      return;
+    }
+
+    const sourceOrder = tab === 'all' ? GE_FEED_SOURCES : [tab];
+    let html = '';
+
+    if (tab === 'all') {
+      sourceOrder.forEach(src => {
+        const srcItems = geFeedData[src] || [];
+        if (!srcItems.length) return;
+        const labels = { acsc: 'ACSC — Cyber Advisories', afp: 'AFP — Media Centre', asic: 'ASIC — Press Releases', austlii: 'AusLII — Judgments' };
+        html += `<div class="ge-feed-group"><div class="ge-feed-source-label">${labels[src] || src.toUpperCase()}</div>`;
+        srcItems.slice(0, 5).forEach(item => {
+          const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-AU', { day: '2-digit', month: 'short' }) : '';
+          const link = item.link ? `onclick="window.open('${item.link.replace(/'/g, "\\'")}','_blank')"` : '';
+          html += `<div class="ge-feed-item" ${link} title="${(item.summary || '').replace(/"/g, '&quot;')}"><span class="ge-feed-item-title">${item.title}</span>${dateStr ? `<span class="ge-feed-item-date">${dateStr}</span>` : ''}</div>`;
+        });
+        html += '</div>';
+      });
+    } else {
+      const labels = { acsc: 'ACSC — Cyber Advisories', afp: 'AFP — Media Centre', asic: 'ASIC — Press Releases', austlii: 'AusLII — Judgments' };
+      html += `<div class="ge-feed-group"><div class="ge-feed-source-label">${labels[tab] || tab.toUpperCase()}</div>`;
+      items.forEach(item => {
+        const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-AU', { day: '2-digit', month: 'short' }) : '';
+        const link = item.link ? `onclick="window.open('${item.link.replace(/'/g, "\\'")}','_blank')"` : '';
+        html += `<div class="ge-feed-item" ${link} title="${(item.summary || '').replace(/"/g, '&quot;')}"><span class="ge-feed-item-title">${item.title}</span>${dateStr ? `<span class="ge-feed-item-date">${dateStr}</span>` : ''}</div>`;
+      });
+      html += '</div>';
+    }
+
+    listEl.innerHTML = html || '<div class="ge-feeds-loading">No items for this source.</div>';
+  }
+
+  function geUpdateFeedStats() {
+    const feedStatEl = document.getElementById('ge-stat-feeds');
+    if (feedStatEl) feedStatEl.textContent = GE_FEED_SOURCES.length.toString();
+
+    const acscItems = geFeedData['acsc'] || [];
+    const acscEl = document.getElementById('ge-stat-acsc');
+    if (acscEl) acscEl.textContent = acscItems.length > 0 ? acscItems.length.toString() : '↺';
+
+    const asicItems = geFeedData['asic'] || [];
+    const asicEl = document.getElementById('ge-stat-asic');
+    if (asicEl) asicEl.textContent = asicItems.length > 0 ? asicItems.length.toString() : '↺';
+
+    const austliiItems = geFeedData['austlii'] || [];
+    const austliiEl = document.getElementById('ge-stat-austlii');
+    if (austliiEl) austliiEl.textContent = austliiItems.length > 0 ? austliiItems.length.toString() : '↺';
+  }
+
+  function geUpdateAbnStats(stats) {
+    const abnEl = document.getElementById('ge-stat-abns');
+    if (abnEl && stats.active_abns) abnEl.textContent = (stats.active_abns / 1e6).toFixed(2) + 'M';
+
+    const newEl = document.getElementById('ge-stat-new-abns');
+    if (newEl && stats.new_today) newEl.textContent = stats.new_today.toLocaleString();
+  }
+
+  function geStartStatCounters() {
+    // Optimistic ABN counters — run locally if edge function not yet responded
+    const now = new Date();
+    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+    const hour = now.getHours();
+    const estActive = (16200000 + dayOfYear * 10 + hour * 2);
+    const estNew = Math.floor(dayOfYear * 4.2 + hour * 0.17);
+
+    const abnEl = document.getElementById('ge-stat-abns');
+    if (abnEl) {
+      let cur = estActive - 5000;
+      const target = estActive;
+      const step = Math.ceil((target - cur) / 30);
+      const anim = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        abnEl.textContent = (cur / 1e6).toFixed(2) + 'M';
+        if (cur >= target) clearInterval(anim);
+      }, 30);
+    }
+
+    const newEl = document.getElementById('ge-stat-new-abns');
+    if (newEl) {
+      let c = 0;
+      const anim = setInterval(() => {
+        c = Math.min(c + Math.ceil(estNew / 40), estNew);
+        newEl.textContent = c.toLocaleString();
+        if (c >= estNew) clearInterval(anim);
+      }, 20);
+    }
+  }
+
+  function geBindControls() {
+    // Close button
+    const closeBtn = document.getElementById('btn-close-gods-eye');
+    if (closeBtn && !closeBtn._gebound) {
+      closeBtn._gebound = true;
+      closeBtn.addEventListener('click', closeGodsEyeModal);
+    }
+
+    // Refresh button
+    const refreshBtn = document.getElementById('ge-refresh-btn');
+    if (refreshBtn && !refreshBtn._gebound) {
+      refreshBtn._gebound = true;
+      refreshBtn.addEventListener('click', geFetchAllFeeds);
+    }
+
+    // Feed tabs
+    document.querySelectorAll('.ge-feed-tab').forEach(tab => {
+      if (tab._gebound) return;
+      tab._gebound = true;
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ge-feed-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        geActiveFeedTab = tab.dataset.feed;
+        geRenderFeedList(geActiveFeedTab);
+      });
+    });
+
+    // State tiles
+    document.querySelectorAll('.ge-state-tile').forEach(tile => {
+      if (tile._gebound) return;
+      tile._gebound = true;
+      tile.addEventListener('click', e => {
+        const abbr = tile.dataset.state;
+        geShowStatePopover(abbr, e);
+        e.stopPropagation();
+      });
+    });
+
+    // Entity spotlight search
+    const spotInput = document.getElementById('ge-spotlight-input');
+    const spotBtn = document.getElementById('ge-spotlight-search');
+
+    function geDoSpotlight() {
+      const q = (spotInput?.value || '').trim();
+      if (!q) return;
+      // Auto-detect: ABN (9-11 digits) → corp recon; domain → pivot; else → search
+      if (/^\d{9,11}$/.test(q.replace(/\s/g, ''))) {
+        closeGodsEyeModal();
+        openCorpRecon();
+      } else if (/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(q)) {
+        window.open(`https://abr.business.gov.au/Search/ResultsActive?SearchText=${encodeURIComponent(q)}`, '_blank');
+      } else {
+        window.open(`https://abr.business.gov.au/Search/ResultsActive?SearchText=${encodeURIComponent(q)}`, '_blank');
+      }
+    }
+
+    if (spotBtn && !spotBtn._gebound) {
+      spotBtn._gebound = true;
+      spotBtn.addEventListener('click', geDoSpotlight);
+    }
+    if (spotInput && !spotInput._gebound) {
+      spotInput._gebound = true;
+      spotInput.addEventListener('keydown', e => { if (e.key === 'Enter') geDoSpotlight(); });
+    }
+
+    // Quick pivot rail
+    const pivotBindings = {
+      'ge-pivot-graph': () => { closeGodsEyeModal(); openInvestigationGraph(); },
+      'ge-pivot-copilot': () => { closeGodsEyeModal(); openAiCopilotModal(); },
+      'ge-pivot-radar': () => { closeGodsEyeModal(); openThreatRadar(); },
+      'ge-pivot-corp': () => { closeGodsEyeModal(); openCorpRecon(); },
+      'ge-pivot-austlii': () => window.open('https://www.austlii.edu.au/', '_blank'),
+      'ge-pivot-social': () => { closeGodsEyeModal(); openSocialRecon(); },
+    };
+
+    Object.entries(pivotBindings).forEach(([id, fn]) => {
+      const btn = document.getElementById(id);
+      if (btn && !btn._gebound) {
+        btn._gebound = true;
+        btn.addEventListener('click', fn);
+      }
+    });
+
+    // Close popover when clicking outside
+    document.addEventListener('click', geHideStatePopover, { capture: false });
+  }
+
+  function geShowStatePopover(abbr, evt) {
+    const state = GE_AU_STATES[abbr];
+    if (!state) return;
+
+    geHideStatePopover();
+    const popover = document.getElementById('ge-state-popover');
+    const titleEl = document.getElementById('ge-popover-title');
+    const linksEl = document.getElementById('ge-popover-links');
+    if (!popover || !titleEl || !linksEl) return;
+
+    titleEl.textContent = `${abbr} — ${state.name}`;
+    linksEl.innerHTML = `
+      <a class="ge-state-link" href="${state.police}" target="_blank" rel="noopener">🚔 Police Portal</a>
+      <a class="ge-state-link" href="${state.courts}" target="_blank" rel="noopener">⚖️ Courts</a>
+      <a class="ge-state-link" href="${state.abn}" target="_blank" rel="noopener">🏢 ABN Search</a>
+      <a class="ge-state-link" href="${state.bom}" target="_blank" rel="noopener">🌦️ BoM Weather</a>
+      <a class="ge-state-link" href="${state.news}" target="_blank" rel="noopener">📰 Local News</a>
+      <a class="ge-state-link" href="${state.land}" target="_blank" rel="noopener">📄 Land / Titles</a>
+    `;
+
+    // Position near click
+    const rect = evt.currentTarget.getBoundingClientRect();
+    popover.style.top = (rect.bottom + 4) + 'px';
+    popover.style.left = Math.min(rect.left, window.innerWidth - 240) + 'px';
+    popover.classList.add('visible');
+    evt.stopPropagation();
+  }
+
+  function geHideStatePopover() {
+    const popover = document.getElementById('ge-state-popover');
+    if (popover) popover.classList.remove('visible');
+  }
+
+  // =========================================================================
   // 6. THREAT DORK & ATTACK SURFACE GENERATOR
   // =========================================================================
   const elModalDorks = document.getElementById('modal-dorks');
@@ -10842,6 +11245,8 @@ ${formatInstructions}
   window.openSessionExport = openSessionExport;
   window.openAiCopilotModal = openAiCopilotModal;
   window.openAdminModal = openAdminModal;
+  window.openGodsEyeModal = openGodsEyeModal;
+  window.closeGodsEyeModal = closeGodsEyeModal;
   window.openTypographyModal = openTypographyModal;
   window.openSettingsModal = openSettingsModal;
   window.closeSettingsModal = closeSettingsModal;
