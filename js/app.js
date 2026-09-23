@@ -22,6 +22,96 @@
   let userBookmarks = JSON.parse(localStorage.getItem('bubbsy_user_bookmarks') || '[]');
   let userFavorites = JSON.parse(localStorage.getItem('bubbsy_favorites') || '[]');
   let hoveredLink = null;
+
+  // --- CATALOG SORT MODES ---
+  // The build pipeline (modules_extra.apply_au_priority) bakes Australian-first order into
+  // data/osint_data.json: [AUS] modules sit high in each column, `au` links sit at the top of each
+  // module. That stays the default and the shipped data is never mutated — these modes re-order a
+  // copy at render time, using the `au` / `au_module` flags the data already carries.
+  const SORT_MODE_KEY = 'bubbsy_sort_mode';
+  const SORT_MODES = ['au', 'az', 'picks'];
+
+  function getSortMode() {
+    try {
+      const stored = localStorage.getItem(SORT_MODE_KEY);
+      return SORT_MODES.includes(stored) ? stored : 'au';
+    } catch (e) {
+      return 'au'; // storage blocked (private window): fall back to the shipped order
+    }
+  }
+
+  function isFavoriteLink(link) {
+    return userFavorites.some(f => f.url === link.url || (link.id && f.id === link.id));
+  }
+
+  // "[AUS] Police & Courts" must sort under P, not under "[". Without stripping the prefix an
+  // ASCII sort puts every [AUS] module first, and A–Z would silently reproduce Australian-first.
+  function sortableTitle(title) {
+    return String(title || '').replace(/^\[AUS\]\s*/i, '').trim().toLowerCase();
+  }
+
+  function byTitle(a, b) {
+    return sortableTitle(a.title).localeCompare(sortableTitle(b.title));
+  }
+
+  // Returns a re-ordered copy. Widgets sort within their own column rather than being
+  // redistributed across columns — that keeps the four-column layout balanced instead of dumping
+  // 113 modules into one alphabetical run down column one.
+  function sortColumnsForMode(columns, mode) {
+    if (mode === 'au') return columns || []; // shipped order is already Australian-first
+
+    return (columns || []).map(col => {
+      const widgets = (col.widgets || []).map(w => {
+        const links = (w.links || []).slice();
+
+        if (mode === 'az') {
+          links.sort(byTitle);
+        } else if (mode === 'picks') {
+          // Favourites rise to the top; everything below stays alphabetical.
+          links.sort((a, b) => {
+            const fa = isFavoriteLink(a) ? 0 : 1;
+            const fb = isFavoriteLink(b) ? 0 : 1;
+            return fa !== fb ? fa - fb : byTitle(a, b);
+          });
+        }
+
+        return Object.assign({}, w, { links });
+      });
+
+      if (mode === 'az') {
+        widgets.sort(byTitle);
+      } else if (mode === 'picks') {
+        // Modules holding the most pinned tools float highest; ties break alphabetically.
+        const pinCount = wd => (wd.links || []).filter(isFavoriteLink).length;
+        widgets.sort((a, b) => {
+          const diff = pinCount(b) - pinCount(a);
+          return diff !== 0 ? diff : byTitle(a, b);
+        });
+      }
+
+      return Object.assign({}, col, { widgets });
+    });
+  }
+
+  function setSortMode(mode) {
+    if (!SORT_MODES.includes(mode)) return;
+    try { localStorage.setItem(SORT_MODE_KEY, mode); } catch (e) {}
+    syncSortModeButtons();
+    renderDashboard();
+    // Re-apply whatever category filter was active, so changing order never silently drops the
+    // user out of the view they were in.
+    if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+  }
+
+  function syncSortModeButtons() {
+    const mode = getSortMode();
+    document.querySelectorAll('.sort-mode-btn').forEach(btn => {
+      const isActive = btn.getAttribute('data-sort-mode') === mode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
   let radarFeedData = [];
   let investigationGraph = JSON.parse(localStorage.getItem('bubbsy_investigation_graph') || JSON.stringify({
     nodes: [
@@ -188,6 +278,7 @@
       return;
     }
 
+    syncSortModeButtons(); // reflect the persisted choice before the first paint
     renderDashboard();
     renderWorldClocks();
     setInterval(updateWorldClocks, 1000);
@@ -791,7 +882,9 @@
 
   function renderDashboard() {
     elDashboardGrid.innerHTML = '';
-    const columns = appData.columns || [];
+    // appData.columns itself is never reordered — sortColumnsForMode hands back a copy, so the
+    // shipped Australian-first order is always recoverable by switching back to it.
+    const columns = sortColumnsForMode(appData.columns || [], getSortMode());
 
     columns.forEach((col, colIdx) => {
       const colDiv = document.createElement('div');
@@ -1457,6 +1550,15 @@
     const activePill = document.querySelector('.cat-pill.active');
     if (activePill && activePill.getAttribute('data-filter-group') === 'favorites') {
       filterByCategory('favorites');
+    }
+
+    // In My Picks the order is derived from the favourites themselves, so pinning or unpinning
+    // has to re-sort. Deferred a frame so the pin pulse animation isn't cut off by the rebuild.
+    if (getSortMode() === 'picks') {
+      requestAnimationFrame(() => {
+        renderDashboard();
+        if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+      });
     }
   }
 
@@ -9036,6 +9138,13 @@ ${formatInstructions}
 
   // Collapse / Expand All Dashboard Categories
   let allCardsCollapsed = false;
+  document.getElementById('sort-mode-group')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.sort-mode-btn');
+    if (!btn) return;
+    const mode = btn.getAttribute('data-sort-mode');
+    if (mode && mode !== getSortMode()) setSortMode(mode);
+  });
+
   document.getElementById('btn-toggle-all-cards')?.addEventListener('click', () => {
     allCardsCollapsed = !allCardsCollapsed;
     const cards = document.querySelectorAll('.widget-card');

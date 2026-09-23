@@ -381,6 +381,19 @@
     <button class="cat-pill" data-filter-group="records_legal">Public Records & Gov</button>
     <button class="cat-pill" data-filter-group="tools_general">Productivity & Toolsets</button>
     <button class="cat-pill" data-filter-group="favorites">Pinned Tools</button>
+
+    <!-- Catalog order. No data-adv: the order you read the page in matters just as much in
+         Basic as in Advanced, so this stays visible in both interface modes. -->
+    <div class="sort-mode-group" id="sort-mode-group" role="group" aria-label="Catalogue order">
+      <span class="sort-mode-label" aria-hidden="true">ORDER</span>
+      <button type="button" class="sort-mode-btn active" data-sort-mode="au" aria-pressed="true"
+              title="Australian sources first — [AUS] modules and .au links float to the top">AU First</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="az" aria-pressed="false"
+              title="Straight alphabetical, no Australian priority">A–Z</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="picks" aria-pressed="false"
+              title="Your pinned tools first, then alphabetical">My Picks</button>
+    </div>
+
     <button class="btn-icon" id="btn-toggle-all-cards" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(255,255,255,0.15);" title="Collapse / Expand All Category Cards">Collapse All</button>
   </nav>
 
