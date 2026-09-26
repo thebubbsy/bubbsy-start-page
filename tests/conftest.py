@@ -2,6 +2,12 @@
 Shared pytest fixtures for Bubbsy Start Page & OSINT Hub test suite.
 """
 
+import os
+import tempfile
+
+# Keep the test run's accounts in a throwaway database, never the real one in ~/.bubbsy.
+os.environ.setdefault('BUBBSY_DB_PATH', os.path.join(tempfile.mkdtemp(prefix='bubbsy-test-'), 'accounts.db'))
+
 import pytest
 import threading
 import urllib.request

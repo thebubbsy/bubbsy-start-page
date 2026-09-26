@@ -23,7 +23,9 @@ import hashlib
 import re
 import datetime
 import unicodedata
+import http.cookies
 import mailaccess_engine
+import accounts
 import domain_drop_engine
 
 # Enforce UTF-8 on Windows console
@@ -1437,9 +1439,21 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_get_manifest()
         elif path == '/api/info':
             self.handle_info()
+        elif path == '/api/auth/me':
+            self.handle_auth_me()
+        elif path == '/api/prefs':
+            self.handle_get_prefs()
+        elif accounts.is_private_path(path):
+            self.send_error(404, "File not found")
         else:
             # Fall back to serving static files
             super().do_GET()
+
+    def do_HEAD(self):
+        if accounts.is_private_path(urllib.parse.urlparse(self.path).path):
+            self.send_error(404, "File not found")
+        else:
+            super().do_HEAD()
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
@@ -1449,6 +1463,8 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_es_open()
         elif path == '/api/bookmarks':
             self.handle_save_bookmarks()
+        elif path.startswith('/api/auth/') or path == '/api/prefs':
+            self.handle_account_post(path)
         else:
             self.send_error(404, "Endpoint not found")
 
@@ -1543,6 +1559,126 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self._json_response({'status': 'saved'})
         except Exception as e:
             self._json_response({'error': str(e)}, 500)
+
+    # --- ACCOUNTS & SYNCED PREFERENCES (see accounts.py) ---
+    # Same-origin only: the session cookie is HttpOnly + SameSite=Lax, and state-changing requests
+    # carrying a foreign Origin are refused, so the permissive CORS header above cannot be used to
+    # read or change someone's account from another site.
+
+    def _session_token(self):
+        cookie = http.cookies.SimpleCookie()
+        try:
+            cookie.load(self.headers.get('Cookie', ''))
+        except http.cookies.CookieError:
+            return None
+        morsel = cookie.get(accounts.SESSION_COOKIE)
+        return morsel.value if morsel else None
+
+    def _current_user(self):
+        try:
+            return accounts.user_for_session(self._session_token())
+        except Exception:
+            return None
+
+    def _is_https(self):
+        return self.headers.get('X-Forwarded-Proto', '').split(',')[0].strip() == 'https'
+
+    def _session_cookie_header(self, token, max_age):
+        parts = [f'{accounts.SESSION_COOKIE}={token}', 'Path=/', 'HttpOnly', 'SameSite=Lax', f'Max-Age={max_age}']
+        if self._is_https():
+            parts.append('Secure')
+        return '; '.join(parts)
+
+    def _json_response_with_cookie(self, data, cookie_header, status=200):
+        body = json.dumps(data).encode('utf-8')
+        self.send_response(status)
+        self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Set-Cookie', cookie_header)
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _same_origin(self):
+        origin = self.headers.get('Origin')
+        if not origin:
+            return True
+        host = self.headers.get('X-Forwarded-Host') or self.headers.get('Host', '')
+        return urllib.parse.urlparse(origin).netloc == host
+
+    def _read_json_body(self, limit=accounts.MAX_PREFS_BYTES * 2):
+        length = int(self.headers.get('Content-Length', 0) or 0)
+        if length > limit:
+            raise accounts.AuthError('Request is too large.', 413)
+        raw = self.rfile.read(length).decode('utf-8') if length else '{}'
+        try:
+            data = json.loads(raw or '{}')
+        except ValueError:
+            raise accounts.AuthError('Request body must be JSON.')
+        if not isinstance(data, dict):
+            raise accounts.AuthError('Request body must be a JSON object.')
+        return data
+
+    def handle_auth_me(self):
+        user = self._current_user()
+        self._json_response({
+            'accountsEnabled': True,
+            'googleClientId': accounts.google_client_id() or None,
+            'user': user,
+        })
+
+    def handle_get_prefs(self):
+        user = self._current_user()
+        if not user:
+            self._json_response({'error': 'Not signed in.'}, 401)
+            return
+        self._json_response(accounts.get_prefs(user['id']))
+
+    def handle_account_post(self, path):
+        try:
+            if not self._same_origin():
+                raise accounts.AuthError('Cross-site request refused.', 403)
+            body = self._read_json_body()
+            client_ip = self.headers.get('X-Forwarded-For', '').split(',')[0].strip() or self.client_address[0]
+
+            if path in ('/api/auth/signup', '/api/auth/login', '/api/auth/google'):
+                accounts.check_rate_limit(client_ip)
+                try:
+                    if path == '/api/auth/signup':
+                        user = accounts.signup(body.get('email'), body.get('password'))
+                    elif path == '/api/auth/login':
+                        user = accounts.login(body.get('email'), body.get('password'))
+                    else:
+                        user = accounts.login_with_google(body.get('credential'))
+                except accounts.AuthError:
+                    accounts.record_failed_attempt(client_ip)
+                    raise
+                token = accounts.create_session(user['id'])
+                self._json_response_with_cookie(
+                    {'user': user, **accounts.get_prefs(user['id'])},
+                    self._session_cookie_header(token, accounts.SESSION_TTL_SECONDS))
+                return
+
+            if path == '/api/auth/logout':
+                accounts.destroy_session(self._session_token())
+                self._json_response_with_cookie({'status': 'signed_out'}, self._session_cookie_header('', 0))
+                return
+
+            user = self._current_user()
+            if not user:
+                raise accounts.AuthError('Not signed in.', 401)
+
+            if path == '/api/prefs':
+                self._json_response(accounts.save_prefs(user['id'], body.get('prefs')))
+            elif path == '/api/auth/delete':
+                accounts.delete_user(user['id'])
+                self._json_response_with_cookie({'status': 'deleted'}, self._session_cookie_header('', 0))
+            else:
+                raise accounts.AuthError('Endpoint not found.', 404)
+        except accounts.AuthError as e:
+            self._json_response({'error': e.message}, e.status)
+        except Exception as e:
+            print(f'[accounts] {path} failed: {e!r}')
+            self._json_response({'error': 'Something went wrong on our side. Please try again.'}, 500)
 
     def handle_radar_feed(self, params):
         """Fetches and caches live Threat Intel / CVE feed from CISA KEV or fallback source, strictly sorted newest first."""

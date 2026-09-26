@@ -72,7 +72,8 @@ def test_control_is_visible_in_both_interface_modes(live_server):
 
             assert page.locator('#sort-mode-group').is_visible() is True, \
                 f"order control should be visible in {ui_mode} mode"
-            assert page.locator('.sort-mode-btn').count() == 3
+            modes = page.eval_on_selector_all('.sort-mode-btn', 'bs => bs.map(b => b.dataset.sortMode)')
+            assert modes == ['au', 'az', 'newest', 'picks', 'custom']
 
             browser.close()
 

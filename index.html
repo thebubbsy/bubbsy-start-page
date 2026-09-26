@@ -216,6 +216,14 @@
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
         </button>
+        <!-- Hidden until the server confirms accounts are available (never shown when opened from disk). -->
+        <button class="btn-icon account-btn" id="btn-account" hidden title="Sign in to save your preferences across computers" aria-label="Account: sign in to sync preferences" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="account-btn-label" id="account-btn-label">Sign in</span>
+        </button>
         <div class="ui-mode-switch" role="group" aria-label="Interface complexity">
           <button type="button" class="ui-mode-btn" id="btn-mode-basic" data-mode="basic" title="Basic: a clean start page with search and categories">Basic</button>
           <button type="button" class="ui-mode-btn" id="btn-mode-advanced" data-mode="advanced" title="Advanced: full tactical HUD with clocks, hotkeys and every tool inline">Advanced</button>
@@ -390,8 +398,17 @@
               title="Australian sources first — [AUS] modules and .au links float to the top">AU First</button>
       <button type="button" class="sort-mode-btn" data-sort-mode="az" aria-pressed="false"
               title="Straight alphabetical, no Australian priority">A–Z</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="newest" aria-pressed="false"
+              title="Most recently added tools first, in every module">Newest</button>
       <button type="button" class="sort-mode-btn" data-sort-mode="picks" aria-pressed="false"
               title="Your pinned tools first, then alphabetical">My Picks</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="custom" aria-pressed="false"
+              title="Your own order: drag modules and links by their ☰ handle, then save">Custom</button>
+      <button type="button" class="sort-arrange-btn" id="btn-arrange-layout" hidden
+              title="Rearrange your custom layout" aria-label="Rearrange your custom layout">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        Arrange
+      </button>
     </div>
 
     <button class="btn-icon" id="btn-toggle-all-cards" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(255,255,255,0.15);" title="Collapse / Expand All Category Cards">Collapse All</button>
@@ -2087,8 +2104,84 @@
   <div id="toast-container"></div>
 
   <!-- Scripts: bundled offline data first, then app controller -->
+  <!-- Arrange mode toolbar (custom layout). Shown only while arranging. -->
+  <div class="layout-edit-bar" id="layout-edit-bar" role="region" aria-label="Arrange layout" hidden>
+    <div class="layout-edit-text">
+      <strong>Arranging your layout.</strong>
+      <span>Drag the ☰ handles to move modules (even between columns) and to reorder links inside a module. Keyboard: focus a handle and use the arrow keys.</span>
+    </div>
+    <div class="layout-edit-actions">
+      <button type="button" class="btn-icon" id="btn-layout-reset" title="Discard unsaved moves and start from the original order">Start over</button>
+      <button type="button" class="btn-icon" id="btn-layout-cancel">Cancel</button>
+      <button type="button" class="btn-icon layout-save-btn" id="btn-layout-save">Save layout</button>
+    </div>
+  </div>
+
+  <!-- Account: optional, and only ever used to store display preferences. -->
+  <div class="modal-overlay" id="modal-account" role="dialog" aria-modal="true" aria-labelledby="modal-account-title">
+    <div class="modal-content account-modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-account-title">Save your preferences across computers</h3>
+        <button class="modal-close" id="btn-close-account" aria-label="Close account dialog">&times;</button>
+      </div>
+
+      <div class="account-honest">
+        <p><strong>What an account does — and all it does:</strong> it stores your Bubbsy preferences on our server so they follow you to any computer you sign in on.</p>
+        <ul>
+          <li><strong>Synced:</strong> catalogue order, your custom layout, pinned tools, collapsed modules, theme, typography, Basic/Advanced mode, your added bookmarks and search settings.</li>
+          <li><strong>Stored about you:</strong> your email and a salted password hash (or your Google account ID if you use Google). That's it.</li>
+          <li><strong>Never stored:</strong> your searches, the sites you open, your investigation graph or notes. No tracking, no analytics, no emails from us.</li>
+          <li><strong>You don't need one.</strong> Everything already works and is saved in this browser. An account only matters if you use more than one computer.</li>
+          <li>You can delete your account and everything stored with it at any time, from this window.</li>
+        </ul>
+      </div>
+
+      <div id="account-signed-out">
+        <div id="account-google-wrap" class="account-google-wrap" hidden>
+          <div id="account-google-btn"></div>
+          <div class="account-divider"><span>or use email</span></div>
+        </div>
+
+        <div class="account-tabs" role="tablist" aria-label="Sign in or create account">
+          <button type="button" class="account-tab active" role="tab" id="account-tab-login" aria-selected="true" data-account-tab="login">Sign in</button>
+          <button type="button" class="account-tab" role="tab" id="account-tab-signup" aria-selected="false" data-account-tab="signup">Create account</button>
+        </div>
+
+        <form id="form-account" class="account-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="account-email">Email</label>
+            <input class="form-control" type="email" id="account-email" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="account-password">Password</label>
+            <input class="form-control" type="password" id="account-password" autocomplete="current-password" minlength="8" required>
+            <p class="account-hint" id="account-password-hint" hidden>At least 8 characters.</p>
+          </div>
+          <p class="account-error" id="account-error" role="alert" hidden></p>
+          <button type="submit" class="btn-icon account-submit" id="account-submit">Sign in</button>
+        </form>
+      </div>
+
+      <div id="account-signed-in" hidden>
+        <p class="account-status">Signed in as <strong id="account-email-display"></strong></p>
+        <p class="account-sync-status" id="account-sync-status" aria-live="polite"></p>
+        <div class="account-actions">
+          <button type="button" class="btn-icon" id="btn-account-sync">Sync now</button>
+          <button type="button" class="btn-icon" id="btn-account-logout">Sign out</button>
+        </div>
+        <details class="account-danger">
+          <summary>Delete my account</summary>
+          <p>This permanently deletes your account and the preferences stored with it on our server. Preferences in this browser stay as they are.</p>
+          <button type="button" class="btn-icon account-delete-btn" id="btn-account-delete">Delete account and data</button>
+        </details>
+      </div>
+    </div>
+  </div>
+
   <script src="data/osint_data.js"></script>
+  <script src="data/link_dates.js"></script>
   <script src="data/radar_cache.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
 </body>
 </html>

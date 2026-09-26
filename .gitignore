@@ -10,3 +10,8 @@ env/
 venv/
 .DS_Store
 Thumbs.db
+
+# Account store (see accounts.py) — never commit user data
+*.db
+*.db-wal
+*.db-shm

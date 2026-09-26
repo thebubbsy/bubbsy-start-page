@@ -5,12 +5,18 @@ import os
 import sys
 import mimetypes
 
+from accounts import is_private_path
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 def application(environ, start_response):
     path = environ.get('PATH_INFO', '/')
     root_dir = os.path.dirname(os.path.abspath(__file__))
     
+    if is_private_path(path):
+        start_response('404 Not Found', [('Content-Type', 'text/plain')])
+        return [b'404 Not Found']
+
     if path == '/' or path == '':
         file_path = os.path.join(root_dir, 'index.html')
     else:
