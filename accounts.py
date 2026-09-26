@@ -305,3 +305,112 @@ def save_prefs(user_id, prefs):
                      'ON CONFLICT(user_id) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at',
                      (user_id, data, updated_at))
     return {'updatedAt': updated_at}
+
+
+# --- HTTP routing (shared by server.py and wsgi.py) --------------------------------------------
+# Framework-neutral so every way this site is hosted exposes the same account API. Same-origin
+# only: the session cookie is HttpOnly + SameSite=Lax, and state-changing requests carrying a
+# foreign Origin are refused, so the site's permissive CORS header cannot be used to read or change
+# someone's account from another site.
+
+API_PATHS = ('/api/auth/me', '/api/auth/signup', '/api/auth/login', '/api/auth/google',
+             '/api/auth/logout', '/api/auth/delete', '/api/prefs')
+
+
+def is_api_path(path):
+    return path in API_PATHS
+
+
+def _session_token(headers):
+    import http.cookies
+    cookie = http.cookies.SimpleCookie()
+    try:
+        cookie.load(headers.get('Cookie') or '')
+    except http.cookies.CookieError:
+        return None
+    morsel = cookie.get(SESSION_COOKIE)
+    return morsel.value if morsel else None
+
+
+def _cookie_header(headers, token, max_age):
+    parts = [f'{SESSION_COOKIE}={token}', 'Path=/', 'HttpOnly', 'SameSite=Lax', f'Max-Age={max_age}']
+    if (headers.get('X-Forwarded-Proto') or '').split(',')[0].strip() == 'https' or headers.get('_https'):
+        parts.append('Secure')
+    return '; '.join(parts)
+
+
+def _same_origin(headers):
+    origin = headers.get('Origin')
+    if not origin:
+        return True
+    host = headers.get('X-Forwarded-Host') or headers.get('Host') or ''
+    return urllib.parse.urlparse(origin).netloc == host
+
+
+def _parse_body(raw):
+    try:
+        data = json.loads((raw or b'{}').decode('utf-8') or '{}')
+    except ValueError:
+        raise AuthError('Request body must be JSON.')
+    if not isinstance(data, dict):
+        raise AuthError('Request body must be a JSON object.')
+    return data
+
+
+def handle_request(method, path, headers, read_body, client_ip):
+    """Returns (status, payload_dict, set_cookie_header_or_None).
+
+    headers: mapping with .get(name); read_body(limit) -> bytes (raise AuthError if too large).
+    """
+    try:
+        token = _session_token(headers)
+
+        if method == 'GET':
+            user = user_for_session(token)
+            if path == '/api/auth/me':
+                return 200, {'accountsEnabled': True, 'googleClientId': google_client_id() or None, 'user': user}, None
+            if path == '/api/prefs':
+                if not user:
+                    raise AuthError('Not signed in.', 401)
+                return 200, get_prefs(user['id']), None
+            raise AuthError('Endpoint not found.', 404)
+
+        if method != 'POST':
+            raise AuthError('Method not allowed.', 405)
+        if not _same_origin(headers):
+            raise AuthError('Cross-site request refused.', 403)
+        body = _parse_body(read_body(MAX_PREFS_BYTES * 2))
+
+        if path in ('/api/auth/signup', '/api/auth/login', '/api/auth/google'):
+            check_rate_limit(client_ip)
+            try:
+                if path == '/api/auth/signup':
+                    user = signup(body.get('email'), body.get('password'))
+                elif path == '/api/auth/login':
+                    user = login(body.get('email'), body.get('password'))
+                else:
+                    user = login_with_google(body.get('credential'))
+            except AuthError:
+                record_failed_attempt(client_ip)
+                raise
+            new_token = create_session(user['id'])
+            return 200, {'user': user, **get_prefs(user['id'])}, _cookie_header(headers, new_token, SESSION_TTL_SECONDS)
+
+        if path == '/api/auth/logout':
+            destroy_session(token)
+            return 200, {'status': 'signed_out'}, _cookie_header(headers, '', 0)
+
+        user = user_for_session(token)
+        if not user:
+            raise AuthError('Not signed in.', 401)
+        if path == '/api/prefs':
+            return 200, save_prefs(user['id'], body.get('prefs')), None
+        if path == '/api/auth/delete':
+            delete_user(user['id'])
+            return 200, {'status': 'deleted'}, _cookie_header(headers, '', 0)
+        raise AuthError('Endpoint not found.', 404)
+    except AuthError as e:
+        return e.status, {'error': e.message}, None
+    except Exception as e:
+        print(f'[accounts] {method} {path} failed: {e!r}')
+        return 500, {'error': 'Something went wrong on our side. Please try again.'}, None
