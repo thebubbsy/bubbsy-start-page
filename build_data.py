@@ -696,5 +696,13 @@ def build_data():
     print(f"Total Links: {total_links}")
     print(f"Australian-priority links: {au_link_total}")
 
+    # Refresh first-added dates for the "Newest" catalogue order. Needs git history; skip quietly
+    # when building from an export without it.
+    try:
+        import build_link_dates
+        build_link_dates.build()
+    except Exception as e:
+        print(f"link_dates not refreshed ({e}); run build_link_dates.py from a git checkout")
+
 if __name__ == '__main__':
     build_data()

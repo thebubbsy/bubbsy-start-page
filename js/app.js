@@ -29,7 +29,8 @@
   // module. That stays the default and the shipped data is never mutated — these modes re-order a
   // copy at render time, using the `au` / `au_module` flags the data already carries.
   const SORT_MODE_KEY = 'bubbsy_sort_mode';
-  const SORT_MODES = ['au', 'az', 'picks'];
+  const CUSTOM_LAYOUT_KEY = 'bubbsy_custom_layout';
+  const SORT_MODES = ['au', 'az', 'newest', 'picks', 'custom'];
 
   function getSortMode() {
     try {
@@ -54,10 +55,30 @@
     return sortableTitle(a.title).localeCompare(sortableTitle(b.title));
   }
 
+  // First-added time per link, derived from git history by build_link_dates.py. A link missing from
+  // the map was added after the map was last built, so it counts as the newest thing there is.
+  // User-added bookmarks carry their creation time (Date.now()) as their id.
+  const LINK_DATES = window.BUBBSY_LINK_DATES || {};
+  function linkAddedAt(link) {
+    if (LINK_DATES[link.url] !== undefined) return LINK_DATES[link.url];
+    if (typeof link.id === 'number' && link.id > 1e12) return Math.floor(link.id / 1000);
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  function byNewest(a, b) {
+    const diff = linkAddedAt(b) - linkAddedAt(a);
+    return diff !== 0 ? diff : byTitle(a, b);
+  }
+
+  function moduleNewest(w) {
+    return (w.links || []).reduce((max, l) => Math.max(max, linkAddedAt(l)), 0);
+  }
+
   // Returns a re-ordered copy. Widgets sort within their own column rather than being
   // redistributed across columns — that keeps the four-column layout balanced instead of dumping
   // 113 modules into one alphabetical run down column one.
   function sortColumnsForMode(columns, mode) {
+    if (mode === 'custom') return applyCustomLayout(columns, getCustomLayout());
     if (mode === 'au') return columns || []; // shipped order is already Australian-first
 
     return (columns || []).map(col => {
@@ -66,6 +87,8 @@
 
         if (mode === 'az') {
           links.sort(byTitle);
+        } else if (mode === 'newest') {
+          links.sort(byNewest);
         } else if (mode === 'picks') {
           // Favourites rise to the top; everything below stays alphabetical.
           links.sort((a, b) => {
@@ -80,6 +103,12 @@
 
       if (mode === 'az') {
         widgets.sort(byTitle);
+      } else if (mode === 'newest') {
+        // Modules with the most recent additions float highest; ties break alphabetically.
+        widgets.sort((a, b) => {
+          const diff = moduleNewest(b) - moduleNewest(a);
+          return diff !== 0 ? diff : byTitle(a, b);
+        });
       } else if (mode === 'picks') {
         // Modules holding the most pinned tools float highest; ties break alphabetically.
         const pinCount = wd => (wd.links || []).filter(isFavoriteLink).length;
@@ -93,6 +122,62 @@
     });
   }
 
+  // --- CUSTOM LAYOUT ---
+  // Stored as { v, base, columns: [[widgetId, ...], ...], links: { widgetId: [url, ...] } }.
+  // `base` is the order the user started arranging from; anything the layout does not mention
+  // (modules or links added to the catalogue later) keeps its place from that base order, so a
+  // saved layout never hides new tools. Only modules whose links were re-ordered get a links entry.
+  function getCustomLayout() {
+    try {
+      const layout = JSON.parse(localStorage.getItem(CUSTOM_LAYOUT_KEY) || 'null');
+      return layout && Array.isArray(layout.columns) ? layout : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function applyCustomLayout(columns, layout) {
+    const baseMode = layout && SORT_MODES.includes(layout.base) && layout.base !== 'custom' ? layout.base : 'au';
+    const base = sortColumnsForMode(columns, baseMode);
+    if (!layout) return base;
+
+    const byId = new Map();
+    base.forEach((col, colIdx) => (col.widgets || []).forEach(w => byId.set(String(w.id), { w, colIdx })));
+
+    const placed = new Set();
+    const out = base.map(col => Object.assign({}, col, { widgets: [] }));
+    layout.columns.forEach((ids, colIdx) => {
+      if (colIdx >= out.length || !Array.isArray(ids)) return;
+      ids.forEach(id => {
+        const hit = byId.get(String(id));
+        if (hit && !placed.has(String(id))) {
+          placed.add(String(id));
+          out[colIdx].widgets.push(hit.w);
+        }
+      });
+    });
+    // Modules the layout does not know about stay in their base column, at the end.
+    byId.forEach((hit, id) => {
+      if (!placed.has(id)) out[hit.colIdx].widgets.push(hit.w);
+    });
+
+    const linkOrders = layout.links || {};
+    out.forEach(col => {
+      col.widgets = col.widgets.map(w => {
+        const order = linkOrders[String(w.id)];
+        if (!Array.isArray(order)) return w;
+        const rank = new Map(order.map((url, i) => [url, i]));
+        const links = (w.links || []).slice().sort((a, b) => {
+          const ra = rank.has(a.url) ? rank.get(a.url) : Infinity;
+          const rb = rank.has(b.url) ? rank.get(b.url) : Infinity;
+          return ra === rb ? 0 : ra - rb; // stable: unknown links keep base order after the known ones
+        });
+        return Object.assign({}, w, { links });
+      });
+    });
+    return out;
+  }
+
   function setSortMode(mode) {
     if (!SORT_MODES.includes(mode)) return;
     try { localStorage.setItem(SORT_MODE_KEY, mode); } catch (e) {}
@@ -104,12 +189,244 @@
   }
 
   function syncSortModeButtons() {
-    const mode = getSortMode();
+    const mode = layoutEditing ? 'custom' : getSortMode();
     document.querySelectorAll('.sort-mode-btn').forEach(btn => {
       const isActive = btn.getAttribute('data-sort-mode') === mode;
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-pressed', String(isActive));
     });
+    const arrange = document.getElementById('btn-arrange-layout');
+    if (arrange) {
+      arrange.hidden = getSortMode() !== 'custom' || layoutEditing;
+    }
+    document.getElementById('sort-mode-group')?.classList.toggle('is-editing', layoutEditing);
+  }
+
+  // --- ARRANGE MODE (drag modules and links into a custom layout) ---
+  // Handles are only added while arranging, so the everyday dashboard carries no extra DOM.
+  // Dragging uses pointer events rather than HTML5 drag-and-drop so it also works on touch screens,
+  // and every handle is a real button that moves with the arrow keys for keyboard users.
+  let layoutEditing = false;
+  let editBaseMode = 'au';
+  let editDirtyLinks = new Set();
+
+  const HANDLE_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+
+  function enterLayoutEdit() {
+    if (layoutEditing || !appData) return;
+    const mode = getSortMode();
+    const layout = mode === 'custom' ? getCustomLayout() : null;
+    // Arranging starts from exactly what is on screen: the current order becomes the base, and any
+    // links already arranged in a saved layout stay arranged.
+    editBaseMode = layout ? (SORT_MODES.includes(layout.base) && layout.base !== 'custom' ? layout.base : 'au') : (mode === 'custom' ? 'au' : mode);
+    editDirtyLinks = new Set(Object.keys((layout && layout.links) || {}));
+
+    // Hidden modules cannot be dragged, so arrange the full catalogue with no filter or search.
+    activeCategoryGroup = 'all';
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
+    if (elMainSearch && elMainSearch.value) {
+      elMainSearch.value = '';
+      elMainSearch.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    layoutEditing = true;
+    document.body.classList.add('layout-editing');
+    renderDashboard(); // renders the current order and, because we are editing, adds the handles
+    const bar = document.getElementById('layout-edit-bar');
+    if (bar) bar.hidden = false;
+    syncSortModeButtons();
+    showToast('Arrange mode: drag the ☰ handles, then Save layout');
+  }
+
+  function exitLayoutEdit() {
+    layoutEditing = false;
+    document.body.classList.remove('layout-editing');
+    const bar = document.getElementById('layout-edit-bar');
+    if (bar) bar.hidden = true;
+    syncSortModeButtons();
+    renderDashboard();
+    if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+  }
+
+  function readLayoutFromDom() {
+    const columns = Array.from(elDashboardGrid.querySelectorAll('.column-stack')).map(col =>
+      Array.from(col.children).filter(c => c.classList.contains('widget-card')).map(c => c.getAttribute('data-widget-id')));
+    const links = {};
+    editDirtyLinks.forEach(id => {
+      const card = elDashboardGrid.querySelector(`.widget-card[data-widget-id="${CSS.escape(id)}"]`);
+      if (!card) return;
+      links[id] = Array.from(card.querySelectorAll('.link-item .link-anchor')).map(a => a.getAttribute('href'));
+    });
+    return { v: 1, base: editBaseMode, columns, links, savedAt: Date.now() };
+  }
+
+  function saveLayoutEdit() {
+    try {
+      localStorage.setItem(CUSTOM_LAYOUT_KEY, JSON.stringify(readLayoutFromDom()));
+      localStorage.setItem(SORT_MODE_KEY, 'custom');
+    } catch (e) {
+      showToast('Could not save layout: browser storage is unavailable', 'error');
+      return;
+    }
+    exitLayoutEdit();
+    showToast('Custom layout saved in this browser');
+    if (window.BubbsyAccount && typeof window.BubbsyAccount.offerSync === 'function') {
+      window.BubbsyAccount.offerSync('Your custom layout is saved in this browser.');
+    }
+  }
+
+  function startLayoutOver() {
+    editDirtyLinks = new Set();
+    // Re-render the base order without the saved layout: temporarily view the base mode.
+    const saved = getSortMode();
+    try { localStorage.setItem(SORT_MODE_KEY, editBaseMode); } catch (e) {}
+    renderDashboard();
+    try { localStorage.setItem(SORT_MODE_KEY, saved); } catch (e) {}
+    showToast('Back to the ' + ({ au: 'AU First', az: 'A–Z', newest: 'Newest', picks: 'My Picks' }[editBaseMode] || 'default') + ' order — nothing is saved until you press Save');
+  }
+
+  function decorateForLayoutEdit() {
+    elDashboardGrid.querySelectorAll('.widget-card').forEach(card => {
+      const header = card.querySelector('.widget-header');
+      const title = card.querySelector('.widget-title')?.textContent || 'module';
+      if (header && !header.querySelector('.drag-handle')) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'drag-handle module-handle';
+        btn.innerHTML = HANDLE_SVG;
+        btn.title = 'Drag to move this module (or use the arrow keys)';
+        btn.setAttribute('aria-label', `Move module ${title}. Arrow keys move up, down, or to another column.`);
+        header.insertBefore(btn, header.firstChild);
+      }
+      card.querySelectorAll('.link-item').forEach(li => {
+        if (li.querySelector('.drag-handle')) return;
+        const linkTitle = li.querySelector('.link-title')?.textContent || 'link';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'drag-handle link-handle';
+        btn.innerHTML = HANDLE_SVG;
+        btn.title = 'Drag to reorder within this module (or use the arrow keys)';
+        btn.setAttribute('aria-label', `Move ${linkTitle}. Arrow keys move it up or down.`);
+        li.insertBefore(btn, li.firstChild);
+      });
+    });
+  }
+
+  function markLinksDirty(el) {
+    const card = el.closest('.widget-card');
+    if (card) editDirtyLinks.add(card.getAttribute('data-widget-id'));
+  }
+
+  function sortableSiblings(container, kind, except) {
+    const sel = kind === 'module' ? 'widget-card' : 'link-item';
+    return Array.from(container.children).filter(c => c !== except && c.classList.contains(sel) && c.style.display !== 'none');
+  }
+
+  function columnAtPoint(x, y) {
+    const hit = document.elementFromPoint(x, y);
+    const col = hit && hit.closest && hit.closest('.column-stack');
+    if (col && elDashboardGrid.contains(col)) return col;
+    // Between or beside columns: pick the nearest one.
+    let best = null;
+    let bestDist = Infinity;
+    elDashboardGrid.querySelectorAll('.column-stack').forEach(c => {
+      const r = c.getBoundingClientRect();
+      const dx = Math.max(r.left - x, 0, x - r.right);
+      const dy = Math.max(r.top - y, 0, y - r.bottom);
+      const d = dx * dx + dy * dy;
+      if (d < bestDist) { bestDist = d; best = c; }
+    });
+    return best;
+  }
+
+  function beginLayoutDrag(e, handle) {
+    const kind = handle.classList.contains('module-handle') ? 'module' : 'link';
+    const item = handle.closest(kind === 'module' ? '.widget-card' : '.link-item');
+    if (!item) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const rect = item.getBoundingClientRect();
+    const placeholder = document.createElement(item.tagName);
+    placeholder.className = 'drag-placeholder';
+    placeholder.style.height = rect.height + 'px';
+    item.parentNode.insertBefore(placeholder, item);
+    const homeList = placeholder.parentNode; // links never leave their own module
+
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    item.classList.add('is-dragging');
+    Object.assign(item.style, { position: 'fixed', left: rect.left + 'px', top: rect.top + 'px', width: rect.width + 'px', zIndex: '9999', pointerEvents: 'none' });
+
+    const onMove = (ev) => {
+      item.style.left = (ev.clientX - offsetX) + 'px';
+      item.style.top = (ev.clientY - offsetY) + 'px';
+      const container = kind === 'module' ? columnAtPoint(ev.clientX, ev.clientY) : homeList;
+      if (!container) return;
+      let before = null;
+      for (const sib of sortableSiblings(container, kind, item)) {
+        const r = sib.getBoundingClientRect();
+        if (ev.clientY < r.top + r.height / 2) { before = sib; break; }
+      }
+      if (before) {
+        if (placeholder.nextSibling !== before) container.insertBefore(placeholder, before);
+      } else if (kind === 'link') {
+        const last = sortableSiblings(container, kind, item).pop();
+        if (last && last.nextSibling !== placeholder) last.after(placeholder);
+      } else if (container.lastElementChild !== placeholder) {
+        container.appendChild(placeholder);
+      }
+      // Nudge the page when dragging near the top or bottom edge.
+      if (ev.clientY < 70) window.scrollBy(0, -14);
+      else if (ev.clientY > window.innerHeight - 70) window.scrollBy(0, 14);
+    };
+
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      item.classList.remove('is-dragging');
+      ['position', 'left', 'top', 'width', 'zIndex', 'pointerEvents'].forEach(k => { item.style[k] = ''; });
+      placeholder.replaceWith(item);
+      if (kind === 'link') markLinksDirty(item);
+      handle.focus({ preventScroll: true });
+    };
+
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  }
+
+  function moveWithKeyboard(e, handle) {
+    const kind = handle.classList.contains('module-handle') ? 'module' : 'link';
+    const item = handle.closest(kind === 'module' ? '.widget-card' : '.link-item');
+    if (!item) return;
+    const container = item.parentNode;
+    const siblings = sortableSiblings(container, kind, null);
+    const idx = siblings.indexOf(item);
+    let moved = false;
+
+    if (e.key === 'ArrowUp' && idx > 0) {
+      container.insertBefore(item, siblings[idx - 1]);
+      moved = true;
+    } else if (e.key === 'ArrowDown' && idx < siblings.length - 1) {
+      siblings[idx + 1].after(item);
+      moved = true;
+    } else if (kind === 'module' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      const cols = Array.from(elDashboardGrid.querySelectorAll('.column-stack'));
+      const target = cols[cols.indexOf(container) + (e.key === 'ArrowLeft' ? -1 : 1)];
+      if (target) {
+        const targetSibs = sortableSiblings(target, kind, null);
+        const before = targetSibs[Math.min(idx, targetSibs.length)] || null;
+        target.insertBefore(item, before);
+        moved = true;
+      }
+    }
+    if (!moved) return;
+    e.preventDefault();
+    if (kind === 'link') markLinksDirty(item);
+    handle.focus();
+    item.scrollIntoView({ block: 'nearest' });
   }
 
   let radarFeedData = [];
@@ -907,6 +1224,7 @@
     elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     updateCategoryRibbonCounts();
     buildBookmarkSearchIndex();
+    if (layoutEditing) decorateForLayoutEdit();
   }
 
   function updateCategoryRibbonCounts() {
@@ -1554,7 +1872,7 @@
 
     // In My Picks the order is derived from the favourites themselves, so pinning or unpinning
     // has to re-sort. Deferred a frame so the pin pulse animation isn't cut off by the rebuild.
-    if (getSortMode() === 'picks') {
+    if (getSortMode() === 'picks' && !layoutEditing) {
       requestAnimationFrame(() => {
         renderDashboard();
         if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
@@ -9139,10 +9457,57 @@ ${formatInstructions}
   // Collapse / Expand All Dashboard Categories
   let allCardsCollapsed = false;
   document.getElementById('sort-mode-group')?.addEventListener('click', (e) => {
+    if (e.target.closest('#btn-arrange-layout')) {
+      enterLayoutEdit();
+      return;
+    }
     const btn = e.target.closest('.sort-mode-btn');
     if (!btn) return;
+    if (layoutEditing) {
+      showToast('Save or cancel your layout first');
+      return;
+    }
     const mode = btn.getAttribute('data-sort-mode');
+    if (mode === 'custom') {
+      // First time: there is nothing to show yet, so go straight into arranging.
+      if (getSortMode() === 'custom' || !getCustomLayout()) enterLayoutEdit();
+      else setSortMode('custom');
+      return;
+    }
     if (mode && mode !== getSortMode()) setSortMode(mode);
+  });
+
+  document.getElementById('btn-layout-save')?.addEventListener('click', saveLayoutEdit);
+  document.getElementById('btn-layout-cancel')?.addEventListener('click', () => {
+    exitLayoutEdit();
+    showToast('Layout changes discarded');
+  });
+  document.getElementById('btn-layout-reset')?.addEventListener('click', startLayoutOver);
+
+  // Handles live inside the dashboard and are rebuilt on every render, so listen once on the grid.
+  elDashboardGrid.addEventListener('pointerdown', (e) => {
+    if (!layoutEditing) return;
+    const handle = e.target.closest('.drag-handle');
+    if (handle && (e.pointerType !== 'mouse' || e.button === 0)) beginLayoutDrag(e, handle);
+  });
+  elDashboardGrid.addEventListener('keydown', (e) => {
+    if (!layoutEditing) return;
+    const handle = e.target.closest('.drag-handle');
+    if (handle) moveWithKeyboard(e, handle);
+  });
+  // While arranging, a click on a module header or link must not collapse the module or open the site.
+  elDashboardGrid.addEventListener('click', (e) => {
+    if (!layoutEditing) return;
+    if (e.target.closest('.drag-handle') || e.target.closest('.link-anchor')) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+  document.addEventListener('keydown', (e) => {
+    if (layoutEditing && e.key === 'Escape' && !document.querySelector('.modal-overlay.active')) {
+      exitLayoutEdit();
+      showToast('Layout changes discarded');
+    }
   });
 
   document.getElementById('btn-toggle-all-cards')?.addEventListener('click', () => {
@@ -10706,6 +11071,7 @@ ${formatInstructions}
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.cycleTheme = cycleTheme;
+  window.showToast = showToast;
 
   // Self Boot
   if (document.readyState === 'loading') {

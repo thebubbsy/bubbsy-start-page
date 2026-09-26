@@ -48,6 +48,16 @@
    - `!archive <url>`: Wayback Machine archive.
    - `!radar`: Jump straight to Threat Intel & CVE Live Radar.
 
+7. **Catalogue Order — one global setting, applied inside every module**:
+   - **AU First** (default), **A–Z**, **Newest** (most recently added tools first, dates derived from git history by `build_link_dates.py`), **My Picks** (pinned first).
+   - **Custom**: press it and every module and link gets a ☰ handle. Drag modules anywhere (including between columns) and links within their module, then **Save layout**. Keyboard: focus a handle and use the arrow keys. Tools added to the catalogue later still appear — a saved layout never hides anything.
+
+8. **Optional Account (preference sync only)**:
+   - Everything works without an account; preferences live in your browser.
+   - An account only stores your preferences (order, custom layout, pins, collapsed modules, theme, typography, mode, added bookmarks) so they follow you to other computers. It stores your email and a salted password hash (or Google account ID) — no searches, no browsing, no investigation data, no analytics. Users can delete their account and data from the account window.
+   - Email + password works out of the box. **Sign in with Google** appears once `GOOGLE_CLIENT_ID` is set (see below).
+   - The sign-in button is hidden when there is no server (opening `index.html` from disk or static hosting).
+
 ---
 
 ## 🚀 How to Run
@@ -66,6 +76,13 @@ Then navigate to `http://localhost:7777` in your browser.
 Simply double-click `index.html`. The bundled dataset `data/osint_data.js` loads immediately in any browser with full client-side filtering.
 
 ---
+
+### Accounts configuration
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `BUBBSY_DB_PATH` | `~/.bubbsy/accounts.db` | SQLite file for accounts and synced preferences. Keep it outside the served folder. On hosts with an ephemeral filesystem (e.g. Render without a disk) point this at a persistent disk, or accounts reset on every deploy. |
+| `GOOGLE_CLIENT_ID` | unset | Enables "Sign in with Google". Create an OAuth 2.0 Client ID (type *Web application*) in Google Cloud Console → APIs & Services → Credentials, add your site URL (e.g. `https://your-domain`) under *Authorized JavaScript origins*, and set the client ID here. No client secret is needed. |
 
 ## ⌨️ Keyboard Shortcuts
 
