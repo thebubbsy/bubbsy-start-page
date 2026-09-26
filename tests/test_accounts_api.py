@@ -141,3 +141,42 @@ def test_passwords_are_hashed_not_stored():
     assert 's3cret-pass' not in stored
     assert accounts.verify_password('s3cret-pass', stored)
     assert not accounts.verify_password('wrong', stored)
+
+
+def test_wsgi_entrypoint_serves_the_account_api(tmp_path, monkeypatch):
+    """PythonAnywhere/Gunicorn deployments go through wsgi.py, so accounts must work there too."""
+    import io
+    import wsgi
+
+    monkeypatch.setenv('BUBBSY_DB_PATH', str(tmp_path / 'wsgi.db'))
+
+    def call(method, path, body=None, cookie=None):
+        raw = json.dumps(body).encode() if body is not None else b''
+        environ = {'REQUEST_METHOD': method, 'PATH_INFO': path, 'wsgi.input': io.BytesIO(raw),
+                   'CONTENT_LENGTH': str(len(raw)), 'HTTP_HOST': 'example.test', 'REMOTE_ADDR': '10.9.9.9',
+                   'wsgi.url_scheme': 'https'}
+        if cookie:
+            environ['HTTP_COOKIE'] = cookie
+        seen = {}
+        out = wsgi.application(environ, lambda status, headers: seen.update(status=status, headers=dict(headers)))
+        return int(seen['status'].split()[0]), json.loads(b''.join(out) or b'{}'), seen['headers']
+
+    status, body, _ = call('GET', '/api/auth/me')
+    assert status == 200 and body['accountsEnabled'] is True
+
+    status, body, headers = call('POST', '/api/auth/signup', {'email': _email(), 'password': 'password123'})
+    assert status == 200
+    assert 'Secure' in headers['Set-Cookie']  # https deployment gets a Secure cookie
+    cookie = headers['Set-Cookie'].split(';')[0]
+
+    assert call('POST', '/api/prefs', {'prefs': {'bubbsy_theme': 'amber'}}, cookie)[0] == 200
+    assert call('GET', '/api/prefs', cookie=cookie)[1]['prefs'] == {'bubbsy_theme': 'amber'}
+
+
+def test_wsgi_refuses_paths_outside_the_site():
+    import io
+    import wsgi
+    seen = {}
+    environ = {'REQUEST_METHOD': 'GET', 'PATH_INFO': '/../../etc/passwd', 'wsgi.input': io.BytesIO(b'')}
+    wsgi.application(environ, lambda status, headers: seen.update(status=status))
+    assert seen['status'].startswith('404')

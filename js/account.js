@@ -220,13 +220,25 @@
     el.hidden = !msg;
   }
 
+  function setUnavailable() {
+    state.available = false;
+    const out = $('account-signed-out');
+    const inn = $('account-signed-in');
+    const na = $('account-unavailable');
+    if (out) out.hidden = true;
+    if (inn) inn.hidden = true;
+    if (na) na.hidden = false;
+  }
+
   function openAccountModal(tab) {
     const modal = $('modal-account');
     if (!modal) return;
-    if (tab) setTab(tab);
-    setUser(state.user);
+    if (state.available) {
+      if (tab) setTab(tab);
+      setUser(state.user);
+    }
     if (typeof window.openModal === 'function') window.openModal(modal); else modal.classList.add('active');
-    if (!state.user) loadGoogle();
+    if (state.available && !state.user) loadGoogle();
   }
 
   function closeAccountModal() {
@@ -361,18 +373,21 @@
       }
     } catch (e) {}
 
-    if (!window.location.protocol.startsWith('http')) return;
-    let me;
-    try {
-      me = await api('/api/auth/me');
-    } catch (e) {
-      return; // no account backend here (static hosting): keep the feature hidden
-    }
-    if (!me || !me.accountsEnabled) return;
-    state.available = true;
-    state.googleClientId = me.googleClientId || null;
+    // The button is always visible so the feature is discoverable. Where this copy of the site has
+    // no account server (opened from disk, or a static-only host), the window says so plainly
+    // instead of offering a form that could never work.
     const btn = $('btn-account');
     if (btn) btn.hidden = false;
+    let me = null;
+    if (window.location.protocol.startsWith('http')) {
+      try { me = await api('/api/auth/me'); } catch (e) { me = null; }
+    }
+    if (!me || !me.accountsEnabled) {
+      setUnavailable();
+      return;
+    }
+    state.available = true;
+    state.googleClientId = me.googleClientId || null;
     setUser(me.user || null);
     if (me.user) {
       try { await reconcile(await api('/api/prefs')); } catch (e) {}

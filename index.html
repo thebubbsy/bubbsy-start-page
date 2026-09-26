@@ -216,7 +216,7 @@
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
         </button>
-        <!-- Hidden until the server confirms accounts are available (never shown when opened from disk). -->
+        <!-- Always shown once js/account.js loads; the window explains when this host has no account server. -->
         <button class="btn-icon account-btn" id="btn-account" hidden title="Sign in to save your preferences across computers" aria-label="Account: sign in to sync preferences" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -1180,75 +1180,95 @@
         <button class="modal-close" id="btn-close-graph" aria-label="Close Visual Link Graph dialog">&times;</button>
       </div>
 
+      <!-- Case bar: several named investigations, each saved automatically in this browser -->
+      <div class="graph-casebar">
+        <label class="graph-case-label" for="graph-case-select">Case</label>
+        <select class="form-control" id="graph-case-select" aria-label="Open investigation case"></select>
+        <button type="button" class="btn-icon" id="btn-graph-case-new" title="Start a new, empty case">＋ New case</button>
+        <button type="button" class="btn-icon" id="btn-graph-case-rename" title="Rename this case">Rename</button>
+        <button type="button" class="btn-icon" id="btn-graph-case-delete" title="Delete this case">Delete</button>
+        <span class="graph-save-status" id="graph-save-status" aria-live="polite"></span>
+      </div>
+
       <!-- Graph Toolbar -->
-      <div class="graph-toolbar" style="flex-wrap:wrap;gap:6px;">
+      <div class="graph-toolbar">
         <div class="graph-tool-group">
-          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:200px;">
-          <select class="form-control" id="graph-new-node-type" style="width:120px;">
-            <option value="ip">IP Address</option>
-            <option value="domain">Domain</option>
-            <option value="hash">Hash</option>
-            <option value="email">Email</option>
+          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Add entity: 192.168.1.1, evil.com, Jane Doe…" aria-label="New entity name">
+          <select class="form-control" id="graph-new-node-type" aria-label="New entity type">
             <option value="person">Person</option>
-            <option value="org">Organization</option>
-            <option value="cve">CVE Exploit</option>
-            <option value="aus">[AUS] ABN/ACN</option>
-            <option value="threat_actor">Threat Actor</option>
-            <option value="location">Location / Geo</option>
+            <option value="threat_actor">Threat actor</option>
+            <option value="org">Organisation</option>
+            <option value="aus">[AUS] ABN / ACN</option>
+            <option value="domain">Domain</option>
+            <option value="url">URL</option>
+            <option value="ip" selected>IP address</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="social">Social account</option>
+            <option value="hash">File hash</option>
+            <option value="crypto">Key / wallet</option>
+            <option value="cve">Vulnerability (CVE)</option>
+            <option value="location">Location</option>
+            <option value="note">Note</option>
           </select>
-          <button type="button" class="btn-icon" id="btn-graph-add-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Node</button>
+          <button type="button" class="btn-icon graph-primary" id="btn-graph-add-node" title="Add the entity (linked to the selected one, if any)">＋ Add</button>
+          <select class="form-control" id="graph-edge-rel-type" aria-label="Relationship for new links" title="Relationship used for new links">
+            <option value="affiliated_with" selected>affiliated with</option>
+            <option value="owns">owns</option>
+            <option value="controls">controls</option>
+            <option value="employs">employs</option>
+            <option value="related_to">related to</option>
+            <option value="resolves_to">resolves to</option>
+            <option value="hosts">hosts</option>
+            <option value="registered_as">registered as</option>
+            <option value="uses_email">uses email</option>
+            <option value="uses_phone">uses phone</option>
+            <option value="located_at">located at</option>
+            <option value="communicates_with">communicates with</option>
+            <option value="targets">targets</option>
+            <option value="affected_by">affected by</option>
+            <option value="same_person_as">same person as</option>
+          </select>
+          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click one entity, then another, to link them">Connect Nodes</button>
         </div>
 
         <div class="graph-tool-group">
-          <select class="form-control" id="graph-layout-mode" style="width:140px;font-size:0.72rem;color:var(--accent-cyan);border-color:rgba(0,240,255,0.3);">
-            <option value="force" selected>⚡ Force Physics</option>
-            <option value="radial">🌐 Radial Starburst</option>
-            <option value="tree">🌲 Hierarchical Tree</option>
-            <option value="grid">▦ Grid Cluster</option>
+          <input type="search" class="form-control" id="graph-search-node" placeholder="Find in graph…" aria-label="Find entity in graph">
+          <select class="form-control" id="graph-layout-mode" aria-label="Arrange entities" title="Arrange entities">
+            <option value="force" selected>Layout: Force (by links)</option>
+            <option value="radial">Layout: Radial (hub centre)</option>
+            <option value="tree">Layout: Rows by type</option>
+            <option value="grid">Layout: Grid</option>
           </select>
-          <select class="form-control" id="graph-edge-rel-type" style="width:130px;font-size:0.72rem;color:var(--accent-green);border-color:rgba(16,185,129,0.3);">
-            <option value="affiliated_with" selected>🔗 affiliated_with</option>
-            <option value="owns">🏢 owns</option>
-            <option value="controls">🎮 controls</option>
-            <option value="resolves_to">🌐 resolves_to</option>
-            <option value="targets">🎯 targets</option>
-            <option value="communicates_with">💬 communicates_with</option>
-            <option value="associated_ip">⚡ associated_ip</option>
-          </select>
-          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them with selected relationship">Connect Nodes</button>
-          <button type="button" class="btn-icon" id="btn-graph-template" title="Load Australian Investigation Case Template">AU Template</button>
-          <button type="button" class="btn-icon" id="btn-graph-export-json" title="Export Investigation Graph as JSON">Export JSON</button>
-          <button type="button" class="btn-icon" id="btn-graph-import-json" title="Import Investigation Graph JSON">Import JSON</button>
+          <button type="button" class="btn-icon" id="btn-graph-fit" title="Fit everything in view (F)">Fit</button>
+          <button type="button" class="btn-icon" id="btn-graph-template" title="Open an example Australian case as a new case">Example</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-json" title="Download this case as JSON (move it to another computer)">Export</button>
+          <button type="button" class="btn-icon" id="btn-graph-import-json" title="Open a case from a JSON file (as a new case)">Import</button>
           <input type="file" id="graph-file-input" accept=".json" style="display:none;">
-          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download High-Res PNG Screenshot">Export PNG</button>
-          <button type="button" class="btn-icon" id="btn-graph-clear" title="Clear Canvas">Clear</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download a PNG picture of the graph">PNG</button>
+          <button type="button" class="btn-icon" id="btn-graph-clear" title="Remove everything from this case">Clear</button>
         </div>
       </div>
 
-      <!-- Selected Node Active Inspector Bar -->
-      <div id="graph-node-inspector" style="display:none;padding:6px 12px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.25);border-radius:4px;margin-bottom:8px;align-items:center;justify-content:space-between;gap:10px;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;">
-          <span style="color:var(--text-muted);">SELECTED:</span>
-          <strong id="inspector-node-label" style="color:var(--accent-cyan);">--</strong>
-          <span class="stat-chip" id="inspector-node-type" style="font-size:0.65rem;">IP</span>
-        </div>
-        <div style="display:flex;gap:6px;">
-          <button type="button" class="btn-icon" id="btn-inspector-pivot" style="padding:1px 8px;font-size:0.68rem;color:var(--accent-cyan);border-color:var(--accent-cyan);">Pivot Matrix</button>
-          <button type="button" class="btn-icon" id="btn-inspector-delete" style="padding:1px 8px;font-size:0.68rem;color:#f43f5e;border-color:#f43f5e;">Delete Node</button>
-          <button type="button" class="btn-icon" id="btn-inspector-close" style="padding:1px 6px;font-size:0.68rem;">✕</button>
-        </div>
-      </div>
+      <!-- Kept for older integrations; the details panel replaces it. -->
+      <div id="graph-node-inspector" style="display:none;"></div>
 
-      <!-- Graph Canvas Container -->
-      <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
-        <canvas id="investigation-canvas"></canvas>
-        <div class="graph-minimap-container" id="graph-minimap-container">
-          <canvas id="graph-minimap-canvas" width="160" height="110"></canvas>
-          <div class="graph-minimap-label">RADAR MINI-MAP</div>
+      <div class="graph-body">
+        <!-- Graph Canvas Container -->
+        <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
+          <canvas id="investigation-canvas" aria-label="Investigation link graph. Use the details panel to edit the selected entity."></canvas>
+          <div class="graph-legend" id="graph-legend"></div>
+          <div class="graph-tooltip" id="graph-tooltip" role="tooltip" hidden></div>
+          <div class="graph-context-menu" id="graph-context-menu" role="menu" hidden></div>
+          <div class="graph-minimap-container" id="graph-minimap-container">
+            <canvas id="graph-minimap-canvas" width="160" height="110"></canvas>
+            <div class="graph-minimap-label">OVERVIEW</div>
+          </div>
+          <div class="graph-hints-overlay">
+            <span>Hover for details · Right-click (or long-press) for options · Drag to place (pins it) · Double-click to edit · Scroll to zoom · F to fit</span>
+          </div>
         </div>
-        <div class="graph-hints-overlay">
-          <span>Click node to inspect • Drag to position • Double-click to Pivot • Del to remove • Scroll to Zoom • Drag canvas to Pan</span>
-        </div>
+        <aside class="graph-detail-panel" id="graph-detail-panel" aria-label="Selected entity details" hidden></aside>
       </div>
     </div>
   </div>
@@ -2136,7 +2156,12 @@
         </ul>
       </div>
 
-      <div id="account-signed-out">
+      <div id="account-unavailable" class="account-unavailable" hidden>
+        <p><strong>Accounts aren't available on this copy of Bubbsy.</strong> It's being served without the Bubbsy server (for example opened straight from a file, or from a static-only host), so there is nowhere to save an account.</p>
+        <p>Nothing is lost: your preferences are saved in this browser as usual. To enable accounts, run the site with <code>python server.py</code> or the included <code>wsgi.py</code>.</p>
+      </div>
+
+      <div id="account-signed-out" hidden>
         <div id="account-google-wrap" class="account-google-wrap" hidden>
           <div id="account-google-btn"></div>
           <div class="account-divider"><span>or use email</span></div>
