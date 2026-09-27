@@ -46,8 +46,15 @@ def test_admin_analytics_auth_checks(live_server):
         urllib.request.urlopen(req_bad_auth)
     assert exc_info.value.code == 401
 
-    # 3. Valid credentials (user:hacker)
-    valid_auth = base64.b64encode(b"user:hacker").decode('ascii')
+    # 3. The old hardcoded default must not work any more
+    old_auth = base64.b64encode(b"user:hacker").decode('ascii')
+    req_old = urllib.request.Request(analytics_url, headers={'Authorization': f'Basic {old_auth}'})
+    with pytest.raises(urllib.error.HTTPError) as exc_info:
+        urllib.request.urlopen(req_old)
+    assert exc_info.value.code == 401
+
+    # 4. The configured ADMIN_PASSWORD works (username is ignored)
+    valid_auth = base64.b64encode(b"admin:test-admin-secret").decode('ascii')
     req_valid = urllib.request.Request(analytics_url, headers={'Authorization': f'Basic {valid_auth}'})
     with urllib.request.urlopen(req_valid) as response:
         assert response.status == 200
@@ -85,15 +92,16 @@ def test_admin_modal_ui_e2e(live_server):
         assert modal_admin.is_visible() is True, "Admin modal should be open"
         assert page.locator('#admin-login-view').is_visible() is True
 
-        # 3. Test invalid login
-        page.locator('#admin-username').fill('user')
-        page.locator('#admin-password').fill('wrongpassword')
+        # 3. Nothing is pre-filled, and a wrong password is refused
+        assert page.locator('#admin-password').input_value() == ''
+        assert page.locator('#admin-username').count() == 0
+        page.locator('#admin-password').fill('hacker')
         page.locator('#btn-admin-login-submit').click()
         time.sleep(0.2)
         assert page.locator('#admin-login-error').is_visible() is True
 
-        # 4. Test valid login (user / hacker)
-        page.locator('#admin-password').fill('hacker')
+        # 4. The configured ADMIN_PASSWORD unlocks the dashboard
+        page.locator('#admin-password').fill('test-admin-secret')
         page.locator('#btn-admin-login-submit').click()
         time.sleep(0.3)
 
@@ -139,3 +147,12 @@ def test_admin_bang_shortcut(live_server):
         assert page.locator('#modal-admin').is_visible() is True, "!admin bang should launch admin modal"
 
         browser.close()
+
+
+def test_admin_is_switched_off_without_a_password(live_server, monkeypatch):
+    monkeypatch.delenv('ADMIN_PASSWORD', raising=False)
+    auth = base64.b64encode(b"user:hacker").decode('ascii')
+    req = urllib.request.Request(f"{live_server}/api/admin/analytics", headers={'Authorization': f'Basic {auth}'})
+    with pytest.raises(urllib.error.HTTPError) as exc_info:
+        urllib.request.urlopen(req)
+    assert exc_info.value.code == 503

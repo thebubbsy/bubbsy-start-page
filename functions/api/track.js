@@ -22,14 +22,16 @@ export async function onRequestPost(context) {
     const country = req.headers.get("cf-ipcountry") || "AU";
     const userAgent = (req.headers.get("user-agent") || "").slice(0, 250);
 
-    const sessionId = payload.session_id || "anonymous";
-    const elementTag = payload.element_tag || "";
-    const elementId = payload.element_id || "";
-    const elementClasses = payload.element_classes || "";
-    const elementText = (payload.element_text || "").slice(0, 200);
-    const targetHref = payload.target_href || "";
-    const pagePath = payload.page_path || "/";
-    const timestamp = payload.timestamp || new Date().toISOString();
+    // Anyone can post here, so every field is capped before it reaches the database.
+    const cap = (v, n) => String(v == null ? "" : v).slice(0, n);
+    const sessionId = cap(payload.session_id || "anonymous", 64);
+    const elementTag = cap(payload.element_tag, 20);
+    const elementId = cap(payload.element_id, 100);
+    const elementClasses = cap(payload.element_classes, 100);
+    const elementText = cap(payload.element_text, 200);
+    const targetHref = cap(payload.target_href, 500);
+    const pagePath = cap(payload.page_path || "/", 200);
+    const timestamp = new Date().toISOString(); // server time; client clocks are not trusted
 
     if (context.env && context.env.DB) {
       await context.env.DB.prepare(`

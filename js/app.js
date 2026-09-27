@@ -22,6 +22,434 @@
   let userBookmarks = JSON.parse(localStorage.getItem('bubbsy_user_bookmarks') || '[]');
   let userFavorites = JSON.parse(localStorage.getItem('bubbsy_favorites') || '[]');
   let hoveredLink = null;
+  let serverStatus = 'unknown'; // 'connected' | 'static' | 'file' — set once the catalogue loads
+
+  // --- LIVE CATALOGUE COUNTS ---
+  // Counted from the loaded catalogue, never typed in by hand: hardcoded totals drift every time
+  // a link is added (the page said 2,061 long after the catalogue passed 2,070).
+  function catalogData() {
+    return appData || window.BUBBSY_DATA || { columns: [] };
+  }
+  function toolCount() {
+    return (catalogData().columns || []).reduce((sum, col) =>
+      sum + (col.widgets || []).reduce((s2, w) => s2 + (w.links || []).length, 0), 0);
+  }
+  function moduleCount() {
+    return (catalogData().columns || []).reduce((sum, col) => sum + (col.widgets || []).length, 0);
+  }
+  function toolCountText() { return toolCount().toLocaleString(); }
+  function applyLiveCounts(root) {
+    (root || document).querySelectorAll('[data-live-count]').forEach(el => {
+      el.textContent = el.getAttribute('data-live-count') === 'modules' ? String(moduleCount()) : toolCountText();
+    });
+  }
+
+  // --- CATALOG SORT MODES ---
+  // The build pipeline (modules_extra.apply_au_priority) bakes Australian-first order into
+  // data/osint_data.json: [AUS] modules sit high in each column, `au` links sit at the top of each
+  // module. That stays the default and the shipped data is never mutated — these modes re-order a
+  // copy at render time, using the `au` / `au_module` flags the data already carries.
+  const SORT_MODE_KEY = 'bubbsy_sort_mode';
+  const CUSTOM_LAYOUT_KEY = 'bubbsy_custom_layout';
+  const SORT_MODES = ['au', 'az', 'newest', 'picks', 'custom'];
+
+  function getSortMode() {
+    try {
+      const stored = localStorage.getItem(SORT_MODE_KEY);
+      return SORT_MODES.includes(stored) ? stored : 'au';
+    } catch (e) {
+      return 'au'; // storage blocked (private window): fall back to the shipped order
+    }
+  }
+
+  function isFavoriteLink(link) {
+    return userFavorites.some(f => f.url === link.url || (link.id && f.id === link.id));
+  }
+
+  // "[AUS] Police & Courts" must sort under P, not under "[". Without stripping the prefix an
+  // ASCII sort puts every [AUS] module first, and A–Z would silently reproduce Australian-first.
+  function sortableTitle(title) {
+    return String(title || '').replace(/^\[AUS\]\s*/i, '').trim().toLowerCase();
+  }
+
+  function byTitle(a, b) {
+    return sortableTitle(a.title).localeCompare(sortableTitle(b.title));
+  }
+
+  // First-added time per link, derived from git history by build_link_dates.py. A link missing from
+  // the map was added after the map was last built, so it counts as the newest thing there is.
+  // User-added bookmarks carry their creation time (Date.now()) as their id.
+  const LINK_DATES = window.BUBBSY_LINK_DATES || {};
+  function linkAddedAt(link) {
+    if (LINK_DATES[link.url] !== undefined) return LINK_DATES[link.url];
+    if (typeof link.id === 'number' && link.id > 1e12) return Math.floor(link.id / 1000);
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  function byNewest(a, b) {
+    const diff = linkAddedAt(b) - linkAddedAt(a);
+    return diff !== 0 ? diff : byTitle(a, b);
+  }
+
+  function moduleNewest(w) {
+    return (w.links || []).reduce((max, l) => Math.max(max, linkAddedAt(l)), 0);
+  }
+
+  // Returns a re-ordered copy. Widgets sort within their own column rather than being
+  // redistributed across columns — that keeps the four-column layout balanced instead of dumping
+  // 113 modules into one alphabetical run down column one.
+  function sortColumnsForMode(columns, mode) {
+    if (mode === 'custom') return applyCustomLayout(columns, getCustomLayout());
+    if (mode === 'au') return columns || []; // shipped order is already Australian-first
+
+    return (columns || []).map(col => {
+      const widgets = (col.widgets || []).map(w => {
+        const links = (w.links || []).slice();
+
+        if (mode === 'az') {
+          links.sort(byTitle);
+        } else if (mode === 'newest') {
+          links.sort(byNewest);
+        } else if (mode === 'picks') {
+          // Favourites rise to the top; everything below stays alphabetical.
+          links.sort((a, b) => {
+            const fa = isFavoriteLink(a) ? 0 : 1;
+            const fb = isFavoriteLink(b) ? 0 : 1;
+            return fa !== fb ? fa - fb : byTitle(a, b);
+          });
+        }
+
+        return Object.assign({}, w, { links });
+      });
+
+      if (mode === 'az') {
+        widgets.sort(byTitle);
+      } else if (mode === 'newest') {
+        // Modules with the most recent additions float highest; ties break alphabetically.
+        widgets.sort((a, b) => {
+          const diff = moduleNewest(b) - moduleNewest(a);
+          return diff !== 0 ? diff : byTitle(a, b);
+        });
+      } else if (mode === 'picks') {
+        // Modules holding the most pinned tools float highest; ties break alphabetically.
+        const pinCount = wd => (wd.links || []).filter(isFavoriteLink).length;
+        widgets.sort((a, b) => {
+          const diff = pinCount(b) - pinCount(a);
+          return diff !== 0 ? diff : byTitle(a, b);
+        });
+      }
+
+      return Object.assign({}, col, { widgets });
+    });
+  }
+
+  // --- CUSTOM LAYOUT ---
+  // Stored as { v, base, columns: [[widgetId, ...], ...], links: { widgetId: [url, ...] } }.
+  // `base` is the order the user started arranging from; anything the layout does not mention
+  // (modules or links added to the catalogue later) keeps its place from that base order, so a
+  // saved layout never hides new tools. Only modules whose links were re-ordered get a links entry.
+  function getCustomLayout() {
+    try {
+      const layout = JSON.parse(localStorage.getItem(CUSTOM_LAYOUT_KEY) || 'null');
+      return layout && Array.isArray(layout.columns) ? layout : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function applyCustomLayout(columns, layout) {
+    const baseMode = layout && SORT_MODES.includes(layout.base) && layout.base !== 'custom' ? layout.base : 'au';
+    const base = sortColumnsForMode(columns, baseMode);
+    if (!layout) return base;
+
+    const byId = new Map();
+    base.forEach((col, colIdx) => (col.widgets || []).forEach(w => byId.set(String(w.id), { w, colIdx })));
+
+    const placed = new Set();
+    const out = base.map(col => Object.assign({}, col, { widgets: [] }));
+    layout.columns.forEach((ids, colIdx) => {
+      if (colIdx >= out.length || !Array.isArray(ids)) return;
+      ids.forEach(id => {
+        const hit = byId.get(String(id));
+        if (hit && !placed.has(String(id))) {
+          placed.add(String(id));
+          out[colIdx].widgets.push(hit.w);
+        }
+      });
+    });
+    // Modules the layout does not know about stay in their base column, at the end.
+    byId.forEach((hit, id) => {
+      if (!placed.has(id)) out[hit.colIdx].widgets.push(hit.w);
+    });
+
+    const linkOrders = layout.links || {};
+    out.forEach(col => {
+      col.widgets = col.widgets.map(w => {
+        const order = linkOrders[String(w.id)];
+        if (!Array.isArray(order)) return w;
+        const rank = new Map(order.map((url, i) => [url, i]));
+        const links = (w.links || []).slice().sort((a, b) => {
+          const ra = rank.has(a.url) ? rank.get(a.url) : Infinity;
+          const rb = rank.has(b.url) ? rank.get(b.url) : Infinity;
+          return ra === rb ? 0 : ra - rb; // stable: unknown links keep base order after the known ones
+        });
+        return Object.assign({}, w, { links });
+      });
+    });
+    return out;
+  }
+
+  function setSortMode(mode) {
+    if (!SORT_MODES.includes(mode)) return;
+    try { localStorage.setItem(SORT_MODE_KEY, mode); } catch (e) {}
+    syncSortModeButtons();
+    renderDashboard();
+    // Re-apply whatever category filter was active, so changing order never silently drops the
+    // user out of the view they were in.
+    if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+  }
+
+  function syncSortModeButtons() {
+    const mode = layoutEditing ? 'custom' : getSortMode();
+    document.querySelectorAll('.sort-mode-btn').forEach(btn => {
+      const isActive = btn.getAttribute('data-sort-mode') === mode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+    const arrange = document.getElementById('btn-arrange-layout');
+    if (arrange) {
+      arrange.hidden = getSortMode() !== 'custom' || layoutEditing;
+    }
+    document.getElementById('sort-mode-group')?.classList.toggle('is-editing', layoutEditing);
+  }
+
+  // --- ARRANGE MODE (drag modules and links into a custom layout) ---
+  // Handles are only added while arranging, so the everyday dashboard carries no extra DOM.
+  // Dragging uses pointer events rather than HTML5 drag-and-drop so it also works on touch screens,
+  // and every handle is a real button that moves with the arrow keys for keyboard users.
+  let layoutEditing = false;
+  let editBaseMode = 'au';
+  let editDirtyLinks = new Set();
+
+  const HANDLE_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+
+  function enterLayoutEdit() {
+    if (layoutEditing || !appData) return;
+    const mode = getSortMode();
+    const layout = mode === 'custom' ? getCustomLayout() : null;
+    // Arranging starts from exactly what is on screen: the current order becomes the base, and any
+    // links already arranged in a saved layout stay arranged.
+    editBaseMode = layout ? (SORT_MODES.includes(layout.base) && layout.base !== 'custom' ? layout.base : 'au') : (mode === 'custom' ? 'au' : mode);
+    editDirtyLinks = new Set(Object.keys((layout && layout.links) || {}));
+
+    // Hidden modules cannot be dragged, so arrange the full catalogue with no filter or search.
+    activeCategoryGroup = 'all';
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
+    if (elMainSearch && elMainSearch.value) {
+      elMainSearch.value = '';
+      elMainSearch.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    layoutEditing = true;
+    document.body.classList.add('layout-editing');
+    renderDashboard(); // renders the current order and, because we are editing, adds the handles
+    const bar = document.getElementById('layout-edit-bar');
+    if (bar) bar.hidden = false;
+    syncSortModeButtons();
+    showToast('Arrange mode: drag the ☰ handles, then Save layout');
+  }
+
+  function exitLayoutEdit() {
+    layoutEditing = false;
+    document.body.classList.remove('layout-editing');
+    const bar = document.getElementById('layout-edit-bar');
+    if (bar) bar.hidden = true;
+    syncSortModeButtons();
+    renderDashboard();
+    if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+  }
+
+  function readLayoutFromDom() {
+    const columns = Array.from(elDashboardGrid.querySelectorAll('.column-stack')).map(col =>
+      Array.from(col.children).filter(c => c.classList.contains('widget-card')).map(c => c.getAttribute('data-widget-id')));
+    const links = {};
+    editDirtyLinks.forEach(id => {
+      const card = elDashboardGrid.querySelector(`.widget-card[data-widget-id="${CSS.escape(id)}"]`);
+      if (!card) return;
+      links[id] = Array.from(card.querySelectorAll('.link-item .link-anchor')).map(a => a.getAttribute('href'));
+    });
+    return { v: 1, base: editBaseMode, columns, links, savedAt: Date.now() };
+  }
+
+  function saveLayoutEdit() {
+    try {
+      localStorage.setItem(CUSTOM_LAYOUT_KEY, JSON.stringify(readLayoutFromDom()));
+      localStorage.setItem(SORT_MODE_KEY, 'custom');
+    } catch (e) {
+      showToast('Could not save layout: browser storage is unavailable', 'error');
+      return;
+    }
+    exitLayoutEdit();
+    showToast('Custom layout saved in this browser');
+    if (window.BubbsyAccount && typeof window.BubbsyAccount.offerSync === 'function') {
+      window.BubbsyAccount.offerSync('Your custom layout is saved in this browser.');
+    }
+  }
+
+  function startLayoutOver() {
+    editDirtyLinks = new Set();
+    // Re-render the base order without the saved layout: temporarily view the base mode.
+    const saved = getSortMode();
+    try { localStorage.setItem(SORT_MODE_KEY, editBaseMode); } catch (e) {}
+    renderDashboard();
+    try { localStorage.setItem(SORT_MODE_KEY, saved); } catch (e) {}
+    showToast('Back to the ' + ({ au: 'AU First', az: 'A–Z', newest: 'Newest', picks: 'My Picks' }[editBaseMode] || 'default') + ' order — nothing is saved until you press Save');
+  }
+
+  function decorateForLayoutEdit() {
+    elDashboardGrid.querySelectorAll('.widget-card').forEach(card => {
+      const header = card.querySelector('.widget-header');
+      const title = card.querySelector('.widget-title')?.textContent || 'module';
+      if (header && !header.querySelector('.drag-handle')) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'drag-handle module-handle';
+        btn.innerHTML = HANDLE_SVG;
+        btn.title = 'Drag to move this module (or use the arrow keys)';
+        btn.setAttribute('aria-label', `Move module ${title}. Arrow keys move up, down, or to another column.`);
+        header.insertBefore(btn, header.firstChild);
+      }
+      card.querySelectorAll('.link-item').forEach(li => {
+        if (li.querySelector('.drag-handle')) return;
+        const linkTitle = li.querySelector('.link-title')?.textContent || 'link';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'drag-handle link-handle';
+        btn.innerHTML = HANDLE_SVG;
+        btn.title = 'Drag to reorder within this module (or use the arrow keys)';
+        btn.setAttribute('aria-label', `Move ${linkTitle}. Arrow keys move it up or down.`);
+        li.insertBefore(btn, li.firstChild);
+      });
+    });
+  }
+
+  function markLinksDirty(el) {
+    const card = el.closest('.widget-card');
+    if (card) editDirtyLinks.add(card.getAttribute('data-widget-id'));
+  }
+
+  function sortableSiblings(container, kind, except) {
+    const sel = kind === 'module' ? 'widget-card' : 'link-item';
+    return Array.from(container.children).filter(c => c !== except && c.classList.contains(sel) && c.style.display !== 'none');
+  }
+
+  function columnAtPoint(x, y) {
+    const hit = document.elementFromPoint(x, y);
+    const col = hit && hit.closest && hit.closest('.column-stack');
+    if (col && elDashboardGrid.contains(col)) return col;
+    // Between or beside columns: pick the nearest one.
+    let best = null;
+    let bestDist = Infinity;
+    elDashboardGrid.querySelectorAll('.column-stack').forEach(c => {
+      const r = c.getBoundingClientRect();
+      const dx = Math.max(r.left - x, 0, x - r.right);
+      const dy = Math.max(r.top - y, 0, y - r.bottom);
+      const d = dx * dx + dy * dy;
+      if (d < bestDist) { bestDist = d; best = c; }
+    });
+    return best;
+  }
+
+  function beginLayoutDrag(e, handle) {
+    const kind = handle.classList.contains('module-handle') ? 'module' : 'link';
+    const item = handle.closest(kind === 'module' ? '.widget-card' : '.link-item');
+    if (!item) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const rect = item.getBoundingClientRect();
+    const placeholder = document.createElement(item.tagName);
+    placeholder.className = 'drag-placeholder';
+    placeholder.style.height = rect.height + 'px';
+    item.parentNode.insertBefore(placeholder, item);
+    const homeList = placeholder.parentNode; // links never leave their own module
+
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    item.classList.add('is-dragging');
+    Object.assign(item.style, { position: 'fixed', left: rect.left + 'px', top: rect.top + 'px', width: rect.width + 'px', zIndex: '9999', pointerEvents: 'none' });
+
+    const onMove = (ev) => {
+      item.style.left = (ev.clientX - offsetX) + 'px';
+      item.style.top = (ev.clientY - offsetY) + 'px';
+      const container = kind === 'module' ? columnAtPoint(ev.clientX, ev.clientY) : homeList;
+      if (!container) return;
+      let before = null;
+      for (const sib of sortableSiblings(container, kind, item)) {
+        const r = sib.getBoundingClientRect();
+        if (ev.clientY < r.top + r.height / 2) { before = sib; break; }
+      }
+      if (before) {
+        if (placeholder.nextSibling !== before) container.insertBefore(placeholder, before);
+      } else if (kind === 'link') {
+        const last = sortableSiblings(container, kind, item).pop();
+        if (last && last.nextSibling !== placeholder) last.after(placeholder);
+      } else if (container.lastElementChild !== placeholder) {
+        container.appendChild(placeholder);
+      }
+      // Nudge the page when dragging near the top or bottom edge.
+      if (ev.clientY < 70) window.scrollBy(0, -14);
+      else if (ev.clientY > window.innerHeight - 70) window.scrollBy(0, 14);
+    };
+
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      item.classList.remove('is-dragging');
+      ['position', 'left', 'top', 'width', 'zIndex', 'pointerEvents'].forEach(k => { item.style[k] = ''; });
+      placeholder.replaceWith(item);
+      if (kind === 'link') markLinksDirty(item);
+      handle.focus({ preventScroll: true });
+    };
+
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  }
+
+  function moveWithKeyboard(e, handle) {
+    const kind = handle.classList.contains('module-handle') ? 'module' : 'link';
+    const item = handle.closest(kind === 'module' ? '.widget-card' : '.link-item');
+    if (!item) return;
+    const container = item.parentNode;
+    const siblings = sortableSiblings(container, kind, null);
+    const idx = siblings.indexOf(item);
+    let moved = false;
+
+    if (e.key === 'ArrowUp' && idx > 0) {
+      container.insertBefore(item, siblings[idx - 1]);
+      moved = true;
+    } else if (e.key === 'ArrowDown' && idx < siblings.length - 1) {
+      siblings[idx + 1].after(item);
+      moved = true;
+    } else if (kind === 'module' && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      const cols = Array.from(elDashboardGrid.querySelectorAll('.column-stack'));
+      const target = cols[cols.indexOf(container) + (e.key === 'ArrowLeft' ? -1 : 1)];
+      if (target) {
+        const targetSibs = sortableSiblings(target, kind, null);
+        const before = targetSibs[Math.min(idx, targetSibs.length)] || null;
+        target.insertBefore(item, before);
+        moved = true;
+      }
+    }
+    if (!moved) return;
+    e.preventDefault();
+    if (kind === 'link') markLinksDirty(item);
+    handle.focus();
+    item.scrollIntoView({ block: 'nearest' });
+  }
+
   let radarFeedData = [];
   let investigationGraph = JSON.parse(localStorage.getItem('bubbsy_investigation_graph') || JSON.stringify({
     nodes: [
@@ -110,10 +538,10 @@
   }
 
   const BANG_SUGGESTIONS = [
-    { bang: '!admin', name: 'Admin Telemetry & D1 Analytics', syntax: '!admin', desc: 'Protected administrator user click telemetry (user:hacker)' },
-    { bang: '!eye', name: "God's Eye View — AU OSINT HUD", syntax: '!eye', desc: "Australian Palantir-style live intel dashboard — ACSC, AFP, ASIC, AusLII, Leaflet map" },
-    { bang: '!godseyeview', name: "God's Eye View (alias)", syntax: '!godseyeview', desc: "Full-screen Australian OSINT intelligence surveillance HUD" },
-    { bang: '!ai', name: 'Autonomous AI OSINT Copilot', syntax: '!ai <target/query>', desc: 'Gemini 3.8 / Multi-model prompt synthesizer & reasoning blueprints' },
+    { bang: '!admin', name: 'Admin: click analytics', syntax: '!admin', desc: 'Site owner only: anonymous click analytics stored in Cloudflare D1' },
+    { bang: '!eye', name: "God's Eye View — AU OSINT HUD", syntax: '!eye', desc: "Australian live intel dashboard: ACSC, AFP, ASIC, AusLII, map" },
+    { bang: '!godseyeview', name: "God's Eye View (alias)", syntax: '!godseyeview', desc: "Full-screen Australian OSINT dashboard" },
+    { bang: '!ai', name: 'AI Prompt Builder', syntax: '!ai <target/query>', desc: 'Builds an investigation prompt and opens it in ChatGPT, Gemini, Claude, DeepSeek or Perplexity' },
     { bang: '!copilot', name: 'AI OSINT Reasoning Studio', syntax: '!copilot <target>', desc: 'Multi-stage MITRE, persona & Essential 8 reasoning engine' },
     { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
     { bang: '!trove', name: 'Trove Australia (NLA)', syntax: '!trove <archive>', desc: 'National Library historical archives & press' },
@@ -180,10 +608,16 @@
         const res = await fetch('/api/data');
         if (res.ok) {
           appData = await res.json();
+          serverStatus = 'connected';
+        } else {
+          serverStatus = 'static';
         }
       } catch (e) {
+        serverStatus = 'static';
         console.warn('Using bundled offline dataset:', e);
       }
+    } else {
+      serverStatus = 'file';
     }
 
     if (!appData) {
@@ -191,6 +625,8 @@
       return;
     }
 
+    restoreUserBookmarks();
+    syncSortModeButtons(); // reflect the persisted choice before the first paint
     renderDashboard();
     renderWorldClocks();
     setInterval(updateWorldClocks, 1000);
@@ -204,6 +640,23 @@
     if (settings.defaultEngine && settings.defaultEngine !== 'filter') {
       setSearchMode(settings.defaultEngine);
     }
+  }
+
+  // Bookmarks added with "Add" live in browser storage; put them back into their modules on every
+  // load (previously they only appeared until the page was refreshed).
+  function restoreUserBookmarks() {
+    if (!appData || !Array.isArray(appData.columns) || !Array.isArray(userBookmarks)) return;
+    const byId = new Map();
+    appData.columns.forEach(col => (col.widgets || []).forEach(w => byId.set(String(w.id), w)));
+    userBookmarks.forEach(b => {
+      const w = byId.get(String(b.widgetId));
+      if (!w || !b.url) return;
+      w.links = w.links || [];
+      if (w.links.some(l => l.url === b.url)) return;
+      const link = { id: b.id, title: b.title, url: b.url, description: b.description || '', domain: b.domain || extractDomain(b.url),
+        favicon: b.favicon || `https://f.start.me/${extractDomain(b.url)}`, au: !!b.isAus, custom: true };
+      if (b.isAus) w.links.unshift(link); else w.links.push(link);
+    });
   }
 
   // --- THEMES ---
@@ -794,7 +1247,9 @@
 
   function renderDashboard() {
     elDashboardGrid.innerHTML = '';
-    const columns = appData.columns || [];
+    // appData.columns itself is never reordered — sortColumnsForMode hands back a copy, so the
+    // shipped Australian-first order is always recoverable by switching back to it.
+    const columns = sortColumnsForMode(appData.columns || [], getSortMode());
 
     columns.forEach((col, colIdx) => {
       const colDiv = document.createElement('div');
@@ -810,13 +1265,15 @@
     });
 
     // Update counters
-    document.getElementById('stats-total-tools').textContent = appData.total_links || '2,061';
+    document.getElementById('stats-total-tools').textContent = toolCountText();
+    applyLiveCounts();
     document.getElementById('stats-total-categories').textContent = appData.total_widgets || '101';
     // Keep the hero placeholder in sync with the live dataset size
     const totalTools = (appData.total_links || 0).toLocaleString();
     elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     updateCategoryRibbonCounts();
     buildBookmarkSearchIndex();
+    if (layoutEditing) decorateForLayoutEdit();
   }
 
   function updateCategoryRibbonCounts() {
@@ -1016,7 +1473,25 @@
     }
     const kb = (totalBytes / 1024).toFixed(1);
     const elStorage = document.getElementById('diag-storage-usage');
-    if (elStorage) elStorage.textContent = `${kb} KB / 5,120 KB`;
+    if (elStorage) elStorage.textContent = `${kb} KB`;
+
+    // Real status only: what this copy of the site is actually connected to.
+    const serverText = {
+      connected: ['Connected', 'var(--accent-green)'],
+      static: ['Not running (static hosting): catalogue loaded from bundled file', 'var(--accent-amber)'],
+      file: ['Not running (opened from a file)', 'var(--accent-amber)'],
+      unknown: ['Checking…', 'var(--text-muted)']
+    }[serverStatus] || ['Unknown', 'var(--text-muted)'];
+    const elBackend = document.getElementById('diag-backend-status');
+    if (elBackend) { elBackend.textContent = serverText[0]; elBackend.style.color = serverText[1]; }
+    const elCatalog = document.getElementById('diag-catalog');
+    if (elCatalog) elCatalog.textContent = `${toolCountText()} tools in ${moduleCount()} modules`;
+    const elAccounts = document.getElementById('diag-accounts');
+    if (elAccounts) {
+      const signedIn = window.BubbsyAccount && window.BubbsyAccount.isSignedIn && window.BubbsyAccount.isSignedIn();
+      const available = window.BubbsyAccount && window.BubbsyAccount.isAvailable && window.BubbsyAccount.isAvailable();
+      elAccounts.textContent = signedIn ? 'Signed in, preferences syncing' : (available ? 'Available (not signed in)' : 'Not available on this copy');
+    }
 
     openModal(document.getElementById('modal-settings'));
   }
@@ -1467,6 +1942,15 @@
     if (activePill && activePill.getAttribute('data-filter-group') === 'favorites') {
       filterByCategory('favorites');
     }
+
+    // In My Picks the order is derived from the favourites themselves, so pinning or unpinning
+    // has to re-sort. Deferred a frame so the pin pulse animation isn't cut off by the rebuild.
+    if (getSortMode() === 'picks' && !layoutEditing) {
+      requestAnimationFrame(() => {
+        renderDashboard();
+        if (activeCategoryGroup && activeCategoryGroup !== 'all') filterByCategory(activeCategoryGroup);
+      });
+    }
   }
 
   function setSearchMode(mode) {
@@ -1478,7 +1962,7 @@
     if (mode === 'filter') {
       elEngineBadge.textContent = 'FILTER';
       elEngineBadge.style.color = 'var(--accent-cyan)';
-      const totalTools = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
+      const totalTools = toolCountText();
       elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     } else if (mode === 'aistudio') {
       elEngineBadge.textContent = 'AI: GOOGLE AI STUDIO';
@@ -1844,7 +2328,7 @@
           </div>
           <div class="empty-title">NO LOCAL OSINT INTEL MATCHES FOR "${escapeHtml(q)}"</div>
           <div class="empty-subtitle">
-            Target not found across 2,061 local tools. Pivot immediately into external reconnaissance engines or clear filter.
+            Target not found across ${toolCountText()} catalogue tools. Pivot immediately into external reconnaissance engines or clear filter.
           </div>
           <div class="empty-actions-row">
             <button type="button" class="btn-search-exec" id="btn-empty-google">🌐 Google Web Search</button>
@@ -1930,9 +2414,9 @@
     const items = [];
 
     const actions = [
-      { id: 'act_ai_copilot', title: 'Autonomous AI OSINT Copilot & Structured Reasoner (Gemini 3.8 / Multi-Model)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
-      { id: 'act_admin', title: 'Admin Click Telemetry & Cloudflare D1 Analytics (user / hacker)', category: 'ACTIONS', icon: 'ADMIN', action: () => { closeModal(elModalPalette); openAdminModal(); } },
-      { id: 'act_gods_eye', title: "God's Eye View — Australian OSINT Palantir HUD (ACSC, AFP, ASIC, AusLII, AU Map)", category: 'ACTIONS', icon: 'EYE', action: () => { closeModal(elModalPalette); openGodsEyeModal(); } },
+      { id: 'act_ai_copilot', title: 'AI Prompt Builder (opens ChatGPT, Gemini, Claude…)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
+      { id: 'act_admin', title: 'Admin: click analytics (site owner only)', category: 'ACTIONS', icon: 'ADMIN', action: () => { closeModal(elModalPalette); openAdminModal(); } },
+      { id: 'act_gods_eye', title: "God's Eye View — Australian OSINT dashboard (ACSC, AFP, ASIC, AusLII, map)", category: 'ACTIONS', icon: 'EYE', action: () => { closeModal(elModalPalette); openGodsEyeModal(); } },
       { id: 'act_aistudio', title: 'Open Google AI Studio (Gemini 2.5 Pro / Flash Developer Workbench)', category: 'ACTIONS', icon: 'AI', action: () => window.open('https://aistudio.google.com/', '_blank') },
       { id: 'act_gemini', title: 'Open Google Gemini AI Assistant', category: 'ACTIONS', icon: 'GEMINI', action: () => window.open('https://gemini.google.com/', '_blank') },
       { id: 'act_social_recon', title: 'Social Handle & Username Recon Engine (Maigret / Sherlock)', category: 'ACTIONS', icon: 'RECON', action: () => openSocialRecon() },
@@ -5303,7 +5787,8 @@
         const data = await res.json();
         radarFeedData = data.feed || [];
         const badge = document.getElementById('radar-live-badge');
-        if (badge) badge.textContent = `FEED: ${data.source.toUpperCase()}`;
+        if (badge) badge.textContent = `FEED: ${String(data.source || 'live').toUpperCase()}`;
+        setRadarChip(data.source === 'live' ? 'LIVE' : 'CACHED');
       } else {
         throw new Error('Non-200 response from radar feed');
       }
@@ -5311,8 +5796,19 @@
       console.warn('Threat radar fetch error, using bundled offline cache:', e);
       radarFeedData = (typeof window !== 'undefined' && window.BUBBSY_RADAR_DATA && window.BUBBSY_RADAR_DATA.length >= 250) ? window.BUBBSY_RADAR_DATA : BUNDLED_OFFLINE_RADAR_ADVISORIES;
       const badge = document.getElementById('radar-live-badge');
-      if (badge) badge.textContent = 'FEED: OFFLINE CACHE (250 ADVISORIES)';
+      if (badge) badge.textContent = `FEED: OFFLINE CACHE (${radarFeedData.length} ADVISORIES)`;
+      setRadarChip('CACHED');
     }
+  }
+
+  function setRadarChip(state) {
+    const chip = document.querySelector('#chip-threat-radar .stat-value');
+    if (chip) chip.textContent = state;
+    const dot = document.querySelector('#chip-threat-radar .status-dot');
+    if (dot) dot.style.background = dot.style.boxShadow = '';
+    document.getElementById('chip-threat-radar')?.setAttribute('title', state === 'LIVE'
+      ? 'Threat radar: live CISA KEV feed'
+      : 'Threat radar: live feed unreachable, showing the bundled advisory cache');
   }
 
   function openThreatRadar() {
@@ -7543,6 +8039,11 @@
   // =========================================================================
   // 4. VISUAL INVESTIGATION LINK GRAPH (CANVAS SIMULATION)
   // =========================================================================
+  // Everything is saved to this browser automatically. Named cases let you keep several
+  // investigations apart, and Export/Import JSON moves one between computers.
+  //
+  // Reading the graph: every entity type has its own shape AND colour (see the legend), pinned
+  // entities stay where you drop them, hovering shows details, right-click gives every action.
   let graphAnimationId = null;
   let isGraphConnectMode = false;
   let connectSourceNode = null;
@@ -7553,315 +8054,964 @@
   let isPanningCanvas = false;
   let panStart = { x: 0, y: 0 };
   let graphNodeSearchQuery = '';
+  let hoveredGraphItem = null; // { kind: 'node'|'edge', item }
+  let graphPointer = { x: 0, y: 0 }; // last pointer position in graph coordinates
+  let dragMoved = false;
+  let longPressTimer = null;
+
+  const GRAPH_KEY = 'bubbsy_investigation_graph';
+  const GRAPH_CASES_KEY = 'bubbsy_graph_cases';
+  const GRAPH_CASE_PREFIX = 'bubbsy_graph_case_';
+
+  const GRAPH_SHAPES = ['circle', 'square', 'diamond', 'hexagon', 'triangle', 'star', 'pentagon', 'octagon', 'pin'];
+
+  const GRAPH_NODE_TYPES = {
+    person:       { name: 'Person',        color: '#3b82f6', shape: 'circle',   radius: 26, icon: '👤' },
+    threat_actor: { name: 'Threat actor',  color: '#ef4444', shape: 'star',     radius: 26, icon: '☠' },
+    org:          { name: 'Organisation',  color: '#f59e0b', shape: 'hexagon',  radius: 24, icon: '🏢' },
+    aus:          { name: 'ABN / ACN',     color: '#10b981', shape: 'pentagon', radius: 22, icon: '🇦🇺' },
+    domain:       { name: 'Domain',        color: '#00ff9d', shape: 'square',   radius: 21, icon: '🌐' },
+    url:          { name: 'URL',           color: '#34d399', shape: 'square',   radius: 19, icon: '🔗' },
+    ip:           { name: 'IP address',    color: '#00f0ff', shape: 'diamond',  radius: 23, icon: '💻' },
+    email:        { name: 'Email',         color: '#a855f7', shape: 'octagon',  radius: 20, icon: '✉' },
+    phone:        { name: 'Phone',         color: '#e879f9', shape: 'octagon',  radius: 20, icon: '☎' },
+    social:       { name: 'Social account', color: '#38bdf8', shape: 'circle',  radius: 20, icon: '@' },
+    hash:         { name: 'File hash',     color: '#ec4899', shape: 'square',   radius: 20, icon: '#' },
+    crypto:       { name: 'Key / wallet',  color: '#f472b6', shape: 'diamond',  radius: 20, icon: '🔑' },
+    proof:        { name: 'Proof',         color: '#f472b6', shape: 'octagon',  radius: 18, icon: '✓' },
+    cve:          { name: 'Vulnerability', color: '#f43f5e', shape: 'triangle', radius: 23, icon: '⚠' },
+    location:     { name: 'Location',      color: '#22c55e', shape: 'pin',      radius: 21, icon: '📍' },
+    geo:          { name: 'Location',      color: '#22c55e', shape: 'pin',      radius: 21, icon: '📍' },
+    note:         { name: 'Note',          color: '#94a3b8', shape: 'square',   radius: 18, icon: '✎' }
+  };
+  const GRAPH_TYPE_ORDER = ['person', 'threat_actor', 'org', 'aus', 'domain', 'url', 'ip', 'email', 'phone', 'social', 'hash', 'crypto', 'proof', 'cve', 'location', 'note'];
+  const GRAPH_SWATCHES = ['#00f0ff', '#3b82f6', '#a855f7', '#ec4899', '#ef4444', '#f59e0b', '#facc15', '#22c55e', '#00ff9d', '#94a3b8', '#ffffff'];
+  const GRAPH_RELATIONS = ['affiliated_with', 'owns', 'controls', 'employs', 'related_to', 'resolves_to', 'hosts', 'registered_as', 'uses_email', 'uses_phone', 'located_at', 'communicates_with', 'targets', 'affected_by', 'same_person_as'];
 
   const elNodeInspector = document.getElementById('graph-node-inspector');
-  const elInspectorLabel = document.getElementById('inspector-node-label');
-  const elInspectorType = document.getElementById('inspector-node-type');
+  const elGraphWrapper = document.getElementById('graph-canvas-wrapper');
+  const elGraphTooltip = document.getElementById('graph-tooltip');
+  const elGraphMenu = document.getElementById('graph-context-menu');
+  const elGraphLegend = document.getElementById('graph-legend');
+  const elGraphDetail = document.getElementById('graph-detail-panel');
+  const elGraphCaseSelect = document.getElementById('graph-case-select');
+  const elGraphSaveStatus = document.getElementById('graph-save-status');
 
+  function typeInfo(type) {
+    return GRAPH_NODE_TYPES[type] || { name: String(type || 'entity'), color: '#00f0ff', shape: 'circle', radius: 20, icon: '•' };
+  }
+
+  function typeStyle(type) {
+    const base = typeInfo(type);
+    const custom = (investigationGraph.styles || {})[type] || {};
+    return { color: custom.color || base.color, shape: custom.shape || base.shape };
+  }
+
+  function nodeColor(n) { return n.customColor || typeStyle(n.type).color; }
+  function nodeShape(n) { return n.customShape || typeStyle(n.type).shape; }
+  function nodeRadius(n) { return n.radius || typeInfo(n.type).radius; }
+
+  // Graphs saved before shapes existed carry `color` baked in from the type. Keep genuinely custom
+  // colours as overrides and let the rest follow the type style, so legend changes apply to them.
+  function normaliseGraph(graph) {
+    const g = graph && typeof graph === 'object' ? graph : {};
+    g.nodes = Array.isArray(g.nodes) ? g.nodes.filter(n => n && n.id) : [];
+    g.edges = Array.isArray(g.edges) ? g.edges.filter(e => e && e.source && e.target) : [];
+    g.styles = g.styles && typeof g.styles === 'object' ? g.styles : {};
+    g.hiddenTypes = Array.isArray(g.hiddenTypes) ? g.hiddenTypes : [];
+    g.nodes.forEach(n => {
+      n.label = String(n.label || 'Untitled');
+      n.type = n.type || 'note';
+      if (n.color && !n.customColor && n.color.toLowerCase() !== typeInfo(n.type).color.toLowerCase()) n.customColor = n.color;
+      if (!Number.isFinite(n.x)) n.x = 300 + Math.random() * 200;
+      if (!Number.isFinite(n.y)) n.y = 200 + Math.random() * 200;
+      n.vx = n.vx || 0;
+      n.vy = n.vy || 0;
+      n.radius = n.radius || typeInfo(n.type).radius;
+    });
+    return g;
+  }
+
+  // --- Cases & saving -------------------------------------------------------------------------
+  function readCases() {
+    try {
+      const idx = JSON.parse(localStorage.getItem(GRAPH_CASES_KEY) || 'null');
+      if (idx && idx.cases && idx.activeId) return idx;
+    } catch (e) {}
+    // First run: the existing graph becomes the first named case.
+    const id = 'case_' + Date.now();
+    const idx = { activeId: id, cases: { [id]: { name: 'Investigation 1', updatedAt: Date.now() } } };
+    try {
+      localStorage.setItem(GRAPH_CASE_PREFIX + id, JSON.stringify(investigationGraph));
+      localStorage.setItem(GRAPH_CASES_KEY, JSON.stringify(idx));
+    } catch (e) {}
+    return idx;
+  }
+
+  let graphCases = null;
+  let graphSaveTimer = null;
+
+  function saveGraph(immediate) {
+    investigationGraph.nodes.forEach(n => { n.color = nodeColor(n); }); // keep `color` meaningful for other tools
+    const write = () => {
+      try {
+        const json = JSON.stringify(investigationGraph);
+        localStorage.setItem(GRAPH_KEY, json);
+        if (!graphCases) graphCases = readCases();
+        localStorage.setItem(GRAPH_CASE_PREFIX + graphCases.activeId, json);
+        graphCases.cases[graphCases.activeId].updatedAt = Date.now();
+        localStorage.setItem(GRAPH_CASES_KEY, JSON.stringify(graphCases));
+        if (elGraphSaveStatus) elGraphSaveStatus.textContent = `Saved in this browser · ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      } catch (e) {
+        if (elGraphSaveStatus) elGraphSaveStatus.textContent = 'Could not save: browser storage is full or blocked';
+      }
+    };
+    clearTimeout(graphSaveTimer);
+    if (immediate) write(); else graphSaveTimer = setTimeout(write, 250);
+  }
+
+  function renderCaseSelect() {
+    if (!elGraphCaseSelect || !graphCases) return;
+    const entries = Object.entries(graphCases.cases).sort((a, b) => (b[1].updatedAt || 0) - (a[1].updatedAt || 0));
+    elGraphCaseSelect.innerHTML = entries.map(([id, c]) =>
+      `<option value="${escapeHtml(id)}" ${id === graphCases.activeId ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('');
+  }
+
+  function switchCase(id) {
+    if (!graphCases.cases[id] || id === graphCases.activeId) return;
+    saveGraph(true);
+    graphCases.activeId = id;
+    let g = null;
+    try { g = JSON.parse(localStorage.getItem(GRAPH_CASE_PREFIX + id) || 'null'); } catch (e) {}
+    investigationGraph = normaliseGraph(g || { nodes: [], edges: [] });
+    setSelectedNode(null);
+    saveGraph(true);
+    renderCaseSelect();
+    fitGraphToView();
+    showToast(`Opened case: ${graphCases.cases[id].name}`);
+  }
+
+  function newCase(name, graph) {
+    saveGraph(true);
+    const id = 'case_' + Date.now();
+    graphCases.cases[id] = { name: name || `Investigation ${Object.keys(graphCases.cases).length + 1}`, updatedAt: Date.now() };
+    graphCases.activeId = id;
+    investigationGraph = normaliseGraph(graph || { nodes: [], edges: [] });
+    setSelectedNode(null);
+    saveGraph(true);
+    renderCaseSelect();
+    requestGraphDraw();
+  }
+
+  // --- Opening & sizing -----------------------------------------------------------------------
   function openInvestigationGraph() {
+    investigationGraph = normaliseGraph(investigationGraph);
+    graphCases = readCases();
+    renderCaseSelect();
+    if (elGraphSaveStatus && !elGraphSaveStatus.textContent) elGraphSaveStatus.textContent = 'Saved automatically in this browser';
     openModal(elModalGraph);
+    renderGraphLegend();
+    renderGraphDetail();
     setTimeout(() => {
       resizeCanvas();
+      if (!investigationGraph._viewed) fitGraphToView();
+      investigationGraph._viewed = true;
       startGraphSimulation();
     }, 50);
   }
 
   function resizeCanvas() {
-    const wrapper = document.getElementById('graph-canvas-wrapper');
-    if (!wrapper || !elCanvas) return;
-    elCanvas.width = wrapper.clientWidth;
-    elCanvas.height = wrapper.clientHeight;
+    if (!elGraphWrapper || !elCanvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    elCanvas.width = Math.max(1, Math.floor(elGraphWrapper.clientWidth * dpr));
+    elCanvas.height = Math.max(1, Math.floor(elGraphWrapper.clientHeight * dpr));
+    elCanvas.style.width = elGraphWrapper.clientWidth + 'px';
+    elCanvas.style.height = elGraphWrapper.clientHeight + 'px';
+  }
+  window.addEventListener('resize', () => {
+    if (elModalGraph.classList.contains('active')) { resizeCanvas(); requestGraphDraw(); }
+  });
+
+  function viewSize() {
+    return { w: elGraphWrapper ? elGraphWrapper.clientWidth : 800, h: elGraphWrapper ? elGraphWrapper.clientHeight : 600 };
   }
 
-  function setSelectedNode(node) {
-    selectedGraphNode = node;
-    if (node) {
-      elNodeInspector.style.display = 'flex';
-      elInspectorLabel.textContent = node.label;
-      elInspectorType.textContent = node.type.toUpperCase();
-      elInspectorType.style.color = node.color || 'var(--accent-cyan)';
-    } else {
-      elNodeInspector.style.display = 'none';
+  function isNodeVisible(n) {
+    return !n.hidden && !(investigationGraph.hiddenTypes || []).includes(n.type);
+  }
+
+  function fitGraphToView() {
+    const nodes = investigationGraph.nodes.filter(isNodeVisible);
+    const { w, h } = viewSize();
+    if (!nodes.length) { graphScale = 1; graphOffset = { x: 0, y: 0 }; requestGraphDraw(); return; }
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    nodes.forEach(n => {
+      minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
+      minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
+    });
+    const pad = 90;
+    graphScale = Math.max(0.3, Math.min(1.6, Math.min(w / (maxX - minX + pad * 2), h / (maxY - minY + pad * 2))));
+    graphOffset.x = w / 2 - ((minX + maxX) / 2) * graphScale;
+    graphOffset.y = h / 2 - ((minY + maxY) / 2) * graphScale;
+    requestGraphDraw();
+  }
+
+  function toGraphCoords(clientX, clientY) {
+    const rect = elCanvas.getBoundingClientRect();
+    return { x: (clientX - rect.left - graphOffset.x) / graphScale, y: (clientY - rect.top - graphOffset.y) / graphScale };
+  }
+
+  function nodeAt(x, y) {
+    const nodes = investigationGraph.nodes;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+      if (!isNodeVisible(n)) continue;
+      const r = nodeRadius(n) + 3;
+      if ((n.x - x) ** 2 + (n.y - y) ** 2 <= r * r) return n;
+    }
+    return null;
+  }
+
+  function edgeAt(x, y) {
+    const byId = new Map(investigationGraph.nodes.map(n => [n.id, n]));
+    let best = null;
+    let bestDist = 8 / graphScale;
+    investigationGraph.edges.forEach(e => {
+      const s = byId.get(e.source);
+      const t = byId.get(e.target);
+      if (!s || !t || !isNodeVisible(s) || !isNodeVisible(t)) return;
+      const dx = t.x - s.x, dy = t.y - s.y;
+      const len2 = dx * dx + dy * dy || 1;
+      const u = Math.max(0, Math.min(1, ((x - s.x) * dx + (y - s.y) * dy) / len2));
+      const d = Math.hypot(s.x + u * dx - x, s.y + u * dy - y);
+      if (d < bestDist) { bestDist = d; best = e; }
+    });
+    return best;
+  }
+
+  function nodeConnections(n) {
+    const byId = new Map(investigationGraph.nodes.map(o => [o.id, o]));
+    return investigationGraph.edges
+      .filter(e => e.source === n.id || e.target === n.id)
+      .map(e => {
+        const outgoing = e.source === n.id;
+        return { edge: e, outgoing, other: byId.get(outgoing ? e.target : e.source) };
+      })
+      .filter(c => c.other);
+  }
+
+  // --- Drawing --------------------------------------------------------------------------------
+  function traceShape(ctx, shape, x, y, r) {
+    ctx.beginPath();
+    const poly = (sides, rot, rr = r) => {
+      for (let i = 0; i < sides; i++) {
+        const a = rot + (i * 2 * Math.PI) / sides;
+        const px = x + rr * Math.cos(a), py = y + rr * Math.sin(a);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+    };
+    switch (shape) {
+      case 'square': {
+        const s = r * 0.88, c = r * 0.22;
+        ctx.moveTo(x - s + c, y - s);
+        ctx.arcTo(x + s, y - s, x + s, y + s, c);
+        ctx.arcTo(x + s, y + s, x - s, y + s, c);
+        ctx.arcTo(x - s, y + s, x - s, y - s, c);
+        ctx.arcTo(x - s, y - s, x + s, y - s, c);
+        ctx.closePath();
+        break;
+      }
+      case 'diamond': poly(4, -Math.PI / 2, r * 1.12); break;
+      case 'hexagon': poly(6, 0, r * 1.02); break;
+      case 'triangle': poly(3, -Math.PI / 2, r * 1.2); break;
+      case 'pentagon': poly(5, -Math.PI / 2, r * 1.05); break;
+      case 'octagon': poly(8, Math.PI / 8, r * 1.02); break;
+      case 'star': {
+        for (let i = 0; i < 10; i++) {
+          const a = -Math.PI / 2 + (i * Math.PI) / 5;
+          const rr = i % 2 === 0 ? r * 1.2 : r * 0.55;
+          if (i === 0) ctx.moveTo(x + rr * Math.cos(a), y + rr * Math.sin(a));
+          else ctx.lineTo(x + rr * Math.cos(a), y + rr * Math.sin(a));
+        }
+        ctx.closePath();
+        break;
+      }
+      case 'pin':
+        ctx.arc(x, y - r * 0.2, r * 0.85, Math.PI * 0.8, Math.PI * 2.2);
+        ctx.lineTo(x, y + r * 1.05);
+        ctx.closePath();
+        break;
+      default:
+        ctx.arc(x, y, r, 0, Math.PI * 2);
     }
   }
 
-  function deleteSelectedNode() {
-    if (!selectedGraphNode) return;
-    const targetId = selectedGraphNode.id;
-    investigationGraph.nodes = investigationGraph.nodes.filter(n => n.id !== targetId);
-    investigationGraph.edges = investigationGraph.edges.filter(e => e.source !== targetId && e.target !== targetId);
-    localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-    showToast(`Deleted node: ${selectedGraphNode.label}`);
-    setSelectedNode(null);
-    if (!graphAnimationId) startGraphSimulation();
+  function shapeSvg(shape, color, size = 14) {
+    // Small inline icon for the legend and menus, drawn with the same geometry as the canvas.
+    const c = document.createElement('canvas');
+    const dpr = 2;
+    c.width = c.height = size * dpr;
+    const ctx = c.getContext('2d');
+    ctx.scale(dpr, dpr);
+    traceShape(ctx, shape, size / 2, size / 2, size * 0.36);
+    ctx.fillStyle = color + '55';
+    ctx.fill();
+    ctx.lineWidth = 1.6;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+    return `<img src="${c.toDataURL()}" width="${size}" height="${size}" alt="" class="graph-shape-icon">`;
+  }
+
+  function drawGraphFrame() {
+    const ctx = elCanvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const nodes = investigationGraph.nodes;
+    const byId = new Map(nodes.map(n => [n.id, n]));
+    const q = graphNodeSearchQuery;
+    const selectedId = selectedGraphNode && selectedGraphNode.id;
+    const neighbours = new Set();
+    if (selectedId) nodeConnections(selectedGraphNode).forEach(c => neighbours.add(c.other.id));
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, elCanvas.width, elCanvas.height);
+    ctx.setTransform(dpr * graphScale, 0, 0, dpr * graphScale, dpr * graphOffset.x, dpr * graphOffset.y);
+
+    // Edges
+    investigationGraph.edges.forEach(e => {
+      const s = byId.get(e.source);
+      const t = byId.get(e.target);
+      if (!s || !t || !isNodeVisible(s) || !isNodeVisible(t)) return;
+      const touchesSelection = selectedId && (s.id === selectedId || t.id === selectedId);
+      const isHovered = hoveredGraphItem && hoveredGraphItem.item === e;
+      const faded = selectedId && !touchesSelection;
+      const color = e.color || nodeColor(s);
+      ctx.globalAlpha = faded ? 0.18 : 1;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(t.x, t.y);
+      ctx.strokeStyle = isHovered || touchesSelection ? color : color + '88';
+      ctx.lineWidth = isHovered ? 3 : (touchesSelection ? 2.4 : 1.6);
+      if (e.style === 'dashed') ctx.setLineDash([6, 5]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const angle = Math.atan2(t.y - s.y, t.x - s.x);
+      const ad = nodeRadius(t) + 7;
+      const ax = t.x - Math.cos(angle) * ad, ay = t.y - Math.sin(angle) * ad;
+      ctx.beginPath();
+      ctx.moveTo(ax, ay);
+      ctx.lineTo(ax - 9 * Math.cos(angle - Math.PI / 7), ay - 9 * Math.sin(angle - Math.PI / 7));
+      ctx.lineTo(ax - 9 * Math.cos(angle + Math.PI / 7), ay - 9 * Math.sin(angle + Math.PI / 7));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      if (e.label && (graphScale > 0.55 || isHovered || touchesSelection)) {
+        const mx = (s.x + t.x) / 2, my = (s.y + t.y) / 2;
+        const text = e.label.replace(/_/g, ' ');
+        ctx.font = '600 10px sans-serif';
+        const tw = ctx.measureText(text).width;
+        ctx.fillStyle = 'rgba(5, 9, 18, 0.92)';
+        ctx.fillRect(mx - tw / 2 - 5, my - 8, tw + 10, 16);
+        ctx.strokeStyle = color + '99';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(mx - tw / 2 - 5, my - 8, tw + 10, 16);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, mx, my);
+      }
+    });
+    ctx.globalAlpha = 1;
+
+    // Rubber band while connecting
+    if (isGraphConnectMode && connectSourceNode) {
+      ctx.beginPath();
+      ctx.moveTo(connectSourceNode.x, connectSourceNode.y);
+      ctx.lineTo(graphPointer.x, graphPointer.y);
+      ctx.strokeStyle = '#facc15';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Nodes
+    nodes.forEach(n => {
+      if (!isNodeVisible(n)) return;
+      const r = nodeRadius(n);
+      const color = nodeColor(n);
+      const shape = nodeShape(n);
+      const isSelected = n.id === selectedId;
+      const isHovered = hoveredGraphItem && hoveredGraphItem.item === n;
+      const isMatch = q && (n.label.toLowerCase().includes(q) || (n.notes || '').toLowerCase().includes(q) || (n.tags || []).join(' ').toLowerCase().includes(q));
+      const faded = (selectedId && !isSelected && !neighbours.has(n.id)) || (q && !isMatch);
+      ctx.globalAlpha = faded ? 0.25 : 1;
+
+      if (isSelected || isHovered || isMatch) {
+        traceShape(ctx, shape, n.x, n.y, r + 7);
+        ctx.strokeStyle = isMatch && !isSelected ? '#facc15' : '#ffffff';
+        ctx.lineWidth = 2;
+        if (isSelected) ctx.setLineDash([4, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      traceShape(ctx, shape, n.x, n.y, r);
+      ctx.fillStyle = '#0a101f';
+      ctx.fill();
+      ctx.fillStyle = color + '33';
+      ctx.fill();
+      ctx.lineWidth = isSelected ? 3 : 2.2;
+      ctx.strokeStyle = color;
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `${Math.round(r * 0.75)}px "Segoe UI Emoji", "Apple Color Emoji", sans-serif`;
+      ctx.fillStyle = color;
+      ctx.fillText(n.icon || typeInfo(n.type).icon, n.x, shape === 'pin' ? n.y - r * 0.2 : n.y + 1);
+
+      // Label with a backing pill so it stays readable over lines.
+      const label = n.label.length > 32 ? n.label.slice(0, 31) + '…' : n.label;
+      ctx.font = `${isSelected ? '700' : '600'} 11px sans-serif`;
+      const tw = ctx.measureText(label).width;
+      const ly = n.y + r + (shape === 'triangle' || shape === 'star' ? 16 : 13);
+      ctx.fillStyle = 'rgba(5, 9, 18, 0.8)';
+      ctx.fillRect(n.x - tw / 2 - 4, ly - 7, tw + 8, 15);
+      ctx.fillStyle = isSelected ? '#ffffff' : '#e2e8f0';
+      ctx.fillText(label, n.x, ly + 1);
+
+      // Small badges: pinned position, has notes.
+      ctx.font = '10px sans-serif';
+      if (n.pinned) ctx.fillText('📌', n.x + r * 0.85, n.y - r * 0.85);
+      if (n.notes) {
+        ctx.beginPath();
+        ctx.arc(n.x - r * 0.85, n.y - r * 0.85, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#facc15';
+        ctx.fill();
+      }
+    });
+    ctx.globalAlpha = 1;
+
+    drawMinimap(byId);
+  }
+
+  function drawMinimap(byId) {
+    const mini = document.getElementById('graph-minimap-canvas');
+    if (!mini) return;
+    const mctx = mini.getContext('2d');
+    mctx.clearRect(0, 0, mini.width, mini.height);
+    const nodes = investigationGraph.nodes.filter(isNodeVisible);
+    if (!nodes.length) return;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    nodes.forEach(n => { minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x); minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y); });
+    const spanX = Math.max(200, maxX - minX + 120), spanY = Math.max(150, maxY - minY + 120);
+    const s = Math.min(mini.width / spanX, mini.height / spanY);
+    const ox = (mini.width - spanX * s) / 2 - (minX - 60) * s;
+    const oy = (mini.height - spanY * s) / 2 - (minY - 60) * s;
+    investigationGraph.edges.forEach(e => {
+      const a = byId.get(e.source), b = byId.get(e.target);
+      if (!a || !b || !isNodeVisible(a) || !isNodeVisible(b)) return;
+      mctx.beginPath();
+      mctx.moveTo(ox + a.x * s, oy + a.y * s);
+      mctx.lineTo(ox + b.x * s, oy + b.y * s);
+      mctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+      mctx.stroke();
+    });
+    nodes.forEach(n => {
+      traceShape(mctx, nodeShape(n), ox + n.x * s, oy + n.y * s, Math.max(2, nodeRadius(n) * s));
+      mctx.fillStyle = nodeColor(n);
+      mctx.fill();
+    });
+    // Current viewport
+    const { w, h } = viewSize();
+    mctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+    mctx.strokeRect(ox + (-graphOffset.x / graphScale) * s, oy + (-graphOffset.y / graphScale) * s, (w / graphScale) * s, (h / graphScale) * s);
+  }
+
+  function stepPhysics() {
+    const nodes = investigationGraph.nodes.filter(isNodeVisible);
+    const byId = new Map(nodes.map(n => [n.id, n]));
+    const rep = 1800, k = 0.04, damping = 0.82, rest = 200;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (dist > 420) continue;
+        const f = rep / (dist * dist);
+        a.vx -= (dx / dist) * f; a.vy -= (dy / dist) * f;
+        b.vx += (dx / dist) * f; b.vy += (dy / dist) * f;
+      }
+    }
+    investigationGraph.edges.forEach(e => {
+      const s = byId.get(e.source), t = byId.get(e.target);
+      if (!s || !t) return;
+      const dx = t.x - s.x, dy = t.y - s.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const f = (dist - rest) * k;
+      s.vx += (dx / dist) * f; s.vy += (dy / dist) * f;
+      t.vx -= (dx / dist) * f; t.vy -= (dy / dist) * f;
+    });
+    let energy = 0;
+    nodes.forEach(n => {
+      if (n === draggedNode || n.pinned) { n.vx = 0; n.vy = 0; return; } // pinned entities stay put
+      n.vx *= damping; n.vy *= damping;
+      n.x += n.vx; n.y += n.vy;
+      energy += n.vx * n.vx + n.vy * n.vy;
+    });
+    return energy;
   }
 
   function startGraphSimulation() {
     if (graphAnimationId) cancelAnimationFrame(graphAnimationId);
-
-    const ctx = elCanvas.getContext('2d');
-    const nodes = investigationGraph.nodes;
-    const edges = investigationGraph.edges;
-
-    function renderLoop() {
-      const k = 0.05;
-      const rep = 800;
-      const damping = 0.85;
-
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[j].x - nodes[i].x;
-          const dy = nodes[j].y - nodes[i].y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          if (dist < 380) {
-            const force = rep / (dist * dist);
-            const fx = (dx / dist) * force;
-            const fy = (dy / dist) * force;
-            nodes[i].vx -= fx;
-            nodes[i].vy -= fy;
-            nodes[j].vx += fx;
-            nodes[j].vy += fy;
-          }
-        }
-      }
-
-      edges.forEach(e => {
-        const s = nodes.find(n => n.id === e.source);
-        const t = nodes.find(n => n.id === e.target);
-        if (s && t) {
-          const dx = t.x - s.x;
-          const dy = t.y - s.y;
-          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const force = (dist - 140) * k;
-          const fx = (dx / dist) * force;
-          const fy = (dy / dist) * force;
-          s.vx += fx;
-          s.vy += fy;
-          t.vx -= fx;
-          t.vy -= fy;
-        }
-      });
-
-      let totalKineticEnergy = 0;
-      nodes.forEach(n => {
-        if (n !== draggedNode) {
-          n.vx *= damping;
-          n.vy *= damping;
-          n.x += n.vx;
-          n.y += n.vy;
-          totalKineticEnergy += (n.vx * n.vx + n.vy * n.vy);
-        }
-      });
-
-      ctx.clearRect(0, 0, elCanvas.width, elCanvas.height);
-      ctx.save();
-      ctx.translate(graphOffset.x, graphOffset.y);
-      ctx.scale(graphScale, graphScale);
-
-      // Draw Edges with Directed Direction & Labeled Badges
-      edges.forEach(e => {
-        const s = nodes.find(n => n.id === e.source);
-        const t = nodes.find(n => n.id === e.target);
-        if (s && t) {
-          ctx.beginPath();
-          ctx.moveTo(s.x, s.y);
-          ctx.lineTo(t.x, t.y);
-          ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
-          ctx.lineWidth = 1.8;
-          ctx.stroke();
-
-          // Arrowhead
-          const angle = Math.atan2(t.y - s.y, t.x - s.x);
-          const arrowDist = t.radius + 6;
-          const ax = t.x - Math.cos(angle) * arrowDist;
-          const ay = t.y - Math.sin(angle) * arrowDist;
-          ctx.beginPath();
-          ctx.moveTo(ax, ay);
-          ctx.lineTo(ax - 10 * Math.cos(angle - Math.PI / 6), ay - 10 * Math.sin(angle - Math.PI / 6));
-          ctx.lineTo(ax - 10 * Math.cos(angle + Math.PI / 6), ay - 10 * Math.sin(angle + Math.PI / 6));
-          ctx.closePath();
-          ctx.fillStyle = 'rgba(0, 240, 255, 0.75)';
-          ctx.fill();
-
-          // Relationship Label Badge
-          if (e.label) {
-            const mx = (s.x + t.x) / 2;
-            const my = (s.y + t.y) / 2;
-            ctx.font = 'bold 9px monospace';
-            const tw = ctx.measureText(e.label).width;
-            ctx.fillStyle = 'rgba(5, 9, 18, 0.88)';
-            ctx.fillRect(mx - tw / 2 - 4, my - 7, tw + 8, 14);
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(mx - tw / 2 - 4, my - 7, tw + 8, 14);
-            ctx.fillStyle = '#67e8f9';
-            ctx.textAlign = 'center';
-            ctx.fillText(e.label, mx, my + 3);
-          }
-        }
-      });
-
-      // Draw Nodes
-      nodes.forEach(n => {
-        const isSelected = selectedGraphNode && selectedGraphNode.id === n.id;
-        const isMatchedSearch = graphNodeSearchQuery && n.label.toLowerCase().includes(graphNodeSearchQuery);
-
-        // Search match highlight
-        if (isMatchedSearch) {
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius + 12, 0, Math.PI * 2);
-          ctx.strokeStyle = '#f59e0b';
-          ctx.lineWidth = 3;
-          ctx.stroke();
-        }
-
-        // Selected halo
-        if (isSelected) {
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, n.radius + 8, 0, Math.PI * 2);
-          ctx.strokeStyle = '#00f0ff';
-          ctx.lineWidth = 2.5;
-          ctx.setLineDash([4, 4]);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        }
-
-        // Outer glow
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius + 4, 0, Math.PI * 2);
-        ctx.fillStyle = n.color ? `${n.color}22` : 'rgba(0, 240, 255, 0.15)';
-        ctx.fill();
-
-        // Node circle
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#0a101f';
-        ctx.fill();
-        ctx.lineWidth = isSelected ? 2.5 : (isMatchedSearch ? 2.2 : 1.8);
-        ctx.strokeStyle = isSelected ? '#ffffff' : (isMatchedSearch ? '#f59e0b' : (n.color || 'var(--accent-cyan)'));
-        ctx.stroke();
-
-        // Node label
-        ctx.fillStyle = isSelected ? '#00f0ff' : (isMatchedSearch ? '#f59e0b' : '#ffffff');
-        ctx.font = isSelected ? 'bold 12px sans-serif' : 'bold 11px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(n.label, n.x, n.y + n.radius + 14);
-
-        // Node type badge
-        ctx.fillStyle = n.color || 'var(--accent-cyan)';
-        ctx.font = '10px monospace';
-        ctx.fillText(n.type.toUpperCase().slice(0, 3), n.x, n.y + 3);
-      });
-
-      ctx.restore();
-
-      // Render Mini-Map Canvas Overlay
-      const miniCanvas = document.getElementById('graph-minimap-canvas');
-      if (miniCanvas) {
-        const mctx = miniCanvas.getContext('2d');
-        mctx.clearRect(0, 0, miniCanvas.width, miniCanvas.height);
-
-        let minX = 0, maxX = elCanvas.width || 800, minY = 0, maxY = elCanvas.height || 600;
-        if (nodes.length > 0) {
-          nodes.forEach(n => {
-            if (n.x < minX) minX = n.x;
-            if (n.x > maxX) maxX = n.x;
-            if (n.y < minY) minY = n.y;
-            if (n.y > maxY) maxY = n.y;
-          });
-        }
-        const spanX = Math.max(600, maxX - minX + 160);
-        const spanY = Math.max(400, maxY - minY + 160);
-        const mScale = Math.min(miniCanvas.width / spanX, miniCanvas.height / spanY);
-
-        mctx.save();
-        mctx.translate((miniCanvas.width - spanX * mScale) / 2, (miniCanvas.height - spanY * mScale) / 2);
-
-        edges.forEach(e => {
-          const s = nodes.find(n => n.id === e.source);
-          const t = nodes.find(n => n.id === e.target);
-          if (s && t) {
-            mctx.beginPath();
-            mctx.moveTo((s.x - minX + 80) * mScale, (s.y - minY + 80) * mScale);
-            mctx.lineTo((t.x - minX + 80) * mScale, (t.y - minY + 80) * mScale);
-            mctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
-            mctx.lineWidth = 1;
-            mctx.stroke();
-          }
-        });
-
-        nodes.forEach(n => {
-          mctx.beginPath();
-          mctx.arc((n.x - minX + 80) * mScale, (n.y - minY + 80) * mScale, Math.max(2, n.radius * mScale * 0.4), 0, Math.PI * 2);
-          mctx.fillStyle = n.color || '#00f0ff';
-          mctx.fill();
-        });
-
-        mctx.restore();
-      }
-
-      if (totalKineticEnergy > 0.005 || draggedNode !== null || isPanningCanvas) {
-        graphAnimationId = requestAnimationFrame(renderLoop);
+    let frames = 0;
+    const loop = () => {
+      const energy = stepPhysics();
+      drawGraphFrame();
+      frames++;
+      if ((energy > 0.01 && frames < 900) || draggedNode || isPanningCanvas) {
+        graphAnimationId = requestAnimationFrame(loop);
       } else {
         graphAnimationId = null;
+        saveGraph(); // positions settle into the saved case
       }
-    }
-
-    renderLoop();
+    };
+    loop();
   }
 
-  const GRAPH_NODE_TYPES = {
-    person: { color: '#3b82f6', radius: 26, labelPrefix: 'Person', icon: '👤' },
-    social: { color: '#00f0ff', radius: 20, labelPrefix: '', icon: '🔗' },
-    org:    { color: '#f59e0b', radius: 24, labelPrefix: 'Org', icon: '🏢' },
-    geo:    { color: '#10b981', radius: 20, labelPrefix: 'Loc', icon: '📍' },
-    location: { color: '#10b981', radius: 20, labelPrefix: 'Loc', icon: '📍' },
-    aus:    { color: '#10b981', radius: 22, labelPrefix: 'AUS', icon: '🇦🇺' },
-    email:  { color: '#a855f7', radius: 18, labelPrefix: 'Email', icon: '✉️' },
-    crypto: { color: '#ec4899', radius: 20, labelPrefix: 'PGP', icon: '🔑' },
-    proof:  { color: '#ec4899', radius: 18, labelPrefix: 'Proof', icon: '🛡️' },
-    domain: { color: '#00ff9d', radius: 20, labelPrefix: 'Domain', icon: '🌐' },
-    ip:     { color: '#00f0ff', radius: 22, labelPrefix: 'IP', icon: '💻' },
-    hash:   { color: '#ec4899', radius: 20, labelPrefix: 'Hash', icon: '🔒' },
-    cve:    { color: '#f43f5e', radius: 22, labelPrefix: 'CVE', icon: '🛡️' },
-    threat_actor: { color: '#ef4444', radius: 26, labelPrefix: 'Actor', icon: '☠️' }
-  };
+  // One redraw without running physics (hover, selection, zoom).
+  let drawQueued = false;
+  function requestGraphDraw() {
+    if (graphAnimationId || drawQueued) return;
+    drawQueued = true;
+    requestAnimationFrame(() => { drawQueued = false; if (!graphAnimationId) drawGraphFrame(); });
+  }
 
+  // --- Legend ----------------------------------------------------------------------------------
+  function renderGraphLegend() {
+    if (!elGraphLegend) return;
+    const counts = {};
+    investigationGraph.nodes.forEach(n => { counts[n.type] = (counts[n.type] || 0) + 1; });
+    const types = Object.keys(counts).sort((a, b) => GRAPH_TYPE_ORDER.indexOf(a) - GRAPH_TYPE_ORDER.indexOf(b));
+    if (!types.length) {
+      elGraphLegend.innerHTML = '<div class="graph-legend-empty">Add an entity to start. Each type gets its own shape and colour.</div>';
+      return;
+    }
+    const hidden = investigationGraph.hiddenTypes || [];
+    elGraphLegend.innerHTML = '<div class="graph-legend-title">Legend <span>click to show/hide · right-click to restyle</span></div>' +
+      types.map(t => {
+        const st = typeStyle(t);
+        return `<button type="button" class="graph-legend-row ${hidden.includes(t) ? 'is-hidden' : ''}" data-type="${escapeHtml(t)}" title="Click to ${hidden.includes(t) ? 'show' : 'hide'} · right-click to change colour or shape">
+          ${shapeSvg(st.shape, st.color)}<span class="graph-legend-name">${escapeHtml(typeInfo(t).name)}</span><span class="graph-legend-count">${counts[t]}</span></button>`;
+      }).join('');
+  }
+
+  elGraphLegend?.addEventListener('click', (e) => {
+    const row = e.target.closest('.graph-legend-row');
+    if (!row) return;
+    const t = row.getAttribute('data-type');
+    const hidden = new Set(investigationGraph.hiddenTypes || []);
+    if (hidden.has(t)) hidden.delete(t); else hidden.add(t);
+    investigationGraph.hiddenTypes = Array.from(hidden);
+    if (selectedGraphNode && !isNodeVisible(selectedGraphNode)) setSelectedNode(null);
+    saveGraph();
+    renderGraphLegend();
+    requestGraphDraw();
+  });
+  elGraphLegend?.addEventListener('contextmenu', (e) => {
+    const row = e.target.closest('.graph-legend-row');
+    if (!row) return;
+    e.preventDefault();
+    openGraphMenu(e.clientX, e.clientY, { kind: 'type', item: row.getAttribute('data-type') });
+  });
+
+  // --- Tooltip ---------------------------------------------------------------------------------
+  function showGraphTooltip(hit, clientX, clientY) {
+    if (!elGraphTooltip) return;
+    if (!hit || elGraphMenu.classList.contains('open') || draggedNode || isPanningCanvas) {
+      elGraphTooltip.hidden = true;
+      return;
+    }
+    let html = '';
+    if (hit.kind === 'node') {
+      const n = hit.item;
+      const conns = nodeConnections(n);
+      html = `<div class="gt-head">${shapeSvg(nodeShape(n), nodeColor(n))}<strong>${escapeHtml(n.label)}</strong></div>
+        <div class="gt-type" style="color:${escapeHtml(nodeColor(n))}">${escapeHtml(typeInfo(n.type).name)}${n.pinned ? ' · pinned' : ''}</div>
+        ${n.notes ? `<div class="gt-notes">${escapeHtml(n.notes.slice(0, 240))}${n.notes.length > 240 ? '…' : ''}</div>` : ''}
+        ${n.url ? `<div class="gt-row">🔗 ${escapeHtml(n.url)}</div>` : ''}
+        ${(n.tags || []).length ? `<div class="gt-row">${n.tags.map(t => `<span class="gt-tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+        <div class="gt-row gt-muted">${conns.length} connection${conns.length === 1 ? '' : 's'}</div>
+        ${conns.slice(0, 6).map(c => `<div class="gt-conn">${c.outgoing ? '→' : '←'} <em>${escapeHtml((c.edge.label || 'linked').replace(/_/g, ' '))}</em> ${escapeHtml(c.other.label)}</div>`).join('')}
+        ${conns.length > 6 ? `<div class="gt-muted">+${conns.length - 6} more</div>` : ''}
+        <div class="gt-hint">Click to select · right-click for options</div>`;
+    } else {
+      const e = hit.item;
+      const byId = new Map(investigationGraph.nodes.map(n => [n.id, n]));
+      const s = byId.get(e.source), t = byId.get(e.target);
+      html = `<div class="gt-head"><strong>${escapeHtml(s ? s.label : '?')}</strong></div>
+        <div class="gt-conn">→ <em>${escapeHtml((e.label || 'linked').replace(/_/g, ' '))}</em> → ${escapeHtml(t ? t.label : '?')}</div>
+        ${e.notes ? `<div class="gt-notes">${escapeHtml(e.notes)}</div>` : ''}
+        <div class="gt-hint">Right-click to edit or remove this link</div>`;
+    }
+    elGraphTooltip.innerHTML = html;
+    elGraphTooltip.hidden = false;
+    const wr = elGraphWrapper.getBoundingClientRect();
+    let x = clientX - wr.left + 16, y = clientY - wr.top + 16;
+    const tw = elGraphTooltip.offsetWidth, th = elGraphTooltip.offsetHeight;
+    if (x + tw > wr.width - 8) x = clientX - wr.left - tw - 12;
+    if (y + th > wr.height - 8) y = Math.max(8, wr.height - th - 8);
+    elGraphTooltip.style.left = x + 'px';
+    elGraphTooltip.style.top = y + 'px';
+  }
+
+  // --- Context menu ----------------------------------------------------------------------------
+  let graphMenuTarget = null;
+
+  function closeGraphMenu() {
+    if (!elGraphMenu) return;
+    elGraphMenu.classList.remove('open');
+    elGraphMenu.hidden = true;
+    graphMenuTarget = null;
+  }
+
+  function menuItem(action, label, extra = '') {
+    return `<button type="button" class="gm-item ${extra}" data-action="${action}">${label}</button>`;
+  }
+
+  function swatchRow(current) {
+    return `<div class="gm-swatches">${GRAPH_SWATCHES.map(c => `<button type="button" class="gm-swatch ${current && current.toLowerCase() === c ? 'active' : ''}" data-action="color" data-value="${c}" style="background:${c}" title="${c}" aria-label="Colour ${c}"></button>`).join('')}
+      <label class="gm-swatch gm-swatch-custom" title="Custom colour"><input type="color" data-action="color-custom" value="${escapeHtml(current || '#00f0ff')}" aria-label="Custom colour"></label></div>`;
+  }
+
+  function shapeRow(current, color) {
+    return `<div class="gm-shapes">${GRAPH_SHAPES.map(s => `<button type="button" class="gm-shape ${s === current ? 'active' : ''}" data-action="shape" data-value="${s}" title="${s}" aria-label="Shape ${s}">${shapeSvg(s, color, 18)}</button>`).join('')}</div>`;
+  }
+
+  function typeRow(current) {
+    return `<div class="gm-types">${GRAPH_TYPE_ORDER.map(t => {
+      const st = typeStyle(t);
+      return `<button type="button" class="gm-type ${t === current ? 'active' : ''}" data-action="type" data-value="${t}" title="${escapeHtml(typeInfo(t).name)}">${shapeSvg(st.shape, st.color, 12)}${escapeHtml(typeInfo(t).name)}</button>`;
+    }).join('')}</div>`;
+  }
+
+  function looksLikeUrl(s) {
+    return /^https?:\/\//i.test(s) || /^[a-z0-9-]+(\.[a-z0-9-]+)+(\/.*)?$/i.test(s);
+  }
+
+  function openGraphMenu(clientX, clientY, target) {
+    if (!elGraphMenu) return;
+    graphMenuTarget = target;
+    elGraphTooltip.hidden = true;
+    let html = '';
+    if (target.kind === 'node') {
+      const n = target.item;
+      const link = n.url || (looksLikeUrl(n.label) ? n.label : '');
+      html = `<div class="gm-title">${shapeSvg(nodeShape(n), nodeColor(n))}<span>${escapeHtml(n.label)}</span></div>
+        ${menuItem('edit', '✎ Edit details, notes & tags…')}
+        ${menuItem('add-linked', '＋ Add a linked entity…')}
+        ${menuItem('connect', '⤳ Connect to another entity')}
+        ${menuItem('pin', n.pinned ? '📌 Unpin (let it float)' : '📌 Pin in place')}
+        <div class="gm-sep"></div>
+        <div class="gm-label">Type</div>${typeRow(n.type)}
+        <div class="gm-label">Colour ${n.customColor ? '<button type="button" class="gm-reset" data-action="color-reset">use type colour</button>' : ''}</div>${swatchRow(nodeColor(n))}
+        <div class="gm-label">Shape ${n.customShape ? '<button type="button" class="gm-reset" data-action="shape-reset">use type shape</button>' : ''}</div>${shapeRow(nodeShape(n), nodeColor(n))}
+        <div class="gm-sep"></div>
+        ${menuItem('pivot', '🔎 Pivot in OSINT Matrix')}
+        ${menuItem('google', '🌐 Search the web for this')}
+        ${link ? menuItem('open-url', '↗ Open ' + escapeHtml(link.length > 30 ? link.slice(0, 29) + '…' : link)) : ''}
+        ${menuItem('copy', '⧉ Copy label')}
+        ${menuItem('focus', '◎ Show only this and its links')}
+        ${menuItem('hide', '◌ Hide this entity')}
+        ${menuItem('delete', '🗑 Delete entity', 'gm-danger')}`;
+    } else if (target.kind === 'edge') {
+      const e = target.item;
+      html = `<div class="gm-title"><span>Link: ${escapeHtml((e.label || 'linked').replace(/_/g, ' '))}</span></div>
+        <div class="gm-label">Relationship</div>
+        <div class="gm-types">${GRAPH_RELATIONS.map(r => `<button type="button" class="gm-type ${r === e.label ? 'active' : ''}" data-action="relation" data-value="${r}">${r.replace(/_/g, ' ')}</button>`).join('')}</div>
+        <div class="gm-inline"><input type="text" class="form-control" id="gm-relation-custom" placeholder="Custom relationship…" value=""><button type="button" class="btn-icon" data-action="relation-custom">Set</button></div>
+        <div class="gm-label">Colour</div>${swatchRow(e.color || '')}
+        ${menuItem('edge-style', e.style === 'dashed' ? '— Solid line' : '┅ Dashed line (unconfirmed)')}
+        ${menuItem('reverse', '⇄ Reverse direction')}
+        ${menuItem('delete-edge', '🗑 Delete link', 'gm-danger')}`;
+    } else if (target.kind === 'type') {
+      const t = target.item;
+      const st = typeStyle(t);
+      html = `<div class="gm-title">${shapeSvg(st.shape, st.color)}<span>All “${escapeHtml(typeInfo(t).name)}” entities</span></div>
+        <div class="gm-label">Colour</div>${swatchRow(st.color)}
+        <div class="gm-label">Shape</div>${shapeRow(st.shape, st.color)}
+        ${menuItem('type-reset', '↺ Reset to default style')}`;
+    } else {
+      const hiddenCount = investigationGraph.nodes.filter(n => n.hidden).length + (investigationGraph.hiddenTypes || []).length;
+      html = `<div class="gm-title"><span>Canvas</span></div>
+        <div class="gm-inline"><input type="text" class="form-control" id="gm-new-label" placeholder="New entity here…"><button type="button" class="btn-icon" data-action="add-here">Add</button></div>
+        ${typeRow(document.getElementById('graph-new-node-type')?.value || 'ip')}
+        <div class="gm-sep"></div>
+        ${menuItem('fit', '⤢ Fit everything in view')}
+        ${menuItem('unpin-all', '📌 Unpin all (re-run layout)')}
+        ${hiddenCount ? menuItem('unhide', `◉ Show hidden (${hiddenCount})`) : ''}`;
+    }
+    elGraphMenu.innerHTML = html;
+    elGraphMenu.hidden = false;
+    elGraphMenu.classList.add('open');
+    const wr = elGraphWrapper.getBoundingClientRect();
+    const mw = elGraphMenu.offsetWidth, mh = elGraphMenu.offsetHeight;
+    let x = clientX - wr.left, y = clientY - wr.top;
+    if (x + mw > wr.width - 6) x = Math.max(6, wr.width - mw - 6);
+    if (y + mh > wr.height - 6) y = Math.max(6, wr.height - mh - 6);
+    elGraphMenu.style.left = x + 'px';
+    elGraphMenu.style.top = y + 'px';
+    const first = elGraphMenu.querySelector('input[type="text"], .gm-item');
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function afterGraphEdit(keepMenu) {
+    saveGraph();
+    renderGraphLegend();
+    if (selectedGraphNode) renderGraphDetail();
+    requestGraphDraw();
+    if (!keepMenu) closeGraphMenu();
+  }
+
+  function handleGraphMenuAction(action, value) {
+    const t = graphMenuTarget;
+    if (!t) return;
+    const n = t.kind === 'node' ? t.item : null;
+    const e = t.kind === 'edge' ? t.item : null;
+    switch (action) {
+      case 'edit': setSelectedNode(n); closeGraphMenu(); setTimeout(() => document.getElementById('gd-label')?.focus(), 30); return;
+      case 'add-linked': setSelectedNode(n); closeGraphMenu(); setTimeout(() => document.getElementById('gd-link-label')?.focus(), 30); return;
+      case 'connect':
+        isGraphConnectMode = true; connectSourceNode = n;
+        syncConnectButton();
+        showToast(`Now click the entity to link ${n.label} to (Esc cancels)`);
+        closeGraphMenu(); return;
+      case 'pin': n.pinned = !n.pinned; if (!n.pinned) startGraphSimulation(); break;
+      case 'type': n.type = value; n.radius = typeInfo(value).radius; break;
+      case 'color':
+        if (t.kind === 'type') { investigationGraph.styles[t.item] = Object.assign({}, investigationGraph.styles[t.item], { color: value }); }
+        else if (e) e.color = value;
+        else n.customColor = value;
+        afterGraphEdit(true); openGraphMenu(parseFloat(elGraphMenu.style.left) + elGraphWrapper.getBoundingClientRect().left, parseFloat(elGraphMenu.style.top) + elGraphWrapper.getBoundingClientRect().top, t); return;
+      case 'color-reset': delete n.customColor; break;
+      case 'shape':
+        if (t.kind === 'type') investigationGraph.styles[t.item] = Object.assign({}, investigationGraph.styles[t.item], { shape: value });
+        else n.customShape = value;
+        break;
+      case 'shape-reset': delete n.customShape; break;
+      case 'type-reset': delete investigationGraph.styles[t.item]; break;
+      case 'pivot': closeGraphMenu(); openPivotMatrix(n.label); return;
+      case 'google': window.open('https://www.google.com/search?q=' + encodeURIComponent('"' + n.label + '"'), '_blank', 'noopener'); break;
+      case 'open-url': {
+        const u = n.url || n.label;
+        window.open(/^https?:\/\//i.test(u) ? u : 'https://' + u, '_blank', 'noopener');
+        break;
+      }
+      case 'copy': copyToClipboard(n.label, 'Copied label'); break;
+      case 'focus':
+        investigationGraph.nodes.forEach(o => { o.hidden = o.id !== n.id && !nodeConnections(n).some(c => c.other.id === o.id); });
+        setSelectedNode(n); fitGraphToView(); break;
+      case 'hide': n.hidden = true; if (selectedGraphNode === n) setSelectedNode(null); break;
+      case 'delete': selectedGraphNode = n; closeGraphMenu(); deleteSelectedNode(); return;
+      case 'relation': e.label = value; break;
+      case 'relation-custom': {
+        const v = document.getElementById('gm-relation-custom')?.value.trim();
+        if (!v) return;
+        e.label = v.replace(/\s+/g, '_');
+        break;
+      }
+      case 'edge-style': e.style = e.style === 'dashed' ? '' : 'dashed'; break;
+      case 'reverse': [e.source, e.target] = [e.target, e.source]; break;
+      case 'delete-edge':
+        investigationGraph.edges = investigationGraph.edges.filter(x => x !== e);
+        showToast('Link removed'); break;
+      case 'add-here': {
+        const label = document.getElementById('gm-new-label')?.value.trim();
+        if (!label) { document.getElementById('gm-new-label')?.focus(); return; }
+        const type = elGraphMenu.querySelector('.gm-type.active')?.getAttribute('data-value') || 'ip';
+        const id = window.addNodeToGraph(label, type, t.at.x, t.at.y);
+        const node = investigationGraph.nodes.find(x => x.id === id);
+        if (node) { node.pinned = true; setSelectedNode(node); }
+        break;
+      }
+      case 'fit': fitGraphToView(); break;
+      case 'unpin-all': investigationGraph.nodes.forEach(o => { o.pinned = false; }); startGraphSimulation(); break;
+      case 'unhide': investigationGraph.nodes.forEach(o => { o.hidden = false; }); investigationGraph.hiddenTypes = []; fitGraphToView(); break;
+      default: return;
+    }
+    afterGraphEdit(false);
+  }
+
+  elGraphMenu?.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('[data-action]');
+    if (!btn || btn.tagName === 'INPUT') return;
+    const action = btn.getAttribute('data-action');
+    // In the canvas menu the type chips only choose the type for "Add"; they don't act on their own.
+    if (action === 'type' && graphMenuTarget && graphMenuTarget.kind === 'canvas') {
+      elGraphMenu.querySelectorAll('.gm-type').forEach(b => b.classList.toggle('active', b === btn));
+      return;
+    }
+    handleGraphMenuAction(action, btn.getAttribute('data-value'));
+  });
+  elGraphMenu?.addEventListener('change', (ev) => {
+    if (ev.target.matches('[data-action="color-custom"]')) handleGraphMenuAction('color', ev.target.value);
+  });
+  elGraphMenu?.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && ev.target.id === 'gm-new-label') handleGraphMenuAction('add-here');
+    if (ev.key === 'Enter' && ev.target.id === 'gm-relation-custom') handleGraphMenuAction('relation-custom');
+    if (ev.key === 'Escape') { ev.stopPropagation(); closeGraphMenu(); }
+  });
+  document.addEventListener('pointerdown', (ev) => {
+    if (elGraphMenu && elGraphMenu.classList.contains('open') && !elGraphMenu.contains(ev.target)) closeGraphMenu();
+  }, true);
+
+  // --- Detail panel ----------------------------------------------------------------------------
+  function setSelectedNode(node) {
+    selectedGraphNode = node;
+    if (elNodeInspector) elNodeInspector.style.display = 'none'; // superseded by the detail panel
+    renderGraphDetail();
+    requestGraphDraw();
+  }
+
+  function renderGraphDetail() {
+    if (!elGraphDetail) return;
+    const n = selectedGraphNode;
+    if (!n) {
+      elGraphDetail.hidden = true;
+      return;
+    }
+    elGraphDetail.hidden = false;
+    const conns = nodeConnections(n);
+    const typeOptions = GRAPH_TYPE_ORDER.map(t => `<option value="${t}" ${t === n.type ? 'selected' : ''}>${escapeHtml(typeInfo(t).name)}</option>`).join('');
+    const shapeOptions = GRAPH_SHAPES.map(s => `<option value="${s}" ${s === nodeShape(n) ? 'selected' : ''}>${s}</option>`).join('');
+    const relOptions = GRAPH_RELATIONS.map(r => `<option value="${r}">${r.replace(/_/g, ' ')}</option>`).join('');
+    elGraphDetail.innerHTML = `
+      <div class="gd-head">${shapeSvg(nodeShape(n), nodeColor(n), 18)}<strong>${escapeHtml(n.label)}</strong>
+        <button type="button" class="gd-close" data-gd="close" aria-label="Close details">✕</button></div>
+      <label class="gd-field"><span>Name</span><input class="form-control" id="gd-label" value="${escapeHtml(n.label)}"></label>
+      <div class="gd-grid">
+        <label class="gd-field"><span>Type</span><select class="form-control" id="gd-type">${typeOptions}</select></label>
+        <label class="gd-field"><span>Shape</span><select class="form-control" id="gd-shape">${shapeOptions}</select></label>
+        <label class="gd-field gd-color"><span>Colour</span><input type="color" id="gd-color" value="${escapeHtml(nodeColor(n))}"></label>
+      </div>
+      <label class="gd-field"><span>Notes</span><textarea class="form-control" id="gd-notes" rows="4" placeholder="What you know, sources, confidence…">${escapeHtml(n.notes || '')}</textarea></label>
+      <label class="gd-field"><span>Link / source URL</span><input class="form-control" id="gd-url" value="${escapeHtml(n.url || '')}" placeholder="https://…"></label>
+      <label class="gd-field"><span>Tags (comma separated)</span><input class="form-control" id="gd-tags" value="${escapeHtml((n.tags || []).join(', '))}" placeholder="suspect, confirmed, AU"></label>
+      <div class="gd-section">Connections (${conns.length})</div>
+      <ul class="gd-conns">${conns.map((c, i) => `<li>
+          <button type="button" class="gd-conn-go" data-gd="goto" data-id="${escapeHtml(c.other.id)}" title="Select ${escapeHtml(c.other.label)}">
+            ${shapeSvg(nodeShape(c.other), nodeColor(c.other), 12)} ${c.outgoing ? '→' : '←'} <em>${escapeHtml((c.edge.label || 'linked').replace(/_/g, ' '))}</em> ${escapeHtml(c.other.label)}</button>
+          <button type="button" class="gd-conn-del" data-gd="unlink" data-idx="${i}" title="Remove this link" aria-label="Remove link">✕</button></li>`).join('') || '<li class="gd-empty">No links yet.</li>'}</ul>
+      <div class="gd-section">Add a linked entity</div>
+      <input class="form-control" id="gd-link-label" placeholder="e.g. john@example.com">
+      <div class="gd-grid">
+        <select class="form-control" id="gd-link-type">${typeOptions.replace(' selected', '')}</select>
+        <select class="form-control" id="gd-link-rel">${relOptions}</select>
+      </div>
+      <button type="button" class="btn-icon gd-add" data-gd="add-link">＋ Add &amp; link</button>
+      <div class="gd-actions">
+        <button type="button" class="btn-icon" data-gd="pivot">🔎 Pivot</button>
+        <button type="button" class="btn-icon" data-gd="pin">${n.pinned ? 'Unpin' : '📌 Pin'}</button>
+        <button type="button" class="btn-icon gd-danger" data-gd="delete">Delete</button>
+      </div>`;
+    elGraphDetail._conns = conns;
+  }
+
+  elGraphDetail?.addEventListener('input', (ev) => {
+    const n = selectedGraphNode;
+    if (!n) return;
+    const id = ev.target.id;
+    if (id === 'gd-label') { n.label = ev.target.value || 'Untitled'; elGraphDetail.querySelector('.gd-head strong').textContent = n.label; }
+    else if (id === 'gd-notes') n.notes = ev.target.value;
+    else if (id === 'gd-url') n.url = ev.target.value.trim();
+    else if (id === 'gd-tags') n.tags = ev.target.value.split(',').map(s => s.trim()).filter(Boolean);
+    else if (id === 'gd-color') n.customColor = ev.target.value;
+    else return;
+    saveGraph();
+    requestGraphDraw();
+  });
+  elGraphDetail?.addEventListener('change', (ev) => {
+    const n = selectedGraphNode;
+    if (!n) return;
+    if (ev.target.id === 'gd-type') { n.type = ev.target.value; n.radius = typeInfo(n.type).radius; }
+    else if (ev.target.id === 'gd-shape') n.customShape = ev.target.value;
+    else return;
+    afterGraphEdit(true);
+  });
+  elGraphDetail?.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && ev.target.id === 'gd-link-label') elGraphDetail.querySelector('[data-gd="add-link"]')?.click();
+  });
+  elGraphDetail?.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('[data-gd]');
+    const n = selectedGraphNode;
+    if (!btn || !n) return;
+    const what = btn.getAttribute('data-gd');
+    if (what === 'close') setSelectedNode(null);
+    else if (what === 'goto') setSelectedNode(investigationGraph.nodes.find(o => o.id === btn.getAttribute('data-id')) || null);
+    else if (what === 'unlink') {
+      const c = (elGraphDetail._conns || [])[parseInt(btn.getAttribute('data-idx'), 10)];
+      if (c) investigationGraph.edges = investigationGraph.edges.filter(x => x !== c.edge);
+      afterGraphEdit(true);
+    } else if (what === 'add-link') {
+      const label = document.getElementById('gd-link-label').value.trim();
+      if (!label) { document.getElementById('gd-link-label').focus(); return; }
+      const type = document.getElementById('gd-link-type').value;
+      const rel = document.getElementById('gd-link-rel').value;
+      const angle = Math.random() * Math.PI * 2;
+      const id = window.addNodeToGraph(label, type, n.x + Math.cos(angle) * 150, n.y + Math.sin(angle) * 150);
+      window.addEdgeToGraph(n.id, id, rel);
+      afterGraphEdit(true);
+      startGraphSimulation();
+      setTimeout(() => document.getElementById('gd-link-label')?.focus(), 20);
+    } else if (what === 'pivot') openPivotMatrix(n.label);
+    else if (what === 'pin') { n.pinned = !n.pinned; afterGraphEdit(true); if (!n.pinned) startGraphSimulation(); }
+    else if (what === 'delete') deleteSelectedNode();
+  });
+
+  function deleteSelectedNode() {
+    if (!selectedGraphNode) return;
+    const target = selectedGraphNode;
+    investigationGraph.nodes = investigationGraph.nodes.filter(n => n.id !== target.id);
+    investigationGraph.edges = investigationGraph.edges.filter(e => e.source !== target.id && e.target !== target.id);
+    showToast(`Deleted: ${target.label}`);
+    setSelectedNode(null);
+    saveGraph();
+    renderGraphLegend();
+    requestGraphDraw();
+  }
+
+  // --- Public API used by the other investigation tools ------------------------------------------
   window.addNodeToGraph = function(label, type = 'ip', customX = null, customY = null) {
     if (!label) return null;
-    const config = GRAPH_NODE_TYPES[type] || GRAPH_NODE_TYPES.social || { color: '#00f0ff', radius: 22 };
-    
-    // Deduplicate: check if node with exact normalized label already exists
-    const normalizedLabel = label.trim().toLowerCase();
+    const normalizedLabel = String(label).trim().toLowerCase();
     const existingNode = investigationGraph.nodes.find(n => n.label && n.label.trim().toLowerCase() === normalizedLabel);
-    if (existingNode) {
-      return existingNode.id;
-    }
+    if (existingNode) return existingNode.id;
 
-    const cx = (elCanvas && elCanvas.width > 0) ? elCanvas.width / 2 : 400;
-    const cy = (elCanvas && elCanvas.height > 0) ? elCanvas.height / 2 : 300;
-
+    const { w, h } = viewSize();
+    const cx = (w / 2 - graphOffset.x) / graphScale;
+    const cy = (h / 2 - graphOffset.y) / graphScale;
+    const info = typeInfo(type);
     const newNode = {
       id: `node_${Date.now()}_${Math.floor(Math.random() * 10000)}`,
-      label: label.trim(),
+      label: String(label).trim(),
       type: type,
       x: customX !== null ? customX : (cx + (Math.random() - 0.5) * 160),
       y: customY !== null ? customY : (cy + (Math.random() - 0.5) * 160),
       vx: (Math.random() - 0.5) * 4,
       vy: (Math.random() - 0.5) * 4,
-      radius: config.radius,
-      color: config.color
+      radius: info.radius,
+      color: typeStyle(type).color,
+      createdAt: Date.now()
     };
-
     investigationGraph.nodes.push(newNode);
-    try {
-      localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-    } catch (e) {
-      console.warn('Graph storage error:', e);
-    }
-    showToast(`Added entity to graph: ${label}`);
-    if (elModalGraph && elModalGraph.classList.contains('active') && !graphAnimationId) {
-      startGraphSimulation();
+    saveGraph(true);
+    showToast(`Added to graph: ${newNode.label}`);
+    if (elModalGraph && elModalGraph.classList.contains('active')) {
+      renderGraphLegend();
+      if (!graphAnimationId) startGraphSimulation();
     }
     return newNode.id;
   };
@@ -7874,239 +9024,314 @@
     );
     if (!edgeExists) {
       investigationGraph.edges.push({ source: sourceId, target: targetId, label: label });
-      try {
-        localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-      } catch (e) {
-        console.warn('Graph storage error:', e);
-      }
+      saveGraph(true);
     }
   };
 
   function applyGraphLayout(layoutMode) {
-    const nodes = investigationGraph.nodes;
-    if (!nodes || nodes.length === 0) return;
-    const cx = (elCanvas && elCanvas.width > 0) ? elCanvas.width / 2 : 400;
-    const cy = (elCanvas && elCanvas.height > 0) ? elCanvas.height / 2 : 300;
+    const nodes = investigationGraph.nodes.filter(isNodeVisible);
+    if (!nodes.length) return;
+    const { w, h } = viewSize();
+    const cx = (w / 2 - graphOffset.x) / graphScale;
+    const cy = (h / 2 - graphOffset.y) / graphScale;
+    const place = (n, x, y) => { n.x = x; n.y = y; n.vx = 0; n.vy = 0; n.pinned = layoutMode !== 'force'; };
 
     if (layoutMode === 'radial') {
-      const radius = Math.min(cx, cy) * 0.55;
-      const step = (2 * Math.PI) / nodes.length;
-      nodes.forEach((n, i) => {
-        n.x = cx + radius * Math.cos(i * step);
-        n.y = cy + radius * Math.sin(i * step);
-        n.vx = 0; n.vy = 0;
-      });
-      showToast('Applied Radial Starburst Layout');
+      // Most-connected entity in the middle, everything else around it.
+      const degree = n => investigationGraph.edges.filter(e => e.source === n.id || e.target === n.id).length;
+      const sorted = nodes.slice().sort((a, b) => degree(b) - degree(a));
+      place(sorted[0], cx, cy);
+      const ring = sorted.slice(1);
+      const radius = Math.max(160, ring.length * 22);
+      ring.forEach((n, i) => place(n, cx + radius * Math.cos((i * 2 * Math.PI) / ring.length), cy + radius * Math.sin((i * 2 * Math.PI) / ring.length)));
+      showToast('Radial layout: most-connected entity in the centre');
     } else if (layoutMode === 'tree') {
-      const levels = {};
-      nodes.forEach((n, i) => {
-        const lvl = i % 4;
-        if (!levels[lvl]) levels[lvl] = [];
-        levels[lvl].push(n);
-      });
-      const levelKeys = Object.keys(levels);
-      levelKeys.forEach((lvl, lIdx) => {
-        const row = levels[lvl];
-        const yPos = 100 + lIdx * 120;
-        row.forEach((n, cIdx) => {
-          const spacing = (elCanvas.width || 800) / (row.length + 1);
-          n.x = spacing * (cIdx + 1);
-          n.y = yPos;
-          n.vx = 0; n.vy = 0;
-        });
-      });
-      showToast('Applied Hierarchical Tree Layout');
+      // Group by type into rows, in legend order.
+      const rows = {};
+      nodes.forEach(n => { (rows[n.type] = rows[n.type] || []).push(n); });
+      const keys = Object.keys(rows).sort((a, b) => GRAPH_TYPE_ORDER.indexOf(a) - GRAPH_TYPE_ORDER.indexOf(b));
+      keys.forEach((k, r) => rows[k].forEach((n, i) => place(n, cx + (i - (rows[k].length - 1) / 2) * 150, cy + (r - (keys.length - 1) / 2) * 120)));
+      showToast('Rows layout: one row per entity type');
     } else if (layoutMode === 'grid') {
       const cols = Math.ceil(Math.sqrt(nodes.length));
-      const cellW = 160;
-      const cellH = 120;
-      const startX = cx - (cols * cellW) / 2 + cellW / 2;
-      const startY = cy - (Math.ceil(nodes.length / cols) * cellH) / 2 + cellH / 2;
-      nodes.forEach((n, i) => {
-        const row = Math.floor(i / cols);
-        const col = i % cols;
-        n.x = startX + col * cellW;
-        n.y = startY + row * cellH;
-        n.vx = 0; n.vy = 0;
-      });
-      showToast('Applied Grid Cluster Layout');
+      nodes.forEach((n, i) => place(n, cx + ((i % cols) - (cols - 1) / 2) * 160, cy + (Math.floor(i / cols) - (Math.ceil(nodes.length / cols) - 1) / 2) * 120));
+      showToast('Grid layout');
     } else {
-      // Force Physics
-      nodes.forEach(n => {
-        n.vx = (Math.random() - 0.5) * 6;
-        n.vy = (Math.random() - 0.5) * 6;
-      });
-      showToast('Applied Force-Directed Physics');
+      nodes.forEach(n => { n.pinned = false; n.vx = (Math.random() - 0.5) * 6; n.vy = (Math.random() - 0.5) * 6; });
+      showToast('Force layout: entities arrange themselves by their links');
     }
-
+    saveGraph();
+    fitGraphToView();
     if (!graphAnimationId) startGraphSimulation();
   }
 
-  elCanvas.addEventListener('mousedown', (e) => {
-    const rect = elCanvas.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left - graphOffset.x) / graphScale;
-    const mouseY = (e.clientY - rect.top - graphOffset.y) / graphScale;
+  // Screen position of an entity (used by the automated tests to aim clicks).
+  window.BubbsyGraph = {
+    screenPos(id) {
+      const n = investigationGraph.nodes.find(o => o.id === id);
+      if (!n) return null;
+      const rect = elCanvas.getBoundingClientRect();
+      return { x: rect.left + graphOffset.x + n.x * graphScale, y: rect.top + graphOffset.y + n.y * graphScale };
+    }
+  };
 
-    const clicked = investigationGraph.nodes.find(n => {
-      const dx = n.x - mouseX;
-      const dy = n.y - mouseY;
-      return Math.sqrt(dx * dx + dy * dy) <= n.radius;
-    });
+  function syncConnectButton() {
+    const btn = document.getElementById('btn-graph-connect-mode');
+    if (btn) {
+      btn.classList.toggle('active', isGraphConnectMode);
+      btn.textContent = isGraphConnectMode ? 'Connecting… (Esc)' : 'Connect Nodes';
+    }
+    elCanvas.style.cursor = isGraphConnectMode ? 'crosshair' : '';
+  }
 
-    if (clicked) {
+  // --- Pointer interaction (mouse, pen and touch) -------------------------------------------------
+  elCanvas.addEventListener('pointerdown', (e) => {
+    if (e.button === 2) return; // right-click is handled by contextmenu
+    closeGraphMenu();
+    elCanvas.setPointerCapture(e.pointerId);
+    const p = toGraphCoords(e.clientX, e.clientY);
+    graphPointer = p;
+    dragMoved = false;
+    const hit = nodeAt(p.x, p.y);
+
+    clearTimeout(longPressTimer);
+    if (e.pointerType === 'touch') {
+      // Long-press opens the same menu a right-click does.
+      longPressTimer = setTimeout(() => {
+        if (dragMoved) return;
+        draggedNode = null; isPanningCanvas = false;
+        const edge = hit ? null : edgeAt(p.x, p.y);
+        openGraphMenu(e.clientX, e.clientY, hit ? { kind: 'node', item: hit } : edge ? { kind: 'edge', item: edge } : { kind: 'canvas', at: p });
+      }, 550);
+    }
+
+    if (hit) {
       if (isGraphConnectMode) {
         if (!connectSourceNode) {
-          connectSourceNode = clicked;
-          showToast(`Connecting: Select target node for ${clicked.label}`);
-        } else if (connectSourceNode !== clicked) {
-          const selectedRel = document.getElementById('graph-edge-rel-type')?.value || 'affiliated_with';
-          investigationGraph.edges.push({
-            source: connectSourceNode.id,
-            target: clicked.id,
-            label: selectedRel
-          });
-          localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-          showToast(`Connected ${connectSourceNode.label} -[${selectedRel}]-> ${clicked.label}`);
+          connectSourceNode = hit;
+          showToast(`Now click the entity to link ${hit.label} to`);
+        } else if (connectSourceNode !== hit) {
+          const rel = document.getElementById('graph-edge-rel-type')?.value || 'affiliated_with';
+          window.addEdgeToGraph(connectSourceNode.id, hit.id, rel);
+          showToast(`Linked ${connectSourceNode.label} → ${rel.replace(/_/g, ' ')} → ${hit.label}`);
           isGraphConnectMode = false;
           connectSourceNode = null;
+          syncConnectButton();
+          afterGraphEdit(true);
         }
-      } else {
-        draggedNode = clicked;
-        setSelectedNode(clicked);
+        requestGraphDraw();
+        return;
       }
-      if (!graphAnimationId) startGraphSimulation();
+      draggedNode = hit;
+      setSelectedNode(hit);
     } else {
-      setSelectedNode(null);
       isPanningCanvas = true;
       panStart = { x: e.clientX - graphOffset.x, y: e.clientY - graphOffset.y };
-      if (!graphAnimationId) startGraphSimulation();
     }
+    if (!graphAnimationId) startGraphSimulation();
   });
 
-  window.addEventListener('mousemove', (e) => {
+  elCanvas.addEventListener('pointermove', (e) => {
+    const p = toGraphCoords(e.clientX, e.clientY);
     if (draggedNode) {
-      const rect = elCanvas.getBoundingClientRect();
-      draggedNode.x = (e.clientX - rect.left - graphOffset.x) / graphScale;
-      draggedNode.y = (e.clientY - rect.top - graphOffset.y) / graphScale;
-      draggedNode.vx = 0;
-      draggedNode.vy = 0;
+      if (Math.abs(p.x - draggedNode.x) + Math.abs(p.y - draggedNode.y) > 2) dragMoved = true;
+      draggedNode.x = p.x; draggedNode.y = p.y; draggedNode.vx = 0; draggedNode.vy = 0;
     } else if (isPanningCanvas) {
-      graphOffset.x = e.clientX - panStart.x;
-      graphOffset.y = e.clientY - panStart.y;
+      const nx = e.clientX - panStart.x, ny = e.clientY - panStart.y;
+      if (Math.abs(nx - graphOffset.x) + Math.abs(ny - graphOffset.y) > 2) dragMoved = true;
+      graphOffset.x = nx; graphOffset.y = ny;
+    } else {
+      const node = nodeAt(p.x, p.y);
+      const edge = node ? null : edgeAt(p.x, p.y);
+      const hit = node ? { kind: 'node', item: node } : edge ? { kind: 'edge', item: edge } : null;
+      const changed = (hit && hit.item) !== (hoveredGraphItem && hoveredGraphItem.item);
+      hoveredGraphItem = hit;
+      if (!isGraphConnectMode) elCanvas.style.cursor = node ? 'grab' : edge ? 'pointer' : '';
+      showGraphTooltip(hit, e.clientX, e.clientY);
+      if (changed) requestGraphDraw();
     }
+    graphPointer = p;
+    if (isGraphConnectMode && connectSourceNode) requestGraphDraw();
   });
 
-  window.addEventListener('mouseup', () => {
+  const endPointer = () => {
+    clearTimeout(longPressTimer);
+    if (draggedNode && dragMoved) {
+      draggedNode.pinned = true; // a node you placed stays where you put it
+      saveGraph();
+    }
     draggedNode = null;
     isPanningCanvas = false;
+  };
+  elCanvas.addEventListener('pointerup', endPointer);
+  elCanvas.addEventListener('pointercancel', endPointer);
+  elCanvas.addEventListener('pointerleave', () => {
+    if (!draggedNode && !isPanningCanvas) { hoveredGraphItem = null; showGraphTooltip(null); requestGraphDraw(); }
+  });
+
+  elCanvas.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    const p = toGraphCoords(e.clientX, e.clientY);
+    const node = nodeAt(p.x, p.y);
+    const edge = node ? null : edgeAt(p.x, p.y);
+    if (node) setSelectedNode(node);
+    openGraphMenu(e.clientX, e.clientY, node ? { kind: 'node', item: node } : edge ? { kind: 'edge', item: edge } : { kind: 'canvas', at: p });
   });
 
   elCanvas.addEventListener('dblclick', (e) => {
-    const rect = elCanvas.getBoundingClientRect();
-    const mouseX = (e.clientX - rect.left - graphOffset.x) / graphScale;
-    const mouseY = (e.clientY - rect.top - graphOffset.y) / graphScale;
-
-    const clicked = investigationGraph.nodes.find(n => {
-      const dx = n.x - mouseX;
-      const dy = n.y - mouseY;
-      return Math.sqrt(dx * dx + dy * dy) <= n.radius;
-    });
-
-    if (clicked) {
-      openPivotMatrix(clicked.label);
+    const p = toGraphCoords(e.clientX, e.clientY);
+    const node = nodeAt(p.x, p.y);
+    if (node) {
+      setSelectedNode(node);
+      setTimeout(() => document.getElementById('gd-label')?.focus(), 30);
+    } else {
+      openGraphMenu(e.clientX, e.clientY, { kind: 'canvas', at: p });
     }
   });
 
   elCanvas.addEventListener('wheel', (e) => {
     e.preventDefault();
-    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-    graphScale = Math.max(0.3, Math.min(3.0, graphScale * zoomFactor));
-    if (!graphAnimationId) startGraphSimulation();
-  });
+    // Zoom toward the cursor so the thing you're looking at stays under the mouse.
+    const rect = elCanvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const before = { x: (mx - graphOffset.x) / graphScale, y: (my - graphOffset.y) / graphScale };
+    graphScale = Math.max(0.25, Math.min(3.0, graphScale * (e.deltaY < 0 ? 1.1 : 0.9)));
+    graphOffset.x = mx - before.x * graphScale;
+    graphOffset.y = my - before.y * graphScale;
+    showGraphTooltip(null);
+    requestGraphDraw();
+  }, { passive: false });
 
-  // Node Inspector Event Handlers
-  document.getElementById('btn-inspector-pivot').addEventListener('click', () => {
-    if (selectedGraphNode) openPivotMatrix(selectedGraphNode.label);
-  });
-  document.getElementById('btn-inspector-delete').addEventListener('click', deleteSelectedNode);
-  document.getElementById('btn-inspector-close').addEventListener('click', () => setSelectedNode(null));
-
-  // Graph Search & Layout Selector
+  // --- Toolbar ---------------------------------------------------------------------------------
   document.getElementById('graph-search-node')?.addEventListener('input', (e) => {
     graphNodeSearchQuery = e.target.value.toLowerCase().trim();
-    if (!graphAnimationId) startGraphSimulation();
+    requestGraphDraw();
   });
 
-  document.getElementById('graph-layout-mode')?.addEventListener('change', (e) => {
-    applyGraphLayout(e.target.value);
+  document.getElementById('graph-layout-mode')?.addEventListener('change', (e) => applyGraphLayout(e.target.value));
+  document.getElementById('btn-graph-fit')?.addEventListener('click', fitGraphToView);
+
+  elGraphCaseSelect?.addEventListener('change', (e) => switchCase(e.target.value));
+  document.getElementById('btn-graph-case-new')?.addEventListener('click', () => {
+    const name = window.prompt('Name for the new case:', `Investigation ${Object.keys(graphCases.cases).length + 1}`);
+    if (name === null) return;
+    newCase(name.trim());
+    renderGraphLegend();
+    showToast(`New case: ${graphCases.cases[graphCases.activeId].name}`);
+  });
+  document.getElementById('btn-graph-case-rename')?.addEventListener('click', () => {
+    const c = graphCases.cases[graphCases.activeId];
+    const name = window.prompt('Rename this case:', c.name);
+    if (!name || !name.trim()) return;
+    c.name = name.trim();
+    saveGraph(true);
+    renderCaseSelect();
+  });
+  document.getElementById('btn-graph-case-delete')?.addEventListener('click', () => {
+    const c = graphCases.cases[graphCases.activeId];
+    if (!window.confirm(`Delete the case "${c.name}" and everything in it? This cannot be undone.`)) return;
+    try { localStorage.removeItem(GRAPH_CASE_PREFIX + graphCases.activeId); } catch (e) {}
+    delete graphCases.cases[graphCases.activeId];
+    const next = Object.keys(graphCases.cases)[0];
+    if (next) {
+      graphCases.activeId = next;
+      let g = null;
+      try { g = JSON.parse(localStorage.getItem(GRAPH_CASE_PREFIX + next) || 'null'); } catch (e) {}
+      investigationGraph = normaliseGraph(g || { nodes: [], edges: [] });
+      saveGraph(true);
+    } else {
+      const id = 'case_' + Date.now();
+      graphCases.cases[id] = { name: 'Investigation 1', updatedAt: Date.now() };
+      graphCases.activeId = id;
+      investigationGraph = normaliseGraph({ nodes: [], edges: [] });
+      saveGraph(true);
+    }
+    setSelectedNode(null);
+    renderCaseSelect();
+    renderGraphLegend();
+    fitGraphToView();
+    showToast(`Deleted case: ${c.name}`);
   });
 
-  // Case Template Loader
+  // Case Template Loader (opens as its own case so it never overwrites your work)
   document.getElementById('btn-graph-template').addEventListener('click', () => {
-    investigationGraph = {
+    const template = {
       nodes: [
-        { id: 'n_org', label: 'Atlassian Australia', type: 'org', x: 260, y: 180, vx: 0, vy: 0, radius: 24, color: '#f59e0b' },
-        { id: 'n_acn', label: 'ACN 004 044 937', type: 'aus', x: 420, y: 140, vx: 0, vy: 0, radius: 22, color: '#10b981' },
-        { id: 'n_dom', label: 'atlassian.com', type: 'domain', x: 380, y: 300, vx: 0, vy: 0, radius: 22, color: '#00ff9d' },
-        { id: 'n_ip', label: '104.192.141.1', type: 'ip', x: 540, y: 280, vx: 0, vy: 0, radius: 22, color: '#00f0ff' },
-        { id: 'n_cve', label: 'CVE-2023-22515', type: 'cve', x: 240, y: 320, vx: 0, vy: 0, radius: 22, color: '#f43f5e' }
+        { id: 'n_org', label: 'Atlassian Australia', type: 'org', x: 260, y: 180 },
+        { id: 'n_acn', label: 'ACN 004 044 937', type: 'aus', x: 460, y: 120 },
+        { id: 'n_dom', label: 'atlassian.com', type: 'domain', x: 420, y: 300 },
+        { id: 'n_ip', label: '104.192.141.1', type: 'ip', x: 600, y: 300 },
+        { id: 'n_cve', label: 'CVE-2023-22515', type: 'cve', x: 260, y: 380, notes: 'Confluence broken access control, actively exploited (CISA KEV).' }
       ],
       edges: [
         { source: 'n_org', target: 'n_acn', label: 'registered_as' },
-        { source: 'n_org', target: 'n_dom', label: 'operates' },
+        { source: 'n_org', target: 'n_dom', label: 'owns' },
         { source: 'n_dom', target: 'n_ip', label: 'resolves_to' },
         { source: 'n_dom', target: 'n_cve', label: 'affected_by' }
       ]
     };
-    localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-    setSelectedNode(null);
-    showToast('Loaded Australian Investigation Case Template!');
+    graphCases = graphCases || readCases();
+    newCase('AU template', template);
+    renderGraphLegend();
+    fitGraphToView();
+    showToast('Opened the Australian case template as a new case');
     if (!graphAnimationId) startGraphSimulation();
   });
 
   document.getElementById('btn-graph-add-node').addEventListener('click', () => {
-    const label = document.getElementById('graph-new-node-label').value.trim();
+    const input = document.getElementById('graph-new-node-label');
+    const label = input.value.trim();
     const type = document.getElementById('graph-new-node-type').value;
-    if (label) {
-      addNodeToGraph(label, type);
-      document.getElementById('graph-new-node-label').value = '';
+    if (!label) { input.focus(); return; }
+    const id = addNodeToGraph(label, type);
+    // With an entity selected, a new one is linked to it straight away.
+    if (selectedGraphNode && id && id !== selectedGraphNode.id) {
+      window.addEdgeToGraph(selectedGraphNode.id, id, document.getElementById('graph-edge-rel-type')?.value || 'affiliated_with');
     }
+    input.value = '';
+    renderGraphLegend();
+    requestGraphDraw();
+  });
+  document.getElementById('graph-new-node-label')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('btn-graph-add-node').click(); }
   });
 
   document.getElementById('btn-graph-connect-mode').addEventListener('click', () => {
     isGraphConnectMode = !isGraphConnectMode;
-    connectSourceNode = null;
-    showToast(isGraphConnectMode ? 'Click source node then target node to connect' : 'Connection mode cancelled');
+    connectSourceNode = isGraphConnectMode && selectedGraphNode ? selectedGraphNode : null;
+    syncConnectButton();
+    showToast(isGraphConnectMode
+      ? (connectSourceNode ? `Click the entity to link ${connectSourceNode.label} to` : 'Click the first entity, then the second')
+      : 'Connect cancelled');
   });
 
   document.getElementById('btn-graph-clear').addEventListener('click', () => {
-    if (confirm('Clear all nodes and edges in graph?')) {
-      investigationGraph.nodes = [];
-      investigationGraph.edges = [];
-      localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-      setSelectedNode(null);
-      showToast('Investigation graph cleared');
-    }
+    if (!confirm('Remove every entity and link from this case?')) return;
+    investigationGraph.nodes = [];
+    investigationGraph.edges = [];
+    setSelectedNode(null);
+    saveGraph(true);
+    renderGraphLegend();
+    requestGraphDraw();
+    showToast('Case cleared');
   });
 
   document.getElementById('btn-graph-export-png').addEventListener('click', () => {
-    const dataUrl = elCanvas.toDataURL('image/png');
     const a = document.createElement('a');
-    a.href = dataUrl;
+    a.href = elCanvas.toDataURL('image/png');
     a.download = `bubbsy_graph_${Date.now()}.png`;
     a.click();
-    showToast('Exported graph screenshot as PNG');
+    showToast('Exported graph as PNG');
   });
 
-  // JSON Export / Import for Link Graph
   document.getElementById('btn-graph-export-json')?.addEventListener('click', () => {
-    const data = JSON.stringify(investigationGraph, null, 2);
-    const blob = new Blob([data], { type: 'application/json' });
+    const name = graphCases && graphCases.cases[graphCases.activeId] ? graphCases.cases[graphCases.activeId].name : 'graph';
+    const data = JSON.stringify(Object.assign({ name }, investigationGraph), null, 2);
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `bubbsy_investigation_graph_${Date.now()}.json`;
+    a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+    a.download = `bubbsy_${name.replace(/[^a-z0-9]+/gi, '_').toLowerCase()}_${Date.now()}.json`;
     a.click();
-    showToast('Exported investigation graph JSON!');
+    showToast('Exported case as JSON');
   });
 
   document.getElementById('btn-graph-import-json')?.addEventListener('click', () => {
@@ -8120,41 +9345,38 @@
     reader.onload = (evt) => {
       try {
         const parsed = JSON.parse(evt.target.result);
-        if (parsed && Array.isArray(parsed.nodes)) {
-          investigationGraph = {
-            nodes: parsed.nodes || [],
-            edges: parsed.edges || []
-          };
-          localStorage.setItem('bubbsy_investigation_graph', JSON.stringify(investigationGraph));
-          setSelectedNode(null);
-          showToast(`Imported graph with ${investigationGraph.nodes.length} nodes!`);
-          if (!graphAnimationId) startGraphSimulation();
-        } else {
-          showToast('Invalid investigation graph JSON schema');
-        }
+        if (!parsed || !Array.isArray(parsed.nodes)) { showToast('That file is not a Bubbsy graph'); return; }
+        graphCases = graphCases || readCases();
+        // Imports open as a new case so they never overwrite what you have.
+        newCase(parsed.name || file.name.replace(/\.json$/i, ''), parsed);
+        renderGraphLegend();
+        fitGraphToView();
+        showToast(`Imported ${investigationGraph.nodes.length} entities as a new case`);
       } catch (err) {
-        showToast('Failed to parse graph JSON file');
+        showToast('Could not read that graph file');
       }
     };
     reader.readAsText(file);
     e.target.value = '';
   });
 
-  // Global Delete hotkey when Graph modal is active
   window.addEventListener('keydown', (e) => {
-    if (elModalGraph.classList.contains('active') && selectedGraphNode) {
-      if (e.key === 'Delete' || e.key === 'Backspace') {
-        const isInput = document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA');
-        if (!isInput) {
-          e.preventDefault();
-          deleteSelectedNode();
-        }
-      }
+    if (!elModalGraph.classList.contains('active')) return;
+    const isInput = document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName);
+    if (e.key === 'Escape' && (isGraphConnectMode || elGraphMenu.classList.contains('open'))) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      isGraphConnectMode = false; connectSourceNode = null; syncConnectButton(); closeGraphMenu(); requestGraphDraw();
+      return;
     }
-  });
+    if (isInput) return;
+    if ((e.key === 'Delete' || e.key === 'Backspace') && selectedGraphNode) { e.preventDefault(); deleteSelectedNode(); }
+    else if (e.key === 'f' || e.key === 'F') { e.preventDefault(); fitGraphToView(); }
+  }, true);
+
 
   // =========================================================================
-  // 4B. AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / PRO)
+  // 4B. AI PROMPT BUILDER (builds a prompt, then opens it in the chosen AI site)
   // =========================================================================
   const elModalAiCopilot = document.getElementById('modal-ai-copilot');
   const elBtnCloseAiCopilot = document.getElementById('btn-close-ai-copilot');
@@ -8369,14 +9591,13 @@ ${formatInstructions}
   });
 
   // =========================================================================
-  // 4C. ADMIN ANALYTICS & CLOUDFLARE D1 TELEMETRY CONTROLLER (user / hacker)
+  // 4C. ADMIN CLICK ANALYTICS (site owner only; password = ADMIN_PASSWORD secret on the server)
   // =========================================================================
   const elModalAdmin = document.getElementById('modal-admin');
   const elBtnCloseAdmin = document.getElementById('btn-close-admin');
   const elAdminLoginView = document.getElementById('admin-login-view');
   const elAdminDashboardView = document.getElementById('admin-dashboard-view');
   const elAdminLoginForm = document.getElementById('admin-login-form');
-  const elAdminUsername = document.getElementById('admin-username');
   const elAdminPassword = document.getElementById('admin-password');
   const elAdminLoginError = document.getElementById('admin-login-error');
   const elAdminClicksTbody = document.getElementById('admin-clicks-tbody');
@@ -8403,55 +9624,38 @@ ${formatInstructions}
       if (elAdminLoginView) elAdminLoginView.style.display = 'block';
       if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
       if (elAdminLoginError) elAdminLoginError.style.display = 'none';
-      setTimeout(() => elAdminUsername?.focus(), 100);
+      setTimeout(() => elAdminPassword?.focus(), 100);
     }
   }
 
   async function handleAdminLogin() {
-    const user = (elAdminUsername?.value || '').trim();
-    const pass = (elAdminPassword?.value || '').trim();
-    if (!user || !pass) {
+    const pass = elAdminPassword?.value || '';
+    const showError = (msg) => {
       if (elAdminLoginError) {
-        elAdminLoginError.textContent = 'Please enter username and password';
+        elAdminLoginError.textContent = msg;
         elAdminLoginError.style.display = 'block';
       }
-      return;
-    }
+    };
+    if (!pass) { showError('Enter the admin password'); return; }
 
-    const authHeader = 'Basic ' + btoa(`${user}:${pass}`);
+    const authHeader = 'Basic ' + btoa(`admin:${pass}`);
     try {
-      const res = await fetch('/api/admin/analytics', {
-        headers: { 'Authorization': authHeader }
-      });
+      const res = await fetch('/api/admin/analytics', { headers: { 'Authorization': authHeader } });
+      const data = await res.json().catch(() => ({}));
       if (res.ok) {
         sessionStorage.setItem('bubbsy_admin_auth', authHeader);
+        if (elAdminPassword) elAdminPassword.value = '';
         if (elAdminLoginError) elAdminLoginError.style.display = 'none';
         if (elAdminLoginView) elAdminLoginView.style.display = 'none';
         if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
-        showToast('Admin Authenticated (Cloudflare D1)');
-        const data = await res.json();
+        showToast('Admin dashboard unlocked');
         renderAdminTelemetry(data);
       } else {
-        if (elAdminLoginError) {
-          elAdminLoginError.textContent = 'Invalid credentials. Access Denied.';
-          elAdminLoginError.style.display = 'block';
-        }
+        showError(data.error || 'Wrong admin password');
         playCyberAudio('modal_close');
       }
     } catch (err) {
-      // Local/offline fallback verification for user / hacker
-      if (user === 'user' && pass === 'hacker') {
-        sessionStorage.setItem('bubbsy_admin_auth', authHeader);
-        if (elAdminLoginView) elAdminLoginView.style.display = 'none';
-        if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
-        showToast('Admin Authenticated (Local)');
-        fetchAdminTelemetry();
-      } else {
-        if (elAdminLoginError) {
-          elAdminLoginError.textContent = 'Authentication failed.';
-          elAdminLoginError.style.display = 'block';
-        }
-      }
+      showError('Could not reach the server. The admin area only works on the live site or server.py.');
     }
   }
 
@@ -8509,10 +9713,11 @@ ${formatInstructions}
 
     elAdminClicksTbody.innerHTML = clicks.map(c => {
       const ts = c.timestamp ? new Date(c.timestamp).toLocaleString() : '--';
-      const sessShort = (c.session_id || 'anon').slice(0, 12);
+      const sessShort = escapeHtml((c.session_id || 'anon').slice(0, 12));
       const tagChip = `<span class="telemetry-tag-chip">&lt;${escapeHtml(c.element_tag || 'EL')}&gt;</span> ${c.element_id ? '#' + escapeHtml(c.element_id) : ''}`;
       const textLabel = escapeHtml(c.element_text || '--');
-      const href = c.target_href ? `<a href="${escapeHtml(c.target_href)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${escapeHtml(c.target_href.slice(0, 45))}${c.target_href.length > 45 ? '...' : ''}</a>` : '--';
+      // Logged values come from anyone who can post to /api/track: only real web links become links.
+      const href = c.target_href && /^https?:\/\//i.test(c.target_href) ? `<a href="${escapeHtml(c.target_href)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${escapeHtml(c.target_href.slice(0, 45))}${c.target_href.length > 45 ? '...' : ''}</a>` : '--';
       const geo = `<span class="stat-chip" style="font-size:0.62rem;">${escapeHtml(c.country || 'AU')}</span>`;
 
       return `
@@ -8593,8 +9798,7 @@ ${formatInstructions}
     sessionStorage.removeItem('bubbsy_admin_auth');
     if (elAdminLoginView) elAdminLoginView.style.display = 'block';
     if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
-    if (elAdminUsername) elAdminUsername.value = 'user';
-    if (elAdminPassword) elAdminPassword.value = 'hacker';
+    if (elAdminPassword) elAdminPassword.value = '';
     showToast('Logged out of Admin');
   }
 
@@ -9981,6 +11185,60 @@ ${formatInstructions}
 
   // Collapse / Expand All Dashboard Categories
   let allCardsCollapsed = false;
+  document.getElementById('sort-mode-group')?.addEventListener('click', (e) => {
+    if (e.target.closest('#btn-arrange-layout')) {
+      enterLayoutEdit();
+      return;
+    }
+    const btn = e.target.closest('.sort-mode-btn');
+    if (!btn) return;
+    if (layoutEditing) {
+      showToast('Save or cancel your layout first');
+      return;
+    }
+    const mode = btn.getAttribute('data-sort-mode');
+    if (mode === 'custom') {
+      // First time: there is nothing to show yet, so go straight into arranging.
+      if (getSortMode() === 'custom' || !getCustomLayout()) enterLayoutEdit();
+      else setSortMode('custom');
+      return;
+    }
+    if (mode && mode !== getSortMode()) setSortMode(mode);
+  });
+
+  document.getElementById('btn-layout-save')?.addEventListener('click', saveLayoutEdit);
+  document.getElementById('btn-layout-cancel')?.addEventListener('click', () => {
+    exitLayoutEdit();
+    showToast('Layout changes discarded');
+  });
+  document.getElementById('btn-layout-reset')?.addEventListener('click', startLayoutOver);
+
+  // Handles live inside the dashboard and are rebuilt on every render, so listen once on the grid.
+  elDashboardGrid.addEventListener('pointerdown', (e) => {
+    if (!layoutEditing) return;
+    const handle = e.target.closest('.drag-handle');
+    if (handle && (e.pointerType !== 'mouse' || e.button === 0)) beginLayoutDrag(e, handle);
+  });
+  elDashboardGrid.addEventListener('keydown', (e) => {
+    if (!layoutEditing) return;
+    const handle = e.target.closest('.drag-handle');
+    if (handle) moveWithKeyboard(e, handle);
+  });
+  // While arranging, a click on a module header or link must not collapse the module or open the site.
+  elDashboardGrid.addEventListener('click', (e) => {
+    if (!layoutEditing) return;
+    if (e.target.closest('.drag-handle') || e.target.closest('.link-anchor')) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+  document.addEventListener('keydown', (e) => {
+    if (layoutEditing && e.key === 'Escape' && !document.querySelector('.modal-overlay.active')) {
+      exitLayoutEdit();
+      showToast('Layout changes discarded');
+    }
+  });
+
   document.getElementById('btn-toggle-all-cards')?.addEventListener('click', () => {
     allCardsCollapsed = !allCardsCollapsed;
     const cards = document.querySelectorAll('.widget-card');
@@ -10066,22 +11324,22 @@ ${formatInstructions}
       pillLabel: '1. Overview',
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
       title: 'Mission Briefing: Bubbsy Command Architecture',
-      desc: 'Bubbsy is an elite forensic OSINT & tactical intelligence platform. Equipped with <strong>__TOTAL_LINKS__+ verified tools</strong> organized across <strong>__TOTAL_WIDGETS__ categories</strong>, Australian-first corporate & legal networks, real-time threat feeds, and sub-millisecond offline execution.',
+      desc: 'Bubbsy is an OSINT start page: <strong>__TOTAL_LINKS__ curated tools</strong> organized across <strong>__TOTAL_WIDGETS__ categories</strong>, Australian-first corporate & legal sources, and live threat feeds. The catalogue also works offline.',
       capabilities: [
         { title: '🇦🇺 Australian-First Intelligence', detail: 'Integrated ABN/ACN corporate registers, ASIC records, NSW Six Maps, VicPlan, and auDA drop schedules.' },
-        { title: '⚡ Sub-Millisecond Omnisearch', detail: 'Zero-latency fuzzy filtering with 35+ direct bang routing shortcuts and keyboard result traversal.' },
-        { title: '🔒 Private & Self-Contained', detail: 'Zero external tracker telemetry, ASD Essential 8 ML3 privacy posture, completely offline capable.' }
+        { title: '⚡ Instant Search', detail: 'Filters the catalogue as you type, with 35+ bang shortcuts and keyboard navigation of results.' },
+        { title: '🔒 Your Data Stays Yours', detail: 'Pins, layout and investigations stay in your browser unless you create an account. The site counts button and link clicks (never what you type) to see which tools get used; details are in the Sign in window.' }
       ],
       highlightSelector: '.brand-hud',
       tryLive: {
         title: 'Tactical Catalog Overview',
-        hint: 'Reset all active filters and browse all 2,061 verified intelligence modules',
+        hint: 'Reset all active filters and browse the full catalogue',
         btnText: '⚡ Browse Full Catalog',
         action: () => {
           closeModal(document.getElementById('modal-tour'));
           filterByCategory('all');
           document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
-          showToast('Browsing full verified catalog (2,061 tools)');
+          showToast(`Browsing the full catalogue (${toolCountText()} tools)`);
         }
       },
       shortcuts: ['/ : Focus Search', 'Ctrl+K : Spotlight', '? : Cheatsheet', 'Aa : Typography']
@@ -10357,9 +11615,9 @@ ${formatInstructions}
       title: 'Command Palette, Customizer & Forensic Export',
       desc: 'Complete control over your investigation workspace with instant spotlight navigation, high-contrast typography, and snapshot archiving.',
       capabilities: [
-        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching 2,061 tools, commands, and social networks in under 2ms.' },
+        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching every catalogue tool, command and social network.' },
         { title: 'Aa High-Contrast Typography', detail: 'Adjust font scaling (80%–150%), font weight (300–800), and switch high-contrast readability palettes.' },
-        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and complete 2,061-tool CSV catalogs.' }
+        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and the complete tool catalogue as CSV.' }
       ],
       highlightSelector: '#btn-palette',
       tryLive: {
@@ -10431,8 +11689,8 @@ ${formatInstructions}
     }
 
     // Dynamic replacement of totals
-    const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
-    const totalWidgets = (appData && appData.total_widgets) ? appData.total_widgets : 101;
+    const totalLinks = toolCountText();
+    const totalWidgets = moduleCount();
     const renderedDesc = s.desc
       .split('__TOTAL_LINKS__').join(totalLinks)
       .split('__TOTAL_WIDGETS__').join(String(totalWidgets));
@@ -11545,6 +12803,7 @@ ${formatInstructions}
   window.openModal = openModal;
   window.closeModal = closeModal;
   window.cycleTheme = cycleTheme;
+  window.showToast = showToast;
 
   // Self Boot
   if (document.readyState === 'loading') {
