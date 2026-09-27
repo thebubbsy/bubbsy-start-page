@@ -79,7 +79,7 @@ Simply double-click `index.html`. The bundled dataset `data/osint_data.js` loads
 
 ### Configuration
 
-**Live site (Cloudflare Pages, deployed from `main`).** Set these under Cloudflare dashboard → Workers & Pages → *bubbsy-start-page* → Settings → Variables and Secrets, then redeploy:
+**Live site (Cloudflare Pages, deployed from `main`).** Every push to `main` is published automatically by `.github/workflows/deploy-cloudflare.yml`, once the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set (instructions at the top of that file). Set these under Cloudflare dashboard → Workers & Pages → *bubbsy-start-page* → Settings → Variables and Secrets, then redeploy:
 
 | Name | Type | Purpose |
 |---|---|---|
