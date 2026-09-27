@@ -3,8 +3,8 @@ window.BUBBSY_DATA = {
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2075,
-  "au_link_total": 327,
+  "total_links": 2078,
+  "au_link_total": 330,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -39,11 +39,11 @@ window.BUBBSY_DATA = {
       "timezone": "Asia/Kolkata"
     },
     {
-      "name": " (Hong Kong)",
+      "name": "Hong Kong",
       "timezone": "Asia/Hong_Kong"
     },
     {
-      "name": " (Japan)",
+      "name": "Tokyo (Japan)",
       "timezone": "Asia/Tokyo"
     },
     {
@@ -63,7 +63,7 @@ window.BUBBSY_DATA = {
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2075+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2078+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -5083,6 +5083,22 @@ window.BUBBSY_DATA = {
               "au": true
             },
             {
+              "title": "WA Online Licence Search (DEMIRS)",
+              "url": "https://ols.demirs.wa.gov.au/",
+              "description": "Western Australian builders, plumbers, electricians and other occupational licensees",
+              "domain": "demirs.wa.gov.au",
+              "favicon": "https://f.start.me/demirs.wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "NT Licensing Public Register",
+              "url": "https://licensingnt.nt.gov.au/PublicRegister/",
+              "description": "Northern Territory occupational licence holders, including expired-within-12-months status",
+              "domain": "licensingnt.nt.gov.au",
+              "favicon": "https://f.start.me/licensingnt.nt.gov.au",
+              "au": true
+            },
+            {
               "title": "Law Society of NSW - Find a Lawyer",
               "url": "https://www.lawsociety.com.au/for-the-public/find-a-lawyer",
               "description": "Practising NSW solicitors, firms, and practising certificate status",
@@ -5123,7 +5139,7 @@ window.BUBBSY_DATA = {
               "au": true
             }
           ],
-          "au_count": 13,
+          "au_count": 15,
           "au_module": true
         },
         {
@@ -10111,6 +10127,22 @@ window.BUBBSY_DATA = {
               "au": true
             },
             {
+              "title": "Transport WA Vehicle Licence (Rego) Check",
+              "url": "https://www.wa.gov.au/service/transport/road-transport/check-your-vehicle-licence-rego-expiry-date",
+              "description": "Free WA vehicle licence (rego) status and expiry lookup by plate number",
+              "domain": "wa.gov.au",
+              "favicon": "https://f.start.me/wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "EzyReg SA Vehicle Registration Check",
+              "url": "https://www.ecom.transport.sa.gov.au/et/checkRegistrationExpiryDate.do",
+              "description": "Free South Australian vehicle registration expiry and CTP insurer lookup by plate number",
+              "domain": "transport.sa.gov.au",
+              "favicon": "https://f.start.me/transport.sa.gov.au",
+              "au": true
+            },
+            {
               "title": "CASA (Civil Aviation Safety Authority Register)",
               "url": "https://www.casa.gov.au/aircraft/register-aircraft/civil-aircraft-register",
               "description": "Search all registered VH- Australian aircraft, owners, and operators",
@@ -10127,7 +10159,7 @@ window.BUBBSY_DATA = {
               "au": true
             }
           ],
-          "au_count": 6,
+          "au_count": 8,
           "au_module": true
         },
         {

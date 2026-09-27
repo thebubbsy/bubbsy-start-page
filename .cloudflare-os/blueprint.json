@@ -1,0 +1,21 @@
+{
+  "blueprintId": "blueprint.bubbsy.startpage",
+  "title": "Bubbsy Enterprise Dashboard & Start Page",
+  "description": "High-performance personal intranet dashboard, domain drops monitor, and category aggregator.",
+  "output": {
+    "id": "app",
+    "noun": "Dashboard",
+    "plural": "Dashboards",
+    "icon": "appWindow"
+  },
+  "author": {
+    "type": "user",
+    "name": "Tony",
+    "id": "tony@local"
+  },
+  "revision": 1,
+  "created": "2026-09-07T14:57:17.685Z",
+  "version": 1,
+  "lastUpdated": "2026-09-07T14:57:17.685Z",
+  "bindings": {}
+}

@@ -230,9 +230,26 @@
     if (na) na.hidden = false;
   }
 
-  function openAccountModal(tab) {
+  // Resolves once we know whether this site has an account server. Opening the window before then
+  // would show neither the form nor the "not available" note, so it shows a short wait instead.
+  let markChecked;
+  const serverChecked = new Promise(resolve => { markChecked = resolve; });
+
+  async function openAccountModal(tab) {
     const modal = $('modal-account');
     if (!modal) return;
+    const checking = $('account-checking');
+    let settled = false;
+    serverChecked.then(() => { settled = true; });
+    await Promise.resolve();
+    if (!settled) {
+      if (checking) checking.hidden = false;
+      if (typeof window.openModal === 'function') window.openModal(modal); else modal.classList.add('active');
+      await serverChecked;
+      if (checking) checking.hidden = true;
+      if (state.available) { if (tab) setTab(tab); setUser(state.user); if (!state.user) loadGoogle(); }
+      return;
+    }
     if (state.available) {
       if (tab) setTab(tab);
       setUser(state.user);
@@ -384,17 +401,19 @@
     }
     if (!me || !me.accountsEnabled) {
       setUnavailable();
+      markChecked();
       return;
     }
     state.available = true;
     state.googleClientId = me.googleClientId || null;
     setUser(me.user || null);
+    markChecked();
     if (me.user) {
       try { await reconcile(await api('/api/prefs')); } catch (e) {}
     }
   }
 
-  window.BubbsyAccount = { offerSync, open: openAccountModal, isSignedIn: () => !!state.user };
+  window.BubbsyAccount = { offerSync, open: openAccountModal, isSignedIn: () => !!state.user, isAvailable: () => state.available };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

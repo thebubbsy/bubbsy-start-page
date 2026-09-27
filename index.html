@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bubbsy Start Page | OSINT Command Hub</title>
-  <meta name="description" content="Bubbsy Start Page - Tactical OSINT & AI command dashboard with 2,061+ curated tools, 113 modules, Australian intelligence, and visual identity recon.">
+  <meta name="description" content="Bubbsy Start Page - Tactical OSINT & AI command dashboard with 2,000+ curated tools across 100+ modules, Australian intelligence, and visual identity recon.">
   <meta property="og:title" content="Bubbsy Start Page | OSINT Command Hub">
-  <meta property="og:description" content="2,061+ OSINT tools, Australian databases, evergreen AI models, and real-time threat intelligence.">
+  <meta property="og:description" content="2,000+ OSINT tools, Australian databases, evergreen AI models, and real-time threat intelligence.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#050912">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2.5'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon></svg>">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Leaflet.js — God's Eye AU Map (free/open-source, no API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // Immediate early typography & high-contrast application
     (function() {
@@ -58,7 +61,7 @@
       <div class="nav-stats">
         <div class="stat-chip" id="chip-tools-count">
           <span class="stat-label">TOOLS:</span>
-          <span class="stat-value" id="stats-total-tools">2,061</span>
+          <span class="stat-value" id="stats-total-tools">2,076</span>
         </div>
         <div class="stat-chip" id="chip-categories-count" data-adv>
           <span class="stat-label">MODULES:</span>
@@ -67,7 +70,7 @@
         <div class="stat-chip" id="chip-threat-radar" data-adv title="Live Threat Intel / CISA KEV Stream">
           <span class="status-dot online" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></span>
           <span class="stat-label">RADAR:</span>
-          <span class="stat-value" style="color:var(--accent-cyan);">ACTIVE 2026</span>
+          <span class="stat-value" style="color:var(--accent-cyan);">…</span>
         </div>
       </div>
 
@@ -179,12 +182,23 @@
           </svg>
           Export
         </button>
-        <button class="btn-icon" id="btn-open-ai-copilot" title="Autonomous AI OSINT Copilot & Multi-Model Reasoner (Gemini 3.8 / Pro)" aria-label="Autonomous AI OSINT Copilot & Multi-Model Reasoner" aria-haspopup="dialog" style="border-color:var(--accent-purple);color:#c084fc;">
+        <button class="btn-icon" id="btn-open-ai-copilot" title="AI Prompt Builder: builds an investigation prompt and opens it in ChatGPT, Gemini, Claude…" aria-label="AI Prompt Builder" aria-haspopup="dialog" style="border-color:var(--accent-purple);color:#c084fc;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
             <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
           </svg>
           <span style="font-weight:700;">AI Copilot</span>
+        </button>
+        <button class="btn-icon" id="btn-open-admin" title="Admin Analytics & Click Telemetry (Cloudflare D1)" aria-label="Admin Analytics & Click Telemetry" aria-haspopup="dialog" style="border-color:var(--accent-amber);color:var(--accent-amber);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span style="font-weight:700;">Admin</span>
+        </button>
+        <button class="btn-icon" id="btn-open-gods-eye" title="God's Eye View — Australian OSINT Intelligence HUD" aria-label="God's Eye View Australian OSINT HUD" aria-haspopup="dialog" style="border-color:#10b981;color:#10b981;">
+          <span style="font-size:1rem;line-height:1;">👁</span>
+          <span style="font-weight:700;">Eye</span>
         </button>
         <button class="btn-icon" id="btn-theme-picker" title="Switch HUD Color Theme" aria-label="Switch HUD Color Theme">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -210,7 +224,7 @@
           </svg>
           Add
         </button>
-        <button class="btn-icon" id="btn-settings" title="Settings & Everything Auth" aria-label="Settings & Everything Auth" aria-haspopup="dialog">
+        <button class="btn-icon" id="btn-settings" title="Settings" aria-label="Settings" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -299,6 +313,16 @@
         <span class="hud-desc">Copilot</span>
       </div>
       <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openAdminModal();">
+        <kbd class="hud-key amber" style="border-color:var(--accent-amber);color:var(--accent-amber);">!admin</kbd>
+        <span class="hud-desc">Admin</span>
+      </div>
+      <div class="hud-separator"></div>
+      <div class="hud-item" onclick="openGodsEyeModal();">
+        <kbd class="hud-key green" style="border-color:#10b981;color:#10b981;">!eye</kbd>
+        <span class="hud-desc">God's Eye</span>
+      </div>
+      <div class="hud-separator"></div>
       <div class="hud-item" onclick="openShortcutsModal();">
         <kbd class="hud-key cyan">?</kbd>
         <span class="hud-desc">Cheatsheet</span>
@@ -337,7 +361,7 @@
           type="text"
           id="main-search"
           class="main-search-input"
-          placeholder="Fuzzy search 2,061+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)"
+          placeholder="Search OSINT, Australian & AI tools… (/ to focus, Ctrl+K for palette)"
           aria-label="Search or filter bookmarks"
           autocomplete="off"
           spellcheck="false"
@@ -377,7 +401,7 @@
 
   <!-- Category Quick Jump Navigation Ribbon -->
   <nav class="category-ribbon" id="category-ribbon">
-    <button class="cat-pill active" data-filter-group="all">All (2,061)</button>
+    <button class="cat-pill active" data-filter-group="all">All</button>
     <button class="cat-pill" data-filter-group="aus_intel">[AUS] Australian OSINT</button>
     <button class="cat-pill" data-filter-group="visual_tools">Interactive Visual Toolkit</button>
     <button class="cat-pill" data-filter-group="ai_hub">AI & Neural Tools</button>
@@ -518,7 +542,7 @@
 
       <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
         <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities & advisories by keyword (e.g. Ivanti, Fortinet, ASD, Essential 8)..." style="flex:1;min-width:200px;">
-        <button type="button" class="btn-icon" id="btn-radar-ai-brief" title="Generate AI Threat Intelligence Brief (Gemini 3.8 / Multi-Model)" style="border-color:var(--accent-purple);color:#c084fc;font-weight:700;">
+        <button type="button" class="btn-icon" id="btn-radar-ai-brief" title="Build an AI threat-intelligence brief prompt from the filtered advisories" style="border-color:var(--accent-purple);color:#c084fc;font-weight:700;">
           🤖 AI Threat Brief
         </button>
         <button type="button" class="btn-icon" id="btn-radar-send-to-graph" title="Send Filtered CVEs to Link Graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
@@ -1334,7 +1358,7 @@
   </div>
 
   <!-- =========================================================================
-       AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / MULTI-MODEL)
+       AI PROMPT BUILDER (builds a prompt and opens it in the chosen AI site)
        ========================================================================= -->
   <div class="modal-overlay" id="modal-ai-copilot" role="dialog" aria-modal="true" aria-labelledby="modal-ai-copilot-title">
     <div class="modal-content" style="max-width:920px;">
@@ -1345,9 +1369,9 @@
               <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
               <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
             </svg>
-            Autonomous AI OSINT Copilot &amp; Multi-Model Reasoner
+            AI Prompt Builder
           </h3>
-          <span class="brand-tag" style="background:rgba(192,132,252,0.15);border:1px solid #c084fc;color:#c084fc;font-weight:700;">GEMINI 3.8 / MULTI-MODEL REASONER</span>
+          <span class="brand-tag" style="background:rgba(192,132,252,0.15);border:1px solid #c084fc;color:#c084fc;font-weight:700;">BUILDS A PROMPT · YOU PICK THE AI</span>
         </div>
         <button class="modal-close" id="btn-close-ai-copilot" aria-label="Close AI OSINT Copilot dialog">&times;</button>
       </div>
@@ -1377,11 +1401,11 @@
         <div class="form-group" style="margin-bottom:0;">
           <label class="form-label">Target Model / Reasoner</label>
           <select class="form-control" id="ai-copilot-model">
-            <option value="aistudio" selected>Google AI Studio (Gemini 2.5 / 3.0 Pro)</option>
-            <option value="chatgpt">ChatGPT (o3-mini / GPT-4o)</option>
-            <option value="claude">Claude (3.7 Sonnet Thinking)</option>
-            <option value="deepseek">DeepSeek (R1 Reasoner)</option>
-            <option value="perplexity">Perplexity (Deep Research)</option>
+            <option value="aistudio" selected>Google AI Studio (Gemini)</option>
+            <option value="chatgpt">ChatGPT</option>
+            <option value="claude">Claude</option>
+            <option value="deepseek">DeepSeek</option>
+            <option value="perplexity">Perplexity</option>
           </select>
         </div>
       </div>
@@ -1429,6 +1453,115 @@
           <button type="button" class="btn-search-exec" id="btn-ai-launch-studio" style="background:linear-gradient(135deg, #a855f7, #6366f1);color:#ffffff;font-weight:700;">
             🚀 1-Click Launch AI Session
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ADMIN ANALYTICS & CLICK TELEMETRY MODAL (CLOUDFLARE D1)
+       ========================================================================= -->
+  <div class="modal-overlay" id="modal-admin" role="dialog" aria-modal="true" aria-labelledby="modal-admin-title">
+    <div class="modal-content" style="max-width:980px;">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <h3 class="modal-title" id="modal-admin-title" style="display:flex;align-items:center;gap:8px;color:var(--accent-amber);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Admin Telemetry &amp; User Click Analytics
+          </h3>
+          <span class="brand-tag" style="border-color:rgba(245,158,11,0.4);color:var(--accent-amber);">CLOUDFLARE D1</span>
+        </div>
+        <button class="modal-close" id="btn-close-admin" aria-label="Close Admin dialog">&times;</button>
+      </div>
+
+      <!-- State 1: Login Gate View -->
+      <div id="admin-login-view" style="padding:24px 12px;text-align:center;">
+        <div style="max-width:360px;margin:0 auto;background:rgba(5,9,18,0.7);padding:24px;border-radius:12px;border:1px solid rgba(245,158,11,0.3);box-shadow:0 12px 30px rgba(0,0,0,0.5);">
+          <div style="font-size:2rem;margin-bottom:8px;">🔐</div>
+          <h4 style="margin:0 0 6px 0;color:var(--text-primary);">Restricted Admin Access</h4>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;">For the site owner only. The password is the <code>ADMIN_PASSWORD</code> secret set in Cloudflare Pages; with none set, the admin area stays switched off.</p>
+          
+          <form id="admin-login-form" onsubmit="return false;">
+            <div class="form-group" style="text-align:left;margin-bottom:16px;">
+              <label class="form-label" for="admin-password" style="font-size:0.72rem;">Admin password</label>
+              <input type="password" class="form-control" id="admin-password" placeholder="The ADMIN_PASSWORD you set in Cloudflare" autocomplete="current-password" style="font-family:var(--font-mono);font-size:0.82rem;">
+            </div>
+            <div id="admin-login-error" role="alert" style="display:none;color:#ef4444;font-size:0.75rem;margin-bottom:12px;font-weight:600;">Wrong admin password</div>
+            <button type="submit" class="btn-search-exec" id="btn-admin-login-submit" style="width:100%;padding:8px;background:var(--accent-amber);color:#050912;font-weight:700;">
+              Open dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- State 2: Authenticated Analytics Dashboard View -->
+      <div id="admin-dashboard-view" style="display:none;">
+        <!-- Top Metric Cards -->
+        <div class="admin-metrics-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:10px;margin-bottom:16px;">
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(0,240,255,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Total Clicks</div>
+            <div id="admin-metric-total-clicks" style="font-size:1.6rem;font-weight:800;color:var(--accent-cyan);font-family:var(--font-mono);">0</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Unique Sessions</div>
+            <div id="admin-metric-sessions" style="font-size:1.6rem;font-weight:800;color:var(--accent-green);font-family:var(--font-mono);">0</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Top Click Target</div>
+            <div id="admin-metric-top-target" style="font-size:0.88rem;font-weight:700;color:var(--accent-amber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="--">--</div>
+          </div>
+          <div class="admin-metric-card" style="background:rgba(255,255,255,0.03);border:1px solid rgba(192,132,252,0.2);border-radius:8px;padding:12px;">
+            <div style="font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">D1 Database Status</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
+              <span class="online-dot" style="background:var(--accent-green);"></span>
+              <span style="font-size:0.85rem;font-weight:700;color:#c084fc;">Active &amp; Logging</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Control Bar -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;padding:8px 12px;background:rgba(0,0,0,0.3);border-radius:6px;border:1px solid rgba(255,255,255,0.05);">
+          <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:240px;">
+            <input type="text" class="form-control" id="admin-filter-input" placeholder="Search clicks by text, tag, ID, or session..." style="font-size:0.75rem;padding:4px 10px;">
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="btn-icon" id="btn-admin-refresh" style="font-size:0.72rem;padding:3px 8px;border-color:var(--accent-cyan);color:var(--accent-cyan);">
+              🔄 Refresh
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-export-csv" style="font-size:0.72rem;padding:3px 8px;border-color:var(--accent-green);color:var(--accent-green);">
+              📥 Export CSV
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-clear-logs" style="font-size:0.72rem;padding:3px 8px;border-color:rgba(239,68,68,0.5);color:#ef4444;">
+              🗑️ Clear Logs
+            </button>
+            <button type="button" class="btn-icon" id="btn-admin-logout" style="font-size:0.72rem;padding:3px 8px;">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Telemetry Table -->
+        <div style="max-height:420px;overflow-y:auto;border:1px solid rgba(255,255,255,0.08);border-radius:6px;background:rgba(5,9,18,0.5);">
+          <table style="width:100%;border-collapse:collapse;font-size:0.75rem;text-align:left;">
+            <thead>
+              <tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;z-index:2;backdrop-filter:blur(8px);">
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:130px;">Time</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:110px;">Session ID</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:90px;">Tag / ID</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;">Clicked Label / Action</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;">Target Link / Destination</th>
+                <th style="padding:8px 10px;color:var(--text-muted);font-weight:600;width:80px;">Geo / IP</th>
+              </tr>
+            </thead>
+            <tbody id="admin-clicks-tbody">
+              <tr>
+                <td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted);">Loading telemetry from Cloudflare D1...</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -1750,9 +1883,7 @@
           <div style="display:flex;gap:12px;font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:4px;">
             <span>📍 Sydney, Australia (AEST / UTC+10)</span>
             <span>•</span>
-            <span>⚡ 2,061 Tools Indexed</span>
-            <span>•</span>
-            <span style="color:var(--accent-green);">● ASD Essential 8 Verified</span>
+            <span>⚡ <span data-live-count="tools">2,076</span> tools</span>
           </div>
         </div>
       </div>
@@ -1959,12 +2090,12 @@
       </div>
 
       <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
-        <label class="form-label">System Health &amp; Diagnostics</label>
+        <label class="form-label">Status</label>
         <div id="settings-diagnostics-box" style="padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:4px;font-family:var(--font-mono);font-size:0.72rem;display:flex;flex-direction:column;gap:4px;">
-          <div style="display:flex;justify-content:space-between;"><span>Backend Engine:</span> <strong id="diag-backend-status" style="color:var(--accent-green);">ONLINE (Port 7777)</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>Indexed OSINT Catalog:</span> <strong style="color:var(--accent-cyan);">2,061 Verified Tools</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>LocalStorage Footprint:</span> <strong id="diag-storage-usage" style="color:var(--text-primary);">-- KB</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>Security Benchmark:</span> <strong style="color:var(--accent-green);">ASD Essential 8 ML3</strong></div>
+          <div class="diag-row"><span>Bubbsy server:</span> <strong id="diag-backend-status">Checking…</strong></div>
+          <div class="diag-row"><span>Catalogue:</span> <strong id="diag-catalog" style="color:var(--accent-cyan);">--</strong></div>
+          <div class="diag-row"><span>Accounts:</span> <strong id="diag-accounts" style="color:var(--text-primary);">--</strong></div>
+          <div class="diag-row"><span>Saved in this browser:</span> <strong id="diag-storage-usage" style="color:var(--text-primary);">-- KB</strong></div>
         </div>
       </div>
 
@@ -1972,7 +2103,7 @@
         <label class="form-label">Backup &amp; Data Catalog</label>
         <div style="display:flex;gap:8px;">
           <button type="button" class="btn-icon" id="btn-export-backup">Export JSON Backup</button>
-          <button type="button" class="btn-icon" id="btn-export-csv-catalog" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Export 2,061 Tools (CSV)</button>
+          <button type="button" class="btn-icon" id="btn-export-csv-catalog" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Export <span data-live-count="tools">2,076</span> Tools (CSV)</button>
           <button type="button" class="btn-icon" id="btn-reset-default">Reset Defaults</button>
         </div>
       </div>
@@ -2110,8 +2241,7 @@
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
       <span style="font-weight:700;letter-spacing:1px;color:var(--text-primary);">BUBBSY COMMAND HUB</span>
       <span class="stat-chip" style="font-size:0.62rem;">v2.18.0</span>
-      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);">2,061 OSINT TOOLS</span>
-      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-green);">ASD ESSENTIAL 8</span>
+      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);"><span data-live-count="tools">2,076</span> OSINT TOOLS</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
       <button type="button" class="btn-icon" onclick="startOnboardingTour();" style="padding:2px 8px;font-size:0.68rem;">Mission Briefing</button>
@@ -2123,7 +2253,178 @@
   <!-- Toast Notification Container -->
   <div id="toast-container"></div>
 
-  <!-- Scripts: bundled offline data first, then app controller -->
+  <!-- ===== GOD'S EYE VIEW — Australian OSINT Palantir HUD ===== -->
+  <div class="modal-overlay" id="modal-gods-eye" role="dialog" aria-modal="true" aria-labelledby="ge-modal-title" style="display:none;padding:0;align-items:stretch;justify-content:stretch;">
+    <!-- GE Header -->
+    <div class="ge-header">
+      <div class="ge-title">
+        <span class="ge-eye-icon">👁</span>
+        <span id="ge-modal-title">GOD'S EYE VIEW — AUSTRALIA</span>
+      </div>
+      <div class="ge-status-bar">
+        <span class="ge-status-dot" id="ge-dot-feeds"></span>
+        <span id="ge-status-feeds">Feeds initialising…</span>
+        <span style="opacity:0.3;">│</span>
+        <span class="ge-status-dot amber"></span>
+        <span id="ge-status-time">——:——:—— AEST</span>
+        <span style="opacity:0.3;">│</span>
+        <span id="ge-feed-count" style="color:var(--accent-cyan);">0 items loaded</span>
+      </div>
+      <button class="modal-close" id="btn-close-gods-eye" aria-label="Close God's Eye View" style="margin-left:auto;">&times;</button>
+    </div>
+
+    <!-- GE Body: 3-col bento grid -->
+    <div class="ge-body">
+
+      <!-- COL 1: Live Intel Feeds -->
+      <div class="ge-panel" id="ge-feeds-panel">
+        <div class="ge-panel-title">
+          📡 LIVE INTEL FEEDS
+          <button class="ge-refresh-btn" id="ge-refresh-btn" title="Refresh all feeds">↻ Refresh</button>
+        </div>
+        <div class="ge-feed-tabs">
+          <button class="ge-feed-tab active" data-feed="acsc">ACSC</button>
+          <button class="ge-feed-tab" data-feed="afp">AFP</button>
+          <button class="ge-feed-tab" data-feed="asic">ASIC</button>
+          <button class="ge-feed-tab" data-feed="austlii">AusLII</button>
+          <button class="ge-feed-tab" data-feed="all">All</button>
+        </div>
+        <div class="ge-feeds-list" id="ge-feeds-list">
+          <div class="ge-feeds-loading">
+            <span class="ge-spinning">↻</span> Loading AU intel feeds…
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 2: Australia Map & Tactical Surveillance -->
+      <div class="ge-panel ge-map-panel">
+        <div class="ge-panel-title" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>🗺️ TACTICAL RECON & SURVEILLANCE MAP</span>
+          <div class="ge-map-controls">
+            <button class="ge-map-btn active" id="ge-toggle-cctv" title="Toggle Public Highway & Traffic CCTV Feeds">📷 Traffic CCTV (<span id="ge-cctv-count">50</span>)</button>
+            <button class="ge-map-btn" id="ge-toggle-radar" title="Toggle Live BoM Rain & Precipitation Radar">🌧️ BoM Weather Radar</button>
+            <button class="ge-map-btn" id="ge-toggle-basemap" title="Switch between Dark Surveillance and Satellite Imagery">🛰️ Satellite</button>
+          </div>
+        </div>
+        <div id="ge-leaflet-map"></div>
+      </div>
+
+      <!-- COL 3: Entity Spotlight + Quick Pivot Rail -->
+      <div class="ge-panel ge-spotlight-panel">
+        <div class="ge-panel-title">🔍 ENTITY SPOTLIGHT</div>
+        <div class="ge-spotlight-input-row">
+          <input type="text" class="ge-spotlight-input" id="ge-spotlight-input" placeholder="Search ABN, name, domain, IP…" autocomplete="off">
+          <button class="ge-spotlight-btn" id="ge-spotlight-search">GO</button>
+        </div>
+
+        <!-- State Tiles inside spotlight panel -->
+        <div class="ge-panel-title" style="border-top:1px solid rgba(0,240,255,0.08);">🏛️ AU STATE INTEL TILES</div>
+        <div class="ge-state-tiles" id="ge-state-tiles">
+          <div class="ge-state-tile" data-state="NSW"><span class="ge-state-abbr">NSW</span><span class="ge-state-name">New South Wales</span></div>
+          <div class="ge-state-tile" data-state="VIC"><span class="ge-state-abbr">VIC</span><span class="ge-state-name">Victoria</span></div>
+          <div class="ge-state-tile" data-state="QLD"><span class="ge-state-abbr">QLD</span><span class="ge-state-name">Queensland</span></div>
+          <div class="ge-state-tile" data-state="WA"><span class="ge-state-abbr">WA</span><span class="ge-state-name">Western Australia</span></div>
+          <div class="ge-state-tile" data-state="SA"><span class="ge-state-abbr">SA</span><span class="ge-state-name">South Australia</span></div>
+          <div class="ge-state-tile" data-state="TAS"><span class="ge-state-abbr">TAS</span><span class="ge-state-name">Tasmania</span></div>
+          <div class="ge-state-tile" data-state="ACT"><span class="ge-state-abbr">ACT</span><span class="ge-state-name">Capital Territory</span></div>
+          <div class="ge-state-tile" data-state="NT"><span class="ge-state-abbr">NT</span><span class="ge-state-name">Northern Territory</span></div>
+        </div>
+
+        <!-- Quick Pivot Rail -->
+        <div class="ge-panel-title" style="border-top:1px solid rgba(0,240,255,0.08);">⚡ QUICK PIVOT</div>
+        <div class="ge-pivot-buttons">
+          <button class="ge-pivot-btn" id="ge-pivot-graph"><span class="ge-pivot-icon">🔗</span> Visual Link Graph</button>
+          <button class="ge-pivot-btn" id="ge-pivot-copilot"><span class="ge-pivot-icon">🤖</span> AI OSINT Copilot</button>
+          <button class="ge-pivot-btn" id="ge-pivot-radar"><span class="ge-pivot-icon">⚠️</span> Threat Radar (CVE)</button>
+          <button class="ge-pivot-btn" id="ge-pivot-corp"><span class="ge-pivot-icon">🏢</span> ABN / ASIC Lookup</button>
+          <button class="ge-pivot-btn" id="ge-pivot-austlii"><span class="ge-pivot-icon">⚖️</span> AusLII Legal Search</button>
+          <button class="ge-pivot-btn" id="ge-pivot-social"><span class="ge-pivot-icon">👤</span> Social Recon</button>
+        </div>
+      </div>
+
+      <!-- STAT COUNTER ROW (spans all 3 columns) -->
+      <div class="ge-stats-row" id="ge-stats-row">
+        <div class="ge-stat-card green">
+          <span class="ge-stat-icon">🏢</span>
+          <span class="ge-stat-value" id="ge-stat-abns">—</span>
+          <span class="ge-stat-label">Active ABNs (Est.)</span>
+        </div>
+        <div class="ge-stat-card amber">
+          <span class="ge-stat-icon">⚠️</span>
+          <span class="ge-stat-value" id="ge-stat-acsc">—</span>
+          <span class="ge-stat-label">ACSC Advisories</span>
+        </div>
+        <div class="ge-stat-card">
+          <span class="ge-stat-icon">⚖️</span>
+          <span class="ge-stat-value" id="ge-stat-austlii">—</span>
+          <span class="ge-stat-label">AusLII Judgments</span>
+        </div>
+        <div class="ge-stat-card red">
+          <span class="ge-stat-icon">🔒</span>
+          <span class="ge-stat-value" id="ge-stat-asic">—</span>
+          <span class="ge-stat-label">ASIC Actions</span>
+        </div>
+        <div class="ge-stat-card amber">
+          <span class="ge-stat-icon">📡</span>
+          <span class="ge-stat-value" id="ge-stat-feeds">—</span>
+          <span class="ge-stat-label">Live Feeds Active</span>
+        </div>
+        <div class="ge-stat-card green">
+          <span class="ge-stat-icon">🌐</span>
+          <span class="ge-stat-value" id="ge-stat-new-abns">—</span>
+          <span class="ge-stat-label">New ABNs Today</span>
+        </div>
+      </div>
+
+    </div><!-- /ge-body -->
+  </div><!-- /#modal-gods-eye -->
+
+  <!-- State Popover (singleton, positioned by JS) -->
+  <div class="ge-state-popover" id="ge-state-popover" role="tooltip">
+    <div class="ge-state-popover-title" id="ge-popover-title">NSW — New South Wales</div>
+    <div id="ge-popover-links"></div>
+  </div>
+
+  <!-- Tactical Camera Stream Inspector Modal -->
+  <div class="modal-overlay" id="modal-ge-camera" role="dialog" aria-modal="true" aria-labelledby="ge-camera-title" style="display:none;align-items:center;justify-content:center;z-index:100000;">
+    <div class="ge-camera-box">
+      <div class="ge-camera-header">
+        <div class="ge-camera-status">
+          <span class="ge-status-dot"></span>
+          <span id="ge-camera-title" style="font-weight:700;letter-spacing:0.08em;color:var(--accent-cyan);text-transform:uppercase;">LIVE SURVEILLANCE FEED</span>
+        </div>
+        <button class="modal-close" id="btn-close-ge-camera" aria-label="Close Camera Stream">&times;</button>
+      </div>
+      <div class="ge-camera-media-wrap">
+        <iframe id="ge-camera-frame" class="ge-camera-iframe" src="" allowfullscreen loading="lazy"></iframe>
+        <img id="ge-camera-img" src="" alt="Public Traffic CCTV Stream" class="ge-camera-img" style="display:none;" />
+        <div class="ge-camera-overlay-info">
+          <span id="ge-camera-id-badge" class="ge-cam-badge">ID: CAM-001</span>
+          <span id="ge-camera-time-badge" class="ge-cam-badge">00:00:00 AEST</span>
+        </div>
+      </div>
+      <div class="ge-camera-meta">
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Location:</span>
+          <span id="ge-cam-location" class="ge-cam-val">—</span>
+        </div>
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Coordinates:</span>
+          <span id="ge-cam-coords" class="ge-cam-val font-mono">—</span>
+        </div>
+        <div class="ge-cam-meta-row">
+          <span class="ge-cam-label">Provider:</span>
+          <span id="ge-cam-source" class="ge-cam-val">—</span>
+        </div>
+      </div>
+      <div class="ge-camera-actions">
+        <button class="ge-camera-btn" id="ge-cam-btn-refresh">↻ Force Refresh</button>
+        <button class="ge-camera-btn" id="ge-cam-btn-cadastre">📍 Pivot Cadastre</button>
+        <button class="ge-camera-btn" id="ge-cam-btn-streetview">👁 Street View</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Arrange mode toolbar (custom layout). Shown only while arranging. -->
   <div class="layout-edit-bar" id="layout-edit-bar" role="region" aria-label="Arrange layout" hidden>
     <div class="layout-edit-text">
@@ -2150,11 +2451,14 @@
         <ul>
           <li><strong>Synced:</strong> catalogue order, your custom layout, pinned tools, collapsed modules, theme, typography, Basic/Advanced mode, your added bookmarks and search settings.</li>
           <li><strong>Stored about you:</strong> your email and a salted password hash (or your Google account ID if you use Google). That's it.</li>
-          <li><strong>Never stored:</strong> your searches, the sites you open, your investigation graph or notes. No tracking, no analytics, no emails from us.</li>
+          <li><strong>Not stored in your account:</strong> your investigation graph, notes or anything you type. No marketing emails.</li>
+          <li><strong>Click counting (everyone, signed in or not):</strong> to see which tools get used, the site records clicks on buttons and links: what was clicked, the link address, the page, plus your IP address, country and browser, under a random per-visit ID that isn't tied to your account. It never records what you type into any box.</li>
           <li><strong>You don't need one.</strong> Everything already works and is saved in this browser. An account only matters if you use more than one computer.</li>
           <li>You can delete your account and everything stored with it at any time, from this window.</li>
         </ul>
       </div>
+
+      <p id="account-checking" class="account-checking" hidden>Checking whether accounts are available…</p>
 
       <div id="account-unavailable" class="account-unavailable" hidden>
         <p><strong>Accounts aren't available on this copy of Bubbsy.</strong> It's being served without the Bubbsy server (for example opened straight from a file, or from a static-only host), so there is nowhere to save an account.</p>
@@ -2203,9 +2507,11 @@
     </div>
   </div>
 
+  <!-- Scripts: bundled offline data first, telemetry tracker, then app controller -->
   <script src="data/osint_data.js"></script>
   <script src="data/link_dates.js"></script>
   <script src="data/radar_cache.js"></script>
+  <script src="js/tracker.js"></script>
   <script src="js/app.js"></script>
   <script src="js/account.js"></script>
 </body>
