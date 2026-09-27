@@ -54,7 +54,7 @@
 
 8. **Optional Account (preference sync only)**:
    - Everything works without an account; preferences live in your browser.
-   - An account only stores your preferences (order, custom layout, pins, collapsed modules, theme, typography, mode, added bookmarks) so they follow you to other computers. It stores your email and a salted password hash (or Google account ID) — no searches, no browsing, no investigation data, no analytics. Users can delete their account and data from the account window.
+   - An account only stores your preferences (order, custom layout, pins, collapsed modules, theme, typography, mode, added bookmarks) so they follow you to other computers. It stores your email and a salted password hash (or Google account ID), and never your investigation data. Separately, the site counts button/link clicks for everyone (what was clicked, link address, page, IP, country, browser; never typed text), which the account window discloses. Users can delete their account and data from the account window.
    - Email + password works out of the box. **Sign in with Google** appears once `GOOGLE_CLIENT_ID` is set (see below).
    - The sign-in button is hidden when there is no server (opening `index.html` from disk or static hosting).
 
@@ -77,12 +77,18 @@ Simply double-click `index.html`. The bundled dataset `data/osint_data.js` loads
 
 ---
 
-### Accounts configuration
+### Configuration
 
-| Variable | Default | Purpose |
+**Live site (Cloudflare Pages, deployed from `main`).** Set these under Cloudflare dashboard → Workers & Pages → *bubbsy-start-page* → Settings → Variables and Secrets, then redeploy:
+
+| Name | Type | Purpose |
 |---|---|---|
-| `BUBBSY_DB_PATH` | `~/.bubbsy/accounts.db` | SQLite file for accounts and synced preferences. Keep it outside the served folder. On hosts with an ephemeral filesystem (e.g. Render without a disk) point this at a persistent disk, or accounts reset on every deploy. |
-| `GOOGLE_CLIENT_ID` | unset | Enables "Sign in with Google". Create an OAuth 2.0 Client ID (type *Web application*) in Google Cloud Console → APIs & Services → Credentials, add your site URL (e.g. `https://your-domain`) under *Authorized JavaScript origins*, and set the client ID here. No client secret is needed. |
+| `ADMIN_PASSWORD` | Secret | Password for the Admin click-analytics window. **Admin stays switched off until this is set**; there is no default. Use a long random value. |
+| `GOOGLE_CLIENT_ID` | Variable | Enables "Continue with Google" in the Sign in window. Create an OAuth 2.0 Client ID (type *Web application*) in Google Cloud Console → APIs & Services → Credentials, add your site URL under *Authorized JavaScript origins*. No client secret is needed. |
+
+Accounts, preferences and click analytics use the D1 database already bound as `DB` in `wrangler.toml`; tables are created automatically. Email + password sign-in works with no extra setup.
+
+**Running `server.py` / `wsgi.py` yourself:** the same `ADMIN_PASSWORD` and `GOOGLE_CLIENT_ID` environment variables apply, plus `BUBBSY_DB_PATH` (default `~/.bubbsy/accounts.db`) for where accounts and analytics are stored. Keep it outside the served folder.
 
 ## ⌨️ Keyboard Shortcuts
 

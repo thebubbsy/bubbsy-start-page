@@ -82,3 +82,34 @@ def test_added_bookmark_survives_reload(live_server):
         page.wait_for_selector('.widget-card')
         assert page.locator('.link-anchor[href="https://my-custom-tool.example/"]').count() == 1
         browser.close()
+
+
+def test_no_modal_is_nested_inside_another():
+    """A merge once dropped a popup's closing tags, trapping the Sign in window inside a hidden one."""
+    from html.parser import HTMLParser
+    void = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
+
+    class Parser(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.stack, self.nested = [], []
+
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            is_modal = 'modal-overlay' in (a.get('class') or '').split()
+            if is_modal and any(m for _, m in self.stack):
+                self.nested.append((a.get('id'), [m for _, m in self.stack if m][-1]))
+            if tag not in void:
+                self.stack.append((tag, a.get('id') if is_modal else None))
+
+        def handle_endtag(self, tag):
+            if tag in void:
+                return
+            for i in range(len(self.stack) - 1, -1, -1):
+                if self.stack[i][0] == tag:
+                    del self.stack[i:]
+                    break
+
+    p = Parser()
+    p.feed(open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read())
+    assert p.nested == []

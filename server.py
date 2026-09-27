@@ -1518,14 +1518,16 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self._json_response({'error': 'Invalid JSON'}, status=400)
             return
 
-        session_id = payload.get('session_id', 'anon')
-        element_tag = payload.get('element_tag', '')
-        element_id = payload.get('element_id', '')
-        element_classes = payload.get('element_classes', '')
-        element_text = payload.get('element_text', '')[:200]
-        target_href = payload.get('target_href', '')
-        page_path = payload.get('page_path', '/')
-        ts = payload.get('timestamp') or datetime.datetime.now(datetime.timezone.utc).isoformat()
+        # Anyone can post here, so every field is capped (same limits as functions/api/track.js).
+        cap = lambda v, n: str(v if v is not None else '')[:n]
+        session_id = cap(payload.get('session_id') or 'anon', 64)
+        element_tag = cap(payload.get('element_tag'), 20)
+        element_id = cap(payload.get('element_id'), 100)
+        element_classes = cap(payload.get('element_classes'), 100)
+        element_text = cap(payload.get('element_text'), 200)
+        target_href = cap(payload.get('target_href'), 500)
+        page_path = cap(payload.get('page_path') or '/', 200)
+        ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
         ip = self.client_address[0] if self.client_address else '127.0.0.1'
         country = 'AU'
         ua = (self.headers.get('User-Agent', '') or '')[:250]

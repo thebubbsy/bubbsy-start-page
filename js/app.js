@@ -9591,14 +9591,13 @@ ${formatInstructions}
   });
 
   // =========================================================================
-  // 4C. ADMIN ANALYTICS & CLOUDFLARE D1 TELEMETRY CONTROLLER (user / hacker)
+  // 4C. ADMIN CLICK ANALYTICS (site owner only; password = ADMIN_PASSWORD secret on the server)
   // =========================================================================
   const elModalAdmin = document.getElementById('modal-admin');
   const elBtnCloseAdmin = document.getElementById('btn-close-admin');
   const elAdminLoginView = document.getElementById('admin-login-view');
   const elAdminDashboardView = document.getElementById('admin-dashboard-view');
   const elAdminLoginForm = document.getElementById('admin-login-form');
-  const elAdminUsername = document.getElementById('admin-username');
   const elAdminPassword = document.getElementById('admin-password');
   const elAdminLoginError = document.getElementById('admin-login-error');
   const elAdminClicksTbody = document.getElementById('admin-clicks-tbody');
@@ -9625,55 +9624,38 @@ ${formatInstructions}
       if (elAdminLoginView) elAdminLoginView.style.display = 'block';
       if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
       if (elAdminLoginError) elAdminLoginError.style.display = 'none';
-      setTimeout(() => elAdminUsername?.focus(), 100);
+      setTimeout(() => elAdminPassword?.focus(), 100);
     }
   }
 
   async function handleAdminLogin() {
-    const user = (elAdminUsername?.value || '').trim();
-    const pass = (elAdminPassword?.value || '').trim();
-    if (!user || !pass) {
+    const pass = elAdminPassword?.value || '';
+    const showError = (msg) => {
       if (elAdminLoginError) {
-        elAdminLoginError.textContent = 'Please enter username and password';
+        elAdminLoginError.textContent = msg;
         elAdminLoginError.style.display = 'block';
       }
-      return;
-    }
+    };
+    if (!pass) { showError('Enter the admin password'); return; }
 
-    const authHeader = 'Basic ' + btoa(`${user}:${pass}`);
+    const authHeader = 'Basic ' + btoa(`admin:${pass}`);
     try {
-      const res = await fetch('/api/admin/analytics', {
-        headers: { 'Authorization': authHeader }
-      });
+      const res = await fetch('/api/admin/analytics', { headers: { 'Authorization': authHeader } });
+      const data = await res.json().catch(() => ({}));
       if (res.ok) {
         sessionStorage.setItem('bubbsy_admin_auth', authHeader);
+        if (elAdminPassword) elAdminPassword.value = '';
         if (elAdminLoginError) elAdminLoginError.style.display = 'none';
         if (elAdminLoginView) elAdminLoginView.style.display = 'none';
         if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
-        showToast('Admin Authenticated (Cloudflare D1)');
-        const data = await res.json();
+        showToast('Admin dashboard unlocked');
         renderAdminTelemetry(data);
       } else {
-        if (elAdminLoginError) {
-          elAdminLoginError.textContent = 'Invalid credentials. Access Denied.';
-          elAdminLoginError.style.display = 'block';
-        }
+        showError(data.error || 'Wrong admin password');
         playCyberAudio('modal_close');
       }
     } catch (err) {
-      // Local/offline fallback verification for user / hacker
-      if (user === 'user' && pass === 'hacker') {
-        sessionStorage.setItem('bubbsy_admin_auth', authHeader);
-        if (elAdminLoginView) elAdminLoginView.style.display = 'none';
-        if (elAdminDashboardView) elAdminDashboardView.style.display = 'block';
-        showToast('Admin Authenticated (Local)');
-        fetchAdminTelemetry();
-      } else {
-        if (elAdminLoginError) {
-          elAdminLoginError.textContent = 'Authentication failed.';
-          elAdminLoginError.style.display = 'block';
-        }
-      }
+      showError('Could not reach the server. The admin area only works on the live site or server.py.');
     }
   }
 
@@ -9731,10 +9713,11 @@ ${formatInstructions}
 
     elAdminClicksTbody.innerHTML = clicks.map(c => {
       const ts = c.timestamp ? new Date(c.timestamp).toLocaleString() : '--';
-      const sessShort = (c.session_id || 'anon').slice(0, 12);
+      const sessShort = escapeHtml((c.session_id || 'anon').slice(0, 12));
       const tagChip = `<span class="telemetry-tag-chip">&lt;${escapeHtml(c.element_tag || 'EL')}&gt;</span> ${c.element_id ? '#' + escapeHtml(c.element_id) : ''}`;
       const textLabel = escapeHtml(c.element_text || '--');
-      const href = c.target_href ? `<a href="${escapeHtml(c.target_href)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${escapeHtml(c.target_href.slice(0, 45))}${c.target_href.length > 45 ? '...' : ''}</a>` : '--';
+      // Logged values come from anyone who can post to /api/track: only real web links become links.
+      const href = c.target_href && /^https?:\/\//i.test(c.target_href) ? `<a href="${escapeHtml(c.target_href)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${escapeHtml(c.target_href.slice(0, 45))}${c.target_href.length > 45 ? '...' : ''}</a>` : '--';
       const geo = `<span class="stat-chip" style="font-size:0.62rem;">${escapeHtml(c.country || 'AU')}</span>`;
 
       return `
@@ -9815,8 +9798,7 @@ ${formatInstructions}
     sessionStorage.removeItem('bubbsy_admin_auth');
     if (elAdminLoginView) elAdminLoginView.style.display = 'block';
     if (elAdminDashboardView) elAdminDashboardView.style.display = 'none';
-    if (elAdminUsername) elAdminUsername.value = 'user';
-    if (elAdminPassword) elAdminPassword.value = 'hacker';
+    if (elAdminPassword) elAdminPassword.value = '';
     showToast('Logged out of Admin');
   }
 
@@ -11346,7 +11328,7 @@ ${formatInstructions}
       capabilities: [
         { title: '🇦🇺 Australian-First Intelligence', detail: 'Integrated ABN/ACN corporate registers, ASIC records, NSW Six Maps, VicPlan, and auDA drop schedules.' },
         { title: '⚡ Instant Search', detail: 'Filters the catalogue as you type, with 35+ bang shortcuts and keyboard navigation of results.' },
-        { title: '🔒 Private by Default', detail: 'No analytics or trackers. Your pins, layout and investigations stay in your browser unless you choose to create an account.' }
+        { title: '🔒 Your Data Stays Yours', detail: 'Pins, layout and investigations stay in your browser unless you create an account. The site counts button and link clicks (never what you type) to see which tools get used; details are in the Sign in window.' }
       ],
       highlightSelector: '.brand-hud',
       tryLive: {

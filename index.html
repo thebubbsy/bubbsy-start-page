@@ -1482,20 +1482,16 @@
         <div style="max-width:360px;margin:0 auto;background:rgba(5,9,18,0.7);padding:24px;border-radius:12px;border:1px solid rgba(245,158,11,0.3);box-shadow:0 12px 30px rgba(0,0,0,0.5);">
           <div style="font-size:2rem;margin-bottom:8px;">🔐</div>
           <h4 style="margin:0 0 6px 0;color:var(--text-primary);">Restricted Admin Access</h4>
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;">Enter administrative credentials to inspect live user click logs and D1 database analytics.</p>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;">For the site owner only. The password is the <code>ADMIN_PASSWORD</code> secret set in Cloudflare Pages; with none set, the admin area stays switched off.</p>
           
           <form id="admin-login-form" onsubmit="return false;">
-            <div class="form-group" style="text-align:left;margin-bottom:12px;">
-              <label class="form-label" for="admin-username" style="font-size:0.72rem;">Username</label>
-              <input type="text" class="form-control" id="admin-username" placeholder="Username" autocomplete="username" value="user" style="font-family:var(--font-mono);font-size:0.82rem;">
-            </div>
             <div class="form-group" style="text-align:left;margin-bottom:16px;">
-              <label class="form-label" for="admin-password" style="font-size:0.72rem;">Password</label>
-              <input type="password" class="form-control" id="admin-password" placeholder="Password" autocomplete="current-password" value="hacker" style="font-family:var(--font-mono);font-size:0.82rem;">
+              <label class="form-label" for="admin-password" style="font-size:0.72rem;">Admin password</label>
+              <input type="password" class="form-control" id="admin-password" placeholder="The ADMIN_PASSWORD you set in Cloudflare" autocomplete="current-password" style="font-family:var(--font-mono);font-size:0.82rem;">
             </div>
-            <div id="admin-login-error" style="display:none;color:#ef4444;font-size:0.75rem;margin-bottom:12px;font-weight:600;">Invalid username or password</div>
+            <div id="admin-login-error" role="alert" style="display:none;color:#ef4444;font-size:0.75rem;margin-bottom:12px;font-weight:600;">Wrong admin password</div>
             <button type="submit" class="btn-search-exec" id="btn-admin-login-submit" style="width:100%;padding:8px;background:var(--accent-amber);color:#050912;font-weight:700;">
-              Authenticate to Dashboard
+              Open dashboard
             </button>
           </form>
         </div>
@@ -2425,6 +2421,10 @@
         <button class="ge-camera-btn" id="ge-cam-btn-refresh">↻ Force Refresh</button>
         <button class="ge-camera-btn" id="ge-cam-btn-cadastre">📍 Pivot Cadastre</button>
         <button class="ge-camera-btn" id="ge-cam-btn-streetview">👁 Street View</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Arrange mode toolbar (custom layout). Shown only while arranging. -->
   <div class="layout-edit-bar" id="layout-edit-bar" role="region" aria-label="Arrange layout" hidden>
     <div class="layout-edit-text">
@@ -2451,11 +2451,14 @@
         <ul>
           <li><strong>Synced:</strong> catalogue order, your custom layout, pinned tools, collapsed modules, theme, typography, Basic/Advanced mode, your added bookmarks and search settings.</li>
           <li><strong>Stored about you:</strong> your email and a salted password hash (or your Google account ID if you use Google). That's it.</li>
-          <li><strong>Never stored:</strong> your searches, the sites you open, your investigation graph or notes. No tracking, no analytics, no emails from us.</li>
+          <li><strong>Not stored in your account:</strong> your investigation graph, notes or anything you type. No marketing emails.</li>
+          <li><strong>Click counting (everyone, signed in or not):</strong> to see which tools get used, the site records clicks on buttons and links: what was clicked, the link address, the page, plus your IP address, country and browser, under a random per-visit ID that isn't tied to your account. It never records what you type into any box.</li>
           <li><strong>You don't need one.</strong> Everything already works and is saved in this browser. An account only matters if you use more than one computer.</li>
           <li>You can delete your account and everything stored with it at any time, from this window.</li>
         </ul>
       </div>
+
+      <p id="account-checking" class="account-checking" hidden>Checking whether accounts are available…</p>
 
       <div id="account-unavailable" class="account-unavailable" hidden>
         <p><strong>Accounts aren't available on this copy of Bubbsy.</strong> It's being served without the Bubbsy server (for example opened straight from a file, or from a static-only host), so there is nowhere to save an account.</p>

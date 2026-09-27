@@ -4155,3 +4155,5 @@ html[data-ui-mode="basic"] .hero-section {
 }
 .diag-row { display: flex; justify-content: space-between; gap: 12px; }
 .diag-row strong { text-align: right; }
+.account-checking { font-size: 0.78rem; color: var(--text-muted); }
+.account-checking[hidden] { display: none; }

@@ -7,6 +7,8 @@ import tempfile
 
 # Keep the test run's accounts in a throwaway database, never the real one in ~/.bubbsy.
 os.environ.setdefault('BUBBSY_DB_PATH', os.path.join(tempfile.mkdtemp(prefix='bubbsy-test-'), 'accounts.db'))
+# The admin area is off unless ADMIN_PASSWORD is set; the tests run with a known one.
+os.environ.setdefault('ADMIN_PASSWORD', 'test-admin-secret')
 
 import pytest
 import threading
