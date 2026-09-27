@@ -3,8 +3,8 @@
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2075,
-  "au_link_total": 327,
+  "total_links": 2078,
+  "au_link_total": 330,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -63,7 +63,7 @@
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2075+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2078+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -10111,6 +10111,22 @@
               "au": true
             },
             {
+              "title": "Transport WA Vehicle Licence (Rego) Check",
+              "url": "https://www.wa.gov.au/service/transport/road-transport/check-your-vehicle-licence-rego-expiry-date",
+              "description": "Free WA vehicle licence (rego) status and expiry lookup by plate number",
+              "domain": "wa.gov.au",
+              "favicon": "https://f.start.me/wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "EzyReg SA Vehicle Registration Check",
+              "url": "https://www.ecom.transport.sa.gov.au/et/checkRegistrationExpiryDate.do",
+              "description": "Free South Australian vehicle registration expiry and CTP insurer lookup by plate number",
+              "domain": "transport.sa.gov.au",
+              "favicon": "https://f.start.me/transport.sa.gov.au",
+              "au": true
+            },
+            {
               "title": "CASA (Civil Aviation Safety Authority Register)",
               "url": "https://www.casa.gov.au/aircraft/register-aircraft/civil-aircraft-register",
               "description": "Search all registered VH- Australian aircraft, owners, and operators",
@@ -10127,7 +10143,7 @@
               "au": true
             }
           ],
-          "au_count": 6,
+          "au_count": 8,
           "au_module": true
         },
         {
