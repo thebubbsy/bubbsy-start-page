@@ -3513,3 +3513,5 @@ html[data-ui-mode="basic"] .hero-section {
   .graph-legend { max-width: 160px; }
   .graph-minimap-container { display: none; }
 }
+.diag-row { display: flex; justify-content: space-between; gap: 12px; }
+.diag-row strong { text-align: right; }

@@ -394,7 +394,7 @@
     }
   }
 
-  window.BubbsyAccount = { offerSync, open: openAccountModal, isSignedIn: () => !!state.user };
+  window.BubbsyAccount = { offerSync, open: openAccountModal, isSignedIn: () => !!state.user, isAvailable: () => state.available };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();

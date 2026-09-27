@@ -22,6 +22,27 @@
   let userBookmarks = JSON.parse(localStorage.getItem('bubbsy_user_bookmarks') || '[]');
   let userFavorites = JSON.parse(localStorage.getItem('bubbsy_favorites') || '[]');
   let hoveredLink = null;
+  let serverStatus = 'unknown'; // 'connected' | 'static' | 'file' — set once the catalogue loads
+
+  // --- LIVE CATALOGUE COUNTS ---
+  // Counted from the loaded catalogue, never typed in by hand: hardcoded totals drift every time
+  // a link is added (the page said 2,061 long after the catalogue passed 2,070).
+  function catalogData() {
+    return appData || window.BUBBSY_DATA || { columns: [] };
+  }
+  function toolCount() {
+    return (catalogData().columns || []).reduce((sum, col) =>
+      sum + (col.widgets || []).reduce((s2, w) => s2 + (w.links || []).length, 0), 0);
+  }
+  function moduleCount() {
+    return (catalogData().columns || []).reduce((sum, col) => sum + (col.widgets || []).length, 0);
+  }
+  function toolCountText() { return toolCount().toLocaleString(); }
+  function applyLiveCounts(root) {
+    (root || document).querySelectorAll('[data-live-count]').forEach(el => {
+      el.textContent = el.getAttribute('data-live-count') === 'modules' ? String(moduleCount()) : toolCountText();
+    });
+  }
 
   // --- CATALOG SORT MODES ---
   // The build pipeline (modules_extra.apply_au_priority) bakes Australian-first order into
@@ -517,7 +538,7 @@
   }
 
   const BANG_SUGGESTIONS = [
-    { bang: '!ai', name: 'Autonomous AI OSINT Copilot', syntax: '!ai <target/query>', desc: 'Gemini 3.8 / Multi-model prompt synthesizer & reasoning blueprints' },
+    { bang: '!ai', name: 'AI Prompt Builder', syntax: '!ai <target/query>', desc: 'Builds an investigation prompt and opens it in ChatGPT, Gemini, Claude, DeepSeek or Perplexity' },
     { bang: '!copilot', name: 'AI OSINT Reasoning Studio', syntax: '!copilot <target>', desc: 'Multi-stage MITRE, persona & Essential 8 reasoning engine' },
     { bang: '!abn', name: 'ABN Lookup & ACN Registers', syntax: '!abn <entity/acn>', desc: 'Australian Business Register & corporate records' },
     { bang: '!trove', name: 'Trove Australia (NLA)', syntax: '!trove <archive>', desc: 'National Library historical archives & press' },
@@ -584,10 +605,16 @@
         const res = await fetch('/api/data');
         if (res.ok) {
           appData = await res.json();
+          serverStatus = 'connected';
+        } else {
+          serverStatus = 'static';
         }
       } catch (e) {
+        serverStatus = 'static';
         console.warn('Using bundled offline dataset:', e);
       }
+    } else {
+      serverStatus = 'file';
     }
 
     if (!appData) {
@@ -595,6 +622,7 @@
       return;
     }
 
+    restoreUserBookmarks();
     syncSortModeButtons(); // reflect the persisted choice before the first paint
     renderDashboard();
     renderWorldClocks();
@@ -609,6 +637,23 @@
     if (settings.defaultEngine && settings.defaultEngine !== 'filter') {
       setSearchMode(settings.defaultEngine);
     }
+  }
+
+  // Bookmarks added with "Add" live in browser storage; put them back into their modules on every
+  // load (previously they only appeared until the page was refreshed).
+  function restoreUserBookmarks() {
+    if (!appData || !Array.isArray(appData.columns) || !Array.isArray(userBookmarks)) return;
+    const byId = new Map();
+    appData.columns.forEach(col => (col.widgets || []).forEach(w => byId.set(String(w.id), w)));
+    userBookmarks.forEach(b => {
+      const w = byId.get(String(b.widgetId));
+      if (!w || !b.url) return;
+      w.links = w.links || [];
+      if (w.links.some(l => l.url === b.url)) return;
+      const link = { id: b.id, title: b.title, url: b.url, description: b.description || '', domain: b.domain || extractDomain(b.url),
+        favicon: b.favicon || `https://f.start.me/${extractDomain(b.url)}`, au: !!b.isAus, custom: true };
+      if (b.isAus) w.links.unshift(link); else w.links.push(link);
+    });
   }
 
   // --- THEMES ---
@@ -1217,7 +1262,8 @@
     });
 
     // Update counters
-    document.getElementById('stats-total-tools').textContent = appData.total_links || '2,061';
+    document.getElementById('stats-total-tools').textContent = toolCountText();
+    applyLiveCounts();
     document.getElementById('stats-total-categories').textContent = appData.total_widgets || '101';
     // Keep the hero placeholder in sync with the live dataset size
     const totalTools = (appData.total_links || 0).toLocaleString();
@@ -1424,7 +1470,25 @@
     }
     const kb = (totalBytes / 1024).toFixed(1);
     const elStorage = document.getElementById('diag-storage-usage');
-    if (elStorage) elStorage.textContent = `${kb} KB / 5,120 KB`;
+    if (elStorage) elStorage.textContent = `${kb} KB`;
+
+    // Real status only: what this copy of the site is actually connected to.
+    const serverText = {
+      connected: ['Connected', 'var(--accent-green)'],
+      static: ['Not running (static hosting): catalogue loaded from bundled file', 'var(--accent-amber)'],
+      file: ['Not running (opened from a file)', 'var(--accent-amber)'],
+      unknown: ['Checking…', 'var(--text-muted)']
+    }[serverStatus] || ['Unknown', 'var(--text-muted)'];
+    const elBackend = document.getElementById('diag-backend-status');
+    if (elBackend) { elBackend.textContent = serverText[0]; elBackend.style.color = serverText[1]; }
+    const elCatalog = document.getElementById('diag-catalog');
+    if (elCatalog) elCatalog.textContent = `${toolCountText()} tools in ${moduleCount()} modules`;
+    const elAccounts = document.getElementById('diag-accounts');
+    if (elAccounts) {
+      const signedIn = window.BubbsyAccount && window.BubbsyAccount.isSignedIn && window.BubbsyAccount.isSignedIn();
+      const available = window.BubbsyAccount && window.BubbsyAccount.isAvailable && window.BubbsyAccount.isAvailable();
+      elAccounts.textContent = signedIn ? 'Signed in, preferences syncing' : (available ? 'Available (not signed in)' : 'Not available on this copy');
+    }
 
     openModal(document.getElementById('modal-settings'));
   }
@@ -1889,7 +1953,7 @@
     if (mode === 'filter') {
       elEngineBadge.textContent = 'FILTER';
       elEngineBadge.style.color = 'var(--accent-cyan)';
-      const totalTools = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
+      const totalTools = toolCountText();
       elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     } else if (mode === 'aistudio') {
       elEngineBadge.textContent = 'AI: GOOGLE AI STUDIO';
@@ -2245,7 +2309,7 @@
           </div>
           <div class="empty-title">NO LOCAL OSINT INTEL MATCHES FOR "${escapeHtml(q)}"</div>
           <div class="empty-subtitle">
-            Target not found across 2,061 local tools. Pivot immediately into external reconnaissance engines or clear filter.
+            Target not found across ${toolCountText()} catalogue tools. Pivot immediately into external reconnaissance engines or clear filter.
           </div>
           <div class="empty-actions-row">
             <button type="button" class="btn-search-exec" id="btn-empty-google">🌐 Google Web Search</button>
@@ -2331,7 +2395,7 @@
     const items = [];
 
     const actions = [
-      { id: 'act_ai_copilot', title: 'Autonomous AI OSINT Copilot & Structured Reasoner (Gemini 3.8 / Multi-Model)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
+      { id: 'act_ai_copilot', title: 'AI Prompt Builder (opens ChatGPT, Gemini, Claude…)', category: 'ACTIONS', icon: 'AI', action: () => openAiCopilotModal() },
       { id: 'act_aistudio', title: 'Open Google AI Studio (Gemini 2.5 Pro / Flash Developer Workbench)', category: 'ACTIONS', icon: 'AI', action: () => window.open('https://aistudio.google.com/', '_blank') },
       { id: 'act_gemini', title: 'Open Google Gemini AI Assistant', category: 'ACTIONS', icon: 'GEMINI', action: () => window.open('https://gemini.google.com/', '_blank') },
       { id: 'act_social_recon', title: 'Social Handle & Username Recon Engine (Maigret / Sherlock)', category: 'ACTIONS', icon: 'RECON', action: () => openSocialRecon() },
@@ -5701,7 +5765,8 @@
         const data = await res.json();
         radarFeedData = data.feed || [];
         const badge = document.getElementById('radar-live-badge');
-        if (badge) badge.textContent = `FEED: ${data.source.toUpperCase()}`;
+        if (badge) badge.textContent = `FEED: ${String(data.source || 'live').toUpperCase()}`;
+        setRadarChip(data.source === 'live' ? 'LIVE' : 'CACHED');
       } else {
         throw new Error('Non-200 response from radar feed');
       }
@@ -5709,8 +5774,19 @@
       console.warn('Threat radar fetch error, using bundled offline cache:', e);
       radarFeedData = (typeof window !== 'undefined' && window.BUBBSY_RADAR_DATA && window.BUBBSY_RADAR_DATA.length >= 250) ? window.BUBBSY_RADAR_DATA : BUNDLED_OFFLINE_RADAR_ADVISORIES;
       const badge = document.getElementById('radar-live-badge');
-      if (badge) badge.textContent = 'FEED: OFFLINE CACHE (250 ADVISORIES)';
+      if (badge) badge.textContent = `FEED: OFFLINE CACHE (${radarFeedData.length} ADVISORIES)`;
+      setRadarChip('CACHED');
     }
+  }
+
+  function setRadarChip(state) {
+    const chip = document.querySelector('#chip-threat-radar .stat-value');
+    if (chip) chip.textContent = state;
+    const dot = document.querySelector('#chip-threat-radar .status-dot');
+    if (dot) dot.style.background = dot.style.boxShadow = '';
+    document.getElementById('chip-threat-radar')?.setAttribute('title', state === 'LIVE'
+      ? 'Threat radar: live CISA KEV feed'
+      : 'Threat radar: live feed unreachable, showing the bundled advisory cache');
   }
 
   function openThreatRadar() {
@@ -9278,7 +9354,7 @@
 
 
   // =========================================================================
-  // 4B. AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / PRO)
+  // 4B. AI PROMPT BUILDER (builds a prompt, then opens it in the chosen AI site)
   // =========================================================================
   const elModalAiCopilot = document.getElementById('modal-ai-copilot');
   const elBtnCloseAiCopilot = document.getElementById('btn-close-ai-copilot');
@@ -10321,22 +10397,22 @@ ${formatInstructions}
       pillLabel: '1. Overview',
       icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
       title: 'Mission Briefing: Bubbsy Command Architecture',
-      desc: 'Bubbsy is an elite forensic OSINT & tactical intelligence platform. Equipped with <strong>__TOTAL_LINKS__+ verified tools</strong> organized across <strong>__TOTAL_WIDGETS__ categories</strong>, Australian-first corporate & legal networks, real-time threat feeds, and sub-millisecond offline execution.',
+      desc: 'Bubbsy is an OSINT start page: <strong>__TOTAL_LINKS__ curated tools</strong> organized across <strong>__TOTAL_WIDGETS__ categories</strong>, Australian-first corporate & legal sources, and live threat feeds. The catalogue also works offline.',
       capabilities: [
         { title: '🇦🇺 Australian-First Intelligence', detail: 'Integrated ABN/ACN corporate registers, ASIC records, NSW Six Maps, VicPlan, and auDA drop schedules.' },
-        { title: '⚡ Sub-Millisecond Omnisearch', detail: 'Zero-latency fuzzy filtering with 35+ direct bang routing shortcuts and keyboard result traversal.' },
-        { title: '🔒 Private & Self-Contained', detail: 'Zero external tracker telemetry, ASD Essential 8 ML3 privacy posture, completely offline capable.' }
+        { title: '⚡ Instant Search', detail: 'Filters the catalogue as you type, with 35+ bang shortcuts and keyboard navigation of results.' },
+        { title: '🔒 Private by Default', detail: 'No analytics or trackers. Your pins, layout and investigations stay in your browser unless you choose to create an account.' }
       ],
       highlightSelector: '.brand-hud',
       tryLive: {
         title: 'Tactical Catalog Overview',
-        hint: 'Reset all active filters and browse all 2,061 verified intelligence modules',
+        hint: 'Reset all active filters and browse the full catalogue',
         btnText: '⚡ Browse Full Catalog',
         action: () => {
           closeModal(document.getElementById('modal-tour'));
           filterByCategory('all');
           document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-filter-group') === 'all'));
-          showToast('Browsing full verified catalog (2,061 tools)');
+          showToast(`Browsing the full catalogue (${toolCountText()} tools)`);
         }
       },
       shortcuts: ['/ : Focus Search', 'Ctrl+K : Spotlight', '? : Cheatsheet', 'Aa : Typography']
@@ -10612,9 +10688,9 @@ ${formatInstructions}
       title: 'Command Palette, Customizer & Forensic Export',
       desc: 'Complete control over your investigation workspace with instant spotlight navigation, high-contrast typography, and snapshot archiving.',
       capabilities: [
-        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching 2,061 tools, commands, and social networks in under 2ms.' },
+        { title: '⚡ Spotlight Palette (Ctrl+K)', detail: 'Universal launcher for searching every catalogue tool, command and social network.' },
         { title: 'Aa High-Contrast Typography', detail: 'Adjust font scaling (80%–150%), font weight (300–800), and switch high-contrast readability palettes.' },
-        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and complete 2,061-tool CSV catalogs.' }
+        { title: '📦 Complete Session Export', detail: 'Download full investigation Markdown dossiers, JSON workspace backups, and the complete tool catalogue as CSV.' }
       ],
       highlightSelector: '#btn-palette',
       tryLive: {
@@ -10686,8 +10762,8 @@ ${formatInstructions}
     }
 
     // Dynamic replacement of totals
-    const totalLinks = (appData && appData.total_links) ? appData.total_links.toLocaleString() : '2,061';
-    const totalWidgets = (appData && appData.total_widgets) ? appData.total_widgets : 101;
+    const totalLinks = toolCountText();
+    const totalWidgets = moduleCount();
     const renderedDesc = s.desc
       .split('__TOTAL_LINKS__').join(totalLinks)
       .split('__TOTAL_WIDGETS__').join(String(totalWidgets));

@@ -39,11 +39,11 @@ window.BUBBSY_DATA = {
       "timezone": "Asia/Kolkata"
     },
     {
-      "name": " (Hong Kong)",
+      "name": "Hong Kong",
       "timezone": "Asia/Hong_Kong"
     },
     {
-      "name": " (Japan)",
+      "name": "Tokyo (Japan)",
       "timezone": "Asia/Tokyo"
     },
     {
