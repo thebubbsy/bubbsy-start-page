@@ -161,6 +161,7 @@ def test_sign_in_button_explains_when_no_account_server(live_server):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
+        page.add_init_script("localStorage.setItem('bubbsy_tour_seen', 'true');")  # the intro tour would cover the button
         page.goto(index)
         page.wait_for_selector('.widget-card')
         page.locator('#btn-account').wait_for(state='visible')
