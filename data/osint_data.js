@@ -3,8 +3,8 @@ window.BUBBSY_DATA = {
   "subtitle": "Local OSINT & AI Intelligence Command Center",
   "version": "2.5.0",
   "total_widgets": 113,
-  "total_links": 2071,
-  "au_link_total": 323,
+  "total_links": 2075,
+  "au_link_total": 327,
   "world_clocks": [
     {
       "name": "Los Angeles (United States)",
@@ -39,11 +39,11 @@ window.BUBBSY_DATA = {
       "timezone": "Asia/Kolkata"
     },
     {
-      "name": " (Hong Kong)",
+      "name": "Hong Kong",
       "timezone": "Asia/Hong_Kong"
     },
     {
-      "name": " (Japan)",
+      "name": "Tokyo (Japan)",
       "timezone": "Asia/Tokyo"
     },
     {
@@ -63,7 +63,7 @@ window.BUBBSY_DATA = {
       "id": "filter",
       "name": "Filter Bookmarks",
       "type": "filter",
-      "placeholder": "Fuzzy search 2071+ tools, Australian databases, and AI models..."
+      "placeholder": "Fuzzy search 2075+ tools, Australian databases, and AI models..."
     },
     {
       "id": "chatgpt",
@@ -253,6 +253,38 @@ window.BUBBSY_DATA = {
               "au": true
             },
             {
+              "title": "VEC Disclosed Donations (VIC)",
+              "url": "https://disclosures.vec.vic.gov.au/",
+              "description": "Victorian Electoral Commission public register of disclosed political donations",
+              "domain": "vec.vic.gov.au",
+              "favicon": "https://f.start.me/vec.vic.gov.au",
+              "au": true
+            },
+            {
+              "title": "WA Electoral Commission Funding & Disclosure",
+              "url": "https://www.elections.wa.gov.au/candidates-and-parties/funding-and-disclosure",
+              "description": "Western Australian political donation and electoral funding disclosure returns",
+              "domain": "elections.wa.gov.au",
+              "favicon": "https://f.start.me/elections.wa.gov.au",
+              "au": true
+            },
+            {
+              "title": "ECSA Funding & Disclosure (SA)",
+              "url": "https://www.ecsa.sa.gov.au/parties-and-candidates/funding-and-disclosure-all-participants",
+              "description": "South Australian Electoral Commission register of political funding and donation disclosures",
+              "domain": "ecsa.sa.gov.au",
+              "favicon": "https://f.start.me/ecsa.sa.gov.au",
+              "au": true
+            },
+            {
+              "title": "TEC Disclosure & Funding (TAS)",
+              "url": "https://www.tec.tas.gov.au/disclosure-and-funding/",
+              "description": "Tasmanian Electoral Commission political donation and electoral expenditure disclosures",
+              "domain": "tec.tas.gov.au",
+              "favicon": "https://f.start.me/tec.tas.gov.au",
+              "au": true
+            },
+            {
               "title": "NSW Registry of Births, Deaths & Marriages",
               "url": "https://bdm.nsw.gov.au/",
               "description": "Official NSW civil registry for birth, death, marriage and change of name certificates",
@@ -365,7 +397,7 @@ window.BUBBSY_DATA = {
               "au": false
             }
           ],
-          "au_count": 13,
+          "au_count": 17,
           "au_module": true
         },
         {
@@ -10179,6 +10211,14 @@ window.BUBBSY_DATA = {
               "au": true
             },
             {
+              "title": "Secure NT",
+              "url": "https://securent.nt.gov.au/",
+              "description": "Northern Territory bushfire, flood, cyclone and storm warnings from BOM, NTFRS and NTES",
+              "domain": "securent.nt.gov.au",
+              "favicon": "https://f.start.me/securent.nt.gov.au",
+              "au": true
+            },
+            {
               "title": "TAS ALERT",
               "url": "https://alert.tas.gov.au/",
               "description": "Tasmanian emergency warnings and alerts",
@@ -10211,7 +10251,7 @@ window.BUBBSY_DATA = {
               "au": true
             }
           ],
-          "au_count": 13,
+          "au_count": 14,
           "au_module": true
         },
         {

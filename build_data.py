@@ -255,6 +255,10 @@ def build_data():
             'color': '#8b5cf6',
             'links': [
                 {'title': 'AEC (Australian Electoral Commission)', 'url': 'https://check.aec.gov.au/', 'description': 'Verify voter enrolment status, electorate boundaries, and political donation disclosures', 'domain': 'aec.gov.au', 'favicon': 'https://f.start.me/aec.gov.au'},
+                {'title': 'VEC Disclosed Donations (VIC)', 'url': 'https://disclosures.vec.vic.gov.au/', 'description': 'Victorian Electoral Commission public register of disclosed political donations', 'domain': 'vec.vic.gov.au', 'favicon': 'https://f.start.me/vec.vic.gov.au'},
+                {'title': 'WA Electoral Commission Funding & Disclosure', 'url': 'https://www.elections.wa.gov.au/candidates-and-parties/funding-and-disclosure', 'description': 'Western Australian political donation and electoral funding disclosure returns', 'domain': 'elections.wa.gov.au', 'favicon': 'https://f.start.me/elections.wa.gov.au'},
+                {'title': 'ECSA Funding & Disclosure (SA)', 'url': 'https://www.ecsa.sa.gov.au/parties-and-candidates/funding-and-disclosure-all-participants', 'description': 'South Australian Electoral Commission register of political funding and donation disclosures', 'domain': 'ecsa.sa.gov.au', 'favicon': 'https://f.start.me/ecsa.sa.gov.au'},
+                {'title': 'TEC Disclosure & Funding (TAS)', 'url': 'https://www.tec.tas.gov.au/disclosure-and-funding/', 'description': 'Tasmanian Electoral Commission political donation and electoral expenditure disclosures', 'domain': 'tec.tas.gov.au', 'favicon': 'https://f.start.me/tec.tas.gov.au'},
                 {'title': 'NSW Registry of Births, Deaths & Marriages', 'url': 'https://bdm.nsw.gov.au/', 'description': 'Official NSW civil registry for birth, death, marriage and change of name certificates', 'domain': 'bdm.nsw.gov.au', 'favicon': 'https://f.start.me/bdm.nsw.gov.au'},
                 {'title': 'Victoria Births, Deaths & Marriages', 'url': 'https://www.bdm.vic.gov.au/', 'description': 'Official Victorian civil registry for birth, death, marriage and relationship records', 'domain': 'bdm.vic.gov.au', 'favicon': 'https://f.start.me/bdm.vic.gov.au'},
                 {'title': 'Queensland Births, Deaths & Marriages', 'url': 'https://www.qld.gov.au/law/births-deaths-marriages-and-divorces', 'description': 'Official Queensland civil registry for birth, death, marriage and divorce records', 'domain': 'qld.gov.au', 'favicon': 'https://f.start.me/qld.gov.au'},
@@ -370,6 +374,7 @@ def build_data():
                 {'title': 'Queensland Fire & Emergency Services', 'url': 'https://www.qfes.qld.gov.au/', 'description': 'QLD bushfire, incident and hazard alerts', 'domain': 'qfes.qld.gov.au', 'favicon': 'https://f.start.me/qfes.qld.gov.au'},
                 {'title': 'Emergency WA (DFES)', 'url': 'https://www.emergency.wa.gov.au/', 'description': 'Western Australian incident alerts and warnings', 'domain': 'emergency.wa.gov.au', 'favicon': 'https://f.start.me/emergency.wa.gov.au'},
                 {'title': 'SA Country Fire Service', 'url': 'https://www.cfs.sa.gov.au/', 'description': 'South Australian CFS incident warnings', 'domain': 'cfs.sa.gov.au', 'favicon': 'https://f.start.me/cfs.sa.gov.au'},
+                {'title': 'Secure NT', 'url': 'https://securent.nt.gov.au/', 'description': 'Northern Territory bushfire, flood, cyclone and storm warnings from BOM, NTFRS and NTES', 'domain': 'securent.nt.gov.au', 'favicon': 'https://f.start.me/securent.nt.gov.au'},
                 {'title': 'TAS ALERT', 'url': 'https://alert.tas.gov.au/', 'description': 'Tasmanian emergency warnings and alerts', 'domain': 'alert.tas.gov.au', 'favicon': 'https://f.start.me/alert.tas.gov.au'},
                 {'title': 'ACT ESA', 'url': 'https://esa.act.gov.au/', 'description': 'ACT Emergency Services Agency warnings and incidents', 'domain': 'esa.act.gov.au', 'favicon': 'https://f.start.me/esa.act.gov.au'},
                 {'title': 'Emergency Alert (National)', 'url': 'https://www.emergencyalert.gov.au/', 'description': 'National telephone-based emergency warning system', 'domain': 'emergencyalert.gov.au', 'favicon': 'https://f.start.me/emergencyalert.gov.au'},
@@ -690,6 +695,14 @@ def build_data():
     print(f"Total Widgets: {total_widgets}")
     print(f"Total Links: {total_links}")
     print(f"Australian-priority links: {au_link_total}")
+
+    # Refresh first-added dates for the "Newest" catalogue order. Needs git history; skip quietly
+    # when building from an export without it.
+    try:
+        import build_link_dates
+        build_link_dates.build()
+    except Exception as e:
+        print(f"link_dates not refreshed ({e}); run build_link_dates.py from a git checkout")
 
 if __name__ == '__main__':
     build_data()

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bubbsy Start Page | OSINT Command Hub</title>
-  <meta name="description" content="Bubbsy Start Page - Tactical OSINT & AI command dashboard with 2,061+ curated tools, 113 modules, Australian intelligence, and visual identity recon.">
+  <meta name="description" content="Bubbsy Start Page - Tactical OSINT & AI command dashboard with 2,000+ curated tools across 100+ modules, Australian intelligence, and visual identity recon.">
   <meta property="og:title" content="Bubbsy Start Page | OSINT Command Hub">
-  <meta property="og:description" content="2,061+ OSINT tools, Australian databases, evergreen AI models, and real-time threat intelligence.">
+  <meta property="og:description" content="2,000+ OSINT tools, Australian databases, evergreen AI models, and real-time threat intelligence.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#050912">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2.5'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon></svg>">
@@ -61,7 +61,7 @@
       <div class="nav-stats">
         <div class="stat-chip" id="chip-tools-count">
           <span class="stat-label">TOOLS:</span>
-          <span class="stat-value" id="stats-total-tools">2,061</span>
+          <span class="stat-value" id="stats-total-tools">2,076</span>
         </div>
         <div class="stat-chip" id="chip-categories-count" data-adv>
           <span class="stat-label">MODULES:</span>
@@ -70,7 +70,7 @@
         <div class="stat-chip" id="chip-threat-radar" data-adv title="Live Threat Intel / CISA KEV Stream">
           <span class="status-dot online" style="background:#00f0ff;box-shadow:0 0 6px #00f0ff;"></span>
           <span class="stat-label">RADAR:</span>
-          <span class="stat-value" style="color:var(--accent-cyan);">ACTIVE 2026</span>
+          <span class="stat-value" style="color:var(--accent-cyan);">…</span>
         </div>
       </div>
 
@@ -182,7 +182,7 @@
           </svg>
           Export
         </button>
-        <button class="btn-icon" id="btn-open-ai-copilot" title="Autonomous AI OSINT Copilot & Multi-Model Reasoner (Gemini 3.8 / Pro)" aria-label="Autonomous AI OSINT Copilot & Multi-Model Reasoner" aria-haspopup="dialog" style="border-color:var(--accent-purple);color:#c084fc;">
+        <button class="btn-icon" id="btn-open-ai-copilot" title="AI Prompt Builder: builds an investigation prompt and opens it in ChatGPT, Gemini, Claude…" aria-label="AI Prompt Builder" aria-haspopup="dialog" style="border-color:var(--accent-purple);color:#c084fc;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
             <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
@@ -224,11 +224,19 @@
           </svg>
           Add
         </button>
-        <button class="btn-icon" id="btn-settings" title="Settings & Everything Auth" aria-label="Settings & Everything Auth" aria-haspopup="dialog">
+        <button class="btn-icon" id="btn-settings" title="Settings" aria-label="Settings" aria-haspopup="dialog">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
           </svg>
+        </button>
+        <!-- Always shown once js/account.js loads; the window explains when this host has no account server. -->
+        <button class="btn-icon account-btn" id="btn-account" hidden title="Sign in to save your preferences across computers" aria-label="Account: sign in to sync preferences" aria-haspopup="dialog">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="account-btn-label" id="account-btn-label">Sign in</span>
         </button>
         <div class="ui-mode-switch" role="group" aria-label="Interface complexity">
           <button type="button" class="ui-mode-btn" id="btn-mode-basic" data-mode="basic" title="Basic: a clean start page with search and categories">Basic</button>
@@ -349,15 +357,16 @@
       <!-- Main Search Input Bar -->
       <div class="search-input-wrapper">
         <div class="search-engine-badge" id="current-engine-label">FILTER</div>
-        <input 
-          type="text" 
-          id="main-search" 
-          class="main-search-input" 
-          placeholder="Fuzzy search 2,061+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)"
-          autocomplete="off" 
+        <input
+          type="text"
+          id="main-search"
+          class="main-search-input"
+          placeholder="Search OSINT, Australian & AI tools… (/ to focus, Ctrl+K for palette)"
+          aria-label="Search or filter bookmarks"
+          autocomplete="off"
           spellcheck="false"
         >
-        <span id="search-live-matches" class="stat-chip" style="display:none;font-size:0.65rem;color:var(--accent-cyan);border-color:var(--accent-cyan);margin-right:4px;">0 MATCHES</span>
+        <span id="search-live-matches" class="stat-chip" role="status" aria-live="polite" aria-atomic="true" style="display:none;font-size:0.65rem;color:var(--accent-cyan);border-color:var(--accent-cyan);margin-right:4px;">0 MATCHES</span>
         <div class="search-hints">
           <span class="kbd-badge">/</span>
           <span class="kbd-badge">ESC</span>
@@ -392,7 +401,7 @@
 
   <!-- Category Quick Jump Navigation Ribbon -->
   <nav class="category-ribbon" id="category-ribbon">
-    <button class="cat-pill active" data-filter-group="all">All (2,061)</button>
+    <button class="cat-pill active" data-filter-group="all">All</button>
     <button class="cat-pill" data-filter-group="aus_intel">[AUS] Australian OSINT</button>
     <button class="cat-pill" data-filter-group="visual_tools">Interactive Visual Toolkit</button>
     <button class="cat-pill" data-filter-group="ai_hub">AI & Neural Tools</button>
@@ -404,6 +413,28 @@
     <button class="cat-pill" data-filter-group="records_legal">Public Records & Gov</button>
     <button class="cat-pill" data-filter-group="tools_general">Productivity & Toolsets</button>
     <button class="cat-pill" data-filter-group="favorites">Pinned Tools</button>
+
+    <!-- Catalog order. No data-adv: the order you read the page in matters just as much in
+         Basic as in Advanced, so this stays visible in both interface modes. -->
+    <div class="sort-mode-group" id="sort-mode-group" role="group" aria-label="Catalogue order">
+      <span class="sort-mode-label" aria-hidden="true">ORDER</span>
+      <button type="button" class="sort-mode-btn active" data-sort-mode="au" aria-pressed="true"
+              title="Australian sources first — [AUS] modules and .au links float to the top">AU First</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="az" aria-pressed="false"
+              title="Straight alphabetical, no Australian priority">A–Z</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="newest" aria-pressed="false"
+              title="Most recently added tools first, in every module">Newest</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="picks" aria-pressed="false"
+              title="Your pinned tools first, then alphabetical">My Picks</button>
+      <button type="button" class="sort-mode-btn" data-sort-mode="custom" aria-pressed="false"
+              title="Your own order: drag modules and links by their ☰ handle, then save">Custom</button>
+      <button type="button" class="sort-arrange-btn" id="btn-arrange-layout" hidden
+              title="Rearrange your custom layout" aria-label="Rearrange your custom layout">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        Arrange
+      </button>
+    </div>
+
     <button class="btn-icon" id="btn-toggle-all-cards" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(255,255,255,0.15);" title="Collapse / Expand All Category Cards">Collapse All</button>
   </nav>
 
@@ -511,7 +542,7 @@
 
       <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
         <input type="text" class="form-control" id="radar-search-input" placeholder="Filter vulnerabilities & advisories by keyword (e.g. Ivanti, Fortinet, ASD, Essential 8)..." style="flex:1;min-width:200px;">
-        <button type="button" class="btn-icon" id="btn-radar-ai-brief" title="Generate AI Threat Intelligence Brief (Gemini 3.8 / Multi-Model)" style="border-color:var(--accent-purple);color:#c084fc;font-weight:700;">
+        <button type="button" class="btn-icon" id="btn-radar-ai-brief" title="Build an AI threat-intelligence brief prompt from the filtered advisories" style="border-color:var(--accent-purple);color:#c084fc;font-weight:700;">
           🤖 AI Threat Brief
         </button>
         <button type="button" class="btn-icon" id="btn-radar-send-to-graph" title="Send Filtered CVEs to Link Graph" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
@@ -1173,75 +1204,95 @@
         <button class="modal-close" id="btn-close-graph" aria-label="Close Visual Link Graph dialog">&times;</button>
       </div>
 
+      <!-- Case bar: several named investigations, each saved automatically in this browser -->
+      <div class="graph-casebar">
+        <label class="graph-case-label" for="graph-case-select">Case</label>
+        <select class="form-control" id="graph-case-select" aria-label="Open investigation case"></select>
+        <button type="button" class="btn-icon" id="btn-graph-case-new" title="Start a new, empty case">＋ New case</button>
+        <button type="button" class="btn-icon" id="btn-graph-case-rename" title="Rename this case">Rename</button>
+        <button type="button" class="btn-icon" id="btn-graph-case-delete" title="Delete this case">Delete</button>
+        <span class="graph-save-status" id="graph-save-status" aria-live="polite"></span>
+      </div>
+
       <!-- Graph Toolbar -->
-      <div class="graph-toolbar" style="flex-wrap:wrap;gap:6px;">
+      <div class="graph-toolbar">
         <div class="graph-tool-group">
-          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Entity Name (e.g. 192.168.1.1, evil.com, Actor X)" style="width:200px;">
-          <select class="form-control" id="graph-new-node-type" style="width:120px;">
-            <option value="ip">IP Address</option>
-            <option value="domain">Domain</option>
-            <option value="hash">Hash</option>
-            <option value="email">Email</option>
+          <input type="text" class="form-control" id="graph-new-node-label" placeholder="Add entity: 192.168.1.1, evil.com, Jane Doe…" aria-label="New entity name">
+          <select class="form-control" id="graph-new-node-type" aria-label="New entity type">
             <option value="person">Person</option>
-            <option value="org">Organization</option>
-            <option value="cve">CVE Exploit</option>
-            <option value="aus">[AUS] ABN/ACN</option>
-            <option value="threat_actor">Threat Actor</option>
-            <option value="location">Location / Geo</option>
+            <option value="threat_actor">Threat actor</option>
+            <option value="org">Organisation</option>
+            <option value="aus">[AUS] ABN / ACN</option>
+            <option value="domain">Domain</option>
+            <option value="url">URL</option>
+            <option value="ip" selected>IP address</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="social">Social account</option>
+            <option value="hash">File hash</option>
+            <option value="crypto">Key / wallet</option>
+            <option value="cve">Vulnerability (CVE)</option>
+            <option value="location">Location</option>
+            <option value="note">Note</option>
           </select>
-          <button type="button" class="btn-icon" id="btn-graph-add-node" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">+ Add Node</button>
+          <button type="button" class="btn-icon graph-primary" id="btn-graph-add-node" title="Add the entity (linked to the selected one, if any)">＋ Add</button>
+          <select class="form-control" id="graph-edge-rel-type" aria-label="Relationship for new links" title="Relationship used for new links">
+            <option value="affiliated_with" selected>affiliated with</option>
+            <option value="owns">owns</option>
+            <option value="controls">controls</option>
+            <option value="employs">employs</option>
+            <option value="related_to">related to</option>
+            <option value="resolves_to">resolves to</option>
+            <option value="hosts">hosts</option>
+            <option value="registered_as">registered as</option>
+            <option value="uses_email">uses email</option>
+            <option value="uses_phone">uses phone</option>
+            <option value="located_at">located at</option>
+            <option value="communicates_with">communicates with</option>
+            <option value="targets">targets</option>
+            <option value="affected_by">affected by</option>
+            <option value="same_person_as">same person as</option>
+          </select>
+          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click one entity, then another, to link them">Connect Nodes</button>
         </div>
 
         <div class="graph-tool-group">
-          <select class="form-control" id="graph-layout-mode" style="width:140px;font-size:0.72rem;color:var(--accent-cyan);border-color:rgba(0,240,255,0.3);">
-            <option value="force" selected>⚡ Force Physics</option>
-            <option value="radial">🌐 Radial Starburst</option>
-            <option value="tree">🌲 Hierarchical Tree</option>
-            <option value="grid">▦ Grid Cluster</option>
+          <input type="search" class="form-control" id="graph-search-node" placeholder="Find in graph…" aria-label="Find entity in graph">
+          <select class="form-control" id="graph-layout-mode" aria-label="Arrange entities" title="Arrange entities">
+            <option value="force" selected>Layout: Force (by links)</option>
+            <option value="radial">Layout: Radial (hub centre)</option>
+            <option value="tree">Layout: Rows by type</option>
+            <option value="grid">Layout: Grid</option>
           </select>
-          <select class="form-control" id="graph-edge-rel-type" style="width:130px;font-size:0.72rem;color:var(--accent-green);border-color:rgba(16,185,129,0.3);">
-            <option value="affiliated_with" selected>🔗 affiliated_with</option>
-            <option value="owns">🏢 owns</option>
-            <option value="controls">🎮 controls</option>
-            <option value="resolves_to">🌐 resolves_to</option>
-            <option value="targets">🎯 targets</option>
-            <option value="communicates_with">💬 communicates_with</option>
-            <option value="associated_ip">⚡ associated_ip</option>
-          </select>
-          <button type="button" class="btn-icon" id="btn-graph-connect-mode" title="Click two nodes to connect them with selected relationship">Connect Nodes</button>
-          <button type="button" class="btn-icon" id="btn-graph-template" title="Load Australian Investigation Case Template">AU Template</button>
-          <button type="button" class="btn-icon" id="btn-graph-export-json" title="Export Investigation Graph as JSON">Export JSON</button>
-          <button type="button" class="btn-icon" id="btn-graph-import-json" title="Import Investigation Graph JSON">Import JSON</button>
+          <button type="button" class="btn-icon" id="btn-graph-fit" title="Fit everything in view (F)">Fit</button>
+          <button type="button" class="btn-icon" id="btn-graph-template" title="Open an example Australian case as a new case">Example</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-json" title="Download this case as JSON (move it to another computer)">Export</button>
+          <button type="button" class="btn-icon" id="btn-graph-import-json" title="Open a case from a JSON file (as a new case)">Import</button>
           <input type="file" id="graph-file-input" accept=".json" style="display:none;">
-          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download High-Res PNG Screenshot">Export PNG</button>
-          <button type="button" class="btn-icon" id="btn-graph-clear" title="Clear Canvas">Clear</button>
+          <button type="button" class="btn-icon" id="btn-graph-export-png" title="Download a PNG picture of the graph">PNG</button>
+          <button type="button" class="btn-icon" id="btn-graph-clear" title="Remove everything from this case">Clear</button>
         </div>
       </div>
 
-      <!-- Selected Node Active Inspector Bar -->
-      <div id="graph-node-inspector" style="display:none;padding:6px 12px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.25);border-radius:4px;margin-bottom:8px;align-items:center;justify-content:space-between;gap:10px;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;">
-          <span style="color:var(--text-muted);">SELECTED:</span>
-          <strong id="inspector-node-label" style="color:var(--accent-cyan);">--</strong>
-          <span class="stat-chip" id="inspector-node-type" style="font-size:0.65rem;">IP</span>
-        </div>
-        <div style="display:flex;gap:6px;">
-          <button type="button" class="btn-icon" id="btn-inspector-pivot" style="padding:1px 8px;font-size:0.68rem;color:var(--accent-cyan);border-color:var(--accent-cyan);">Pivot Matrix</button>
-          <button type="button" class="btn-icon" id="btn-inspector-delete" style="padding:1px 8px;font-size:0.68rem;color:#f43f5e;border-color:#f43f5e;">Delete Node</button>
-          <button type="button" class="btn-icon" id="btn-inspector-close" style="padding:1px 6px;font-size:0.68rem;">✕</button>
-        </div>
-      </div>
+      <!-- Kept for older integrations; the details panel replaces it. -->
+      <div id="graph-node-inspector" style="display:none;"></div>
 
-      <!-- Graph Canvas Container -->
-      <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
-        <canvas id="investigation-canvas"></canvas>
-        <div class="graph-minimap-container" id="graph-minimap-container">
-          <canvas id="graph-minimap-canvas" width="160" height="110"></canvas>
-          <div class="graph-minimap-label">RADAR MINI-MAP</div>
+      <div class="graph-body">
+        <!-- Graph Canvas Container -->
+        <div class="graph-canvas-wrapper" id="graph-canvas-wrapper">
+          <canvas id="investigation-canvas" aria-label="Investigation link graph. Use the details panel to edit the selected entity."></canvas>
+          <div class="graph-legend" id="graph-legend"></div>
+          <div class="graph-tooltip" id="graph-tooltip" role="tooltip" hidden></div>
+          <div class="graph-context-menu" id="graph-context-menu" role="menu" hidden></div>
+          <div class="graph-minimap-container" id="graph-minimap-container">
+            <canvas id="graph-minimap-canvas" width="160" height="110"></canvas>
+            <div class="graph-minimap-label">OVERVIEW</div>
+          </div>
+          <div class="graph-hints-overlay">
+            <span>Hover for details · Right-click (or long-press) for options · Drag to place (pins it) · Double-click to edit · Scroll to zoom · F to fit</span>
+          </div>
         </div>
-        <div class="graph-hints-overlay">
-          <span>Click node to inspect • Drag to position • Double-click to Pivot • Del to remove • Scroll to Zoom • Drag canvas to Pan</span>
-        </div>
+        <aside class="graph-detail-panel" id="graph-detail-panel" aria-label="Selected entity details" hidden></aside>
       </div>
     </div>
   </div>
@@ -1307,7 +1358,7 @@
   </div>
 
   <!-- =========================================================================
-       AUTONOMOUS AI OSINT COPILOT & STRUCTURED PROMPT STUDIO (GEMINI 3.8 / MULTI-MODEL)
+       AI PROMPT BUILDER (builds a prompt and opens it in the chosen AI site)
        ========================================================================= -->
   <div class="modal-overlay" id="modal-ai-copilot" role="dialog" aria-modal="true" aria-labelledby="modal-ai-copilot-title">
     <div class="modal-content" style="max-width:920px;">
@@ -1318,9 +1369,9 @@
               <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
               <polygon points="12 6 14 10 18 12 14 14 12 18 10 14 6 12 10 10 12 6"></polygon>
             </svg>
-            Autonomous AI OSINT Copilot &amp; Multi-Model Reasoner
+            AI Prompt Builder
           </h3>
-          <span class="brand-tag" style="background:rgba(192,132,252,0.15);border:1px solid #c084fc;color:#c084fc;font-weight:700;">GEMINI 3.8 / MULTI-MODEL REASONER</span>
+          <span class="brand-tag" style="background:rgba(192,132,252,0.15);border:1px solid #c084fc;color:#c084fc;font-weight:700;">BUILDS A PROMPT · YOU PICK THE AI</span>
         </div>
         <button class="modal-close" id="btn-close-ai-copilot" aria-label="Close AI OSINT Copilot dialog">&times;</button>
       </div>
@@ -1350,11 +1401,11 @@
         <div class="form-group" style="margin-bottom:0;">
           <label class="form-label">Target Model / Reasoner</label>
           <select class="form-control" id="ai-copilot-model">
-            <option value="aistudio" selected>Google AI Studio (Gemini 2.5 / 3.0 Pro)</option>
-            <option value="chatgpt">ChatGPT (o3-mini / GPT-4o)</option>
-            <option value="claude">Claude (3.7 Sonnet Thinking)</option>
-            <option value="deepseek">DeepSeek (R1 Reasoner)</option>
-            <option value="perplexity">Perplexity (Deep Research)</option>
+            <option value="aistudio" selected>Google AI Studio (Gemini)</option>
+            <option value="chatgpt">ChatGPT</option>
+            <option value="claude">Claude</option>
+            <option value="deepseek">DeepSeek</option>
+            <option value="perplexity">Perplexity</option>
           </select>
         </div>
       </div>
@@ -1836,9 +1887,7 @@
           <div style="display:flex;gap:12px;font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:4px;">
             <span>📍 Sydney, Australia (AEST / UTC+10)</span>
             <span>•</span>
-            <span>⚡ 2,061 Tools Indexed</span>
-            <span>•</span>
-            <span style="color:var(--accent-green);">● ASD Essential 8 Verified</span>
+            <span>⚡ <span data-live-count="tools">2,076</span> tools</span>
           </div>
         </div>
       </div>
@@ -2045,12 +2094,12 @@
       </div>
 
       <div class="form-group" style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
-        <label class="form-label">System Health &amp; Diagnostics</label>
+        <label class="form-label">Status</label>
         <div id="settings-diagnostics-box" style="padding:8px 12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:4px;font-family:var(--font-mono);font-size:0.72rem;display:flex;flex-direction:column;gap:4px;">
-          <div style="display:flex;justify-content:space-between;"><span>Backend Engine:</span> <strong id="diag-backend-status" style="color:var(--accent-green);">ONLINE (Port 7777)</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>Indexed OSINT Catalog:</span> <strong style="color:var(--accent-cyan);">2,061 Verified Tools</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>LocalStorage Footprint:</span> <strong id="diag-storage-usage" style="color:var(--text-primary);">-- KB</strong></div>
-          <div style="display:flex;justify-content:space-between;"><span>Security Benchmark:</span> <strong style="color:var(--accent-green);">ASD Essential 8 ML3</strong></div>
+          <div class="diag-row"><span>Bubbsy server:</span> <strong id="diag-backend-status">Checking…</strong></div>
+          <div class="diag-row"><span>Catalogue:</span> <strong id="diag-catalog" style="color:var(--accent-cyan);">--</strong></div>
+          <div class="diag-row"><span>Accounts:</span> <strong id="diag-accounts" style="color:var(--text-primary);">--</strong></div>
+          <div class="diag-row"><span>Saved in this browser:</span> <strong id="diag-storage-usage" style="color:var(--text-primary);">-- KB</strong></div>
         </div>
       </div>
 
@@ -2058,7 +2107,7 @@
         <label class="form-label">Backup &amp; Data Catalog</label>
         <div style="display:flex;gap:8px;">
           <button type="button" class="btn-icon" id="btn-export-backup">Export JSON Backup</button>
-          <button type="button" class="btn-icon" id="btn-export-csv-catalog" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Export 2,061 Tools (CSV)</button>
+          <button type="button" class="btn-icon" id="btn-export-csv-catalog" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">Export <span data-live-count="tools">2,076</span> Tools (CSV)</button>
           <button type="button" class="btn-icon" id="btn-reset-default">Reset Defaults</button>
         </div>
       </div>
@@ -2196,8 +2245,7 @@
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
       <span style="font-weight:700;letter-spacing:1px;color:var(--text-primary);">BUBBSY COMMAND HUB</span>
       <span class="stat-chip" style="font-size:0.62rem;">v2.18.0</span>
-      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);">2,061 OSINT TOOLS</span>
-      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-green);">ASD ESSENTIAL 8</span>
+      <span class="stat-chip" style="font-size:0.62rem;color:var(--accent-cyan);"><span data-live-count="tools">2,076</span> OSINT TOOLS</span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
       <button type="button" class="btn-icon" onclick="startOnboardingTour();" style="padding:2px 8px;font-size:0.68rem;">Mission Briefing</button>
@@ -2377,14 +2425,91 @@
         <button class="ge-camera-btn" id="ge-cam-btn-refresh">↻ Force Refresh</button>
         <button class="ge-camera-btn" id="ge-cam-btn-cadastre">📍 Pivot Cadastre</button>
         <button class="ge-camera-btn" id="ge-cam-btn-streetview">👁 Street View</button>
+  <!-- Arrange mode toolbar (custom layout). Shown only while arranging. -->
+  <div class="layout-edit-bar" id="layout-edit-bar" role="region" aria-label="Arrange layout" hidden>
+    <div class="layout-edit-text">
+      <strong>Arranging your layout.</strong>
+      <span>Drag the ☰ handles to move modules (even between columns) and to reorder links inside a module. Keyboard: focus a handle and use the arrow keys.</span>
+    </div>
+    <div class="layout-edit-actions">
+      <button type="button" class="btn-icon" id="btn-layout-reset" title="Discard unsaved moves and start from the original order">Start over</button>
+      <button type="button" class="btn-icon" id="btn-layout-cancel">Cancel</button>
+      <button type="button" class="btn-icon layout-save-btn" id="btn-layout-save">Save layout</button>
+    </div>
+  </div>
+
+  <!-- Account: optional, and only ever used to store display preferences. -->
+  <div class="modal-overlay" id="modal-account" role="dialog" aria-modal="true" aria-labelledby="modal-account-title">
+    <div class="modal-content account-modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-account-title">Save your preferences across computers</h3>
+        <button class="modal-close" id="btn-close-account" aria-label="Close account dialog">&times;</button>
+      </div>
+
+      <div class="account-honest">
+        <p><strong>What an account does — and all it does:</strong> it stores your Bubbsy preferences on our server so they follow you to any computer you sign in on.</p>
+        <ul>
+          <li><strong>Synced:</strong> catalogue order, your custom layout, pinned tools, collapsed modules, theme, typography, Basic/Advanced mode, your added bookmarks and search settings.</li>
+          <li><strong>Stored about you:</strong> your email and a salted password hash (or your Google account ID if you use Google). That's it.</li>
+          <li><strong>Never stored:</strong> your searches, the sites you open, your investigation graph or notes. No tracking, no analytics, no emails from us.</li>
+          <li><strong>You don't need one.</strong> Everything already works and is saved in this browser. An account only matters if you use more than one computer.</li>
+          <li>You can delete your account and everything stored with it at any time, from this window.</li>
+        </ul>
+      </div>
+
+      <div id="account-unavailable" class="account-unavailable" hidden>
+        <p><strong>Accounts aren't available on this copy of Bubbsy.</strong> It's being served without the Bubbsy server (for example opened straight from a file, or from a static-only host), so there is nowhere to save an account.</p>
+        <p>Nothing is lost: your preferences are saved in this browser as usual. To enable accounts, run the site with <code>python server.py</code> or the included <code>wsgi.py</code>.</p>
+      </div>
+
+      <div id="account-signed-out" hidden>
+        <div id="account-google-wrap" class="account-google-wrap" hidden>
+          <div id="account-google-btn"></div>
+          <div class="account-divider"><span>or use email</span></div>
+        </div>
+
+        <div class="account-tabs" role="tablist" aria-label="Sign in or create account">
+          <button type="button" class="account-tab active" role="tab" id="account-tab-login" aria-selected="true" data-account-tab="login">Sign in</button>
+          <button type="button" class="account-tab" role="tab" id="account-tab-signup" aria-selected="false" data-account-tab="signup">Create account</button>
+        </div>
+
+        <form id="form-account" class="account-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="account-email">Email</label>
+            <input class="form-control" type="email" id="account-email" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="account-password">Password</label>
+            <input class="form-control" type="password" id="account-password" autocomplete="current-password" minlength="8" required>
+            <p class="account-hint" id="account-password-hint" hidden>At least 8 characters.</p>
+          </div>
+          <p class="account-error" id="account-error" role="alert" hidden></p>
+          <button type="submit" class="btn-icon account-submit" id="account-submit">Sign in</button>
+        </form>
+      </div>
+
+      <div id="account-signed-in" hidden>
+        <p class="account-status">Signed in as <strong id="account-email-display"></strong></p>
+        <p class="account-sync-status" id="account-sync-status" aria-live="polite"></p>
+        <div class="account-actions">
+          <button type="button" class="btn-icon" id="btn-account-sync">Sync now</button>
+          <button type="button" class="btn-icon" id="btn-account-logout">Sign out</button>
+        </div>
+        <details class="account-danger">
+          <summary>Delete my account</summary>
+          <p>This permanently deletes your account and the preferences stored with it on our server. Preferences in this browser stay as they are.</p>
+          <button type="button" class="btn-icon account-delete-btn" id="btn-account-delete">Delete account and data</button>
+        </details>
       </div>
     </div>
   </div>
 
   <!-- Scripts: bundled offline data first, telemetry tracker, then app controller -->
   <script src="data/osint_data.js"></script>
+  <script src="data/link_dates.js"></script>
   <script src="data/radar_cache.js"></script>
   <script src="js/tracker.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/account.js"></script>
 </body>
 </html>
