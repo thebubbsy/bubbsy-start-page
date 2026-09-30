@@ -1,0 +1,59 @@
+# Publishes the site to Cloudflare Pages (start.onyachamp.com) every time main changes,
+# so the live site can never fall behind the code again.
+#
+# One-time setup (GitHub repo → Settings → Secrets and variables → Actions → New repository secret):
+#   CLOUDFLARE_API_TOKEN   Cloudflare → My Profile → API Tokens → Create Token →
+#                          "Edit Cloudflare Workers" template (or a custom token with
+#                          Account → Cloudflare Pages → Edit, and Account → D1 → Edit)
+#   CLOUDFLARE_ACCOUNT_ID  Cloudflare dashboard → Workers & Pages → Account ID (right-hand side)
+#
+# You can also run it by hand: Actions tab → "Deploy to Cloudflare Pages" → Run workflow.
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-pages-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the Cloudflare secrets are set
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          missing=""
+          [ -z "$CLOUDFLARE_API_TOKEN" ] && missing="$missing CLOUDFLARE_API_TOKEN"
+          [ -z "$CLOUDFLARE_ACCOUNT_ID" ] && missing="$missing CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secret(s):$missing. Add them under Settings → Secrets and variables → Actions (see the top of this workflow file), then re-run."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test the Cloudflare functions
+        run: node --no-warnings --test tests/functions/cloudflare_functions.test.mjs
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # wrangler.toml supplies the D1 binding (DB) and compatibility date.
+          command: pages deploy . --project-name=bubbsy-start-page --branch=main --commit-dirty=true
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

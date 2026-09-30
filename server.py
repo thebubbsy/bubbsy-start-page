@@ -14,16 +14,16 @@ import base64
 import json
 import os
 import sys
-import subprocess
-import shutil
 import time
 import threading
 import concurrent.futures
 import hashlib
+import hmac
 import re
 import datetime
 import unicodedata
 import mailaccess_engine
+import accounts
 import domain_drop_engine
 
 # Enforce UTF-8 on Windows console
@@ -34,14 +34,16 @@ PORT = int(os.environ.get('PORT', 7777))
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 DIST_DIR = os.path.join(ROOT_DIR, 'dist')
-BOOKMARKS_FILE = os.path.join(DATA_DIR, 'user_bookmarks.json')
+OSINT_DATA_FILE = os.path.join(DATA_DIR, 'osint_data.json')
 import sqlite3
 RADAR_CACHE_FILE = os.path.join(DATA_DIR, 'radar_cache.json')
-ANALYTICS_DB_FILE = os.path.join(ROOT_DIR, 'bubbsy_analytics.db')
+# Outside the served folder, next to the accounts database (see accounts.py).
+ANALYTICS_DB_FILE = os.path.join(os.path.dirname(accounts.db_path()), 'bubbsy_analytics.db')
 OSINT_DATA_FILE = os.path.join(DATA_DIR, 'osint_data.json')
 
 def init_analytics_db():
     try:
+        os.makedirs(os.path.dirname(ANALYTICS_DB_FILE), exist_ok=True)
         conn = sqlite3.connect(ANALYTICS_DB_FILE)
         cur = conn.cursor()
         cur.execute('''
@@ -68,15 +70,6 @@ def init_analytics_db():
         print(f"[Analytics DB Init Warning] {e}")
 
 init_analytics_db()
-
-# Path to es.exe if available
-ES_CLI_PATH = shutil.which('es.exe') or shutil.which('es')
-if not ES_CLI_PATH:
-    potential_winget_path = os.path.expandvars(r'%LOCALAPPDATA%\Microsoft\WinGet\Links\es.exe')
-    if os.path.exists(potential_winget_path):
-        ES_CLI_PATH = potential_winget_path
-
-DEFAULT_EVERYTHING_HTTP = os.environ.get('EVERYTHING_HTTP_URL', 'http://127.0.0.1:8080')
 
 # Default CISA KEV URL
 CISA_KEV_URL = 'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json'
@@ -1440,11 +1433,7 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         params = urllib.parse.parse_qs(parsed.query)
 
-        if path == '/api/es/status':
-            self.handle_es_status(params)
-        elif path == '/api/es/search':
-            self.handle_es_search(params)
-        elif path == '/api/social/scan':
+        if path == '/api/social/scan':
             self.handle_social_scan(params)
         elif path == '/api/social/candidates':
             self.handle_social_candidates(params)
@@ -1452,8 +1441,6 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_radar_feed(params)
         elif path == '/api/acsc/feed':
             self.handle_acsc_feed(params)
-        elif path == '/api/bookmarks':
-            self.handle_get_bookmarks()
         elif path == '/api/data':
             self.handle_get_osint_data()
         elif path == '/api/email/investigate':
@@ -1464,28 +1451,34 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_domain_expiry(params)
         elif path == '/api/domain/drops/trending':
             self.handle_domain_drops_trending()
-        elif path == '/api/manifest':
-            self.handle_get_manifest()
         elif path == '/api/info':
             self.handle_info()
         elif path == '/api/admin/analytics':
             self.handle_admin_analytics(params)
+        elif accounts.is_api_path(path):
+            self.handle_account_api('GET', path)
+        elif accounts.is_private_path(path):
+            self.send_error(404, "File not found")
         else:
             # Fall back to serving static files
             super().do_GET()
+
+    def do_HEAD(self):
+        if accounts.is_private_path(urllib.parse.urlparse(self.path).path):
+            self.send_error(404, "File not found")
+        else:
+            super().do_HEAD()
 
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
 
-        if path == '/api/es/open':
-            self.handle_es_open()
-        elif path == '/api/bookmarks':
-            self.handle_save_bookmarks()
-        elif path == '/api/track':
+        if path == '/api/track':
             self.handle_track_click()
         elif path == '/api/admin/clear':
             self.handle_admin_clear()
+        elif accounts.is_api_path(path):
+            self.handle_account_api('POST', path)
         else:
             self.send_error(404, "Endpoint not found")
 
@@ -1503,21 +1496,18 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
         except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError):
             pass
 
-    def _build_auth_header(self, user, password):
-        if user or password:
-            auth_str = f"{user}:{password}"
-            encoded = base64.b64encode(auth_str.encode('utf-8')).decode('ascii')
-            return f"Basic {encoded}"
-        return None
-
     def _verify_admin_auth(self):
+        """Admin = the ADMIN_PASSWORD environment variable, sent as HTTP Basic auth (any username).
+        With no ADMIN_PASSWORD set, the admin area is switched off rather than guessable."""
+        expected = os.environ.get('ADMIN_PASSWORD', '')
+        if not expected:
+            return False
         auth_header = self.headers.get('Authorization', '')
         if auth_header.startswith('Basic '):
             try:
                 decoded = base64.b64decode(auth_header[6:]).decode('utf-8')
-                parts = decoded.split(':', 1)
-                if len(parts) == 2 and parts[0] == 'user' and parts[1] == 'hacker':
-                    return True
+                password = decoded.split(':', 1)[1] if ':' in decoded else decoded
+                return hmac.compare_digest(password.encode('utf-8'), expected.encode('utf-8'))
             except Exception:
                 pass
         return False
@@ -1531,14 +1521,16 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self._json_response({'error': 'Invalid JSON'}, status=400)
             return
 
-        session_id = payload.get('session_id', 'anon')
-        element_tag = payload.get('element_tag', '')
-        element_id = payload.get('element_id', '')
-        element_classes = payload.get('element_classes', '')
-        element_text = payload.get('element_text', '')[:200]
-        target_href = payload.get('target_href', '')
-        page_path = payload.get('page_path', '/')
-        ts = payload.get('timestamp') or datetime.datetime.now(datetime.timezone.utc).isoformat()
+        # Anyone can post here, so every field is capped (same limits as functions/api/track.js).
+        cap = lambda v, n: str(v if v is not None else '')[:n]
+        session_id = cap(payload.get('session_id') or 'anon', 64)
+        element_tag = cap(payload.get('element_tag'), 20)
+        element_id = cap(payload.get('element_id'), 100)
+        element_classes = cap(payload.get('element_classes'), 100)
+        element_text = cap(payload.get('element_text'), 200)
+        target_href = cap(payload.get('target_href'), 500)
+        page_path = cap(payload.get('page_path') or '/', 200)
+        ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
         ip = self.client_address[0] if self.client_address else '127.0.0.1'
         country = 'AU'
         ua = (self.headers.get('User-Agent', '') or '')[:250]
@@ -1558,15 +1550,11 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
 
     def handle_admin_analytics(self, params):
         if not self._verify_admin_auth():
-            u = params.get('u', [''])[0]
-            p = params.get('p', [''])[0]
-            if not (u == 'user' and p == 'hacker'):
-                self.send_response(401)
-                self.send_header('WWW-Authenticate', 'Basic realm="Bubbsy Admin Area"')
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({'error': 'Unauthorized'}).encode('utf-8'))
+            if not os.environ.get('ADMIN_PASSWORD'):
+                self._json_response({'error': 'Admin is switched off: set the ADMIN_PASSWORD environment variable to enable it.'}, status=503)
                 return
+            self._json_response({'error': 'Unauthorized'}, status=401)
+            return
 
         try:
             conn = sqlite3.connect(ANALYTICS_DB_FILE)
@@ -1629,48 +1617,7 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             self._json_response({'error': str(e)}, status=500)
 
     def handle_info(self):
-        self._json_response({
-            'name': 'Bubbsy Start Page | OSINT Command Hub',
-            'version': '2.18.0',
-            'features': [
-                'Social Recon & Avatar Harvesting Engine',
-                'Google AI Studio & Gemini Integration',
-                '2026 Threat Intel & CVE Live Radar',
-                'ASD / ACSC Cyber Threat Feeds',
-                'High-Contrast Typography & Scale Suite',
-                'Australian Corporate & ABN Registry Graph',
-                'OSINT Pivot Matrix',
-                'Visual Investigation Link Graph',
-                'MailAccess: Email Intelligence, Name Consensus & Exposure Engine',
-                'Domain Drop Sniper & Expiry Countdown Radar',
-                'Session Snapshot & Encrypted Export'
-            ],
-            'status': 'online'
-        })
-
-    def handle_get_manifest(self):
-        # Look for latest manifest in dist/ or current directory
-        manifest_data = {
-            'buildVersion': '2.18.0.20260819.1900',
-            'buildTime': '2026-08-19T19:00:00+10:00',
-            'port': PORT,
-            'outputFolder': 'dist/v2.18.0-20260819-1900',
-            'featuresShipped': [
-                'Visual Identity Disambiguation & Social Recon Engine (35 Platforms)',
-                'Multi-engine OSINT Pivot Matrix (IP, Domain, Hash, Email, CVE, AU ABN)',
-                'Threat Intel CVE Live Radar Feed (CISA KEV / GitHub Security Advisories)',
-                'Global Keyboard Command Palette (Ctrl+K / Spotlight Launcher)',
-                'Interactive Visual Investigation Node Graph with force simulation',
-                'Incident Workspace Snapshot & Markdown Report Export'
-            ],
-            'performance': {
-                'totalTools': 1699,
-                'totalCategories': 89,
-                'bundleSizeBytes': 52400,
-                'searchLatencyMs': 1.2
-            }
-        }
-        self._json_response(manifest_data)
+        self._json_response({'name': 'Bubbsy Start Page', 'status': 'online'})
 
     def handle_get_osint_data(self):
         if os.path.exists(OSINT_DATA_FILE):
@@ -1680,27 +1627,26 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self._json_response({'error': 'osint_data.json not found'}, 404)
 
-    def handle_get_bookmarks(self):
-        if os.path.exists(BOOKMARKS_FILE):
-            try:
-                with open(BOOKMARKS_FILE, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                self._json_response(data)
-                return
-            except Exception:
-                pass
-        self._json_response({'custom_bookmarks': [], 'notes': []})
+    def handle_account_api(self, method, path):
+        def read_body(limit):
+            length = int(self.headers.get('Content-Length', 0) or 0)
+            if length > limit:
+                raise accounts.AuthError('Request is too large.', 413)
+            return self.rfile.read(length) if length else b''
 
-    def handle_save_bookmarks(self):
+        client_ip = self.headers.get('X-Forwarded-For', '').split(',')[0].strip() or self.client_address[0]
+        status, payload, cookie = accounts.handle_request(method, path, self.headers, read_body, client_ip)
         try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length).decode('utf-8')
-            data = json.loads(body)
-            with open(BOOKMARKS_FILE, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2)
-            self._json_response({'status': 'saved'})
-        except Exception as e:
-            self._json_response({'error': str(e)}, 500)
+            body = json.dumps(payload).encode('utf-8')
+            self.send_response(status)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(body)))
+            if cookie:
+                self.send_header('Set-Cookie', cookie)
+            self.end_headers()
+            self.wfile.write(body)
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError):
+            pass
 
     def handle_radar_feed(self, params):
         """Fetches and caches live Threat Intel / CVE feed from CISA KEV or fallback source, strictly sorted newest first."""
@@ -1963,195 +1909,6 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             'count': len(advisories[:limit]),
             'feed': advisories[:limit]
         })
-
-    def handle_es_status(self, params):
-        http_target = params.get('http_url', [DEFAULT_EVERYTHING_HTTP])[0]
-        user = params.get('user', [''])[0]
-        password = params.get('pass', [''])[0]
-
-        http_ok = False
-        http_details = None
-        auth_required = False
-
-        # 1. Test HTTP Server with optional Basic Auth
-        try:
-            headers = {'User-Agent': 'BubbsyStartPage'}
-            auth_hdr = self._build_auth_header(user, password)
-            if auth_hdr:
-                headers['Authorization'] = auth_hdr
-
-            req = urllib.request.Request(f"{http_target.rstrip('/')}/?search=&json=1&count=1", headers=headers)
-            with urllib.request.urlopen(req, timeout=1.2) as resp:
-                if resp.status == 200:
-                    http_ok = True
-                    http_details = f"Everything HTTP server responsive on {http_target}"
-        except urllib.error.HTTPError as he:
-            if he.code == 401:
-                auth_required = True
-                http_details = "HTTP 401 Unauthorized: Everything HTTP server requires valid username & password"
-            else:
-                http_details = f"HTTP Error {he.code}: {he.reason}"
-        except Exception as e:
-            http_details = str(e)
-
-        # 2. Test es.exe CLI IPC
-        cli_ok = False
-        cli_details = None
-        if ES_CLI_PATH:
-            try:
-                res = subprocess.run([ES_CLI_PATH, '-timeout', '500', '-n', '1', 'test'], capture_output=True, text=True, timeout=1.0)
-                if res.returncode == 0:
-                    cli_ok = True
-                    cli_details = f"es.exe IPC connection established ({ES_CLI_PATH})"
-                else:
-                    cli_details = res.stderr.strip() or res.stdout.strip()
-            except Exception as e:
-                cli_details = str(e)
-        else:
-            cli_details = "es.exe CLI not found in PATH or WinGet"
-
-        mode = 'offline'
-        if http_ok:
-            mode = 'http_server'
-        elif auth_required:
-            mode = 'auth_required'
-        elif cli_ok:
-            mode = 'cli_ipc'
-
-        self._json_response({
-            'status': 'ok',
-            'mode': mode,
-            'http_ok': http_ok,
-            'auth_required': auth_required,
-            'cli_ok': cli_ok,
-            'es_cli_path': ES_CLI_PATH,
-            'http_url': http_target,
-            'details': {
-                'http': http_details,
-                'cli': cli_details
-            }
-        })
-
-    def handle_es_search(self, params):
-        query = params.get('q', [''])[0].strip()
-        count = int(params.get('max', ['50'])[0])
-        http_target = params.get('http_url', [DEFAULT_EVERYTHING_HTTP])[0]
-        user = params.get('user', [''])[0]
-        password = params.get('pass', [''])[0]
-
-        if not query:
-            self._json_response({'results': [], 'total': 0, 'source': 'none', 'query': ''})
-            return
-
-        # Attempt 1: Query Everything HTTP Server with Basic Auth
-        try:
-            encoded_query = urllib.parse.quote(query)
-            url = f"{http_target.rstrip('/')}/?search={encoded_query}&json=1&count={count}"
-            headers = {'User-Agent': 'BubbsyStartPage'}
-            auth_hdr = self._build_auth_header(user, password)
-            if auth_hdr:
-                headers['Authorization'] = auth_hdr
-
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=2.0) as resp:
-                if resp.status == 200:
-                    raw_json = json.loads(resp.read().decode('utf-8', errors='ignore'))
-                    raw_results = raw_json.get('results', [])
-                    results = []
-                    for item in raw_results:
-                        name = item.get('name', '')
-                        item_path = item.get('path', '')
-                        full_path = os.path.join(item_path, name) if item_path else name
-                        is_folder = item.get('type') == 'folder'
-                        results.append({
-                            'name': name,
-                            'path': item_path,
-                            'full_path': full_path,
-                            'size': item.get('size', 0),
-                            'date_modified': item.get('date_modified', ''),
-                            'is_folder': is_folder,
-                            'ext': os.path.splitext(name)[1].lower().lstrip('.')
-                        })
-                    self._json_response({
-                        'source': 'http_server',
-                        'query': query,
-                        'total': raw_json.get('totalResults', len(results)),
-                        'results': results
-                    })
-                    return
-        except urllib.error.HTTPError as he:
-            if he.code == 401:
-                self._json_response({
-                    'source': 'auth_required',
-                    'query': query,
-                    'total': 0,
-                    'results': [],
-                    'error': 'HTTP 401 Unauthorized: Everything HTTP server requires valid username and password. Please configure credentials in Settings.'
-                })
-                return
-        except Exception:
-            pass
-
-        # Attempt 2: Run es.exe CLI with timeout
-        if ES_CLI_PATH:
-            try:
-                cmd = [ES_CLI_PATH, '-timeout', '800', '-n', str(count), query]
-                proc = subprocess.run(cmd, capture_output=True, text=True, timeout=1.5)
-                if proc.returncode == 0:
-                    lines = proc.stdout.strip().split('\n')
-                    results = []
-                    for line in lines:
-                        line = line.strip()
-                        if not line:
-                            continue
-                        full_path = line
-                        name = os.path.basename(full_path)
-                        folder = os.path.dirname(full_path)
-                        is_folder = os.path.isdir(full_path) if os.path.exists(full_path) else (not os.path.splitext(name)[1])
-                        results.append({
-                            'name': name,
-                            'path': folder,
-                            'full_path': full_path,
-                            'size': 0,
-                            'date_modified': '',
-                            'is_folder': is_folder,
-                            'ext': os.path.splitext(name)[1].lower().lstrip('.')
-                        })
-                    self._json_response({
-                        'source': 'es_cli',
-                        'query': query,
-                        'total': len(results),
-                        'results': results
-                    })
-                    return
-                else:
-                    err_msg = proc.stderr.strip() or proc.stdout.strip()
-                    self._json_response({
-                        'source': 'offline',
-                        'query': query,
-                        'total': 0,
-                        'results': [],
-                        'error': err_msg or 'Everything IPC not connected. Launch Everything.'
-                    })
-                    return
-            except subprocess.TimeoutExpired:
-                self._json_response({
-                    'source': 'timeout',
-                    'query': query,
-                    'total': 0,
-                    'results': [],
-                    'error': 'Everything query timed out.'
-                })
-                return
-            except Exception as e:
-                self._json_response({
-                    'source': 'error',
-                    'query': query,
-                    'total': 0,
-                    'results': [],
-                    'error': f"CLI execution error: {str(e)}"
-                })
-                return
 
     def handle_social_candidates(self, params):
         platform_id = params.get('platform', ['github'])[0].strip().lower()
@@ -2661,27 +2418,6 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
     def handle_domain_drops_trending(self):
         result = domain_drop_engine.get_trending_dropping_watchlist()
         self._json_response(result)
-
-    def handle_es_open(self):
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length).decode('utf-8')
-            data = json.loads(body)
-            file_path = data.get('path', '')
-            action = data.get('action', 'open')  # 'open' or 'explorer'
-
-            if not file_path or not os.path.exists(file_path):
-                self._json_response({'error': f'File or directory not found: {file_path}'}, 404)
-                return
-
-            if action == 'explorer':
-                subprocess.Popen(['explorer.exe', f'/select,{os.path.normpath(file_path)}'])
-            else:
-                os.startfile(os.path.normpath(file_path))
-
-            self._json_response({'status': 'success', 'path': file_path, 'action': action})
-        except Exception as e:
-            self._json_response({'error': str(e)}, 500)
 
 def run_server():
     os.chdir(ROOT_DIR)

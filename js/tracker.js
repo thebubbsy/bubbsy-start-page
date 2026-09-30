@@ -1,6 +1,9 @@
 /**
- * Bubbsy User Click Telemetry Tracker
- * Cloudflare Pages + D1 Database Analytics Client
+ * Anonymous click counter (Cloudflare Pages + D1).
+ *
+ * Records which buttons and links are used so the site can be improved: element type/id/label,
+ * link target and page path, plus (added server-side) IP address, country and browser. Never
+ * records what is typed into any field. Disclosed to users in the account window.
  */
 (function () {
   'use strict';
@@ -19,11 +22,15 @@
   function dispatchClickTelemetry(element) {
     if (!element || element === document.body || element === document.documentElement) return;
 
-    // Safety: Never harvest password input fields or sensitive secrets
-    if (element.type === 'password' || element.id === 'admin-password') return;
+    // Never record what people type: for form fields only the field's own label is sent, never
+    // its value (search boxes hold investigation targets). Password fields are skipped entirely.
+    if (element.type === 'password') return;
+    const isField = /^(INPUT|TEXTAREA|SELECT)$/.test(element.tagName) || element.isContentEditable;
 
     // Find best descriptive text
-    let label = (element.innerText || element.value || element.getAttribute('aria-label') || element.title || '').trim();
+    let label = isField
+      ? (element.getAttribute('aria-label') || element.getAttribute('placeholder') || element.name || element.id || element.tagName).trim()
+      : (element.innerText || element.getAttribute('aria-label') || element.title || '').trim();
     if (!label && element.querySelector('span, strong, svg title')) {
       label = (element.querySelector('span, strong, svg title')?.textContent || '').trim();
     }
@@ -36,7 +43,7 @@
       element_classes: typeof element.className === 'string' ? element.className.slice(0, 100) : '',
       element_text: label,
       target_href: element.href || element.getAttribute('data-href') || '',
-      page_path: window.location.pathname + window.location.search + window.location.hash,
+      page_path: window.location.pathname, // no query string or hash: those can carry searches
       timestamp: new Date().toISOString(),
     };
 
@@ -73,5 +80,4 @@
     { capture: true, passive: true }
   );
 
-  console.log('[Bubbsy Tracker] Initialized. Session:', sessionId);
 })();

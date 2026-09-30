@@ -1,6 +1,6 @@
 # Bubbsy Start Page & Tactical OSINT Command Hub
 
-**Bubbsy Start Page** is a premier public web application and tactical cyber intelligence command center. It features **2,061+ curated OSINT links across 113 structured modules** — including 20 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
+**Bubbsy Start Page** is a premier public web application and tactical cyber intelligence command center. It features **2,000+ curated OSINT links across 100+ modules** (with live catalogue count) — including 20 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
 
 ---
 
@@ -11,7 +11,7 @@
    - Live Threat Intel & CVE Radar dynamically pulling real-time vulnerabilities from CISA KEV (1,730+ CVEs), ASD / ACSC, and Essential Eight benchmarks.
    - Automated GitHub Actions data pipeline continuously synchronizes and validates the CVE catalog.
 
-2. **2,061+ Curated OSINT Tools Across 113 Modules**:
+2. **2,000+ Curated OSINT Tools Across 100+ Modules** (the page always shows the live count):
    - 113 structured modules across 4 balanced columns (Threat Intel, Geolocation, People & Email, Social Networks, Dorking, DNS/IP, Darknet, Public Records, Gov & Police, etc.).
    - 20 dedicated **[AUS]** modules: Government & Data, Public Records, Police & Courts, Corporations/ABN/ASIC, Real Estate & Cadastre, Transport & Rego, News & Media, Gov Services & myGov, Telco/Postal/Address, Emergency & Weather, Defence & Security, Sport/Arts/Culture, Cyber Security & Scams, Professional/Health & Licence Registers, Maps/Geospatial & Environment, Banking/Tax & Consumer, Jobs/Education & Skills, Aviation/Rail & Vessel Tracking, Marketplaces & Forums, Energy/Utilities & Infrastructure.
    - **4 global depth modules**: Corporate Registries & Ownership (OpenCorporates, Aleph, ICIJ, OpenSanctions), Archives & Fact-Check, Satellite & Earth Observation, OPSEC & Secure Comms.
@@ -48,6 +48,16 @@
    - `!archive <url>`: Wayback Machine archive.
    - `!radar`: Jump straight to Threat Intel & CVE Live Radar.
 
+7. **Catalogue Order — one global setting, applied inside every module**:
+   - **AU First** (default), **A–Z**, **Newest** (most recently added tools first, dates derived from git history by `build_link_dates.py`), **My Picks** (pinned first).
+   - **Custom**: press it and every module and link gets a ☰ handle. Drag modules anywhere (including between columns) and links within their module, then **Save layout**. Keyboard: focus a handle and use the arrow keys. Tools added to the catalogue later still appear — a saved layout never hides anything.
+
+8. **Optional Account (preference sync only)**:
+   - Everything works without an account; preferences live in your browser.
+   - An account only stores your preferences (order, custom layout, pins, collapsed modules, theme, typography, mode, added bookmarks) so they follow you to other computers. It stores your email and a salted password hash (or Google account ID), and never your investigation data. Separately, the site counts button/link clicks for everyone (what was clicked, link address, page, IP, country, browser; never typed text), which the account window discloses. Users can delete their account and data from the account window.
+   - Email + password works out of the box. **Sign in with Google** appears once `GOOGLE_CLIENT_ID` is set (see below).
+   - The sign-in button is hidden when there is no server (opening `index.html` from disk or static hosting).
+
 ---
 
 ## 🌐 Public Deployment & Architecture
@@ -77,6 +87,19 @@ npx wrangler pages dev .
 ```
 
 ---
+
+### Configuration
+
+**Live site (Cloudflare Pages, deployed from `main`).** Every push to `main` is published automatically by `.github/workflows/deploy-cloudflare.yml`, once the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set (instructions at the top of that file). Set these under Cloudflare dashboard → Workers & Pages → *bubbsy-start-page* → Settings → Variables and Secrets, then redeploy:
+
+| Name | Type | Purpose |
+|---|---|---|
+| `ADMIN_PASSWORD` | Secret | Password for the Admin click-analytics window. **Admin stays switched off until this is set**; there is no default. Use a long random value. |
+| `GOOGLE_CLIENT_ID` | Variable | Enables "Continue with Google" in the Sign in window. Create an OAuth 2.0 Client ID (type *Web application*) in Google Cloud Console → APIs & Services → Credentials, add your site URL under *Authorized JavaScript origins*. No client secret is needed. |
+
+Accounts, preferences and click analytics use the D1 database already bound as `DB` in `wrangler.toml`; tables are created automatically. Email + password sign-in works with no extra setup.
+
+**Running `server.py` / `wsgi.py` yourself:** the same `ADMIN_PASSWORD` and `GOOGLE_CLIENT_ID` environment variables apply, plus `BUBBSY_DB_PATH` (default `~/.bubbsy/accounts.db`) for where accounts and analytics are stored. Keep it outside the served folder.
 
 ## ⌨️ Keyboard Shortcuts
 
