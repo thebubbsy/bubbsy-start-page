@@ -1,15 +1,15 @@
 # Bubbsy Start Page & Tactical OSINT Command Hub
 
-**Bubbsy Start Page** is a high-performance tactical start page and intelligence command center. It features **2,061+ curated OSINT links across 113 structured modules** — including 20 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
+**Bubbsy Start Page** is a premier public web application and tactical cyber intelligence command center. It features **2,061+ curated OSINT links across 113 structured modules** — including 20 dedicated **[AUS] Australian** modules, an **Interactive Visual Toolkit**, and 5 **Hacker Search Engine** modules curated from `edoardottt/awesome-hacker-search-engines` — paired with multi-platform Visual Identity Disambiguation, Social Recon, and a Live CVE Threat Radar.
 
 ---
 
 ## ⚡ Key Features
 
-1. **100% Self-Hosted & Offline Resilient**:
-   - Zero dependence on start.me or third-party cloud hosting.
-   - Operates fully offline with zero external server requirements.
-   - 250 bundled CVE & threat advisories cached locally.
+1. **Live Cloud Edge & Continuous Threat Intelligence**:
+   - Deployed on Cloudflare Pages with Edge Workers and Cloudflare D1 analytics.
+   - Live Threat Intel & CVE Radar dynamically pulling real-time vulnerabilities from CISA KEV (1,730+ CVEs), ASD / ACSC, and Essential Eight benchmarks.
+   - Automated GitHub Actions data pipeline continuously synchronizes and validates the CVE catalog.
 
 2. **2,061+ Curated OSINT Tools Across 113 Modules**:
    - 113 structured modules across 4 balanced columns (Threat Intel, Geolocation, People & Email, Social Networks, Dorking, DNS/IP, Darknet, Public Records, Gov & Police, etc.).
@@ -50,20 +50,31 @@
 
 ---
 
-## 🚀 How to Run
+## 🌐 Public Deployment & Architecture
 
-### Method 1: One-Click Launcher (Recommended)
-Double-click `start_bubbsy.bat`.
-This starts the local Python backend on `http://localhost:7777` and automatically opens your default browser.
+Bubbsy Start Page is built for the global web and deployed on **Cloudflare Pages**:
+- **Hosting & CDN**: Cloudflare Pages edge network (`pages_build_output_dir = "."`).
+- **Edge Functions**: Cloudflare Pages serverless functions (`functions/api/`):
+  - `/api/radar/feed`: Real-time CISA KEV CVE stream with edge caching.
+  - `/api/acsc/feed`: Australian Signals Directorate / ACSC cyber advisory stream.
+  - `/api/gods-eye/feed`: Server-side proxy for Australian government open-data feeds.
+  - `/api/track` & `/api/admin/*`: High-speed telemetry logging backed by Cloudflare D1.
 
-### Method 2: Manual Command Line
-```powershell
+---
+
+## 💻 Developer & Contribution Guide
+
+For contributors developing locally:
+
+```bash
+# Ingest and synchronize the latest live CVEs from CISA KEV
+python update_cves.py
+
+# Run local development preview server
 python server.py
+# Or preview with Cloudflare Wrangler
+npx wrangler pages dev .
 ```
-Then navigate to `http://localhost:7777` in your browser.
-
-### Method 3: Standalone Browser Mode (Zero Server)
-Simply double-click `index.html`. The bundled dataset `data/osint_data.js` loads immediately in any browser with full client-side filtering.
 
 ---
 
@@ -83,5 +94,3 @@ Developed by **Matthew Bubb (OnYaChamp)** ([@thebubbsy](https://github.com/thebu
 - Central Hub & Engineering Portfolio: [OnYaChamp.com](https://onyachamp.com)
 - OpenXML Flagship: [MarkSmith Compiler](https://onyachamp.com/marksmith.html)
 - Sovereign MDM: [LocalPilot Fleet](https://github.com/thebubbsy/LocalPilotFleet)
-
-

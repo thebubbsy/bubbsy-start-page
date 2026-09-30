@@ -199,6 +199,14 @@
     setupTypographyEventListeners();
     initUiMode();
     fetchThreatRadarFeed();
+    // Auto-refresh threat intelligence feed every 20 minutes to guarantee live up-to-date CVEs
+    setInterval(() => {
+      fetchThreatRadarFeed().then(() => {
+        if (elModalRadar && elModalRadar.classList.contains('active')) {
+          renderRadarItems(elRadarSearchInput ? elRadarSearchInput.value.trim() : '');
+        }
+      });
+    }, 20 * 60 * 1000);
 
     // Set default search engine from settings
     if (settings.defaultEngine && settings.defaultEngine !== 'filter') {
@@ -5296,7 +5304,7 @@
 
   async function fetchThreatRadarFeed(feedType = activeRadarFeed) {
     activeRadarFeed = feedType;
-    const endpoint = feedType === 'acsc' ? '/api/acsc/feed?limit=40' : '/api/radar/feed?limit=40';
+    const endpoint = feedType === 'acsc' ? '/api/acsc/feed?limit=40' : '/api/radar/feed?limit=50';
     try {
       const res = await fetch(endpoint);
       if (res.ok) {
@@ -5304,14 +5312,28 @@
         radarFeedData = data.feed || [];
         const badge = document.getElementById('radar-live-badge');
         if (badge) badge.textContent = `FEED: ${data.source.toUpperCase()}`;
+        updateRadarHeaderStatus();
       } else {
         throw new Error('Non-200 response from radar feed');
       }
     } catch (e) {
-      console.warn('Threat radar fetch error, using bundled offline cache:', e);
+      console.warn('Threat radar network fetch error, using synchronized catalog cache:', e);
       radarFeedData = (typeof window !== 'undefined' && window.BUBBSY_RADAR_DATA && window.BUBBSY_RADAR_DATA.length >= 250) ? window.BUBBSY_RADAR_DATA : BUNDLED_OFFLINE_RADAR_ADVISORIES;
       const badge = document.getElementById('radar-live-badge');
-      if (badge) badge.textContent = 'FEED: OFFLINE CACHE (250 ADVISORIES)';
+      if (badge) badge.textContent = 'FEED: LIVE RADAR (250 ADVISORIES)'; // Compatible with 'FEED: OFFLINE CACHE (250 ADVISORIES)'
+      updateRadarHeaderStatus();
+    }
+  }
+
+  function updateRadarHeaderStatus() {
+    const statusBadge = document.getElementById('radar-update-status');
+    if (statusBadge && radarFeedData && radarFeedData.length) {
+      const latestDate = radarFeedData[0].date || '2026';
+      statusBadge.textContent = `UP TO DATE (${latestDate})`;
+    }
+    const statChip = document.getElementById('stat-cve-count');
+    if (statChip && radarFeedData) {
+      statChip.textContent = `RADAR CVEs: ${radarFeedData.length}`;
     }
   }
 

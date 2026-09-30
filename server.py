@@ -1494,6 +1494,9 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
             body = json.dumps(data).encode('utf-8')
             self.send_response(status)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization')
             self.send_header('Content-Length', str(len(body)))
             self.end_headers()
             self.wfile.write(body)
@@ -1712,8 +1715,8 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
 
         # Attempt to fetch live CISA KEV catalog
         try:
-            req = urllib.request.Request(CISA_KEV_URL, headers={'User-Agent': 'Bubbsy-OSINT-Radar/2.18 (Tactical OSINT Feed)'})
-            with urllib.request.urlopen(req, timeout=4.0) as resp:
+            req = urllib.request.Request(CISA_KEV_URL, headers={'User-Agent': 'Bubbsy-OSINT-Radar/3.0 (Cloud Threat Feed)'})
+            with urllib.request.urlopen(req, timeout=12.0) as resp:
                 if resp.status == 200:
                     raw = json.loads(resp.read().decode('utf-8', errors='ignore'))
                     raw_vulns = raw.get('vulnerabilities', [])
@@ -1721,23 +1724,25 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
                     # Strictly sort newest first
                     raw_vulns.sort(key=parse_date, reverse=True)
 
-                    # Cache the newest 250 to disk for offline resilience
+                    # Cache the newest 250 to disk for resilience
                     if not os.path.exists(DATA_DIR):
                         os.makedirs(DATA_DIR, exist_ok=True)
                     with open(RADAR_CACHE_FILE, 'w', encoding='utf-8') as cf:
-                        json.dump(raw_vulns[:250], cf)
+                        json.dump(raw_vulns[:250], cf, indent=2, ensure_ascii=False)
 
-                    for v in raw_vulns[:150]:
+                    for v in raw_vulns[:200]:
                         cve_id = v.get('cveID', '')
                         vendor = v.get('vendorProject', '')
                         product = v.get('product', '')
                         desc = v.get('shortDescription', '')
                         date_added = v.get('dateAdded', '')
                         ransomware = v.get('knownRansomwareCampaignUse', 'Unknown')
+                        vuln_name = v.get('vulnerabilityName', '')
+                        title = f"{cve_id} — {vuln_name}" if vuln_name else f"{cve_id} — {vendor} {product}"
                         
                         items.append({
                             'id': cve_id,
-                            'title': f"{cve_id} — {vendor} {product}",
+                            'title': title,
                             'description': desc,
                             'vendor': vendor,
                             'product': product,
@@ -1755,18 +1760,20 @@ class BubbsyHandler(http.server.SimpleHTTPRequestHandler):
                     with open(RADAR_CACHE_FILE, 'r', encoding='utf-8') as cf:
                         cached = json.load(cf)
                         cached.sort(key=parse_date, reverse=True)
-                        for v in cached[:100]:
+                        for v in cached[:200]:
                             cve_id = v.get('cveID', '')
                             vendor = v.get('vendorProject', '')
                             product = v.get('product', '')
+                            vuln_name = v.get('vulnerabilityName', '')
+                            title = f"{cve_id} — {vuln_name}" if vuln_name else f"{cve_id} — {vendor} {product}"
                             items.append({
                                 'id': cve_id,
-                                'title': f"{cve_id} — {vendor} {product}",
+                                'title': title,
                                 'description': v.get('shortDescription', ''),
                                 'vendor': vendor,
                                 'product': product,
                                 'date': v.get('dateAdded', ''),
-                                'severity': 'HIGH',
+                                'severity': 'CRITICAL' if v.get('knownRansomwareCampaignUse') == 'Known' else 'HIGH',
                                 'ransomware': v.get('knownRansomwareCampaignUse') == 'Known',
                                 'source': 'CISA KEV (Cached)',
                                 'url': f"https://nvd.nist.gov/vuln/detail/{cve_id}"
