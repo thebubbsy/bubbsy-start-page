@@ -817,6 +817,14 @@
     elMainSearch.placeholder = `Fuzzy search ${totalTools}+ OSINT, Australian & AI tools... (Press / to focus, Ctrl+K for Palette)`;
     updateCategoryRibbonCounts();
     buildBookmarkSearchIndex();
+    const auBadge = document.getElementById('stats-au-sources');
+    if (auBadge) {
+      let auTotal = 0;
+      BOOKMARK_SEARCH_INDEX.forEach(entry => {
+        entry.links.forEach(l => { if (l.isAu || entry.isAuModule) auTotal++; });
+      });
+      auBadge.textContent = auTotal.toLocaleString();
+    }
   }
 
   function updateCategoryRibbonCounts() {
@@ -1158,6 +1166,49 @@
       pill.classList.add('active');
       activeCategoryGroup = pill.getAttribute('data-filter-group');
       filterByCategory(activeCategoryGroup);
+    });
+
+    document.getElementById('chip-au-sources')?.addEventListener('click', () => {
+      const ausPill = elCategoryRibbon.querySelector('.cat-pill[data-filter-group="aus_intel"]');
+      if (ausPill) {
+        ausPill.click();
+        showToast('Filtered to [AUS] Australian OSINT sources');
+      }
+    });
+
+    document.getElementById('btn-random-tool')?.addEventListener('click', () => {
+      const visibleLinks = Array.from(elDashboardGrid.querySelectorAll('.widget-card:not([style*="display: none"]) .link-item:not([style*="display: none"])'));
+      if (visibleLinks.length === 0) {
+        showToast('No visible OSINT tools to pick from', 'error');
+        return;
+      }
+      const picked = visibleLinks[Math.floor(Math.random() * visibleLinks.length)];
+      const parentCard = picked.closest('.widget-card');
+      if (parentCard && parentCard.classList.contains('collapsed')) {
+        parentCard.classList.remove('collapsed');
+      }
+      picked.scrollIntoView({ behavior: motionSafeBehavior('smooth'), block: 'center' });
+      picked.classList.remove('pulse-copy');
+      void picked.offsetWidth;
+      picked.classList.add('pulse-copy');
+      const title = picked.querySelector('.link-title')?.textContent || 'OSINT Tool';
+      const cat = parentCard?.querySelector('.widget-title')?.textContent || 'Module';
+      showToast(`[RANDOM RECON] ${title} (${cat})`);
+    });
+
+    document.getElementById('btn-copy-visible-urls')?.addEventListener('click', () => {
+      const visibleLinks = Array.from(elDashboardGrid.querySelectorAll('.widget-card:not([style*="display: none"]) .link-item:not([style*="display: none"])'));
+      if (visibleLinks.length === 0) {
+        showToast('No visible tools to copy', 'error');
+        return;
+      }
+      const lines = visibleLinks.map(li => {
+        const a = li.querySelector('.link-anchor');
+        const t = li.querySelector('.link-title')?.textContent || 'Tool';
+        const u = a ? a.getAttribute('href') : (li.getAttribute('data-link-url') || '');
+        return `- [${t}](${u})`;
+      });
+      copyToClipboard(lines.join('\n'), `Copied ${lines.length} visible OSINT tool(s) as Markdown!`);
     });
 
     // Container-level Event Delegation on elDashboardGrid for links
