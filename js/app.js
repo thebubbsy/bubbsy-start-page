@@ -11597,7 +11597,50 @@ ${formatInstructions}
   window.closeModal = closeModal;
   window.cycleTheme = cycleTheme;
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', async (e) => {
+    const btnRawUrls = e.target.closest('#btn-copy-raw-urls');
+    if (btnRawUrls) {
+      const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
+        .filter(el => el.offsetParent !== null);
+      const urls = visibleLinks.map(el => {
+        const a = el.querySelector('a.tool-link') || el.querySelector('a');
+        return a?.href || '';
+      }).filter(Boolean);
+      if (urls.length === 0) return;
+      try {
+        await navigator.clipboard.writeText(urls.join('\n'));
+        showToast(`Copied ${urls.length} raw OSINT URLs to clipboard!`);
+      } catch (err) {}
+      return;
+    }
+
+    const btnCsv = e.target.closest('#btn-export-visible-csv');
+    if (btnCsv) {
+      const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
+        .filter(el => el.offsetParent !== null);
+      const rows = [['Category', 'Name', 'URL']];
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.tool-link') || el.querySelector('a');
+        const card = el.closest('.category-card');
+        const catTitle = card?.querySelector('.card-title')?.textContent?.trim() || 'Uncategorized';
+        const name = (a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+        const url = a?.href || '';
+        if (url) rows.push([catTitle, name, url]);
+      });
+      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\r\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'bubbsy-osint-visible-tools.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${rows.length - 1} visible OSINT tools to CSV!`);
+      return;
+    }
+
     const btnJson = e.target.closest('#btn-export-visible-json');
     if (!btnJson) return;
     const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
