@@ -11597,6 +11597,33 @@ ${formatInstructions}
   window.closeModal = closeModal;
   window.cycleTheme = cycleTheme;
 
+  document.addEventListener('click', (e) => {
+    const btnJson = e.target.closest('#btn-export-visible-json');
+    if (!btnJson) return;
+    const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
+      .filter(el => el.offsetParent !== null);
+    const items = visibleLinks.map(el => {
+      const a = el.querySelector('a.tool-link') || el.querySelector('a');
+      const card = el.closest('.category-card');
+      const catTitle = card?.querySelector('.card-title')?.textContent?.trim() || 'Uncategorized';
+      return {
+        name: (a?.textContent || el.textContent || '').trim(),
+        url: a?.href || '',
+        category: catTitle
+      };
+    }).filter(x => x.url);
+    const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), count: items.length, tools: items }, null, 2)], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'bubbsy-osint-visible-tools.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast(`Exported ${items.length} visible OSINT tools to JSON!`);
+  });
+
   // Self Boot
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
