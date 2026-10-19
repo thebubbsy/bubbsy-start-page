@@ -13014,6 +13014,49 @@ ${formatInstructions}
       return;
     }
 
+    const btnGeTsv = e.target.closest('#ge-copy-feeds-tsv');
+    if (btnGeTsv) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const tsvLines = ['Source\tTitle\tURL'];
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').replace(/[\t\r\n]+/g, ' ').trim();
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/[\t\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+        const url = (a?.href || '').replace(/[\t\r\n]+/g, ' ').trim();
+        if (title) {
+          tsvLines.push(`${src}\t${title}\t${url}`);
+        }
+      });
+      copyToClipboard(tsvLines.join('\r\n'), `Copied ${tsvLines.length - 1} God's Eye feed item(s) as TSV (Excel/Sheets ready)!`);
+      return;
+    }
+
+    const btnGeCopyJson = e.target.closest('#ge-copy-feeds-json');
+    if (btnGeCopyJson) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const records = feedItems.map(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        return {
+          source: (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim(),
+          title: (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim(),
+          url: a?.href || ''
+        };
+      }).filter(r => r.title);
+      const jsonStr = JSON.stringify({ exportedAt: new Date().toISOString(), count: records.length, feeds: records }, null, 2);
+      copyToClipboard(jsonStr, `Copied ${records.length} God's Eye feed item(s) as JSON to clipboard!`);
+      return;
+    }
+
     const btnGeCsv = e.target.closest('#ge-export-feeds-csv');
     if (btnGeCsv) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
