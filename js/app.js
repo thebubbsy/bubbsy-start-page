@@ -11637,11 +11637,37 @@ ${formatInstructions}
       return;
     }
 
+    const btnMdTable = e.target.closest('#btn-copy-visible-md-table');
+    if (btnMdTable) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const mdRows = [
+        '| # | Category | Tool Name | Domain | URL |',
+        '| :--- | :--- | :--- | :--- | :--- |'
+      ];
+      let idx = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        idx++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim();
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim();
+        const domain = (extractDomain(url) || '-').replace(/\|/g, '\\|');
+        mdRows.push(`| ${idx} | ${catTitle} | ${name} | \`${domain}\` | ${url} |`);
+      });
+      if (idx === 0) return;
+      copyToClipboard(mdRows.join('\n'), `Copied ${idx} visible OSINT tool(s) as Markdown table!`);
+      return;
+    }
+
     const btnGeMd = e.target.closest('#ge-copy-feeds-md');
     if (btnGeMd) {
-      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'));
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
       if (feedItems.length === 0) {
-        showToast('No live feed items loaded yet', 'error');
+        showToast('No visible live feed items loaded yet', 'error');
         return;
       }
       const mdLines = [`# God's Eye Australia — Live Intel Feeds (${new Date().toISOString()})`, ''];
@@ -11658,9 +11684,36 @@ ${formatInstructions}
       return;
     }
 
+    const btnGeCsv = e.target.closest('#ge-export-feeds-csv');
+    if (btnGeCsv) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      const rows = [['Source', 'Title', 'URL']];
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        const url = a?.href || '';
+        if (title) rows.push([src, title, url]);
+      });
+      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\r\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'gods-eye-au-intel-feeds.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${rows.length - 1} God's Eye feed item(s) to CSV!`);
+      return;
+    }
+
     const btnGeJson = e.target.closest('#ge-export-feeds-json');
     if (btnGeJson) {
-      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'));
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
       const records = feedItems.map(item => {
         const a = item.tagName === 'A' ? item : item.querySelector('a');
         return {
@@ -11731,6 +11784,24 @@ ${formatInstructions}
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     showToast(`Exported ${items.length} visible OSINT tools to JSON!`);
+  });
+
+  document.addEventListener('input', (e) => {
+    const feedFilter = e.target.closest('#ge-feed-filter-input');
+    if (!feedFilter) return;
+    const q = (feedFilter.value || '').toLowerCase().trim();
+    const items = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list > a'));
+    let visibleCount = 0;
+    items.forEach(item => {
+      const txt = (item.textContent || '').toLowerCase();
+      const match = !q || txt.includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+    const countEl = document.getElementById('ge-feed-count');
+    if (countEl && items.length > 0) {
+      countEl.textContent = q ? `${visibleCount} / ${items.length} items shown` : `${items.length} items loaded`;
+    }
   });
 
   // Self Boot
