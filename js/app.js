@@ -12943,6 +12943,55 @@ ${formatInstructions}
       return;
     }
 
+    const btnTsv = e.target.closest('#btn-copy-visible-tsv');
+    if (btnTsv) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const tsvRows = ['Category\tTool Name\tDomain\tURL'];
+      let idx = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        idx++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/[\t\r\n]+/g, ' ').trim();
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/[\t\r\n]+/g, ' ').trim();
+        const domain = (extractDomain(url) || '-').replace(/[\t\r\n]+/g, ' ').trim();
+        tsvRows.push(`${catTitle}\t${name}\t${domain}\t${url}`);
+      });
+      if (idx === 0) return;
+      copyToClipboard(tsvRows.join('\r\n'), `Copied ${idx} visible OSINT tool(s) as TSV (Excel/Sheets ready)!`);
+      return;
+    }
+
+    const btnGeUrls = e.target.closest('#ge-copy-feeds-urls');
+    if (btnGeUrls) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      const urls = feedItems.map(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        return a?.href || '';
+      }).filter(Boolean);
+      if (urls.length === 0) {
+        showToast('No visible live feed URLs loaded yet', 'error');
+        return;
+      }
+      copyToClipboard(urls.join('\n'), `Copied ${urls.length} God's Eye live feed URL(s) to clipboard!`);
+      return;
+    }
+
+    const btnGeClearFilter = e.target.closest('#ge-clear-feed-filter');
+    if (btnGeClearFilter) {
+      const feedFilter = document.getElementById('ge-feed-filter-input');
+      if (feedFilter) {
+        feedFilter.value = '';
+        feedFilter.dispatchEvent(new Event('input', { bubbles: true }));
+        feedFilter.focus();
+      }
+      return;
+    }
+
     const btnGeMd = e.target.closest('#ge-copy-feeds-md');
     if (btnGeMd) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))

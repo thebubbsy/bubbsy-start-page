@@ -441,6 +441,7 @@
     <button class="btn-icon" id="btn-random-tool" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(0,240,255,0.3);color:var(--accent-cyan);" title="Jump to a random visible OSINT tool">Random Recon</button>
     <button class="btn-icon" id="btn-copy-visible-urls" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(16,185,129,0.3);color:var(--accent-green);" title="Copy all currently visible/filtered tools as Markdown">Copy Visible</button>
     <button class="btn-icon" id="btn-copy-visible-md-table" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(236,72,153,0.35);color:#f472b6;" title="Copy all currently visible/filtered OSINT tools as a Markdown table">Copy MD Table</button>
+    <button class="btn-icon" id="btn-copy-visible-tsv" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(103,232,249,0.35);color:#67e8f9;" title="Copy all currently visible/filtered OSINT tools as TSV for Excel or Google Sheets">Copy TSV</button>
     <button class="btn-icon" id="btn-copy-raw-urls" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(168,85,247,0.35);color:#c084fc;" title="Copy newline-separated raw URLs of all visible OSINT tools">Copy URLs</button>
     <button class="btn-icon" id="btn-copy-visible-domains" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(20,184,166,0.35);color:#2dd4bf;" title="Copy deduplicated sorted domain list of all visible OSINT tools">Copy Domains</button>
     <button class="btn-icon" id="btn-export-visible-csv" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(56,189,248,0.35);color:#38bdf8;" title="Export all currently visible/filtered OSINT tools as CSV">Export CSV</button>
@@ -2293,6 +2294,7 @@
           <span>📡 LIVE INTEL FEEDS</span>
           <div style="margin-left:auto;display:flex;gap:4px;">
             <button class="ge-refresh-btn" id="ge-copy-feeds-md" title="Copy visible Australian live intel feed items as Markdown">📋 MD</button>
+            <button class="ge-refresh-btn" id="ge-copy-feeds-urls" title="Copy visible Australian live intel feed URLs to clipboard">📋 URLs</button>
             <button class="ge-refresh-btn" id="ge-export-feeds-csv" title="Download visible Australian live intel feed items as CSV">⬇ CSV</button>
             <button class="ge-refresh-btn" id="ge-export-feeds-json" title="Download visible Australian live intel feed items as JSON">⬇ JSON</button>
             <button class="ge-refresh-btn" id="ge-refresh-btn" title="Refresh all feeds">↻ Refresh</button>
@@ -2305,8 +2307,9 @@
           <button class="ge-feed-tab" data-feed="austlii">AusLII</button>
           <button class="ge-feed-tab" data-feed="all">All</button>
         </div>
-        <div style="padding: 4px 10px 6px;">
-          <input type="text" id="ge-feed-filter-input" placeholder="Filter live feed items by keyword or agency..." style="width:100%;background:rgba(15,23,42,0.75);border:1px solid rgba(56,189,248,0.25);border-radius:6px;color:#e2e8f0;font-size:0.74rem;padding:5px 9px;outline:none;" />
+        <div style="padding: 4px 10px 6px; display:flex; gap:6px; align-items:center;">
+          <input type="text" id="ge-feed-filter-input" placeholder="Filter live feed items by keyword or agency..." style="flex:1;background:rgba(15,23,42,0.75);border:1px solid rgba(56,189,248,0.25);border-radius:6px;color:#e2e8f0;font-size:0.74rem;padding:5px 9px;outline:none;" />
+          <button type="button" class="ge-refresh-btn" id="ge-clear-feed-filter" title="Clear live feed keyword filter" style="padding:4px 8px;">✕ Clear</button>
         </div>
         <div class="ge-feeds-list" id="ge-feeds-list">
           <div class="ge-feeds-loading">
