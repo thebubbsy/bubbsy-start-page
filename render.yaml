@@ -4,3 +4,7 @@ services:
     runtime: python
     buildCommand: ""
     startCommand: python server.py
+    envVars:
+      # Optional: enables "Sign in with Google" (see README → Accounts configuration).
+      - key: GOOGLE_CLIENT_ID
+        sync: false

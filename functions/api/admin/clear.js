@@ -1,27 +1,16 @@
-function verifyAdminAuth(request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader && authHeader.startsWith("Basic ")) {
-    try {
-      const decoded = atob(authHeader.substring(6));
-      const [user, pass] = decoded.split(":");
-      if (user === "user" && pass === "hacker") return true;
-    } catch (e) {}
-  }
-  return false;
-}
+/**
+ * POST /api/admin/clear: delete all click analytics. Site owner only (ADMIN_PASSWORD secret).
+ */
+import { requireAdmin } from "../../../lib/cf-accounts.js";
 
 export async function onRequestPost(context) {
   const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
+    "Cache-Control": "no-store",
   };
 
-  if (!verifyAdminAuth(context.request)) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401,
-      headers: corsHeaders,
-    });
-  }
+  const denied = await requireAdmin(context.request, context.env || {});
+  if (denied) return denied;
 
   try {
     if (context.env && context.env.DB) {

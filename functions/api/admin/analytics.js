@@ -1,54 +1,17 @@
-function verifyAdminAuth(request) {
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader && authHeader.startsWith("Basic ")) {
-    try {
-      const decoded = atob(authHeader.substring(6));
-      const [user, pass] = decoded.split(":");
-      if (user === "user" && pass === "hacker") {
-        return true;
-      }
-    } catch (e) {
-      // Invalid base64
-    }
-  }
-
-  // Fallback to query params
-  const url = new URL(request.url);
-  const u = url.searchParams.get("u");
-  const p = url.searchParams.get("p");
-  if (u === "user" && p === "hacker") {
-    return true;
-  }
-
-  return false;
-}
-
-export async function onRequestOptions() {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
-  });
-}
+/**
+ * GET /api/admin/analytics: click analytics for the site owner.
+ * Access: the ADMIN_PASSWORD secret (see lib/cf-accounts.js). Off when the secret is unset.
+ */
+import { requireAdmin } from "../../../lib/cf-accounts.js";
 
 export async function onRequestGet(context) {
   const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
+    "Cache-Control": "no-store",
   };
 
-  if (!verifyAdminAuth(context.request)) {
-    return new Response(JSON.stringify({ error: "Unauthorized. Admin credentials required." }), {
-      status: 401,
-      headers: {
-        ...corsHeaders,
-        "WWW-Authenticate": 'Basic realm="Bubbsy Admin Area"',
-      },
-    });
-  }
+  const denied = await requireAdmin(context.request, context.env || {});
+  if (denied) return denied;
 
   try {
     let clicks = [];

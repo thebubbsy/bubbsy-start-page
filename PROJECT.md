@@ -26,7 +26,7 @@
   - Activity Chronolocation Timezone Estimator: 24-hour UTC histogram binning, circadian waking/sleep model, and Australian/international timezone mapping.
   - Persona Dossier Exporter: Formatted forensic Markdown report copied to clipboard and downloadable as `.md`.
   - Visual Investigation Link Graph (`#modal-graph`): HTML5 2D Canvas force-directed physics engine with kinetic energy auto-sleep (`totalKineticEnergy < 0.005`), radial constellation layout, and PNG exporter.
-  - Offline Threat Radar Cache: 250 authentic CVE threat advisories bundled in `data/radar_cache.js` (`window.BUBBSY_RADAR_DATA`) and `js/app.js` (`BUNDLED_OFFLINE_RADAR_ADVISORIES`).
+  - Synchronized Threat Radar Catalog: 250 authentic CVE threat advisories bundled in `data/radar_cache.js` (`window.BUBBSY_RADAR_DATA`) with automated continuous CISA KEV synchronization.
 
 ## Feature Inventory
 Every feature from the Survey phase and User Directives is mapped to an assigned milestone.

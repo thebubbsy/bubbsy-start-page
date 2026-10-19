@@ -57,6 +57,8 @@ AUS_EXTRA_WIDGETS = [
             _lk('NSW Fair Trading Public Register', 'https://www.onegov.nsw.gov.au/publicregister/', 'NSW trade licences, builders, electricians, motor dealers and disciplinary action', 'onegov.nsw.gov.au'),
             _lk('QBCC Licence Search (QLD)', 'https://www.qbcc.qld.gov.au/online-services/licence-search', 'Queensland building and construction licensees, defect history, and directions', 'qbcc.qld.gov.au'),
             _lk('VBA Practitioner Search (VIC)', 'https://www.vba.vic.gov.au/tools/practitioner-search', 'Victorian registered builders, plumbers, and disciplinary records', 'vba.vic.gov.au'),
+            _lk('WA Online Licence Search (DEMIRS)', 'https://ols.demirs.wa.gov.au/', 'Western Australian builders, plumbers, electricians and other occupational licensees', 'demirs.wa.gov.au'),
+            _lk('NT Licensing Public Register', 'https://licensingnt.nt.gov.au/PublicRegister/', 'Northern Territory occupational licence holders, including expired-within-12-months status', 'licensingnt.nt.gov.au'),
             _lk('Law Society of NSW - Find a Lawyer', 'https://www.lawsociety.com.au/for-the-public/find-a-lawyer', 'Practising NSW solicitors, firms, and practising certificate status', 'lawsociety.com.au'),
             _lk('Victorian Legal Services Board Register', 'https://lsbc.vic.gov.au/lawyer-search', 'Victorian lawyer register, conditions, and disciplinary history', 'lsbc.vic.gov.au'),
             _lk('Fair Work Ombudsman', 'https://www.fairwork.gov.au/', 'Australian workplace enforcement outcomes, court penalties, and awards', 'fairwork.gov.au'),

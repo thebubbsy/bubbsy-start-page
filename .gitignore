@@ -11,5 +11,9 @@ venv/
 .DS_Store
 Thumbs.db
 .wrangler/
-*.db
+node_modules/
 
+# Account store / local D1 files — never commit user data
+*.db
+*.db-wal
+*.db-shm

@@ -1,18 +1,704 @@
 /**
- * Bubbsy OSINT Command Hub - Bundled Offline Radar Advisories (250 items)
+ * Bubbsy Threat Radar - Live CVE & Threat Intelligence Cache
+ * Auto-synchronized: 2026-09-30T17:34:15.493234+00:00
+ * Latest CVE: CVE-2026-76504 (2026-09-30)
  */
 window.BUBBSY_RADAR_DATA = [
   {
+    "id": "CVE-2026-76504",
+    "title": "CVE-2026-76504 — Cisco Catalyst SD-WAN Manager Hex Encoding Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Cisco",
+    "product": "Catalyst SD-WAN Manager",
+    "date": "2026-09-30",
+    "ransomware": false,
+    "description": "Cisco Catalyst SD-WAN Manager contains a hex encoding vulnerability that could allow an unauthenticated, remote attacker to access an affected system with privileges of the admin user due to improper handling of URI encoding in an HTTP request.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76504"
+  },
+  {
+    "id": "CVE-2026-86950",
+    "title": "CVE-2026-86950 — Apple Multiple Products Out-of-Bounds Write Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Apple",
+    "product": "Multiple Products",
+    "date": "2026-09-29",
+    "ransomware": false,
+    "description": "Apple iOS, macOS, and iPadOS contain an out-of-bounds write vulnerability in CoreGraphics that may lead to arbitrary code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86950"
+  },
+  {
+    "id": "CVE-2026-88772",
+    "title": "CVE-2026-88772 — Citrix NetScaler Improper Restriction of Operations within the Bounds of a Memory Buffer Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Citrix",
+    "product": "NetScaler",
+    "date": "2026-09-27",
+    "ransomware": false,
+    "description": "Citrix NetScaler ADC and NetScaler Gateway contain an improper restriction of operations within the bounds of a memory buffer vulnerability that could allow for remote code execution or denial of service",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-88772"
+  },
+  {
+    "id": "CVE-2026-88771",
+    "title": "CVE-2026-88771 — Citrix NetScaler Improper Input Validation Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Citrix",
+    "product": "NetScaler",
+    "date": "2026-09-27",
+    "ransomware": false,
+    "description": "Citrix NetScaler ADC and NetScaler Gateway contain an improper input validation vulnerability that could allow an unauthenticated attacker to execute arbitrary commands.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-88771"
+  },
+  {
+    "id": "CVE-2026-67279",
+    "title": "CVE-2026-67279 — Mikrotik RouterOS Improper Enforcement of Behavioral Workflow Vulnerability",
+    "severity": "HIGH",
+    "vendor": "MikroTik",
+    "product": "RouterOS",
+    "date": "2026-09-25",
+    "ransomware": false,
+    "description": "Mikrotik RouterOS contains an improper enforcement of behavioral workflow vulnerability that could allow an unauthenticated client to open a session channel and send an exec request. This vulnerability can be chained to achieve unauthenticated exploitation of CVE-2026-86060.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-67279"
+  },
+  {
+    "id": "CVE-2026-65660",
+    "title": "CVE-2026-65660 — Microsoft SharePoint Code Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Microsoft",
+    "product": "SharePoint",
+    "date": "2026-09-25",
+    "ransomware": false,
+    "description": "Microsoft SharePoint contains a code injection vulnerability which could allow an authorized attacker to execute code over a network.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65660"
+  },
+  {
+    "id": "CVE-2026-87902",
+    "title": "CVE-2026-87902 — WordPress Core Remote File Inclusion Vulnerability",
+    "severity": "HIGH",
+    "vendor": "WordPress",
+    "product": "Core",
+    "date": "2026-09-25",
+    "ransomware": false,
+    "description": "WordPress Core contains a remote file inclusion vulnerability which could allow an unauthenticated attacker to make page-template resolution include a chosen readable local `.php` file outside the active theme directories, leading to remote code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-87902"
+  },
+  {
+    "id": "CVE-2026-5430",
+    "title": "CVE-2026-5430 — WSO2 Multiple Products Path Traversal Vulnerability ",
+    "severity": "HIGH",
+    "vendor": "WSO2",
+    "product": "Multiple Products",
+    "date": "2026-09-24",
+    "ransomware": false,
+    "description": "WSO2 API Control Plane, API Manager, Traffic Manager & Universal Gateway contain a path traversal vulnerability that could allow for unrestricted file upload and lead to remote code execution. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5430"
+  },
+  {
+    "id": "CVE-2026-71362",
+    "title": "CVE-2026-71362 — Adobe Commerce and Magento Incorrect Authorization Vulnerability ",
+    "severity": "HIGH",
+    "vendor": "Adobe",
+    "product": "Commerce and Magento ",
+    "date": "2026-09-24",
+    "ransomware": false,
+    "description": "Adobe Commerce and Magento contains an incorrect authorization vulnerability that could allow an attacker to leverage this vulnerability to gain elevated access to sensitive resources without any user interaction. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-71362"
+  },
+  {
+    "id": "CVE-2026-93952",
+    "title": "CVE-2026-93952 — Arista VeloCloud Orchestrator Improper Input Validation Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Arista",
+    "product": "VeloCloud Orchestrator",
+    "date": "2026-09-22",
+    "ransomware": false,
+    "description": "Arista VeloCloud Orchestrator (VCO) on-prem contains an improper input validation vulnerability that may allow a remote attacker to access privileged internal functionality and impact the VCO host. Successful exploitation may compromise the confidentiality, integrity, and availability of the orchestrator and data managed by the orchestrator.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93952"
+  },
+  {
+    "id": "CVE-2026-94127",
+    "title": "CVE-2026-94127 — F5 BIG-IP APM Heap-based Buffer Overflow Vulnerability",
+    "severity": "HIGH",
+    "vendor": "F5",
+    "product": "BIG-IP APM",
+    "date": "2026-09-22",
+    "ransomware": false,
+    "description": "F5 BIG-IP APM contains a heap-based buffer overflow vulnerability when access policy and an OAuth profile are configured on a virtual server. This vulnerability could allow an unauthenticated attacker to perform remote code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-94127"
+  },
+  {
+    "id": "CVE-2026-93616",
+    "title": "CVE-2026-93616 — Check Point Multiple Products Path Traversal Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Check Point",
+    "product": "Multiple Products",
+    "date": "2026-09-22",
+    "ransomware": false,
+    "description": "Check Point Security Management Server, Multi-Domain Security Management Server, Log Server, Multi-Domain Log Server, and SmartEvent contain a path traversal vulnerability that allows an unauthenticated attacker to upload and execute arbitrary scripts.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-93616"
+  },
+  {
+    "id": "CVE-2026-85102",
+    "title": "CVE-2026-85102 — Check Point Multiple Products Improper Certificate Validation Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Check Point",
+    "product": "Multiple Products",
+    "date": "2026-09-22",
+    "ransomware": false,
+    "description": "Check Point Security Gateway and Check Point Spark Firewall using Site to Site VPN or Remote Access VPN contain an improper certificate validation vulnerability which could allow an unauthenticated remote attacker to execute arbitrary code on the Gateway.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85102"
+  },
+  {
+    "id": "CVE-2026-7273",
+    "title": "CVE-2026-7273 — Zyxel GS1900 Series Switches Stack-Based Buffer Overflow Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Zyxel",
+    "product": "GS1900 Series Switches",
+    "date": "2026-09-21",
+    "ransomware": false,
+    "description": "Zyxel GS1900 series switches contain a stack-based buffer overflow vulnerability in the CGI program which could allow a LAN-based, unauthenticated attacker to exploit the flaw and potentially execute OS commands via a crafted HTTP request.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7273"
+  },
+  {
+    "id": "CVE-2025-39964",
+    "title": "CVE-2025-39964 — Linux Kernel Race Condition Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Linux",
+    "product": "Kernel",
+    "date": "2026-09-18",
+    "ransomware": false,
+    "description": "Linux Kernel contains a race condition vulnerability which allows concurrent writes to the same AF_ALG socket causing data to be unpredictably interleaved and creating inconsistencies in the socket's internal state.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-39964"
+  },
+  {
+    "id": "CVE-2026-53266",
+    "title": "CVE-2026-53266 — Linux Kernel Out-of-Bounds Write Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Linux",
+    "product": "Kernel",
+    "date": "2026-09-18",
+    "ransomware": false,
+    "description": "Linux Kernel contains an out-of-bounds write vulnerability in the ebtables SNAT target which allows an ARP sender hardware address rewrite to write directly into a nonlinear socket-buffer fragment backed by a splice-imported file page. The impacted product(s) could be end-of-life (EoL) and/or end-of-service (EoS). Users are advised to discontinue use and/or transition to a supported version.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-53266"
+  },
+  {
+    "id": "CVE-2025-39682",
+    "title": "CVE-2025-39682 — Linux Kernel Improper Check for Unusual or Exceptional Conditions Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Linux",
+    "product": "Kernel",
+    "date": "2026-09-18",
+    "ransomware": false,
+    "description": "Linux Kernel contains an improper check for unusual or exceptional conditions vulnerability in the TLS receive path which allows a zero-length record retrieved from the rx_list to bypass the intended recvmsg() record-type handling, potentially causing subsequent TLS records to be processed using incorrect zero-copy and queuing assumptions. The impacted product(s) could be end-of-life (EoL) and/or end-of-service (EoS). Users are advised to discontinue use and/or transition to a supported version.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-39682"
+  },
+  {
+    "id": "CVE-2026-58704",
+    "title": "CVE-2026-58704 — Google Pixel Improper Authorization Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Google",
+    "product": "Pixel",
+    "date": "2026-09-16",
+    "ransomware": false,
+    "description": "Google Pixel devices contain an improper authorization vulnerability in the cellular modem. A logic error may allow an attacker to bypass permission checks and escalate privileges.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-58704"
+  },
+  {
+    "id": "CVE-2026-76460",
+    "title": "CVE-2026-76460 — Cisco Identity Services Engine Incorrect Use of Privileged APIs Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Cisco",
+    "product": "Identity Services Engine",
+    "date": "2026-09-16",
+    "ransomware": false,
+    "description": "Cisco Identity Services Engine (ISE) and Cisco ISE Passive Identity Connector (ISE-PIC) contain an incorrect use of privileged APIs vulnerability that could allow an unauthenticated, remote attacker to gain unauthorized access to the affected device by bypassing the web-based management interface.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76460"
+  },
+  {
+    "id": "CVE-2026-87886",
+    "title": "CVE-2026-87886 — Acronis Backup Incorrect Default Permissions Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Acronis",
+    "product": "Backup",
+    "date": "2026-09-16",
+    "ransomware": false,
+    "description": "Acronis Backup plugin for cPanel & WHM and extension for Plesk contains an incorrect default permissions vulnerability that could allow for privilege escalation.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-87886"
+  },
+  {
+    "id": "CVE-2026-76461",
+    "title": "CVE-2026-76461 — Cisco Secure Email Gateway SQL Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Cisco",
+    "product": "Secure Email Gateway",
+    "date": "2026-09-14",
+    "ransomware": false,
+    "description": "Cisco AsyncOS software for Cisco Secure Email Gateway (SEG) contains a SQL injection vulnerability that could allow an unauthenticated, remote attacker to execute arbitrary commands with root privileges on the underlying operating system.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-76461"
+  },
+  {
+    "id": "CVE-2026-84869",
+    "title": "CVE-2026-84869 — ConnectWise ScreenConnect Improper Privilege Management and Missing Authorization Vulnerability",
+    "severity": "HIGH",
+    "vendor": "ConnectWise",
+    "product": "ScreenConnect",
+    "date": "2026-09-11",
+    "ransomware": false,
+    "description": "ConnectWise ScreenConnect contains both an improper privilege management and missing authorization vulnerability that may allow an attacker to transfer and execute files through an active remote session without authorization or host confirmation.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-84869"
+  },
+  {
+    "id": "CVE-2026-42016",
+    "title": "CVE-2026-42016 — JFrog Artifactory Incorrect Authorization Vulnerability",
+    "severity": "HIGH",
+    "vendor": "JFrog",
+    "product": "Artifactory",
+    "date": "2026-09-11",
+    "ransomware": false,
+    "description": "JFrog Artifactory contains an incorrect authorization vulnerability that leads to a privilege escalation attack due to a validation check of the token signature/issuer and not the token’s scope.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42016"
+  },
+  {
+    "id": "CVE-2026-42018",
+    "title": "CVE-2026-42018 — JFrog Artifactory Improper Authentication Vulnerability",
+    "severity": "HIGH",
+    "vendor": "JFrog",
+    "product": "Artifactory",
+    "date": "2026-09-11",
+    "ransomware": false,
+    "description": "JFrog Artifactory contains an improper authentication vulnerability that could return an internal anonymous-user token to an unauthenticated caller when anonymous access is disabled, potentially exposing sensitive resources.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42018"
+  },
+  {
+    "id": "CVE-2026-85706",
+    "title": "CVE-2026-85706 — GitLab Community Edition and Enterprise Edition Path Traversal Vulnerability",
+    "severity": "HIGH",
+    "vendor": "GitLab",
+    "product": "Community Edition and Enterprise Edition",
+    "date": "2026-09-11",
+    "ransomware": false,
+    "description": "GitLab Community Edition and Enterprise Edition contains a path traversal vulnerability that allows an unauthenticated user to read arbitrary files due to an improper path confinement and missing authentication enforcement in the repository commits API.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85706"
+  },
+  {
+    "id": "CVE-2026-86060",
+    "title": "CVE-2026-86060 — MikroTik RouterOS Improper Neutralization of Argument Delimiters in a Command Vulnerability",
+    "severity": "HIGH",
+    "vendor": "MikroTik",
+    "product": "RouterOS",
+    "date": "2026-09-10",
+    "ransomware": false,
+    "description": "MikroTik RouterOS contains an improper neutralization of argument delimiters in a command vulnerability which allows an attacker to change the trusted RouterOS policy mask, leading to privilege escalation.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86060"
+  },
+  {
+    "id": "CVE-2026-67277",
+    "title": "CVE-2026-67277 — MikroTik RouterOS Missing Authentication for Critical Function Vulnerability",
+    "severity": "HIGH",
+    "vendor": "MikroTik",
+    "product": "RouterOS",
+    "date": "2026-09-10",
+    "ransomware": false,
+    "description": "MikroTik RouterOS contains a missing authentication for critical function vulnerability which allows kernel memory disclosure and denial of service in the btest service.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-67277"
+  },
+  {
+    "id": "CVE-2026-19490",
+    "title": "CVE-2026-19490 — Citrix NetScaler Authentication Bypass Using an Alternate Path or Channel Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Citrix",
+    "product": "NetScaler",
+    "date": "2026-09-09",
+    "ransomware": false,
+    "description": "Citrix NetScaler ADC and NetScaler Gateway contain an authentication-bypass vulnerability involving an alternate path or channel. When the NetScaler appliance is configured as an AAA virtual server or as a Gateway (SSL VPN, ICA Proxy, CVPN, or RDP Proxy), an unauthenticated remote threat actor may be able to bypass authentication.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-19490"
+  },
+  {
+    "id": "CVE-2025-25249",
+    "title": "CVE-2025-25249 — Fortinet Multiple Products Heap-based Buffer Overflow Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Fortinet",
+    "product": "Multiple Products",
+    "date": "2026-09-09",
+    "ransomware": false,
+    "description": "Fortinet FortiOS, FortiSwitchManager, and FortiSASE contain a heap-based buffer overflow vulnerability that allows an attacker to execute unauthorized code or commands via specially crafted packets.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-25249"
+  },
+  {
+    "id": "CVE-2026-87491",
+    "title": "CVE-2026-87491 — Google Chromium V8 Out of Bounds Write Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Google",
+    "product": "Chromium V8",
+    "date": "2026-09-09",
+    "ransomware": false,
+    "description": "Google Chromium V8 contains an out of bounds write vulnerability that allows a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-87491"
+  },
+  {
+    "id": "CVE-2026-20079",
+    "title": "CVE-2026-20079 — Cisco Firewall Management Center Authentication Bypass Using an Alternate Path or Channel Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Cisco",
+    "product": "Secure Firewall Management Center (FMC) and Security Cloud Control (SCC) Firewall Management",
+    "date": "2026-09-09",
+    "ransomware": false,
+    "description": "Cisco Secure Firewall Management Center (FMC) Software and Cisco Security Cloud Control (SCC) Firewall Management contain an authentication Bypass using an alternate path or channel vulnerability that could allow an unauthenticated, remote attacker to bypass authentication and execute script files on an affected device to obtain root access to the underlying operating system.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20079"
+  },
+  {
+    "id": "CVE-2026-75650",
+    "title": "CVE-2026-75650 — Adobe Commerce and Magento Improper Neutralization of Special Elements Used in a Template Engine Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Adobe",
+    "product": "Commerce and Magento",
+    "date": "2026-09-08",
+    "ransomware": false,
+    "description": "Adobe Commerce and Magento Open Source contain an improper neutralization of special elements used in a template engine vulnerability that could allow an attacker to execute arbitrary code.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-75650"
+  },
+  {
+    "id": "CVE-2026-81963",
+    "title": "CVE-2026-81963 — Microsoft Windows Link Following Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Microsoft",
+    "product": "Windows",
+    "date": "2026-09-08",
+    "ransomware": false,
+    "description": "Microsoft Windows Update Stack contains a link following vulnerability that allows a local attacker to escalate privileges locally up to SYSTEM.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-81963"
+  },
+  {
+    "id": "CVE-2026-86218",
+    "title": "CVE-2026-86218 — N-able N-central Static Code Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "N-able",
+    "product": "N-central",
+    "date": "2026-09-08",
+    "ransomware": false,
+    "description": "N-able N-central contains a static code injection vulnerability that could allow for pre-authentication remote code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86218"
+  },
+  {
+    "id": "CVE-2026-85880",
+    "title": "CVE-2026-85880 — Microsoft Windows Heap-Based Buffer Overflow Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Microsoft",
+    "product": "Windows",
+    "date": "2026-09-08",
+    "ransomware": false,
+    "description": "Microsoft Windows Advanced Local Procedure Call contains a heap-based buffer overflow vulnerability that allows an attacker to elevate privileges locally.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85880"
+  },
+  {
+    "id": "CVE-2026-85046",
+    "title": "CVE-2026-85046 — Google Chromium V8 Type Confusion Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Google",
+    "product": "Chromium V8",
+    "date": "2026-09-04",
+    "ransomware": false,
+    "description": "Google Chromium V8 contains a type confusion vulnerability that allows a remote attacker to execute arbitrary code inside the sandbox via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-85046"
+  },
+  {
+    "id": "CVE-2026-59822",
+    "title": "CVE-2026-59822 — BerriAI LiteLLM Improper Authentication Vulnerability",
+    "severity": "HIGH",
+    "vendor": "BerriAI",
+    "product": "LiteLLM",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "BerriAI LiteLLM contains an improper authentication vulnerability in the MCP Streamable HTTP endpoint that could allow an unauthenticated attacker to establish an authenticated MCP session using an arbitrary Bearer token.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59822"
+  },
+  {
+    "id": "CVE-2026-48710",
+    "title": "CVE-2026-48710 — Kludex Starlette HTTP Request/Response Smuggling Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Kludex",
+    "product": "Starlette",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "Kludex Starlette contains a HTTP request/response smuggling vulnerability that could allow attackers to inject paths into the host part, prepending the actual path leading to issues such as authentication bypass when the authentication depends on the reconstructed URL’s path. This vulnerability could be chaned with CVE-2026-42271.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48710"
+  },
+  {
+    "id": "CVE-2026-49869",
+    "title": "CVE-2026-49869 — Kestra OSS OS Command Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Kestra",
+    "product": "Kestra OSS",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "Kestra OSS contains an OS command injection vulnerability that could allow an unauthenticated remote attacker to create and execute arbitrary workflows without credentials.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-49869"
+  },
+  {
+    "id": "CVE-2026-82329",
+    "title": "CVE-2026-82329 — JFrog Artifactory Improper Authentication Vulnerability",
+    "severity": "HIGH",
+    "vendor": "JFrog",
+    "product": "Artifactory",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "JFrog Artifactory contains an improper authentication vulnerability that under default configuration can allow an unauthenticated attacker with network access to obtain administrative privileges. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82329"
+  },
+  {
+    "id": "CVE-2026-9586",
+    "title": "CVE-2026-9586 — Sangoma Switchvox SQL Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Sangoma",
+    "product": "Switchvox",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "Sangoma Switchvox contains a SQL injection vulnerability which allows an unauthenticated remote attacker to execute arbitrary SQL statements against the backend PostgreSQL database using a single crafted request, including database operations and remote code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9586"
+  },
+  {
+    "id": "CVE-2026-83548",
+    "title": "CVE-2026-83548 — SonicWall SMA1000 Appliances Server-Side Request Forgery Vulnerability",
+    "severity": "HIGH",
+    "vendor": "SonicWall",
+    "product": "SMA1000 Appliances",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "SonicWall SMA1000 Appliances contains a server-side request forgery vulnerability that could allow a remote unauthenticated attacker to gain unauthorized access to sensitive functionality and perform unauthorized operations.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83548"
+  },
+  {
+    "id": "CVE-2026-83549",
+    "title": "CVE-2026-83549 — SonicWall SMA1000 Appliances OS Command Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "SonicWall",
+    "product": "SMA1000 Appliances",
+    "date": "2026-09-02",
+    "ransomware": false,
+    "description": "SonicWall SMA1000 Appliances contains an OS command injection vulnerability that could enable a remote authenticated attacker as administrator to execute arbitrary OS commands, resulting in remote code execution.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-83549"
+  },
+  {
+    "id": "CVE-2026-82078",
+    "title": "CVE-2026-82078 — PaperCut NG/MF Unsafe Reflection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "PaperCut",
+    "product": "NG/MF",
+    "date": "2026-08-31",
+    "ransomware": false,
+    "description": "PaperCut NG/MF contains an unsafe reflection vulnerability that allows an attacker to manipulate system configuration parameters and execute arbitrary Java bytecode residing on the application classpath under the security context of the PaperCut server process. This vulnerability can be chained with CVE-2026-81578.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-82078"
+  },
+  {
+    "id": "CVE-2026-81578",
+    "title": "CVE-2026-81578 — PaperCut NG/MF Missing Authentication for Critical Function Vulnerability",
+    "severity": "HIGH",
+    "vendor": "PaperCut",
+    "product": "NG/MF",
+    "date": "2026-08-31",
+    "ransomware": false,
+    "description": "PaperCut NG/MF contains a missing authentication for critical function vulnerability which allows an unauthenticated remote attacker to modify certain system configurations. This vulnerability can be chained with CVE-2026-82078.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-81578"
+  },
+  {
+    "id": "CVE-2023-49105",
+    "title": "CVE-2023-49105 — ownCloud Improper Authentication Vulnerability",
+    "severity": "HIGH",
+    "vendor": "ownCloud",
+    "product": "ownCloud",
+    "date": "2026-08-27",
+    "ransomware": false,
+    "description": "ownCloud contains an improper authentication vulnerability that allows an attacker to access, modify, or delete any file without authentication if the username of a victim is known, and the victim has no signing-key configured.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-49105"
+  },
+  {
+    "id": "CVE-2026-53362",
+    "title": "CVE-2026-53362 — Linux Kernel Unspecified Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Linux",
+    "product": "Kernel",
+    "date": "2026-08-27",
+    "ransomware": false,
+    "description": "Linux Kernel contains an unspecified vulnerability that can allow for privilege escalation via IPv6 networking subsystem. This vulnerability can impact multiple products, including but not limited to Suse, Red Hat, and other products using Linux. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-53362"
+  },
+  {
+    "id": "CVE-2026-66384",
+    "title": "CVE-2026-66384 — JFrog Artifactory Improper Limitation of a Pathname to a Restricted Directory Vulnerability",
+    "severity": "HIGH",
+    "vendor": "JFrog",
+    "product": "Artifactory",
+    "date": "2026-08-27",
+    "ransomware": false,
+    "description": "JFrog Artifactory contains an improper limitation of a pathname to a restricted directory vulnerability. This can allow an authenticated user to write data outside the intended Docker cache path under specific remote-repository conditions.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-66384"
+  },
+  {
+    "id": "CVE-2021-23758",
+    "title": "CVE-2021-23758 — Ajax.NET Professional Deserialization of Untrusted Data Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Ajax.NET Professional",
+    "product": "Ajax.NET Professional",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Ajax.NET Professional (AjaxPro) contains a deserialization of untrusted data vulnerability that could allow for remote code execution via arbitrary .NET classes. The impacted product(s) could be end-of-life (EoL) and/or end-of-service (EoS). Users are advised to discontinue use and/or transition to a supported version.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-23758"
+  },
+  {
+    "id": "CVE-2015-3246",
+    "title": "CVE-2015-3246 — Red Hat Libuser Race Condition Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Red Hat",
+    "product": "Libuser",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Red Hat libuser contains a race condition vulnerability that allows authenticated local users to corrupt the /etc/passwd file to cause a denial of service or privilege escalation. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2015-3246"
+  },
+  {
+    "id": "CVE-2015-5287",
+    "title": "CVE-2015-5287 — Red Hat Automatic Bug Reporting Tool Privilege Escalation Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Red Hat",
+    "product": "Automatic Bug Reporting Tool",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Red Hat Automatic Bug Reporting Tool (ABRT) contains a privilege escalation vulnerability that could allow local users with certain permissions to gain privileges via a symlink attack on a file with a predictable name. The impacted product(s) could be end-of-life (EoL) and/or end-of-service (EoS). Users are advised to discontinue use and/or transition to a supported version.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2015-5287"
+  },
+  {
+    "id": "CVE-2022-0995",
+    "title": "CVE-2022-0995 — Linux Kernel Out-of-Bounds Write Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Linux",
+    "product": "Kernel",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Linux Kernel contains an out-of-bounds memory write vulnerability which could allow a local user to gain privileged access or cause a denial of service on the system.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0995"
+  },
+  {
+    "id": "CVE-2026-8452",
+    "title": "CVE-2026-8452 — Citrix NetScaler ADC and NetScaler Gateway Improper Restriction of Operations within the Bounds of a Memory Buffer Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Citrix",
+    "product": "NetScaler ADC and NetScaler Gateway",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Citrix NetScaler ADC and NetScaler Gateway contain an improper restriction of operations within the bounds of a memory buffer vulnerability which could lead to denial of service. ",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8452"
+  },
+  {
+    "id": "CVE-2019-1068",
+    "title": "CVE-2019-1068 — Microsoft SQL Server Remote Code Execution Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Microsoft",
+    "product": "SQL Server",
+    "date": "2026-08-26",
+    "ransomware": false,
+    "description": "Microsoft SQL Server contains a remote code execution vulnerability that could allow an attacker to execute code in the context of the SQL Server Database Engine service account.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-1068"
+  },
+  {
+    "id": "CVE-2026-60004",
+    "title": "CVE-2026-60004 — Gitea Code Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Gitea",
+    "product": "Gitea",
+    "date": "2026-08-25",
+    "ransomware": false,
+    "description": "Gitea contains a code injection vulnerability that allows an attacker with repository write access to send a malicious patch to the diffpatch API endpoint to plant an executable Git hook and run shell commands as the Gitea service account.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-60004"
+  },
+  {
+    "id": "CVE-2026-21962",
+    "title": "CVE-2026-21962 — Oracle HTTP Server and Oracle Weblogic Server Proxy Plug-in Improper Access Control Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Oracle",
+    "product": "HTTP Server and Oracle Weblogic Server Proxy Plug-in",
+    "date": "2026-08-24",
+    "ransomware": false,
+    "description": "Oracle HTTP Server and Oracle Weblogic Server Proxy Plug-in contain an improper access control vulnerability that can result in unauthorized creation, deletion or modification access to critical data as well as unauthorized access to critical data or complete access to all Oracle HTTP Server and Oracle Weblogic Server Proxy Plug-in accessible data.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21962"
+  },
+  {
+    "id": "CVE-2026-73570",
+    "title": "CVE-2026-73570 — Zimbra Collaboration Suite (ZCS) OS Command Injection Vulnerability",
+    "severity": "HIGH",
+    "vendor": "Synacor",
+    "product": "Zimbra Collaboration Suite (ZCS)",
+    "date": "2026-08-21",
+    "ransomware": false,
+    "description": "Zimbra Collaboration Suite (ZCS) contains an OS command injection vulnerability which could allow an unauthenticated attacker to send specially crafted SMTP requests that may result in execution of arbitrary operating system commands as the Zimbra user.",
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-73570"
+  },
+  {
     "id": "CVE-2026-72530",
     "title": "CVE-2026-72530 — TrueConf Server Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "TrueConf",
     "product": "Server",
     "date": "2026-08-20",
     "ransomware": false,
     "description": "TrueConf Server contains a code injection vulnerability that could allow an unauthorized remote attacker with network access via port 4307/TCP to use a specially crafted script to break out of the isolated environment and execute arbitrary code on the host system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72530",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72530"
   },
   {
     "id": "CVE-2026-72529",
@@ -23,8 +709,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-20",
     "ransomware": false,
     "description": "TrueConf Server contains a missing authentication for critical function vulnerability which could allow a remote unauthorized attacker with network access via port 4307/TCP to execute an arbitrary script.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72529",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72529"
   },
   {
     "id": "CVE-2026-64849",
@@ -35,20 +721,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-19",
     "ransomware": false,
     "description": "MLflow contains a server-side request forgery vulnerability that can allow attackers to reach internal or cloud metadata services and receive response_status and response_body.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-64849",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-64849"
   },
   {
     "id": "CVE-2026-33824",
     "title": "CVE-2026-33824 — Microsoft Internet Key Exchange (IKE) Service Extensions Double Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Internet Key Exchange (IKE) Service Extensions",
     "date": "2026-08-18",
     "ransomware": false,
     "description": "Microsoft Internet Key Exchange (IKE) Service Extensions contains a double free vulnerability that could enable remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33824",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33824"
   },
   {
     "id": "CVE-2026-59310",
@@ -57,10 +743,10 @@ window.BUBBSY_RADAR_DATA = [
     "vendor": "Broadcom",
     "product": "VMware vCenter",
     "date": "2026-08-18",
-    "ransomware": false,
+    "ransomware": true,
     "description": "Broadcom VMware vCenter contains a path traversal vulnerability which could allow a threat actor with network access to vCenter to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59310",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59310"
   },
   {
     "id": "CVE-2026-55040",
@@ -71,8 +757,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-18",
     "ransomware": false,
     "description": "Microsoft SharePoint contains a weak authentication vulnerability which allows an unauthorized attacker to bypass a security feature over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55040",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55040"
   },
   {
     "id": "CVE-2026-65400",
@@ -83,20 +769,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-18",
     "ransomware": false,
     "description": "Apple macOS contains an improper authentication vulnerability that could allow an attacker on the network to authenticate to Screen Sharing without valid credentials.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65400",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-65400"
   },
   {
     "id": "CVE-2025-62593",
     "title": "CVE-2025-62593 — Ray-Project Ray Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ray-Project",
     "product": "Ray",
     "date": "2026-08-17",
     "ransomware": false,
     "description": "Ray-Project Ray contains a code injection vulnerability that could allow remote code execution. Developers using Ray as a development tool may be exposed to this vulnerability exploitable through Firefox and Safari.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62593",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62593"
   },
   {
     "id": "CVE-2026-20349",
@@ -107,44 +793,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-11",
     "ransomware": false,
     "description": "Cisco Secure Firewall Adaptive Security Appliance (ASA) and Secure Firewall Threat Defense (FTD) contain a heap inspection vulnerability that could allow an unauthenticated, remote attacker to cause the device to reload unexpectedly, resulting in a denial of service (DoS) condition.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20349",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20349"
   },
   {
     "id": "CVE-2026-68820",
     "title": "CVE-2026-68820 — Microsoft Windows Ancillary Function Driver for WinSock Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Windows Ancillary Function Driver for WinSock ",
     "date": "2026-08-11",
     "ransomware": false,
     "description": "Microsoft Windows Ancillary Function Driver for WinSock contains a use-after-free vulnerability that allows an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-68820",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-68820"
   },
   {
     "id": "CVE-2026-72898",
     "title": "CVE-2026-72898 — Metabase SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Metabase",
     "product": "Metabase",
     "date": "2026-08-11",
     "ransomware": false,
     "description": "Metabase contains a SQL Injection vulnerability that allows an unauthenticated remote attacker to inject arbitrary SQL into the Metabase application database, which can give them administrator access to the instance. From there, the attacker could change the application configuration, steal stored credentials for the connected databases, read any data accessible through those connections, and export data.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72898",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-72898"
   },
   {
     "id": "CVE-2026-8037",
     "title": "CVE-2026-8037 — Progress LoadMaster Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Progress",
     "product": "LoadMaster",
     "date": "2026-08-07",
     "ransomware": false,
     "description": "Progress LoadMaster contains a command injection vulnerability that allows an un-authenticated attacker to execute arbitrary commands on the LoadMaster appliance by exploiting unsanitized input in multiple command endpoints.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8037",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8037"
   },
   {
     "id": "CVE-2026-63077",
@@ -153,22 +839,22 @@ window.BUBBSY_RADAR_DATA = [
     "vendor": "JetBrains",
     "product": "TeamCity",
     "date": "2026-08-05",
-    "ransomware": false,
+    "ransomware": true,
     "description": "JetBrains TeamCity contains a deserialization of untrusted data vulnerability that could allow unauthenticated remote code execution via the agent polling protocol.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63077",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63077"
   },
   {
     "id": "CVE-2026-18556",
     "title": "CVE-2026-18556 — N-able N-central Authentication Bypass Using an Alternate Path or Channel Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "N-able",
     "product": "N-central",
     "date": "2026-08-04",
     "ransomware": false,
     "description": "N-able N-central contains an authentication bypass using an alternate path or channel that allows for authentication bypass.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18556",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18556"
   },
   {
     "id": "CVE-2026-34486",
@@ -179,44 +865,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-08-04",
     "ransomware": false,
     "description": "Apache Tomcat contains a missing encryption of sensitive data vulnerability that allows the bypass of the EncryptInterceptor. This vulnerability can be chained with CVE‑2025‑24813.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34486",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34486"
   },
   {
     "id": "CVE-2026-9198",
     "title": "CVE-2026-9198 — IBM Langflow Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "IBM",
     "product": "Langflow",
     "date": "2026-08-04",
     "ransomware": false,
     "description": "Langflow contains a code injection vulnerability that allows unauthenticated attackers to achieve full remote code execution on default Langflow deployments.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9198",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9198"
   },
   {
     "id": "CVE-2026-18577",
     "title": "CVE-2026-18577 — N-able N-central Authentication Bypass Using an Alternate Path or Channel Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "N-able",
     "product": "N-central",
     "date": "2026-08-03",
     "ransomware": false,
     "description": "N-able N-central contains an authentication bypass using an alternate path or channel allows for authentication bypass and account takeover in N-central. This vulnerability is the result of an incomplete patch for CVE-2026-18556.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18577",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18577"
   },
   {
     "id": "CVE-2026-20316",
     "title": "CVE-2026-20316 — Cisco Secure Firewall Management Center Use of Hard-coded Password Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "Cisco",
     "product": "Secure Firewall Management Center (FMC)",
     "date": "2026-07-29",
-    "ransomware": false,
+    "ransomware": true,
     "description": "Cisco Secure Firewall Management Center (FMC) formerly known as Firepower Management Center contains a use of hard-coded password vulnerability that could allow an unauthenticated, remote attacker to log in to an affected device using a low-privileged account to access sensitive data within the impacted systems.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20316",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20316"
   },
   {
     "id": "CVE-2025-68686",
@@ -227,128 +913,128 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-27",
     "ransomware": false,
     "description": "Fortinet FortiOS contains an exposure of sensitive information to an unauthorized actor vulnerability. This may allow a remote unauthenticated attacker to bypass the patch developed for the symbolic link persistency mechanism observed in some post-exploit cases, via crafted HTTP requests. An attacker would need first to have compromised the product via another vulnerability, at filesystem level.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68686",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68686"
   },
   {
     "id": "CVE-2026-16812",
     "title": "CVE-2026-16812 — Arista VeloCloud Orchestrator On-Prem OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Arista",
     "product": "VeloCloud Orchestrator",
     "date": "2026-07-27",
     "ransomware": false,
     "description": "Arista VeloCloud Orchestrator On-Prem contains an OS command injection vulnerability that may allow a remote attacker to access privileged internal functionality and impact the VCO host. Successful exploitation may compromise the confidentiality, integrity, and availability of the orchestrator and data managed by the orchestrator.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16812",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16812"
   },
   {
     "id": "CVE-2026-16232",
     "title": "CVE-2026-16232 — Check Point SmartConsole Improper Authentication Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Check Point",
     "product": "SmartConsole",
     "date": "2026-07-22",
     "ransomware": false,
     "description": "Check Point SmartConsole contains an improper authentication vulnerability which could allow an unauthenticated remote attacker to obtain an application login token and use it to authenticate with full administrative privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16232",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-16232"
   },
   {
     "id": "CVE-2026-50522",
     "title": "CVE-2026-50522 — Microsoft SharePoint Deserialization of Untrusted Data Vulnerability ",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "SharePoint",
     "date": "2026-07-22",
     "ransomware": false,
     "description": "Microsoft SharePoint contains a deserialization of untrusted data vulnerability which could allow an unauthorized attacker to execute code over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50522",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50522"
   },
   {
     "id": "CVE-2026-60137",
     "title": "CVE-2026-60137 — WordPress Core SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "WordPress",
     "product": "Core",
     "date": "2026-07-21",
     "ransomware": false,
     "description": "WordPress Core contains a SQL injection vulnerability when a plugin or theme passes untrusted input to the parameter. This vulnerability can be chained with CVE-2026-63030 to allow an unauthenticated attacker to gain remote code execution on default WordPress installations.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-60137",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-60137"
   },
   {
     "id": "CVE-2026-63030",
     "title": "CVE-2026-63030 — WordPress Core Interpretation Conflict Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "WordPress",
     "product": "Core",
     "date": "2026-07-21",
     "ransomware": false,
     "description": "WordPress Core contains an interpretation conflict vulnerability that could allow an attacker to perform SQL Injection and achieve Remote Code Execution. This vulnerability can be chained with CVE-2026-60137.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63030",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-63030"
   },
   {
     "id": "CVE-2026-0770",
     "title": "CVE-2026-0770 — Langflow Inclusion of Functionality from Untrusted Control Sphere Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Langflow",
     "product": "Langflow",
     "date": "2026-07-21",
     "ransomware": false,
     "description": "Langflow contains an inclusion of functionality from untrusted control sphere vulnerability that allows remote attackers to execute arbitrary code on affected installations. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0770",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0770"
   },
   {
     "id": "CVE-2021-27137",
     "title": "CVE-2021-27137 — DD-WRT Stack-Based Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "DD-WRT",
     "product": "DD-WRT",
     "date": "2026-07-21",
     "ransomware": false,
     "description": "DD-WRT contains a stack-based buffer overflow vulnerability that could allow an unauthenticated attacker to overflow an internal buffer used by UPnP and trigger a code execution vulnerability.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-27137",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-27137"
   },
   {
     "id": "CVE-2026-58644",
     "title": "CVE-2026-58644 — Microsoft SharePoint Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "SharePoint",
     "date": "2026-07-16",
     "ransomware": false,
     "description": "Microsoft SharePoint contains a deserialization of untrusted data vulnerability that allows an unauthorized attacker to execute code over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-58644",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-58644"
   },
   {
     "id": "CVE-2026-25089",
     "title": "CVE-2026-25089 — Fortinet FortiSandbox OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Fortinet",
     "product": "FortiSandbox",
     "date": "2026-07-16",
     "ransomware": false,
     "description": "Fortinet FortiSandbox, FortiSandbox Cloud, and FortiSandbox PaaS contain an OS command injection vulnerability that allows an unauthenticated attacker to execute unauthorized commands via specifically crafted HTTP requests.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-25089",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-25089"
   },
   {
     "id": "CVE-2026-39808",
     "title": "CVE-2026-39808 — Fortinet FortiSandbox OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Fortinet",
     "product": "FortiSandbox",
     "date": "2026-07-16",
     "ransomware": false,
     "description": "Fortinet FortiSandbox contains an OS command injection vulnerability that could allow an unauthenticated attacker to execute unauthorized code or commands via crafted HTTP requests.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39808",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39808"
   },
   {
     "id": "CVE-2026-46817",
@@ -359,8 +1045,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-15",
     "ransomware": false,
     "description": "Oracle E-Business Suite contains an improper privilege management vulnerability that allows an unauthenticated attacker with network access via HTTP to compromise Oracle Payments. Successful attacks of this vulnerability can result in takeover of Oracle Payments.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46817",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46817"
   },
   {
     "id": "CVE-2023-4346",
@@ -371,8 +1057,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-15",
     "ransomware": false,
     "description": "KNX Association KNX Protocol Connection Authorization Option 1 contains an overly restrictive account lockout mechanism vulnerability that could allow an attacker to purge all devices without additional security options enabled and set a BCU key to lock the device. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4346",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4346"
   },
   {
     "id": "CVE-2026-56155",
@@ -383,8 +1069,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-14",
     "ransomware": false,
     "description": "Microsoft Active Directory Federation Services contains an insufficient granularity of access control vulnerability that allows an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56155",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56155"
   },
   {
     "id": "CVE-2026-56164",
@@ -395,20 +1081,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-14",
     "ransomware": false,
     "description": "Microsoft SharePoint contains a missing authentication for critical function vulnerability that allows an unauthorized attacker to elevate privileges over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56164",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56164"
   },
   {
     "id": "CVE-2026-15409",
     "title": "CVE-2026-15409 — SonicWall SMA1000 Appliances Server-Side Request Forgery Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "SonicWall",
     "product": "SMA1000 Appliances",
     "date": "2026-07-14",
     "ransomware": true,
     "description": "SonicWall SMA1000 Appliances contain a server-side request forgery vulnerability that could allow a remote unauthenticated attacker to potentially cause the appliance to make requests to unintended location.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15409",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15409"
   },
   {
     "id": "CVE-2026-15410",
@@ -419,8 +1105,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-14",
     "ransomware": true,
     "description": "SonicWall SMA1000 Appliances contain a code injection vulnerability which in specific conditions could potentially enable a remote authenticated attacker as administrator to execute arbitrary OS commands.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15410",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-15410"
   },
   {
     "id": "CVE-2008-4128",
@@ -431,8 +1117,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-13",
     "ransomware": false,
     "description": "Cisco IOS 12.4 contains multiple cross-site forgery vulnerabilities that allows remote attackers to execute arbitrary commands via (1) a certain \"show privilege\" command to the /level/15/exec/- URI, and (2) a certain \"alias exec\" command to the /level/15/exec/-/configure/http URI.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-4128",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-4128"
   },
   {
     "id": "CVE-2026-56291",
@@ -443,8 +1129,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-10",
     "ransomware": false,
     "description": "Balbooa Forms contains an unrestricted upload of file with dangerous type vulnerability that allows an unauthenticated arbitrary file upload which could allow uploading of executable files leading to full RCE.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56291",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56291"
   },
   {
     "id": "CVE-2026-48939",
@@ -455,8 +1141,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-10",
     "ransomware": false,
     "description": "iCagenda contains an unrestricted upload of file with dangerous type vulnerability that allows the upload of arbitrary files in the file attachment feature, ultimately resulting in PHP code upload and execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48939",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48939"
   },
   {
     "id": "CVE-2026-48908",
@@ -467,8 +1153,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-07",
     "ransomware": false,
     "description": "JoomShaper SP Page Builder contains an unrestricted upload of file with dangerous type vulnerability that allows unauthenticated users to upload arbitrary files, ultimately resulting in the upload and execution of PHP code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48908",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48908"
   },
   {
     "id": "CVE-2026-55255",
@@ -479,32 +1165,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-07",
     "ransomware": false,
     "description": "Langflow contains an authorization bypass through user-controlled key vulnerability which allows an authenticated attacker to execute any flow belonging to another user by specifying the victim's flow ID in the request.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55255",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-55255"
   },
   {
     "id": "CVE-2026-56290",
     "title": "CVE-2026-56290 — Joomlack Page Builder Improper Access Control Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Joomlack",
     "product": "Page Builder",
     "date": "2026-07-07",
     "ransomware": false,
     "description": "Joomlack Page Builder contains an improper access control vulnerability that could allow for remote code execution via unauthenticated arbitrary file upload.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56290",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-56290"
   },
   {
     "id": "CVE-2026-48282",
     "title": "CVE-2026-48282 — Adobe ColdFusion Path Traversal Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Adobe",
     "product": "ColdFusion",
     "date": "2026-07-07",
     "ransomware": false,
     "description": "Adobe ColdFusion contains a path traversal vulnerability that could lead to arbitrary code execution in the context of the current user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48282",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48282"
   },
   {
     "id": "CVE-2026-45659",
@@ -515,20 +1201,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-07-01",
     "ransomware": true,
     "description": "Microsoft SharePoint Server contains a deserialization of untrusted data vulnerability which allows an authorized attacker to execute code over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45659",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45659"
   },
   {
     "id": "CVE-2026-48558",
     "title": "CVE-2026-48558 — SimpleHelp Authentication Bypass Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "SimpleHelp ",
     "product": "SimpleHelp",
     "date": "2026-06-29",
     "ransomware": false,
     "description": "SimpleHelp contains an authentication bypass vulnerability in the OIDC authentication flow. When OIDC authentication is configured, identity tokens submitted during login are accepted without verifying their cryptographic signature. In a vulnerable configuration, a remote, unauthenticated attacker can submit a forged token containing arbitrary identity claims to obtain a fully authenticated technician session. In some configurations, this may also allow bypass of multi-factor authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48558",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48558"
   },
   {
     "id": "CVE-2026-12569",
@@ -539,8 +1225,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-25",
     "ransomware": true,
     "description": "PTC Windchill and FlexPLM contains an improper input validation vulnerability allowing an unauthenticated, remote attacker to execute arbitrary code by sending a malicious request to the network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12569",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12569"
   },
   {
     "id": "CVE-2026-20230",
@@ -551,32 +1237,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-25",
     "ransomware": false,
     "description": "Cisco Unified Communications Manager (Unified CM) and Cisco Unified Communications Manager Session Management Edition (Unified CM SME) contain a server-side request forgery (SSRF) Vulnerability that could allow an unauthenticated, remote attacker to write files to the underlying operating system that could be used later to elevate to root.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20230",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20230"
   },
   {
     "id": "CVE-2025-67038",
     "title": "CVE-2025-67038 — Lantronix EDS5000 Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Lantronix",
     "product": "EDS5000",
     "date": "2026-06-23",
     "ransomware": false,
     "description": "Lantronix EDS5000 contains a code injection vulnerability that could allow attackers to inject arbitrary OS commands into the username parameter. Injected commands are executed with root privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-67038",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-67038"
   },
   {
     "id": "CVE-2026-34910",
     "title": "CVE-2026-34910 — Ubiquiti UniFi OS Improper Input Validation Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ubiquiti",
     "product": "UniFi OS",
     "date": "2026-06-23",
     "ransomware": false,
     "description": "Ubiquiti UniFi OS contains an improper input validation vulnerability which could allow a malicious actor with access to the network to conduct command injection.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34910",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34910"
   },
   {
     "id": "CVE-2026-34909",
@@ -587,8 +1273,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-23",
     "ransomware": false,
     "description": "Ubiquiti UniFi OS contains a path traversal vulnerability which could allow a malicious actor with access to the network to access files on the underlying system that could be manipulated to access an underlying account.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34909",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34909"
   },
   {
     "id": "CVE-2026-34908",
@@ -599,8 +1285,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-23",
     "ransomware": false,
     "description": "Ubiquiti UniFi OS contains an improper access control vulnerability which could allow a malicious actor with access to the network to make unauthorized changes to the system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34908",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34908"
   },
   {
     "id": "CVE-2026-20253",
@@ -611,8 +1297,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-18",
     "ransomware": false,
     "description": "Splunk Enterprise contains a missing authentication for critical function vulnerability which could allow an unauthenticated user to create or truncate arbitrary files through a PostgreSQL sidecar service endpoint.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20253",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20253"
   },
   {
     "id": "CVE-2026-48907",
@@ -623,8 +1309,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-16",
     "ransomware": false,
     "description": "Widget Factory Joomla Content Editor contains an improper access control vulnerability which could allow for upload and execution of PHP code via the creation of new editor profiles for unauthenticated users. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48907",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48907"
   },
   {
     "id": "CVE-2026-54420",
@@ -635,8 +1321,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-15",
     "ransomware": false,
     "description": "LiteSpeed cPanel plugin contains a UNIX symbolic link (Symlink) following vulnerability that could allow a user with FTP or web shell access on a shared hosting server running CloudLinux/CageFS.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-54420",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-54420"
   },
   {
     "id": "CVE-2026-20262",
@@ -647,44 +1333,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-15",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Manager contains a directory or path traversal vulnerability that could allow an authenticated, remote attacker to create a file or overwrite any file on the filesystem of an affected system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20262",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20262"
   },
   {
     "id": "CVE-2026-35273",
     "title": "CVE-2026-35273 — Oracle PeopleSoft Enterprise PeopleTools Missing Authentication for Critical Function Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "Oracle",
     "product": " PeopleSoft Enterprise PeopleTools",
     "date": "2026-06-12",
     "ransomware": true,
     "description": "Oracle PeopleSoft Enterprise PeopleTools contains a missing authentication for critical function vulnerability which could allow an unauthenticated attacker to obtain takeover of PeopleSoft Enterprise PeopleTools.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35273",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35273"
   },
   {
     "id": "CVE-2026-10520",
     "title": "CVE-2026-10520 — Ivanti Sentry OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ivanti",
     "product": "Sentry",
     "date": "2026-06-11",
     "ransomware": false,
     "description": "Ivanti Sentry (formerly known as MobileIron Sentry) contains an OS command injection vulnerability which could allow a remote unauthenticated user to achieve root-level remote code execution. This vulnerability can be successfully exploited in cases where the Sentry appliance is in an unmanaged state with its endpoints externally reachable. The use of mTLS with EPMM or restricted HTTPS access through Neurons for MDM makes interfaces inaccessible to external actors.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10520",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10520"
   },
   {
     "id": "CVE-2026-11645",
     "title": "CVE-2026-11645 — Google Chromium V8 Out-of-Bounds Read and Write Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Google",
     "product": "Chromium V8",
     "date": "2026-06-09",
     "ransomware": false,
     "description": "Google Chromium V8 out-of-bounds read and write vulnerability that could allow a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11645",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11645"
   },
   {
     "id": "CVE-2026-7473",
@@ -695,8 +1381,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-09",
     "ransomware": false,
     "description": "Arista Extensible Operating System (EOS) contains an incomplete comparison with missing factors vulnerability when the switch incorrectly decapsulate and forwards other unexpected tunneled packet with a destination IP matching its configured decapsulation IP.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7473",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7473"
   },
   {
     "id": "CVE-2026-20245",
@@ -707,20 +1393,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-09",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Manager formerly SD-WAN vManage contains an improper encoding or escaping of output vulnerability. This vulnerability could allow an authenticated, local attacker to execute arbitrary commands as root by supplying a crafted file to the affected system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20245",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20245"
   },
   {
     "id": "CVE-2026-42271",
     "title": "CVE-2026-42271 — BerriAI LiteLLM Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "BerriAI",
     "product": "LiteLLM",
     "date": "2026-06-08",
     "ransomware": false,
     "description": "BerriAI LiteLLM contains a command injection vulnerability that could allow any authenticated user, including holders of low-privilege internal-user keys, to run arbitrary commands on the host.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42271",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42271"
   },
   {
     "id": "CVE-2026-50751",
@@ -731,8 +1417,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-08",
     "ransomware": true,
     "description": "Check Point Security Gateway contains an improper authentication vulnerability in IKEv1 key exchange that could allow an unauthenticated remote attacker to bypass user authentication and establish a remote access VPN connection without a valid user password.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50751",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50751"
   },
   {
     "id": "CVE-2026-28318",
@@ -743,44 +1429,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-05",
     "ransomware": false,
     "description": "SolarWinds Serv-U contains an uncontrolled resource consumption vulnerability that allows specially crafted POST requests using the Content-Encoding: deflate header to crash the Serv-U service without authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28318",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28318"
   },
   {
     "id": "CVE-2026-45247",
     "title": "CVE-2026-45247 — Mirasvit Full Page Cache Warmer Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Mirasvit",
     "product": "Mirasvit Full Page Cache Warmer",
     "date": "2026-06-03",
     "ransomware": false,
     "description": "Mirasvit Full Page Cache Warmer contains a deserialization of untrusted data vulnerability that could allow unauthenticated attackers to achieve remote code execution by supplying a crafted serialized PHP object in the CacheWarmer cookie.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45247",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45247"
   },
   {
     "id": "CVE-2022-0492",
     "title": "CVE-2022-0492 — Linux Kernel Improper Authentication Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Linux",
     "product": "Kernel",
     "date": "2026-06-02",
     "ransomware": false,
     "description": "Linux Kernel contains an improper authentication vulnerability which could allow for privilege escalation via the cgroups v1 release_agent feature.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0492",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-0492"
   },
   {
     "id": "CVE-2025-48595",
     "title": "CVE-2025-48595 — Android Framework Integer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Android",
     "product": "Framework",
     "date": "2026-06-02",
     "ransomware": false,
     "description": "Android Framework contains an integer overflow vulnerability that allows for code execution that could allow for local privilege escalation.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48595",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48595"
   },
   {
     "id": "CVE-2024-21182",
@@ -791,8 +1477,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-06-01",
     "ransomware": false,
     "description": "Oracle WebLogic contains an unspecified vulnerability that could allow an unauthenticated attacker with network access via T3, IIOP to compromise Oracle WebLogic Server. Successful attacks of this vulnerability can result in unauthorized access to critical data or complete access to all Oracle WebLogic Server accessible data.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21182",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21182"
   },
   {
     "id": "CVE-2026-0257",
@@ -803,32 +1489,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-29",
     "ransomware": true,
     "description": "Palo Alto Networks PAN-OS contains an authentication bypass vulnerability that allows attackers to bypass security restrictions and establish an unauthorized VPN connection.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0257",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0257"
   },
   {
     "id": "CVE-2026-48027",
     "title": "CVE-2026-48027 — Nx Console Embedded Malicious Code Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "Nx",
     "product": "Nx Console",
     "date": "2026-05-27",
     "ransomware": true,
     "description": "Nx Console contains an embedded malicious code vulnerability that allowed a malicious version of Nx Console to be published. The compromised extension fetched an obfuscated payload that could harvested credentials from multiple sources on disk and in memory.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48027",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48027"
   },
   {
     "id": "CVE-2026-45321",
     "title": "CVE-2026-45321 — TanStack Unspecified Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "TanStack",
     "product": "TanStack",
     "date": "2026-05-27",
     "ransomware": true,
     "description": "TanStack contains an unspecified vulnerability that allowed malicious versions of the product to be published to the npm registry to publish credential-stealing malware under a trusted identity.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45321",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45321"
   },
   {
     "id": "CVE-2026-8398",
@@ -839,44 +1525,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-27",
     "ransomware": false,
     "description": "Daemon Tools contains an unspecified vulnerability that has a high impact on confidentiality, integrity, and availability.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8398",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8398"
   },
   {
     "id": "CVE-2026-48172",
     "title": "CVE-2026-48172 — LiteSpeed cPanel Plugin Privilege Escalation Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "LiteSpeed",
     "product": "cPanel Plugin",
     "date": "2026-05-26",
     "ransomware": false,
     "description": "LiteSpeed cPanel Plugin contains privilege escalation vulnerability that is exposed via the user-end cPanel plugin, which can be abused by any cPanel user account to execute arbitrary scripts with root privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48172",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48172"
   },
   {
     "id": "CVE-2026-9082",
     "title": "CVE-2026-9082 — Drupal Core SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Drupal",
     "product": "Core",
     "date": "2026-05-22",
     "ransomware": false,
     "description": "Drupal Core contains a SQL injection vulnerability that could allow for privilege escalation and remote code execution via specially crafted requests sent with the database abstraction API.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9082",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9082"
   },
   {
     "id": "CVE-2025-34291",
     "title": "CVE-2025-34291 — Langflow Origin Validation Error Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Langflow",
     "product": "Langflow",
     "date": "2026-05-21",
     "ransomware": false,
     "description": "Langflow contains an origin validation error vulnerability in which an overly permissive CORS configuration combined with a refresh token cookie configured as SameSite=None allows a malicious webpage to perform cross-origin requests that include credentials and successfully call the refresh endpoint. This could allow the attacker to execute arbitrary code and achieve full system compromise via obtained tokens that permit access to authenticated endpoints.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-34291",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-34291"
   },
   {
     "id": "CVE-2026-34926",
@@ -887,68 +1573,68 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-21",
     "ransomware": false,
     "description": "Trend Micro Apex One (on-premise) contains a directory traversal vulnerability that could allow a pre-authenticated local attacker to modify a key table on the server to inject malicious code to deploy to agents on affected installations.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34926",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34926"
   },
   {
     "id": "CVE-2008-4250",
     "title": "CVE-2008-4250 — Microsoft Windows Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Windows",
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft Windows contains a buffer overflow vulnerability in the Windows Server Service that allows remote attackers to execute arbitrary code via a crafted RPC request that triggers an overflow during path canonicalization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-4250",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-4250"
   },
   {
     "id": "CVE-2009-1537",
     "title": "CVE-2009-1537 — Microsoft DirectX NULL Byte Overwrite Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "DirectX",
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft DirectX contains a NULL byte overwrite vulnerability in the QuickTime Movie Parser Filter in quartz.dll in DirectShow which could allow remote attackers to execute arbitrary code via a crafted QuickTime media file.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-1537",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-1537"
   },
   {
     "id": "CVE-2009-3459",
     "title": "CVE-2009-3459 — Adobe Acrobat and Reader Heap-Based Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Adobe",
     "product": "Acrobat and Reader",
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Adobe Acrobat and Reader contain a heap-based buffer overflow vulnerability which could allow remote attackers to execute arbitrary code via a crafted PDF file that triggers memory corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-3459",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-3459"
   },
   {
     "id": "CVE-2010-0249",
     "title": "CVE-2010-0249 — Microsoft Internet Explorer Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Internet Explorer",
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft Internet Explorer contains an use-after-free vulnerability that could allow remote attackers to execute arbitrary code by accessing a pointer associated with a deleted object. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-0249",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-0249"
   },
   {
     "id": "CVE-2010-0806",
     "title": "CVE-2010-0806 — Microsoft Internet Explorer Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Internet Explorer",
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft Internet Explorer contains an use-after-free vulnerability that could allow remote attackers to execute arbitrary code via vectors involving access to an invalid pointer after the deletion of an object. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-0806",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-0806"
   },
   {
     "id": "CVE-2026-41091",
@@ -959,8 +1645,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft Defender contains a link following vulnerability that allows an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41091",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41091"
   },
   {
     "id": "CVE-2026-45498",
@@ -971,8 +1657,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-20",
     "ransomware": false,
     "description": "Microsoft Defender contains an unspecified vulnerability that allows for denial of service.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45498",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45498"
   },
   {
     "id": "CVE-2026-42897",
@@ -983,68 +1669,68 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-05-15",
     "ransomware": false,
     "description": "Microsoft Exchange Server contains a cross-site scripting vulnerability during web page generation in Outlook Web Access and when certain interaction conditions are met, arbitrary JavaScript can be executed in the browser context.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42897",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42897"
   },
   {
     "id": "CVE-2026-20182",
     "title": "CVE-2026-20182 — Cisco Catalyst SD-WAN Controller Authentication Bypass Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Cisco",
     "product": "Catalyst SD-WAN",
     "date": "2026-05-14",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Controller & Manager contain an authentication bypass vulnerability that allows an unauthenticated, remote attacker to bypass authentication and obtain administrative privileges on an affected system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20182",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20182"
   },
   {
     "id": "CVE-2026-42208",
     "title": "CVE-2026-42208 — BerriAI LiteLLM SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "BerriAI",
     "product": "LiteLLM",
     "date": "2026-05-08",
     "ransomware": false,
     "description": "BerriAI LiteLLM contains a SQL injection vulnerability that allows an attacker to read data from the proxy's database and potentially modify it, leading to unauthorized access to the proxy and the credentials it manages.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42208",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42208"
   },
   {
     "id": "CVE-2026-6973",
     "title": "CVE-2026-6973 — Ivanti Endpoint Manager Mobile (EPMM) Improper Input Validation Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ivanti",
     "product": "Endpoint Manager Mobile (EPMM)",
     "date": "2026-05-07",
     "ransomware": false,
     "description": "Ivanti Endpoint Manager Mobile (EPMM) contains an improper input validation vulnerability that allows a remotely authenticated user with administrative access to achieve remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6973",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6973"
   },
   {
     "id": "CVE-2026-0300",
     "title": "CVE-2026-0300 — Palo Alto Networks PAN-OS Out-of-bounds Write Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Palo Alto Networks",
     "product": "PAN-OS",
     "date": "2026-05-06",
     "ransomware": false,
     "description": "Palo Alto Networks PAN-OS contains an out-of-bounds write vulnerability in the User-ID Authentication Portal (aka Captive Portal) service that can allow an unauthenticated attacker to execute arbitrary code with root privileges on the PA-Series and VM-Series firewalls by sending specially crafted packets.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0300",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0300"
   },
   {
     "id": "CVE-2026-31431",
     "title": "CVE-2026-31431 — Linux Kernel Incorrect Resource Transfer Between Spheres Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Linux",
     "product": "Kernel",
     "date": "2026-05-01",
     "ransomware": false,
     "description": "Linux Kernel contains an incorrect resource transfer between spheres vulnerability that could allow for privilege escalation.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-31431",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-31431"
   },
   {
     "id": "CVE-2026-41940",
@@ -1055,20 +1741,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-30",
     "ransomware": true,
     "description": "WebPros cPanel & WHM (WebHost Manager) and WP2 (WordPress Squared) contain an authentication bypass vulnerability in the login flow that allows unauthenticated remote attackers to gain unauthorized access to the control panel.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41940",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41940"
   },
   {
     "id": "CVE-2024-1708",
     "title": "CVE-2024-1708 — ConnectWise ScreenConnect Path Traversal Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "ConnectWise",
     "product": "ScreenConnect",
     "date": "2026-04-28",
     "ransomware": true,
     "description": "ConnectWise ScreenConnect contains a path traversal vulnerability which could allow an attacker to execute remote code or directly impact confidential data and critical systems.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-1708",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-1708"
   },
   {
     "id": "CVE-2026-32202",
@@ -1079,20 +1765,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-28",
     "ransomware": false,
     "description": "Microsoft Windows Shell contains a protection mechanism failure vulnerability that allows an unauthorized attacker to perform spoofing over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32202",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32202"
   },
   {
     "id": "CVE-2025-29635",
     "title": "CVE-2025-29635 — D-Link DIR-823X Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "D-Link",
     "product": "DIR-823X",
     "date": "2026-04-24",
     "ransomware": false,
     "description": "D-Link DIR-823X contains a command injection vulnerability that allows an authorized attacker to execute arbitrary commands on remote devices by sending a POST request to /goform/set_prohibiting via the corresponding function. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-29635",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-29635"
   },
   {
     "id": "CVE-2024-7399",
@@ -1103,8 +1789,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-24",
     "ransomware": false,
     "description": "Samsung MagicINFO 9 Server contains a path traversal vulnerability that could allow an attacker to write arbitrary files as system authority.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-7399",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-7399"
   },
   {
     "id": "CVE-2024-57728",
@@ -1115,44 +1801,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-24",
     "ransomware": true,
     "description": "SimpleHelp contains a path traversal vulnerability that allows admin users to upload arbitrary files anywhere on the file system by uploading a crafted zip file (i.e. zip slip). This can be exploited to execute arbitrary code on the host in the context of the SimpleHelp server user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-57728",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-57728"
   },
   {
     "id": "CVE-2024-57726",
     "title": "CVE-2024-57726 — SimpleHelp Missing Authorization Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "SimpleHelp ",
     "product": "SimpleHelp",
     "date": "2026-04-24",
     "ransomware": true,
     "description": "SimpleHelp contains a missing authorization vulnerability that could allow low-privileged technicians to create API keys with excessive permissions. These API keys can be used to escalate privileges to the server admin role.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-57726",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-57726"
   },
   {
     "id": "CVE-2026-39987",
     "title": "CVE-2026-39987 — Marimo Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Marimo",
     "product": "Marimo",
     "date": "2026-04-23",
     "ransomware": false,
     "description": "Marimo contains an pre-authorization remote code execution vulnerability, allowing an unauthenticated attacked to shell access and execute arbitrary system commands.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39987",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39987"
   },
   {
     "id": "CVE-2026-33825",
     "title": "CVE-2026-33825 — Microsoft Defender Insufficient Granularity of Access Control Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "Microsoft",
     "product": "Defender",
     "date": "2026-04-22",
     "ransomware": true,
     "description": "Microsoft Defender contains an insufficient granularity of access control vulnerability that could allow an authorized attacker to escalate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33825",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33825"
   },
   {
     "id": "CVE-2026-20122",
@@ -1163,8 +1849,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Manager contains an incorrect use of privileged APIs vulnerability due to improper file handling on the API interface of an affected system. An attacker could exploit this vulnerability by uploading a malicious file on the local file system. A successful exploit could allow the attacker to overwrite arbitrary files on the affected system and gain vmanage user privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20122",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20122"
   },
   {
     "id": "CVE-2026-20133",
@@ -1175,8 +1861,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Manager contains an exposure of sensitive information to an unauthorized actor vulnerability that could allow remote attackers to view sensitive information on affected systems.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20133",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20133"
   },
   {
     "id": "CVE-2025-2749",
@@ -1187,20 +1873,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Kentico Xperience contains a path traversal vulnerability that could allow an authenticated user's Staging Sync Server to upload arbitrary data to path relative locations.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2749",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2749"
   },
   {
     "id": "CVE-2023-27351",
     "title": "CVE-2023-27351 — PaperCut NG/MF Improper Authentication Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "PaperCut",
     "product": "NG/MF",
     "date": "2026-04-20",
     "ransomware": true,
     "description": "PaperCut NG/MF contains an improper authentication vulnerability that could allow remote attackers to bypass authentication on affected installations via the SecurityRequestFilter class.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-27351",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-27351"
   },
   {
     "id": "CVE-2025-48700",
@@ -1211,8 +1897,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Synacor Zimbra Collaboration Suite (ZCS) contains a cross-site scripting vulnerability that could allow attackers to execute arbitrary JavaScript within the user's session, potentially leading to unauthorized access to sensitive information.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48700",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48700"
   },
   {
     "id": "CVE-2026-20128",
@@ -1223,8 +1909,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Manager contains a storing passwords in a recoverable format vulnerability that allows an authenticated, local attacker to gain DCA user privileges by accessing a credential file for the DCA user on the filesystem as a low-privileged user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20128",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20128"
   },
   {
     "id": "CVE-2025-32975",
@@ -1235,44 +1921,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-20",
     "ransomware": false,
     "description": "Quest KACE Systems Management Appliance (SMA) contains an improper authentication vulnerability that could allow attackers to impersonate legitimate users without valid credentials.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-32975",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-32975"
   },
   {
     "id": "CVE-2024-27199",
     "title": "CVE-2024-27199 — JetBrains TeamCity Relative Path Traversal Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "JetBrains",
     "product": "TeamCity",
     "date": "2026-04-20",
     "ransomware": true,
     "description": "JetBrains TeamCity contains a relative path traversal vulnerability that could allow limited admin actions to be performed.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-27199",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-27199"
   },
   {
     "id": "CVE-2026-34197",
     "title": "CVE-2026-34197 — Apache ActiveMQ Improper Input Validation Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apache",
     "product": "ActiveMQ",
     "date": "2026-04-16",
     "ransomware": false,
     "description": "Apache ActiveMQ contains an improper input validation vulnerability that allows for code injection.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34197",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34197"
   },
   {
     "id": "CVE-2009-0238",
     "title": "CVE-2009-0238 — Microsoft Office Remote Code Execution",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Office",
     "date": "2026-04-14",
     "ransomware": false,
     "description": "Microsoft Office Excel contains a remote code execution vulnerability that could allow an attacker to take complete control of an affected system if a user opens a specially crafted Excel file that includes a malformed object.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-0238",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-0238"
   },
   {
     "id": "CVE-2026-32201",
@@ -1283,20 +1969,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-14",
     "ransomware": false,
     "description": "Microsoft SharePoint Server contains an improper input validation vulnerability that allows an unauthorized attacker to perform spoofing over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32201",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32201"
   },
   {
     "id": "CVE-2012-1854",
     "title": "CVE-2012-1854 — Microsoft Visual Basic for Applications Insecure Library Loading Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Visual Basic for Applications (VBA)",
     "date": "2026-04-13",
     "ransomware": false,
     "description": "Microsoft Visual Basic for Applications (VBA) contains an insecure library loading vulnerability that could allow for remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-1854",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2012-1854"
   },
   {
     "id": "CVE-2025-60710",
@@ -1307,8 +1993,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-13",
     "ransomware": true,
     "description": "Microsoft Windows contains a link following vulnerability that allows for privilege escalation",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-60710",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-60710"
   },
   {
     "id": "CVE-2023-21529",
@@ -1319,8 +2005,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-13",
     "ransomware": true,
     "description": "Microsoft Exchange Server contains a deserialization of untrusted data that allows an authenticated attacker to achieve remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-21529",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-21529"
   },
   {
     "id": "CVE-2023-36424",
@@ -1331,56 +2017,56 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-13",
     "ransomware": false,
     "description": "Microsoft Windows Common Log File System Driver contains an out-of-bounds read vulnerability that could allow a threat actor for privileges escalation",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-36424",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-36424"
   },
   {
     "id": "CVE-2020-9715",
     "title": "CVE-2020-9715 — Adobe Acrobat Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Adobe",
     "product": "Acrobat",
     "date": "2026-04-13",
     "ransomware": false,
     "description": "Adobe Acrobat contains a use-after-free vulnerability that allows for code execution",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-9715",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-9715"
   },
   {
     "id": "CVE-2026-21643",
     "title": "CVE-2026-21643 — Fortinet FortiClient EMS SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Fortinet",
     "product": "FortiClient EMS",
     "date": "2026-04-13",
     "ransomware": false,
     "description": "Fortinet FortiClient EMS contains a SQL injection vulnerability that may allow an unauthenticated attacker to execute unauthorized code or commands via specifically crafted HTTP requests.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21643",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21643"
   },
   {
     "id": "CVE-2026-34621",
     "title": "CVE-2026-34621 — Adobe Acrobat and Reader Prototype Pollution Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Adobe",
     "product": "Acrobat and Reader",
     "date": "2026-04-13",
     "ransomware": false,
     "description": "Adobe Acrobat and Reader contain a prototype pollution vulnerability that allows for arbitrary code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34621",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34621"
   },
   {
     "id": "CVE-2026-1340",
     "title": "CVE-2026-1340 — Ivanti Endpoint Manager Mobile (EPMM) Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ivanti",
     "product": "Endpoint Manager Mobile (EPMM)",
     "date": "2026-04-08",
     "ransomware": false,
     "description": "Ivanti Endpoint Manager Mobile (EPMM) contains a code injection vulnerability that could allow attackers to achieve unauthenticated remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1340",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1340"
   },
   {
     "id": "CVE-2026-35616",
@@ -1391,32 +2077,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-04-06",
     "ransomware": false,
     "description": "Fortinet FortiClient EMS contains an improper access control vulnerability that may allow an unauthenticated attacker to execute unauthorized code or commands via crafted requests.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35616",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35616"
   },
   {
     "id": "CVE-2026-3502",
     "title": "CVE-2026-3502 — TrueConf Client Download of Code Without Integrity Check Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "TrueConf",
     "product": "Client",
     "date": "2026-04-02",
     "ransomware": false,
     "description": "TrueConf Client contains a download of code without integrity check vulnerability. An attacker who is able to influence the update delivery path can substitute a tampered update payload. If the payload is executed or installed by the updater, this may result in arbitrary code execution in the context of the updating process or user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3502",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3502"
   },
   {
     "id": "CVE-2026-5281",
     "title": "CVE-2026-5281 — Google Dawn Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Google",
     "product": "Dawn",
     "date": "2026-04-01",
     "ransomware": false,
     "description": "Google Dawn contains an use-after-free vulnerability that could allow a remote attacker who had compromised the renderer process to execute arbitrary code via a crafted HTML page. This vulnerability could affect multiple Chromium-based products including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5281",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5281"
   },
   {
     "id": "CVE-2026-3055",
@@ -1427,20 +2113,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-30",
     "ransomware": false,
     "description": "Citrix NetScaler ADC (formerly Citrix ADC), NetScaler Gateway (formerly Citrix Gateway) and NetScaler ADC FIPS and NDcPP contain an out-of-bounds reads vulnerability when configured as a SAML IDP leading to memory overread.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3055",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3055"
   },
   {
     "id": "CVE-2025-53521",
     "title": "CVE-2025-53521 — F5 BIG-IP Stack-Based Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "F5",
     "product": "BIG-IP",
     "date": "2026-03-27",
     "ransomware": false,
     "description": "F5 BIG-IP APM contains a stack-based buffer overflow vulnerability that could allow a threat actor to achieve remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-53521",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-53521"
   },
   {
     "id": "CVE-2026-33634",
@@ -1451,44 +2137,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-26",
     "ransomware": false,
     "description": "Aquasecurity Trivy contains an embedded malicious code vulnerability that could allow an attacker to gain access to everything in the CI/CD environment, including all tokens, SSH keys, cloud credentials, database passwords, and any sensitive configuration in memory.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33634",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33634"
   },
   {
     "id": "CVE-2026-33017",
     "title": "CVE-2026-33017 — Langflow Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Langflow",
     "product": "Langflow",
     "date": "2026-03-25",
     "ransomware": false,
     "description": "Langflow contains a code injection vulnerability that could allow building public flows without requiring authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33017",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33017"
   },
   {
     "id": "CVE-2025-32432",
     "title": "CVE-2025-32432 — Craft CMS Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Craft CMS",
     "product": "Craft CMS",
     "date": "2026-03-20",
     "ransomware": false,
     "description": "Craft CMS contains a code injection vulnerability that allows a remote attacker to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-32432",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-32432"
   },
   {
     "id": "CVE-2025-54068",
     "title": "CVE-2025-54068 — Laravel Livewire Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Laravel",
     "product": "Livewire",
     "date": "2026-03-20",
     "ransomware": false,
     "description": "Laravel Livewire contain a code injection vulnerability that could allow unauthenticated attackers to achieve remote command execution in specific scenarios.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54068",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54068"
   },
   {
     "id": "CVE-2025-43510",
@@ -1499,32 +2185,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-20",
     "ransomware": false,
     "description": "Apple watchOS, iOS, iPadOS, macOS, visionOS, and tvOS contain an improper locking vulnerability that could allow a malicious application to cause unexpected changes in memory shared between processes.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43510",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43510"
   },
   {
     "id": "CVE-2025-43520",
     "title": "CVE-2025-43520 — Apple Multiple Products Classic Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "Multiple Products",
     "date": "2026-03-20",
     "ransomware": false,
     "description": "Apple watchOS, iOS, iPadOS, macOS, visionOS, and tvOS contain a classic buffer overflow vulnerability which could allow a malicious application to cause unexpected system termination or write kernel memory.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43520",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43520"
   },
   {
     "id": "CVE-2025-31277",
     "title": "CVE-2025-31277 — Apple Multiple Products Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "Multiple Products",
     "date": "2026-03-20",
     "ransomware": false,
     "description": "Apple Safari, iOS, watchOS, visionOS, iPadOS, macOS, and tvOS contain a buffer overflow vulnerability that could allow the processing of maliciously crafted web content which may lead to memory corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31277",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31277"
   },
   {
     "id": "CVE-2026-20131",
@@ -1535,8 +2221,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-19",
     "ransomware": true,
     "description": "Cisco Secure Firewall Management Center (FMC) Software and Cisco Security Cloud Control (SCC) Firewall Management contain a deserialization of untrusted data vulnerability in the web-based management interface that could allow an unauthenticated, remote attacker to execute arbitrary Java code as root on an affected device.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20131",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20131"
   },
   {
     "id": "CVE-2025-66376",
@@ -1547,20 +2233,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-18",
     "ransomware": false,
     "description": "Synacor Zimbra Collaboration Suite (ZCS) contains a cross-site scripting vulnerability in the Classic UI where attackers could abuse Cascading Style Sheets (CSS) @import directives in email HTML.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66376",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66376"
   },
   {
     "id": "CVE-2026-20963",
     "title": "CVE-2026-20963 — Microsoft SharePoint Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "SharePoint",
     "date": "2026-03-18",
     "ransomware": false,
     "description": "Microsoft SharePoint contains a deserialization of untrusted data vulnerability that allows an unauthorized attacker to execute code over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20963",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20963"
   },
   {
     "id": "CVE-2025-47813",
@@ -1571,20 +2257,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-16",
     "ransomware": false,
     "description": "Wing FTP Server contains a generation of error message containing sensitive information vulnerability when using a long value in the UID cookie.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-47813",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-47813"
   },
   {
     "id": "CVE-2026-3910",
     "title": "CVE-2026-3910 — Google Chromium V8 Improper Restriction of Operations Within the Bounds of a Memory Buffer Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Google",
     "product": "Chromium V8",
     "date": "2026-03-13",
     "ransomware": false,
     "description": "Google Chromium V8 contains an improper restriction of operations within the bounds of a memory buffer vulnerability that could allow a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3910",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3910"
   },
   {
     "id": "CVE-2026-3909",
@@ -1595,20 +2281,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-13",
     "ransomware": false,
     "description": "Google Skia contains an out-of-bounds write vulnerability that could allow a remote attacker to perform out of bounds memory access via a crafted HTML page. This vulnerability affects Google Chrome and ChromeOS, Android, Flutter, and possibly other products.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3909",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3909"
   },
   {
     "id": "CVE-2025-68613",
     "title": "CVE-2025-68613 — n8n Improper Control of Dynamically-Managed Code Resources Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "n8n",
     "product": "n8n",
     "date": "2026-03-11",
     "ransomware": false,
     "description": "n8n contains an improper control of dynamically managed code resources vulnerability in its workflow expression evaluation system that allows for remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68613",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68613"
   },
   {
     "id": "CVE-2021-22054",
@@ -1619,8 +2305,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-09",
     "ransomware": false,
     "description": "Omnissa Workspace One UEM formerly known as VMware Workspace One UEM contains a server-side request forgery (SSRF) vulnerability that could allow a malicious actor with network access to UEM to send their requests without authentication and to gain access to sensitive information.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22054",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22054"
   },
   {
     "id": "CVE-2025-26399",
@@ -1631,20 +2317,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-09",
     "ransomware": true,
     "description": "SolarWinds Web Help Desk contain a deserialization of untrusted data vulnerability in AjaxProxy that could allow an attacker to run commands on the host machine.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-26399",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-26399"
   },
   {
     "id": "CVE-2026-1603",
     "title": "CVE-2026-1603 — Ivanti Endpoint Manager (EPM) Authentication Bypass Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ivanti",
     "product": " Endpoint Manager (EPM)",
     "date": "2026-03-09",
     "ransomware": false,
     "description": "Ivanti Endpoint Manager (EPM) contains an authentication bypass using an alternate path or channel vulnerability that could allow a remote unauthenticated attacker to leak specific stored credential data.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1603",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1603"
   },
   {
     "id": "CVE-2017-7921",
@@ -1655,8 +2341,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-05",
     "ransomware": false,
     "description": "Multiple Hikvision products contain an improper authentication vulnerability that could allow a malicious user to escalate privileges on the system and gain access to sensitive information.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-7921",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-7921"
   },
   {
     "id": "CVE-2021-22681",
@@ -1667,56 +2353,56 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-05",
     "ransomware": false,
     "description": "Multiple Rockwell products contain an insufficient protected credentials vulnerability. Studio 5000 Logix Designer software may allow a key to be discovered. This key is used to verify Logix controllers are communicating with Rockwell Automation design software. If successfully exploited, this vulnerability could allow an unauthorized application to connect with Logix controllers. To leverage this vulnerability, an unauthorized user would require network access to the controller.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22681",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22681"
   },
   {
     "id": "CVE-2023-43000",
     "title": "CVE-2023-43000 — Apple Multiple products Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "Multiple Products",
     "date": "2026-03-05",
     "ransomware": false,
     "description": "Apple macOS, iOS, iPadOS, and Safari 16.6 contain a use-after-free vulnerability due to the processing of maliciously crafted web content that may lead to memory corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-43000",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-43000"
   },
   {
     "id": "CVE-2021-30952",
     "title": "CVE-2021-30952 — Apple Multiple Products Integer Overflow or Wraparound Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "Multiple Products",
     "date": "2026-03-05",
     "ransomware": false,
     "description": "Apple tvOS, macOS, Safari, iPadOS and watchOS contain an integer overflow or wraparound vulnerability due to the processing of maliciously crafted web content that may lead to arbitrary code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-30952",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-30952"
   },
   {
     "id": "CVE-2023-41974",
     "title": "CVE-2023-41974 — Apple iOS and iPadOS Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "iOS and iPadOS",
     "date": "2026-03-05",
     "ransomware": false,
     "description": "Apple iOS and iPadOS contain a use-after-free vulnerability. An app may be able to execute arbitrary code with kernel privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-41974",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-41974"
   },
   {
     "id": "CVE-2026-22719",
     "title": "CVE-2026-22719 — Broadcom VMware Aria Operations Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Broadcom",
     "product": "VMware Aria Operations",
     "date": "2026-03-03",
     "ransomware": false,
     "description": "Broadcom VMware Aria Operations formerly known as vRealize Operations (vROps) contains a command injection vulnerability that allows an unauthenticated attacker to execute arbitrary commands, potentially leading to remote code execution during support‑assisted product migration.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22719",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22719"
   },
   {
     "id": "CVE-2026-21385",
@@ -1727,8 +2413,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-03-03",
     "ransomware": false,
     "description": "Multiple Qualcomm chipsets contain a memory corruption vulnerability while using alignments for memory allocation. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21385",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21385"
   },
   {
     "id": "CVE-2022-20775",
@@ -1739,56 +2425,56 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-25",
     "ransomware": false,
     "description": "Cisco SD-WAN CLI contains a path traversal vulnerability that could allow an authenticated local attacker to gain elevated privileges via improper access controls on commands within the application CLI. A successful exploit could allow the attacker to execute arbitrary commands as the root user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-20775",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-20775"
   },
   {
     "id": "CVE-2026-20127",
     "title": "CVE-2026-20127 — Cisco Catalyst SD-WAN Controller and Manager Authentication Bypass Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Cisco",
     "product": "Catalyst SD-WAN Controller and Manager",
     "date": "2026-02-25",
     "ransomware": false,
     "description": "Cisco Catalyst SD-WAN Controller, formerly SD-WAN vSmart, and Cisco Catalyst SD-WAN Manager, formerly SD-WAN vManage, contain an authentication bypass vulnerability could allow an unauthenticated, remote attacker to bypass authentication and obtain administrative privileges on an affected system. This vulnerability exists because the peering authentication mechanism in an affected system is not working properly. An attacker could exploit this vulnerability by sending crafted requests to an affected system. A successful exploit could allow the attacker to log in to an affected Cisco Catalyst SD-WAN Controller as an internal, high-privileged, non-root user account. Using this account, the attacker could access NETCONF, which would then allow the attacker to manipulate network configuration for the SD-WAN fabric.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20127",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20127"
   },
   {
     "id": "CVE-2026-25108",
     "title": "CVE-2026-25108 — Soliton Systems K.K FileZen OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Soliton Systems K.K",
     "product": "FileZen",
     "date": "2026-02-24",
     "ransomware": false,
     "description": "Soliton Systems K.K FileZen contains an OS command injection vulnerability when an user logs-in to the affected product and sends a specially crafted HTTP request.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-25108",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-25108"
   },
   {
     "id": "CVE-2025-49113",
-    "title": "CVE-2025-49113 — Roundcube RoundCube Webmail Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
+    "title": "CVE-2025-49113 — RoundCube Webmail Deserialization of Untrusted Data Vulnerability",
+    "severity": "HIGH",
     "vendor": "Roundcube",
     "product": "Webmail",
     "date": "2026-02-20",
     "ransomware": false,
     "description": "RoundCube Webmail contains a deserialization of untrusted data vulnerability that allows remote code execution by authenticated users because the _from parameter in a URL is not validated in program/actions/settings/upload.php.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-49113",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-49113"
   },
   {
     "id": "CVE-2025-68461",
-    "title": "CVE-2025-68461 — Roundcube RoundCube Webmail Cross-site Scripting Vulnerability",
+    "title": "CVE-2025-68461 — RoundCube Webmail Cross-site Scripting Vulnerability",
     "severity": "HIGH",
     "vendor": "Roundcube",
     "product": "Webmail",
     "date": "2026-02-20",
     "ransomware": false,
     "description": "RoundCube Webmail contains a cross-site scripting vulnerability via the animate tag in an SVG document.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68461",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68461"
   },
   {
     "id": "CVE-2021-22175",
@@ -1799,20 +2485,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-18",
     "ransomware": false,
     "description": "GitLab contains a server-side request forgery (SSRF) vulnerability when requests to the internal network for webhooks are enabled.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22175",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22175"
   },
   {
     "id": "CVE-2026-22769",
     "title": "CVE-2026-22769 — Dell RecoverPoint for Virtual Machines (RP4VMs) Use of Hard-coded Credentials Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Dell",
     "product": "RecoverPoint for Virtual Machines (RP4VMs)",
     "date": "2026-02-18",
     "ransomware": false,
     "description": "Dell RecoverPoint for Virtual Machines (RP4VMs) contains an use of hard-coded credentials vulnerability that could allow an unauthenticated remote attacker to gain unauthorized access to the underlying operating system and root-level persistence.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22769",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22769"
   },
   {
     "id": "CVE-2020-7796",
@@ -1823,8 +2509,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-17",
     "ransomware": false,
     "description": "Synacor Zimbra Collaboration Suite (ZCS) contains a server-side request forgery vulnerability if WebEx zimlet installed and zimlet JSP is enabled.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-7796",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-7796"
   },
   {
     "id": "CVE-2024-7694",
@@ -1835,32 +2521,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-17",
     "ransomware": false,
     "description": "TeamT5 ThreatSonar Anti-Ransomware contains an unrestricted upload of file with dangerous type vulnerability. ThreatSonar Anti-Ransomware does not properly validate the content of uploaded files. Remote attackers with administrator privileges on the product platform can upload malicious files, which can be used to execute arbitrary system commands on the server.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-7694",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-7694"
   },
   {
     "id": "CVE-2008-0015",
-    "title": "CVE-2008-0015 — Microsoft  Microsoft Windows Video ActiveX Control Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
+    "title": "CVE-2008-0015 —  Microsoft Windows Video ActiveX Control Remote Code Execution Vulnerability",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Windows",
     "date": "2026-02-17",
     "ransomware": false,
     "description": "Microsoft Windows Video ActiveX Control contains a remote code execution vulnerability. An attacker could exploit the vulnerability by constructing a specially crafted Web page. When a user views the Web page, the vulnerability could allow remote code execution. An attacker who successfully exploited this vulnerability could gain the same user rights as the logged-on user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-0015",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-0015"
   },
   {
     "id": "CVE-2026-2441",
     "title": "CVE-2026-2441 — Google Chromium CSS Use-After-Free Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Google",
     "product": "Chromium",
     "date": "2026-02-17",
     "ransomware": false,
     "description": "Google Chromium CSS contains a use-after-free vulnerability that could allow a remote attacker to potentially exploit heap corruption via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2441",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2441"
   },
   {
     "id": "CVE-2026-1731",
@@ -1871,44 +2557,44 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-13",
     "ransomware": true,
     "description": "BeyondTrust Remote Support (RS) and Privileged Remote Access (PRA)contain an OS command injection vulnerability. Successful exploitation could allow an unauthenticated remote attacker to execute operating system commands in the context of the site user. Successful exploitation requires no authentication or user interaction and may lead to system compromise, including unauthorized access, data exfiltration, and service disruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1731",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1731"
   },
   {
     "id": "CVE-2026-20700",
     "title": "CVE-2026-20700 — Apple Multiple Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Apple",
     "product": "Multiple Products",
     "date": "2026-02-12",
     "ransomware": false,
     "description": "Apple iOS, macOS, tvOS, watchOS, and visionOS contain an improper restriction of operations within the bounds of a memory buffer vulnerability that could allow an attacker with memory write the capability to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20700",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20700"
   },
   {
     "id": "CVE-2024-43468",
     "title": "CVE-2024-43468 — Microsoft Configuration Manager SQL Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Configuration Manager",
     "date": "2026-02-12",
     "ransomware": false,
     "description": "Microsoft Configuration Manager contains an SQL injection vulnerability. An unauthenticated attacker could exploit this vulnerability by sending specially crafted requests to the target environment which are processed in an unsafe manner enabling the attacker to execute commands on the server and/or underlying database.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-43468",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-43468"
   },
   {
     "id": "CVE-2025-15556",
     "title": "CVE-2025-15556 — Notepad++ Download of Code Without Integrity Check Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Notepad++",
     "product": "Notepad++",
     "date": "2026-02-12",
     "ransomware": false,
     "description": "Notepad++ when using the WinGUp updater, contains a download of code without integrity check vulnerability that could allow an attacker to intercept or redirect update traffic to download and execute an attacker-controlled installer. This could lead to arbitrary code execution with the privileges of the user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15556",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15556"
   },
   {
     "id": "CVE-2025-40536",
@@ -1919,8 +2605,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-12",
     "ransomware": false,
     "description": "SolarWinds Web Help Desk contains a security control bypass vulnerability that could allow an unauthenticated attacker to gain access to certain restricted functionality.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-40536",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-40536"
   },
   {
     "id": "CVE-2026-21513",
@@ -1931,8 +2617,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft MSHTML Framework contains a protection mechanism failure vulnerability that could allow an unauthorized attacker to bypass a security feature over a network.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21513",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21513"
   },
   {
     "id": "CVE-2026-21525",
@@ -1943,6 +2629,7 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft Windows Remote Access Connection Manager contains a NULL pointer dereference that could allow an unauthorized attacker to deny service locally.",
+    "source": "CISA KEV (Live)",
     "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21525"
   },
   {
@@ -1954,8 +2641,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft Windows Shell contains a protection mechanism failure vulnerability that could allow an unauthorized attacker to bypass a security feature over a network. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21510",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21510"
   },
   {
     "id": "CVE-2026-21533",
@@ -1966,8 +2653,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft Windows Remote Desktop Services contains an improper privilege management vulnerability that could allow an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21533",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21533"
   },
   {
     "id": "CVE-2026-21519",
@@ -1978,8 +2665,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft Desktop Windows Manager contains a type confusion vulnerability that could allow an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21519",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21519"
   },
   {
     "id": "CVE-2026-21514",
@@ -1990,32 +2677,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-10",
     "ransomware": false,
     "description": "Microsoft Office Word contains a reliance on untrusted inputs in a security decision vulnerability that could allow an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21514",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21514"
   },
   {
     "id": "CVE-2025-11953",
     "title": "CVE-2025-11953 — React Native Community CLI OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "React Native Community",
     "product": "CLI",
     "date": "2026-02-05",
     "ransomware": false,
     "description": "React Native Community CLI contains an OS command injection vulnerability which could allow unauthenticated network attackers to send POST requests to the Metro Development Server and run arbitrary executables via a vulnerable endpoint exposed by the server. On Windows, attackers can also execute arbitrary shell commands with fully controlled arguments.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-11953",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-11953"
   },
   {
     "id": "CVE-2026-24423",
     "title": "CVE-2026-24423 — SmarterTools SmarterMail Missing Authentication for Critical Function Vulnerability",
-    "severity": "HIGH",
+    "severity": "CRITICAL",
     "vendor": "SmarterTools",
     "product": "SmarterMail",
     "date": "2026-02-05",
     "ransomware": true,
     "description": "SmarterTools SmarterMail contains a missing authentication for critical function vulnerability in the ConnectToHub API method. This could allow the attacker to point the SmarterMail instance to a malicious HTTP server which serves the malicious OS command and could lead to command execution. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24423",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24423"
   },
   {
     "id": "CVE-2021-39935",
@@ -2026,68 +2713,68 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-02-03",
     "ransomware": false,
     "description": "GitLab Community and Enterprise Editions contain a server-side request forgery vulnerability which could allow unauthorized external users to perform Server Side Requests via the CI Lint API. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-39935",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-39935"
   },
   {
     "id": "CVE-2025-64328",
     "title": "CVE-2025-64328 — Sangoma FreePBX OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Sangoma",
     "product": "FreePBX ",
     "date": "2026-02-03",
     "ransomware": false,
     "description": "Sangoma FreePBX Endpoint Manager contains an OS command injection vulnerability that could allow for a post-authentication command injection by an authenticated known user via the testconnection -> check_ssh_connect() function. An attacker can leverage this vulnerability to potentially obtain remote access to the system as an asterisk user. ",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-64328",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-64328"
   },
   {
     "id": "CVE-2019-19006",
-    "title": "CVE-2019-19006 — Sangoma  Sangoma FreePBX Improper Authentication Vulnerability",
+    "title": "CVE-2019-19006 —  Sangoma FreePBX Improper Authentication Vulnerability",
     "severity": "HIGH",
     "vendor": "Sangoma",
     "product": "FreePBX",
     "date": "2026-02-03",
     "ransomware": false,
     "description": "Sangoma FreePBX contains an improper authentication vulnerability that potentially allows unauthorized users to bypass password authentication and access services provided by the FreePBX admin.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19006",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-19006"
   },
   {
     "id": "CVE-2025-40551",
     "title": "CVE-2025-40551 — SolarWinds Web Help Desk Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "SolarWinds",
     "product": "Web Help Desk",
     "date": "2026-02-03",
     "ransomware": false,
     "description": "SolarWinds Web Help Desk contains a deserialization of untrusted data vulnerability that could lead to remote code execution, which would allow an attacker to run commands on the host machine. This could be exploited without authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-40551",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-40551"
   },
   {
     "id": "CVE-2026-1281",
     "title": "CVE-2026-1281 — Ivanti Endpoint Manager Mobile (EPMM) Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Ivanti",
     "product": "Endpoint Manager Mobile (EPMM)",
     "date": "2026-01-29",
     "ransomware": false,
     "description": "Ivanti Endpoint Manager Mobile (EPMM) contains a code injection vulnerability that could allow attackers to achieve unauthenticated remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1281",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1281"
   },
   {
     "id": "CVE-2026-24858",
     "title": "CVE-2026-24858 — Fortinet Multiple Products Authentication Bypass Using an Alternate Path or Channel Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Fortinet",
     "product": "Multiple Products",
     "date": "2026-01-27",
     "ransomware": false,
     "description": "Fortinet FortiAnalyzer, FortiManager, FortiOS, and FortiProxy contain an authentication bypass using an alternate path or channel that could allow an attacker with a FortiCloud account and a registered device to log into other devices registered to other accounts, if FortiCloud SSO authentication is enabled on those devices.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24858",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24858"
   },
   {
     "id": "CVE-2018-14634",
@@ -2098,8 +2785,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-26",
     "ransomware": false,
     "description": "Linux Kernel contains an integer overflow vulnerability in the create_elf_tables() function which could allow an unprivileged local user with access to SUID (or otherwise privileged) binary to escalate their privileges on the system.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-14634",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-14634"
   },
   {
     "id": "CVE-2025-52691",
@@ -2110,8 +2797,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-26",
     "ransomware": true,
     "description": "SmarterTools SmarterMail contains an unrestricted upload of file with dangerous type vulnerability that could allow an unauthenticated attacker to upload arbitrary files to any location on the mail server, potentially enabling remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-52691",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-52691"
   },
   {
     "id": "CVE-2026-23760",
@@ -2122,20 +2809,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-26",
     "ransomware": true,
     "description": "SmarterTools SmarterMail contains an authentication bypass using an alternate path or channel vulnerability in the password reset API. The force-reset-password endpoint permits anonymous requests and fails to verify the existing password or a reset token when resetting system administrator accounts. This could allow an unauthenticated attacker to supply a target administrator username and a new password to reset the account, resulting in full administrative compromise of the SmarterMail instance.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23760",
-    "essential_eight_pillar": "Regular Backups & Application Control"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23760"
   },
   {
     "id": "CVE-2026-24061",
     "title": "CVE-2026-24061 — GNU InetUtils Argument Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "GNU",
     "product": "InetUtils",
     "date": "2026-01-26",
     "ransomware": false,
     "description": "GNU InetUtils contains an argument injection vulnerability in telnetd that could allow for remote authentication bypass via a \"-f root\" value for the USER environment variable.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24061",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24061"
   },
   {
     "id": "CVE-2026-21509",
@@ -2146,20 +2833,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-26",
     "ransomware": false,
     "description": "Microsoft Office contains a security feature bypass vulnerability in which reliance on untrusted inputs in a security decision in Microsoft Office could allow an unauthorized attacker to bypass a security feature locally. Some of the impacted product(s) could be end-of-life (EoL) and/or end-of-service (EoS). Users are advised to discontinue use and/or transition to a supported version.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21509",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21509"
   },
   {
     "id": "CVE-2024-37079",
     "title": "CVE-2024-37079 — Broadcom VMware vCenter Server Out-of-bounds Write Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Broadcom",
     "product": "VMware vCenter Server",
     "date": "2026-01-23",
     "ransomware": false,
     "description": "Broadcom VMware vCenter Server contains an out-of-bounds write vulnerability in the implementation of the DCERPC protocol. This could allow a malicious actor with network access to vCenter Server to send specially crafted network packets, potentially leading to remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-37079",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-37079"
   },
   {
     "id": "CVE-2025-68645",
@@ -2170,8 +2857,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-22",
     "ransomware": false,
     "description": "Synacor Zimbra Collaboration Suite (ZCS) contains a PHP remote file inclusion vulnerability that could allow for remote attackers to craft requests to the /h/rest endpoint to influence internal request dispatching, allowing inclusion of arbitrary files from the WebRoot directory.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68645",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68645"
   },
   {
     "id": "CVE-2025-34026",
@@ -2182,8 +2869,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-22",
     "ransomware": false,
     "description": "Versa Concerto SD-WAN orchestration platform contains an improper authentication vulnerability in the Traefik reverse proxy configuration, allowing at attacker to access administrative endpoints. The internal Actuator endpoint can be leveraged for access to heap dumps and trace logs.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-34026",
-    "essential_eight_pillar": "Multi-Factor Authentication"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-34026"
   },
   {
     "id": "CVE-2025-31125",
@@ -2194,8 +2881,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-22",
     "ransomware": false,
     "description": "Vite Vitejs contains an improper access control vulnerability that exposes content of non-allowed files using ?inline&import or ?raw?import. Only apps explicitly exposing the Vite dev server to the network (using --host or server.host config option) are affected.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31125",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31125"
   },
   {
     "id": "CVE-2025-54313",
@@ -2206,20 +2893,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-22",
     "ransomware": false,
     "description": "Prettier eslint-config-prettier contains an embedded malicious code vulnerability. Installing an affected package executes an install.js file that launches the node-gyp.dll malware on Windows.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54313",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54313"
   },
   {
     "id": "CVE-2026-20045",
     "title": "CVE-2026-20045 — Cisco Unified Communications Products Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Cisco",
     "product": "Unified Communications Manager",
     "date": "2026-01-21",
     "ransomware": false,
     "description": "Cisco Unified Communications Manager (Unified CM), Cisco Unified Communications Manager Session Management Edition (Unified CM SME), Cisco Unified Communications Manager IM & Presence Service (Unified CM IM&P), Cisco Unity Connection, and Cisco Webex Calling Dedicated Instance contain a code injection vulnerability that could allow the attacker to obtain user-level access to the underlying operating system and then elevate privileges to root.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20045",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20045"
   },
   {
     "id": "CVE-2026-20805",
@@ -2230,8 +2917,8 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-13",
     "ransomware": false,
     "description": "Microsoft Windows Desktop Windows Manager contains an information disclosure vulnerability that allows an authorized attacker to disclose information locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20805",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20805"
   },
   {
     "id": "CVE-2025-8110",
@@ -2242,32 +2929,32 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2026-01-12",
     "ransomware": false,
     "description": "Gogs contains a path traversal vulnerability affecting improper Symbolic link handling in the PutContents API that could allow for code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8110",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8110"
   },
   {
     "id": "CVE-2009-0556",
     "title": "CVE-2009-0556 — Microsoft Office PowerPoint Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Microsoft",
     "product": "Office",
     "date": "2026-01-07",
     "ransomware": false,
     "description": "Microsoft Office PowerPoint contains a code injection vulnerability that allows remote attackers to execute arbitrary code via a PowerPoint file with an OutlineTextRefAtom containing an invalid index value that triggers memory corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-0556",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2009-0556"
   },
   {
     "id": "CVE-2025-37164",
     "title": "CVE-2025-37164 — Hewlett Packard Enterprise (HPE) OneView Code Injection Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Hewlett Packard Enterprise (HPE)",
     "product": "OneView",
     "date": "2026-01-07",
     "ransomware": false,
     "description": "Hewlett Packard Enterprise (HPE) OneView contains a code injection vulnerability that allows a remote unauthenticated user to perform remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-37164",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-37164"
   },
   {
     "id": "CVE-2025-14847",
@@ -2278,20 +2965,20 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2025-12-29",
     "ransomware": false,
     "description": "MongoDB Server contains an improper handling of length parameter inconsistency vulnerability in Zlib compressed protocol headers. This vulnerability may allow a read of uninitialized heap memory by an unauthenticated client.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14847",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14847"
   },
   {
     "id": "CVE-2023-52163",
     "title": "CVE-2023-52163 — Digiever DS-2105 Pro Missing Authorization Vulnerability",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vendor": "Digiever",
     "product": "DS-2105 Pro",
     "date": "2025-12-22",
     "ransomware": false,
     "description": "Digiever DS-2105 Pro contains a missing authorization vulnerability which could allow for command injection via time_tzsetup.cgi.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-52163",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-52163"
   },
   {
     "id": "CVE-2025-14733",
@@ -2300,10 +2987,10 @@ window.BUBBSY_RADAR_DATA = [
     "vendor": "WatchGuard",
     "product": "Firebox",
     "date": "2025-12-19",
-    "ransomware": false,
+    "ransomware": true,
     "description": "WatchGuard Fireware OS iked process contains an out of bounds write vulnerability in the OS iked process. This vulnerability may allow a remote unauthenticated attacker to execute arbitrary code and affects both the mobile user VPN with IKEv2 and the branch office VPN using IKEv2 when configured with a dynamic gateway peer.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14733",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14733"
   },
   {
     "id": "CVE-2025-59374",
@@ -2314,691 +3001,7 @@ window.BUBBSY_RADAR_DATA = [
     "date": "2025-12-17",
     "ransomware": false,
     "description": "ASUS Live Update contains an embedded malicious code vulnerability client were distributed with unauthorized modifications introduced through a supply chain compromise. The modified builds could cause devices meeting specific targeting conditions to perform unintended actions. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59374",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-40602",
-    "title": "CVE-2025-40602 — SonicWall SMA1000 Missing Authorization Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "SonicWall",
-    "product": "SMA1000 appliance",
-    "date": "2025-12-17",
-    "ransomware": false,
-    "description": "SonicWall SMA1000 contains a missing authorization vulnerability that could allow for privilege escalation appliance management console (AMC) of affected devices.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-40602",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-20393",
-    "title": "CVE-2025-20393 — Cisco Multiple Products Improper Input Validation Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Cisco",
-    "product": "Multiple Products",
-    "date": "2025-12-17",
-    "ransomware": false,
-    "description": "Cisco Secure Email Gateway, Secure Email, AsyncOS Software, and Web Manager appliances contains an improper input validation vulnerability that allows threat actors to execute arbitrary commands with root privileges on the underlying operating system of an affected appliance.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-20393",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-59718",
-    "title": "CVE-2025-59718 — Fortinet Multiple Products Improper Verification of Cryptographic Signature Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Fortinet",
-    "product": "Multiple Products",
-    "date": "2025-12-16",
-    "ransomware": false,
-    "description": "Fortinet FortiOS, FortiSwitchMaster, FortiProxy, and FortiWeb contain an improper verification of cryptographic signature vulnerability that may allow an unauthenticated attacker to bypass the FortiCloud SSO login authentication via a crafted SAML message. Please be aware that CVE-2025-59719 pertains to the same problem and is mentioned in the same vendor advisory. Ensure to apply all patches mentioned in the advisory.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59718",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-14611",
-    "title": "CVE-2025-14611 — Gladinet CentreStack and Triofox Hard Coded Cryptographic Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Gladinet",
-    "product": "CentreStack and Triofox",
-    "date": "2025-12-15",
-    "ransomware": false,
-    "description": "Gladinet CentreStack and TrioFox contain a hardcoded cryptographic keys vulnerability for their implementation of the AES cryptoscheme. This vulnerability degrades security for public exposed endpoints that may make use of it and may offer arbitrary local file inclusion when provided a specially crafted request without authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14611",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-43529",
-    "title": "CVE-2025-43529 — Apple Multiple Products Use-After-Free WebKit Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Apple",
-    "product": "Multiple Products",
-    "date": "2025-12-15",
-    "ransomware": false,
-    "description": "Apple iOS, iPadOS, macOS, and other Apple products contain a use-after-free vulnerability in WebKit. Processing maliciously crafted web content may lead to memory corruption. This vulnerability could impact HTML parsers that use WebKit, including but not limited to Apple Safari and non-Apple products which rely on WebKit for HTML processing.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43529",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2018-4063",
-    "title": "CVE-2018-4063 — Sierra Wireless AirLink ALEOS Unrestricted Upload of File with Dangerous Type Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Sierra Wireless",
-    "product": "AirLink ALEOS",
-    "date": "2025-12-12",
-    "ransomware": false,
-    "description": "Sierra Wireless AirLink ALEOS contains an unrestricted upload of file with dangerous type vulnerability. A specially crafted HTTP request can upload a file, resulting in executable code being uploaded, and routable, to the webserver. An attacker can make an authenticated HTTP request to trigger this vulnerability. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-4063",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-14174",
-    "title": "CVE-2025-14174 — Google Chromium Out of Bounds Memory Access Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Google",
-    "product": "Chromium",
-    "date": "2025-12-12",
-    "ransomware": false,
-    "description": "Google Chromium contains an out of bounds memory access vulnerability in ANGLE that could allow a remote attacker to perform out of bounds memory access via a crafted HTML page. This vulnerability could affect multiple web browsers that utilize Chromium, including, but not limited to, Google Chrome, Microsoft Edge, and Opera.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14174",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-58360",
-    "title": "CVE-2025-58360 — OSGeo GeoServer Improper Restriction of XML External Entity Reference Vulnerability",
-    "severity": "HIGH",
-    "vendor": "OSGeo",
-    "product": "GeoServer",
-    "date": "2025-12-11",
-    "ransomware": false,
-    "description": "OSGeo GeoServer contains an improper restriction of XML external entity reference vulnerability that occurs when the application accepts XML input through a specific endpoint /geoserver/wms operation GetMap and could allow an attacker to define external entities within the XML request.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-58360",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-6218",
-    "title": "CVE-2025-6218 — RARLAB WinRAR Path Traversal Vulnerability",
-    "severity": "HIGH",
-    "vendor": "RARLAB",
-    "product": "WinRAR",
-    "date": "2025-12-09",
-    "ransomware": false,
-    "description": "RARLAB WinRAR contains a path traversal vulnerability allowing an attacker to execute code in the context of the current user.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-6218",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-62221",
-    "title": "CVE-2025-62221 — Microsoft Windows Use After Free Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-12-09",
-    "ransomware": false,
-    "description": "Microsoft Windows Cloud Files Mini Filter Driver contains a use after free vulnerability that can allow an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62221",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2022-37055",
-    "title": "CVE-2022-37055 — D-Link Routers Buffer Overflow Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "D-Link",
-    "product": "Routers",
-    "date": "2025-12-08",
-    "ransomware": false,
-    "description": "D-Link Routers contains a buffer overflow vulnerability that has a high impact on confidentiality, integrity, and availability. The impacted products could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-37055",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-66644",
-    "title": "CVE-2025-66644 — Array Networks ArrayOS AG OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Array Networks ",
-    "product": "ArrayOS AG",
-    "date": "2025-12-08",
-    "ransomware": false,
-    "description": "Array Networks ArrayOS AG contains an OS command injection vulnerability that could allow an attacker to execute arbitrary commands.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66644",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-55182",
-    "title": "CVE-2025-55182 — Meta React Server Components Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Meta",
-    "product": "React Server Components",
-    "date": "2025-12-05",
-    "ransomware": true,
-    "description": "Meta React Server Components contains a remote code execution vulnerability that could allow unauthenticated remote code execution by exploiting a flaw in how React decodes payloads sent to React Server Function endpoints. Please note CVE-2025-66478 has been rejected, but it is associated with CVE-2025- 55182.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-55182",
-    "essential_eight_pillar": "Regular Backups & Application Control"
-  },
-  {
-    "id": "CVE-2021-26828",
-    "title": "CVE-2021-26828 — OpenPLC ScadaBR Unrestricted Upload of File with Dangerous Type Vulnerability",
-    "severity": "HIGH",
-    "vendor": "OpenPLC",
-    "product": "ScadaBR",
-    "date": "2025-12-03",
-    "ransomware": false,
-    "description": "OpenPLC ScadaBR contains an unrestricted upload of file with dangerous type vulnerability that allows remote authenticated users to upload and execute arbitrary JSP files via view_edit.shtm.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26828",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-48633",
-    "title": "CVE-2025-48633 — Android Framework Information Disclosure Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Android",
-    "product": "Framework",
-    "date": "2025-12-02",
-    "ransomware": false,
-    "description": "Android Framework contains an unspecified vulnerability that allows for information disclosure.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48633",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-48572",
-    "title": "CVE-2025-48572 — Android Framework Privilege Escalation Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Android",
-    "product": "Framework",
-    "date": "2025-12-02",
-    "ransomware": false,
-    "description": "Android Framework contains an unspecified vulnerability that allows for privilege escalation.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48572",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2021-26829",
-    "title": "CVE-2021-26829 — OpenPLC ScadaBR Cross-site Scripting Vulnerability",
-    "severity": "HIGH",
-    "vendor": "OpenPLC",
-    "product": "ScadaBR",
-    "date": "2025-11-28",
-    "ransomware": false,
-    "description": "OpenPLC ScadaBR contains a cross-site scripting vulnerability via system_settings.shtm.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-26829",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-61757",
-    "title": "CVE-2025-61757 — Oracle Fusion Middleware Missing Authentication for Critical Function Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Oracle",
-    "product": "Fusion Middleware",
-    "date": "2025-11-21",
-    "ransomware": false,
-    "description": "Oracle Fusion Middleware contains a missing authentication for critical function vulnerability, allowing unauthenticated remote attackers to take over Identity Manager.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-61757",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-13223",
-    "title": "CVE-2025-13223 — Google Chromium V8 Type Confusion Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Google",
-    "product": "Chromium V8",
-    "date": "2025-11-19",
-    "ransomware": false,
-    "description": "Google Chromium V8 contains a type confusion vulnerability that allows for heap corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-13223",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-58034",
-    "title": "CVE-2025-58034 — Fortinet FortiWeb OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Fortinet",
-    "product": "FortiWeb",
-    "date": "2025-11-18",
-    "ransomware": false,
-    "description": "Fortinet FortiWeb contains an OS command Injection vulnerability that may allow an authenticated attacker to execute unauthorized code on the underlying system via crafted HTTP requests or CLI commands.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-58034",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-64446",
-    "title": "CVE-2025-64446 — Fortinet FortiWeb Path Traversal Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Fortinet",
-    "product": "FortiWeb",
-    "date": "2025-11-14",
-    "ransomware": false,
-    "description": "Fortinet FortiWeb contains a relative path traversal vulnerability that may allow an unauthenticated attacker to execute administrative commands on the system via crafted HTTP or HTTPS requests.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-64446",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-12480",
-    "title": "CVE-2025-12480 — Gladinet Triofox Improper Access Control Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Gladinet",
-    "product": "Triofox",
-    "date": "2025-11-12",
-    "ransomware": false,
-    "description": "Gladinet Triofox contains an improper access control vulnerability that allows access to initial setup pages even after setup is complete.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-12480",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-62215",
-    "title": "CVE-2025-62215 — Microsoft Windows Race Condition Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-11-12",
-    "ransomware": false,
-    "description": "Microsoft Windows Kernel contains a race condition vulnerability that allows a local attacker with low-level privileges to escalate privileges. Successful exploitation of this vulnerability could enable the attacker to gain SYSTEM-level access.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62215",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-9242",
-    "title": "CVE-2025-9242 — WatchGuard Firebox Out-of-Bounds Write Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "WatchGuard",
-    "product": "Firebox",
-    "date": "2025-11-12",
-    "ransomware": false,
-    "description": "WatchGuard Firebox contains an out-of-bounds write vulnerability in the OS iked process that may allow a remote unauthenticated attacker to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-9242",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-21042",
-    "title": "CVE-2025-21042 — Samsung Mobile Devices Out-of-Bounds Write Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Samsung",
-    "product": "Mobile Devices",
-    "date": "2025-11-10",
-    "ransomware": false,
-    "description": "Samsung mobile devices contain an out-of-bounds write vulnerability in libimagecodec.quram.so. This vulnerability could allow remote attackers to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-21042",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-48703",
-    "title": "CVE-2025-48703 — CWP Control Web Panel OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "CWP",
-    "product": "Control Web Panel",
-    "date": "2025-11-04",
-    "ransomware": false,
-    "description": "CWP Control Web Panel (formerly CentOS Web Panel) contains an OS command Injection vulnerability that allows unauthenticated remote code execution via shell metacharacters in the t_total parameter in a filemanager changePerm request. A valid non-root username must be known.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48703",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-11371",
-    "title": "CVE-2025-11371 — Gladinet CentreStack and Triofox Files or Directories Accessible to External Parties Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Gladinet",
-    "product": "CentreStack and Triofox",
-    "date": "2025-11-04",
-    "ransomware": false,
-    "description": "Gladinet CentreStack and Triofox contains a files or directories accessible to external parties vulnerability that allows unintended disclosure of system files.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-11371",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-41244",
-    "title": "CVE-2025-41244 — Broadcom VMware Aria Operations and VMware Tools Privilege Defined with Unsafe Actions Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Broadcom",
-    "product": "VMware Aria Operations and VMware Tools",
-    "date": "2025-10-30",
-    "ransomware": false,
-    "description": "Broadcom VMware Aria Operations and VMware Tools contain a privilege defined with unsafe actions vulnerability. A malicious local actor with non-administrative privileges having access to a VM with VMware Tools installed and managed by Aria Operations with SDMP enabled may exploit this vulnerability to escalate privileges to root on the same VM.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41244",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-24893",
-    "title": "CVE-2025-24893 — XWiki Platform Eval Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "XWiki",
-    "product": "Platform",
-    "date": "2025-10-30",
-    "ransomware": false,
-    "description": "XWiki Platform contains an eval injection vulnerability that could allow any guest to perform arbitrary remote code execution through a request to SolrSearch.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-24893",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-6204",
-    "title": "CVE-2025-6204 — Dassault Systèmes DELMIA Apriso Code Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Dassault Systèmes",
-    "product": "DELMIA Apriso",
-    "date": "2025-10-28",
-    "ransomware": false,
-    "description": "Dassault Systèmes DELMIA Apriso contains a code injection vulnerability that could allow an attacker to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-6204",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-6205",
-    "title": "CVE-2025-6205 — Dassault Systèmes DELMIA Apriso Missing Authorization Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Dassault Systèmes",
-    "product": "DELMIA Apriso",
-    "date": "2025-10-28",
-    "ransomware": false,
-    "description": "Dassault Systèmes DELMIA Apriso contains a missing authorization vulnerability that could allow an attacker to gain privileged access to the application.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-6205",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-54236",
-    "title": "CVE-2025-54236 — Adobe Commerce and Magento Improper Input Validation Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Adobe",
-    "product": "Commerce and Magento",
-    "date": "2025-10-24",
-    "ransomware": false,
-    "description": "Adobe Commerce and Magento Open Source contain an improper input validation vulnerability that could allow an attacker to take over customer accounts through the Commerce REST API.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54236",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-59287",
-    "title": "CVE-2025-59287 — Microsoft Windows Server Update Service (WSUS) Deserialization of Untrusted Data Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-24",
-    "ransomware": false,
-    "description": "Microsoft Windows Server Update Service (WSUS) contains a deserialization of untrusted data vulnerability that allows for remote code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59287",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-61932",
-    "title": "CVE-2025-61932 — Motex LANSCOPE Endpoint Manager Improper Verification of Source of a Communication Channel Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Motex",
-    "product": "LANSCOPE Endpoint Manager",
-    "date": "2025-10-22",
-    "ransomware": false,
-    "description": "Motex LANSCOPE Endpoint Manager contains an improper verification of source of a communication channel vulnerability allowing an attacker to execute arbitrary code by sending specially crafted packets.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-61932",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2022-48503",
-    "title": "CVE-2022-48503 — Apple Multiple Products Unspecified Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Apple",
-    "product": "Multiple Products",
-    "date": "2025-10-20",
-    "ransomware": false,
-    "description": "Apple macOS, iOS, tvOS, Safari, and watchOS contain an unspecified vulnerability in JavaScriptCore that when processing web content may lead to arbitrary code execution. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-48503",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-2746",
-    "title": "CVE-2025-2746 — Kentico Xperience CMS Authentication Bypass Using an Alternate Path or Channel Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Kentico",
-    "product": "Xperience CMS",
-    "date": "2025-10-20",
-    "ransomware": false,
-    "description": "Kentico Xperience CMS contains an authentication bypass using an alternate path or channel vulnerability that could allow an attacker to control administrative objects.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2746",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-2747",
-    "title": "CVE-2025-2747 — Kentico Xperience CMS Authentication Bypass Using an Alternate Path or Channel Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Kentico",
-    "product": "Xperience CMS",
-    "date": "2025-10-20",
-    "ransomware": false,
-    "description": "Kentico Xperience CMS contains an authentication bypass using an alternate path or channel vulnerability that could allow an attacker to control administrative objects.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-2747",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-33073",
-    "title": "CVE-2025-33073 — Microsoft Windows SMB Client Improper Access Control Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-20",
-    "ransomware": false,
-    "description": "Microsoft Windows SMB Client contains an improper access control vulnerability that could allow for privilege escalation. An attacker could execute a specially crafted malicious script to coerce the victim machine to connect back to the attack system using SMB and authenticate.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-33073",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-61884",
-    "title": "CVE-2025-61884 — Oracle E-Business Suite Server-Side Request Forgery (SSRF) Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Oracle",
-    "product": "E-Business Suite",
-    "date": "2025-10-20",
-    "ransomware": true,
-    "description": "Oracle E-Business Suite contains a server-side request forgery (SSRF) vulnerability in the Runtime component of Oracle Configurator. This vulnerability is remotely exploitable without authentication.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-61884",
-    "essential_eight_pillar": "Regular Backups & Application Control"
-  },
-  {
-    "id": "CVE-2025-54253",
-    "title": "CVE-2025-54253 — Adobe Experience Manager Forms Code Execution Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Adobe",
-    "product": "Experience Manager (AEM) Forms",
-    "date": "2025-10-15",
-    "ransomware": false,
-    "description": "Adobe Experience Manager Forms in JEE contains an unspecified vulnerability that allows for arbitrary code execution.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54253",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-47827",
-    "title": "CVE-2025-47827 — IGEL OS Use of a Key Past its Expiration Date Vulnerability",
-    "severity": "HIGH",
-    "vendor": "IGEL",
-    "product": "IGEL OS",
-    "date": "2025-10-14",
-    "ransomware": false,
-    "description": "IGEL OS contains a use of a key past its expiration date vulnerability that allows for Secure Boot bypass. The igel-flash-driver module improperly verifies a cryptographic signature. Ultimately, a crafted root filesystem can be mounted from an unverified SquashFS image.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-47827",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-24990",
-    "title": "CVE-2025-24990 — Microsoft Windows Untrusted Pointer Dereference Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-14",
-    "ransomware": false,
-    "description": "Microsoft Windows Agere Modem Driver contains an untrusted pointer dereference vulnerability that allows for privilege escalation. An attacker who successfully exploited this vulnerability could gain administrator privileges.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-24990",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2025-59230",
-    "title": "CVE-2025-59230 — Microsoft Windows Improper Access Control Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-14",
-    "ransomware": false,
-    "description": "Microsoft Windows contains an improper access control vulnerability in Windows Remote Access Connection Manager which could allow an authorized attacker to elevate privileges locally.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59230",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2016-7836",
-    "title": "CVE-2016-7836 — SKYSEA Client View Improper Authentication Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "SKYSEA",
-    "product": "Client View",
-    "date": "2025-10-14",
-    "ransomware": false,
-    "description": "SKYSEA Client View contains an improper authentication vulnerability that allows remote code execution via a flaw in processing authentication on the TCP connection with the management console program.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-7836",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2021-43798",
-    "title": "CVE-2021-43798 — Grafana Labs Grafana Path Traversal Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Grafana Labs",
-    "product": "Grafana",
-    "date": "2025-10-09",
-    "ransomware": false,
-    "description": "Grafana contains a path traversal vulnerability that could allow access to local files.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-43798",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-27915",
-    "title": "CVE-2025-27915 — Synacor Zimbra Collaboration Suite (ZCS) Cross-site Scripting Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Synacor",
-    "product": "Zimbra Collaboration Suite (ZCS)",
-    "date": "2025-10-07",
-    "ransomware": false,
-    "description": "Synacor Zimbra Collaboration Suite (ZCS) contains a cross-site scripting vulnerability that exists in the Classic Web Client due to insufficient sanitization of HTML content in ICS files. When a user views an e-mail message containing a malicious ICS entry, its embedded JavaScript executes via an ontoggle event inside a tag. This allows an attacker to run arbitrary JavaScript within the victim's session, potentially leading to unauthorized actions such as setting e-mail filters to redirect messages to an attacker-controlled address. As a result, an attacker can perform unauthorized actions on the victim's account, including e-mail redirection and data exfiltration.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-27915",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2021-22555",
-    "title": "CVE-2021-22555 — Linux Kernel Heap Out-of-Bounds Write Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Linux",
-    "product": "Kernel",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Linux Kernel contains a heap out-of-bounds write vulnerability that could allow an attacker to gain privileges or cause a DoS (via heap memory corruption) through user name space.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-22555",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2010-3962",
-    "title": "CVE-2010-3962 — Microsoft Internet Explorer Uninitialized Memory Corruption Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Internet Explorer",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Microsoft Internet Explorer contains an uninitialized memory corruption vulnerability that could allow for remote code execution. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-3962",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2021-43226",
-    "title": "CVE-2021-43226 — Microsoft Windows Privilege Escalation Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Microsoft Windows Common Log File System Driver contains a privilege escalation vulnerability that could allow a local, privileged attacker to bypass certain security mechanisms.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-43226",
-    "essential_eight_pillar": "Restrict Administrative Privileges"
-  },
-  {
-    "id": "CVE-2013-3918",
-    "title": "CVE-2013-3918 — Microsoft Windows Out-of-Bounds Write Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Microsoft Windows contains an out-of-bounds write vulnerability in the InformationCardSigninHelper Class ActiveX control, icardie.dll. An attacker could exploit the vulnerability by constructing a specially crafted webpage. When a user views the webpage, the vulnerability could allow remote code execution. An attacker who successfully exploited this vulnerability could gain the same user rights as the current user. The impacted product could be end-of-life (EoL) and/or end-of-service (EoS). Users should discontinue product utilization.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2013-3918",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2011-3402",
-    "title": "CVE-2011-3402 — Microsoft Windows Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Microsoft Windows Kernel contains an unspecified vulnerability in the TrueType font parsing engine in win32k.sys in the kernel-mode drivers that allows remote attackers to execute arbitrary code via crafted font data in a Word document or web page.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2011-3402",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2010-3765",
-    "title": "CVE-2010-3765 — Mozilla Multiple Products Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Mozilla",
-    "product": "Multiple Products",
-    "date": "2025-10-06",
-    "ransomware": false,
-    "description": "Mozilla Firefox, SeaMonkey, and Thunderbird contain an unspecified vulnerability when JavaScript is enabled. This allows remote attackers to execute arbitrary code via vectors related to nsCSSFrameConstructor::ContentAppended, the appendChild method, incorrect index tracking, and the creation of multiple frames, which triggers memory corruption.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-3765",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2025-61882",
-    "title": "CVE-2025-61882 — Oracle E-Business Suite Unspecified Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Oracle",
-    "product": "E-Business Suite",
-    "date": "2025-10-06",
-    "ransomware": true,
-    "description": "Oracle E-Business Suite contains an unspecified vulnerability in the BI Publisher Integration component. The vulnerability allows unauthenticated attacker with network access via HTTP to compromise Oracle Concurrent Processing. Successful attacks can result in takeover of Oracle Concurrent Processing.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-61882",
-    "essential_eight_pillar": "Regular Backups & Application Control"
-  },
-  {
-    "id": "CVE-2014-6278",
-    "title": "CVE-2014-6278 — GNU Bash OS Command Injection Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "GNU",
-    "product": "GNU Bash",
-    "date": "2025-10-02",
-    "ransomware": false,
-    "description": "GNU Bash contains an OS command injection vulnerability which allows remote attackers to execute arbitrary commands via a crafted environment.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2014-6278",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2017-1000353",
-    "title": "CVE-2017-1000353 — Jenkins Remote Code Execution Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Jenkins",
-    "product": "Jenkins",
-    "date": "2025-10-02",
-    "ransomware": false,
-    "description": "Jenkins contains a remote code execution vulnerability. This vulnerability that could allowed attackers to transfer a serialized Java SignedObject object to the remoting-based Jenkins CLI, that would be deserialized using a new ObjectInputStream, bypassing the existing blocklist-based protection mechanism.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-1000353",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
-  },
-  {
-    "id": "CVE-2015-7755",
-    "title": "CVE-2015-7755 — Juniper ScreenOS Improper Authentication Vulnerability",
-    "severity": "HIGH",
-    "vendor": "Juniper",
-    "product": "ScreenOS",
-    "date": "2025-10-02",
-    "ransomware": false,
-    "description": "Juniper ScreenOS contains an improper authentication vulnerability that could allow unauthorized remote administrative access to the device.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2015-7755",
-    "essential_eight_pillar": "Multi-Factor Authentication"
-  },
-  {
-    "id": "CVE-2025-21043",
-    "title": "CVE-2025-21043 — Samsung Mobile Devices Out-of-Bounds Write Vulnerability",
-    "severity": "CRITICAL",
-    "vendor": "Samsung",
-    "product": "Mobile Devices",
-    "date": "2025-10-02",
-    "ransomware": false,
-    "description": "Samsung mobile devices contain an out-of-bounds write vulnerability in libimagecodec.quram.so which allows remote attackers to execute arbitrary code.",
-    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-21043",
-    "essential_eight_pillar": "Patch Applications & Operating Systems"
+    "source": "CISA KEV (Live)",
+    "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59374"
   }
 ];

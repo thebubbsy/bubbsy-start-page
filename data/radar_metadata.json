@@ -1,0 +1,9 @@
+{
+  "last_updated": "2026-09-30T17:34:15.494717+00:00",
+  "total_catalog_count": 1730,
+  "cached_count": 250,
+  "latest_cve": "CVE-2026-76504",
+  "latest_cve_title": "CVE-2026-76504 \u2014 Cisco Catalyst SD-WAN Manager Hex Encoding Vulnerability",
+  "latest_date": "2026-09-30",
+  "status": "up_to_date"
+}
