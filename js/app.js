@@ -11597,14 +11597,18 @@ ${formatInstructions}
   window.closeModal = closeModal;
   window.cycleTheme = cycleTheme;
 
+  function getVisibleDashboardLinkElements() {
+    return Array.from(document.querySelectorAll('#dashboard-grid .link-item, #dashboard-grid .tool-item'))
+      .filter(el => el.offsetParent !== null && !el.closest('.widget-card[style*="display: none"]'));
+  }
+
   document.addEventListener('click', async (e) => {
     const btnRawUrls = e.target.closest('#btn-copy-raw-urls');
     if (btnRawUrls) {
-      const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
-        .filter(el => el.offsetParent !== null);
+      const visibleLinks = getVisibleDashboardLinkElements();
       const urls = visibleLinks.map(el => {
-        const a = el.querySelector('a.tool-link') || el.querySelector('a');
-        return a?.href || '';
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        return a?.href || el.getAttribute('data-link-url') || '';
       }).filter(Boolean);
       if (urls.length === 0) return;
       try {
@@ -11614,17 +11618,80 @@ ${formatInstructions}
       return;
     }
 
+    const btnDomains = e.target.closest('#btn-copy-visible-domains');
+    if (btnDomains) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      const domainSet = new Set();
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const rawUrl = a?.href || el.getAttribute('data-link-url') || '';
+        const d = extractDomain(rawUrl);
+        if (d) domainSet.add(d);
+      });
+      const domains = Array.from(domainSet).sort();
+      if (domains.length === 0) return;
+      try {
+        await navigator.clipboard.writeText(domains.join('\n'));
+        showToast(`Copied ${domains.length} unique OSINT domain(s) to clipboard!`);
+      } catch (err) {}
+      return;
+    }
+
+    const btnGeMd = e.target.closest('#ge-copy-feeds-md');
+    if (btnGeMd) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'));
+      if (feedItems.length === 0) {
+        showToast('No live feed items loaded yet', 'error');
+        return;
+      }
+      const mdLines = [`# God's Eye Australia — Live Intel Feeds (${new Date().toISOString()})`, ''];
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        const url = a?.href || '';
+        if (title) {
+          mdLines.push(url ? `- **[${src}]** [${title}](${url})` : `- **[${src}]** ${title}`);
+        }
+      });
+      copyToClipboard(mdLines.join('\n'), `Copied ${feedItems.length} God's Eye intel feed item(s) as Markdown!`);
+      return;
+    }
+
+    const btnGeJson = e.target.closest('#ge-export-feeds-json');
+    if (btnGeJson) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'));
+      const records = feedItems.map(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        return {
+          source: (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim(),
+          title: (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim(),
+          url: a?.href || ''
+        };
+      }).filter(r => r.title);
+      const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), count: records.length, feeds: records }, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'gods-eye-au-intel-feeds.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${records.length} God's Eye feed item(s) to JSON!`);
+      return;
+    }
+
     const btnCsv = e.target.closest('#btn-export-visible-csv');
     if (btnCsv) {
-      const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
-        .filter(el => el.offsetParent !== null);
+      const visibleLinks = getVisibleDashboardLinkElements();
       const rows = [['Category', 'Name', 'URL']];
       visibleLinks.forEach(el => {
-        const a = el.querySelector('a.tool-link') || el.querySelector('a');
-        const card = el.closest('.category-card');
-        const catTitle = card?.querySelector('.card-title')?.textContent?.trim() || 'Uncategorized';
-        const name = (a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
-        const url = a?.href || '';
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = card?.querySelector('.widget-title, .card-title')?.textContent?.trim() || 'Uncategorized';
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+        const url = a?.href || el.getAttribute('data-link-url') || '';
         if (url) rows.push([catTitle, name, url]);
       });
       const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\r\n');
@@ -11643,15 +11710,14 @@ ${formatInstructions}
 
     const btnJson = e.target.closest('#btn-export-visible-json');
     if (!btnJson) return;
-    const visibleLinks = Array.from(document.querySelectorAll('#dashboard-grid .tool-item'))
-      .filter(el => el.offsetParent !== null);
+    const visibleLinks = getVisibleDashboardLinkElements();
     const items = visibleLinks.map(el => {
-      const a = el.querySelector('a.tool-link') || el.querySelector('a');
-      const card = el.closest('.category-card');
-      const catTitle = card?.querySelector('.card-title')?.textContent?.trim() || 'Uncategorized';
+      const a = el.querySelector('a.link-anchor, a.tool-link, a');
+      const card = el.closest('.widget-card, .category-card');
+      const catTitle = card?.querySelector('.widget-title, .card-title')?.textContent?.trim() || 'Uncategorized';
       return {
-        name: (a?.textContent || el.textContent || '').trim(),
-        url: a?.href || '',
+        name: (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim(),
+        url: a?.href || el.getAttribute('data-link-url') || '',
         category: catTitle
       };
     }).filter(x => x.url);

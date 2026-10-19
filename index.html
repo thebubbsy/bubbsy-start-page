@@ -411,6 +411,7 @@
     <button class="btn-icon" id="btn-random-tool" style="margin-left:auto;font-size:0.68rem;padding:3px 10px;border-color:rgba(0,240,255,0.3);color:var(--accent-cyan);" title="Jump to a random visible OSINT tool">Random Recon</button>
     <button class="btn-icon" id="btn-copy-visible-urls" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(16,185,129,0.3);color:var(--accent-green);" title="Copy all currently visible/filtered tools as Markdown">Copy Visible</button>
     <button class="btn-icon" id="btn-copy-raw-urls" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(168,85,247,0.35);color:#c084fc;" title="Copy newline-separated raw URLs of all visible OSINT tools">Copy URLs</button>
+    <button class="btn-icon" id="btn-copy-visible-domains" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(20,184,166,0.35);color:#2dd4bf;" title="Copy deduplicated sorted domain list of all visible OSINT tools">Copy Domains</button>
     <button class="btn-icon" id="btn-export-visible-csv" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(56,189,248,0.35);color:#38bdf8;" title="Export all currently visible/filtered OSINT tools as CSV">Export CSV</button>
     <button class="btn-icon" id="btn-export-visible-json" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(245,158,11,0.35);color:var(--accent-amber);" title="Export all currently visible/filtered OSINT tools as JSON">Export JSON</button>
     <button class="btn-icon" id="btn-toggle-all-cards" style="font-size:0.68rem;padding:3px 10px;border-color:rgba(255,255,255,0.15);" title="Collapse / Expand All Category Cards">Collapse All</button>
@@ -2243,9 +2244,13 @@
 
       <!-- COL 1: Live Intel Feeds -->
       <div class="ge-panel" id="ge-feeds-panel">
-        <div class="ge-panel-title">
-          📡 LIVE INTEL FEEDS
-          <button class="ge-refresh-btn" id="ge-refresh-btn" title="Refresh all feeds">↻ Refresh</button>
+        <div class="ge-panel-title" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+          <span>📡 LIVE INTEL FEEDS</span>
+          <div style="margin-left:auto;display:flex;gap:4px;">
+            <button class="ge-refresh-btn" id="ge-copy-feeds-md" title="Copy visible Australian live intel feed items as Markdown">📋 MD</button>
+            <button class="ge-refresh-btn" id="ge-export-feeds-json" title="Download visible Australian live intel feed items as JSON">⬇ JSON</button>
+            <button class="ge-refresh-btn" id="ge-refresh-btn" title="Refresh all feeds">↻ Refresh</button>
+          </div>
         </div>
         <div class="ge-feed-tabs">
           <button class="ge-feed-tab active" data-feed="acsc">ACSC</button>
