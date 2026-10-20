@@ -13010,6 +13010,84 @@ ${formatInstructions}
       return;
     }
 
+    const btnCopySummary = e.target.closest('#btn-copy-visible-summary');
+    if (btnCopySummary) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const catCounts = new Map();
+      const domains = new Set();
+      let auCount = 0;
+      let totalCount = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        totalCount++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').replace(/\|/g, '\\|').trim();
+        catCounts.set(catTitle, (catCounts.get(catTitle) || 0) + 1);
+        const dom = (extractDomain(url) || '').toLowerCase();
+        if (dom) {
+          domains.add(dom);
+          if (dom.endsWith('.au') || catTitle.includes('[AUS]')) auCount++;
+        } else if (catTitle.includes('[AUS]')) {
+          auCount++;
+        }
+      });
+      if (totalCount === 0) return;
+      const sortedCats = Array.from(catCounts.entries()).sort((a, b) => b[1] - a[1]);
+      const mdLines = [
+        `### Bubbsy OSINT Command Hub — Visible Toolset Summary`,
+        ``,
+        `- **Visible Tools**: **${totalCount}** across **${sortedCats.length}** modules`,
+        `- **Unique Domains**: **${domains.size}** (**${auCount}** Australian-prioritised tools)`,
+        ``,
+        `| # | Module / Category | Visible Tools | Share % |`,
+        `| :- | :--- | :---: | :---: |`,
+        ...sortedCats.map(([cat, cnt], idx) => `| ${idx + 1} | ${cat} | **${cnt}** | ${((cnt * 100) / totalCount).toFixed(1)}% |`)
+      ];
+      copyToClipboard(mdLines.join('\r\n'), `Copied Category & Domain Breakdown Summary (${sortedCats.length} modules, ${totalCount} tools)!`);
+      return;
+    }
+
+    const btnGeCopySummary = e.target.closest('#ge-copy-feeds-summary');
+    if (btnGeCopySummary) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      const agencyCounts = new Map();
+      feedItems.forEach(item => {
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        agencyCounts.set(src, (agencyCounts.get(src) || 0) + 1);
+      });
+      const statAbns = (document.getElementById('ge-stat-abns')?.textContent || '—').trim();
+      const statAcsc = (document.getElementById('ge-stat-acsc')?.textContent || '—').trim();
+      const statAustlii = (document.getElementById('ge-stat-austlii')?.textContent || '—').trim();
+      const statAsic = (document.getElementById('ge-stat-asic')?.textContent || '—').trim();
+      const statFeeds = (document.getElementById('ge-stat-feeds')?.textContent || '—').trim();
+      const statNewAbns = (document.getElementById('ge-stat-new-abns')?.textContent || '—').trim();
+      const mdLines = [
+        `### God's Eye View — Australian OSINT Posture & Feed Summary`,
+        ``,
+        `| Australian Intel Indicator | Value |`,
+        `| :--- | :--- |`,
+        `| **Active ABNs (Est.)** | ${statAbns} |`,
+        `| **ACSC Advisories** | ${statAcsc} |`,
+        `| **AusLII Judgments** | ${statAustlii} |`,
+        `| **ASIC Actions** | ${statAsic} |`,
+        `| **Live Feeds Active** | ${statFeeds} |`,
+        `| **New ABNs Today** | ${statNewAbns} |`,
+        `| **Visible Feed Items** | **${feedItems.length}** |`
+      ];
+      if (agencyCounts.size > 0) {
+        mdLines.push(``, `| Agency / Feed Source | Visible Items |`, `| :--- | :---: |`);
+        Array.from(agencyCounts.entries()).sort((a, b) => b[1] - a[1]).forEach(([src, cnt]) => {
+          mdLines.push(`| **${src}** | ${cnt} |`);
+        });
+      }
+      copyToClipboard(mdLines.join('\r\n'), `Copied God's Eye Australian Intel Summary (${feedItems.length} visible feed items)!`);
+      return;
+    }
+
     const btnGeCopyCsv = e.target.closest('#ge-copy-feeds-csv');
     if (btnGeCopyCsv) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
