@@ -12965,6 +12965,72 @@ ${formatInstructions}
       return;
     }
 
+    const btnCopyCsv = e.target.closest('#btn-copy-visible-csv');
+    if (btnCopyCsv) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const csvRows = ['Category,Tool Name,Domain,URL'];
+      let idx = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        idx++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').trim();
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+        const domain = (extractDomain(url) || '-').trim();
+        const esc = v => `"${String(v).replace(/"/g, '""')}"`;
+        csvRows.push([esc(catTitle), esc(name), esc(domain), esc(url)].join(','));
+      });
+      if (idx === 0) return;
+      copyToClipboard(csvRows.join('\r\n'), `Copied ${idx} visible OSINT tool(s) as CSV to clipboard!`);
+      return;
+    }
+
+    const btnCopyJson = e.target.closest('#btn-copy-visible-json');
+    if (btnCopyJson) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const items = visibleLinks.map(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').trim();
+        return {
+          name: (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim(),
+          category: catTitle,
+          domain: extractDomain(url) || '-',
+          url
+        };
+      }).filter(x => x.url);
+      if (items.length === 0) return;
+      const jsonStr = JSON.stringify({ copiedAt: new Date().toISOString(), count: items.length, tools: items }, null, 2);
+      copyToClipboard(jsonStr, `Copied ${items.length} visible OSINT tool(s) as JSON to clipboard!`);
+      return;
+    }
+
+    const btnGeCopyCsv = e.target.closest('#ge-copy-feeds-csv');
+    if (btnGeCopyCsv) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const rows = [['Source', 'Title', 'URL']];
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        const url = a?.href || '';
+        if (title) rows.push([src, title, url]);
+      });
+      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\r\n');
+      copyToClipboard(csv, `Copied ${rows.length - 1} God's Eye feed item(s) as CSV to clipboard!`);
+      return;
+    }
+
     const btnGeUrls = e.target.closest('#ge-copy-feeds-urls');
     if (btnGeUrls) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
