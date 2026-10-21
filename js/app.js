@@ -13325,6 +13325,72 @@ ${formatInstructions}
       return;
     }
 
+    const btnGeSummaryCsv = e.target.closest('#ge-copy-feeds-summary-csv');
+    if (btnGeSummaryCsv) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const counts = new Map();
+      let validTotal = 0;
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!title) return;
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').replace(/[\t\r\n]+/g, ' ').trim();
+        counts.set(src, (counts.get(src) || 0) + 1);
+        validTotal++;
+      });
+      const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+      const csvRows = ['AgencySource,VisibleItems,SharePercent'];
+      sorted.forEach(([agency, cnt]) => {
+        const pct = validTotal > 0 ? ((cnt * 100) / validTotal).toFixed(1) + '%' : '0.0%';
+        csvRows.push(`"${String(agency).replace(/"/g, '""')}",${cnt},"${pct}"`);
+      });
+      csvRows.push(`"Total Visible",${validTotal},"100.0%"`);
+      copyToClipboard(csvRows.join('\r\n'), `Copied God's Eye Agency Breakdown (${sorted.length} source(s), ${validTotal} item(s)) as CSV!`);
+      return;
+    }
+
+    const btnVisSummaryCsv = e.target.closest('#btn-copy-visible-summary-csv');
+    if (btnVisSummaryCsv) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) {
+        showToast('No visible OSINT tools match the current filter', 'error');
+        return;
+      }
+      const catCounts = new Map();
+      const domCounts = new Map();
+      let totalValid = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/[\t\r\n]+/g, ' ').trim();
+        catCounts.set(catTitle, (catCounts.get(catTitle) || 0) + 1);
+        try {
+          const host = new URL(url).hostname.replace(/^www\./i, '').toLowerCase();
+          if (host) domCounts.set(host, (domCounts.get(host) || 0) + 1);
+        } catch (_) {}
+        totalValid++;
+      });
+      const csvRows = ['Dimension,Name,ToolCount,SharePercent'];
+      Array.from(catCounts.entries()).sort((a, b) => b[1] - a[1]).forEach(([cat, cnt]) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        csvRows.push(`"Category","${String(cat).replace(/"/g, '""')}",${cnt},"${pct}"`);
+      });
+      Array.from(domCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10).forEach(([dom, cnt]) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        csvRows.push(`"TopDomain","${String(dom).replace(/"/g, '""')}",${cnt},"${pct}"`);
+      });
+      csvRows.push(`"Summary","Total Visible Tools",${totalValid},"100.0%"`);
+      copyToClipboard(csvRows.join('\r\n'), `Copied OSINT Category & Top Domain Breakdown (${totalValid} tools) as CSV!`);
+      return;
+    }
+
     const btnGeCopyJson = e.target.closest('#ge-copy-feeds-json');
     if (btnGeCopyJson) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
