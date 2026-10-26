@@ -12918,6 +12918,34 @@ ${formatInstructions}
       return;
     }
 
+    const btnHtmlTable = e.target.closest('#btn-copy-visible-html');
+    if (btnHtmlTable) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const htmlRows = [];
+      let idx = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        idx++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').trim();
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+        const domain = (extractDomain(url) || '-').toLowerCase();
+        const safeCat = String(catTitle).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const safeName = String(name).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const safeDom = String(domain).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const safeUrl = String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        const bg = idx % 2 === 0 ? '#0d1117' : '#161b22';
+        htmlRows.push(`    <tr style="background:${bg};border-bottom:1px solid #21262d"><td style="padding:6px 10px;border:1px solid #30363d;text-align:center;color:#8b949e;font-family:monospace">${idx}</td><td style="padding:6px 10px;border:1px solid #30363d;color:#58a6ff;font-weight:600">${safeCat}</td><td style="padding:6px 10px;border:1px solid #30363d"><a href="${safeUrl}" style="color:#c9d1d9;text-decoration:none;font-weight:500">${safeName}</a></td><td style="padding:6px 10px;border:1px solid #30363d;color:#7ee787;font-family:monospace">${safeDom}</td><td style="padding:6px 10px;border:1px solid #30363d"><a href="${safeUrl}" style="color:#8b949e;text-decoration:none;font-size:11px">${safeUrl}</a></td></tr>`);
+      });
+      if (idx === 0) return;
+      const htmlTable = `<table style="border-collapse:collapse;width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;color:#c9d1d9;background-color:#0d1117;border:1px solid #30363d">\n  <thead>\n    <tr style="background-color:#21262d;color:#f0f6fc;text-align:left">\n      <th style="padding:8px 10px;border:1px solid #30363d;text-align:center;width:40px">#</th>\n      <th style="padding:8px 10px;border:1px solid #30363d;width:140px">Category</th>\n      <th style="padding:8px 10px;border:1px solid #30363d">Tool Name</th>\n      <th style="padding:8px 10px;border:1px solid #30363d;width:150px">Domain</th>\n      <th style="padding:8px 10px;border:1px solid #30363d">URL</th>\n    </tr>\n  </thead>\n  <tbody>\n${htmlRows.join('\n')}\n  </tbody>\n</table>`;
+      copyToClipboard(htmlTable, `Copied ${idx} visible OSINT tool(s) as styled HTML table to clipboard!`);
+      return;
+    }
+
     const btnMdTable = e.target.closest('#btn-copy-visible-md-table');
     if (btnMdTable) {
       const visibleLinks = getVisibleDashboardLinkElements();
@@ -13133,6 +13161,35 @@ ${formatInstructions}
         feedFilter.dispatchEvent(new Event('input', { bubbles: true }));
         feedFilter.focus();
       }
+      return;
+    }
+
+    const btnGeHtml = e.target.closest('#ge-copy-feeds-html');
+    if (btnGeHtml) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const rows = [];
+      let idx = 0;
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        const url = a?.href || '';
+        if (title) {
+          idx++;
+          const safeTitle = String(title).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const safeSrc = String(src).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const safeUrl = String(url).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+          const bg = idx % 2 === 0 ? '#0d1117' : '#161b22';
+          rows.push(`    <tr style="background:${bg};border-bottom:1px solid #21262d"><td style="padding:6px 10px;border:1px solid #30363d;text-align:center;color:#8b949e;font-family:monospace">${idx}</td><td style="padding:6px 10px;border:1px solid #30363d;text-align:center"><span style="background-color:#1e3a8a;color:#93c5fd;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600">${safeSrc}</span></td><td style="padding:6px 10px;border:1px solid #30363d"><a href="${safeUrl}" style="color:#c9d1d9;text-decoration:none;font-weight:500">${safeTitle}</a></td><td style="padding:6px 10px;border:1px solid #30363d"><a href="${safeUrl}" style="color:#8b949e;text-decoration:none;font-size:11px">${safeUrl}</a></td></tr>`);
+        }
+      });
+      const htmlTable = `<table style="border-collapse:collapse;width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.5;color:#c9d1d9;background-color:#0d1117;border:1px solid #30363d">\n  <thead>\n    <tr style="background-color:#21262d;color:#f0f6fc;text-align:left">\n      <th style="padding:8px 10px;border:1px solid #30363d;text-align:center;width:40px">#</th>\n      <th style="padding:8px 10px;border:1px solid #30363d;text-align:center;width:110px">Source</th>\n      <th style="padding:8px 10px;border:1px solid #30363d">Intel Headline</th>\n      <th style="padding:8px 10px;border:1px solid #30363d">URL</th>\n    </tr>\n  </thead>\n  <tbody>\n${rows.join('\n')}\n  </tbody>\n</table>`;
+      copyToClipboard(htmlTable, `Copied ${idx} God's Eye intel feed item(s) as styled HTML table to clipboard!`);
       return;
     }
 
