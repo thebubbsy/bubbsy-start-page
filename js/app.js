@@ -13391,6 +13391,73 @@ ${formatInstructions}
       return;
     }
 
+    const btnGeSummaryHtml = e.target.closest('#ge-copy-feeds-summary-html');
+    if (btnGeSummaryHtml) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const counts = new Map();
+      let validTotal = 0;
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!title) return;
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').replace(/[\t\r\n]+/g, ' ').trim();
+        counts.set(src, (counts.get(src) || 0) + 1);
+        validTotal++;
+      });
+      const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+      const rows = sorted.map(([agency, cnt]) => {
+        const pct = validTotal > 0 ? ((cnt * 100) / validTotal).toFixed(1) + '%' : '0.0%';
+        const safeAgency = String(agency).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return `    <tr style="border-bottom:1px solid #1e293b"><td style="padding:6px 12px;font-weight:600;color:#38bdf8">${safeAgency}</td><td style="padding:6px 12px;text-align:right">${cnt}</td><td style="padding:6px 12px;text-align:right;color:#67e8f9">${pct}</td></tr>`;
+      }).join('\n');
+      const htmlTable = `<table style="border-collapse:collapse;font-family:Segoe UI,Helvetica,Arial,sans-serif;font-size:12px;color:#f8fafc;background:#0f172a;border:1px solid #334155;border-radius:6px;overflow:hidden">\n  <thead>\n    <tr style="background:#1e293b;border-bottom:2px solid #475569">\n      <th style="padding:6px 12px;text-align:left;color:#94a3b8">Agency / Source</th>\n      <th style="padding:6px 12px;text-align:right;color:#94a3b8">Visible Items</th>\n      <th style="padding:6px 12px;text-align:right;color:#94a3b8">Share %</th>\n    </tr>\n  </thead>\n  <tbody>\n${rows}\n    <tr style="font-weight:bold;background:#1e293b"><td style="padding:6px 12px">Total Visible</td><td style="padding:6px 12px;text-align:right">${validTotal}</td><td style="padding:6px 12px;text-align:right">100.0%</td></tr>\n  </tbody>\n</table>`;
+      copyToClipboard(htmlTable, `Copied God's Eye Agency Breakdown (${sorted.length} source(s), ${validTotal} item(s)) as styled HTML!`);
+      return;
+    }
+
+    const btnVisSummaryHtml = e.target.closest('#btn-copy-visible-summary-html');
+    if (btnVisSummaryHtml) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) {
+        showToast('No visible OSINT tools match the current filter', 'error');
+        return;
+      }
+      const catCounts = new Map();
+      const domCounts = new Map();
+      let totalValid = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/[\t\r\n]+/g, ' ').trim();
+        catCounts.set(catTitle, (catCounts.get(catTitle) || 0) + 1);
+        try {
+          const host = new URL(url).hostname.replace(/^www\./i, '').toLowerCase();
+          if (host) domCounts.set(host, (domCounts.get(host) || 0) + 1);
+        } catch (_) {}
+        totalValid++;
+      });
+      const catRows = Array.from(catCounts.entries()).sort((a, b) => b[1] - a[1]).map(([cat, cnt]) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        const safeCat = String(cat).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return `    <tr style="border-bottom:1px solid #1e293b"><td style="padding:5px 12px;color:#94a3b8">Category</td><td style="padding:5px 12px;font-weight:600;color:#38bdf8">${safeCat}</td><td style="padding:5px 12px;text-align:right">${cnt}</td><td style="padding:5px 12px;text-align:right;color:#67e8f9">${pct}</td></tr>`;
+      }).join('\n');
+      const domRows = Array.from(domCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([dom, cnt]) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        const safeDom = String(dom).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return `    <tr style="border-bottom:1px solid #1e293b"><td style="padding:5px 12px;color:#94a3b8">Top Domain</td><td style="padding:5px 12px;font-family:Consolas,monospace;color:#a7f3d0">${safeDom}</td><td style="padding:5px 12px;text-align:right">${cnt}</td><td style="padding:5px 12px;text-align:right;color:#67e8f9">${pct}</td></tr>`;
+      }).join('\n');
+      const htmlTable = `<table style="border-collapse:collapse;font-family:Segoe UI,Helvetica,Arial,sans-serif;font-size:12px;color:#f8fafc;background:#0f172a;border:1px solid #334155;border-radius:6px;overflow:hidden">\n  <thead>\n    <tr style="background:#1e293b;border-bottom:2px solid #475569">\n      <th style="padding:6px 12px;text-align:left;color:#94a3b8">Dimension</th>\n      <th style="padding:6px 12px;text-align:left;color:#94a3b8">Name</th>\n      <th style="padding:6px 12px;text-align:right;color:#94a3b8">Count</th>\n      <th style="padding:6px 12px;text-align:right;color:#94a3b8">Share %</th>\n    </tr>\n  </thead>\n  <tbody>\n${catRows}\n${domRows}\n    <tr style="font-weight:bold;background:#1e293b"><td style="padding:6px 12px" colspan="2">Total Visible Tools</td><td style="padding:6px 12px;text-align:right">${totalValid}</td><td style="padding:6px 12px;text-align:right">100.0%</td></tr>\n  </tbody>\n</table>`;
+      copyToClipboard(htmlTable, `Copied OSINT Category & Top Domain Breakdown (${totalValid} tools) as styled HTML!`);
+      return;
+    }
+
     const btnGeCopyJson = e.target.closest('#ge-copy-feeds-json');
     if (btnGeCopyJson) {
       const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
