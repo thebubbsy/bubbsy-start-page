@@ -13532,6 +13532,36 @@ ${formatInstructions}
       return;
     }
 
+    const btnGeSummaryXml = e.target.closest('#ge-copy-feeds-summary-xml');
+    if (btnGeSummaryXml) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const counts = new Map();
+      let validTotal = 0;
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!title) return;
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').replace(/[\t\r\n]+/g, ' ').trim();
+        counts.set(src, (counts.get(src) || 0) + 1);
+        validTotal++;
+      });
+      const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+      const rows = sorted.map(([agency, cnt], idx) => {
+        const pct = validTotal > 0 ? ((cnt * 100) / validTotal).toFixed(1) + '%' : '0.0%';
+        const safeAgency = String(agency).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        return `    <Agency index="${idx + 1}" name="${safeAgency}" count="${cnt}" sharePercent="${pct}" />`;
+      }).join('\n');
+      const xmlDoc = `<?xml version="1.0" encoding="UTF-8"?>\n<GodsEyeAgencyBreakdown totalItems="${validTotal}" sourcesCount="${sorted.length}" exportedAt="${new Date().toISOString()}">\n  <Agencies>\n${rows}\n  </Agencies>\n</GodsEyeAgencyBreakdown>`;
+      copyToClipboard(xmlDoc, `Copied God's Eye Agency Breakdown (${sorted.length} source(s), ${validTotal} item(s)) as structured XML!`);
+      return;
+    }
+
+
     const btnVisSummaryHtml = e.target.closest('#btn-copy-visible-summary-html');
     if (btnVisSummaryHtml) {
       const visibleLinks = getVisibleDashboardLinkElements();
@@ -13569,6 +13599,45 @@ ${formatInstructions}
       copyToClipboard(htmlTable, `Copied OSINT Category & Top Domain Breakdown (${totalValid} tools) as styled HTML!`);
       return;
     }
+
+    const btnVisSummaryXml = e.target.closest('#btn-copy-visible-summary-xml');
+    if (btnVisSummaryXml) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) {
+        showToast('No visible OSINT tools match the current filter', 'error');
+        return;
+      }
+      const catCounts = new Map();
+      const domCounts = new Map();
+      let totalValid = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/[\t\r\n]+/g, ' ').trim();
+        catCounts.set(catTitle, (catCounts.get(catTitle) || 0) + 1);
+        try {
+          const host = new URL(url).hostname.replace(/^www\./i, '').toLowerCase();
+          if (host) domCounts.set(host, (domCounts.get(host) || 0) + 1);
+        } catch (_) {}
+        totalValid++;
+      });
+      const catRows = Array.from(catCounts.entries()).sort((a, b) => b[1] - a[1]).map(([cat, cnt], idx) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        const safeCat = String(cat).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        return `    <Category index="${idx + 1}" name="${safeCat}" count="${cnt}" sharePercent="${pct}" />`;
+      }).join('\n');
+      const domRows = Array.from(domCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([dom, cnt], idx) => {
+        const pct = totalValid > 0 ? ((cnt * 100) / totalValid).toFixed(1) + '%' : '0.0%';
+        const safeDom = String(dom).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        return `    <TopDomain index="${idx + 1}" domain="${safeDom}" count="${cnt}" sharePercent="${pct}" />`;
+      }).join('\n');
+      const xmlDoc = `<?xml version="1.0" encoding="UTF-8"?>\n<OsintBreakdown totalTools="${totalValid}" exportedAt="${new Date().toISOString()}">\n  <Categories count="${catCounts.size}">\n${catRows}\n  </Categories>\n  <TopDomains count="${Math.min(domCounts.size, 10)}">\n${domRows}\n  </TopDomains>\n</OsintBreakdown>`;
+      copyToClipboard(xmlDoc, `Copied OSINT Category & Top Domain Breakdown (${totalValid} tools) as structured XML!`);
+      return;
+    }
+
 
     const btnGeCopyJson = e.target.closest('#ge-copy-feeds-json');
     if (btnGeCopyJson) {
