@@ -12973,6 +12973,29 @@ ${formatInstructions}
       return;
     }
 
+    const btnYaml = e.target.closest('#btn-copy-visible-yaml');
+    if (btnYaml) {
+      const visibleLinks = getVisibleDashboardLinkElements();
+      if (visibleLinks.length === 0) return;
+      const yamlRows = [];
+      let idx = 0;
+      visibleLinks.forEach(el => {
+        const a = el.querySelector('a.link-anchor, a.tool-link, a');
+        const url = a?.href || el.getAttribute('data-link-url') || '';
+        if (!url) return;
+        idx++;
+        const card = el.closest('.widget-card, .category-card');
+        const catTitle = (card?.querySelector('.widget-title, .card-title')?.textContent || 'Uncategorized').replace(/\s+/g, ' ').trim();
+        const name = (el.querySelector('.link-title')?.textContent || a?.textContent || el.textContent || '').replace(/\s+/g, ' ').trim();
+        const domain = (extractDomain(url) || '-').toLowerCase();
+        yamlRows.push(`  - index: ${idx}\n    name: ${JSON.stringify(name)}\n    category: ${JSON.stringify(catTitle)}\n    domain: ${JSON.stringify(domain)}\n    url: ${JSON.stringify(url)}`);
+      });
+      if (idx === 0) return;
+      const yamlDoc = `# OSINT Tools Export\ncount: ${idx}\nexportedAt: '${new Date().toISOString()}'\ntools:\n${yamlRows.join('\n')}`;
+      copyToClipboard(yamlDoc, `Copied ${idx} visible OSINT tool(s) as structured YAML to clipboard!`);
+      return;
+    }
+
     const btnMdTable = e.target.closest('#btn-copy-visible-md-table');
     if (btnMdTable) {
       const visibleLinks = getVisibleDashboardLinkElements();
@@ -13245,6 +13268,31 @@ ${formatInstructions}
       });
       const xmlDoc = `<?xml version="1.0" encoding="UTF-8"?>\n<GodsEyeIntelFeeds count="${idx}" exportedAt="${new Date().toISOString()}">\n${xmlRows.join('\n')}\n</GodsEyeIntelFeeds>`;
       copyToClipboard(xmlDoc, `Copied ${idx} God's Eye intel feed item(s) as structured XML to clipboard!`);
+      return;
+    }
+
+    const btnGeYaml = e.target.closest('#ge-copy-feeds-yaml');
+    if (btnGeYaml) {
+      const feedItems = Array.from(document.querySelectorAll('#ge-feeds-list .ge-feed-item, #ge-feeds-list a'))
+        .filter(item => item.style.display !== 'none');
+      if (feedItems.length === 0) {
+        showToast('No visible live feed items loaded yet', 'error');
+        return;
+      }
+      const yamlRows = [];
+      let idx = 0;
+      feedItems.forEach(item => {
+        const a = item.tagName === 'A' ? item : item.querySelector('a');
+        const title = (item.querySelector('.ge-feed-item-title')?.textContent || a?.textContent || item.textContent || '').replace(/\s+/g, ' ').trim();
+        const src = (item.querySelector('.ge-feed-badge, .ge-feed-source')?.textContent || 'AU-INTEL').trim();
+        const url = a?.href || '';
+        if (title) {
+          idx++;
+          yamlRows.push(`  - index: ${idx}\n    source: ${JSON.stringify(src)}\n    title: ${JSON.stringify(title)}\n    url: ${JSON.stringify(url)}`);
+        }
+      });
+      const yamlDoc = `# God's Eye Australia - Live Intel Feeds\ncount: ${idx}\nexportedAt: '${new Date().toISOString()}'\nfeeds:\n${yamlRows.join('\n')}`;
+      copyToClipboard(yamlDoc, `Copied ${idx} God's Eye intel feed item(s) as structured YAML to clipboard!`);
       return;
     }
 
